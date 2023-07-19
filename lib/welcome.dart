@@ -1,3 +1,4 @@
+import 'package:awallet/signups/signup.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 
@@ -15,7 +16,6 @@ class _WelcomePageState extends State<WelcomePage> {
       appBar: AppBar(
         title: const Text('Welcome'),
       ),
-
       body: Center(
         child: Column(
           children: [
@@ -25,20 +25,35 @@ class _WelcomePageState extends State<WelcomePage> {
               style: TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 30),
-            
             SizedBox(
-              width: 200,
-              height: 45,
-              child: ElevatedButton(
-                child: const Text('Start', style: TextStyle(fontSize: 18)),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
-                },
-              )
+                width: 200,
+                height: 45,
+                child: ElevatedButton(
+                  child: const Text('Start', style: TextStyle(fontSize: 18)),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage()),
+                    );
+                  },
+                )),
+            const SizedBox(
+              height: 50,
             ),
+            SizedBox(
+                width: 200,
+                height: 45,
+                child: ElevatedButton(
+                  child: const Text('Create New Wallet',
+                      style: TextStyle(fontSize: 18,color: Colors.black)),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                    );
+                  },
+                )),
           ],
         ),
       ),
