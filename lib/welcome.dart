@@ -24,36 +24,36 @@ class _WelcomePageState extends State<WelcomePage> {
               'Welcome to AWallet!',
               style: TextStyle(fontSize: 20),
             ),
+
             const SizedBox(height: 30),
             SizedBox(
-                width: 200,
-                height: 45,
-                child: ElevatedButton(
-                  child: const Text('Start', style: TextStyle(fontSize: 18)),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
-                    );
-                  },
-                )),
-            const SizedBox(
-              height: 50,
+              width: 200,
+              height: 45,
+              child: ElevatedButton(
+                child: const Text('Sign In', style: TextStyle(fontSize: 18)),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
+                },
+              )
             ),
+
+            const SizedBox(height: 50),
             SizedBox(
-                width: 200,
-                height: 45,
-                child: ElevatedButton(
-                  child: const Text('Create New Wallet',
-                      style: TextStyle(fontSize: 18,color: Colors.black)),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignUpPage()),
-                    );
-                  },
-                )),
+              width: 200,
+              height: 45,
+              child: ElevatedButton(
+                child: const Text('Sign Up', style: TextStyle(fontSize: 18)),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignUpPage()),
+                  );
+                },
+              )
+            ),
           ],
         ),
       ),

@@ -12,7 +12,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  GlobalKey _formKey = GlobalKey<FormState>();
+  final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _pswController = TextEditingController();
 
