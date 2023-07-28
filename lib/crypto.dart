@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -9,31 +10,64 @@ class CryptoPage extends StatefulWidget {
 }
 
 class _CryptoPageState extends State<CryptoPage> {
+
+  late Timer _timer;
+  String _progress = '';
+
   @override
   void initState() {
     super.initState();
 
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-    //   final path = await Utils.getDownloadPath();
-    //   print('Get Path --> $path');
-    // });
-    myAsyncMethod();
+    print('isDownloading --> $isDownloading');
+    if (!isDownloading) {
+      testDownloadFile();
+    }
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      print('dlProgress --> $dlProgress%');
+
+      if (isDownloaded) {
+        setState(() {
+          _progress = 'Done';
+        });
+      } else {
+        setState(() {
+          _progress = dlProgress;
+        });
+      }
+    });
   }
 
-  void myAsyncMethod() async {
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void testDownloadFile() async {
     final path = await Utils.getDownloadPath();
     // print('Get Path --> $path');
 
-    const url      = 'https://cache.oblnd.top/neutrino-testnet/2023-07-20neutrino.db';
+    const url = 'https://cache.oblnd.top/neutrino-testnet/2023-07-27neutrino.db';
     final savePath = '$path/neutrino.db';
 
-    await Utils.downloadFile(url, savePath);
+    Utils.downloadFile(url, savePath);
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Crypto Page!')),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(height: 160),
+            Text(
+              'Downloaded: $_progress%',
+              style: const TextStyle(fontSize: 20),
+            ),
+          ]
+        )
+      )
     );
   }
 }

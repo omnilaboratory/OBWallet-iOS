@@ -1,8 +1,17 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
+
+// Data of downloading state
+bool isDownloading = false;
+bool isDownloaded  = false;
+String dlProgress  = '';
+int downloadSize   = 0;
+int fileOriginSize = 0;
 
 class Utils {
+
   static Future<String> getDownloadPath() async {
     Directory? appDir;
 
@@ -22,32 +31,100 @@ class Utils {
   }
 
   static Future<void> downloadFile(String url, String savePath) async {
+
     final dio = Dio();
-    final file = File(savePath);
+    File localFile = File(savePath);
 
-    if (await file.exists()) {
-      // Get the size that the file has been downloaded.
-      final downloadedSize = await file.length();
-      print(downloadedSize);
-      final headers = {'range': 'bytes=$downloadedSize-'};
+    Response response = await dio.head(url);
+    fileOriginSize = int.parse(response.headers.value('content-length')!);
 
-      await dio.download(url, savePath, options: Options(headers: headers),
-          onReceiveProgress: (received, total) {
-        if (total != -1) {
-          final progress = (received / total * 100).toStringAsFixed(2);
-          print('RESUME --> ($progress%) Downloaded $received out of $total bytes');
+    if (await localFile.exists()) {
+      String dir       = path.dirname(savePath);
+      String basename  = path.basenameWithoutExtension(savePath);
+      String extension = path.extension(savePath);
+
+      String localRouteToSaveFileStr = savePath;
+      List<int> sizes = [];
+      // int fileOriginSize = 0;
+      Options? options;
+
+      // Response response = await dio.head(url);
+      // fileOriginSize = int.parse(response.headers.value('content-length')!);
+
+      int fileLocalSize = localFile.lengthSync();
+
+      // File has been downloaded.
+      if (fileLocalSize == fileOriginSize) {
+        print('File has been downloaded.');
+        isDownloaded = true;
+        return;
+      }
+
+      sizes.add(fileLocalSize);
+
+      int i = 1;
+      localRouteToSaveFileStr = '$dir/$basename' '_$i$extension';
+      File f = File(localRouteToSaveFileStr);
+      while (f.existsSync()) {
+        sizes.add(f.lengthSync());
+        i++;
+        localRouteToSaveFileStr = '$dir/$basename' '_$i$extension';
+        f = File(localRouteToSaveFileStr);
+      }
+
+      int sumSizes = sizes.fold(0, (p, c) => p + c);
+      if (sumSizes < fileOriginSize) {
+        options = Options(
+          headers: {'Range': 'bytes=$sumSizes-'},
+        );
+      }
+
+      await dio.download(
+        url, 
+        localRouteToSaveFileStr, 
+        options: options,
+        onReceiveProgress: (received, total) {
+          if (total != -1) {
+            isDownloading = true;
+            downloadSize  = received + sumSizes;
+            dlProgress    = (downloadSize / fileOriginSize * 100).toStringAsFixed(0);
+            print('RESUME --> ($dlProgress%) Downloaded $downloadSize out of $fileOriginSize bytes');
+          }
         }
-      });
-    } else {
+      );
+
+      var raf = await localFile.open(mode: FileMode.writeOnlyAppend);
+
+      i = 1;
+      String filePartLocalRouteStr = '$dir/$basename' '_$i$extension';
+      f = File(filePartLocalRouteStr);
+
+      while (f.existsSync()) {
+        raf = await raf.writeFrom(await f.readAsBytes());
+        await f.delete();
+
+        i++;
+        filePartLocalRouteStr = '$dir/$basename' '_$i$extension';
+        f = File(filePartLocalRouteStr);
+      }
+
+      await raf.close();
+    } 
+    
+    // New downloading
+    else {
       await dio.download(url, savePath, onReceiveProgress: (received, total) {
         if (total != -1) {
-          final progress = (received / total * 100).toStringAsFixed(2);
-          print('NEW --> ($progress%) Downloaded $received out of $total bytes');
+          isDownloading = true;
+          downloadSize  = received;
+          dlProgress    = (received / total * 100).toStringAsFixed(0);
+          print('NEW --> ($dlProgress%) Downloaded $received out of $total bytes');
         }
       });
     }
 
     print('Download complete');
+    isDownloaded = true;
   }
 
   static bool isEmailValid(String email) {
