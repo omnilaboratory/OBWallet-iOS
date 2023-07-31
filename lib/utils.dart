@@ -38,6 +38,7 @@ class Utils {
     Response response = await dio.head(url);
     fileOriginSize = int.parse(response.headers.value('content-length')!);
 
+    // Resume downloading
     if (await localFile.exists()) {
       String dir       = path.dirname(savePath);
       String basename  = path.basenameWithoutExtension(savePath);
@@ -45,17 +46,13 @@ class Utils {
 
       String localRouteToSaveFileStr = savePath;
       List<int> sizes = [];
-      // int fileOriginSize = 0;
       Options? options;
-
-      // Response response = await dio.head(url);
-      // fileOriginSize = int.parse(response.headers.value('content-length')!);
 
       int fileLocalSize = localFile.lengthSync();
 
       // File has been downloaded.
       if (fileLocalSize == fileOriginSize) {
-        print('File has been downloaded.');
+        // print('File has been downloaded.');
         isDownloaded = true;
         return;
       }
@@ -88,7 +85,7 @@ class Utils {
             isDownloading = true;
             downloadSize  = received + sumSizes;
             dlProgress    = (downloadSize / fileOriginSize * 100).toStringAsFixed(0);
-            print('RESUME --> ($dlProgress%) Downloaded $downloadSize out of $fileOriginSize bytes');
+            // print('RESUME --> ($dlProgress%) Downloaded $downloadSize out of $fileOriginSize bytes');
           }
         }
       );
@@ -118,7 +115,7 @@ class Utils {
           isDownloading = true;
           downloadSize  = received;
           dlProgress    = (received / total * 100).toStringAsFixed(0);
-          print('NEW --> ($dlProgress%) Downloaded $received out of $total bytes');
+          // print('NEW --> ($dlProgress%) Downloaded $received out of $total bytes');
         }
       });
     }

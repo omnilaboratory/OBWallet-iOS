@@ -12,27 +12,25 @@ class CryptoPage extends StatefulWidget {
 class _CryptoPageState extends State<CryptoPage> {
 
   late Timer _timer;
-  String _progress = '';
 
   @override
   void initState() {
     super.initState();
 
-    print('isDownloading --> $isDownloading');
+    // print('isDownloading --> $isDownloading');
     if (!isDownloading) {
       testDownloadFile();
     }
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      print('dlProgress --> $dlProgress%');
-
+      // print('dlProgress --> $dlProgress%');
       if (isDownloaded) {
         setState(() {
-          _progress = 'Done';
+          dlProgress = '100';
         });
       } else {
         setState(() {
-          _progress = dlProgress;
+          dlProgress;
         });
       }
     });
@@ -60,11 +58,45 @@ class _CryptoPageState extends State<CryptoPage> {
       body: Center(
         child: Column(
           children: [
-            const SizedBox(height: 160),
-            Text(
-              'Downloaded: $_progress%',
-              style: const TextStyle(fontSize: 20),
+            const SizedBox(height: 150),
+
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  width: 150,
+                  height: 150,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 6,
+                    value: dlProgress != '' ? double.parse(dlProgress) / 100 : 0, 
+                    color: const Color.fromARGB(255, 0, 145, 250),
+                    backgroundColor: const Color.fromARGB(255, 238, 238, 238),
+                  )
+                ),
+
+                Text(
+                  '$dlProgress%',
+                  style: const TextStyle(fontSize: 22),
+                ),
+
+              ],
             ),
+
+            const SizedBox(height: 50),
+            const Text(
+              '1/3 neutrino.db',
+              style: TextStyle(fontSize: 25),
+            ),
+
+            const SizedBox(height: 30),
+            const Padding(
+              padding: EdgeInsets.only(left: 20, right: 20),
+              child: Text(
+                'You will get a crypto account until download finished, please wait for about 10 minutes.',
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
+            )
           ]
         )
       )
