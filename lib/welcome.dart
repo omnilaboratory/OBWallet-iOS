@@ -1,5 +1,10 @@
 import 'package:awallet/signups/signup.dart';
+import 'package:awallet/src/generated/lightning.pbgrpc.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:grpc/grpc.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'home.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -54,9 +59,80 @@ class _WelcomePageState extends State<WelcomePage> {
                 },
               )
             ),
+            const SizedBox(
+              height: 50,
+            ),
+            SizedBox(
+                width: 260,
+                height: 45,
+                child: ElevatedButton(
+                  child: const Text('Create New Wallet',
+                      style: TextStyle(fontSize: 18, color: Colors.black)),
+                  onPressed: () {
+                    testPermissionAndMethodChannel();
+                    return;
+                  },
+                )),
+            const SizedBox(
+              height: 50,
+            ),
+            SizedBox(
+                width: 200,
+                height: 45,
+                child: ElevatedButton(
+                  child: const Text('New Address',
+                      style: TextStyle(fontSize: 18, color: Colors.black)),
+                  onPressed: () {
+                    newAddress();
+                    return;
+                  },
+                )),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> newAddress() async {
+    var methodChannel = const MethodChannel("samples.flutter.io/battery");
+    var temp = await methodChannel.invokeMethod("newAddress");
+    print(temp);
+  }
+
+  Future<void> listPeers() async {
+    final channel = ClientChannel('127.0.0.1',
+        port: 8080,
+        options: const ChannelOptions(
+            credentials: ChannelCredentials.insecure()));
+
+    var request = ListPeersRequest();
+    request.latestError=true;
+
+    var stub = LightningClient(channel);
+    var temp =  await stub.listPeers(request);
+    print(temp.peers);
+  }
+
+  bool storage = true;
+  bool videos = true;
+  bool photos = true;
+
+  Future<void> testPermissionAndMethodChannel() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    if (androidInfo.version.sdkInt >= 33) {
+      videos = await Permission.videos.request().isGranted;
+      photos = await Permission.photos.request().isGranted;
+    } else {
+      storage = await Permission.storage.request().isGranted;
+    }
+
+    if (storage || (videos && photos)) {
+      var methodChannel = const MethodChannel("samples.flutter.io/battery");
+      var temp = await methodChannel.invokeMethod("start", "I am a boy1");
+      print(temp);
+    } else {
+      print("no Permission");
+    }
   }
 }

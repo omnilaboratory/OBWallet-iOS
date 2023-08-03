@@ -38,6 +38,10 @@ dependencies:
   dio: ^5.3.0
   path_provider: ^2.0.15
   path: ^1.8.3
+  permission_handler: ^10.4.3
+  device_info_plus: ^9.0.2
+  grpc: ^3.2.3
+  protobuf: ^3.0.0
 
 dev_dependencies:
   flutter_test:
