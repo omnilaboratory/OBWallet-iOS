@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class RecoverWallet extends StatefulWidget {
@@ -108,10 +109,12 @@ class _RecoverWalletState extends State<RecoverWallet> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: GestureDetector(
                       onTap: () {
-                        print("btn_confirm");
+                        if (kDebugMode) {
+                          print("btn_confirm");
+                        }
                       },
                       child: const Image(
                         image: AssetImage("asset/images/btn_confirm.png"),
