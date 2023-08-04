@@ -17,10 +17,6 @@ class MainActivity: FlutterActivity() {
             run {
                 println(call.method)
                 when (call.method) {
-                    "abc" -> {
-                        result.success("abc")
-                    }
-
                     "start" -> {
                         val filePath =
                             getExternalFilesDir(null)?.absolutePath + File.separator + "obd"
@@ -43,22 +39,15 @@ class MainActivity: FlutterActivity() {
                             })
                     }
 
-                    "hello" -> {
-                        val param = call.arguments<String>()
-                        println(param)
-//                        val sayHi = greeting.Greeting.sayHi(param)
-//                        println(sayHi)
-                        result.success(param)
-                    }
-
                     "newAddress" -> {
                         val param = call.arguments<String>()
                         Obdmobile.oB_NewAddress(param?.toByteArray(),
                             object : Callback {
                                 override fun onError(p0: Exception?) {
                                     if (p0 != null) {
-                                        println(p0.message)
-                                        result.success("onError:" + p0.message)
+                                        var message = p0.message
+                                        println(message)
+//                                        result.error("400", message,"")
                                     } else {
                                         result.success("onError")
                                     }
