@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 
+import 'cryptos/recover_wallet.dart';
+
 class CryptoPage extends StatefulWidget {
   const CryptoPage({super.key});
 
@@ -47,6 +49,13 @@ class _CryptoPageState extends State<CryptoPage> {
               child: InkWell(
                 onTap: (){
                   log("onTap btn_recover");
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const RecoverWallet();
+                      }
+                  );
+
                 },
                 child: const Image(image: AssetImage("asset/images/btn_recover.png"))),
             ),
