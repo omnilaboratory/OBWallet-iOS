@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'cryptos/recover_wallet.dart';
