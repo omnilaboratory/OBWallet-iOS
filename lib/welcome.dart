@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:awallet/signups/signup.dart';
 import 'package:awallet/src/generated/lightning.pbgrpc.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
@@ -96,7 +99,9 @@ class _WelcomePageState extends State<WelcomePage> {
   Future<void> newAddress() async {
     var methodChannel = const MethodChannel("samples.flutter.io/battery");
     var temp = await methodChannel.invokeMethod("newAddress");
-    print(temp);
+    if (kDebugMode) {
+      print(temp);
+    }
   }
 
   Future<void> listPeers() async {
@@ -110,29 +115,46 @@ class _WelcomePageState extends State<WelcomePage> {
 
     var stub = LightningClient(channel);
     var temp =  await stub.listPeers(request);
-    print(temp.peers);
+    if (kDebugMode) {
+      print(temp.peers);
+    }
   }
 
   bool storage = true;
   bool videos = true;
   bool photos = true;
+  bool audio = true;
 
   Future<void> testPermissionAndMethodChannel() async {
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    if (androidInfo.version.sdkInt >= 33) {
-      videos = await Permission.videos.request().isGranted;
-      photos = await Permission.photos.request().isGranted;
-    } else {
+    if (Platform.isAndroid) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      if (androidInfo.version.sdkInt >= 33) {
+        videos = await Permission.videos.request().isGranted;
+        photos = await Permission.photos.request().isGranted;
+        audio = await Permission.audio.request().isGranted;
+      } else {
+        storage = await Permission.storage.request().isGranted;
+      }
+    } else if (Platform.isIOS) {
       storage = await Permission.storage.request().isGranted;
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+      if (int.parse(iosDeviceInfo.systemVersion) > 14) {
+        photos = await Permission.photos.request().isGranted;
+      }
     }
 
-    if (storage || (videos && photos)) {
+    if (storage || (videos && photos && audio)) {
       var methodChannel = const MethodChannel("samples.flutter.io/battery");
       var temp = await methodChannel.invokeMethod("start", "I am a boy1");
-      print(temp);
+      if (kDebugMode) {
+        print(temp);
+      }
     } else {
-      print("no Permission");
+      if (kDebugMode) {
+        print("no Permission");
+      }
     }
   }
 }
