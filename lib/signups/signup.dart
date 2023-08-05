@@ -53,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             prefixIcon: Icon(Icons.person)),
                         // 校验用户名
                         validator: (v) {
-                          return v!.trim().isNotEmpty ? null : "用户名不能为空";
+                          return v!.trim().isNotEmpty ? null : "wrong username";
                         },
                       ),
                       const SizedBox(height: 20),
@@ -84,15 +84,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                   child: Text("Next"),
                                 ),
                                 onPressed: () {
-                                  // 通过_formKey.currentState 获取FormState后，
-                                  // 调用validate()方法校验用户名密码是否合法，校验
-                                  // 通过后再提交数据。
                                   if ((_formKey.currentState as FormState)
                                       .validate()) {
                                     if (kDebugMode) {
                                       print(_unameController.value.text);
                                     }
-                                    //验证通过提交数据
                                   }
                                 },
                               ),
