@@ -17,7 +17,11 @@ class SquareButton extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Image(image: AssetImage(icon)),
+              Image(
+                image: AssetImage(icon),
+                width: 32,
+                height: 32,
+              ),
               const SizedBox(height: 5),
               Text(
                 text,
