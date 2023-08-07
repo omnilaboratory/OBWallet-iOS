@@ -1,5 +1,7 @@
-import 'package:awallet/components/crypto_token_card.dart';
+import 'package:awallet/component/crypto_token_card.dart';
 import 'package:flutter/material.dart';
+
+import '../component/square_button.dart';
 
 class CryptoHome extends StatefulWidget {
   const CryptoHome({super.key});
@@ -15,13 +17,27 @@ class _CryptoHomeState extends State<CryptoHome> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           children: [
-            CryptoTokenCard(balance: 0.3,address: "0x0f6eD175150e0e8ef842244F977Dad19A6e054CB",)
+            const CryptoTokenCard(balance: 0.3,address: "0x0f6eD175150e0e8ef842244F977Dad19A6e054CB"),
+            const SizedBox(height: 20),
+            buildTxButtons(),
           ],
         ),
       ),
     );
+  }
+
+  Row buildTxButtons() {
+    return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SquareButton(icon: 'asset/images/icon_pay.png', text: 'Pay', onPressed: (){}),
+              SquareButton(icon: 'asset/images/icon_exchange.png', text: 'Exchange', onPressed: (){}),
+              SquareButton(icon: 'asset/images/icon_receive.png', text: 'Receive', onPressed: (){}),
+              SquareButton(icon: 'asset/images/icon_send.png', text: 'Send', onPressed: (){}),
+            ],
+          );
   }
 }

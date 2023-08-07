@@ -17,7 +17,7 @@ class _CryptoTokenCardState extends State<CryptoTokenCard> {
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
     return Container(
-      width: size.width * 0.95,
+      width: size.width * 0.9,
       height: 135,
       padding: const EdgeInsets.only(left: 40),
       decoration: const BoxDecoration(
