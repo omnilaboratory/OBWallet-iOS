@@ -68,21 +68,6 @@ class _RecoverWalletState extends State<RecoverWallet> {
                   text: 'Local Files', 
                   onPressed: onLocalFiles
                 ),
-
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: GestureDetector(
-                    onTap: () {
-                      if (kDebugMode) {
-                        print("btn_confirm");
-                      }
-                    },
-                    child: const Image(
-                      image: AssetImage("asset/images/btn_confirm.png"),
-                    ),
-                  ),
-                ),
               ]),
             ),
 
