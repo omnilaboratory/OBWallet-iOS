@@ -29,9 +29,7 @@ class _CryptoHomeState extends State<CryptoHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: buildAppBar(),
       body: Center(
         child: Column(
           children: [
@@ -57,6 +55,39 @@ class _CryptoHomeState extends State<CryptoHome> {
     );
   }
 
+  AppBar buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      automaticallyImplyLeading: true,
+      title: const Row(
+        children: [
+          Image(image: AssetImage("asset/images/logo_head.png")),
+          Text('Crypto',
+              style: TextStyle(
+                color: Color(0xFF333333),
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+              )),
+        ],
+      ),
+      actions: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(right: 20.0),
+          child: Row(
+            children: [
+              ButtonForAppBarAction(
+                  imageUrl: "asset/images/icon_fresh.png", onTap: () {}),
+              ButtonForAppBarAction(
+                  imageUrl: "asset/images/icon_tx_history.png", onTap: () {}),
+              ButtonForAppBarAction(
+                  imageUrl: "asset/images/icon_more_3pot.png", onTap: () {}),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget tokenItem(BuildContext context, int index) {
     var tokenInfo = tokenList[index];
     return Container(
@@ -75,14 +106,27 @@ class _CryptoHomeState extends State<CryptoHome> {
           ],
         ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(),
+              padding: const EdgeInsets.only(top: 16),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image(image: AssetImage(tokenInfo.iconUrl)),
-                  const SizedBox(width: 10),
-                  Text(tokenInfo.name),
+                  Image(
+                    image: AssetImage(tokenInfo.iconUrl),
+                    width: 20,
+                    height: 20,
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    tokenInfo.name,
+                    style: const TextStyle(
+                      color: Color(0xFF666666),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -93,7 +137,8 @@ class _CryptoHomeState extends State<CryptoHome> {
               children: [
                 Text(tokenInfo.balance.toString(),
                     textAlign: TextAlign.right,
-                    style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold)),
                 Text("\$ ${tokenInfo.balanceOfDollar}",
                     textAlign: TextAlign.right),
               ],
@@ -176,6 +221,25 @@ class _CryptoHomeState extends State<CryptoHome> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ButtonForAppBarAction extends StatelessWidget {
+  final String imageUrl;
+  final GestureTapCallback onTap;
+
+  const ButtonForAppBarAction({
+    super.key,
+    required this.imageUrl,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(onTap: onTap, child: Image(image: AssetImage(imageUrl))),
     );
   }
 }
