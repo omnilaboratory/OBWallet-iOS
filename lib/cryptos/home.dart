@@ -31,7 +31,7 @@ class _CryptoHomeState extends State<CryptoHome> {
 
   Row buildTxButtons() {
     return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SquareButton(icon: 'asset/images/icon_pay.png', text: 'Pay', onPressed: (){}),
               SquareButton(icon: 'asset/images/icon_exchange.png', text: 'Exchange', onPressed: (){}),

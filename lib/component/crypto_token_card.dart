@@ -39,7 +39,7 @@ class _CryptoTokenCardState extends State<CryptoTokenCard> {
                   style: const TextStyle(fontSize: 12, color: Colors.white)),
               const SizedBox(width: 10),
               Transform.scale(
-                  scale: 0.8,
+                  scale: 0.9,
                   child: GestureDetector(
                       onTap: () {
                         log("copy");
