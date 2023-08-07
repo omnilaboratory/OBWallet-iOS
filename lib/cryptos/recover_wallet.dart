@@ -1,8 +1,5 @@
 import 'dart:developer';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import '../component/rect_button.dart';
 
 class RecoverWallet extends StatefulWidget {
@@ -71,7 +68,7 @@ class _RecoverWalletState extends State<RecoverWallet> {
               ]),
             ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
             InkWell(
               onTap: () {
                 Navigator.pop(context);
