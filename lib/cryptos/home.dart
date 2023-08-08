@@ -256,7 +256,7 @@ class ButtonForAppBarAction extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
           onTap: onTap,
-          child: Image(width: 20, height: 20, image: AssetImage(imageUrl))),
+          child: Image(width: 24, height: 24, image: AssetImage(imageUrl))),
     );
   }
 }
