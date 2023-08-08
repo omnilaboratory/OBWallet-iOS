@@ -1,5 +1,6 @@
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/crypto_token_card.dart';
+import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:flutter/material.dart';
 
 import '../component/square_button.dart';
@@ -115,7 +116,14 @@ class _CryptoHomeState extends State<CryptoHome> {
         SquareButton(
             icon: 'asset/images/icon_receive.png',
             text: 'Receive',
-            onPressed: () {}),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const ReceiveWalletAddress();
+                  }
+              );
+            }),
         SquareButton(
             icon: 'asset/images/icon_send.png', text: 'Send', onPressed: () {}),
       ],

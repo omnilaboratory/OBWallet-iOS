@@ -10,7 +10,6 @@ class RecoverWallet extends StatefulWidget {
 }
 
 class _RecoverWalletState extends State<RecoverWallet> {
-
   onGoogleDrive() {
     log('onGoogleDrive');
   }
@@ -23,61 +22,60 @@ class _RecoverWalletState extends State<RecoverWallet> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 80),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              width: size.width * 0.8,
-              height: size.height * 0.65,
-              child: Column(children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 28, bottom: 50),
-                  child: Text("Recover Wallet", style: TextStyle(fontSize: 20)),
+        backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
+        body: Center(
+          child: Column(
+            children: [
+              const SizedBox(height: 80),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(image: AssetImage("asset/images/icon_smile.png")),
-                      SizedBox(width: 10),
-                      Text("Select the source to recover",
-                          style: TextStyle(fontSize: 16,color: Color(0xFF333333))),
-                    ],
+                width: size.width * 0.8,
+                height: size.height * 0.65,
+                child: Column(children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 28, bottom: 50),
+                    child:
+                        Text("Recover Wallet", style: TextStyle(fontSize: 20)),
                   ),
-                ),
-
-                RectButton(
-                  icon: 'asset/images/icon_google.png', 
-                  text: 'Google Drive', 
-                  onPressed: onGoogleDrive
-                ),
-
-                const SizedBox(height: 30),
-                RectButton(
-                  icon: 'asset/images/icon_folder.png', 
-                  text: 'Local Files', 
-                  onPressed: onLocalFiles
-                ),
-              ]),
-            ),
-
-            const SizedBox(height: 20),
-            InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: const Image(image: AssetImage("asset/images/btn_cancel.png"))
-            )
-          ],
-        ),
-      )
-    );
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(
+                            width: 30,
+                            height: 30,
+                            image: AssetImage("asset/images/icon_smile.png")),
+                        SizedBox(width: 10),
+                        Text("Select the source to recover",
+                            style: TextStyle(
+                                fontSize: 16, color: Color(0xFF333333))),
+                      ],
+                    ),
+                  ),
+                  RectButton(
+                      icon: 'asset/images/icon_google.png',
+                      text: 'Google Drive',
+                      onPressed: onGoogleDrive),
+                  const SizedBox(height: 30),
+                  RectButton(
+                      icon: 'asset/images/icon_folder.png',
+                      text: 'Local Files',
+                      onPressed: onLocalFiles),
+                ]),
+              ),
+              const SizedBox(height: 20),
+              InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Image(
+                      image: AssetImage("asset/images/btn_cancel.png")))
+            ],
+          ),
+        ));
   }
 }
