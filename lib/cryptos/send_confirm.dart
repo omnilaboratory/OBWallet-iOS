@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awallet/component/bottom_button.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,10 @@
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/crypto_token_card.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
+import 'package:awallet/component/crypto_wallet_card.dart';
+import 'package:awallet/cryptos/more_menu.dart';
+import 'package:awallet/cryptos/token_activity.dart';
+import 'package:awallet/cryptos/tx_history.dart';
 import 'package:flutter/material.dart';
 
 import '../component/square_button.dart';
@@ -30,9 +34,7 @@ class _CryptoHomeState extends State<CryptoHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: buildAppBar(),
       body: Center(
         child: Column(
           children: [
@@ -40,7 +42,7 @@ class _CryptoHomeState extends State<CryptoHome> {
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
               child: buildChainButtons(),
             ),
-            const CryptoTokenCard(
+            const CryptoWalletCard(
                 balance: 0.3, address: "0x0f6eD175150e0......ad19A6e054CB"),
             const SizedBox(height: 20),
             buildTxButtons(),
@@ -55,6 +57,52 @@ class _CryptoHomeState extends State<CryptoHome> {
           ],
         ),
       ),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      automaticallyImplyLeading: false,
+      title: const Row(
+        children: [
+          Image(image: AssetImage("asset/images/logo_head.png")),
+          Text('Crypto',
+              style: TextStyle(
+                color: Color(0xFF333333),
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+              )),
+        ],
+      ),
+      actions: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(right: 20.0),
+          child: Row(
+            children: [
+              ButtonForAppBarAction(
+                  imageUrl: "asset/images/icon_fresh.png", onTap: () {}),
+              ButtonForAppBarAction(
+                  imageUrl: "asset/images/icon_tx_history.png",
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TxHistory()));
+                  }),
+              ButtonForAppBarAction(
+                  imageUrl: "asset/images/icon_more_3pot.png",
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const MoreMenu();
+                        });
+                  }),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -75,47 +123,77 @@ class _CryptoHomeState extends State<CryptoHome> {
             ),
           ],
         ),
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(),
-              child: Row(
-                children: [
-                  Image(image: AssetImage(tokenInfo.iconUrl)),
-                  const SizedBox(width: 10),
-                  Text(tokenInfo.name),
-                ],
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TokenActivity(tokenInfo: tokenInfo)));
+          },
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image(
+                      image: AssetImage(tokenInfo.iconUrl),
+                      width: 20,
+                      height: 20,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      tokenInfo.name,
+                      style: const TextStyle(
+                        color: Color(0xFF666666),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const Spacer(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(tokenInfo.balance.toString(),
-                    textAlign: TextAlign.right,
-                    style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
-                Text("\$ ${tokenInfo.balanceOfDollar}",
-                    textAlign: TextAlign.right),
-              ],
-            )
-          ],
+              const Spacer(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(tokenInfo.balance.toString(),
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text("\$ ${tokenInfo.balanceOfDollar}",
+                      textAlign: TextAlign.right),
+                ],
+              )
+            ],
+          ),
         ));
   }
 
   Row buildTxButtons() {
+    var size = MediaQuery.sizeOf(context);
+    var iconWidth = (size.width - 50) / 5;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SquareButton(
-            icon: 'asset/images/icon_pay.png', text: 'Pay', onPressed: () {}),
+            icon: 'asset/images/icon_pay.png',
+            iconWidth: iconWidth,
+            text: 'Pay',
+            onPressed: () {}),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',
             text: 'Exchange',
+            iconWidth: iconWidth,
             onPressed: () {}),
         SquareButton(
             icon: 'asset/images/icon_receive.png',
             text: 'Receive',
+            iconWidth: iconWidth,
+            onPressed: () {}),
             onPressed: () {
               showDialog(
                   context: context,
@@ -125,7 +203,10 @@ class _CryptoHomeState extends State<CryptoHome> {
               );
             }),
         SquareButton(
-            icon: 'asset/images/icon_send.png', text: 'Send', onPressed: () {}),
+            icon: 'asset/images/icon_send.png',
+            text: 'Send',
+            iconWidth: iconWidth,
+            onPressed: () {}),
       ],
     );
   }
@@ -184,6 +265,27 @@ class _CryptoHomeState extends State<CryptoHome> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ButtonForAppBarAction extends StatelessWidget {
+  final String imageUrl;
+  final GestureTapCallback onTap;
+
+  const ButtonForAppBarAction({
+    super.key,
+    required this.imageUrl,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+          onTap: onTap,
+          child: Image(width: 24, height: 24, image: AssetImage(imageUrl))),
     );
   }
 }
