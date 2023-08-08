@@ -43,6 +43,7 @@ dependencies:
   grpc: ^3.2.3
   protobuf: ^3.0.0
   intl: ^0.18.1
+  flutter_dash: ^1.0.0
 
 dev_dependencies:
   flutter_test:

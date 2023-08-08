@@ -1,7 +1,7 @@
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/cryptos/more_menu.dart';
-import 'package:awallet/cryptos/token_tx_history.dart';
+import 'package:awallet/cryptos/token_activity.dart';
 import 'package:awallet/cryptos/tx_history.dart';
 import 'package:flutter/material.dart';
 
@@ -126,8 +126,7 @@ class _CryptoHomeState extends State<CryptoHome> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        TokenTxHistory(tokenInfo: tokenInfo)));
+                    builder: (context) => TokenActivity(tokenInfo: tokenInfo)));
           },
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,21 +172,31 @@ class _CryptoHomeState extends State<CryptoHome> {
   }
 
   Row buildTxButtons() {
+    var size = MediaQuery.sizeOf(context);
+    var iconWidth = (size.width - 50) / 5;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SquareButton(
-            icon: 'asset/images/icon_pay.png', text: 'Pay', onPressed: () {}),
+            icon: 'asset/images/icon_pay.png',
+            iconWidth: iconWidth,
+            text: 'Pay',
+            onPressed: () {}),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',
             text: 'Exchange',
+            iconWidth: iconWidth,
             onPressed: () {}),
         SquareButton(
             icon: 'asset/images/icon_receive.png',
             text: 'Receive',
+            iconWidth: iconWidth,
             onPressed: () {}),
         SquareButton(
-            icon: 'asset/images/icon_send.png', text: 'Send', onPressed: () {}),
+            icon: 'asset/images/icon_send.png',
+            text: 'Send',
+            iconWidth: iconWidth,
+            onPressed: () {}),
       ],
     );
   }
