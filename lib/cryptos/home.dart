@@ -1,5 +1,4 @@
 import 'package:awallet/bean/token_info.dart';
-import 'package:awallet/component/crypto_token_card.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/cryptos/more_menu.dart';
@@ -193,7 +192,6 @@ class _CryptoHomeState extends State<CryptoHome> {
             icon: 'asset/images/icon_receive.png',
             text: 'Receive',
             iconWidth: iconWidth,
-            onPressed: () {}),
             onPressed: () {
               showDialog(
                   context: context,
