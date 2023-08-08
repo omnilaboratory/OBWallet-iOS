@@ -1,5 +1,6 @@
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/crypto_token_card.dart';
+import 'package:awallet/cryptos/more_menu.dart';
 import 'package:awallet/cryptos/tx_history.dart';
 import 'package:flutter/material.dart';
 
@@ -87,7 +88,14 @@ class _CryptoHomeState extends State<CryptoHome> {
                             builder: (context) => const TxHistory()));
                   }),
               ButtonForAppBarAction(
-                  imageUrl: "asset/images/icon_more_3pot.png", onTap: () {}),
+                  imageUrl: "asset/images/icon_more_3pot.png",
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const MoreMenu();
+                        });
+                  }),
             ],
           ),
         ),
@@ -246,7 +254,9 @@ class ButtonForAppBarAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: InkWell(onTap: onTap, child: Image(image: AssetImage(imageUrl))),
+      child: InkWell(
+          onTap: onTap,
+          child: Image(width: 20, height: 20, image: AssetImage(imageUrl))),
     );
   }
 }

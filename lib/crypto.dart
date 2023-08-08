@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:awallet/cryptos/home.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +47,6 @@ class _CryptoPageState extends State<CryptoPage> {
               padding: const EdgeInsets.only(top: 40,bottom: 20),
               child: InkWell(
                 onTap: (){
-                  log("onTap btn_recover");
                   showDialog(
                       context: context,
                       builder: (context) {
