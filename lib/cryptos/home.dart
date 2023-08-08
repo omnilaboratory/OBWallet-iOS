@@ -1,5 +1,6 @@
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/crypto_token_card.dart';
+import 'package:awallet/cryptos/tx_history.dart';
 import 'package:flutter/material.dart';
 
 import '../component/square_button.dart';
@@ -58,7 +59,7 @@ class _CryptoHomeState extends State<CryptoHome> {
   AppBar buildAppBar() {
     return AppBar(
       backgroundColor: Colors.transparent,
-      automaticallyImplyLeading: true,
+      automaticallyImplyLeading: false,
       title: const Row(
         children: [
           Image(image: AssetImage("asset/images/logo_head.png")),
@@ -78,7 +79,13 @@ class _CryptoHomeState extends State<CryptoHome> {
               ButtonForAppBarAction(
                   imageUrl: "asset/images/icon_fresh.png", onTap: () {}),
               ButtonForAppBarAction(
-                  imageUrl: "asset/images/icon_tx_history.png", onTap: () {}),
+                  imageUrl: "asset/images/icon_tx_history.png",
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TxHistory()));
+                  }),
               ButtonForAppBarAction(
                   imageUrl: "asset/images/icon_more_3pot.png", onTap: () {}),
             ],
