@@ -1,6 +1,7 @@
 import 'package:awallet/bean/token_info.dart';
-import 'package:awallet/component/crypto_token_card.dart';
+import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/cryptos/more_menu.dart';
+import 'package:awallet/cryptos/token_tx_history.dart';
 import 'package:awallet/cryptos/tx_history.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +40,7 @@ class _CryptoHomeState extends State<CryptoHome> {
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
               child: buildChainButtons(),
             ),
-            const CryptoTokenCard(
+            const CryptoWalletCard(
                 balance: 0.3, address: "0x0f6eD175150e0......ad19A6e054CB"),
             const SizedBox(height: 20),
             buildTxButtons(),
@@ -120,45 +121,54 @@ class _CryptoHomeState extends State<CryptoHome> {
             ),
           ],
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage(tokenInfo.iconUrl),
-                    width: 20,
-                    height: 20,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    tokenInfo.name,
-                    style: const TextStyle(
-                      color: Color(0xFF666666),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        TokenTxHistory(tokenInfo: tokenInfo)));
+          },
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image(
+                      image: AssetImage(tokenInfo.iconUrl),
+                      width: 20,
+                      height: 20,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 5),
+                    Text(
+                      tokenInfo.name,
+                      style: const TextStyle(
+                        color: Color(0xFF666666),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const Spacer(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(tokenInfo.balance.toString(),
-                    textAlign: TextAlign.right,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold)),
-                Text("\$ ${tokenInfo.balanceOfDollar}",
-                    textAlign: TextAlign.right),
-              ],
-            )
-          ],
+              const Spacer(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(tokenInfo.balance.toString(),
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text("\$ ${tokenInfo.balanceOfDollar}",
+                      textAlign: TextAlign.right),
+                ],
+              )
+            ],
+          ),
         ));
   }
 

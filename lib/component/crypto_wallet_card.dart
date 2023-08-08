@@ -1,18 +1,18 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 
-class CryptoTokenCard extends StatefulWidget {
+class CryptoWalletCard extends StatefulWidget {
   final double balance;
   final String address;
 
-  const CryptoTokenCard(
+  const CryptoWalletCard(
       {super.key, required this.balance, required this.address});
 
   @override
-  State<CryptoTokenCard> createState() => _CryptoTokenCardState();
+  State<CryptoWalletCard> createState() => _CryptoWalletCardState();
 }
 
-class _CryptoTokenCardState extends State<CryptoTokenCard> {
+class _CryptoWalletCardState extends State<CryptoWalletCard> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
