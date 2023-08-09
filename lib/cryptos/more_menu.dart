@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:awallet/bean/btn_info.dart';
 import 'package:awallet/component/btn_icon_name.dart';
+import 'package:awallet/cryptos/send.dart';
 import 'package:flutter/material.dart';
 
 class MoreMenu extends StatefulWidget {
@@ -13,19 +12,23 @@ class MoreMenu extends StatefulWidget {
 
 class _MoreMenuState extends State<MoreMenu> {
   var btnInfoList = [
-    BtnInfo("asset/images/icon_channel_manage.png", "Channel Manage", () {
-      log("Channel Manage");
-    }),
-    BtnInfo("asset/images/icon_plus.png", "Create Channel", () {
-      log("Create Channel");
-    }),
-    BtnInfo("asset/images/icon_backup.png", "Backup Now", () {
-      log("Backup Now");
-    }),
-    BtnInfo("asset/images/icon_export_wif.png", "Export WIF", () {
-      log("Export WIF");
-    }),
+    BtnInfo("asset/images/icon_channel_manage.png", "Channel Manage", null),
+    BtnInfo("asset/images/icon_plus.png", "Create Channel", null),
+    BtnInfo("asset/images/icon_backup.png", "Backup Now", null),
+    BtnInfo("asset/images/icon_export_wif.png", "Export WIF", null),
   ];
+
+  @override
+  void initState() {
+    btnInfoList[3].callback = () {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const Send();
+          });
+    };
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
