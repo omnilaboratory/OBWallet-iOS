@@ -1,4 +1,5 @@
 import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/component/bottom_white_button.dart';
 import 'package:flutter/material.dart';
 
 class SendConfirm extends StatefulWidget {
@@ -10,6 +11,10 @@ class SendConfirm extends StatefulWidget {
 
 class _SendConfirmState extends State<SendConfirm> {
   onConfirm() {
+    Navigator.pop(context);
+  }
+
+  onClose() {
     Navigator.pop(context);
   }
 
@@ -215,12 +220,11 @@ class _SendConfirmState extends State<SendConfirm> {
                 ]),
               ),
               const SizedBox(height: 30),
-              InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Image(
-                      image: AssetImage("asset/images/btn_cancel.png")))
+              BottomWhiteButton(
+                icon: 'asset/images/icon_close_white.png',
+                text: 'CANCEL',
+                onPressed: onClose,
+              )
             ],
           ),
         ));
