@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'card.dart';
-import 'crypto.dart';
+import 'cryptos/home.dart';
 import 'profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   static const List<Widget> _pages = <Widget>[
     CardPage(),
-    CryptoPage(),
+    CryptoHome(),
     ProfilePage()
   ];
 
@@ -38,10 +38,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: _titles[_selectedPage],
-      ),
+      // appBar: AppBar(
+      //   // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      //   title: _titles[_selectedPage],
+      // ),
 
       body: Center(child: _pages.elementAt(_selectedPage)),
 

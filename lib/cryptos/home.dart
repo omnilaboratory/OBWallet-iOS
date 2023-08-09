@@ -1,12 +1,14 @@
+import 'package:awallet/bean/global_state.dart';
 import 'package:awallet/bean/token_info.dart';
-import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/cryptos/more_menu.dart';
+import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/token_activity.dart';
 import 'package:awallet/cryptos/tx_history.dart';
 import 'package:flutter/material.dart';
 
 import '../component/square_button.dart';
+import 'create_btc_wallet.dart';
 
 class CryptoHome extends StatefulWidget {
   const CryptoHome({super.key});
@@ -19,6 +21,36 @@ class _CryptoHomeState extends State<CryptoHome> {
   @override
   void initState() {
     super.initState();
+    print("initState");
+
+    if (GlobalState.isExistBtcAddress == false) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const CryptoCreateBtcWallet();
+            });
+      });
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    print("didChangeDependencies");
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(covariant CryptoHome oldWidget) {
+    print("didUpdateWidget");
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    print("dispose");
+    // TODO: implement dispose
+    super.dispose();
   }
 
   var tokenList = [
@@ -32,6 +64,11 @@ class _CryptoHomeState extends State<CryptoHome> {
 
   @override
   Widget build(BuildContext context) {
+    print("build");
+    return buildHomeScaffold();
+  }
+
+  Scaffold buildHomeScaffold() {
     return Scaffold(
       appBar: buildAppBar(),
       body: Center(
@@ -197,8 +234,7 @@ class _CryptoHomeState extends State<CryptoHome> {
                   context: context,
                   builder: (context) {
                     return const ReceiveWalletAddress();
-                  }
-              );
+                  });
             }),
         SquareButton(
             icon: 'asset/images/icon_send.png',
