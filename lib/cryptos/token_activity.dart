@@ -1,3 +1,5 @@
+import 'package:awallet/cryptos/receive_wallet_address.dart';
+import 'package:awallet/cryptos/send.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
@@ -109,12 +111,24 @@ class _TokenActivityState extends State<TokenActivity> {
             icon: 'asset/images/icon_receive.png',
             text: 'Receive',
             iconWidth: iconWidth,
-            onPressed: () {}),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const ReceiveWalletAddress();
+                  });
+            }),
         SquareButton(
             icon: 'asset/images/icon_send.png',
             text: 'Send',
             iconWidth: iconWidth,
-            onPressed: () {}),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Send();
+                  });
+            }),
         SquareButton(
             icon: 'asset/images/icon_gift.png',
             text: 'Gift',
