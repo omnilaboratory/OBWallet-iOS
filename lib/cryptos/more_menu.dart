@@ -1,6 +1,6 @@
 import 'package:awallet/bean/btn_info.dart';
 import 'package:awallet/component/btn_icon_name.dart';
-import 'package:awallet/cryptos/send.dart';
+import 'package:awallet/component/export_wif.dart';
 import 'package:flutter/material.dart';
 
 class MoreMenu extends StatefulWidget {
@@ -21,10 +21,11 @@ class _MoreMenuState extends State<MoreMenu> {
   @override
   void initState() {
     btnInfoList[3].callback = () {
+      Navigator.pop(context);
       showDialog(
           context: context,
           builder: (context) {
-            return const Send();
+            return const ExportWif();
           });
     };
     super.initState();
