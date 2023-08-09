@@ -141,32 +141,6 @@ class _CryptoHomeState extends State<CryptoHome> {
             ),
           ],
         ),
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(),
-              child: Row(
-                children: [
-                  Image(image: AssetImage(tokenInfo.iconUrl)),
-                  const SizedBox(width: 10),
-                  Text(tokenInfo.name),
-                ],
-              ),
-            ),
-            const Spacer(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(tokenInfo.balance.toString(),
-                    textAlign: TextAlign.right,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold)),
-                Text("\$ ${tokenInfo.balanceOfDollar}",
-                    textAlign: TextAlign.right),
-              ],
-            )
-          ],
         child: InkWell(
           onTap: () {
             Navigator.push(
@@ -175,27 +149,14 @@ class _CryptoHomeState extends State<CryptoHome> {
                     builder: (context) => TokenActivity(tokenInfo: tokenInfo)));
           },
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 16),
+                padding: const EdgeInsets.only(),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image(
-                      image: AssetImage(tokenInfo.iconUrl),
-                      width: 20,
-                      height: 20,
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      tokenInfo.name,
-                      style: const TextStyle(
-                        color: Color(0xFF666666),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                    Image(image: AssetImage(tokenInfo.iconUrl)),
+                    const SizedBox(width: 10),
+                    Text(tokenInfo.name),
                   ],
                 ),
               ),
@@ -248,9 +209,6 @@ class _CryptoHomeState extends State<CryptoHome> {
             icon: 'asset/images/icon_send.png',
             text: 'Send',
             iconWidth: iconWidth,
-            onPressed: () {}),
-            icon: 'asset/images/icon_send.png',
-            text: 'Send',
             onPressed: () {
               showDialog(
                   context: context,
