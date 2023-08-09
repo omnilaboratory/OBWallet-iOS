@@ -4,6 +4,7 @@ import 'package:awallet/cryptos/more_menu.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/token_activity.dart';
 import 'package:awallet/cryptos/tx_history.dart';
+import 'package:awallet/cryptos/send.dart';
 import 'package:flutter/material.dart';
 
 import '../component/square_button.dart';
@@ -140,6 +141,32 @@ class _CryptoHomeState extends State<CryptoHome> {
             ),
           ],
         ),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(),
+              child: Row(
+                children: [
+                  Image(image: AssetImage(tokenInfo.iconUrl)),
+                  const SizedBox(width: 10),
+                  Text(tokenInfo.name),
+                ],
+              ),
+            ),
+            const Spacer(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(tokenInfo.balance.toString(),
+                    textAlign: TextAlign.right,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold)),
+                Text("\$ ${tokenInfo.balanceOfDollar}",
+                    textAlign: TextAlign.right),
+              ],
+            )
+          ],
         child: InkWell(
           onTap: () {
             Navigator.push(
@@ -222,6 +249,15 @@ class _CryptoHomeState extends State<CryptoHome> {
             text: 'Send',
             iconWidth: iconWidth,
             onPressed: () {}),
+            icon: 'asset/images/icon_send.png',
+            text: 'Send',
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Send();
+                  });
+            }),
       ],
     );
   }
