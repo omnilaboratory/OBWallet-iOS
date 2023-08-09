@@ -1,4 +1,3 @@
-import 'package:awallet/bean/global_state.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/cryptos/more_menu.dart';
@@ -8,7 +7,6 @@ import 'package:awallet/cryptos/tx_history.dart';
 import 'package:flutter/material.dart';
 
 import '../component/square_button.dart';
-import 'create_btc_wallet.dart';
 
 class CryptoHome extends StatefulWidget {
   const CryptoHome({super.key});
@@ -48,7 +46,6 @@ class _CryptoHomeState extends State<CryptoHome> {
 
   @override
   Widget build(BuildContext context) {
-    print("build");
     return buildHomeScaffold();
   }
 

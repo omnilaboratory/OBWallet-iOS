@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'package:awallet/bean/global_state.dart';
-import 'package:awallet/cryptos/home.dart';
 import 'package:awallet/home.dart';
 import 'package:flutter/material.dart';
 
