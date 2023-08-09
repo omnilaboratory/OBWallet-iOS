@@ -21,35 +21,19 @@ class _CryptoHomeState extends State<CryptoHome> {
   @override
   void initState() {
     super.initState();
-    print("initState");
 
-    if (GlobalState.isExistBtcAddress == false) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const CryptoCreateBtcWallet();
-            });
-      });
-    }
+    // if (GlobalState.isExistBtcAddress == false) {
+    //   WidgetsBinding.instance.addPostFrameCallback((_) {
+    //     showDialog(
+    //         context: context,
+    //         builder: (context) {
+    //           return const CryptoCreateBtcWallet();
+    //         });
+    //   });
+    // }
   }
-
-  @override
-  void didChangeDependencies() {
-    print("didChangeDependencies");
-    super.didChangeDependencies();
-  }
-
-  @override
-  void didUpdateWidget(covariant CryptoHome oldWidget) {
-    print("didUpdateWidget");
-    super.didUpdateWidget(oldWidget);
-  }
-
   @override
   void dispose() {
-    print("dispose");
-    // TODO: implement dispose
     super.dispose();
   }
 
