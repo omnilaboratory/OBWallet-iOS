@@ -73,7 +73,6 @@ class _ExportWifState extends State<ExportWif> {
                           padding: const EdgeInsets.only(
                               left: 25, right: 25, top: 5),
                           child: TextField(
-                            focusNode: FocusNode(),
                             maxLines: 10,
                             minLines: 1,
                             onChanged: (text) {
