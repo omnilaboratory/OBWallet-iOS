@@ -2,12 +2,13 @@ import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/cryptos/more_menu.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
+import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/cryptos/token_activity.dart';
 import 'package:awallet/cryptos/tx_history.dart';
-import 'package:awallet/cryptos/send.dart';
 import 'package:flutter/material.dart';
 
 import '../component/square_button.dart';
+import 'crypto_receive.dart';
 
 class CryptoHome extends StatefulWidget {
   const CryptoHome({super.key});
@@ -17,6 +18,8 @@ class CryptoHome extends StatefulWidget {
 }
 
 class _CryptoHomeState extends State<CryptoHome> {
+  double balance = 0;
+
   @override
   void initState() {
     super.initState();
@@ -31,6 +34,7 @@ class _CryptoHomeState extends State<CryptoHome> {
     //   });
     // }
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -47,7 +51,34 @@ class _CryptoHomeState extends State<CryptoHome> {
 
   @override
   Widget build(BuildContext context) {
+    if (balance == 0) {
+      return buildNoMoneyScaffold();
+    }
     return buildHomeScaffold();
+  }
+
+  Widget buildNoMoneyScaffold() {
+    return Scaffold(
+      appBar: buildAppBar(),
+      body: Center(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+              child: buildChainButtons(),
+            ),
+            const CryptoWalletCard(
+                balance: 0.3, address: "0x0f6eD175150e0......ad19A6e054CB"),
+            const SizedBox(height: 37),
+            const CryptoReceive(
+              address: "0x0f6eD175150e0......ad19A6e054CB",
+              tips: "The balance is zero, please top up Ethereum Assets",
+              qrSize: 200,
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   Scaffold buildHomeScaffold() {
@@ -248,7 +279,9 @@ class _CryptoHomeState extends State<CryptoHome> {
               onPressed: () {
                 if (currChainBtnIndex != 0) {
                   currChainBtnIndex = 0;
-                  setState(() {});
+                  setState(() {
+                    balance = 0;
+                  });
                 }
               },
             ),
@@ -267,7 +300,9 @@ class _CryptoHomeState extends State<CryptoHome> {
               onPressed: () {
                 if (currChainBtnIndex != 1) {
                   currChainBtnIndex = 1;
-                  setState(() {});
+                  setState(() {
+                    balance = 1;
+                  });
                 }
               },
             ),

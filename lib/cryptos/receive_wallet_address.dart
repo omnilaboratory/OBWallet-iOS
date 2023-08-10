@@ -1,6 +1,7 @@
-import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:flutter/material.dart';
+
+import 'crypto_receive.dart';
 
 class ReceiveWalletAddress extends StatefulWidget {
   const ReceiveWalletAddress({super.key});
@@ -10,14 +11,6 @@ class ReceiveWalletAddress extends StatefulWidget {
 }
 
 class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
-  onShare() {
-    Navigator.pop(context);
-  }
-
-  onCopy() {
-    Navigator.pop(context);
-  }
-
   onClose() {
     Navigator.pop(context);
   }
@@ -55,88 +48,10 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                     padding:
                         const EdgeInsets.only(left: 15, right: 15, top: 15),
                     child: buildChainTypeButtons()),
-                const Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                            width: 30,
-                            height: 30,
-                            image: AssetImage("asset/images/icon_smile.png")),
-                        SizedBox(width: 7),
-                        Text(
-                          "Top up to wallet address",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Color(0xFF333333),
-                          ),
-                        )
-                      ]),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 50),
-                  child: Image(
-                      width: 100,
-                      height: 100,
-                      image:
-                          AssetImage("asset/images/icon_qrcode_default.png")),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 15),
-                  child: Text(
-                    'Wallet Address',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFF333333),
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 5),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "2533464754865976HFDGE5437",
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Color(0xFF999999),
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                        Image(
-                            width: 16,
-                            height: 16,
-                            image:
-                                AssetImage("asset/images/icon_copy_gray.png")),
-                      ]),
-                ),
-                const Spacer(
-                  flex: 1,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 50, right: 50, bottom: 20),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        BottomButton(
-                          icon: 'asset/images/icon_share_green.png',
-                          text: 'SHARE',
-                          onPressed: onShare,
-                        ),
-                        const Spacer(
-                          flex: 1,
-                        ),
-                        BottomButton(
-                          icon: 'asset/images/icon_copy_green.png',
-                          text: 'COPY',
-                          onPressed: onCopy,
-                        )
-                      ]),
-                ),
+                const SizedBox(height: 30),
+                const CryptoReceive(
+                    address: "0x0f6eD175150e0......ad19A6e054CB",
+                    tips: "Top up to wallet address"),
               ])),
           const SizedBox(height: 30),
           BottomWhiteButton(
