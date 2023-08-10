@@ -153,7 +153,7 @@ class _UpdateState extends State<Update> {
                 ),
                 const SizedBox(height: 50),
                 const Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                    padding: EdgeInsets.only(left: 30, right: 30),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
