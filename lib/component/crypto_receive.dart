@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-import '../component/bottom_button.dart';
+import 'bottom_button.dart';
 
 class CryptoReceive extends StatelessWidget {
   final String address;

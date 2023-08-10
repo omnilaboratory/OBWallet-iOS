@@ -1,5 +1,7 @@
 import 'package:awallet/bean/token_info.dart';
+import 'package:awallet/component/crypto_receive.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
+import 'package:awallet/component/square_button.dart';
 import 'package:awallet/cryptos/more_menu.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
@@ -7,8 +9,6 @@ import 'package:awallet/cryptos/token_activity.dart';
 import 'package:awallet/cryptos/tx_history.dart';
 import 'package:flutter/material.dart';
 
-import '../component/square_button.dart';
-import 'crypto_receive.dart';
 
 class CryptoHome extends StatefulWidget {
   const CryptoHome({super.key});

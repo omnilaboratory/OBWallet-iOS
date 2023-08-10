@@ -1,7 +1,7 @@
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:flutter/material.dart';
 
-import 'crypto_receive.dart';
+import '../component/crypto_receive.dart';
 
 class ReceiveWalletAddress extends StatefulWidget {
   const ReceiveWalletAddress({super.key});
