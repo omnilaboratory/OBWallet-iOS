@@ -106,7 +106,7 @@ class _LoginState extends State<Login> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 20, right: 20),
+              padding: const EdgeInsets.only(bottom: 10, right: 20),
               child: buildLoginBtn(context),
             )
           ])
@@ -158,8 +158,8 @@ class _LoginState extends State<Login> {
               ),
               Image(
                 image: AssetImage("asset/images/btn_arrow-right.png"),
-                width: 40,
-                height: 40,
+                width: 36,
+                height: 36,
               )
             ]),
       ),
@@ -168,7 +168,7 @@ class _LoginState extends State<Login> {
 
   Widget buildInputFields() {
     return Container(
-      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
       child: Form(
         key: _formKey,
         child: Column(
@@ -185,7 +185,7 @@ class _LoginState extends State<Login> {
                 return v!.trim().isNotEmpty ? null : "wrong username";
               },
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 30),
             TextFormField(
               controller: _pswController,
               decoration: const InputDecoration(
