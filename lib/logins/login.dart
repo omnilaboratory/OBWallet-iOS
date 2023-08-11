@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awallet/home.dart';
 import 'package:awallet/logins/sign_up_step1.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,11 @@ class _LoginState extends State<Login> {
           const Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image(image: AssetImage("asset/images/image_logo.png"),width: 72,height: 72,),
+              Image(
+                image: AssetImage("asset/images/image_logo.png"),
+                width: 72,
+                height: 72,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -116,6 +121,10 @@ class _LoginState extends State<Login> {
         if ((_formKey.currentState as FormState).validate()) {
           log(_unameController.value.text);
           log(_pswController.value.text);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
         }
       },
       child: Container(
