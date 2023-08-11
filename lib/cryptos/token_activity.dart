@@ -140,7 +140,7 @@ class _TokenActivityState extends State<TokenActivity> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      leadingWidth: 32,
+      leadingWidth: 24,
       leading: InkWell(
           onTap: () {
             Navigator.pop(context);
@@ -148,7 +148,7 @@ class _TokenActivityState extends State<TokenActivity> {
           child: const Image(image: AssetImage('asset/images/btn_back.png'))),
       title: const Row(
         children: [
-          Image(image: AssetImage("asset/images/logo_head.png")),
+          Image(width: 24, height: 33, image: AssetImage("asset/images/logo_head.png")),
           Text('BTC Activity',
               style: TextStyle(
                 color: Color(0xFF333333),

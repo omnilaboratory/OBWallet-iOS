@@ -50,9 +50,15 @@ class _TxHistoryState extends State<TxHistory> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        leadingWidth: 24,
+        leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Image(image: AssetImage('asset/images/btn_back.png'))),
         title: const Row(
           children: [
-            Image(image: AssetImage("asset/images/logo_head.png")),
+            Image(width: 24, height: 33, image: AssetImage("asset/images/logo_head.png")),
             Text('Crypto',
                 style: TextStyle(
                   color: Color(0xFF333333),

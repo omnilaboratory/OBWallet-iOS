@@ -1,4 +1,4 @@
-import 'package:awallet/component/bottom_white_button.dart';
+import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/logins/sign_up_step2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
@@ -36,7 +36,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     return AppBar(
         automaticallyImplyLeading: false,
         title: const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Image(image: AssetImage("asset/images/logo_head.png")),
+          Image(width: 24, height: 33, image: AssetImage("asset/images/logo_head.png")),
           Text('Sign Up',
               style: TextStyle(
                 color: Color(0xFF333333),
@@ -50,18 +50,16 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        BottomWhiteButton(
+        BottomButton(
           icon: 'asset/images/icon_arrow_left_green.png',
           text: 'BACK',
-          fontColor: Colors.black,
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        BottomWhiteButton(
+        BottomButton(
           icon: 'asset/images/icon_arrow_right_green.png',
           text: 'NEXT',
-          fontColor: Colors.black,
           onPressed: () {
             Navigator.push(
                 context,

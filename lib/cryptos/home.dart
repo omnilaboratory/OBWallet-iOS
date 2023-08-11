@@ -116,7 +116,7 @@ class _CryptoHomeState extends State<CryptoHome> {
       automaticallyImplyLeading: false,
       title: const Row(
         children: [
-          Image(image: AssetImage("asset/images/logo_head.png")),
+          Image(width: 24, height: 33, image: AssetImage("asset/images/logo_head.png")),
           Text('Crypto',
               style: TextStyle(
                 color: Color(0xFF333333),
