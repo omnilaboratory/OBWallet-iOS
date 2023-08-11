@@ -1,6 +1,6 @@
+import 'package:awallet/logins/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'welcome.dart';
 
 void main() {
   debugPaintSizeEnabled = false;
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
 
-      home: const WelcomePage(),
+      home: const Login(),
     );
   }
 }
