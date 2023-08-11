@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awallet/logins/sign_up_step1.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -24,7 +25,7 @@ class _LoginState extends State<Login> {
           const Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image(image: AssetImage("asset/images/image_logo.png")),
+              Image(image: AssetImage("asset/images/image_logo.png"),width: 72,height: 72,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -81,7 +82,12 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: const EdgeInsets.only(top: 12, left: 10, bottom: 20),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpStepOne()));
+                    },
                     child: const Text(
                       'Sign Up',
                       style: TextStyle(
