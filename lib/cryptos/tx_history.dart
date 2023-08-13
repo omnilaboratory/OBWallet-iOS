@@ -1,4 +1,5 @@
 import 'package:awallet/bean/crypto_tx_info.dart';
+import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/tx_item.dart';
 import 'package:flutter/material.dart';
 
@@ -12,30 +13,6 @@ class TxHistory extends StatefulWidget {
 class _TxHistoryState extends State<TxHistory> {
   var txHistoryList = [
     CryptoTxInfo(title: "Scan Pay", txTime: DateTime.now(), amount: 122.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
     CryptoTxInfo(
         title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
     CryptoTxInfo(
@@ -56,17 +33,7 @@ class _TxHistoryState extends State<TxHistory> {
               Navigator.pop(context);
             },
             child: const Image(image: AssetImage('asset/images/btn_back.png'))),
-        title: const Row(
-          children: [
-            Image(width: 24, height: 33, image: AssetImage("asset/images/logo_head.png")),
-            Text('Crypto',
-                style: TextStyle(
-                  color: Color(0xFF333333),
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                )),
-          ],
-        ),
+        title:const HeadLogo(title: "Crypto"),
       ),
       body: ListView.builder(
           padding: const EdgeInsets.only(left: 20, right: 20, top: 10),

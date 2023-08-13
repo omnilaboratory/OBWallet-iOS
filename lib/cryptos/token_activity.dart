@@ -1,13 +1,14 @@
+import 'package:awallet/bean/crypto_tx_info.dart';
+import 'package:awallet/bean/token_info.dart';
+import 'package:awallet/component/crypto_token_card.dart';
+import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/component/square_button.dart';
+import 'package:awallet/component/tx_item.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
-import '../bean/crypto_tx_info.dart';
-import '../bean/token_info.dart';
-import '../component/crypto_token_card.dart';
-import '../component/square_button.dart';
-import '../component/tx_item.dart';
 
 class TokenActivity extends StatefulWidget {
   final TokenInfo tokenInfo;
@@ -22,36 +23,6 @@ class _TokenActivityState extends State<TokenActivity> {
 
   var txHistoryList = [
     CryptoTxInfo(title: "Scan Pay", txTime: DateTime.now(), amount: 122.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
     CryptoTxInfo(
         title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
     CryptoTxInfo(
@@ -146,17 +117,7 @@ class _TokenActivityState extends State<TokenActivity> {
             Navigator.pop(context);
           },
           child: const Image(image: AssetImage('asset/images/btn_back.png'))),
-      title: const Row(
-        children: [
-          Image(width: 24, height: 33, image: AssetImage("asset/images/logo_head.png")),
-          Text('BTC Activity',
-              style: TextStyle(
-                color: Color(0xFF333333),
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-              )),
-        ],
-      ),
+      title:HeadLogo(title: "${widget.tokenInfo.name} Activity"),
     );
   }
 }

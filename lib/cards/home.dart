@@ -1,3 +1,4 @@
+import 'package:awallet/component/head_logo.dart';
 import 'package:flutter/material.dart';
 
 class CardHome extends StatefulWidget {
@@ -43,21 +44,7 @@ class _CardHomeState extends State<CardHome> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          // titleSpacing: 0,
-          title: const Row(
-            children: [
-              Image(
-                  width: 24,
-                  height: 33,
-                  image: AssetImage("asset/images/logo_head.png")),
-              Text('Card',
-                  style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                  )),
-            ],
-          ),
+          title: const HeadLogo(title: "Card"),
         ),
         body: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -96,3 +83,4 @@ class _CardHomeState extends State<CardHome> {
     );
   }
 }
+

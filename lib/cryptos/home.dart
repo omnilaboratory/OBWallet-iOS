@@ -1,6 +1,7 @@
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/crypto_receive.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
+import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/cryptos/Update.dart';
 import 'package:awallet/cryptos/more_menu.dart';
@@ -114,17 +115,7 @@ class _CryptoHomeState extends State<CryptoHome> {
     return AppBar(
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
-      title: const Row(
-        children: [
-          Image(width: 24, height: 33, image: AssetImage("asset/images/logo_head.png")),
-          Text('Crypto',
-              style: TextStyle(
-                color: Color(0xFF333333),
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-              )),
-        ],
-      ),
+      title:const HeadLogo(title: "Crypto"),
       actions: <Widget>[
         Padding(
           padding: const EdgeInsets.only(right: 20.0),
