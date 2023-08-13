@@ -7,64 +7,39 @@ class CardHome extends StatefulWidget {
   State<CardHome> createState() => _CardHomeState();
 }
 
-class _CardHomeState extends State<CardHome>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+class _CardHomeState extends State<CardHome> {
+  var tabNames = ['Account', 'Card'];
+
+  List<Widget> tabList = [];
+  List<Widget> tabViewList = [
+    const Center(
+      child: Text("Account Pages"),
+    ),
+    const Center(
+      child: Text("Card Pages"),
+    ),
+  ];
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this);
+    for (var e in tabNames) {
+      tabList.add(Tab(
+        child: Text(
+          e,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ));
+    }
     super.initState();
   }
 
   @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  TabBar buildTabBar() {
-    return TabBar(controller: _tabController, tabs: const [
-      Tab(
-        child: Text(
-          'Account',
-          style: TextStyle(
-            color: Color(0xFF4A92FF),
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-      Tab(
-        child: Text(
-          'Card',
-          style: TextStyle(
-            color: Color(0xFF999999),
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-    ]);
-  }
-
-  Widget getTabBarPages() {
-    return TabBarView(controller: _tabController, children: const <Widget>[
-      Text(
-        "Account",
-      ),
-      Text(
-        "Card",
-      ),
-    ]);
-  }
-
-  @override
   Widget build(BuildContext context) {
-
-    var size = MediaQuery.sizeOf(context);
     return DefaultTabController(
-      length: 2,
+      length: tabNames.length,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -85,60 +60,38 @@ class _CardHomeState extends State<CardHome>
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: Column(
             children: [
-              Container(
-                height: 40,
-                decoration: BoxDecoration(
-                    color: const Color(0xFFF6F6F6),
-                    borderRadius: BorderRadius.circular(8.0)),
-                child: TabBar(
-                  indicator: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(4.0)),
-                  indicatorPadding: const EdgeInsets.only(top: 4,bottom: 4),
-                  labelColor: const Color(0xFF4A92FF),
-                  unselectedLabelColor: const Color(0xFF999999),
-                  tabs: const [
-                    Tab(
-                        child: Text(
-                          'Account',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                    ),
-                    Tab(
-                        child: Text(
-                          'Card',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-              const Expanded(
+              buildTabBars(),
+              Expanded(
                   child: TabBarView(
-                children: [
-                  Center(
-                    child: Text("Chats Pages"),
-                  ),
-                  Center(
-                    child: Text("Status Pages"),
-                  ),
-                ],
+                children: tabViewList,
               ))
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildTabBars() {
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+        color: const Color(0xFFF6F6F6),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: TabBar(
+        padding: const EdgeInsets.only(left: 4, right: 4),
+        indicator: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(4.0)),
+        indicatorPadding: const EdgeInsets.only(top: 4, bottom: 4),
+        labelColor: const Color(0xFF4A92FF),
+        unselectedLabelColor: const Color(0xFF999999),
+        dividerColor: Colors.transparent,
+        indicatorSize: TabBarIndicatorSize.tab,
+        tabs: tabList,
       ),
     );
   }
