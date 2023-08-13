@@ -118,14 +118,14 @@ class _LoginState extends State<Login> {
   Widget buildLoginBtn(BuildContext context) {
     return InkWell(
       onTap: () {
-        if ((_formKey.currentState as FormState).validate()) {
+        // if ((_formKey.currentState as FormState).validate()) {
           log(_unameController.value.text);
           log(_pswController.value.text);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const HomePage()),
           );
-        }
+        // }
       },
       child: Container(
         width: 88,

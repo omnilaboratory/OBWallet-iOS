@@ -1,7 +1,7 @@
 import 'package:awallet/bean/global_state.dart';
 import 'package:flutter/material.dart';
 
-import 'card.dart';
+import 'cards/home.dart';
 import 'crypto.dart';
 import 'cryptos/home.dart';
 import 'profile.dart';
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   static final List<Widget> _pages = <Widget>[
-    const CardPage(),
+    const CardHome(),
     const CryptoHome(),
     const ProfilePage()
   ];

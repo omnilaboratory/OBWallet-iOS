@@ -158,7 +158,7 @@ class _ApplyCardStepTwoState extends State<ApplyCardStepTwo> {
                   icon: 'asset/images/icon_arrow_right_green.png',
                   text: 'APPLY CARD',
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const HomePage()));
