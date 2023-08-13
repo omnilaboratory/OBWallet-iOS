@@ -180,7 +180,6 @@ class _LoginState extends State<Login> {
                   labelText: "Username",
                   hintText: "Username",
                   prefixIcon: Icon(Icons.person)),
-              // 校验用户名
               validator: (v) {
                 return v!.trim().isNotEmpty ? null : "wrong username";
               },
