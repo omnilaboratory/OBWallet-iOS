@@ -1,3 +1,4 @@
+import 'package:awallet/cards/account.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,7 @@ class _CardHomeState extends State<CardHome> {
 
   List<Widget> tabList = [];
   List<Widget> tabViewList = [
-    const Center(
-      child: Text("Account Pages"),
-    ),
+    Account(),
     const Center(
       child: Text("Card Pages"),
     ),
