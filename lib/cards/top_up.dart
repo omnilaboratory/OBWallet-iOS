@@ -208,7 +208,7 @@ class _TopUpState extends State<TopUp> {
   Widget buildTitle() {
     return const Center(
       child: Padding(
-        padding: EdgeInsets.only(top: 28, bottom: 50),
+        padding: EdgeInsets.only(top: 28, bottom: 20),
         child: Text("Top Up", style: TextStyle(fontSize: 20)),
       ),
     );
