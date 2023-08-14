@@ -1,5 +1,6 @@
 import 'package:awallet/bean/balance_in_currency_info.dart';
 import 'package:awallet/bean/currency_tx_info.dart';
+import 'package:awallet/cards/currency_tx_history.dart';
 import 'package:awallet/component/account_balance_in_currency.dart';
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
@@ -48,9 +49,9 @@ class _AccountState extends State<Account> {
             length: MediaQuery.of(context).size.width - 40,
           ),
         ),
-        const Row(
+        Row(
           children: [
-            Text(
+            const Text(
               'Recent Transactions',
               style: TextStyle(
                 color: Color(0xFF999999),
@@ -59,14 +60,19 @@ class _AccountState extends State<Account> {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            Spacer(),
-            Text(
-              'View All',
-              style: TextStyle(
-                color: Color(0xFF06D78F),
-                fontSize: 16,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.w500,
+            const Spacer(),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const TxHistory()));
+              },
+              child: const Text(
+                'View All',
+                style: TextStyle(
+                  color: Color(0xFF06D78F),
+                  fontSize: 16,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             )
           ],
