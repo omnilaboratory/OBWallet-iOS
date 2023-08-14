@@ -1,6 +1,11 @@
 import 'package:awallet/cards/account.dart';
+import 'package:awallet/cards/card_part.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:flutter/material.dart';
+
+import '../cryptos/Update.dart';
+import '../cryptos/more_menu.dart';
+import '../cryptos/tx_history.dart';
 
 class CardHome extends StatefulWidget {
   const CardHome({super.key});
@@ -15,9 +20,7 @@ class _CardHomeState extends State<CardHome> {
   List<Widget> tabList = [];
   List<Widget> tabViewList = [
     Account(),
-    const Center(
-      child: Text("Card Pages"),
-    ),
+    CardPart(),
   ];
 
   @override
@@ -44,9 +47,50 @@ class _CardHomeState extends State<CardHome> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: const HeadLogo(title: "Card"),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: Row(
+                children: [
+                  ButtonForAppBarAction(
+                      width: 22,
+                      height: 16,
+                      imageUrl: "asset/images/icon_kyc.png",
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const Update();
+                            });
+                      }),
+                  ButtonForAppBarAction(
+                      width: 24,
+                      height: 24,
+                      imageUrl: "asset/images/icon_tx_history.png",
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const TxHistory()));
+                      }),
+                  ButtonForAppBarAction(
+                      width: 18,
+                      height: 18,
+                      imageUrl: "asset/images/icon_more_3line.png",
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const MoreMenu();
+                            });
+                      }),
+                ],
+              ),
+            ),
+          ],
         ),
         body: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
           child: Column(
             children: [
               buildTabBars(),
@@ -83,3 +127,28 @@ class _CardHomeState extends State<CardHome> {
   }
 }
 
+class ButtonForAppBarAction extends StatelessWidget {
+  final double width;
+  final double height;
+  final String imageUrl;
+  final GestureTapCallback onTap;
+
+  const ButtonForAppBarAction({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.imageUrl,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+          onTap: onTap,
+          child:
+              Image(width: width, height: height, image: AssetImage(imageUrl))),
+    );
+  }
+}
