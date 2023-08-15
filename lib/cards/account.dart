@@ -1,6 +1,7 @@
 import 'package:awallet/bean/balance_in_currency_info.dart';
 import 'package:awallet/bean/currency_tx_info.dart';
 import 'package:awallet/cards/currency_tx_history.dart';
+import 'package:awallet/cards/send.dart';
 import 'package:awallet/cards/top_up.dart';
 import 'package:awallet/component/account_balance_in_currency.dart';
 import 'package:awallet/component/currency_tx_item.dart';
@@ -122,11 +123,11 @@ class _AccountState extends State<Account> {
             text: 'Send',
             iconWidth: iconWidth,
             onPressed: () {
-              // showDialog(
-              //     context: context,
-              //     builder: (context) {
-              //       return const Send();
-              //     });
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Send();
+                  });
             }),
       ],
     );
