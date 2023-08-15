@@ -1,7 +1,6 @@
 import 'package:awallet/bean/balance_in_currency_info.dart';
 import 'package:awallet/bean/currency_tx_info.dart';
 import 'package:awallet/cards/currency_tx_history.dart';
-import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/top_up.dart';
@@ -11,7 +10,6 @@ import 'package:awallet/component/square_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
-import '../cryptos/send.dart';
 
 class Account extends StatefulWidget {
   Account({super.key});
