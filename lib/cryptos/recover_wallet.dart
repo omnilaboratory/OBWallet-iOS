@@ -1,6 +1,13 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import '../component/rect_button.dart';
+import 'package:googleapis/drive/v3.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sign_in_as_googleapis_auth.dart';
+
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  scopes: [DriveApi.driveFileScope],
+);
 
 class RecoverWallet extends StatefulWidget {
   const RecoverWallet({super.key});
@@ -10,8 +17,46 @@ class RecoverWallet extends StatefulWidget {
 }
 
 class _RecoverWalletState extends State<RecoverWallet> {
-  onGoogleDrive() {
-    log('onGoogleDrive');
+  @override
+  void initState() {
+    super.initState();
+
+    // trying to sign in silently if has signed in
+    _googleSignIn.signInSilently();
+  }
+
+  // recover wallet from Google Drive
+  recoverFromDrive() async {
+    final client = (await _googleSignIn.authenticatedClient())!;
+
+    // get the instance to access resource in the drive
+    final drive = DriveApi(client);
+    log('Drive instance: $drive');
+
+    // get the recover files
+    var query   = "name='RECOVER_FILE_NAME'";
+    final files = await drive.files.list(q: query);
+
+    for (final file in files.files!) {
+      log('File Name: ${file.name}');
+    }
+  }
+
+  onGoogleDrive() async {
+    bool isSignedIn = await _googleSignIn.isSignedIn();
+
+    if (isSignedIn) {
+      log('Google account signed in.');
+      recoverFromDrive();
+    } else {
+      log('Google account NOT signed in.');
+      GoogleSignInAccount? account = await _googleSignIn.signIn();
+
+      if (account != null) {
+        log('Signed In: $account');
+        recoverFromDrive();
+      }
+    }
   }
 
   onLocalFiles() {
@@ -76,6 +121,7 @@ class _RecoverWalletState extends State<RecoverWallet> {
                       image: AssetImage("asset/images/btn_cancel.png")))
             ],
           ),
-        ));
+        )
+      );
   }
 }

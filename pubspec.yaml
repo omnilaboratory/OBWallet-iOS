@@ -48,6 +48,10 @@ dependencies:
   fluttertoast: ^8.2.2
   image_picker: ^1.0.1
   auto_size_text: ^3.0.0
+  google_sign_in: ^6.1.4
+  googleapis: ^11.4.0
+  googleapis_auth: ^1.4.1
+  extension_google_sign_in_as_googleapis_auth: ^2.0.10
 
 dev_dependencies:
   flutter_test:
