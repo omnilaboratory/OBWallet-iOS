@@ -32,6 +32,7 @@ class BottomWhiteButton extends StatelessWidget {
               style: TextStyle(
                 color: fontColor,
                 fontSize: 16,
+                fontWeight: FontWeight.w400,
                 letterSpacing: 4,
               ),
             ),

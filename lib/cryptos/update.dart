@@ -81,6 +81,7 @@ class _UpdateState extends State<Update> {
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
+                    fontWeight: FontWeight.w500,
                     letterSpacing: 4,
                   ),
                 ),
@@ -149,6 +150,7 @@ class _UpdateState extends State<Update> {
                   style: TextStyle(
                     color: Color(0xFF333333),
                     fontSize: 15,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 const SizedBox(height: 50),
@@ -169,6 +171,7 @@ class _UpdateState extends State<Update> {
                             style: TextStyle(
                               color: Color(0xFF999999),
                               fontSize: 13,
+                              fontWeight: FontWeight.w500,
                               height: 1.47,
                             ),
                           ),

@@ -1,4 +1,5 @@
 import 'package:awallet/cards/exchange.dart';
+import 'package:awallet/cards/send.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
@@ -8,7 +9,6 @@ import '../component/account_balance_in_currency.dart';
 import '../component/bottom_button.dart';
 import '../component/currency_tx_item.dart';
 import '../component/square_button.dart';
-import '../cryptos/send.dart';
 import '../cryptos/tx_history.dart';
 import '../home.dart';
 import 'top_up.dart';

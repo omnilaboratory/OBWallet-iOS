@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:awallet/cards/review_exchange.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+
+import '../component/number_controller_widget.dart';
 
 class Exchange extends StatefulWidget {
   const Exchange({super.key});
@@ -178,14 +182,29 @@ class _ExchangeState extends State<Exchange> {
                                           AlignmentDirectional.centerStart,
                                       children: [
                                         Positioned(
-                                          child: Text(
-                                            "Balance: 200.00",
-                                            style: TextStyle(
-                                              color: Color(0xFF666666),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              height: 1.29,
-                                            ),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Balance: ",
+                                                style: TextStyle(
+                                                  color: Color(0xFF666666),
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  height: 1.29,
+                                                ),
+                                              ),
+                                              Text(
+                                                "200.00",
+                                                style: TextStyle(
+                                                  color: Color(0xFF666666),
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  height: 1.29,
+                                                ),
+                                              )
+                                            ],
                                           ),
                                         ),
                                         Positioned(
@@ -327,14 +346,29 @@ class _ExchangeState extends State<Exchange> {
                                           AlignmentDirectional.centerStart,
                                       children: [
                                         Positioned(
-                                          child: Text(
-                                            "Balance: 200.00",
-                                            style: TextStyle(
-                                              color: Color(0xFF666666),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              height: 1.29,
-                                            ),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Balance: ",
+                                                style: TextStyle(
+                                                  color: Color(0xFF666666),
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  height: 1.29,
+                                                ),
+                                              ),
+                                              Text(
+                                                "200.00",
+                                                style: TextStyle(
+                                                  color: Color(0xFF666666),
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  height: 1.29,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         Positioned(
@@ -405,7 +439,7 @@ class _ExchangeState extends State<Exchange> {
                             child: const Padding(
                                 padding: EdgeInsets.only(left: 25, top: 30),
                                 child: Text(
-                                  'Maximum Slippage',
+                                  'Maximum Slippage(%)',
                                   style: TextStyle(
                                     color: Color(0xFF999999),
                                     fontSize: 14,
@@ -414,39 +448,28 @@ class _ExchangeState extends State<Exchange> {
                                 )),
                           ),
                           Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 25, right: 25, top: 2),
-                              child: SizedBox(
-                                height: 36,
-                                child: TextField(
-                                  maxLines: 10,
-                                  minLines: 1,
-                                  onChanged: (text) {
-                                    setState(() {});
-                                  },
-                                  keyboardType: TextInputType.visiblePassword,
-                                  cursorColor: const Color(0xFF4A92FF),
-                                  style: const TextStyle(
-                                    color: Color(0xFF333333),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                  decoration: InputDecoration(
-                                    suffixIcon: const Icon(Icons.person),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 14, vertical: 7),
-                                    border: _outlineInputBorder,
-                                    focusedBorder: _outlineInputBorder,
-                                    enabledBorder: _outlineInputBorder,
-                                    disabledBorder: _outlineInputBorder,
-                                    focusedErrorBorder: _outlineInputBorder,
-                                    errorBorder: _outlineInputBorder,
-                                  ),
-                                ),
-                              )),
+                            padding: const EdgeInsets.only(
+                                left: 25, right: 25, top: 7),
+                            child: GestureDetector(
+                              onTap: () {
+                                FocusScope.of(context)
+                                    .requestFocus(FocusNode());
+                              },
+                              child: NumberControllerWidget(
+                                numText: '0',
+                                addValueChanged: (number) {
+                                  log(number);
+                                },
+                                removeValueChanged: (number) {
+                                  log(number);
+                                },
+                                updateValueChanged: (number) {},
+                              ),
+                            ),
+                          ),
                           const Padding(
                             padding:
-                                EdgeInsets.only(left: 25, right: 25, top: 5),
+                                EdgeInsets.only(left: 25, right: 25, top: 7),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [

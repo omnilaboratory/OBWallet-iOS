@@ -42,6 +42,7 @@ class _SendConfirmState extends State<SendConfirm> {
                       style: TextStyle(
                         color: Color(0xFF333333),
                         fontSize: 14,
+                        fontWeight: FontWeight.w500,
                       )),
                   const SizedBox(height: 30),
                   Container(
@@ -63,25 +64,19 @@ class _SendConfirmState extends State<SendConfirm> {
                             style: TextStyle(
                               color: Color(0xFF999999),
                               fontSize: 14,
+                              fontWeight: FontWeight.w400,
                             )),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text.rich(TextSpan(children: [
-                                TextSpan(
-                                  text: '100',
-                                  style: TextStyle(
-                                    color: Color(0xFF333333),
-                                    fontSize: 26,
-                                  ),
+                              Text(
+                                '100.00',
+                                style: TextStyle(
+                                  color: Color(0xFF333333),
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.w700,
                                 ),
-                                TextSpan(
-                                    text: '.00',
-                                    style: TextStyle(
-                                      color: Color(0xFF333333),
-                                      fontSize: 16,
-                                    ))
-                              ])),
+                              ),
                               SizedBox(width: 3),
                               Padding(
                                   padding: EdgeInsets.only(top: 6),
@@ -89,6 +84,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                       style: TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 16,
+                                        fontWeight: FontWeight.w500,
                                       )))
                             ]),
                         SizedBox(height: 10),
@@ -109,11 +105,13 @@ class _SendConfirmState extends State<SendConfirm> {
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       )),
                                   Text('ZHANG HANWEN',
                                       style: TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
                         Visibility(
@@ -125,11 +123,13 @@ class _SendConfirmState extends State<SendConfirm> {
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       )),
                                   Text('LI XUE',
                                       style: TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
                         Visibility(
@@ -141,11 +141,13 @@ class _SendConfirmState extends State<SendConfirm> {
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       )),
                                   Text('- -',
                                       style: TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
                         Visibility(
@@ -158,18 +160,21 @@ class _SendConfirmState extends State<SendConfirm> {
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       )),
                                   SizedBox(width: 6),
                                   Text('\$100.00',
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       )),
                                   SizedBox(width: 6),
                                   Text('0.0001234 BTC',
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
                         Visibility(
@@ -181,11 +186,13 @@ class _SendConfirmState extends State<SendConfirm> {
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       )),
                                   Text('24hours',
                                       style: TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
                         Visibility(
@@ -198,11 +205,13 @@ class _SendConfirmState extends State<SendConfirm> {
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       )),
                                   Text('This is a memo',
                                       style: TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
                       ],

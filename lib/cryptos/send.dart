@@ -54,6 +54,8 @@ class _SendState extends State<Send> {
                                 "Send",
                                 style: TextStyle(
                                   color: Color(0xFF333333),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
@@ -95,6 +97,7 @@ class _SendState extends State<Send> {
                                 style: TextStyle(
                                   color: Color(0xFF999999),
                                   fontSize: 14,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
@@ -115,6 +118,7 @@ class _SendState extends State<Send> {
                                   style: const TextStyle(
                                     color: Color(0xFF333333),
                                     fontSize: 16,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                   decoration: InputDecoration(
                                     suffixIcon: const Icon(Icons.person),
@@ -138,6 +142,7 @@ class _SendState extends State<Send> {
                                 style: TextStyle(
                                   color: Color(0xFF999999),
                                   fontSize: 14,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
@@ -162,6 +167,7 @@ class _SendState extends State<Send> {
                                       style: const TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 16,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                       decoration: InputDecoration(
                                         contentPadding:
@@ -211,6 +217,7 @@ class _SendState extends State<Send> {
                                             style: TextStyle(
                                               color: Color(0xFF333333),
                                               fontSize: 16,
+                                              fontWeight: FontWeight.w400,
                                             ),
                                           ),
                                         ),
@@ -241,14 +248,30 @@ class _SendState extends State<Send> {
                                           AlignmentDirectional.centerStart,
                                       children: [
                                         Positioned(
-                                          child: Text(
-                                            "Balance: 200.00",
-                                            style: TextStyle(
-                                              color: Color(0xFF666666),
-                                              fontSize: 12,
+                                            child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Balance: ",
+                                              style: TextStyle(
+                                                color: Color(0xFF666666),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                                height: 1.29,
+                                              ),
                                             ),
-                                          ),
-                                        ),
+                                            Text(
+                                              "200.00",
+                                              style: TextStyle(
+                                                color: Color(0xFF666666),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                                height: 1.29,
+                                              ),
+                                            ),
+                                          ],
+                                        )),
                                         Positioned(
                                           right: 0,
                                           child: Text(
@@ -256,6 +279,8 @@ class _SendState extends State<Send> {
                                             style: TextStyle(
                                               color: Color(0xFF4A92FF),
                                               fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              height: 1.29,
                                             ),
                                           ),
                                         ),
@@ -273,6 +298,7 @@ class _SendState extends State<Send> {
                                 style: TextStyle(
                                   color: Color(0xFF999999),
                                   fontSize: 14,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
@@ -314,6 +340,7 @@ class _SendState extends State<Send> {
                                 style: TextStyle(
                                   color: Color(0xFF999999),
                                   fontSize: 14,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
@@ -329,6 +356,7 @@ class _SendState extends State<Send> {
                                       style: TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 16,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                     SizedBox(width: 10),
@@ -344,6 +372,7 @@ class _SendState extends State<Send> {
                                       style: TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 16,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                   ],
@@ -358,19 +387,20 @@ class _SendState extends State<Send> {
                                 style: TextStyle(
                                   color: Color(0xFF333333),
                                   fontSize: 16,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
                           ),
                           const Padding(
                               padding:
-                              EdgeInsets.only(left: 25, right: 25, top: 0),
+                                  EdgeInsets.only(left: 25, right: 25, top: 0),
                               child: Row(
                                 children: [
                                   Expanded(
                                     child: Stack(
                                       alignment:
-                                      AlignmentDirectional.centerStart,
+                                          AlignmentDirectional.centerStart,
                                       children: [
                                         Positioned(
                                           child: Text(
@@ -378,6 +408,8 @@ class _SendState extends State<Send> {
                                             style: TextStyle(
                                               color: Color(0xFF666666),
                                               fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              height: 1.29,
                                             ),
                                           ),
                                         ),
@@ -390,6 +422,8 @@ class _SendState extends State<Send> {
                                                 style: TextStyle(
                                                   color: Color(0xFF4A92FF),
                                                   fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  height: 1.29,
                                                 ),
                                               ),
                                               SizedBox(width: 7),

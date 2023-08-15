@@ -111,6 +111,7 @@ class _ApplyCardStepTwoState extends State<ApplyCardStepTwo> {
                           style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 14,
+                            fontWeight: FontWeight.w400,
                           ),
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(

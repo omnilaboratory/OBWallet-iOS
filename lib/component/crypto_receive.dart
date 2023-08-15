@@ -14,7 +14,7 @@ class CryptoReceive extends StatelessWidget {
       {super.key,
       required this.address,
       required this.tips,
-      this.qrSize = 160});
+      this.qrSize = 100});
 
   onShare(BuildContext context) {}
 
@@ -59,6 +59,7 @@ class CryptoReceive extends StatelessWidget {
             style: TextStyle(
               color: Color(0xFF333333),
               fontSize: 15,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ),
@@ -70,6 +71,8 @@ class CryptoReceive extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 13,
                 color: Color(0xFF999999),
+                fontWeight: FontWeight.w500,
+                height: 1.47,
               ),
             ),
             const SizedBox(width: 5),

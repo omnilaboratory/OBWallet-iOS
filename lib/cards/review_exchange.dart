@@ -85,7 +85,6 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                             style: TextStyle(
                               color: Color(0xFF333333),
                               fontSize: 18,
-                              fontFamily: 'Montserrat',
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -121,7 +120,6 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                             style: TextStyle(
                               color: Color(0xFF333333),
                               fontSize: 18,
-                              fontFamily: 'Montserrat',
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -140,7 +138,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                           style: TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
-                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
                             height: 1.29,
                           ),
                         ),
@@ -150,7 +148,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                           style: TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
-                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
                             height: 1.29,
                           ),
                         ),
@@ -160,7 +158,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                           style: TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
-                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
                             height: 1.29,
                           ),
                         ),
@@ -170,7 +168,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                           style: TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
-                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
                             height: 1.29,
                           ),
                         ),
@@ -180,7 +178,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                           style: TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
-                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
                             height: 1.29,
                           ),
                         ),
