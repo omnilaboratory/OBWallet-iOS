@@ -1,6 +1,7 @@
 import 'package:awallet/bean/balance_in_currency_info.dart';
 import 'package:awallet/bean/currency_tx_info.dart';
 import 'package:awallet/cards/currency_tx_history.dart';
+import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/cards/top_up.dart';
 import 'package:awallet/component/account_balance_in_currency.dart';
@@ -101,7 +102,13 @@ class _AccountState extends State<Account> {
             icon: 'asset/images/icon_pay.png',
             iconWidth: iconWidth,
             text: 'Pay',
-            onPressed: () {}),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Kyc();
+                  });
+            }),
         SquareButton(
             icon: 'asset/images/icon_top_up.png',
             text: 'Top Up',
