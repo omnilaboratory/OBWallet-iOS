@@ -1,6 +1,8 @@
 import 'package:awallet/bean/balance_in_currency_info.dart';
 import 'package:awallet/bean/currency_tx_info.dart';
 import 'package:awallet/cards/currency_tx_history.dart';
+import 'package:awallet/cards/kyc.dart';
+import 'package:awallet/cards/send.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/top_up.dart';
 import 'package:awallet/component/account_balance_in_currency.dart';
