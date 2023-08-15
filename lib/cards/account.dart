@@ -1,12 +1,15 @@
 import 'package:awallet/bean/balance_in_currency_info.dart';
 import 'package:awallet/bean/currency_tx_info.dart';
 import 'package:awallet/cards/currency_tx_history.dart';
+import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/top_up.dart';
 import 'package:awallet/component/account_balance_in_currency.dart';
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+
+import '../cryptos/send.dart';
 
 class Account extends StatefulWidget {
   Account({super.key});
@@ -116,17 +119,23 @@ class _AccountState extends State<Account> {
             icon: 'asset/images/icon_exchange.png',
             text: 'Exchange',
             iconWidth: iconWidth,
-            onPressed: () {}),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Exchange();
+                  });
+            }),
         SquareButton(
             icon: 'asset/images/icon_send.png',
             text: 'Send',
             iconWidth: iconWidth,
             onPressed: () {
-              // showDialog(
-              //     context: context,
-              //     builder: (context) {
-              //       return const Send();
-              //     });
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Send();
+                  });
             }),
       ],
     );

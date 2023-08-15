@@ -1,6 +1,7 @@
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dash/flutter_dash.dart';
 
 class SendConfirm extends StatefulWidget {
   const SendConfirm({super.key});
@@ -54,16 +55,16 @@ class _SendConfirmState extends State<SendConfirm> {
                               offset: Offset(2.0, 2.0),
                               blurRadius: 10.0)
                         ]),
-                    child: Column(
+                    child: const Column(
                       children: [
-                        const SizedBox(height: 14),
-                        const Text('Payment Details',
+                        SizedBox(height: 14),
+                        Text('Payment Details',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFF999999),
                               fontSize: 14,
                             )),
-                        const Row(
+                        Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text.rich(TextSpan(children: [
@@ -90,17 +91,16 @@ class _SendConfirmState extends State<SendConfirm> {
                                         fontSize: 16,
                                       )))
                             ]),
-                        const SizedBox(height: 10),
-                        Container(
-                            width: 242,
-                            decoration: const ShapeDecoration(
-                                shape: RoundedRectangleBorder(
-                                    side: BorderSide(
-                              width: 0.50,
-                              strokeAlign: BorderSide.strokeAlignCenter,
-                              color: Color(0xFFCFCFCF),
-                            )))),
-                        const Visibility(
+                        SizedBox(height: 10),
+                        Padding(
+                          padding: EdgeInsets.only(left: 0, right: 0),
+                          child: Dash(
+                              direction: Axis.horizontal,
+                              dashLength: 4,
+                              length: 240,
+                              dashColor: Color(0xFFCFCFCF)),
+                        ),
+                        Visibility(
                             visible: true,
                             child: Padding(
                                 padding: EdgeInsets.only(left: 15, top: 10),
@@ -116,7 +116,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                         fontSize: 12,
                                       ))
                                 ]))),
-                        const Visibility(
+                        Visibility(
                             visible: true,
                             child: Padding(
                                 padding: EdgeInsets.only(left: 15, top: 10),
@@ -132,7 +132,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                         fontSize: 12,
                                       ))
                                 ]))),
-                        const Visibility(
+                        Visibility(
                             visible: true,
                             child: Padding(
                                 padding: EdgeInsets.only(left: 15, top: 10),
@@ -148,7 +148,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                         fontSize: 12,
                                       ))
                                 ]))),
-                        const Visibility(
+                        Visibility(
                             visible: true,
                             child: Padding(
                                 padding: EdgeInsets.only(
@@ -172,7 +172,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                         fontSize: 12,
                                       ))
                                 ]))),
-                        const Visibility(
+                        Visibility(
                             visible: false,
                             child: Padding(
                                 padding: EdgeInsets.only(left: 15, top: 15),
@@ -188,7 +188,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                         fontSize: 12,
                                       ))
                                 ]))),
-                        const Visibility(
+                        Visibility(
                             visible: false,
                             child: Padding(
                                 padding: EdgeInsets.only(

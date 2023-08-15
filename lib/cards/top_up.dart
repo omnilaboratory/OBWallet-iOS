@@ -104,7 +104,7 @@ class _TopUpState extends State<TopUp> {
                         ),
                         const Spacer(),
                         BottomButton(
-                          icon: 'asset/images/icon_top_up.png',
+                          icon: 'asset/images/icon_top_up_green.png',
                           text: 'Top Up',
                           onPressed: () {
                             log("onTap");

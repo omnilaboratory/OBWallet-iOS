@@ -1,3 +1,4 @@
+import 'package:awallet/cards/exchange.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
@@ -7,8 +8,10 @@ import '../component/account_balance_in_currency.dart';
 import '../component/bottom_button.dart';
 import '../component/currency_tx_item.dart';
 import '../component/square_button.dart';
+import '../cryptos/send.dart';
 import '../cryptos/tx_history.dart';
 import '../home.dart';
+import 'top_up.dart';
 
 class CardPart extends StatefulWidget {
   CardPart({super.key});
@@ -289,22 +292,34 @@ class _CardPartState extends State<CardPart> {
             icon: 'asset/images/icon_top_up.png',
             text: 'Top Up',
             iconWidth: iconWidth,
-            onPressed: () {}),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const TopUp();
+                  });
+            }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',
             text: 'Exchange',
             iconWidth: iconWidth,
-            onPressed: () {}),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Exchange();
+                  });
+            }),
         SquareButton(
             icon: 'asset/images/icon_send.png',
             text: 'Send',
             iconWidth: iconWidth,
             onPressed: () {
-              // showDialog(
-              //     context: context,
-              //     builder: (context) {
-              //       return const Send();
-              //     });
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Send();
+                  });
             }),
       ],
     );

@@ -125,7 +125,7 @@ class _ApplyCardStepOneState extends State<ApplyCardStepOne> {
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 BottomButton(
-                  icon: 'asset/images/icon_share_green.png',
+                  icon: 'asset/images/icon_skip_green.png',
                   text: 'SKIP',
                   onPressed: () {
                     Navigator.pop(context);
