@@ -1,11 +1,11 @@
 import 'package:awallet/cards/account.dart';
 import 'package:awallet/cards/card_part.dart';
+import 'package:awallet/cards/currency_tx_history.dart';
+import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:flutter/material.dart';
 
-import '../cryptos/Update.dart';
 import '../cryptos/more_menu.dart';
-import '../cryptos/tx_history.dart';
 
 class CardHome extends StatefulWidget {
   const CardHome({super.key});
@@ -60,7 +60,7 @@ class _CardHomeState extends State<CardHome> {
                         showDialog(
                             context: context,
                             builder: (context) {
-                              return const Update();
+                              return const Kyc();
                             });
                       }),
                   ButtonForAppBarAction(
@@ -68,10 +68,7 @@ class _CardHomeState extends State<CardHome> {
                       height: 24,
                       imageUrl: "asset/images/icon_tx_history.png",
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TxHistory()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const TxHistory()));
                       }),
                   ButtonForAppBarAction(
                       width: 18,

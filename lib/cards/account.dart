@@ -103,11 +103,6 @@ class _AccountState extends State<Account> {
             iconWidth: iconWidth,
             text: 'Pay',
             onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const Kyc();
-                  });
             }),
         SquareButton(
             icon: 'asset/images/icon_top_up.png',
