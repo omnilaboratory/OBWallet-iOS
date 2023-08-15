@@ -88,7 +88,7 @@ class _SendState extends State<Send> {
                         ),
                         const Spacer(),
                         BottomButton(
-                          icon: 'asset/images/icon_send.png',
+                          icon: 'asset/images/icon_confirm_green.png',
                           text: 'SEND',
                           onPressed: () {
                             log("onTap");
