@@ -1,16 +1,13 @@
 import 'package:awallet/bean/token_info.dart';
-import 'package:awallet/component/crypto_receive.dart';
-import 'package:awallet/component/crypto_wallet_card.dart';
+import 'package:awallet/component/button_for_app_bar.dart';
 import 'package:awallet/component/head_logo.dart';
-import 'package:awallet/component/square_button.dart';
 import 'package:awallet/cryptos/Update.dart';
+import 'package:awallet/cryptos/ethereum_page.dart';
 import 'package:awallet/cryptos/more_menu.dart';
-import 'package:awallet/cryptos/receive_wallet_address.dart';
-import 'package:awallet/cryptos/send.dart';
-import 'package:awallet/cryptos/token_activity.dart';
 import 'package:awallet/cryptos/tx_history.dart';
 import 'package:flutter/material.dart';
 
+import 'bitcoin_page.dart';
 
 class CryptoHome extends StatefulWidget {
   const CryptoHome({super.key});
@@ -22,19 +19,28 @@ class CryptoHome extends StatefulWidget {
 class _CryptoHomeState extends State<CryptoHome> {
   double balance = 0;
 
+  var tabNames = ['Bitcoin', 'Ethereum'];
+
+  List<Widget> tabList = [];
+  List<Widget> tabViewList = [
+    const BitcoinPage(),
+    const EthereumPage(),
+  ];
+
   @override
   void initState() {
+    for (var e in tabNames) {
+      tabList.add(Tab(
+        child: Text(
+          e,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ));
+    }
     super.initState();
-
-    // if (GlobalState.isExistBtcAddress == false) {
-    //   WidgetsBinding.instance.addPostFrameCallback((_) {
-    //     showDialog(
-    //         context: context,
-    //         builder: (context) {
-    //           return const CryptoCreateBtcWallet();
-    //         });
-    //   });
-    // }
   }
 
   @override
@@ -53,60 +59,46 @@ class _CryptoHomeState extends State<CryptoHome> {
 
   @override
   Widget build(BuildContext context) {
-    if (balance == 0) {
-      return buildNoMoneyScaffold();
-    }
-    return buildHomeScaffold();
+    return DefaultTabController(
+        length: tabNames.length, child: buildHomeScaffold());
   }
 
-  Widget buildNoMoneyScaffold() {
+  Scaffold buildHomeScaffold() {
     return Scaffold(
       appBar: buildAppBar(),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-              child: buildChainButtons(),
-            ),
-            const CryptoWalletCard(
-                balance: 0.3, address: "0x0f6eD175150e0......ad19A6e054CB"),
-            const SizedBox(height: 37),
-            const CryptoReceive(
-              address: "0x0f6eD175150e0......ad19A6e054CB",
-              tips: "The balance is zero, please top up Ethereum Assets",
-              qrSize: 200,
-            )
+            buildTabBars(),
+            const SizedBox(height: 20),
+            Expanded(
+                child: TabBarView(
+              children: tabViewList,
+            ))
           ],
         ),
       ),
     );
   }
 
-  Scaffold buildHomeScaffold() {
-    return Scaffold(
-      appBar: buildAppBar(),
-      body: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-              child: buildChainButtons(),
-            ),
-            const CryptoWalletCard(
-                balance: 0.3, address: "0x0f6eD175150e0......ad19A6e054CB"),
-            const SizedBox(height: 20),
-            buildTxButtons(),
-            Expanded(
-              child: ListView.builder(
-                itemBuilder: tokenItem,
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(20.0),
-                itemCount: tokenList.length,
-              ),
-            )
-          ],
-        ),
+  Widget buildTabBars() {
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+        color: const Color(0xFFF6F6F6),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: TabBar(
+        padding: const EdgeInsets.only(left: 4, right: 4),
+        indicator: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(4.0)),
+        indicatorPadding: const EdgeInsets.only(top: 4, bottom: 4),
+        labelColor: const Color(0xFF4A92FF),
+        unselectedLabelColor: const Color(0xFF999999),
+        dividerColor: Colors.transparent,
+        indicatorSize: TabBarIndicatorSize.tab,
+        tabs: tabList,
       ),
     );
   }
@@ -115,7 +107,7 @@ class _CryptoHomeState extends State<CryptoHome> {
     return AppBar(
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
-      title:const HeadLogo(title: "Crypto"),
+      title: const HeadLogo(title: "Crypto"),
       actions: <Widget>[
         Padding(
           padding: const EdgeInsets.only(right: 20.0),
@@ -153,182 +145,6 @@ class _CryptoHomeState extends State<CryptoHome> {
       ],
     );
   }
-
-  Widget tokenItem(BuildContext context, int index) {
-    var tokenInfo = tokenList[index];
-    return Container(
-        margin: const EdgeInsets.only(bottom: 20),
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        height: 68,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x3F000000),
-              blurRadius: 4,
-              offset: Offset(1, 1),
-            ),
-          ],
-        ),
-        child: InkWell(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => TokenActivity(tokenInfo: tokenInfo)));
-          },
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(),
-                child: Row(
-                  children: [
-                    Image(image: AssetImage(tokenInfo.iconUrl)),
-                    const SizedBox(width: 10),
-                    Text(tokenInfo.name),
-                  ],
-                ),
-              ),
-              const Spacer(),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(tokenInfo.balance.toString(),
-                      textAlign: TextAlign.right,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold)),
-                  Text("\$ ${tokenInfo.balanceOfDollar}",
-                      textAlign: TextAlign.right),
-                ],
-              )
-            ],
-          ),
-        ));
-  }
-
-  Row buildTxButtons() {
-    var size = MediaQuery.sizeOf(context);
-    var iconWidth = (size.width - 50) / 5;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        SquareButton(
-            icon: 'asset/images/icon_pay.png',
-            iconWidth: iconWidth,
-            text: 'Pay',
-            onPressed: () {}),
-        SquareButton(
-            icon: 'asset/images/icon_exchange.png',
-            text: 'Exchange',
-            iconWidth: iconWidth,
-            onPressed: () {}),
-        SquareButton(
-            icon: 'asset/images/icon_receive.png',
-            text: 'Receive',
-            iconWidth: iconWidth,
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const ReceiveWalletAddress();
-                  });
-            }),
-        SquareButton(
-            icon: 'asset/images/icon_send.png',
-            text: 'Send',
-            iconWidth: iconWidth,
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const Send();
-                  });
-            }),
-      ],
-    );
-  }
-
-  var chainBgClrs = <Color>[Colors.white, Colors.transparent];
-  var chainFgClrs = [const Color(0xFF4A92FF), const Color(0xFF999999)];
-  var currChainBtnIndex = 0;
-
-  Widget buildChainButtons() {
-    return Container(
-      height: 45,
-      padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF6F6F6),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Expanded(
-            child: TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: chainFgClrs[currChainBtnIndex == 0 ? 0 : 1],
-                backgroundColor: chainBgClrs[currChainBtnIndex == 0 ? 0 : 1],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
-              child: const Text("Bitcoin"),
-              onPressed: () {
-                if (currChainBtnIndex != 0) {
-                  currChainBtnIndex = 0;
-                  setState(() {
-                    balance = 0;
-                  });
-                }
-              },
-            ),
-          ),
-          const SizedBox(width: 20),
-          Expanded(
-            child: TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: chainFgClrs[currChainBtnIndex == 1 ? 0 : 1],
-                backgroundColor: chainBgClrs[currChainBtnIndex == 1 ? 0 : 1],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
-              child: const Text("Ethereum"),
-              onPressed: () {
-                if (currChainBtnIndex != 1) {
-                  currChainBtnIndex = 1;
-                  setState(() {
-                    balance = 1;
-                  });
-                }
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
-class ButtonForAppBarAction extends StatelessWidget {
-  final String imageUrl;
-  final GestureTapCallback onTap;
 
-  const ButtonForAppBarAction({
-    super.key,
-    required this.imageUrl,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: InkWell(
-          onTap: onTap,
-          child: Image(width: 24, height: 24, image: AssetImage(imageUrl))),
-    );
-  }
-}
