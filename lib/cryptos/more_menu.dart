@@ -1,6 +1,6 @@
 import 'package:awallet/bean/btn_info.dart';
 import 'package:awallet/component/btn_icon_name.dart';
-import 'package:awallet/component/export_wif.dart';
+import 'package:awallet/cryptos/export_wif_step_one.dart';
 import 'package:flutter/material.dart';
 
 class MoreMenu extends StatefulWidget {
@@ -25,7 +25,7 @@ class _MoreMenuState extends State<MoreMenu> {
       showDialog(
           context: context,
           builder: (context) {
-            return const ExportWif();
+            return const ExportWifStepOne();
           });
     };
     super.initState();

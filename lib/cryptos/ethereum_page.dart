@@ -1,4 +1,5 @@
 import 'package:awallet/bean/token_info.dart';
+import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/crypto_receive.dart';
 import 'package:awallet/component/crypto_token_item.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
@@ -75,7 +76,13 @@ class _EthereumPageState extends State<EthereumPage> {
             icon: 'asset/images/icon_exchange.png',
             text: 'Exchange',
             iconWidth: iconWidth,
-            onPressed: () {}),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Exchange();
+                  });
+            }),
         SquareButton(
             icon: 'asset/images/icon_receive.png',
             text: 'Receive',
