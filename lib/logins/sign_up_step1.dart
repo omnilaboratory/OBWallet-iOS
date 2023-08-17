@@ -12,6 +12,8 @@ class SignUpStepOne extends StatefulWidget {
 
 class _SignUpStepOneState extends State<SignUpStepOne> {
   final GlobalKey _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _codeController = TextEditingController();
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _pswController = TextEditingController();
   final TextEditingController _psw2Controller = TextEditingController();
@@ -26,7 +28,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
         buildTitle(),
         const SizedBox(height: 55),
         buildInputField(),
-        const SizedBox(height: 200),
+        const SizedBox(height: 20),
         buildButtons(context)
       ])),
     );
@@ -74,7 +76,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   Container buildInputField() {
     return Container(
       width: 320,
-      height: 292,
+      height: 450,
       padding: const EdgeInsets.only(left: 20, right: 20),
       decoration: ShapeDecoration(
         color: Colors.white,
@@ -97,16 +99,36 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           children: [
             const SizedBox(height: 10),
             TextFormField(
-              controller: _unameController,
+              controller: _emailController,
               decoration: const InputDecoration(
-                  labelText: "Username",
-                  hintText: "Username",
+                  labelText: "Email",
+                  hintText: "Email",
                   prefixIcon: Icon(Icons.person)),
               validator: (v) {
-                return v!.trim().isNotEmpty ? null : "wrong username";
+                return v!.trim().isNotEmpty ? null : "wrong Email";
               },
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                SizedBox(
+                  width: 180,
+                  child: TextFormField(
+                    controller: _codeController,
+                    decoration: const InputDecoration(
+                        labelText: "Code",
+                        hintText: "Code",
+                        prefixIcon: Icon(Icons.build_outlined)),
+                    validator: (v) {
+                      return v!.trim().isNotEmpty ? null : "wrong Code";
+                    },
+                  ),
+                ),
+                const Spacer(),
+                TextButton(onPressed: (){}, child: const Text("Get code"))
+              ],
+            ),
+            const SizedBox(height: 20),
             TextFormField(
               controller: _pswController,
               decoration: const InputDecoration(
@@ -118,7 +140,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                 return v!.trim().isNotEmpty ? null : "wrong password";
               },
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             TextFormField(
               controller: _psw2Controller,
               decoration: const InputDecoration(
@@ -128,6 +150,17 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
               obscureText: true,
               validator: (v) {
                 return v!.trim().isNotEmpty ? null : "wrong Confirm Password";
+              },
+            ),
+            const SizedBox(height: 20),
+            TextFormField(
+              controller: _unameController,
+              decoration: const InputDecoration(
+                  labelText: "Nickname",
+                  hintText: "Nickname",
+                  prefixIcon: Icon(Icons.person)),
+              validator: (v) {
+                return v!.trim().isNotEmpty ? null : "wrong Nickname";
               },
             ),
           ],
