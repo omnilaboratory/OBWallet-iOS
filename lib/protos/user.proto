@@ -1,0 +1,146 @@
+syntax = "proto3";
+package user;
+
+import "user/country.proto";
+service UserService {
+  //user regist
+  rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
+  //verify code
+  rpc VerifyCode(VerifyCodeRequest) returns (VerifyCodeResponse) {}
+  //user login
+  rpc SignIn(SignInRequest) returns (SignInResponse) {}
+  rpc Kyc(KycRequest) returns (KycResponse) {}
+  rpc Upload(UploadRequest) returns (UploadResponse) {}
+  rpc ApplyCard(ApplyCardRequest) returns (ApplyCardResponse) {}
+  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
+}
+
+message UserInfo {
+  int64 id = 1;
+  string user_name = 2;
+  string password_hash = 3;
+  string email = 4;
+  uint64 created_at = 5;
+
+  CountryCode country_code = 6;
+  //image-path1; identity card front
+  string id1 = 7;
+  //image-path2; identity card back
+  string id2 = 8;
+  //id_card number
+  string id_num =9;
+
+  string social_id = 17;
+
+  string address1 = 10;
+  string address2 = 11;
+  string address3 = 12;
+
+  uint64 updated_at = 13;
+  bool keyinfo_ok =15;
+  string open_id=16;
+}
+message CardInfo {
+  int64 id = 1;
+  string card_no =2;
+  //USD CNY SGD
+  CurrencyCode symbol=3;
+  string expiry_date =9;
+  string cvv =10;
+  int64  user_id=4;
+  double balance=5;
+  uint64 created_at = 6;
+  uint64 updated_at = 7;
+}
+
+message CardExchangeInfo {
+  int64 id = 1;
+  int64 card_id=2;
+  string counter_party=3;
+  // counter_party card number
+  string counter_party_no=4;
+  //imcome positive, outcome negative
+  double amt=5;
+  uint64 created_at = 6;
+  uint64 updated_at = 7;
+}
+message SignUpRequest {
+  string user_name = 1;
+  string password = 2;
+  string confirm_password = 3;
+  string email = 4;
+  //VerifyCode
+  string vcode = 5;
+  //got from VerifyCodeRPC
+  string verify_code_id = 6;
+}
+message SignUpResponse {
+  string token = 1;
+}
+
+message VerifyCodeRequest {
+  string email = 1;
+}
+message VerifyCodeResponse {
+  string verify_code_id = 1;
+}
+
+message SignInRequest {
+  string user_name = 1;
+  string password = 2;
+}
+message SignInResponse {
+  string token = 1;
+  bool kyc_ok = 2;
+}
+
+message KycRequest {
+  CountryCode country_code = 1;
+  //image-path1; identity card front
+  string id1 = 2;
+  //image-path2; identity card back
+  string id2 = 3;
+  //id_card number
+  string id_num =8;
+  string social_id = 4;
+
+  string address1 = 5;
+  string address2 = 6;
+  string address3 = 7;
+}
+message KycResponse {
+}
+
+message UploadRequest {
+  //usage: example id1 id2;
+  string tag = 1;
+  //  image file name at local
+  string name = 2;
+  //image binanry
+  bytes content = 3;
+}
+message UploadResponse {
+  string image_url = 1;
+}
+
+message GetUserInfoRequest {
+}
+message GetUserInfoResponse {
+  UserInfo user = 1;
+}
+
+message ApplyCardRequest {
+  string ic_no=1;
+  CurrencyCode currency=2;
+}
+message ApplyCardResponse {
+  CardInfo card=1;
+}
+
+
+message SayRequest {
+  string sentence = 1;
+}
+message SayResponse {
+  string sentence = 1;
+}
