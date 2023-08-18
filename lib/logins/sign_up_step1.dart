@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/logins/sign_up_step2.dart';
+import 'package:awallet/src/generated/user.pbgrpc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+import 'package:grpc/grpc.dart';
 
 class SignUpStepOne extends StatefulWidget {
   const SignUpStepOne({super.key});
@@ -17,6 +22,24 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _pswController = TextEditingController();
   final TextEditingController _psw2Controller = TextEditingController();
+
+  Future<void> getVerifyCode() async {
+    final caCert = await rootBundle.loadString('asset/config/tls.cert');
+    final channel = ClientChannel('43.138.107.248',
+        port: 19090,
+        options: ChannelOptions(
+            credentials: ChannelCredentials.secure(
+          certificates: utf8.encode(caCert),
+          onBadCertificate: (certificate, host) =>
+              host == '43.138.107.248:19090',
+        )));
+
+    var request = VerifyCodeRequest();
+    request.email = "254698748@qq.com";
+    var stub = UserServiceClient(channel);
+    var temp = stub.verifyCode(request);
+    print(temp);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +61,10 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     return AppBar(
         automaticallyImplyLeading: false,
         title: const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Image(width: 24, height: 33, image: AssetImage("asset/images/logo_head.png")),
+          Image(
+              width: 24,
+              height: 33,
+              image: AssetImage("asset/images/logo_head.png")),
           Text('Sign Up',
               style: TextStyle(
                 color: Color(0xFF333333),
@@ -63,10 +89,8 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           icon: 'asset/images/icon_arrow_right_green.png',
           text: 'NEXT',
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const SignUpStepTwo()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SignUpStepTwo()));
           },
         ),
       ],
@@ -125,7 +149,11 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                   ),
                 ),
                 const Spacer(),
-                TextButton(onPressed: (){}, child: const Text("Get code"))
+                TextButton(
+                    onPressed: () {
+                      getVerifyCode();
+                    },
+                    child: const Text("Get code"))
               ],
             ),
             const SizedBox(height: 20),
