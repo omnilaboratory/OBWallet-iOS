@@ -1,10 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalStorage  {
+class LocalStorage {
   static SharedPreferences? prefs;
 
-  static initSP() async {
+  static Future<bool> initSP() async {
     prefs = await SharedPreferences.getInstance();
+    return true;
   }
 
   static save(String key, String value) {

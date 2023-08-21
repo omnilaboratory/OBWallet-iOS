@@ -1,6 +1,8 @@
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/src/generated/user.pbgrpc.dart';
+import 'package:awallet/tools/local_storage.dart';
+import 'package:awallet/utils.dart';
 import 'package:grpc/grpc.dart';
 
 class UserService {
@@ -10,12 +12,11 @@ class UserService {
 
   UserService._internal();
 
+  static var channel = CommonService.getGrpcChannel();
+
   static UserService getInstance() {
-    if (userServiceClient == null) {
-      var channel = CommonService.getGrpcChannel();
-      userServiceClient = UserServiceClient(channel!,
-          options: CallOptions(metadata: {"token": CommonService.token}));
-    }
+    userServiceClient ??= UserServiceClient(channel!,
+        options: CallOptions(metadata: {"token": CommonService.token}));
     return _instance;
   }
 
@@ -39,7 +40,7 @@ class UserService {
   Future<GrpcResponse> signIn(String username, String password) async {
     var request = SignInRequest();
     request.userName = username;
-    request.password = CommonService.generateMd5(password);
+    request.password = Utils.generateMd5(password);
 
     var ret = GrpcResponse();
     try {
@@ -47,6 +48,7 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
       CommonService.token = resp!.token;
+      LocalStorage.save("userToken", resp.token);
       userServiceClient = null;
     } catch (e) {
       GrpcError error = e as GrpcError;
@@ -56,8 +58,8 @@ class UserService {
   }
 
   Future<GrpcResponse> signUp(SignUpRequest req) async {
-    req.password = CommonService.generateMd5(req.password);
-    req.confirmPassword = CommonService.generateMd5(req.confirmPassword);
+    req.password = Utils.generateMd5(req.password);
+    req.confirmPassword = Utils.generateMd5(req.confirmPassword);
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.signUp(req);

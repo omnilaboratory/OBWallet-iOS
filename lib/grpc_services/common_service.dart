@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:crypto/crypto.dart';
 import 'package:grpc/grpc.dart';
 
 import '../src/generated/user.pbgrpc.dart';
@@ -35,9 +34,5 @@ p5fy9yg5itlqSZMCIEJ73XIYi8nGqD2a4Cmn129VzU/vOo39ucMvC+E9Da0C
           )));
     }
     return channel;
-  }
-
-  static String generateMd5(String input) {
-    return md5.convert(utf8.encode(input)).toString();
   }
 }

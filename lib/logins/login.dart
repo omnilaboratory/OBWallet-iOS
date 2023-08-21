@@ -16,20 +16,23 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
-  @override
-  void initState() {
-    LocalStorage.initSP();
-    super.initState();
-  }
-
   final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _pswController = TextEditingController();
 
   @override
+  void initState() {
+    LocalStorage.initSP().then((value) {
+      var userToken = LocalStorage.get("userToken");
+      if (userToken.toString().isNotEmpty) {
+        autoLogin(userToken);
+      }
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // _unameController.text = "254698748@qq.com";
     return Scaffold(
         body: SingleChildScrollView(
       child: Padding(
@@ -128,12 +131,6 @@ class _LoginState extends State<Login> {
   }
 
   Widget buildLoginBtn(BuildContext context) {
-    if (LocalStorage.get("username") != null) {
-      _unameController.text = LocalStorage.get("username");
-    }
-    if (LocalStorage.get("password") != null) {
-      _pswController.text = LocalStorage.get("password");
-    }
     return InkWell(
       onTap: () {
         if ((_formKey.currentState as FormState).validate()) {
@@ -182,6 +179,12 @@ class _LoginState extends State<Login> {
   }
 
   Widget buildInputFields() {
+    if (LocalStorage.get("username") != null) {
+      _unameController.text = LocalStorage.get("username");
+    }
+    if (LocalStorage.get("password") != null) {
+      _pswController.text = LocalStorage.get("password");
+    }
     return Container(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
       child: Form(
@@ -217,6 +220,12 @@ class _LoginState extends State<Login> {
     );
   }
 
+  void autoLogin(String localToken) {
+    CommonService.token = localToken;
+    UserService.userServiceClient = null;
+    getUserInfoAndGoHome();
+  }
+
   void login() {
     var username = _unameController.value.text.trim();
     var password = _pswController.value.text.trim();
@@ -224,23 +233,24 @@ class _LoginState extends State<Login> {
       if (loginInfo.code == 1) {
         LocalStorage.save("username", username);
         LocalStorage.save("password", password);
+        getUserInfoAndGoHome();
+      } else {
+        log(loginInfo.msg);
+      }
+    });
+  }
 
-        UserService.getInstance().getUserInfo().then((userInfoResp) {
-          if (userInfoResp.code == 1) {
-            var userInfo = userInfoResp.data as GetUserInfoResponse;
-            CommonService.userInfo = userInfo.user;
-          } else {
-            log(userInfoResp.msg);
-          }
-        });
-
+  void getUserInfoAndGoHome() {
+    UserService.getInstance().getUserInfo().then((userInfoResp) {
+      if (userInfoResp.code == 1) {
+        var userInfo = userInfoResp.data as GetUserInfoResponse;
+        CommonService.userInfo = userInfo.user;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
-
       } else {
-        log(loginInfo.msg);
+        log(userInfoResp.msg);
       }
     });
   }
