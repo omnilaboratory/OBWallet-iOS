@@ -4,7 +4,7 @@ import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/home.dart';
 import 'package:awallet/logins/sign_up_step1.dart';
-import 'package:awallet/src/generated/user.pbgrpc.dart';
+import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 

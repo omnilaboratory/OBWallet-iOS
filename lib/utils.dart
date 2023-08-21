@@ -122,7 +122,6 @@ class Utils {
       });
     }
 
-    print('Download complete');
     isDownloaded = true;
   }
 

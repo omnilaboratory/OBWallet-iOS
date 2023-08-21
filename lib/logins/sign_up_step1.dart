@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/logins/sign_up_step2.dart';
-import 'package:awallet/src/generated/user.pb.dart';
+import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';

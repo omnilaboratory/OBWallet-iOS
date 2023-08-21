@@ -1,12 +1,10 @@
 import 'dart:io';
 
 import 'package:awallet/signups/signup.dart';
-import 'package:awallet/src/generated/lightning.pbgrpc.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:grpc/grpc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'home.dart';
 
@@ -106,21 +104,6 @@ class _WelcomePageState extends State<WelcomePage> {
     }
   }
 
-  Future<void> listPeers() async {
-    final channel = ClientChannel('127.0.0.1',
-        port: 8080,
-        options: const ChannelOptions(
-            credentials: ChannelCredentials.insecure()));
-
-    var request = ListPeersRequest();
-    request.latestError=true;
-
-    var stub = LightningClient(channel);
-    var temp =  await stub.listPeers(request);
-    if (kDebugMode) {
-      print(temp.peers);
-    }
-  }
 
   bool storage = true;
   bool videos = true;

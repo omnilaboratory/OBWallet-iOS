@@ -1,6 +1,6 @@
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
-import 'package:awallet/src/generated/user.pbgrpc.dart';
+import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
 import 'package:grpc/grpc.dart';

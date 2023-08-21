@@ -31,12 +31,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  static const List<Widget> _titles = [
-    Text('Card'),
-    Text('Crypto'),
-    Text('Profile'),
-  ];
-
   static final List<Widget> _pages = <Widget>[
     const CardHome(),
     const CryptoHome(),

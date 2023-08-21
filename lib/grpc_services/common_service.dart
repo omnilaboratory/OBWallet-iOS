@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:grpc/grpc.dart';
 
-import '../src/generated/user.pbgrpc.dart';
 
 mixin CommonService {
   static ClientChannel? channel;

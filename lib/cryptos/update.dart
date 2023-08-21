@@ -113,7 +113,7 @@ class _UpdateState extends State<Update> {
                             ),
                           ),
                           TextSpan(
-                            text: '$dlProgress',
+                            text: dlProgress,
                             style: const TextStyle(
                               color: Color(0xFF333333),
                               fontSize: 32,
