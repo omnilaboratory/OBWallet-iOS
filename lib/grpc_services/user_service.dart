@@ -4,28 +4,79 @@ import 'package:awallet/src/generated/user.pbgrpc.dart';
 import 'package:grpc/grpc.dart';
 
 class UserService {
-  static late final UserService _instance = UserService._internal();
+  static final UserService _instance = UserService._internal();
 
-  static late UserServiceClient userServiceClient;
+  static UserServiceClient? userServiceClient;
 
-  UserService._internal() {}
+  UserService._internal();
 
-  static Future<UserService> getInstance() async {
-    var channel = await CommonService.getGrpcChannel();
-    userServiceClient = UserServiceClient(channel);
+  static UserService getInstance() {
+    if (userServiceClient == null) {
+      var channel = CommonService.getGrpcChannel();
+      userServiceClient = UserServiceClient(channel!,
+          options: CallOptions(metadata: {"token": CommonService.token}));
+    }
     return _instance;
   }
 
   factory UserService() => _instance;
 
-  Future<GrpcResponse<String>> verifyCode(String email) async {
+  Future<GrpcResponse> verifyCode(String email) async {
     var request = VerifyCodeRequest();
     request.email = email;
-    var ret = GrpcResponse(data: "");
+    var ret = GrpcResponse();
     try {
-      var resp = await userServiceClient.verifyCode(request);
+      var resp = await userServiceClient?.verifyCode(request);
       ret.code = 1;
-      ret.data = resp.verifyCodeId;
+      ret.data = resp;
+    } catch (e) {
+      GrpcError error = e as GrpcError;
+      ret.msg = error.message.toString();
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> signIn(String username, String password) async {
+    var request = SignInRequest();
+    request.userName = username;
+    request.password = CommonService.generateMd5(password);
+
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.signIn(request);
+      ret.code = 1;
+      ret.data = resp;
+      CommonService.token = resp!.token;
+      userServiceClient = null;
+    } catch (e) {
+      GrpcError error = e as GrpcError;
+      ret.msg = error.message.toString();
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> signUp(SignUpRequest req) async {
+    req.password = CommonService.generateMd5(req.password);
+    req.confirmPassword = CommonService.generateMd5(req.confirmPassword);
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.signUp(req);
+      ret.code = 1;
+      ret.data = resp;
+      CommonService.token = resp!.token;
+      userServiceClient = null;
+    } catch (e) {
+      GrpcError error = e as GrpcError;
+      ret.msg = error.message.toString();
+    }
+    return ret;
+  }
+  Future<GrpcResponse> getUserInfo() async {
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.getUserInfo(GetUserInfoRequest());
+      ret.code = 1;
+      ret.data = resp;
     } catch (e) {
       GrpcError error = e as GrpcError;
       ret.msg = error.message.toString();

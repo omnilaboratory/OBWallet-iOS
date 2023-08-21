@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/logins/sign_up_step2.dart';
+import 'package:awallet/src/generated/user.pb.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
@@ -21,13 +24,15 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   final TextEditingController _pswController = TextEditingController();
   final TextEditingController _psw2Controller = TextEditingController();
 
+  late VerifyCodeResponse verifyCodeResponse;
+
   getVerifyCode() async {
     var email = _emailController.value.text.trim();
     if (email.isEmpty || !EmailValidator.validate(email)) {
       Fluttertoast.showToast(msg: "wrong email", gravity: ToastGravity.CENTER);
       return;
     }
-    (await UserService.getInstance())
+    UserService.getInstance()
         .verifyCode(_emailController.value.text)
         .then((resp) => {
               if (resp.code == 0)
@@ -35,6 +40,8 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                   Fluttertoast.showToast(
                       msg: resp.msg, gravity: ToastGravity.CENTER)
                 }
+              else
+                {verifyCodeResponse = resp.data}
             });
   }
 
@@ -86,8 +93,8 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           icon: 'asset/images/icon_arrow_right_green.png',
           text: 'NEXT',
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SignUpStepTwo()));
+            signUp();
+            return;
           },
         ),
       ],
@@ -264,5 +271,25 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
         )
       ],
     );
+  }
+
+  void signUp() {
+    SignUpRequest signUpRequest = SignUpRequest();
+    signUpRequest.email = _emailController.value.text.trim();
+    signUpRequest.password = _pswController.value.text.trim();
+    signUpRequest.confirmPassword = _psw2Controller.value.text.trim();
+    signUpRequest.userName = _unameController.value.text.trim();
+    signUpRequest.vcode = _codeController.value.text.trim();
+    signUpRequest.verifyCodeId = verifyCodeResponse.verifyCodeId;
+
+    UserService.getInstance().signUp(signUpRequest).then((value) async {
+      if (value.code == 1) {
+        log(value.data.toString());
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const SignUpStepTwo()));
+      } else {
+        log(value.msg);
+      }
+    });
   }
 }

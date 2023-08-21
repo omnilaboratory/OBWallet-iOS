@@ -1,7 +1,9 @@
 import 'dart:developer';
 
+import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/home.dart';
 import 'package:awallet/logins/sign_up_step1.dart';
+import 'package:awallet/src/generated/user.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -18,6 +20,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    _unameController.text = "254698748@qq.com";
     return Scaffold(
         body: SingleChildScrollView(
       child: Padding(
@@ -119,12 +122,12 @@ class _LoginState extends State<Login> {
     return InkWell(
       onTap: () {
         // if ((_formKey.currentState as FormState).validate()) {
-          log(_unameController.value.text);
-          log(_pswController.value.text);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
-          );
+        log(_unameController.value.text);
+        log(_pswController.value.text);
+
+        login();
+        return;
+
         // }
       },
       child: Container(
@@ -200,5 +203,32 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  void login() {
+    UserService.getInstance()
+        .signIn(_unameController.value.text.trim(),
+            _pswController.value.text.trim())
+        .then((value) async {
+      if (value.code == 1) {
+        var resp = value.data as SignInResponse;
+        log(resp.token);
+
+        var userInfoResp = await UserService.getInstance().getUserInfo();
+        if (userInfoResp.code == 1) {
+          var userInfo = userInfoResp.data  as GetUserInfoResponse;
+          log(userInfo.user.toString());
+        } else {
+          log(userInfoResp.msg);
+        }
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      } else {
+        log(value.msg);
+      }
+    });
   }
 }
