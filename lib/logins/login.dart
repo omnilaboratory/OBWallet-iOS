@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    _unameController.text = "254698748@qq.com";
+    // _unameController.text = "254698748@qq.com";
     return Scaffold(
         body: SingleChildScrollView(
       child: Padding(

@@ -5,7 +5,6 @@ import 'package:grpc/grpc.dart';
 
 mixin CommonService {
   static ClientChannel? channel;
-
   static String token = "";
 
   static ClientChannel? getGrpcChannel() {
@@ -24,7 +23,6 @@ AAAAAAAAAAEwCgYIKoZIzj0EAwIDRwAwRAIgYqaOcB2PvjH8hR34JRRgduh9Ks9U
 p5fy9yg5itlqSZMCIEJ73XIYi8nGqD2a4Cmn129VzU/vOo39ucMvC+E9Da0C
 -----END CERTIFICATE-----
 ''';
-      // final caCert = await rootBundle.loadString('asset/config/tls.cert');
       channel = ClientChannel('43.138.107.248',
           port: 19090,
           options: ChannelOptions(
