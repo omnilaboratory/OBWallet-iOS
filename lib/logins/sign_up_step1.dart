@@ -1,12 +1,10 @@
-import 'dart:convert';
-
 import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/logins/sign_up_step2.dart';
-import 'package:awallet/src/generated/user.pbgrpc.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-import 'package:grpc/grpc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpStepOne extends StatefulWidget {
   const SignUpStepOne({super.key});
@@ -23,22 +21,21 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   final TextEditingController _pswController = TextEditingController();
   final TextEditingController _psw2Controller = TextEditingController();
 
-  Future<void> getVerifyCode() async {
-    final caCert = await rootBundle.loadString('asset/config/tls.cert');
-    final channel = ClientChannel('43.138.107.248',
-        port: 19090,
-        options: ChannelOptions(
-            credentials: ChannelCredentials.secure(
-          certificates: utf8.encode(caCert),
-          onBadCertificate: (certificate, host) =>
-              host == '43.138.107.248:19090',
-        )));
-
-    var request = VerifyCodeRequest();
-    request.email = "254698748@qq.com";
-    var stub = UserServiceClient(channel);
-    var temp = stub.verifyCode(request);
-    print(temp);
+  getVerifyCode() async {
+    var email = _emailController.value.text.trim();
+    if (email.isEmpty || !EmailValidator.validate(email)) {
+      Fluttertoast.showToast(msg: "wrong email", gravity: ToastGravity.CENTER);
+      return;
+    }
+    (await UserService.getInstance())
+        .verifyCode(_emailController.value.text)
+        .then((resp) => {
+              if (resp.code == 0)
+                {
+                  Fluttertoast.showToast(
+                      msg: resp.msg, gravity: ToastGravity.CENTER)
+                }
+            });
   }
 
   @override

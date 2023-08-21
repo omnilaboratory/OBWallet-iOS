@@ -52,6 +52,7 @@ dependencies:
   googleapis: ^11.4.0
   googleapis_auth: ^1.4.1
   extension_google_sign_in_as_googleapis_auth: ^2.0.10
+  email_validator: ^2.1.17
 
 dev_dependencies:
   flutter_test:
