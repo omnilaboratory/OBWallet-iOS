@@ -125,13 +125,22 @@ class _KycState extends State<Kyc> {
                           ),
                         ),
                         const Spacer(),
-                        BottomButton(
-                          icon: 'asset/images/icon_confirm_green.png',
-                          text: 'DONE',
-                          onPressed: () {
-                            log("onTap");
-                          },
-                        )
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                          BottomButton(
+                            icon: 'asset/images/icon_skip_green.png',
+                            text: 'SKIP',
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          BottomButton(
+                            icon: 'asset/images/icon_confirm_green.png',
+                            text: 'DONE',
+                            onPressed: () {
+                              log("onTap");
+                            },
+                          )
+                        ]),
                       ]),
                 ),
                 const SizedBox(height: 20),

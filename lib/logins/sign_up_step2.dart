@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/grpc_services/user_service.dart';
-import 'package:awallet/logins/apply_card_step_one.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
@@ -77,7 +77,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const ApplyCardStepOne()));
+                    builder: (context) => const Kyc()));
           },
         ),
       ],

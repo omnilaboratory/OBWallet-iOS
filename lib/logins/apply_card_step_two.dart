@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/home.dart';
+import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
 class ApplyCardStepTwo extends StatefulWidget {
@@ -159,10 +163,7 @@ class _ApplyCardStepTwoState extends State<ApplyCardStepTwo> {
                   icon: 'asset/images/icon_arrow_right_green.png',
                   text: 'APPLY CARD',
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()));
+                    applyCard();
                   },
                 )
               ]),
@@ -176,4 +177,22 @@ class _ApplyCardStepTwoState extends State<ApplyCardStepTwo> {
     borderSide: const BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
     borderRadius: BorderRadius.circular(8),
   );
+
+  void applyCard() {
+    UserService.getInstance()
+        .applyCard()
+        .then((value) async {
+      if (value.code == 1) {
+        var resp = value.data  as ApplyCardResponse;
+        log(resp.card.toString());
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      } else {
+        log(value.msg);
+      }
+    });
+  }
 }

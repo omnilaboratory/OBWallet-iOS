@@ -1,5 +1,6 @@
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
+import 'package:awallet/src/generated/user/country.pbenum.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
@@ -91,6 +92,46 @@ class UserService {
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.upload(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      GrpcError error = e as GrpcError;
+      ret.msg = error.message.toString();
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> kyc() async {
+    var request = UserInfo();
+    request.socialId = '9';
+    request.firstName = '哈';
+    request.lastName = '哈哈';
+    request.email = 'healergyl@126.com';
+    request.mobile = '15116920267';
+    request.dob = '1996-06-06';
+    request.address1 = 'address1';
+    request.address2 = 'address2';
+    request.city = 'beijing';
+    request.state = 'pending';
+    request.postCode = '1';
+    request.countryCode = CountryCode.CN;
+
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.kyc(request);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      GrpcError error = e as GrpcError;
+      ret.msg = error.message.toString();
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> applyCard() async {
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.applyCard(ApplyCardRequest());
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
