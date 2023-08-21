@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
   void initState() {
     LocalStorage.initSP().then((value) {
       var userToken = LocalStorage.get("userToken");
-      if (userToken.toString().isNotEmpty) {
+      if (userToken != null && userToken.toString().isNotEmpty) {
         autoLogin(userToken);
       }
     });
