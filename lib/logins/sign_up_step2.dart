@@ -1,7 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/logins/apply_card_step_one.dart';
+import 'package:awallet/src/generated/user.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,7 +46,10 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
     return AppBar(
         automaticallyImplyLeading: false,
         title: const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Image(width: 24, height: 33, image: AssetImage("asset/images/logo_head.png")),
+          Image(
+              width: 24,
+              height: 33,
+              image: AssetImage("asset/images/logo_head.png")),
           Text('Sign Up',
               style: TextStyle(
                 color: Color(0xFF333333),
@@ -69,9 +75,10 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
           text: 'FINISH',
           onPressed: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const ApplyCardStepOne()));},
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ApplyCardStepOne()));
+          },
         ),
       ],
     );
@@ -147,7 +154,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
                 onTap: () {
                   getImage(0);
                 },
-                child: cardImages.isEmpty
+                child: cardImage0 == null
                     ? const Image(
                         image: AssetImage(
                             "asset/images/user_idCard_template1.png"),
@@ -155,7 +162,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
                         height: 84,
                       )
                     : Image.file(
-                        File(cardImages[0].path),
+                        File(cardImage0!.path),
                         width: 130,
                         height: 84,
                         fit: BoxFit.fitHeight,
@@ -165,7 +172,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
                 onTap: () {
                   getImage(1);
                 },
-                child: cardImages.isEmpty || cardImages.length != 2
+                child: cardImage1 == null
                     ? const Image(
                         image: AssetImage(
                             "asset/images/user_idCard_template2.png"),
@@ -173,7 +180,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
                         height: 84,
                       )
                     : Image.file(
-                        File(cardImages[1].path),
+                        File(cardImage1!.path),
                         width: 130,
                         height: 84,
                         fit: BoxFit.fitHeight,
@@ -187,12 +194,28 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
   }
 
   final picker = ImagePicker();
-  final List<XFile> cardImages = [];
+  XFile? cardImage0;
+  XFile? cardImage1;
 
   Future getImage(int type) async {
     var image = await picker.pickImage(source: ImageSource.gallery);
+
+    var req = UploadRequest();
+    req.name = image!.name;
+    req.content = await image.readAsBytes();
+    var resp = await UserService.getInstance().uploadImage(req);
+    if (resp.code == 1) {
+      log(resp.data.toString());
+    } else {
+      log(resp.msg);
+    }
+
     setState(() {
-      cardImages[type] = image!;
+      if (type == 0) {
+        cardImage0 = image;
+      } else {
+        cardImage1 = image;
+      }
     });
   }
 

@@ -1,9 +1,11 @@
 import 'dart:developer';
 
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/home.dart';
 import 'package:awallet/logins/sign_up_step1.dart';
 import 'package:awallet/src/generated/user.pbgrpc.dart';
+import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -14,6 +16,13 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  @override
+  void initState() {
+    LocalStorage.initSP();
+    super.initState();
+  }
+
   final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _pswController = TextEditingController();
@@ -119,16 +128,19 @@ class _LoginState extends State<Login> {
   }
 
   Widget buildLoginBtn(BuildContext context) {
+    if (LocalStorage.get("username") != null) {
+      _unameController.text = LocalStorage.get("username");
+    }
+    if (LocalStorage.get("password") != null) {
+      _pswController.text = LocalStorage.get("password");
+    }
     return InkWell(
       onTap: () {
-        // if ((_formKey.currentState as FormState).validate()) {
-        log(_unameController.value.text);
-        log(_pswController.value.text);
-
-        login();
-        return;
-
-        // }
+        if ((_formKey.currentState as FormState).validate()) {
+          log(_unameController.value.text);
+          log(_pswController.value.text);
+          login();
+        }
       },
       child: Container(
         width: 88,
@@ -206,28 +218,29 @@ class _LoginState extends State<Login> {
   }
 
   void login() {
-    UserService.getInstance()
-        .signIn(_unameController.value.text.trim(),
-            _pswController.value.text.trim())
-        .then((value) async {
-      if (value.code == 1) {
-        var resp = value.data as SignInResponse;
-        log(resp.token);
+    var username = _unameController.value.text.trim();
+    var password = _pswController.value.text.trim();
+    UserService.getInstance().signIn(username, password).then((loginInfo) {
+      if (loginInfo.code == 1) {
+        LocalStorage.save("username", username);
+        LocalStorage.save("password", password);
 
-        var userInfoResp = await UserService.getInstance().getUserInfo();
-        if (userInfoResp.code == 1) {
-          var userInfo = userInfoResp.data  as GetUserInfoResponse;
-          log(userInfo.user.toString());
-        } else {
-          log(userInfoResp.msg);
-        }
+        UserService.getInstance().getUserInfo().then((userInfoResp) {
+          if (userInfoResp.code == 1) {
+            var userInfo = userInfoResp.data as GetUserInfoResponse;
+            CommonService.userInfo = userInfo.user;
+          } else {
+            log(userInfoResp.msg);
+          }
+        });
 
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
+
       } else {
-        log(value.msg);
+        log(loginInfo.msg);
       }
     });
   }

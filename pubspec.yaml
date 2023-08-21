@@ -53,6 +53,7 @@ dependencies:
   extension_google_sign_in_as_googleapis_auth: ^2.0.10
   email_validator: ^2.1.17
   crypto: ^3.0.3
+  shared_preferences: ^2.0.8
 
 dev_dependencies:
   flutter_test:

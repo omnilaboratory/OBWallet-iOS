@@ -71,10 +71,24 @@ class UserService {
     }
     return ret;
   }
+
   Future<GrpcResponse> getUserInfo() async {
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.getUserInfo(GetUserInfoRequest());
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      GrpcError error = e as GrpcError;
+      ret.msg = error.message.toString();
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> uploadImage(UploadRequest req) async {
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.upload(req);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {

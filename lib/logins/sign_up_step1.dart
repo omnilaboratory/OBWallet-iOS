@@ -24,7 +24,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   final TextEditingController _pswController = TextEditingController();
   final TextEditingController _psw2Controller = TextEditingController();
 
-  late VerifyCodeResponse verifyCodeResponse;
+  VerifyCodeResponse? verifyCodeResponse;
 
   getVerifyCode() async {
     var email = _emailController.value.text.trim();
@@ -94,7 +94,6 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           text: 'NEXT',
           onPressed: () {
             signUp();
-            return;
           },
         ),
       ],
@@ -274,17 +273,19 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   }
 
   void signUp() {
+    if (verifyCodeResponse == null) {
+      Fluttertoast.showToast(msg: "please get verifyCode first");
+      return;
+    }
     SignUpRequest signUpRequest = SignUpRequest();
     signUpRequest.email = _emailController.value.text.trim();
     signUpRequest.password = _pswController.value.text.trim();
     signUpRequest.confirmPassword = _psw2Controller.value.text.trim();
     signUpRequest.userName = _unameController.value.text.trim();
     signUpRequest.vcode = _codeController.value.text.trim();
-    signUpRequest.verifyCodeId = verifyCodeResponse.verifyCodeId;
-
+    signUpRequest.verifyCodeId = verifyCodeResponse!.verifyCodeId;
     UserService.getInstance().signUp(signUpRequest).then((value) async {
       if (value.code == 1) {
-        log(value.data.toString());
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const SignUpStepTwo()));
       } else {

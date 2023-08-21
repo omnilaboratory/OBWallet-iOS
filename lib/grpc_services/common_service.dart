@@ -3,9 +3,12 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:grpc/grpc.dart';
 
+import '../src/generated/user.pbgrpc.dart';
+
 mixin CommonService {
   static ClientChannel? channel;
   static String token = "";
+  static UserInfo? userInfo;
 
   static ClientChannel? getGrpcChannel() {
     if (channel == null) {

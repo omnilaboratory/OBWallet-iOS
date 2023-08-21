@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:awallet/signups/signup.dart';
 import 'package:awallet/src/generated/lightning.pbgrpc.dart';
+import 'package:awallet/tools/local_storage.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,10 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Welcome'),
