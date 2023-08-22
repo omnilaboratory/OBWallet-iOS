@@ -9,7 +9,11 @@ service UserService {
   rpc VerifyCode(VerifyCodeRequest) returns (VerifyCodeResponse) {}
   //user login
   rpc SignIn(SignInRequest) returns (SignInResponse) {}
+  //same as UpdateUser-rpc ,but with kyc commit.
   rpc Kyc(UserInfo) returns (UserInfo) {}
+  // input parameter UserInfo-Obj must first get from GetUserInfo-rpc,
+  // then update the UserInfo-obj,last call UpdateUser with UserInfo-obj
+  rpc UpdateUser(UserInfo) returns (UserInfo) {}
   rpc Upload(UploadRequest) returns (UploadResponse) {}
   rpc ApplyCard(ApplyCardRequest) returns (ApplyCardResponse) {}
   rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}

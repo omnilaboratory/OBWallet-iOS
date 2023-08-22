@@ -37,6 +37,10 @@ class UserServiceClient extends $grpc.Client {
       '/user.UserService/Kyc',
       ($0.UserInfo value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.UserInfo.fromBuffer(value));
+  static final _$updateUser = $grpc.ClientMethod<$0.UserInfo, $0.UserInfo>(
+      '/user.UserService/UpdateUser',
+      ($0.UserInfo value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.UserInfo.fromBuffer(value));
   static final _$upload = $grpc.ClientMethod<$0.UploadRequest, $0.UploadResponse>(
       '/user.UserService/Upload',
       ($0.UploadRequest value) => value.writeToBuffer(),
@@ -70,6 +74,10 @@ class UserServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.UserInfo> kyc($0.UserInfo request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$kyc, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.UserInfo> updateUser($0.UserInfo request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateUser, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.UploadResponse> upload($0.UploadRequest request, {$grpc.CallOptions? options}) {
@@ -118,6 +126,13 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.UserInfo.fromBuffer(value),
         ($0.UserInfo value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UserInfo, $0.UserInfo>(
+        'UpdateUser',
+        updateUser_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UserInfo.fromBuffer(value),
+        ($0.UserInfo value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.UploadRequest, $0.UploadResponse>(
         'Upload',
         upload_Pre,
@@ -157,6 +172,10 @@ abstract class UserServiceBase extends $grpc.Service {
     return kyc(call, await request);
   }
 
+  $async.Future<$0.UserInfo> updateUser_Pre($grpc.ServiceCall call, $async.Future<$0.UserInfo> request) async {
+    return updateUser(call, await request);
+  }
+
   $async.Future<$0.UploadResponse> upload_Pre($grpc.ServiceCall call, $async.Future<$0.UploadRequest> request) async {
     return upload(call, await request);
   }
@@ -173,6 +192,7 @@ abstract class UserServiceBase extends $grpc.Service {
   $async.Future<$0.VerifyCodeResponse> verifyCode($grpc.ServiceCall call, $0.VerifyCodeRequest request);
   $async.Future<$0.SignInResponse> signIn($grpc.ServiceCall call, $0.SignInRequest request);
   $async.Future<$0.UserInfo> kyc($grpc.ServiceCall call, $0.UserInfo request);
+  $async.Future<$0.UserInfo> updateUser($grpc.ServiceCall call, $0.UserInfo request);
   $async.Future<$0.UploadResponse> upload($grpc.ServiceCall call, $0.UploadRequest request);
   $async.Future<$0.ApplyCardResponse> applyCard($grpc.ServiceCall call, $0.ApplyCardRequest request);
   $async.Future<$0.GetUserInfoResponse> getUserInfo($grpc.ServiceCall call, $0.GetUserInfoRequest request);
