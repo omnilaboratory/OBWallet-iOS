@@ -1,3 +1,4 @@
+import 'package:awallet/bean/crypto_wallet_info.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/crypto_token_item.dart';
@@ -30,8 +31,7 @@ class _BitcoinPageState extends State<BitcoinPage> {
     return Center(
       child: Column(
         children: [
-          const CryptoWalletCard(
-              balance: 0.3, address: "0x0f6eD175150e0......ad19A6e054CB"),
+          CryptoWalletCard(walletInfo: CryptoWalletInfo(address: "0xaaaaaaaadfafadf",balance: 151515)),
           const SizedBox(height: 20),
           buildTxButtons(),
           Expanded(

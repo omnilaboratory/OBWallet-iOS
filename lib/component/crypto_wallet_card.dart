@@ -1,12 +1,13 @@
 import 'dart:developer';
+import 'package:awallet/bean/crypto_wallet_info.dart';
 import 'package:flutter/material.dart';
 
 class CryptoWalletCard extends StatefulWidget {
-  final double balance;
-  final String address;
+
+  final CryptoWalletInfo walletInfo;
 
   const CryptoWalletCard(
-      {super.key, required this.balance, required this.address});
+      {super.key, required this.walletInfo});
 
   @override
   State<CryptoWalletCard> createState() => _CryptoWalletCardState();
@@ -30,12 +31,12 @@ class _CryptoWalletCardState extends State<CryptoWalletCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("\$ ${widget.balance}", style: const TextStyle(
+          Text("\$ ${widget.walletInfo.balance}", style: const TextStyle(
               fontSize: 26, fontWeight: FontWeight.w800, color: Colors.white)),
           const SizedBox(height: 10),
           Row(
             children: [
-              Text(widget.address,
+              Text(widget.walletInfo.address,
                   style: const TextStyle(fontSize: 12, color: Colors.white)),
               const SizedBox(width: 10),
               Transform.scale(

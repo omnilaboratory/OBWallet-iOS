@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awallet/bean/crypto_wallet_info.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/crypto_receive.dart';
@@ -21,7 +22,6 @@ class EthereumPage extends StatefulWidget {
 
 class _EthereumPageState extends State<EthereumPage> {
   double balance = 1;
-  var ethAddress = '';
 
   var tokenList = [
     const TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
@@ -32,7 +32,7 @@ class _EthereumPageState extends State<EthereumPage> {
   @override
   void initState() {
     LocalStorage.initSP().then((value) {
-      ethAddress = LocalStorage.get(LocalStorage.ethAddress);
+      var ethAddress = LocalStorage.get(LocalStorage.ethAddress);
       if (ethAddress != null && ethAddress.toString().isNotEmpty) {
         EthService.getInstance()
             .getBalanceOfEthAddress(ethAddress)
@@ -64,11 +64,12 @@ class _EthereumPageState extends State<EthereumPage> {
   Widget build(BuildContext context) {
     columnChildren = [];
     columnChildren.add(CryptoWalletCard(
-        balance: balance, address: ethAddress));
+        walletInfo: CryptoWalletInfo(address: LocalStorage.get(LocalStorage.ethAddress), balance: balance)));
     columnChildren.add(const SizedBox(height: 20));
+
     if (balance == 0) {
       columnChildren.add(CryptoReceive(
-        address: ethAddress,
+        address: LocalStorage.get(LocalStorage.ethAddress),
         tips: "The balance is zero, please top up Ethereum Assets",
         qrSize: 200,
       ));
