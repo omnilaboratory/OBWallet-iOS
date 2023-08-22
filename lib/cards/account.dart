@@ -23,7 +23,7 @@ class Account extends StatefulWidget {
     CurrencyTxInfo(
         name: "STARBUCKS FELIZ EN VIS, HO CHI STARBUCKS FELIZ EN VIS, HO CHI",
         currencyName: "VND",
-        amount: 123456789987654320,
+        amount: 123456789123987652608,
         amountOfDollar: 160),
     CurrencyTxInfo(
         name: "STARBUCKS FELIZ EN VIS, HO CHI",
