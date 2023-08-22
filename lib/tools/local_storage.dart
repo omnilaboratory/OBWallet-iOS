@@ -1,6 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
+  static String ethAddress= "ethAddress";
+
   static SharedPreferences? prefs;
 
   static Future<bool> initSP() async {

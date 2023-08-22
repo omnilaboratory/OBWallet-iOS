@@ -135,6 +135,8 @@ class UserService {
 
   Future<GrpcResponse> applyCard() async {
     var request = ApplyCardRequest();
+    request.icNo = '130429198903091012';
+    request.currency = CurrencyCode.CNY;
 
     var ret = GrpcResponse();
     try {
