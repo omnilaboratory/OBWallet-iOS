@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:awallet/bean/crypto_wallet_info.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 
 class CryptoWalletCard extends StatefulWidget {
@@ -36,7 +37,7 @@ class _CryptoWalletCardState extends State<CryptoWalletCard> {
           const SizedBox(height: 10),
           Row(
             children: [
-              Text(widget.walletInfo.address,
+              Text(StringTools.starString(widget.walletInfo.address,maxLength: 30),
                   style: const TextStyle(fontSize: 12, color: Colors.white)),
               const SizedBox(width: 10),
               Transform.scale(
