@@ -10,6 +10,7 @@ class CurrencyTxItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
       child: Row(
@@ -40,7 +41,7 @@ class CurrencyTxItem extends StatelessWidget {
               minFontSize: 6,
               style: const TextStyle(
                 color: Color(0xFF666666),
-                fontSize: 12,
+                fontSize: 13,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -50,7 +51,7 @@ class CurrencyTxItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               SizedBox(
-                width: 200,
+                width: size.width - 190,
                 child: AutoSizeText(
                   "${Utils.numDecimalPattern.format(txInfo.amount)} ${txInfo.currencyName}",
                   overflow: TextOverflow.ellipsis,
@@ -59,7 +60,7 @@ class CurrencyTxItem extends StatelessWidget {
                   textAlign: TextAlign.end,
                   style: const TextStyle(
                     color: Color(0xFF666666),
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

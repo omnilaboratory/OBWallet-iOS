@@ -31,30 +31,4 @@ class EthService {
 
     return walletInfo;
   }
-
-  /// Generate a new eth address
-  Future<GrpcResponse> genEthAddress() async {
-    var ret = GrpcResponse();
-    try {
-      var resp = await Eth.genEthAddress();
-      ret.code = 1;
-      ret.data = resp;
-    } catch (e) {
-      ret.msg = 'genEthAddress -> error: $e';
-    }
-    return ret;
-  }
-
-  /// Get balance of an Eth Address
-  Future<GrpcResponse> getBalanceOfEthAddress(String address) async {
-    var ret = GrpcResponse();
-    try {
-      var resp = await Eth.getBalanceOfEthAddress(address);
-      ret.code = 1;
-      ret.data = resp;
-    } catch (e) {
-      ret.msg = 'getBalanceOfEthAddress -> error: $e';
-    }
-    return ret;
-  }
 }

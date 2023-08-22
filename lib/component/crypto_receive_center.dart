@@ -5,12 +5,12 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import 'bottom_button.dart';
 
-class CryptoReceive extends StatelessWidget {
+class CryptoReceiveCenter extends StatelessWidget {
   final String address;
   final String tips;
   final double qrSize;
 
-  const CryptoReceive(
+  const CryptoReceiveCenter(
       {super.key,
       required this.address,
       required this.tips,
@@ -24,28 +24,25 @@ class CryptoReceive extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Image(
-                  width: 30,
-                  height: 30,
-                  image: AssetImage("asset/images/icon_smile.png")),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  tips,
-                  maxLines: 2,
-                  style: const TextStyle(
-                    color: Color(0xFF999999),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                    height: 1.47,
-                  ),
-                ),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          const Image(
+              width: 30,
+              height: 30,
+              image: AssetImage("asset/images/icon_smile.png")),
+          const SizedBox(width: 8),
+          SizedBox(
+            child: Text(
+              tips,
+              maxLines: 2,
+              style: const TextStyle(
+                color: Color(0xFF999999),
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                height: 1.47,
               ),
-            ]),
+            ),
+          ),
+        ]),
         Padding(
           padding: const EdgeInsets.only(top: 20),
           child: QrImageView(
