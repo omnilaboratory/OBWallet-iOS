@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
   static String ethAddress= "ethAddress";
+  static String ethPrivateKey= "private_key";
 
   static SharedPreferences? prefs;
 

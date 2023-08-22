@@ -1,6 +1,7 @@
 
 import 'dart:math' as math;
 import 'dart:developer';
+import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart';
@@ -22,8 +23,10 @@ class Eth {
       log('privateKey: $privateKey');
 
       // Save the address and private key to local storage on device
-      await Utils.saveToStorage('eth_address', address);
-      await Utils.saveToStorage('private_key', privateKey);
+      // await Utils.saveToStorage('eth_address', address);
+      // await Utils.saveToStorage('private_key', privateKey);
+      LocalStorage.save(LocalStorage.ethAddress, address);
+      LocalStorage.save(LocalStorage.ethPrivateKey, privateKey);
       // log('Stored status: $res');
 
       return address;

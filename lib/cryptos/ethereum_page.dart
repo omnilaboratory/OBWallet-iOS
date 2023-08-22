@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:awallet/bean/crypto_wallet_info.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/crypto_receive.dart';
@@ -9,8 +6,7 @@ import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
-import 'package:awallet/grpc_services/eth_service.dart';
-import 'package:awallet/tools/local_storage.dart';
+import 'package:awallet/services/eth_service.dart';
 import 'package:flutter/material.dart';
 
 class EthereumPage extends StatefulWidget {
@@ -21,8 +17,6 @@ class EthereumPage extends StatefulWidget {
 }
 
 class _EthereumPageState extends State<EthereumPage> {
-  double balance = 1;
-
   var tokenList = [
     const TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
   ];
@@ -31,45 +25,30 @@ class _EthereumPageState extends State<EthereumPage> {
 
   @override
   void initState() {
-    LocalStorage.initSP().then((value) {
-      var ethAddress = LocalStorage.get(LocalStorage.ethAddress);
-      if (ethAddress != null && ethAddress.toString().isNotEmpty) {
-        EthService.getInstance()
-            .getBalanceOfEthAddress(ethAddress)
-            .then((value) async {
-          if (value.code == 1) {
-            var resp = value.data;
-            balance = resp;
-            log(resp.toString());
-          } else {
-            log(value.msg);
-          }
-        });
-      } else {
-        EthService.getInstance().genEthAddress().then((value) async {
-          if (value.code == 1) {
-            var resp = value.data;
-            log(resp.toString());
-            LocalStorage.save(LocalStorage.ethAddress, resp);
-          } else {
-            log(value.msg);
-          }
-        });
-      }
-    });
+    if (EthService.walletInfo == null) {
+      EthService.getEthWalletInfo().then((value) {
+        EthService.walletInfo = value;
+        setState(() {});
+      });
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (EthService.walletInfo == null) {
+      return const Center(
+        child: Text("loading"),
+      );
+    }
+
     columnChildren = [];
-    columnChildren.add(CryptoWalletCard(
-        walletInfo: CryptoWalletInfo(address: LocalStorage.get(LocalStorage.ethAddress), balance: balance)));
+    columnChildren.add(CryptoWalletCard(walletInfo: EthService.walletInfo!));
     columnChildren.add(const SizedBox(height: 20));
 
-    if (balance == 0) {
+    if (EthService.walletInfo?.balance == 0) {
       columnChildren.add(CryptoReceive(
-        address: LocalStorage.get(LocalStorage.ethAddress),
+        address: EthService.walletInfo!.address,
         tips: "The balance is zero, please top up Ethereum Assets",
         qrSize: 200,
       ));
