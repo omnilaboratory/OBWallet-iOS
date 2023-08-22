@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/currency_tx_info.dart';
+import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyTxItem extends StatelessWidget {
@@ -48,12 +49,19 @@ class CurrencyTxItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                "${txInfo.amount} ${txInfo.currencyName}",
-                style: const TextStyle(
-                  color: Color(0xFF666666),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+              SizedBox(
+                width: 200,
+                child: AutoSizeText(
+                  "${Utils.numDecimalPattern.format(txInfo.amount)} ${txInfo.currencyName}",
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  minFontSize: 6,
+                  textAlign: TextAlign.end,
+                  style: const TextStyle(
+                    color: Color(0xFF666666),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
               Text(

@@ -1235,6 +1235,8 @@ class ApplyCardRequest extends $pb.GeneratedMessage {
   factory ApplyCardRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ApplyCardRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'icNo')
+    ..e<$1.CurrencyCode>(2, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $1.CurrencyCode.UNKNOWNCurrency, valueOf: $1.CurrencyCode.valueOf, enumValues: $1.CurrencyCode.values)
     ..hasRequiredFields = false
   ;
 
@@ -1258,6 +1260,24 @@ class ApplyCardRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static ApplyCardRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ApplyCardRequest>(create);
   static ApplyCardRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get icNo => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set icNo($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasIcNo() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearIcNo() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $1.CurrencyCode get currency => $_getN(1);
+  @$pb.TagNumber(2)
+  set currency($1.CurrencyCode v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCurrency() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCurrency() => clearField(2);
 }
 
 class ApplyCardResponse extends $pb.GeneratedMessage {
