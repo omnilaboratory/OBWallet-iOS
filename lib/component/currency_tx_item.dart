@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/currency_tx_info.dart';
+import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyTxItem extends StatelessWidget {
@@ -51,7 +52,7 @@ class CurrencyTxItem extends StatelessWidget {
               SizedBox(
                 width: 200,
                 child: AutoSizeText(
-                  "${txInfo.amount} ${txInfo.currencyName}",
+                  "${Utils.numDecimalPattern.format(txInfo.amount)} ${txInfo.currencyName}",
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   minFontSize: 6,
