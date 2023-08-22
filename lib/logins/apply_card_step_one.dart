@@ -1,4 +1,5 @@
 import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/home.dart';
 import 'package:awallet/logins/apply_card_step_two.dart';
 import 'package:flutter/material.dart';
 
@@ -128,7 +129,10 @@ class _ApplyCardStepOneState extends State<ApplyCardStepOne> {
                   icon: 'asset/images/icon_skip_green.png',
                   text: 'SKIP',
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()));
                   },
                 ),
                 BottomButton(

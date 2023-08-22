@@ -4,6 +4,7 @@ import 'package:awallet/src/generated/user/country.pbenum.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
+import 'package:fixnum/src/int64.dart';
 import 'package:grpc/grpc.dart';
 
 class UserService {
@@ -103,7 +104,11 @@ class UserService {
 
   Future<GrpcResponse> kyc() async {
     var request = UserInfo();
-    request.socialId = '9';
+    request.id = Int64(9);
+    request.userName = 'hahaha';
+    request.updatedAt = Int64(1692602216);
+    request.createdAt = Int64(1692602216);
+    request.idNum = '130429198903091012';
     request.firstName = '哈';
     request.lastName = '哈哈';
     request.email = 'healergyl@126.com';
@@ -129,9 +134,11 @@ class UserService {
   }
 
   Future<GrpcResponse> applyCard() async {
+    var request = ApplyCardRequest();
+
     var ret = GrpcResponse();
     try {
-      var resp = await userServiceClient?.applyCard(ApplyCardRequest());
+      var resp = await userServiceClient?.applyCard(request);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {

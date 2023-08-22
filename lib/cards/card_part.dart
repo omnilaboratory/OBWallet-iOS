@@ -148,7 +148,8 @@ class _CardPartState extends State<CardPart> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const TxHistory()));
+                                      builder: (context) =>
+                                      const ApplyCardStepOne()));
                             },
                             child: const Image(
                                 width: 24,
@@ -200,11 +201,11 @@ class _CardPartState extends State<CardPart> {
                               icon: 'asset/images/icon_arrow_right_green.png',
                               text: 'APPLY CARD',
                               onPressed: () {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const ApplyCardStepOne()));
+                                        const ApplyCardStepOne()));
                               },
                             )
                           ]),

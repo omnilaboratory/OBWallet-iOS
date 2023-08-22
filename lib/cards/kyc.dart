@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
 import '../component/bottom_button.dart';
@@ -48,7 +50,8 @@ class _KycState extends State<Kyc> {
                               Image(
                                   width: 30,
                                   height: 30,
-                                  image: AssetImage("asset/images/icon_smile.png")),
+                                  image: AssetImage(
+                                      "asset/images/icon_smile.png")),
                               SizedBox(width: 10),
                               Text("KYC address verification",
                                   style: TextStyle(
@@ -125,22 +128,24 @@ class _KycState extends State<Kyc> {
                           ),
                         ),
                         const Spacer(),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                          BottomButton(
-                            icon: 'asset/images/icon_skip_green.png',
-                            text: 'SKIP',
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          BottomButton(
-                            icon: 'asset/images/icon_confirm_green.png',
-                            text: 'DONE',
-                            onPressed: () {
-                              log("onTap");
-                            },
-                          )
-                        ]),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              BottomButton(
+                                icon: 'asset/images/icon_skip_green.png',
+                                text: 'SKIP',
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              BottomButton(
+                                icon: 'asset/images/icon_confirm_green.png',
+                                text: 'DONE',
+                                onPressed: () {
+                                  kyc();
+                                },
+                              )
+                            ]),
                       ]),
                 ),
                 const SizedBox(height: 20),
@@ -196,5 +201,18 @@ class _KycState extends State<Kyc> {
         ],
       ),
     );
+  }
+
+  void kyc() {
+    UserService.getInstance().kyc().then((value) async {
+      if (value.code == 1) {
+        var resp = value.data as UserInfo;
+        log(resp.toString());
+
+        Navigator.pop(context);
+      } else {
+        log(value.msg);
+      }
+    });
   }
 }
