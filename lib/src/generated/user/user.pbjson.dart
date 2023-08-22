@@ -284,11 +284,16 @@ final $typed_data.Uint8List getUserInfoResponseDescriptor = $convert.base64Decod
 @$core.Deprecated('Use applyCardRequestDescriptor instead')
 const ApplyCardRequest$json = {
   '1': 'ApplyCardRequest',
+  '2': [
+    {'1': 'ic_no', '3': 1, '4': 1, '5': 9, '10': 'icNo'},
+    {'1': 'currency', '3': 2, '4': 1, '5': 14, '6': '.user.CurrencyCode', '10': 'currency'},
+  ],
 };
 
 /// Descriptor for `ApplyCardRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List applyCardRequestDescriptor = $convert.base64Decode(
-    'ChBBcHBseUNhcmRSZXF1ZXN0');
+    'ChBBcHBseUNhcmRSZXF1ZXN0EhMKBWljX25vGAEgASgJUgRpY05vEi4KCGN1cnJlbmN5GAIgAS'
+    'gOMhIudXNlci5DdXJyZW5jeUNvZGVSCGN1cnJlbmN5');
 
 @$core.Deprecated('Use applyCardResponseDescriptor instead')
 const ApplyCardResponse$json = {

@@ -151,9 +151,8 @@ message GetUserInfoResponse {
 }
 
 message ApplyCardRequest {
-  //ic_no and currency is collected at kyc-rpc
-//  string ic_no=1;
-//  CurrencyCode currency=2;
+  string ic_no=1;
+  CurrencyCode currency=2;
 }
 message ApplyCardResponse {
   CardInfo card=1;
