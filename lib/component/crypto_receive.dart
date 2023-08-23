@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -20,8 +21,7 @@ class CryptoReceive extends StatelessWidget {
 
   onCopy(BuildContext context) {
     Fluttertoast.showToast(
-        msg: "address is on your Clipboard",
-        gravity: ToastGravity.CENTER);
+        msg: "address is on your Clipboard", gravity: ToastGravity.CENTER);
     Clipboard.setData(ClipboardData(text: address));
   }
 
@@ -74,13 +74,18 @@ class CryptoReceive extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 8),
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(
-              address,
-              style: const TextStyle(
-                fontSize: 13,
-                color: Color(0xFF999999),
-                fontWeight: FontWeight.w500,
-                height: 1.47,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.55,
+              child: AutoSizeText(
+                address,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Color(0xFF999999),
+                  fontWeight: FontWeight.w500,
+                  height: 1.47,
+                ),
               ),
             ),
             const SizedBox(width: 5),

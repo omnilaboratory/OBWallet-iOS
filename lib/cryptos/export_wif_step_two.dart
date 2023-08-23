@@ -1,7 +1,11 @@
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/cryptos/export_wif_step_one.dart';
+import 'package:awallet/tools/local_storage.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ExportWifStepTwo extends StatefulWidget {
   const ExportWifStepTwo({super.key});
@@ -21,7 +25,10 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
   }
 
   onCopy() {
-    Navigator.pop(context);
+    Fluttertoast.showToast(
+        msg: "address is on your Clipboard", gravity: ToastGravity.CENTER);
+    Clipboard.setData(
+        ClipboardData(text: LocalStorage.get(LocalStorage.ethPrivateKey)));
   }
 
   onClose() {
@@ -60,8 +67,8 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
                   child: Image(
                       width: 100,
                       height: 100,
-                      image: AssetImage(
-                          "asset/images/icon_qrcode_default.png")),
+                      image:
+                          AssetImage("asset/images/icon_qrcode_default.png")),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 15),
@@ -75,26 +82,27 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 7),
+                Padding(
+                  padding: const EdgeInsets.only(top: 7),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "2533464754865976HFDGE5437",
-                          style: TextStyle(
+                          StringTools.starString(
+                              LocalStorage.get(LocalStorage.ethPrivateKey),
+                              maxLength: 26),
+                          style: const TextStyle(
                             fontSize: 13,
                             color: Color(0xFF999999),
                             fontWeight: FontWeight.w500,
                             height: 1.47,
                           ),
                         ),
-                        SizedBox(width: 5),
-                        Image(
+                        const SizedBox(width: 5),
+                        const Image(
                           width: 16,
                           height: 16,
-                          image: AssetImage(
-                              "asset/images/icon_copy_gray.png"),
+                          image: AssetImage("asset/images/icon_copy_gray.png"),
                         ),
                       ]),
                 ),
@@ -103,7 +111,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
                 ),
                 Padding(
                   padding:
-                  const EdgeInsets.only(left: 50, right: 50, bottom: 20),
+                      const EdgeInsets.only(left: 50, right: 50, bottom: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [

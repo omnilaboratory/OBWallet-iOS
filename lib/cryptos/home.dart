@@ -19,12 +19,12 @@ class CryptoHome extends StatefulWidget {
 class _CryptoHomeState extends State<CryptoHome> {
   double balance = 0;
 
-  var tabNames = ['Bitcoin', 'Ethereum'];
+  var tabNames = ['Ethereum','Bitcoin' ];
 
   List<Widget> tabList = [];
   List<Widget> tabViewList = [
-    const BitcoinPage(),
     const EthereumPage(),
+    const BitcoinPage(),
   ];
 
   @override
