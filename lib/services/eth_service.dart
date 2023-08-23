@@ -20,7 +20,7 @@ class EthService {
     return _walletInfo!;
   }
 
-  Future<void> createWalletInfo() async {
+  createWalletInfo() async {
     String? address = LocalStorage.get(LocalStorage.ethAddress);
     _walletInfo = CryptoWalletInfo(address: "");
     if (address == null || address.isEmpty) {
@@ -42,7 +42,7 @@ class EthService {
     return _tokenList;
   }
 
-  Future<void> updateTokenBalances() async {
+  updateTokenBalances() async {
     String address = LocalStorage.get(LocalStorage.ethAddress);
     double totalBalance = 0;
     double balance = await Eth.getBalanceOfETH(address);
