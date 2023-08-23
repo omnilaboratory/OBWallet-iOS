@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'package:awallet/bean/crypto_wallet_info.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CryptoWalletCard extends StatefulWidget {
   final CryptoWalletInfo walletInfo;
@@ -44,7 +46,10 @@ class _CryptoWalletCardState extends State<CryptoWalletCard> {
               const SizedBox(width: 10),
               GestureDetector(
                   onTap: () {
-                    log("copy");
+                    Fluttertoast.showToast(
+                        msg: "address is on your Clipboard",
+                        gravity: ToastGravity.CENTER);
+                    Clipboard.setData(ClipboardData(text: widget.walletInfo.address));
                   },
                   child: const Image(
                       width: 24,

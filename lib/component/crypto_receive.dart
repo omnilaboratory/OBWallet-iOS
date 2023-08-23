@@ -18,7 +18,12 @@ class CryptoReceive extends StatelessWidget {
 
   onShare(BuildContext context) {}
 
-  onCopy(BuildContext context) {}
+  onCopy(BuildContext context) {
+    Fluttertoast.showToast(
+        msg: "address is on your Clipboard",
+        gravity: ToastGravity.CENTER);
+    Clipboard.setData(ClipboardData(text: address));
+  }
 
   @override
   Widget build(BuildContext context) {
