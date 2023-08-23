@@ -31,11 +31,24 @@ class _EthereumPageState extends State<EthereumPage> {
               name: "ETH",
               iconUrl: 'asset/images/icon_eth_logo.png',
               balance: value.balance),
-          const TokenInfo(
-              name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
+          TokenInfo(
+              name: "USDT",
+              iconUrl: 'asset/images/icon_tether.png',
+              balance: value.usdtBalance),
         ];
         setState(() {});
       });
+    } else {
+      tokenList = [
+        TokenInfo(
+            name: "ETH",
+            iconUrl: 'asset/images/icon_eth_logo.png',
+            balance: EthService.walletInfo?.balance),
+        TokenInfo(
+            name: "USDT",
+            iconUrl: 'asset/images/icon_tether.png',
+            balance: EthService.walletInfo?.usdtBalance),
+      ];
     }
     super.initState();
   }
