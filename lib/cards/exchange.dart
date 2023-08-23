@@ -340,98 +340,80 @@ class _ExchangeState extends State<Exchange> {
                                   EdgeInsets.only(left: 25, right: 25, top: 5),
                               child: Row(
                                 children: [
-                                  Expanded(
-                                    child: Stack(
-                                      alignment:
-                                          AlignmentDirectional.centerStart,
-                                      children: [
-                                        Positioned(
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "Balance: ",
-                                                style: TextStyle(
-                                                  color: Color(0xFF666666),
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.29,
-                                                ),
-                                              ),
-                                              Text(
-                                                "200.00",
-                                                style: TextStyle(
-                                                  color: Color(0xFF666666),
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.29,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Positioned(
-                                          right: 0,
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '1',
-                                                style: TextStyle(
-                                                  color: Color(0xFF666666),
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.29,
-                                                ),
-                                              ),
-                                              SizedBox(width: 2),
-                                              Text(
-                                                'USD',
-                                                style: TextStyle(
-                                                  color: Color(0xFF666666),
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.29,
-                                                ),
-                                              ),
-                                              SizedBox(width: 2),
-                                              Text(
-                                                '=',
-                                                style: TextStyle(
-                                                  color: Color(0xFF666666),
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.29,
-                                                ),
-                                              ),
-                                              SizedBox(width: 2),
-                                              Text(
-                                                '1.00126',
-                                                style: TextStyle(
-                                                  color: Color(0xFF666666),
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.29,
-                                                ),
-                                              ),
-                                              SizedBox(width: 2),
-                                              Text(
-                                                'USDC',
-                                                style: TextStyle(
-                                                  color: Color(0xFF666666),
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.29,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                                  Text(
+                                    "Balance: ",
+                                    style: TextStyle(
+                                      color: Color(0xFF666666),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.29,
                                     ),
-                                  )
+                                  ),
+                                  Text(
+                                    "200.00",
+                                    style: TextStyle(
+                                      color: Color(0xFF666666),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.29,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          const Padding(
+                              padding:
+                              EdgeInsets.only(left: 25, right: 25, top: 5),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '1',
+                                    style: TextStyle(
+                                      color: Color(0xFF666666),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.29,
+                                    ),
+                                  ),
+                                  SizedBox(width: 2),
+                                  Text(
+                                    'USD',
+                                    style: TextStyle(
+                                      color: Color(0xFF666666),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.29,
+                                    ),
+                                  ),
+                                  SizedBox(width: 2),
+                                  Text(
+                                    '=',
+                                    style: TextStyle(
+                                      color: Color(0xFF666666),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.29,
+                                    ),
+                                  ),
+                                  SizedBox(width: 2),
+                                  Text(
+                                    '1.00126',
+                                    style: TextStyle(
+                                      color: Color(0xFF666666),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.29,
+                                    ),
+                                  ),
+                                  SizedBox(width: 2),
+                                  Text(
+                                    'USDC',
+                                    style: TextStyle(
+                                      color: Color(0xFF666666),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.29,
+                                    ),
+                                  ),
                                 ],
                               )),
                           SizedBox(
