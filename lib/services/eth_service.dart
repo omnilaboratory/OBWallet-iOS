@@ -47,11 +47,11 @@ class EthService {
     double totalBalance = 0;
     double balance = await Eth.getBalanceOfETH(address);
     totalBalance += balance;
-    _tokenList[0].balance = balance;
+    getTokenList()[0].balance = balance;
 
     balance = await Eth.getBalanceOfUSDT(address);
     totalBalance += balance;
-    _tokenList[1].balance = balance;
+    getTokenList()[1].balance = balance;
 
     _walletInfo = getWalletInfo();
     _walletInfo?.balance = totalBalance;
