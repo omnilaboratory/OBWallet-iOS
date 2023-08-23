@@ -4,22 +4,23 @@ import 'package:flutter/material.dart';
 
 class CryptoTokenItem extends StatelessWidget {
   final TokenInfo tokenInfo;
+
   const CryptoTokenItem({super.key, required this.tokenInfo});
 
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(bottom: 20),
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        height: 68,
+        padding:
+            const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x3F000000),
-              blurRadius: 4,
-              offset: Offset(1, 1),
+              color: Color(0x7AABAADD),
+              blurRadius: 5.0,
+              offset: Offset(2.0, 2.0),
             ),
           ],
         ),
@@ -31,14 +32,25 @@ class CryptoTokenItem extends StatelessWidget {
                     builder: (context) => TokenActivity(tokenInfo: tokenInfo)));
           },
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(),
+                padding: const EdgeInsets.only(top: 5),
                 child: Row(
                   children: [
-                    Image(image: AssetImage(tokenInfo.iconUrl)),
-                    const SizedBox(width: 10),
-                    Text(tokenInfo.name),
+                    Image(
+                        width: 20,
+                        height: 20,
+                        image: AssetImage(tokenInfo.iconUrl)),
+                    const SizedBox(width: 5),
+                    Text(
+                      tokenInfo.name,
+                      style: const TextStyle(
+                        color: Color(0xFF666666),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -50,9 +62,20 @@ class CryptoTokenItem extends StatelessWidget {
                   Text(tokenInfo.balance.toString(),
                       textAlign: TextAlign.right,
                       style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold)),
-                  Text("\$ ${tokenInfo.balanceOfDollar}",
-                      textAlign: TextAlign.right),
+                        color: Color(0xFF333333),
+                        fontSize: 26,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w700,
+                      )),
+                  Text(
+                    "\$ ${tokenInfo.balanceOfDollar}",
+                    textAlign: TextAlign.right,
+                    style: const TextStyle(
+                      color: Color(0xFF999999),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
                 ],
               )
             ],

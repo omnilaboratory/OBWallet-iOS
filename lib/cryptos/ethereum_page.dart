@@ -17,9 +17,7 @@ class EthereumPage extends StatefulWidget {
 }
 
 class _EthereumPageState extends State<EthereumPage> {
-  var tokenList = [
-    const TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
-  ];
+  var tokenList = [];
 
   late List<Widget> columnChildren;
 
@@ -28,6 +26,14 @@ class _EthereumPageState extends State<EthereumPage> {
     if (EthService.walletInfo == null) {
       EthService.getEthWalletInfo().then((value) {
         EthService.walletInfo = value;
+        tokenList = [
+          TokenInfo(
+              name: "ETH",
+              iconUrl: 'asset/images/icon_eth_logo.png',
+              balance: value.balance),
+          const TokenInfo(
+              name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
+        ];
         setState(() {});
       });
     }
@@ -60,7 +66,8 @@ class _EthereumPageState extends State<EthereumPage> {
             return CryptoTokenItem(tokenInfo: tokenList[index]);
           },
           shrinkWrap: true,
-          padding: const EdgeInsets.all(20.0),
+          padding:
+              const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 20),
           itemCount: tokenList.length,
         ),
       ));

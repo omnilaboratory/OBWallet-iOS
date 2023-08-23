@@ -40,7 +40,7 @@ class _BitcoinPageState extends State<BitcoinPage> {
                 return CryptoTokenItem(tokenInfo: tokenList[index]);
               },
               shrinkWrap: true,
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 20),
               itemCount: tokenList.length,
             ),
           )
