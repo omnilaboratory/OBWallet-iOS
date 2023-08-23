@@ -26,7 +26,7 @@ class EthService {
     }
     walletInfo.address = address;
 
-    double ethBalance = await Eth.getBalanceOfEthAddress(address);
+    double ethBalance = await Eth.getBalanceOfETH(address);
     walletInfo.balance = ethBalance;
 
     return walletInfo;
