@@ -6,7 +6,6 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
-import 'package:shared_preferences/shared_preferences.dart';
 
 // Data of downloading state
 bool isDownloading = false;
@@ -140,32 +139,5 @@ class Utils {
   static String generateMd5(String input) {
     return md5.convert(utf8.encode(input)).toString();
   }
-  
-  static Future<bool> saveToStorage(String key, String value) async {
-    try {
-      // const storage = FlutterSecureStorage();
-      // await storage.write(key: key, value: value);
 
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final res = await prefs.setString(key, value);
-      return res;
-    } catch (e) {
-      log('saveToStorage -> error: $e');
-      return false;
-    }
-  }
-
-  static Future<String?> readFromStorage(String key) async {
-    try {
-      // const storage = FlutterSecureStorage();
-      // String? value = await storage.read(key: key);
-
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final String? value = prefs.getString(key);
-      return value;
-    } catch (e) {
-      log('readFromStorage -> error: $e');
-      return '';
-    }
-  }
 }
