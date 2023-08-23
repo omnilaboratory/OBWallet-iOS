@@ -1,15 +1,11 @@
-import 'package:awallet/bean/global_state.dart';
 import 'package:flutter/material.dart';
 
 import 'cards/home.dart';
-import 'crypto.dart';
 import 'cryptos/home.dart';
 import 'profile.dart';
 
 class HomePage extends StatefulWidget {
-  final int showIndex;
-
-  const HomePage({super.key, this.showIndex = 0});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -21,14 +17,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _selectedPage = widget.showIndex;
-    if (_selectedPage == 1) {
-      if (GlobalState.isExistBtcAddress) {
-        _pages[1] = const CryptoHome();
-      } else {
-        _pages[1] = const CryptoPage();
-      }
-    }
+    _selectedPage = 0;
   }
 
   static final List<Widget> _pages = <Widget>[
@@ -38,13 +27,6 @@ class _HomePageState extends State<HomePage> {
   ];
 
   void _onItemTapped(int index) {
-    if (index == 1) {
-      if (GlobalState.isExistBtcAddress) {
-        _pages[1] = const CryptoHome();
-      } else {
-        _pages[1] = const CryptoPage();
-      }
-    }
     setState(() {
       _selectedPage = index;
     });
@@ -53,10 +35,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      //   title: _titles[_selectedPage],
-      // ),
 
       body: Center(child: _pages.elementAt(_selectedPage)),
 

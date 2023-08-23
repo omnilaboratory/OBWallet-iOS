@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:awallet/bean/crypto_wallet_info.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';

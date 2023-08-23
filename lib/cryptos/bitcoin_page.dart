@@ -18,12 +18,12 @@ class BitcoinPage extends StatefulWidget {
 class _BitcoinPageState extends State<BitcoinPage> {
 
   var tokenList = [
-    const TokenInfo(
+    TokenInfo(
         name: "BTC",
         iconUrl: 'asset/images/icon_bitcoin.png',
         balance: 100000.0,
         balanceOfDollar: 1220222222000.0),
-    const TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
+    TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
   ];
 
   @override

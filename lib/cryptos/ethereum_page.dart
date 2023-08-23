@@ -1,12 +1,11 @@
-import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/exchange.dart';
-import 'package:awallet/component/crypto_receive.dart';
 import 'package:awallet/component/crypto_token_item.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
 class EthereumPage extends StatefulWidget {
@@ -17,83 +16,52 @@ class EthereumPage extends StatefulWidget {
 }
 
 class _EthereumPageState extends State<EthereumPage> {
-  var tokenList = [];
-
-  late List<Widget> columnChildren;
-
   @override
   void initState() {
-    if (EthService.walletInfo == null) {
-      EthService.getEthWalletInfo().then((value) {
-        EthService.walletInfo = value;
-        tokenList = [
-          TokenInfo(
-              name: "ETH",
-              iconUrl: 'asset/images/icon_eth_logo.png',
-              balance: value.balance),
-          TokenInfo(
-              name: "USDT",
-              iconUrl: 'asset/images/icon_tether.png',
-              balance: value.usdtBalance),
-        ];
+    var address = LocalStorage.get(LocalStorage.ethAddress);
+    if (address != null) {
+      EthService.getInstance().updateTokenBalances().then((value) {
         setState(() {});
       });
-    } else {
-      tokenList = [
-        TokenInfo(
-            name: "ETH",
-            iconUrl: 'asset/images/icon_eth_logo.png',
-            balance: EthService.walletInfo?.balance),
-        TokenInfo(
-            name: "USDT",
-            iconUrl: 'asset/images/icon_tether.png',
-            balance: EthService.walletInfo?.usdtBalance),
-      ];
     }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (EthService.walletInfo == null) {
-      return const Center(
-        child: Text("loading"),
-      );
+    var address = LocalStorage.get(LocalStorage.ethAddress);
+
+    if (address == null) {
+      return createOrRecoverWallet();
     }
 
-    columnChildren = [];
-    columnChildren.add(CryptoWalletCard(walletInfo: EthService.walletInfo!));
-    columnChildren.add(const SizedBox(height: 20));
+    var walletInfo = EthService.getInstance().getWalletInfo();
 
-    if (EthService.walletInfo?.balance == 0) {
-      columnChildren.add(CryptoReceive(
-        address: EthService.walletInfo!.address,
-        tips: "The balance is zero, please top up Ethereum Assets",
-        qrSize: 200,
-      ));
-    } else {
-      columnChildren.add(buildTxButtons());
-      columnChildren.add(Expanded(
-        child: ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return CryptoTokenItem(tokenInfo: tokenList[index]);
-          },
-          shrinkWrap: true,
-          padding:
-              const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 20),
-          itemCount: tokenList.length,
-        ),
-      ));
-    }
+    var tokenList = EthService.getInstance().getTokenList();
 
     return Center(
       child: Column(
-        children: columnChildren,
+        children: [
+          CryptoWalletCard(walletInfo: walletInfo),
+          const SizedBox(height: 20),
+          buildTxButtons(),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return CryptoTokenItem(tokenInfo: tokenList[index]);
+              },
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(
+                  left: 10, top: 20, right: 10, bottom: 20),
+              itemCount: tokenList.length,
+            ),
+          )
+        ],
       ),
     );
   }
 
-  Row buildTxButtons() {
+  Widget buildTxButtons() {
     var size = MediaQuery.sizeOf(context);
     var iconWidth = (size.width - 50) / 5;
     return Row(
@@ -138,6 +106,35 @@ class _EthereumPageState extends State<EthereumPage> {
                   });
             }),
       ],
+    );
+  }
+
+  Widget createOrRecoverWallet() {
+    return Center(
+      child: Center(
+          child: Column(children: [
+        const SizedBox(height: 60),
+        const Image(image: AssetImage("asset/images/img_wallet.png")),
+        Padding(
+          padding: const EdgeInsets.only(top: 40, bottom: 20),
+          child: InkWell(
+              onTap: () {
+                EthService.getInstance().createWalletInfo().then((value) async {
+                  await EthService.getInstance().updateTokenBalances();
+                  setState(() {});
+                });
+              },
+              child: const Image(
+                  image: AssetImage("asset/images/btn_new_wallet.png"))),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 40, bottom: 20),
+          child: InkWell(
+              onTap: () {},
+              child: const Image(
+                  image: AssetImage("asset/images/btn_recover.png"))),
+        ),
+      ])),
     );
   }
 }

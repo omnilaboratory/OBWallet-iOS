@@ -1,37 +1,59 @@
 import 'package:awallet/bean/crypto_wallet_info.dart';
-import 'package:awallet/bean/grpc_response.dart';
+import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/eth.dart';
 import 'package:awallet/tools/local_storage.dart';
-
 
 class EthService {
   static final EthService _instance = EthService._internal();
 
   EthService._internal();
 
-  static EthService getInstance() {
-    return _instance;
-  }
+  static EthService getInstance() => _instance;
 
   factory EthService() => _instance;
 
+  CryptoWalletInfo? _walletInfo;
 
-  static CryptoWalletInfo? walletInfo;
+  CryptoWalletInfo getWalletInfo() {
+    _walletInfo ??=
+        CryptoWalletInfo(address: LocalStorage.get(LocalStorage.ethAddress));
+    return _walletInfo!;
+  }
 
-  static Future<CryptoWalletInfo> getEthWalletInfo() async {
+  Future<void> createWalletInfo() async {
     String? address = LocalStorage.get(LocalStorage.ethAddress);
-    CryptoWalletInfo walletInfo = CryptoWalletInfo(address: "");
+    _walletInfo = CryptoWalletInfo(address: "");
     if (address == null || address.isEmpty) {
       address = await Eth.genEthAddress();
     }
-    walletInfo.address = address;
+    _walletInfo?.address = address;
+    _walletInfo?.balance = 0;
+  }
 
-    double ethBalance = await Eth.getBalanceOfETH(address);
-    walletInfo.balance = ethBalance;
+  List<TokenInfo> _tokenList = [];
 
-    double usdtBalance = await Eth.getBalanceOfUSDT(address);
-    walletInfo.usdtBalance = usdtBalance;
+  List<TokenInfo> getTokenList() {
+    if (_tokenList.isEmpty) {
+      _tokenList = [
+        TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
+        TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
+      ];
+    }
+    return _tokenList;
+  }
 
-    return walletInfo;
+  Future<void> updateTokenBalances() async {
+    String address = LocalStorage.get(LocalStorage.ethAddress);
+    double totalBalance = 0;
+    double balance = await Eth.getBalanceOfETH(address);
+    totalBalance += balance;
+    _tokenList[0].balance = balance;
+
+    balance = await Eth.getBalanceOfUSDT(address);
+    totalBalance += balance;
+    _tokenList[1].balance = balance;
+
+    _walletInfo = getWalletInfo();
+    _walletInfo?.balance = totalBalance;
   }
 }
