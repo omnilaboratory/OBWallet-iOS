@@ -20,7 +20,7 @@ class _EthereumPageState extends State<EthereumPage> {
   void initState() {
     var address = LocalStorage.get(LocalStorage.ethAddress);
     if (address != null) {
-      EthService.getInstance().updateTokenBalances().then((value) {
+      EthService.getInstance().updateTokenBalances().then(() {
         setState(() {});
       });
     }
@@ -119,7 +119,7 @@ class _EthereumPageState extends State<EthereumPage> {
           padding: const EdgeInsets.only(top: 40, bottom: 20),
           child: InkWell(
               onTap: () {
-                EthService.getInstance().createWalletInfo().then((value) async {
+                EthService.getInstance().createWalletInfo().then(() async {
                   await EthService.getInstance().updateTokenBalances();
                   setState(() {});
                 });
