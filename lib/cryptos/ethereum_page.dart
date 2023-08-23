@@ -20,7 +20,7 @@ class _EthereumPageState extends State<EthereumPage> {
   void initState() {
     var address = LocalStorage.get(LocalStorage.ethAddress);
     if (address != null) {
-      EthService.getInstance().updateTokenBalances().then(() {
+      EthService.getInstance().updateTokenBalances().then((value) {
         setState(() {});
       });
     }
