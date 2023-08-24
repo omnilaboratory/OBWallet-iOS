@@ -1,6 +1,5 @@
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
-import 'package:awallet/cryptos/export_wif_step_two.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
