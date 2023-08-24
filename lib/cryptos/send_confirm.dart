@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
+import 'package:awallet/eth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
@@ -11,8 +14,12 @@ class SendConfirm extends StatefulWidget {
 }
 
 class _SendConfirmState extends State<SendConfirm> {
-  onConfirm() {
-    Navigator.pop(context);
+  onConfirm() async {
+    var res = await Eth.sendEthTo('0xD791f9A21ef0319965aEffeC1A5EF94FC479845b', 0.00001);
+    if (res != '') {  // sending successful
+      log('txId: $res');
+      Navigator.pop(context);
+    }
   }
 
   onClose() {

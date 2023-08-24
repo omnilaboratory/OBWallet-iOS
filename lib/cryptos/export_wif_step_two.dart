@@ -26,7 +26,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
 
   onCopy() {
     Fluttertoast.showToast(
-        msg: "address is on your Clipboard", gravity: ToastGravity.CENTER);
+        msg: "WIF is on your Clipboard", gravity: ToastGravity.CENTER);
     Clipboard.setData(
         ClipboardData(text: LocalStorage.get(LocalStorage.ethPrivateKey)));
   }
@@ -99,10 +99,21 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
                           ),
                         ),
                         const SizedBox(width: 5),
-                        const Image(
-                          width: 16,
-                          height: 16,
-                          image: AssetImage("asset/images/icon_copy_gray.png"),
+                        GestureDetector(
+                          onTap: () {
+                            Clipboard.setData(ClipboardData(
+                                text: LocalStorage.get(
+                                    LocalStorage.ethPrivateKey)));
+                            Fluttertoast.showToast(
+                                msg: "WIF is on your Clipboard",
+                                gravity: ToastGravity.CENTER);
+                          },
+                          child: const Image(
+                            width: 16,
+                            height: 16,
+                            image:
+                                AssetImage("asset/images/icon_copy_gray.png"),
+                          ),
                         ),
                       ]),
                 ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:awallet/cards/review_exchange.dart';
@@ -16,6 +17,37 @@ class Exchange extends StatefulWidget {
 }
 
 class _ExchangeState extends State<Exchange> {
+  late Timer _timer;
+  int _countdownTime = 30;
+
+  void startCountdownTimer() {
+    const oneSec = Duration(seconds: 1);
+    callback(timer) => {
+          setState(() {
+            if (_countdownTime <= 0) {
+              _countdownTime = 30;
+            } else {
+              _countdownTime = _countdownTime - 1;
+            }
+          })
+        };
+    _timer = Timer.periodic(oneSec, callback);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startCountdownTimer();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (_timer != null) {
+      _timer.cancel();
+    }
+  }
+
   onNext() {
     Navigator.pop(context);
     showDialog(
@@ -360,12 +392,13 @@ class _ExchangeState extends State<Exchange> {
                                   ),
                                 ],
                               )),
-                          const Padding(
+                          Padding(
                               padding:
-                              EdgeInsets.only(left: 25, right: 25, top: 5),
+                                  const EdgeInsets.only(left: 25, right: 25, top: 5),
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     '1',
                                     style: TextStyle(
                                       color: Color(0xFF666666),
@@ -374,8 +407,8 @@ class _ExchangeState extends State<Exchange> {
                                       height: 1.29,
                                     ),
                                   ),
-                                  SizedBox(width: 2),
-                                  Text(
+                                  const SizedBox(width: 2),
+                                  const Text(
                                     'USD',
                                     style: TextStyle(
                                       color: Color(0xFF666666),
@@ -384,8 +417,8 @@ class _ExchangeState extends State<Exchange> {
                                       height: 1.29,
                                     ),
                                   ),
-                                  SizedBox(width: 2),
-                                  Text(
+                                  const SizedBox(width: 2),
+                                  const Text(
                                     '=',
                                     style: TextStyle(
                                       color: Color(0xFF666666),
@@ -394,8 +427,8 @@ class _ExchangeState extends State<Exchange> {
                                       height: 1.29,
                                     ),
                                   ),
-                                  SizedBox(width: 2),
-                                  Text(
+                                  const SizedBox(width: 2),
+                                  const Text(
                                     '1.00126',
                                     style: TextStyle(
                                       color: Color(0xFF666666),
@@ -404,10 +437,29 @@ class _ExchangeState extends State<Exchange> {
                                       height: 1.29,
                                     ),
                                   ),
-                                  SizedBox(width: 2),
-                                  Text(
+                                  const SizedBox(width: 2),
+                                  const Text(
                                     'USDC',
                                     style: TextStyle(
+                                      color: Color(0xFF666666),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.29,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  const SizedBox(
+                                    height: 10,
+                                    width: 10,
+                                    child: CircularProgressIndicator(
+                                      color: Color(0xFF666666),
+                                      strokeWidth: 2,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    '$_countdownTime''s',
+                                    style: const TextStyle(
                                       color: Color(0xFF666666),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,

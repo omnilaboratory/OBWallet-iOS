@@ -1,6 +1,11 @@
+import 'dart:developer';
+
+import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/cryptos/send_confirm.dart';
+import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 
 class Send extends StatefulWidget {
@@ -11,6 +16,15 @@ class Send extends StatefulWidget {
 }
 
 class _SendState extends State<Send> {
+  var tokenList = EthService.getInstance().getTokenList();
+  late TokenInfo dropdownValue;
+
+  @override
+  void initState() {
+    dropdownValue = tokenList[0];
+    super.initState();
+  }
+
   onNext() {
     Navigator.pop(context);
     showDialog(
@@ -28,6 +42,7 @@ class _SendState extends State<Send> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
       body: Center(
         child: Column(
@@ -199,47 +214,31 @@ class _SendState extends State<Send> {
                                             bottomRight: Radius.circular(8)),
                                       ),
                                     ),
-                                    child: const Stack(
-                                      alignment: AlignmentDirectional.centerEnd,
-                                      children: [
-                                        Positioned(
-                                          left: 5,
-                                          child: Image(
-                                            width: 20,
-                                            height: 20,
-                                            image: AssetImage(
-                                                "asset/images/icon_tether_logo.png"),
-                                          ),
-                                        ),
-                                        Center(
-                                          child: Text(
-                                            "USDT",
-                                            style: TextStyle(
-                                              color: Color(0xFF333333),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          right: 2,
-                                          child: Image(
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<TokenInfo>(
+                                        icon: const Image(
                                             width: 24,
                                             height: 24,
                                             image: AssetImage(
-                                                "asset/images/icon_arrow_down_black.png"),
-                                          ),
-                                        ),
-                                      ],
+                                                "asset/images/icon_arrow_down_black.png")),
+                                        value: dropdownValue,
+                                        isExpanded: true,
+                                        items: buildCountryDropdownItemList(),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            dropdownValue = value!;
+                                          });
+                                        },
+                                      ),
                                     ),
                                   ),
                                 )
                               ],
                             ),
                           ),
-                          const Padding(
+                          Padding(
                               padding:
-                                  EdgeInsets.only(left: 25, right: 25, top: 5),
+                                  const EdgeInsets.only(left: 25, right: 25, top: 5),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -252,7 +251,7 @@ class _SendState extends State<Send> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            Text(
+                                            const Text(
                                               "Balance: ",
                                               style: TextStyle(
                                                 color: Color(0xFF666666),
@@ -262,8 +261,8 @@ class _SendState extends State<Send> {
                                               ),
                                             ),
                                             Text(
-                                              "200.00",
-                                              style: TextStyle(
+                                              StringTools.formatCryptoNum(dropdownValue.balance),
+                                              style: const TextStyle(
                                                 color: Color(0xFF666666),
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400,
@@ -274,15 +273,20 @@ class _SendState extends State<Send> {
                                         )),
                                         Positioned(
                                           right: 0,
-                                          child: Text(
-                                            "MAX",
-                                            style: TextStyle(
-                                              color: Color(0xFF4A92FF),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              height: 1.29,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              log('MAX');
+                                            },
+                                            child: const Text(
+                                              "MAX",
+                                              style: TextStyle(
+                                                color: Color(0xFF4A92FF),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                                height: 1.29,
+                                              ),
                                             ),
-                                          ),
+                                          )
                                         ),
                                       ],
                                     ),
@@ -471,6 +475,34 @@ class _SendState extends State<Send> {
         ),
       ),
     );
+  }
+
+  List<DropdownMenuItem<TokenInfo>> buildCountryDropdownItemList() {
+    List<DropdownMenuItem<TokenInfo>> list = tokenList.map((TokenInfo value) {
+      return DropdownMenuItem<TokenInfo>(
+        value: value,
+        child: Row(
+          children: [
+            const SizedBox(width: 7),
+            Image(
+              width: 20,
+              height: 20,
+              image: AssetImage(value.iconUrl),
+            ),
+            const SizedBox(width: 7),
+            Text(
+              value.name,
+              style: const TextStyle(
+                color: Color(0xFF333333),
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+      );
+    }).toList();
+    return list;
   }
 
   var chainBgClrs = <Color>[Colors.white, Colors.transparent];

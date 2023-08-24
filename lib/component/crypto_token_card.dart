@@ -1,4 +1,5 @@
 import 'package:awallet/bean/token_info.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 
 class CryptoTokenCard extends StatefulWidget {
@@ -32,7 +33,7 @@ class _CryptoTokenCardState extends State<CryptoTokenCard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                      "${widget.tokenInfo.balance.toString()} ${widget.tokenInfo.name}",
+                      "${StringTools.formatCryptoNum(widget.tokenInfo.balance)} ${widget.tokenInfo.name}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24,
@@ -42,7 +43,7 @@ class _CryptoTokenCardState extends State<CryptoTokenCard> {
                   Row(
                     children: [
                       Text(
-                          "\$ ${widget.tokenInfo.balanceOfDollar.toString()}",
+                          "\$ ${StringTools.formatCurrencyNum(widget.tokenInfo.balanceOfDollar)}",
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -56,16 +57,15 @@ class _CryptoTokenCardState extends State<CryptoTokenCard> {
               Padding(
                 padding: const EdgeInsets.only(right: 24),
                 child: Container(
-                    width: 50,
-                    height: 50,
+                    width: 38,
+                    height: 38,
                     decoration: const ShapeDecoration(
                       color: Colors.white,
                       shape: OvalBorder(),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child:
-                          Image(image: AssetImage(widget.tokenInfo.iconUrl)),
+                      child: Image(image: AssetImage(widget.tokenInfo.iconUrl)),
                     )),
               )
             ],
