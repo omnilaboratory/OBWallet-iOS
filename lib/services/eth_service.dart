@@ -51,6 +51,7 @@ class EthService {
       _tokenList = [
         TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
         TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
+        TokenInfo(name: "USDC", iconUrl: 'asset/images/icon_tether.png'),
       ];
     }
     return _tokenList;
@@ -67,6 +68,10 @@ class EthService {
     balance = await Eth.getBalanceOfUSDT(address);
     totalBalance += balance;
     getTokenList()[1].balance = balance;
+
+    balance = await Eth.getBalanceOfUSDC(address);
+    totalBalance += balance;
+    getTokenList()[2].balance = balance;
 
     _walletInfo = getWalletInfo();
     _walletInfo?.balance = totalBalance;
