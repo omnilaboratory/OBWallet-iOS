@@ -16,9 +16,6 @@ int fileOriginSize = 0;
 
 class Utils {
 
-  // number format
-  static NumberFormat numDecimalPattern = NumberFormat.decimalPattern();
-
   static Future<String> getDownloadPath() async {
     Directory? appDir;
 

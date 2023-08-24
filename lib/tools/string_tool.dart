@@ -1,3 +1,4 @@
+
 class StringTools {
   static String starString(String? longText, {int maxLength = 16}) {
     if (longText != null && longText.isNotEmpty) {
@@ -9,4 +10,15 @@ class StringTools {
     }
     return longText!;
   }
+
+  static String formatCryptoNum(double? num) {
+    num ??= 0;
+    return num.toStringAsFixed(6);
+  }
+
+  static String formatCurrencyNum(double? num) {
+    num ??= 0;
+    return num.toStringAsFixed(2);
+  }
+
 }

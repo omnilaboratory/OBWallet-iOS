@@ -177,7 +177,6 @@ class _AccountState extends State<Account> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22,
-                    fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -186,7 +185,6 @@ class _AccountState extends State<Account> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 32,
-                    fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w700,
                   ),
                 ),

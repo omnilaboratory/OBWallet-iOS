@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cryptos/token_activity.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 
 class CryptoTokenItem extends StatelessWidget {
@@ -9,6 +11,7 @@ class CryptoTokenItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
         margin: const EdgeInsets.only(bottom: 20),
         padding:
@@ -59,21 +62,32 @@ class CryptoTokenItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(tokenInfo.balance.toString(),
+                  SizedBox(
+                    width: size.width - 180,
+                    child: AutoSizeText(
+                        StringTools.formatCryptoNum(tokenInfo.balance),
+                        maxLines: 1,
+                        maxFontSize: 26,
+                        minFontSize: 12,
+                        textAlign: TextAlign.right,
+                        style: const TextStyle(
+                          color: Color(0xFF333333),
+                          fontWeight: FontWeight.w700,
+                        )),
+                  ),
+                  SizedBox(
+                    width: size.width - 180,
+                    child: AutoSizeText(
+                      "\$ ${StringTools.formatCurrencyNum(tokenInfo.balanceOfDollar)}",
+                      maxLines: 1,
+                      maxFontSize: 24,
+                      minFontSize: 10,
                       textAlign: TextAlign.right,
                       style: const TextStyle(
-                        color: Color(0xFF333333),
-                        fontSize: 26,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w700,
-                      )),
-                  Text(
-                    "\$ ${tokenInfo.balanceOfDollar}",
-                    textAlign: TextAlign.right,
-                    style: const TextStyle(
-                      color: Color(0xFF999999),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
+                        color: Color(0xFF999999),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ],
