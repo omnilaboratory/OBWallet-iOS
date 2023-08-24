@@ -11,6 +11,8 @@ class Eth {
   static String apiUrlMainnet = "https://eth-mainnet.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
   static String apiUrlGoerli = "https://eth-goerli.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
 
+  // static String apiUrlGoerli = "https://goerli.infura.io/v3/84c1e06ebd0540a78ef1c5a512d66734";
+
   /// Generate a new eth address
   static Future<String> genEthAddress() async {
     try {
@@ -83,7 +85,7 @@ class Eth {
       return result;
     } catch (e) {
       log('getBalanceOfETH -> error: $e');
-      return -1;
+      return 0;
     }
   }
 
@@ -107,7 +109,7 @@ class Eth {
       return result;
     } catch (e) {
       log('getBalanceOfUSDT -> error: $e');
-      return -1;
+      return 0;
     }
   }
 
@@ -128,12 +130,12 @@ class Eth {
       return result;
     } catch (e) {
       log('getBalanceOfUSDC -> error: $e');
-      return -1;
+      return 0;
     }
   }
 
-  /// Sending transactions
-  static void sendTransaction() async {
+  /// Sending ETH to an address
+  static Future<String> sendEthTo(String to, double amount) async {
     try {
       var httpClient = Client();
       var ethClient  = Web3Client(apiUrlGoerli, httpClient);
@@ -141,29 +143,25 @@ class Eth {
       var privateKey  = LocalStorage.get(LocalStorage.ethPrivateKey);
       var credentials = EthPrivateKey.fromHex(privateKey);
 
-      double etherAmount = 0.00001;
-      BigInt weiAmount = BigInt.from((etherAmount * 1000000000000000000).toInt());
-      log('weiAmount -> $weiAmount');
-
-      // BigInt gasAmount = BigInt.from((0.00000006 * 1000000000000000000).toInt());
-      // log('gasAmount -> $gasAmount');
+      BigInt weiAmount = BigInt.from((amount * 1000000000000000000).toInt());
 
       var response = await ethClient.sendTransaction(
         credentials,
         Transaction(
-          to: EthereumAddress.fromHex('0x8c56B81743BD38E222639e223A6b2500d259F521'),
-          gasPrice: EtherAmount.fromInt(EtherUnit.gwei, 2),
-          // gasPrice: EtherAmount.inWei(BigInt.one),
+          to: EthereumAddress.fromHex(to),
+          // gasPrice: EtherAmount.fromInt(EtherUnit.gwei, 2),
           // maxGas: 100000,
           value: EtherAmount.fromBigInt(EtherUnit.wei, weiAmount),
         ),
-        chainId: 5
+        chainId: 5  // Goerli testnet
       );
 
-      log('response -> $response');
+      await ethClient.dispose();
+      return response;
 
     } catch (e) {
-      log('sendTransaction -> error: $e');
+      log('sendEthTo -> error: $e');
+      return '';
     }
   }
 }
