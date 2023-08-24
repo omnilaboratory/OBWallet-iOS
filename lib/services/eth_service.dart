@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/crypto_wallet_info.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/eth.dart';
@@ -22,12 +24,24 @@ class EthService {
 
   createWalletInfo() async {
     String? address = LocalStorage.get(LocalStorage.ethAddress);
-    _walletInfo = CryptoWalletInfo(address: "");
     if (address == null || address.isEmpty) {
       address = await Eth.genEthAddress();
     }
-    _walletInfo?.address = address;
-    _walletInfo?.balance = 0;
+    _walletInfo = CryptoWalletInfo(address: address, balance: 0);
+  }
+
+  bool recoverWallet(String? wif) {
+    if (wif == null || wif.isEmpty) {
+      return false;
+    }
+    var address = Eth.getEthAddressFromPrivKey(wif);
+    if (address.isEmpty) {
+      return false;
+    }
+    _walletInfo = CryptoWalletInfo(address: address, balance: 0);
+    LocalStorage.save(LocalStorage.ethAddress, address);
+    LocalStorage.save(LocalStorage.ethPrivateKey, wif);
+    return true;
   }
 
   List<TokenInfo> _tokenList = [];
@@ -43,6 +57,7 @@ class EthService {
   }
 
   updateTokenBalances() async {
+    log('updateTokenBalances');
     String address = LocalStorage.get(LocalStorage.ethAddress);
     double totalBalance = 0;
     double balance = await Eth.getBalanceOfETH(address);

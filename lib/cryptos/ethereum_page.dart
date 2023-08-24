@@ -8,6 +8,8 @@ import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
+import 'ethereum_recover_wallet.dart';
+
 class EthereumPage extends StatefulWidget {
   const EthereumPage({super.key});
 
@@ -112,33 +114,55 @@ class _EthereumPageState extends State<EthereumPage> {
   }
 
   Widget createOrRecoverWallet() {
-    return Center(
+    return SingleChildScrollView(
       child: Center(
-          child: Column(children: [
-        const SizedBox(height: 60),
-        const Image(image: AssetImage("asset/images/img_wallet.png")),
-        Padding(
-          padding: const EdgeInsets.only(top: 40, bottom: 20),
-          child: InkWell(
-              onTap: () {
-                EthService.getInstance().createWalletInfo().then((value) async {
-                  await EthService.getInstance().updateTokenBalances();
-                  if (mounted) {
+        child: Center(
+            child: Column(children: [
+          const SizedBox(height: 60),
+          const Image(image: AssetImage("asset/images/img_wallet.png")),
+          Padding(
+            padding: const EdgeInsets.only(top: 40, bottom: 20),
+            child: InkWell(
+                onTap: () {
+                  createNewWallet();
+                },
+                child: const Image(
+                    image: AssetImage("asset/images/btn_new_wallet.png"))),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 40, bottom: 20),
+            child: InkWell(
+                onTap: () async {
+                  var flag = await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const EthereumRecoverWallet();
+                      });
+                  if (flag) {
+                    updateTokenBalances();
                     setState(() {});
                   }
-                });
-              },
-              child: const Image(
-                  image: AssetImage("asset/images/btn_new_wallet.png"))),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 40, bottom: 20),
-          child: InkWell(
-              onTap: () {},
-              child: const Image(
-                  image: AssetImage("asset/images/btn_recover.png"))),
-        ),
-      ])),
+                },
+                child: const Image(
+                    image: AssetImage("asset/images/btn_recover.png"))),
+          ),
+        ])),
+      ),
     );
+  }
+
+  void createNewWallet() {
+    EthService.getInstance()
+        .createWalletInfo()
+        .then((value) async {
+      await updateTokenBalances();
+    });
+  }
+
+  Future<void> updateTokenBalances() async {
+    await EthService.getInstance().updateTokenBalances();
+    if (mounted) {
+      setState(() {});
+    }
   }
 }

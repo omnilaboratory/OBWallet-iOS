@@ -7,7 +7,7 @@ class LocalStorage {
   static SharedPreferences? prefs;
 
   static Future<bool> initSP() async {
-    prefs = await SharedPreferences.getInstance();
+    prefs ??= await SharedPreferences.getInstance();
     return true;
   }
 
