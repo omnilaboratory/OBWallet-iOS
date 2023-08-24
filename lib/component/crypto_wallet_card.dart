@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/crypto_wallet_info.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +32,11 @@ class _CryptoWalletCardState extends State<CryptoWalletCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("\$ ${widget.walletInfo.balance}",
+          AutoSizeText("\$ ${StringTools.formatCurrencyNum(widget.walletInfo.balance)}",
+              maxLines: 1,
+              maxFontSize: 36,
+              minFontSize: 24,
               style: const TextStyle(
-                  fontSize: 32,
                   fontWeight: FontWeight.w700,
                   color: Colors.white)),
           const SizedBox(height: 10),
