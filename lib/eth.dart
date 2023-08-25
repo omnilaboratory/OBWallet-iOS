@@ -2,6 +2,7 @@
 import 'dart:math' as math;
 import 'dart:developer';
 import 'package:awallet/tools/local_storage.dart';
+import 'package:decimal/decimal.dart';
 import 'package:intl/intl.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart';
@@ -12,11 +13,21 @@ class Eth {
   // static String apiUrl = "https://eth-mainnet.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
   static String apiUrl = "https://eth-goerli.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
 
+  static String goerliContractOfUSDT = '0x7A203Ad2432Ea8a2A97BAc74BA2fa87d3963f13b';
+  // static String mainnetContractOfUSDT = '0xdAC17F958D2ee523a2206206994597C13D831ec7';
+  static String contractOfUSDC = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48';
+
   static Web3Client? ethClient;
 
   static initWeb3Client() {
     ethClient = Web3Client(apiUrl, Client());
     log('ethClient -> $ethClient');
+  }
+
+  static getCredentials() {
+    var privateKey  = LocalStorage.get(LocalStorage.ethPrivateKey);
+    var credentials = EthPrivateKey.fromHex(privateKey);
+    return credentials;
   }
 
   /// Generate a new eth address
@@ -94,9 +105,6 @@ class Eth {
   /// Get USDT balance of an Eth Address
   static Future<double> getBalanceOfUSDT(String address) async {
     try {
-      var goerliContractOfUSDT  = '0x7A203Ad2432Ea8a2A97BAc74BA2fa87d3963f13b';
-      // var mainnetContractOfUSDT = '0xdAC17F958D2ee523a2206206994597C13D831ec7';
-
       EthereumAddress contract = EthereumAddress.fromHex(goerliContractOfUSDT);
       EthereumAddress ethAddr  = EthereumAddress.fromHex(address);
 
@@ -115,7 +123,7 @@ class Eth {
   /// Get USDC balance of an Eth Address
   static Future<double> getBalanceOfUSDC(String address) async {
     try {
-      EthereumAddress contract = EthereumAddress.fromHex('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48');
+      EthereumAddress contract = EthereumAddress.fromHex(contractOfUSDC);
       EthereumAddress ethAddr  = EthereumAddress.fromHex(address);
 
       var usdc    = USDT(address: contract, client: ethClient!);
@@ -133,13 +141,14 @@ class Eth {
   /// Sending ETH to an address
   static Future<String> sendEthTo(String toAddress, double amount) async {
     try {
-      var privateKey  = LocalStorage.get(LocalStorage.ethPrivateKey);
-      var credentials = EthPrivateKey.fromHex(privateKey);
-
-      BigInt weiAmount = BigInt.from((amount * 1000000000000000000).toInt());
+      // The ETH has 18 decimals, so has to process for BigInt with the code.
+      String toAmount  = amount.toStringAsFixed(15);  // double type has max 15 decimals
+      Decimal baseVal  = Decimal.parse(toAmount);
+      Decimal decimals = Decimal.parse('1000000000000000000'); // 18 decimals
+      BigInt weiAmount = (baseVal * decimals).toBigInt();
 
       var response = await ethClient!.sendTransaction(
-        credentials,
+        getCredentials(),
         Transaction(
           to:    EthereumAddress.fromHex(toAddress),
           value: EtherAmount.fromBigInt(EtherUnit.wei, weiAmount),
@@ -150,6 +159,48 @@ class Eth {
       return response;
     } catch (e) {
       log('sendEthTo -> error: $e');
+      return '';
+    }
+  }
+
+  /// Sending USDT to an address
+  static Future<String> sendUsdtTo(String toAddress, double amount) async {
+    try {
+      EthereumAddress contract = EthereumAddress.fromHex(goerliContractOfUSDT);
+      EthereumAddress ethAddr  = EthereumAddress.fromHex(toAddress);
+
+      // The USDT contract has 6 decimals, so has to process for BigInt with the code.
+      String toAmount  = amount.toStringAsFixed(6);
+      Decimal baseVal  = Decimal.parse(toAmount);
+      Decimal decimals = Decimal.parse('1000000'); // 6 decimals
+      BigInt value     = (baseVal * decimals).toBigInt();
+
+      var usdt     = USDT(address: contract, client: ethClient!);
+      var response = await usdt.transfer(ethAddr, value, credentials: getCredentials());
+      return response;
+    } catch (e) {
+      log('sendUsdtTo -> error: $e');
+      return '';
+    }
+  }
+
+  /// Sending USDC to an address
+  static Future<String> sendUsdcTo(String toAddress, double amount) async {
+    try {
+      EthereumAddress contract = EthereumAddress.fromHex(contractOfUSDC);
+      EthereumAddress ethAddr  = EthereumAddress.fromHex(toAddress);
+
+      // The USDC contract has 6 decimals, so has to process for BigInt with the code.
+      String toAmount  = amount.toStringAsFixed(6);
+      Decimal baseVal  = Decimal.parse(toAmount);
+      Decimal decimals = Decimal.parse('1000000'); // 6 decimals
+      BigInt value     = (baseVal * decimals).toBigInt();
+
+      var usdc     = USDT(address: contract, client: ethClient!);
+      var response = await usdc.transfer(ethAddr, value, credentials: getCredentials());
+      return response;
+    } catch (e) {
+      log('sendUsdcTo -> error: $e');
       return '';
     }
   }
