@@ -48,6 +48,12 @@ class _SendState extends State<Send> {
       return;
     }
 
+    if (_amountController.value.text.toString().compareTo(StringTools.formatCryptoNum(dropdownValue.balance)) > 0) {
+      Fluttertoast.showToast(
+          msg: "The amount cannot exceed the maximum", gravity: ToastGravity.CENTER);
+      return;
+    }
+
     Navigator.pop(context);
     showDialog(
         context: context,
@@ -297,7 +303,9 @@ class _SendState extends State<Send> {
                                             right: 0,
                                             child: GestureDetector(
                                               onTap: () {
-                                                log('MAX');
+                                                setState(() {
+                                                  _amountController.text = StringTools.formatCryptoNum(dropdownValue.balance);
+                                                });
                                               },
                                               child: const Text(
                                                 "MAX",
