@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/home.dart';
@@ -27,6 +28,8 @@ class _LoginState extends State<Login> {
       if (userToken != null && userToken.toString().isNotEmpty) {
         autoLogin(userToken);
       }
+
+      Eth.initWeb3Client();
     });
     super.initState();
   }

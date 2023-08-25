@@ -9,10 +9,15 @@ import 'contract_abis/USDT.g.dart';
 
 class Eth {
 
-  static String apiUrlMainnet = "https://eth-mainnet.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
-  static String apiUrlGoerli = "https://eth-goerli.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
+  // static String apiUrl = "https://eth-mainnet.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
+  static String apiUrl = "https://eth-goerli.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
 
-  // static String apiUrlGoerli = "https://goerli.infura.io/v3/84c1e06ebd0540a78ef1c5a512d66734";
+  static Web3Client? ethClient;
+
+  static initWeb3Client() {
+    ethClient = Web3Client(apiUrl, Client());
+    log('ethClient -> $ethClient');
+  }
 
   /// Generate a new eth address
   static Future<String> genEthAddress() async {
@@ -76,15 +81,9 @@ class Eth {
   /// Get ETH balance of an Eth Address
   static Future<double> getBalanceOfETH(String address) async {
     try {
-      var httpClient = Client();
-      var ethClient  = Web3Client(apiUrlGoerli, httpClient); // should be apiUrlMainnet
-
-      // You can now call rpc methods. This one will query the amount of Ether you own
       EthereumAddress ethAddr = EthereumAddress.fromHex(address);
-      EtherAmount     balance = await ethClient.getBalance(ethAddr);
+      EtherAmount balance = await ethClient!.getBalance(ethAddr);
       var result = balance.getValueInUnit(EtherUnit.ether);
-
-      await ethClient.dispose();
       return result;
     } catch (e) {
       log('getBalanceOfETH -> error: $e');
@@ -95,22 +94,17 @@ class Eth {
   /// Get USDT balance of an Eth Address
   static Future<double> getBalanceOfUSDT(String address) async {
     try {
-      var httpClient = Client();
-      var ethClient  = Web3Client(apiUrlGoerli, httpClient); // should be apiUrlMainnet
-
       var goerliContractOfUSDT  = '0x7A203Ad2432Ea8a2A97BAc74BA2fa87d3963f13b';
       // var mainnetContractOfUSDT = '0xdAC17F958D2ee523a2206206994597C13D831ec7';
 
       EthereumAddress contract = EthereumAddress.fromHex(goerliContractOfUSDT);
       EthereumAddress ethAddr  = EthereumAddress.fromHex(address);
 
-      var usdt    = USDT(address: contract, client: ethClient);
+      var usdt    = USDT(address: contract, client: ethClient!);
       var balance = await usdt.balanceOf(ethAddr);
 
       // The USDT contract has 6 decimals, so has to process for BigInt with the code.
       double result = balance / BigInt.from(10).pow(6);
-
-      await ethClient.dispose();
       return result;
     } catch (e) {
       log('getBalanceOfUSDT -> error: $e');
@@ -121,19 +115,14 @@ class Eth {
   /// Get USDC balance of an Eth Address
   static Future<double> getBalanceOfUSDC(String address) async {
     try {
-      var httpClient = Client();
-      var ethClient  = Web3Client(apiUrlMainnet, httpClient);
-
       EthereumAddress contract = EthereumAddress.fromHex('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48');
       EthereumAddress ethAddr  = EthereumAddress.fromHex(address);
 
-      var usdc    = USDT(address: contract, client: ethClient);
+      var usdc    = USDT(address: contract, client: ethClient!);
       var balance = await usdc.balanceOf(ethAddr);
 
       // The USDC contract has 6 decimals, so has to process for BigInt with the code.
       double result = balance / BigInt.from(10).pow(6);
-
-      await ethClient.dispose();
       return result;
     } catch (e) {
       log('getBalanceOfUSDC -> error: $e');
@@ -142,30 +131,23 @@ class Eth {
   }
 
   /// Sending ETH to an address
-  static Future<String> sendEthTo(String to, double amount) async {
+  static Future<String> sendEthTo(String toAddress, double amount) async {
     try {
-      var httpClient = Client();
-      var ethClient  = Web3Client(apiUrlGoerli, httpClient);
-
       var privateKey  = LocalStorage.get(LocalStorage.ethPrivateKey);
       var credentials = EthPrivateKey.fromHex(privateKey);
 
       BigInt weiAmount = BigInt.from((amount * 1000000000000000000).toInt());
 
-      var response = await ethClient.sendTransaction(
+      var response = await ethClient!.sendTransaction(
         credentials,
         Transaction(
-          to: EthereumAddress.fromHex(to),
-          // gasPrice: EtherAmount.fromInt(EtherUnit.gwei, 2),
-          // maxGas: 100000,
+          to:    EthereumAddress.fromHex(toAddress),
           value: EtherAmount.fromBigInt(EtherUnit.wei, weiAmount),
         ),
-        chainId: 5  // Goerli testnet
+        chainId: 5  // Goerli testnet - will be mainnet(1)
       );
 
-      await ethClient.dispose();
       return response;
-
     } catch (e) {
       log('sendEthTo -> error: $e');
       return '';
@@ -175,15 +157,10 @@ class Eth {
   /// Returns the amount of Ether typically needed to pay for one unit of gas.
   static Future<double> getGasPrice() async {
     try {
-      var httpClient = Client();
-      var ethClient  = Web3Client(apiUrlGoerli, httpClient); // should be apiUrlMainnet
-
-      EtherAmount gasPrice = await ethClient.getGasPrice();
+      EtherAmount gasPrice = await ethClient!.getGasPrice();
 
       // Convert EtherAmount to amount of ETH
       double result = gasPrice.getValueInUnit(EtherUnit.ether);
-
-      await ethClient.dispose();
       return result;
     } catch (e) {
       log('getGasPrice -> error: $e');
@@ -197,10 +174,7 @@ class Eth {
   /// than the amount of gas actually used by the transaction.
   static Future<String> estimateGas() async {
     try {
-      var httpClient = Client();
-      var ethClient  = Web3Client(apiUrlGoerli, httpClient); // should be apiUrlMainnet
-
-      BigInt gas = await ethClient.estimateGas();
+      BigInt gas = await ethClient!.estimateGas();
 
       // Calc the estimate gas (amount of gas * gas price)
       var gasPrice = await getGasPrice();
@@ -208,8 +182,6 @@ class Eth {
 
       // Convert double (may be is like 4.66578e-13 ) to string
       String result = NumberFormat("#.##########").format(calc);
-
-      await ethClient.dispose();
       return result;
     } catch (e) {
       log('estimateGas -> error: $e');
