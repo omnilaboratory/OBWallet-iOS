@@ -3,11 +3,21 @@ import 'dart:developer';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/eth.dart';
+import 'package:awallet/tools/local_storage.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
 class SendConfirm extends StatefulWidget {
-  const SendConfirm({super.key});
+  final String address;
+  final String amount;
+  final String name;
+
+  const SendConfirm(
+      {super.key,
+      required this.address,
+      required this.amount,
+      required this.name});
 
   @override
   State<SendConfirm> createState() => _SendConfirmState();
@@ -15,10 +25,13 @@ class SendConfirm extends StatefulWidget {
 
 class _SendConfirmState extends State<SendConfirm> {
   onConfirm() async {
-    var res = await Eth.sendEthTo('0xD791f9A21ef0319965aEffeC1A5EF94FC479845b', 0.00001);
-    if (res != '') {  // sending successful
-      log('txId: $res');
-      Navigator.pop(context);
+    if (widget.name == 'ETH') {
+      Eth.sendEthTo(widget.address, double.parse(widget.amount)).then((value) {
+        if (value.isNotEmpty) {
+          log('txId: $value');
+          Navigator.pop(context);
+        }
+      });
     }
   }
 
@@ -63,10 +76,10 @@ class _SendConfirmState extends State<SendConfirm> {
                               offset: Offset(2.0, 2.0),
                               blurRadius: 10.0)
                         ]),
-                    child: const Column(
+                    child: Column(
                       children: [
-                        SizedBox(height: 14),
-                        Text('Payment Details',
+                        const SizedBox(height: 14),
+                        const Text('Payment Details',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFF999999),
@@ -77,25 +90,25 @@ class _SendConfirmState extends State<SendConfirm> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '100.00',
-                                style: TextStyle(
+                                widget.amount,
+                                style: const TextStyle(
                                   color: Color(0xFF333333),
                                   fontSize: 26,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
-                              SizedBox(width: 3),
+                              const SizedBox(width: 3),
                               Padding(
-                                  padding: EdgeInsets.only(top: 6),
-                                  child: Text('USDT',
-                                      style: TextStyle(
+                                  padding: const EdgeInsets.only(top: 6),
+                                  child: Text(widget.name,
+                                      style: const TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                       )))
                             ]),
-                        SizedBox(height: 10),
-                        Padding(
+                        const SizedBox(height: 10),
+                        const Padding(
                           padding: EdgeInsets.only(left: 0, right: 0),
                           child: Dash(
                               direction: Axis.horizontal,
@@ -106,16 +119,19 @@ class _SendConfirmState extends State<SendConfirm> {
                         Visibility(
                             visible: true,
                             child: Padding(
-                                padding: EdgeInsets.only(left: 15, top: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 10),
                                 child: Row(children: [
-                                  Text('To: ',
+                                  const Text('To: ',
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
                                       )),
-                                  Text('ZHANG HANWEN',
-                                      style: TextStyle(
+                                  Text(
+                                      StringTools.starString(widget.address,
+                                          maxLength: 30),
+                                      style: const TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
@@ -124,22 +140,27 @@ class _SendConfirmState extends State<SendConfirm> {
                         Visibility(
                             visible: true,
                             child: Padding(
-                                padding: EdgeInsets.only(left: 15, top: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 10),
                                 child: Row(children: [
-                                  Text('From: ',
+                                  const Text('From: ',
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
                                       )),
-                                  Text('LI XUE',
-                                      style: TextStyle(
+                                  Text(
+                                      StringTools.starString(
+                                          LocalStorage.get(
+                                              LocalStorage.ethAddress),
+                                          maxLength: 30),
+                                      style: const TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
-                        Visibility(
+                        const Visibility(
                             visible: true,
                             child: Padding(
                                 padding: EdgeInsets.only(left: 15, top: 10),
@@ -157,7 +178,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                         fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
-                        Visibility(
+                        const Visibility(
                             visible: true,
                             child: Padding(
                                 padding: EdgeInsets.only(
@@ -184,7 +205,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                         fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
-                        Visibility(
+                        const Visibility(
                             visible: false,
                             child: Padding(
                                 padding: EdgeInsets.only(left: 15, top: 15),
@@ -202,7 +223,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                         fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
-                        Visibility(
+                        const Visibility(
                             visible: false,
                             child: Padding(
                                 padding: EdgeInsets.only(

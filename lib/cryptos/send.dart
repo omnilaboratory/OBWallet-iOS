@@ -7,6 +7,7 @@ import 'package:awallet/cryptos/send_confirm.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Send extends StatefulWidget {
   const Send({super.key});
@@ -16,6 +17,9 @@ class Send extends StatefulWidget {
 }
 
 class _SendState extends State<Send> {
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+
   var tokenList = EthService.getInstance().getTokenList();
   late TokenInfo dropdownValue;
 
@@ -26,11 +30,32 @@ class _SendState extends State<Send> {
   }
 
   onNext() {
+    if (_addressController.value.text.toString().isEmpty) {
+      Fluttertoast.showToast(
+          msg: "The address cannot be empty", gravity: ToastGravity.CENTER);
+      return;
+    }
+
+    if (_amountController.value.text.toString().isEmpty) {
+      Fluttertoast.showToast(
+          msg: "The amount cannot be empty", gravity: ToastGravity.CENTER);
+      return;
+    }
+
+    if (_amountController.value.text.toString().compareTo('0') == 0) {
+      Fluttertoast.showToast(
+          msg: "The amount must be greater than 0", gravity: ToastGravity.CENTER);
+      return;
+    }
+
     Navigator.pop(context);
     showDialog(
         context: context,
         builder: (context) {
-          return const SendConfirm();
+          return SendConfirm(
+              name: dropdownValue.name,
+              address: _addressController.value.text.toString(),
+              amount: _amountController.value.text.toString());
         });
   }
 
@@ -123,11 +148,9 @@ class _SendState extends State<Send> {
                               child: SizedBox(
                                 height: 36,
                                 child: TextField(
+                                  controller: _addressController,
                                   maxLines: 10,
                                   minLines: 1,
-                                  onChanged: (text) {
-                                    setState(() {});
-                                  },
                                   keyboardType: TextInputType.visiblePassword,
                                   cursorColor: const Color(0xFF4A92FF),
                                   style: const TextStyle(
@@ -172,11 +195,9 @@ class _SendState extends State<Send> {
                                   child: SizedBox(
                                     height: 34,
                                     child: TextField(
+                                      controller: _amountController,
                                       maxLines: 10,
                                       minLines: 1,
-                                      onChanged: (text) {
-                                        setState(() {});
-                                      },
                                       keyboardType: TextInputType.number,
                                       cursorColor: const Color(0xFF4A92FF),
                                       style: const TextStyle(
@@ -237,8 +258,8 @@ class _SendState extends State<Send> {
                             ),
                           ),
                           Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 25, right: 25, top: 5),
+                              padding: const EdgeInsets.only(
+                                  left: 25, right: 25, top: 5),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -261,7 +282,8 @@ class _SendState extends State<Send> {
                                               ),
                                             ),
                                             Text(
-                                              StringTools.formatCryptoNum(dropdownValue.balance),
+                                              StringTools.formatCryptoNum(
+                                                  dropdownValue.balance),
                                               style: const TextStyle(
                                                 color: Color(0xFF666666),
                                                 fontSize: 12,
@@ -272,22 +294,21 @@ class _SendState extends State<Send> {
                                           ],
                                         )),
                                         Positioned(
-                                          right: 0,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              log('MAX');
-                                            },
-                                            child: const Text(
-                                              "MAX",
-                                              style: TextStyle(
-                                                color: Color(0xFF4A92FF),
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                height: 1.29,
+                                            right: 0,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                log('MAX');
+                                              },
+                                              child: const Text(
+                                                "MAX",
+                                                style: TextStyle(
+                                                  color: Color(0xFF4A92FF),
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  height: 1.29,
+                                                ),
                                               ),
-                                            ),
-                                          )
-                                        ),
+                                            )),
                                       ],
                                     ),
                                   )
