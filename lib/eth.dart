@@ -2,6 +2,7 @@
 import 'dart:math' as math;
 import 'dart:developer';
 import 'package:awallet/tools/local_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart';
 import 'contract_abis/USDT.g.dart';
@@ -82,6 +83,8 @@ class Eth {
       EthereumAddress ethAddr = EthereumAddress.fromHex(address);
       EtherAmount     balance = await ethClient.getBalance(ethAddr);
       var result = balance.getValueInUnit(EtherUnit.ether);
+
+      await ethClient.dispose();
       return result;
     } catch (e) {
       log('getBalanceOfETH -> error: $e');
@@ -106,6 +109,8 @@ class Eth {
 
       // The USDT contract has 6 decimals, so has to process for BigInt with the code.
       double result = balance / BigInt.from(10).pow(6);
+
+      await ethClient.dispose();
       return result;
     } catch (e) {
       log('getBalanceOfUSDT -> error: $e');
@@ -127,6 +132,8 @@ class Eth {
 
       // The USDC contract has 6 decimals, so has to process for BigInt with the code.
       double result = balance / BigInt.from(10).pow(6);
+
+      await ethClient.dispose();
       return result;
     } catch (e) {
       log('getBalanceOfUSDC -> error: $e');
@@ -164,4 +171,50 @@ class Eth {
       return '';
     }
   }
+
+  /// Returns the amount of Ether typically needed to pay for one unit of gas.
+  static Future<double> getGasPrice() async {
+    try {
+      var httpClient = Client();
+      var ethClient  = Web3Client(apiUrlGoerli, httpClient); // should be apiUrlMainnet
+
+      EtherAmount gasPrice = await ethClient.getGasPrice();
+
+      // Convert EtherAmount to amount of ETH
+      double result = gasPrice.getValueInUnit(EtherUnit.ether);
+
+      await ethClient.dispose();
+      return result;
+    } catch (e) {
+      log('getGasPrice -> error: $e');
+      return 0;
+    }
+  }
+
+  /// Estimate the amount of gas that would be necessary 
+  /// if the transaction was sent via sendTransaction (web3dart). 
+  /// Note that the estimate may be significantly higher 
+  /// than the amount of gas actually used by the transaction.
+  static Future<String> estimateGas() async {
+    try {
+      var httpClient = Client();
+      var ethClient  = Web3Client(apiUrlGoerli, httpClient); // should be apiUrlMainnet
+
+      BigInt gas = await ethClient.estimateGas();
+
+      // Calc the estimate gas (amount of gas * gas price)
+      var gasPrice = await getGasPrice();
+      var calc = gas.toDouble() * gasPrice;
+
+      // Convert double (may be is like 4.66578e-13 ) to string
+      String result = NumberFormat("#.##########").format(calc);
+
+      await ethClient.dispose();
+      return result;
+    } catch (e) {
+      log('estimateGas -> error: $e');
+      return '';
+    }
+  }
+
 }
