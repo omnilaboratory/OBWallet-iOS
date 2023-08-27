@@ -2,6 +2,7 @@ import 'package:awallet/bean/btn_info.dart';
 import 'package:awallet/component/btn_icon_name.dart';
 import 'package:awallet/cryptos/export_wif_step_one.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dash/flutter_dash.dart';
 
 class MoreMenu extends StatefulWidget {
   const MoreMenu({super.key});
@@ -16,6 +17,8 @@ class _MoreMenuState extends State<MoreMenu> {
     BtnInfo("asset/images/icon_plus.png", "Create Channel", null),
     BtnInfo("asset/images/icon_backup.png", "Backup Now", null),
     BtnInfo("asset/images/icon_export_wif.png", "Export WIF", null),
+    BtnInfo("asset/images/icon_mainnet.png", "Mainnet", null),
+    BtnInfo("asset/images/icon_testnet.png", "Goerli Testnet", null),
   ];
 
   @override
@@ -40,7 +43,7 @@ class _MoreMenuState extends State<MoreMenu> {
         child: Container(
           color: const Color.fromRGBO(18, 58, 80, 0.8),
           child: Padding(
-            padding: const EdgeInsets.only(right: 30, top: 30),
+            padding: const EdgeInsets.only(right: 20, top: 30),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,16 +52,30 @@ class _MoreMenuState extends State<MoreMenu> {
                   onTap: () {},
                   child: Container(
                     padding: const EdgeInsets.only(top: 20, left: 20),
-                    width: 200,
-                    height: 180,
+                    width: 187,
+                    height: 283,
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                       image: AssetImage('asset/images/image_bg_more.png'),
                       fit: BoxFit.fill,
                     )),
-                    child: ListView.builder(
+                    child: ListView.separated(
                         itemCount: btnInfoList.length,
                         shrinkWrap: true,
+                        separatorBuilder: (content, index) {
+                          if (index == 3) {
+                            return const Padding(
+                              padding: EdgeInsets.only(top: 10, bottom: 10),
+                              child: Dash(
+                                  direction: Axis.horizontal,
+                                  dashLength: 4,
+                                  length: 140,
+                                  dashColor: Color(0xFFCFCFCF)),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
                         itemBuilder: (BuildContext context, int index) {
                           return BtnIconName(btnInfo: btnInfoList[index]);
                         }),

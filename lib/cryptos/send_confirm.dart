@@ -32,6 +32,20 @@ class _SendConfirmState extends State<SendConfirm> {
           Navigator.pop(context);
         }
       });
+    } else if (widget.name == 'USDT') {
+      Eth.sendUsdtTo(widget.address, double.parse(widget.amount)).then((value) {
+        if (value.isNotEmpty) {
+          log('txId: $value');
+          Navigator.pop(context);
+        }
+      });
+    } else if (widget.name == 'USDC') {
+      Eth.sendUsdcTo(widget.address, double.parse(widget.amount)).then((value) {
+        if (value.isNotEmpty) {
+          log('txId: $value');
+          Navigator.pop(context);
+        }
+      });
     }
   }
 

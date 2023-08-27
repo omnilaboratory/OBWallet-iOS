@@ -18,8 +18,8 @@ class BtnIconName extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image(
-              width: 18,
-              height: 18,
+              width: 16,
+              height: 16,
               image: AssetImage(btnInfo.iconUrl),
             ),
             const SizedBox(width: 10),
