@@ -78,4 +78,19 @@ class AccountService {
     }
     return ret;
   }
+
+  Future<GrpcResponse> getSwapTxList() async {
+    var request = GetSwapTxListRequest();
+
+    var ret = GrpcResponse();
+    try {
+      var resp = await accountServiceClient?.getSwapTxList(request);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      GrpcError error = e as GrpcError;
+      ret.msg = error.message.toString();
+    }
+    return ret;
+  }
 }

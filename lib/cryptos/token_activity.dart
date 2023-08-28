@@ -21,12 +21,12 @@ class TokenActivity extends StatefulWidget {
 
 class _TokenActivityState extends State<TokenActivity> {
 
-  var txHistoryList = [
-    CryptoTxInfo(title: "Scan Pay", txTime: DateTime.now(), amount: 122.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
+  List<CryptoTxInfo> txHistoryList = [
+    // CryptoTxInfo(title: "Scan Pay", txTime: DateTime.now(), amount: 122.0),
+    // CryptoTxInfo(
+    //     title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
+    // CryptoTxInfo(
+    //     title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
   ];
 
   @override
@@ -100,11 +100,11 @@ class _TokenActivityState extends State<TokenActivity> {
                     return const Send();
                   });
             }),
-        SquareButton(
-            icon: 'asset/images/icon_gift.png',
-            text: 'Gift',
-            iconWidth: iconWidth,
-            onPressed: () {}),
+        // SquareButton(
+        //     icon: 'asset/images/icon_gift.png',
+        //     text: 'Gift',
+        //     iconWidth: iconWidth,
+        //     onPressed: () {}),
       ],
     );
   }

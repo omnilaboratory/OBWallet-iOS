@@ -1,3 +1,4 @@
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -45,7 +46,6 @@ class _CryptoTxItemState extends State<CryptoTxItem> {
                 style: const TextStyle(
                   color: Color(0xFF333333),
                   fontSize: 12,
-                  fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -55,7 +55,6 @@ class _CryptoTxItemState extends State<CryptoTxItem> {
                 style: const TextStyle(
                   color: Color(0xFF999999),
                   fontSize: 12,
-                  fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -64,7 +63,7 @@ class _CryptoTxItemState extends State<CryptoTxItem> {
         ),
         const Spacer(),
         Text(
-          "\$ ${widget.txInfo.amount.toString()}",
+          "\$ ${StringTools.formatCryptoNum(widget.txInfo.amount)}",
           textAlign: TextAlign.right,
           style: const TextStyle(
             color: Color(0xFF666666),

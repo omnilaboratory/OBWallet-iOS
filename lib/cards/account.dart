@@ -20,6 +20,13 @@ class Account extends StatefulWidget {
     // BalanceInCurrencyInfo(name: "SGD", icon: "\$", balance: 20),
     // BalanceInCurrencyInfo(name: "CNY", icon: "￥", balance: 20),
   ];
+
+  @override
+  State<Account> createState() => _AccountState();
+}
+
+class _AccountState extends State<Account> {
+
   final txs = [
     // CurrencyTxInfo(
     //     name: "STARBUCKS FELIZ EN VIS, HO CHI STARBUCKS FELIZ EN VIS, HO CHI",
@@ -33,11 +40,6 @@ class Account extends StatefulWidget {
     //     amountOfDollar: 160),
   ];
 
-  @override
-  State<Account> createState() => _AccountState();
-}
-
-class _AccountState extends State<Account> {
   double totalBalanceUsd = 0;
 
   @override
@@ -59,7 +61,7 @@ class _AccountState extends State<Account> {
       children: [
         const SizedBox(height: 28),
         buildBalance(),
-        // buildBalanceInCurrency(),
+        txs.isNotEmpty?buildBalanceInCurrency(): const SizedBox(height: 0),
         const SizedBox(height: 30),
         buildTxButtons(),
         Padding(
@@ -101,9 +103,9 @@ class _AccountState extends State<Account> {
         Expanded(
           child: ListView.builder(
               padding: const EdgeInsets.only(top: 20),
-              itemCount: widget.txs.length,
+              itemCount: txs.length,
               itemBuilder: (BuildContext context, int index) {
-                return CurrencyTxItem(txInfo: widget.txs[index]);
+                return CurrencyTxItem(txInfo: txs[index]);
               }),
         )
       ],

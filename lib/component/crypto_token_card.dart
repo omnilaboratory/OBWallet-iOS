@@ -71,64 +71,70 @@ class _CryptoTokenCardState extends State<CryptoTokenCard> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20, bottom: 12),
-          child: Row(
-            children: [
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Local: ',
-                      style: TextStyle(
-                        color: Colors.black.withOpacity(0.6499999761581421),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
+        Visibility(
+          visible: false,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 12),
+            child: Row(
+              children: [
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Local: ',
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(0.6499999761581421),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                    const TextSpan(
-                      text: '0.036000 BTC',
-                      style: TextStyle(
-                        color: Color(0xA506D78F),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
+                      const TextSpan(
+                        text: '0.036000 BTC',
+                        style: TextStyle(
+                          color: Color(0xA506D78F),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              const Spacer(),
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Remote: ',
-                      style: TextStyle(
-                        color: Colors.black.withOpacity(0.6499999761581421),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
+                const Spacer(),
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Remote: ',
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(0.6499999761581421),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                    const TextSpan(
-                      text: '0.028000 BTC',
-                      style: TextStyle(
-                        color: Color(0xFF638AC1),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
+                      const TextSpan(
+                        text: '0.028000 BTC',
+                        style: TextStyle(
+                          color: Color(0xFF638AC1),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                textAlign: TextAlign.right,
-              )
-            ],
+                    ],
+                  ),
+                  textAlign: TextAlign.right,
+                )
+              ],
+            ),
           ),
         ),
-        const LinearProgressIndicator(
-          minHeight: 12,
-          value: 0.2,
-          backgroundColor: Color(0xFF638AC1),
-          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF06D78F)),
+        const Visibility(
+          visible: false,
+          child: LinearProgressIndicator(
+            minHeight: 12,
+            value: 0.2,
+            backgroundColor: Color(0xFF638AC1),
+            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF06D78F)),
+          ),
         ),
       ],
     );

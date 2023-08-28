@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/src/generated/user/country.pbenum.dart';
@@ -136,8 +138,8 @@ class UserService {
   Future<GrpcResponse> verifyPwd(String username, String password) async {
     var request = SignInRequest();
     request.userName = username;
-    request.password = password;
-
+    request.password = Utils.generateMd5(password);
+    log("$request");
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.verifyPwd(request);

@@ -1,6 +1,8 @@
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/tx_item.dart';
+import 'package:awallet/grpc_services/account_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
 class TxHistory extends StatefulWidget {
@@ -11,19 +13,33 @@ class TxHistory extends StatefulWidget {
 }
 
 class _TxHistoryState extends State<TxHistory> {
-  var txHistoryList = [
-    CryptoTxInfo(title: "Scan Pay", txTime: DateTime.now(), amount: 122.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(
-        title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    CryptoTxInfo(title: "Top Up", txTime: DateTime.now(), amount: 15622.02323)
-  ];
+  String tips = "Loading";
 
+  List<CryptoTxInfo> txHistoryList = [];
 
-
+  @override
+  void initState() {
+    AccountService.getInstance().getSwapTxList().then((result) {
+      if (result.code == 1) {
+        txHistoryList.clear();
+        var resp = result.data as GetSwapTxListResponse;
+        if (resp.items.isNotEmpty) {
+          for (var element in resp.items) {
+            txHistoryList.add(CryptoTxInfo(
+                title:
+                    "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
+                txTime: DateTime.fromMillisecondsSinceEpoch(
+                    element.createdAt as int),
+                amount: element.amt));
+          }
+        } else {
+          tips = "No Txs Data";
+        }
+        setState(() {});
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +52,16 @@ class _TxHistoryState extends State<TxHistory> {
               Navigator.pop(context);
             },
             child: const Image(image: AssetImage('asset/images/btn_back.png'))),
-        title:const HeadLogo(title: "Crypto"),
+        title: const HeadLogo(title: "Crypto"),
       ),
-      body: ListView.builder(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-          itemCount: txHistoryList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return CryptoTxItem(txInfo: txHistoryList[index]);
-          }),
+      body: txHistoryList.isEmpty
+          ? Center(child: Text(tips))
+          : ListView.builder(
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+              itemCount: txHistoryList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return CryptoTxItem(txInfo: txHistoryList[index]);
+              }),
     );
   }
 }
