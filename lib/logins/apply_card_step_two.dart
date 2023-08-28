@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:awallet/component/bottom_button.dart';
-import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/home.dart';
-import 'package:awallet/src/generated/user/user.pbgrpc.dart';
+import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
 class ApplyCardStepTwo extends StatefulWidget {
@@ -179,7 +179,7 @@ class _ApplyCardStepTwoState extends State<ApplyCardStepTwo> {
   );
 
   void applyCard() {
-    UserService.getInstance()
+    CardService.getInstance()
         .applyCard()
         .then((value) async {
       if (value.code == 1) {

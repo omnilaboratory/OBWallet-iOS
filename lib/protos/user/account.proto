@@ -1,0 +1,151 @@
+syntax = "proto3";
+package user;
+
+import "user/country.proto";
+
+service account{
+  rpc GetAccountInfo(GetAccountInfoRequest) returns (AccountInfo) {}
+  //current only usd recharge/pay history
+  rpc GetAccountHistory(GetAccountHistoryRequest) returns (GetAccountHistoryResponse) {}
+  rpc SellCoin(SellCoinRequest) returns (SellCoinResponse) {}
+  rpc BuyCoin(BuyCoinRequest) returns (BuyCoinResponse) {}
+  rpc GetSwapTxList(GetSwapTxListRequest) returns (GetSwapTxListResponse) {}
+  rpc GetTrackedTxList(GetSwapTxListRequest) returns (GetTrackedTxListResponse) {}
+  rpc GetCoinPrice(GetCoinPriceRequest) returns (GetCoinPriceResponse) {}
+}
+message GetCoinPriceRequest {
+    TrackedTx.ContractSymbol symbol =1;
+}
+message GetCoinPriceResponse {
+  double price = 1;
+}
+message GetSwapTxListRequest{
+}
+message GetSwapTxListResponse{
+   repeated SwapTx items =1;
+}
+message GetTrackedTxListResponse{
+   repeated TrackedTx items =1;
+}
+
+message GetAccountHistoryRequest{
+  TrackedTx.ContractSymbol Symbol = 1;
+}
+message GetAccountHistoryResponse{
+   repeated AccountHistory items =1;
+}
+
+message GetAccountInfoRequest{
+}
+message AccountInfo{
+  int64 id=1;
+  int64 user_id=2;
+  double balance_usd=5;
+  double locked_usd=7;
+  int64 created_at=6;
+}
+
+message TrackedTx{
+  int64 id = 1;
+  int64 user_id = 13;
+  string tx_id = 2;
+  string from = 3;
+  string to = 4;
+  string token_address = 5;
+  double amt = 6;
+  int64 commit_height=14;
+  ContractSymbol Symbol =7;
+  int64 confirms = 8;
+  Status status = 9;
+  string tx_err_msg=10;
+
+  enum ContractSymbol {
+    USD = 0;
+    ETH = 1;
+    USDT = 2;
+    USDC = 3;
+  }
+  enum Status {
+    StatusUnknown = 0;
+    TxInit = 1;
+    //confirms=1
+    TxCommited = 2;
+    TxConfirming = 3;
+    TxCommitFail = 4;
+    TxFinish = 5;
+  }
+  int64 created_at = 11;
+  int64 updated_at = 12;
+}
+message SwapTx{
+  int64 id = 1;
+  int64 user_id = 2;
+  string tx_id = 3;
+  int64 confirms = 9;
+
+  TrackedTx.Status status = 13;
+  string tx_err_msg=17;
+  bool is_buy_coin=18;
+  //example eth current is 1680$.
+  double coin_price = 8;
+  //amt pair with from_symbol,submit form user.
+  double amt = 4;
+
+  double target_amt = 5;
+  double settle_amt = 15;
+  TrackedTx.ContractSymbol from_symbol = 6;
+  TrackedTx.ContractSymbol target_symbol = 7;
+  int64 created_at = 11;
+  int64 updated_at = 12;
+
+
+}
+
+message SellCoinRequest {
+  string txid=6;
+  TrackedTx.ContractSymbol coin=2;
+  double coin_amt =3;
+  double usd_amt =4;
+  double rate=5;
+}
+message SellCoinResponse {
+}
+message BuyCoinRequest {
+  TrackedTx.ContractSymbol coin=2;
+  double coin_amt =3;
+  double usd_amt =4;
+  double rate=5;
+}
+message BuyCoinResponse {
+  string txid=6;
+}
+
+message AccountHistory{
+  int64 id=1;
+  int64 account_id =8;
+
+  //imcome positive, outcome negative
+  double amt=2;
+ //for Recharge and Withdraw source_id is orderNo. for swap source_id is tx_id
+  string source_id =3;
+  //only for source_id is tx_id and Symbol is coin
+  int64 confirms = 9;
+  SourceType source_type=4;
+  //  bool status =10;
+  uint64 created_at = 5;
+  uint64 updated_at = 6;
+  TrackedTx.ContractSymbol Symbol=7;
+
+  enum SourceType {
+    UnKnow = 0;
+    Recharge = 1;
+    Withdraw = 2;
+    Swap = 3;
+    //    Order = 2;
+  }
+}
+
+
+
+
+

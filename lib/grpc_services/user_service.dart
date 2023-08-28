@@ -132,21 +132,4 @@ class UserService {
     }
     return ret;
   }
-
-  Future<GrpcResponse> applyCard() async {
-    var request = ApplyCardRequest();
-    request.icNo = '130429198903091012';
-    request.currency = CurrencyCode.CNY;
-
-    var ret = GrpcResponse();
-    try {
-      var resp = await userServiceClient?.applyCard(request);
-      ret.code = 1;
-      ret.data = resp;
-    } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
-    }
-    return ret;
-  }
 }

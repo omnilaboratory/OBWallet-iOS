@@ -9,21 +9,26 @@ service UserService {
   rpc VerifyCode(VerifyCodeRequest) returns (VerifyCodeResponse) {}
   //user login
   rpc SignIn(SignInRequest) returns (SignInResponse) {}
+
+  //same as SignIn, but willn't gen token ,  if pwd  ok,the return SignInResponse is emputy;  if pwd err, thrown an error
+  rpc VerifyPwd(SignInRequest) returns (SignInResponse) {}
   //same as UpdateUser-rpc ,but with kyc commit.
   rpc Kyc(UserInfo) returns (UserInfo) {}
   // input parameter UserInfo-Obj must first get from GetUserInfo-rpc,
   // then update the UserInfo-obj,last call UpdateUser with UserInfo-obj
   rpc UpdateUser(UserInfo) returns (UserInfo) {}
   rpc Upload(UploadRequest) returns (UploadResponse) {}
-  rpc ApplyCard(ApplyCardRequest) returns (ApplyCardResponse) {}
   rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
 }
+
 
 message UserInfo {
   int64 id = 1;
   string user_name = 2;
   string password_hash = 3;
   string email = 4;
+  string eth_address=25;
+  string btc_address=26;
 
   // kyc info
   CountryCode country_code = 5;
@@ -55,30 +60,7 @@ message UserInfo {
   string kyc_status=22;
   uint64 created_at = 24;
 }
-message CardInfo {
-  int64 id = 1;
-  string card_no =2;
-  //USD CNY SGD
-  CurrencyCode symbol=3;
-  string expiry_date =9;
-  string cvv =10;
-  int64  user_id=4;
-  double balance=5;
-  uint64 created_at = 6;
-  uint64 updated_at = 7;
-}
 
-message CardExchangeInfo {
-  int64 id = 1;
-  int64 card_id=2;
-  string counter_party=3;
-  // counter_party card number
-  string counter_party_no=4;
-  //imcome positive, outcome negative
-  double amt=5;
-  uint64 created_at = 6;
-  uint64 updated_at = 7;
-}
 message SignUpRequest {
   string user_name = 1;
   string password = 2;
@@ -153,15 +135,6 @@ message GetUserInfoRequest {
 message GetUserInfoResponse {
   UserInfo user = 1;
 }
-
-message ApplyCardRequest {
-  string ic_no=1;
-  CurrencyCode currency=2;
-}
-message ApplyCardResponse {
-  CardInfo card=1;
-}
-
 
 message SayRequest {
   string sentence = 1;
