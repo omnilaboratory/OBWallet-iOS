@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/tx_item.dart';
@@ -23,8 +25,10 @@ class _TxHistoryState extends State<TxHistory> {
       if (result.code == 1) {
         txHistoryList.clear();
         var resp = result.data as GetSwapTxListResponse;
-        if (resp.items.isNotEmpty) {
-          for (var element in resp.items) {
+        var items = resp.items;
+        log("$items");
+        if (items.isNotEmpty) {
+          for (var element in items) {
             txHistoryList.add(CryptoTxInfo(
                 title:
                     "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
