@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
