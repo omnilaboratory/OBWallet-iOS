@@ -1,24 +1,78 @@
+import 'dart:developer';
+
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
+import 'package:awallet/eth.dart';
+import 'package:awallet/grpc_services/account_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
 import 'exchange.dart';
 
 class ReviewExchange extends StatefulWidget {
-  const ReviewExchange({super.key});
+  double fromAmt = 0;
+  double toAmt = 0;
+  String fromCoin;
+  String toCoin;
+  String type;
+
+  ReviewExchange({
+    super.key,
+    required this.fromAmt,
+    required this.toAmt,
+    required this.fromCoin,
+    required this.toCoin,
+    required this.type,
+  });
 
   @override
   State<ReviewExchange> createState() => _ReviewExchangeState();
 }
 
 class _ReviewExchangeState extends State<ReviewExchange> {
-  onNext() {
-    Navigator.pop(context);
+  double coinPrice = 0;
+
+  onConfirm() {
+    if (widget.fromCoin == 'ETH') {
+      Eth.sendEthTo(
+              '0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347', widget.fromAmt)
+          .then((value) {
+        if (value.isNotEmpty) {
+          log('txId: $value');
+          sellCoin(value);
+        }
+      });
+    } else if (widget.fromCoin == 'USDT') {
+      Eth.sendUsdtTo(
+              '0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347', widget.fromAmt)
+          .then((value) {
+        if (value.isNotEmpty) {
+          log('txId: $value');
+          sellCoin(value);
+        }
+      });
+    } else if (widget.fromCoin == 'USDC') {
+      Eth.sendUsdcTo(
+              '0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347', widget.fromAmt)
+          .then((value) {
+        if (value.isNotEmpty) {
+          log('txId: $value');
+          sellCoin(value);
+        }
+      });
+    }
   }
 
   onClose() {
     Navigator.pop(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getCoinPrice(widget.fromCoin);
   }
 
   @override
@@ -64,25 +118,25 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                       ),
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 23),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '100.00',
-                          style: TextStyle(
+                          StringTools.formatCryptoNum(widget.fromAmt),
+                          style: const TextStyle(
                             color: Color(0xFF333333),
                             fontSize: 26,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Padding(
-                          padding: EdgeInsets.only(top: 5),
+                          padding: const EdgeInsets.only(top: 5),
                           child: Text(
-                            'USD',
-                            style: TextStyle(
+                            widget.fromCoin,
+                            style: const TextStyle(
                               color: Color(0xFF333333),
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
@@ -96,28 +150,27 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                   const Image(
                     width: 22,
                     height: 22,
-                    image: AssetImage(
-                        "asset/images/icon_arrow_down_gray.png"),
+                    image: AssetImage("asset/images/icon_arrow_down_gray.png"),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 12),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '95.66',
-                          style: TextStyle(
+                          StringTools.formatCurrencyNum(widget.toAmt),
+                          style: const TextStyle(
                             color: Color(0xFF333333),
                             fontSize: 26,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Padding(
-                          padding: EdgeInsets.only(top: 5),
+                          padding: const EdgeInsets.only(top: 5),
                           child: Text(
-                            'USDC',
-                            style: TextStyle(
+                            widget.toCoin,
+                            style: const TextStyle(
                               color: Color(0xFF333333),
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
@@ -127,13 +180,13 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                       ],
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 35),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           '1',
                           style: TextStyle(
                             color: Color(0xFF666666),
@@ -142,18 +195,18 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                             height: 1.29,
                           ),
                         ),
-                        SizedBox(width: 2),
+                        const SizedBox(width: 2),
                         Text(
-                          'USD',
-                          style: TextStyle(
+                          widget.fromCoin,
+                          style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             height: 1.29,
                           ),
                         ),
-                        SizedBox(width: 2),
-                        Text(
+                        const SizedBox(width: 2),
+                        const Text(
                           '=',
                           style: TextStyle(
                             color: Color(0xFF666666),
@@ -162,20 +215,20 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                             height: 1.29,
                           ),
                         ),
-                        SizedBox(width: 2),
+                        const SizedBox(width: 2),
                         Text(
-                          '1.00126',
-                          style: TextStyle(
+                          StringTools.formatCurrencyNum(coinPrice),
+                          style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             height: 1.29,
                           ),
                         ),
-                        SizedBox(width: 2),
+                        const SizedBox(width: 2),
                         Text(
-                          'USDC',
-                          style: TextStyle(
+                          widget.toCoin,
+                          style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -203,7 +256,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                         ),
                         SizedBox(width: 2),
                         Text(
-                          '1.8',
+                          '0.5',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color(0xFF666666),
@@ -229,27 +282,27 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                   const Spacer(
                     flex: 1,
                   ),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                    BottomButton(
-                      icon: 'asset/images/icon_arrow_left_green.png',
-                      text: 'BACK',
-                      onPressed: () {
-                        Navigator.pop(context);
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return const Exchange();
-                            });
-                      },
-                    ),
-                    BottomButton(
-                      icon: 'asset/images/icon_confirm_green.png',
-                      text: 'CONFIRM',
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    )
-                  ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        BottomButton(
+                          icon: 'asset/images/icon_arrow_left_green.png',
+                          text: 'BACK',
+                          onPressed: () {
+                            Navigator.pop(context);
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Exchange(type: widget.type);
+                                });
+                          },
+                        ),
+                        BottomButton(
+                          icon: 'asset/images/icon_confirm_green.png',
+                          text: 'CONFIRM',
+                          onPressed: onConfirm,
+                        )
+                      ]),
                   const SizedBox(height: 30),
                 ]),
               ),
@@ -332,5 +385,43 @@ class _ReviewExchangeState extends State<ReviewExchange> {
         )
       ],
     );
+  }
+
+  void getCoinPrice(name) {
+    AccountService.getInstance().getCoinPrice(name).then((value) async {
+      if (value.code == 1) {
+        var resp = value.data as GetCoinPriceResponse;
+        log(resp.price.toString());
+        setState(() {
+          coinPrice = resp.price;
+        });
+      } else {
+        log(value.msg);
+      }
+    });
+  }
+
+  void sellCoin(String value) {
+    SellCoinRequest request = SellCoinRequest();
+    request.txid = value;
+    if (widget.fromCoin == 'ETH') {
+      request.coin = TrackedTx_ContractSymbol.ETH;
+    } else if (widget.fromCoin == 'USDT') {
+      request.coin = TrackedTx_ContractSymbol.USDT;
+    } else if (widget.fromCoin == 'USDC') {
+      request.coin = TrackedTx_ContractSymbol.USDC;
+    }
+    request.coinAmt = widget.fromAmt;
+    request.usdAmt = widget.toAmt;
+    request.rate = coinPrice;
+    AccountService.getInstance().sellCoin(request).then((value) async {
+      if (value.code == 1) {
+        var resp = value.data as SellCoinResponse;
+        log(resp.toString());
+        Navigator.pop(context);
+      } else {
+        log(value.msg);
+      }
+    });
   }
 }

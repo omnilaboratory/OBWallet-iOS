@@ -1,22 +1,51 @@
 import 'dart:async';
-import 'dart:math';
+import 'dart:developer';
 
+import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/review_exchange.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
+import 'package:awallet/grpc_services/account_service.dart';
+import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
 import '../component/number_controller_widget.dart';
 
 class Exchange extends StatefulWidget {
-  const Exchange({super.key});
+  final String type;
+
+  const Exchange({super.key, required this.type});
 
   @override
   State<Exchange> createState() => _ExchangeState();
 }
 
 class _ExchangeState extends State<Exchange> {
+  final TextEditingController _amountFromController = TextEditingController();
+  final TextEditingController _amountToController = TextEditingController();
+
+  double totalBalanceUsd = 0;
+  double coinPrice = 0;
+
+  var tokenList = EthService.getInstance().getTokenList();
+  late TokenInfo dropdownValue;
+
+  List<TokenInfo> tokenLegalList = [];
+
+  List<TokenInfo> getTokenLegalList() {
+    if (tokenLegalList.isEmpty) {
+      tokenLegalList = [
+        TokenInfo(name: "USD", iconUrl: 'asset/images/icon_tether.png')
+      ];
+    }
+    return tokenLegalList;
+  }
+
+  late TokenInfo dropdownLegalValue;
+
   late Timer _timer;
   int _countdownTime = 30;
 
@@ -26,6 +55,7 @@ class _ExchangeState extends State<Exchange> {
           setState(() {
             if (_countdownTime <= 0) {
               _countdownTime = 30;
+              getCoinPrice(dropdownValue.name);
             } else {
               _countdownTime = _countdownTime - 1;
             }
@@ -37,6 +67,22 @@ class _ExchangeState extends State<Exchange> {
   @override
   void initState() {
     super.initState();
+    if (widget.type == 'buy') {
+    } else if (widget.type == 'send') {}
+    dropdownValue = tokenList[0];
+    AccountService.getInstance().getAccountInfo().then((value) async {
+      if (value.code == 1) {
+        var resp = value.data as AccountInfo;
+        log(resp.toString());
+        getTokenLegalList()[0].balance = resp.balanceUsd;
+        setState(() {
+          dropdownLegalValue = tokenLegalList[0];
+        });
+      } else {
+        log(value.msg);
+      }
+    });
+    getCoinPrice(dropdownValue.name);
     startCountdownTimer();
   }
 
@@ -53,7 +99,13 @@ class _ExchangeState extends State<Exchange> {
     showDialog(
         context: context,
         builder: (context) {
-          return const ReviewExchange();
+          return ReviewExchange(
+            fromAmt: double.parse(_amountFromController.text),
+            toAmt: double.parse(_amountToController.text),
+            fromCoin: dropdownValue.name,
+            toCoin: dropdownLegalValue.name,
+            type: widget.type,
+          );
         });
   }
 
@@ -123,10 +175,18 @@ class _ExchangeState extends State<Exchange> {
                                   child: SizedBox(
                                     height: 34,
                                     child: TextField(
+                                      controller: _amountFromController,
                                       maxLines: 10,
                                       minLines: 1,
                                       onChanged: (text) {
-                                        setState(() {});
+                                        setState(() {
+                                          _amountToController.text =
+                                              StringTools.formatCurrencyNum(
+                                                  double.parse(
+                                                          _amountFromController
+                                                              .text) *
+                                                      coinPrice);
+                                        });
                                       },
                                       keyboardType: TextInputType.number,
                                       cursorColor: const Color(0xFF4A92FF),
@@ -165,47 +225,32 @@ class _ExchangeState extends State<Exchange> {
                                             bottomRight: Radius.circular(8)),
                                       ),
                                     ),
-                                    child: const Stack(
-                                      alignment: AlignmentDirectional.centerEnd,
-                                      children: [
-                                        Positioned(
-                                          left: 5,
-                                          child: Image(
-                                            width: 20,
-                                            height: 20,
-                                            image: AssetImage(
-                                                "asset/images/icon_tether_logo.png"),
-                                          ),
-                                        ),
-                                        Center(
-                                          child: Text(
-                                            "USDT",
-                                            style: TextStyle(
-                                              color: Color(0xFF333333),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          right: 2,
-                                          child: Image(
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<TokenInfo>(
+                                        icon: const Image(
                                             width: 24,
                                             height: 24,
                                             image: AssetImage(
-                                                "asset/images/icon_arrow_down_black.png"),
-                                          ),
-                                        ),
-                                      ],
+                                                "asset/images/icon_arrow_down_black.png")),
+                                        value: dropdownValue,
+                                        isExpanded: true,
+                                        items: buildCountryDropdownItemList(),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            dropdownValue = value!;
+                                            getCoinPrice(dropdownValue.name);
+                                          });
+                                        },
+                                      ),
                                     ),
                                   ),
                                 )
                               ],
                             ),
                           ),
-                          const Padding(
-                              padding:
-                                  EdgeInsets.only(left: 25, right: 25, top: 5),
+                          Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 25, right: 25, top: 5),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -218,7 +263,7 @@ class _ExchangeState extends State<Exchange> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
-                                              Text(
+                                              const Text(
                                                 "Balance: ",
                                                 style: TextStyle(
                                                   color: Color(0xFF666666),
@@ -228,8 +273,9 @@ class _ExchangeState extends State<Exchange> {
                                                 ),
                                               ),
                                               Text(
-                                                "200.00",
-                                                style: TextStyle(
+                                                StringTools.formatCryptoNum(
+                                                    dropdownValue.balance),
+                                                style: const TextStyle(
                                                   color: Color(0xFF666666),
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w400,
@@ -240,17 +286,27 @@ class _ExchangeState extends State<Exchange> {
                                           ),
                                         ),
                                         Positioned(
-                                          right: 0,
-                                          child: Text(
-                                            "MAX",
-                                            style: TextStyle(
-                                              color: Color(0xFF4A92FF),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              height: 1.29,
-                                            ),
-                                          ),
-                                        ),
+                                            right: 0,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  _amountFromController.text =
+                                                      StringTools
+                                                          .formatCryptoNum(
+                                                              dropdownValue
+                                                                  .balance);
+                                                });
+                                              },
+                                              child: const Text(
+                                                "MAX",
+                                                style: TextStyle(
+                                                  color: Color(0xFF4A92FF),
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  height: 1.29,
+                                                ),
+                                              ),
+                                            )),
                                       ],
                                     ),
                                   )
@@ -287,10 +343,18 @@ class _ExchangeState extends State<Exchange> {
                                   child: SizedBox(
                                     height: 34,
                                     child: TextField(
+                                      controller: _amountToController,
                                       maxLines: 10,
                                       minLines: 1,
                                       onChanged: (text) {
-                                        setState(() {});
+                                        setState(() {
+                                          _amountFromController.text =
+                                              StringTools.formatCryptoNum(
+                                                  double.parse(
+                                                          _amountToController
+                                                              .text) /
+                                                      coinPrice);
+                                        });
                                       },
                                       keyboardType: TextInputType.number,
                                       cursorColor: const Color(0xFF4A92FF),
@@ -329,50 +393,35 @@ class _ExchangeState extends State<Exchange> {
                                             bottomRight: Radius.circular(8)),
                                       ),
                                     ),
-                                    child: const Stack(
-                                      alignment: AlignmentDirectional.centerEnd,
-                                      children: [
-                                        Positioned(
-                                          left: 5,
-                                          child: Image(
-                                            width: 20,
-                                            height: 20,
-                                            image: AssetImage(
-                                                "asset/images/icon_tether_logo.png"),
-                                          ),
-                                        ),
-                                        Center(
-                                          child: Text(
-                                            "USDT",
-                                            style: TextStyle(
-                                              color: Color(0xFF333333),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          right: 2,
-                                          child: Image(
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<TokenInfo>(
+                                        icon: const Image(
                                             width: 24,
                                             height: 24,
                                             image: AssetImage(
-                                                "asset/images/icon_arrow_down_black.png"),
-                                          ),
-                                        ),
-                                      ],
+                                                "asset/images/icon_arrow_down_black.png")),
+                                        value: dropdownLegalValue,
+                                        isExpanded: true,
+                                        items:
+                                            buildCountryDropdownItemLegalList(),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            dropdownLegalValue = value!;
+                                          });
+                                        },
+                                      ),
                                     ),
                                   ),
                                 )
                               ],
                             ),
                           ),
-                          const Padding(
-                              padding:
-                                  EdgeInsets.only(left: 25, right: 25, top: 5),
+                          Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 25, right: 25, top: 5),
                               child: Row(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Balance: ",
                                     style: TextStyle(
                                       color: Color(0xFF666666),
@@ -382,8 +431,9 @@ class _ExchangeState extends State<Exchange> {
                                     ),
                                   ),
                                   Text(
-                                    "200.00",
-                                    style: TextStyle(
+                                    StringTools.formatCurrencyNum(
+                                        dropdownLegalValue.balance),
+                                    style: const TextStyle(
                                       color: Color(0xFF666666),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
@@ -393,8 +443,8 @@ class _ExchangeState extends State<Exchange> {
                                 ],
                               )),
                           Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 25, right: 25, top: 5),
+                              padding: const EdgeInsets.only(
+                                  left: 25, right: 25, top: 5),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
@@ -408,9 +458,9 @@ class _ExchangeState extends State<Exchange> {
                                     ),
                                   ),
                                   const SizedBox(width: 2),
-                                  const Text(
-                                    'USD',
-                                    style: TextStyle(
+                                  Text(
+                                    dropdownValue.name,
+                                    style: const TextStyle(
                                       color: Color(0xFF666666),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
@@ -428,9 +478,9 @@ class _ExchangeState extends State<Exchange> {
                                     ),
                                   ),
                                   const SizedBox(width: 2),
-                                  const Text(
-                                    '1.00126',
-                                    style: TextStyle(
+                                  Text(
+                                    StringTools.formatCurrencyNum(coinPrice),
+                                    style: const TextStyle(
                                       color: Color(0xFF666666),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
@@ -438,9 +488,9 @@ class _ExchangeState extends State<Exchange> {
                                     ),
                                   ),
                                   const SizedBox(width: 2),
-                                  const Text(
-                                    'USDC',
-                                    style: TextStyle(
+                                  Text(
+                                    dropdownLegalValue.name,
+                                    style: const TextStyle(
                                       color: Color(0xFF666666),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
@@ -458,7 +508,7 @@ class _ExchangeState extends State<Exchange> {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    '$_countdownTime''s',
+                                    '$_countdownTime' 's',
                                     style: const TextStyle(
                                       color: Color(0xFF666666),
                                       fontSize: 12,
@@ -490,7 +540,7 @@ class _ExchangeState extends State<Exchange> {
                                     .requestFocus(FocusNode());
                               },
                               child: NumberControllerWidget(
-                                numText: '0',
+                                numText: '0.5',
                                 addValueChanged: (number) {
                                   log(number);
                                 },
@@ -501,13 +551,13 @@ class _ExchangeState extends State<Exchange> {
                               ),
                             ),
                           ),
-                          const Padding(
-                            padding:
-                                EdgeInsets.only(left: 25, right: 25, top: 7),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 25, right: 25, top: 7),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "Receive at least",
                                   style: TextStyle(
                                     color: Color(0xFF666666),
@@ -516,19 +566,23 @@ class _ExchangeState extends State<Exchange> {
                                     height: 1.29,
                                   ),
                                 ),
-                                SizedBox(width: 3),
+                                const SizedBox(width: 3),
                                 Text(
-                                  "98.12",
-                                  style: TextStyle(
+                                  StringTools.formatCurrencyNum(double.parse(
+                                          _amountToController.text.isEmpty
+                                              ? '0'
+                                              : _amountToController.text) *
+                                      0.95),
+                                  style: const TextStyle(
                                     color: Color(0xFF666666),
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
                                     height: 1.29,
                                   ),
                                 ),
-                                SizedBox(width: 3),
-                                Text(
-                                  "USDC",
+                                const SizedBox(width: 3),
+                                const Text(
+                                  "USD",
                                   style: TextStyle(
                                     color: Color(0xFF666666),
                                     fontSize: 12,
@@ -561,6 +615,63 @@ class _ExchangeState extends State<Exchange> {
             ],
           ),
         ));
+  }
+
+  List<DropdownMenuItem<TokenInfo>> buildCountryDropdownItemList() {
+    List<DropdownMenuItem<TokenInfo>> list = tokenList.map((TokenInfo value) {
+      return DropdownMenuItem<TokenInfo>(
+        value: value,
+        child: Row(
+          children: [
+            const SizedBox(width: 7),
+            Image(
+              width: 20,
+              height: 20,
+              image: AssetImage(value.iconUrl),
+            ),
+            const SizedBox(width: 7),
+            Text(
+              value.name,
+              style: const TextStyle(
+                color: Color(0xFF333333),
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+      );
+    }).toList();
+    return list;
+  }
+
+  List<DropdownMenuItem<TokenInfo>> buildCountryDropdownItemLegalList() {
+    List<DropdownMenuItem<TokenInfo>> list =
+        tokenLegalList.map((TokenInfo value) {
+      return DropdownMenuItem<TokenInfo>(
+        value: value,
+        child: Row(
+          children: [
+            const SizedBox(width: 7),
+            Image(
+              width: 20,
+              height: 20,
+              image: AssetImage(value.iconUrl),
+            ),
+            const SizedBox(width: 7),
+            Text(
+              value.name,
+              style: const TextStyle(
+                color: Color(0xFF333333),
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+      );
+    }).toList();
+    return list;
   }
 
   Widget buildTitle() {
@@ -645,4 +756,18 @@ class _ExchangeState extends State<Exchange> {
     borderRadius: BorderRadius.only(
         topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
   );
+
+  void getCoinPrice(String name) {
+    AccountService.getInstance().getCoinPrice(name).then((value) async {
+      if (value.code == 1) {
+        var resp = value.data as GetCoinPriceResponse;
+        log(resp.price.toString());
+        setState(() {
+          coinPrice = resp.price;
+        });
+      } else {
+        log(value.msg);
+      }
+    });
+  }
 }

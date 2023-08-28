@@ -68,7 +68,7 @@ class _BitcoinPageState extends State<BitcoinPage> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const Exchange();
+                    return const Exchange(type: 'send');
                   });
             }),
         SquareButton(

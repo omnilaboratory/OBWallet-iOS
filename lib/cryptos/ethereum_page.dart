@@ -84,7 +84,7 @@ class _EthereumPageState extends State<EthereumPage> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const Exchange();
+                    return const Exchange(type: 'send');
                   });
             }),
         SquareButton(

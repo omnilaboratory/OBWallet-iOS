@@ -308,7 +308,7 @@ class _CardPartState extends State<CardPart> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const Exchange();
+                    return const Exchange(type: 'buy');
                   });
             }),
         SquareButton(

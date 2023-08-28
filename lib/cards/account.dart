@@ -7,7 +7,9 @@ import 'package:awallet/component/account_balance_in_currency.dart';
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/grpc_services/account_service.dart';
+import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
@@ -44,6 +46,14 @@ class _AccountState extends State<Account> {
 
   @override
   void initState() {
+    var address = LocalStorage.get(LocalStorage.ethAddress);
+    if (address != null) {
+      EthService.getInstance().updateTokenBalances().then((value) {
+        if (mounted) {
+          setState(() {});
+        }
+      });
+    }
     AccountService.getInstance().getAccountInfo().then((info) {
       if (info.code == 1) {
         var accountInfo = info.data as AccountInfo;
@@ -142,7 +152,7 @@ class _AccountState extends State<Account> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const Exchange();
+                    return const Exchange(type: 'buy');
                   });
             }),
         SquareButton(

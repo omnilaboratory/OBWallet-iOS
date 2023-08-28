@@ -36,12 +36,10 @@ class AccountService {
     return ret;
   }
 
-  Future<GrpcResponse> sellCoin() async {
-    var request = SellCoinRequest();
-
+  Future<GrpcResponse> sellCoin(SellCoinRequest req) async {
     var ret = GrpcResponse();
     try {
-      var resp = await accountServiceClient?.sellCoin(request);
+      var resp = await accountServiceClient?.sellCoin(req);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
@@ -66,8 +64,15 @@ class AccountService {
     return ret;
   }
 
-  Future<GrpcResponse> getCoinPrice() async {
+  Future<GrpcResponse> getCoinPrice(String name) async {
     var request = GetCoinPriceRequest();
+    if(name == 'ETH'){
+      request.symbol = TrackedTx_ContractSymbol.ETH;
+    }else if(name == 'USDT'){
+      request.symbol = TrackedTx_ContractSymbol.USDT;
+    }else if(name == 'USDC'){
+      request.symbol = TrackedTx_ContractSymbol.USDC;
+    }
 
     var ret = GrpcResponse();
     try {
