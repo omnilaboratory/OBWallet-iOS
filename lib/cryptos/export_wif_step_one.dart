@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/cryptos/export_wif_step_two.dart';
+import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ExportWifStepOne extends StatefulWidget {
   const ExportWifStepOne({super.key});
@@ -11,13 +16,40 @@ class ExportWifStepOne extends StatefulWidget {
 }
 
 class _ExportWifStepOneState extends State<ExportWifStepOne> {
+  final TextEditingController _pswController = TextEditingController();
+
   onNext() {
-    Navigator.pop(context);
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const ExportWifStepTwo();
-        });
+    if (_pswController.value.text.toString().isEmpty) {
+      Fluttertoast.showToast(
+          msg: "The password cannot be empty", gravity: ToastGravity.CENTER);
+      return;
+    }
+
+    if (_pswController.value.text.toString() != LocalStorage.get("password")) {
+      Fluttertoast.showToast(
+          msg: "Please enter the correct password",
+          gravity: ToastGravity.CENTER);
+      return;
+    }
+
+    var password = _pswController.value.text.trim();
+    UserService.getInstance()
+        .verifyPwd(LocalStorage.get("username"), password)
+        .then((value) async {
+      if (value.code == 1) {
+        var resp = value.data;
+        log(resp.toString());
+
+        Navigator.pop(context);
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const ExportWifStepTwo();
+            });
+      } else {
+        log(value.msg);
+      }
+    });
   }
 
   onClose() {
@@ -67,14 +99,11 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(
-                      left: 25, right: 25, top: 5),
+                  padding: const EdgeInsets.only(left: 25, right: 25, top: 5),
                   child: TextField(
+                    controller: _pswController,
                     maxLines: 10,
                     minLines: 1,
-                    onChanged: (text) {
-                      setState(() {});
-                    },
                     keyboardType: TextInputType.visiblePassword,
                     cursorColor: const Color(0xFF4A92FF),
                     style: const TextStyle(
@@ -99,8 +128,7 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
                   flex: 1,
                 ),
                 Padding(
-                  padding:
-                  const EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.only(bottom: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

@@ -132,4 +132,21 @@ class UserService {
     }
     return ret;
   }
+
+  Future<GrpcResponse> verifyPwd(String username, String password) async {
+    var request = SignInRequest();
+    request.userName = username;
+    request.password = Utils.generateMd5(password);
+
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.verifyPwd(request);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      GrpcError error = e as GrpcError;
+      ret.msg = error.message.toString();
+    }
+    return ret;
+  }
 }
