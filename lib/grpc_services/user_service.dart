@@ -136,7 +136,7 @@ class UserService {
   Future<GrpcResponse> verifyPwd(String username, String password) async {
     var request = SignInRequest();
     request.userName = username;
-    request.password = Utils.generateMd5(password);
+    request.password = password;
 
     var ret = GrpcResponse();
     try {
