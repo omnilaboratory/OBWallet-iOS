@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/currency_tx_info.dart';
 import 'package:awallet/tools/string_tool.dart';
-import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyTxItem extends StatelessWidget {
