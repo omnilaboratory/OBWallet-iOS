@@ -22,6 +22,9 @@ class _TxHistoryState extends State<TxHistory> {
     CryptoTxInfo(title: "Top Up", txTime: DateTime.now(), amount: 15622.02323)
   ];
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

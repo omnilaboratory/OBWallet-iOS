@@ -1,35 +1,39 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/balance_in_currency_info.dart';
 import 'package:awallet/bean/currency_tx_info.dart';
 import 'package:awallet/cards/currency_tx_history.dart';
-import 'package:awallet/cards/send.dart';
 import 'package:awallet/cards/exchange.dart';
+import 'package:awallet/cards/send.dart';
 import 'package:awallet/cards/top_up.dart';
 import 'package:awallet/component/account_balance_in_currency.dart';
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
+import 'package:awallet/grpc_services/account_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-
 
 class Account extends StatefulWidget {
   Account({super.key});
 
   final balances = [
-    BalanceInCurrencyInfo(name: "USD", icon: "\$", balance: 123),
-    BalanceInCurrencyInfo(name: "SGD", icon: "\$", balance: 20),
-    BalanceInCurrencyInfo(name: "CNY", icon: "￥", balance: 20),
+    // BalanceInCurrencyInfo(name: "USD", icon: "\$", balance: 123),
+    // BalanceInCurrencyInfo(name: "SGD", icon: "\$", balance: 20),
+    // BalanceInCurrencyInfo(name: "CNY", icon: "￥", balance: 20),
   ];
   final txs = [
-    CurrencyTxInfo(
-        name: "STARBUCKS FELIZ EN VIS, HO CHI STARBUCKS FELIZ EN VIS, HO CHI",
-        currencyName: "VND",
-        amount: 9234567891230.01,
-        amountOfDollar: 160),
-    CurrencyTxInfo(
-        name: "STARBUCKS FELIZ EN VIS, HO CHI",
-        currencyName: "VND",
-        amount: 20,
-        amountOfDollar: 160),
+    // CurrencyTxInfo(
+    //     name: "STARBUCKS FELIZ EN VIS, HO CHI STARBUCKS FELIZ EN VIS, HO CHI",
+    //     currencyName: "VND",
+    //     amount: 9234567891230.01,
+    //     amountOfDollar: 160),
+    // CurrencyTxInfo(
+    //     name: "STARBUCKS FELIZ EN VIS, HO CHI",
+    //     currencyName: "VND",
+    //     amount: 20,
+    //     amountOfDollar: 160),
   ];
 
   @override
@@ -37,13 +41,28 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
+  double totalBalanceUsd = 0;
+
+  @override
+  void initState() {
+    AccountService.getInstance().getAccountInfo().then((info) {
+      if (info.code == 1) {
+        var accountInfo = info.data as AccountInfo;
+        log("$accountInfo");
+        totalBalanceUsd = accountInfo.balanceUsd;
+        setState(() {});
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 28),
         buildBalance(),
-        buildBalanceInCurrency(),
+        // buildBalanceInCurrency(),
         const SizedBox(height: 30),
         buildTxButtons(),
         Padding(
@@ -67,7 +86,8 @@ class _AccountState extends State<Account> {
             const Spacer(),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const TxHistory()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const TxHistory()));
               },
               child: const Text(
                 'View All',
@@ -167,12 +187,12 @@ class _AccountState extends State<Account> {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      child: const Align(
+      child: Align(
           alignment: Alignment.centerLeft,
           child: Text.rich(
             TextSpan(
               children: [
-                TextSpan(
+                const TextSpan(
                   text: '\$ ',
                   style: TextStyle(
                     color: Colors.white,
@@ -181,8 +201,8 @@ class _AccountState extends State<Account> {
                   ),
                 ),
                 TextSpan(
-                  text: '33,821.78',
-                  style: TextStyle(
+                  text: StringTools.formatCurrencyNum(totalBalanceUsd),
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 32,
                     fontWeight: FontWeight.w700,

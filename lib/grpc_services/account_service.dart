@@ -22,7 +22,6 @@ class AccountService {
 
   Future<GrpcResponse> getAccountInfo() async {
     var request = GetAccountInfoRequest();
-
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.getAccountInfo(request);
