@@ -13,16 +13,16 @@ class TxHistory extends StatefulWidget {
 class _TxHistoryState extends State<TxHistory> {
 
   var txHistoryList = [
-    CurrencyTxInfo(
-        name: "STARBUCKS FELIZ EN VIS, HO CHI STARBUCKS FELIZ EN VIS, HO CHI",
-        currencyName: "VND",
-        amount: 123456789987654320,
-        amountOfDollar: 160),
-    CurrencyTxInfo(
-        name: "STARBUCKS FELIZ EN VIS, HO CHI",
-        currencyName: "VND",
-        amount: 20,
-        amountOfDollar: 160),
+    // CurrencyTxInfo(
+    //     name: "STARBUCKS FELIZ EN VIS, HO CHI STARBUCKS FELIZ EN VIS, HO CHI",
+    //     currencyName: "VND",
+    //     amount: 123456789987654320,
+    //     amountOfDollar: 160),
+    // CurrencyTxInfo(
+    //     name: "STARBUCKS FELIZ EN VIS, HO CHI",
+    //     currencyName: "VND",
+    //     amount: 20,
+    //     amountOfDollar: 160),
   ];
 
 
