@@ -1,6 +1,7 @@
 
 import 'dart:math' as math;
 import 'dart:developer';
+import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:decimal/decimal.dart';
 import 'package:intl/intl.dart';
@@ -47,7 +48,7 @@ class Eth {
       // Save the address and private key to local storage on device
       LocalStorage.save(LocalStorage.ethAddress, address);
       LocalStorage.save(LocalStorage.ethPrivateKey, privateKey);
-
+      UserService.getInstance().updateUser(address);
       return address;
     } catch (e) {
       log('genEthAddress -> error: $e');

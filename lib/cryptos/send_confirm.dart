@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/eth.dart';
+import 'package:awallet/grpc_services/eth_grpc_service.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class _SendConfirmState extends State<SendConfirm> {
       Eth.sendEthTo(widget.address, double.parse(widget.amount)).then((value) {
         if (value.isNotEmpty) {
           log('txId: $value');
+          EthGrpcService.getInstance().ethTrackTx(value);
           Navigator.pop(context);
         }
       });
@@ -36,6 +38,7 @@ class _SendConfirmState extends State<SendConfirm> {
       Eth.sendUsdtTo(widget.address, double.parse(widget.amount)).then((value) {
         if (value.isNotEmpty) {
           log('txId: $value');
+          EthGrpcService.getInstance().ethTrackTx(value);
           Navigator.pop(context);
         }
       });
@@ -43,6 +46,7 @@ class _SendConfirmState extends State<SendConfirm> {
       Eth.sendUsdcTo(widget.address, double.parse(widget.amount)).then((value) {
         if (value.isNotEmpty) {
           log('txId: $value');
+          EthGrpcService.getInstance().ethTrackTx(value);
           Navigator.pop(context);
         }
       });

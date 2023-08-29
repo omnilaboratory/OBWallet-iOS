@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
@@ -49,12 +47,10 @@ class AccountService {
     return ret;
   }
 
-  Future<GrpcResponse> buyCoin() async {
-    var request = BuyCoinRequest();
-
+  Future<GrpcResponse> buyCoin(BuyCoinRequest req) async {
     var ret = GrpcResponse();
     try {
-      var resp = await accountServiceClient?.buyCoin(request);
+      var resp = await accountServiceClient?.buyCoin(req);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {

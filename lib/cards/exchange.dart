@@ -174,7 +174,9 @@ class _ExchangeState extends State<Exchange> {
                     ),
                   ),
                   const SizedBox(height: 5),
-                  widget.type == EnumExchangeType.sell ? buildToken():buildCurrency(),
+                  widget.type == EnumExchangeType.sell
+                      ? buildToken()
+                      : buildCurrency(),
                   const SizedBox(height: 25),
                   InkWell(
                     onTap: () {
@@ -208,7 +210,9 @@ class _ExchangeState extends State<Exchange> {
                     ),
                   ),
                   const SizedBox(height: 5),
-                  widget.type == EnumExchangeType.sell ? buildCurrency():buildToken(),
+                  widget.type == EnumExchangeType.sell
+                      ? buildCurrency()
+                      : buildToken(),
                   const SizedBox(height: 5),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -224,7 +228,9 @@ class _ExchangeState extends State<Exchange> {
                       ),
                       const SizedBox(width: 2),
                       Text(
-                        currSelectedToken.name,
+                        widget.type == EnumExchangeType.sell
+                            ? currSelectedToken.name
+                            : currSelectedCurrency.name,
                         style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
@@ -244,7 +250,9 @@ class _ExchangeState extends State<Exchange> {
                       ),
                       const SizedBox(width: 2),
                       Text(
-                        StringTools.formatCurrencyNum(coinPrice),
+                        widget.type == EnumExchangeType.sell
+                            ? StringTools.formatCurrencyNum(coinPrice)
+                            : StringTools.formatCryptoNum(1 / coinPrice),
                         style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
@@ -254,7 +262,9 @@ class _ExchangeState extends State<Exchange> {
                       ),
                       const SizedBox(width: 2),
                       Text(
-                        currSelectedCurrency.name,
+                        widget.type == EnumExchangeType.sell
+                            ? currSelectedCurrency.name
+                            : currSelectedToken.name,
                         style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
@@ -327,11 +337,17 @@ class _ExchangeState extends State<Exchange> {
                       ),
                       const SizedBox(width: 3),
                       Text(
-                        StringTools.formatCurrencyNum(double.parse(
-                                _amountToController.text.isEmpty
-                                    ? '0'
-                                    : _amountToController.text) *
-                            0.95),
+                        widget.type == EnumExchangeType.sell
+                            ? StringTools.formatCurrencyNum(double.parse(
+                                    _amountToController.text.isEmpty
+                                        ? '0'
+                                        : _amountToController.text) *
+                                0.95)
+                            : StringTools.formatCryptoNum(double.parse(
+                                    _amountFromController.text.isEmpty
+                                        ? '0'
+                                        : _amountFromController.text) *
+                                0.95),
                         style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
@@ -340,9 +356,11 @@ class _ExchangeState extends State<Exchange> {
                         ),
                       ),
                       const SizedBox(width: 3),
-                      const Text(
-                        "USD",
-                        style: TextStyle(
+                      Text(
+                        widget.type == EnumExchangeType.sell
+                            ? currSelectedCurrency.name
+                            : currSelectedToken.name,
+                        style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
                           fontWeight: FontWeight.w400,

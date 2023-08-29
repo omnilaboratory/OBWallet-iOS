@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:awallet/bean/crypto_wallet_info.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/eth.dart';
+import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/local_storage.dart';
 
 class EthService {
@@ -41,6 +42,7 @@ class EthService {
     _walletInfo = CryptoWalletInfo(address: address, balance: 0);
     LocalStorage.save(LocalStorage.ethAddress, address);
     LocalStorage.save(LocalStorage.ethPrivateKey, wif);
+    UserService.getInstance().updateUser(address);
     return true;
   }
 

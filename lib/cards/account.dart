@@ -7,6 +7,7 @@ import 'package:awallet/component/account_balance_in_currency.dart';
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/grpc_services/account_service.dart';
+import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/enum_exchange_type.dart';
@@ -49,6 +50,13 @@ class _AccountState extends State<Account> {
   void initState() {
     var address = LocalStorage.get(LocalStorage.ethAddress);
     if (address != null) {
+      UserService.getInstance().updateUser(address).then((value) {
+        if (value.code == 1) {
+          log(value.data.toString());
+        } else {
+          log(value.msg);
+        }
+      });
       EthService.getInstance().updateTokenBalances().then((value) {
         if (mounted) {
           setState(() {});

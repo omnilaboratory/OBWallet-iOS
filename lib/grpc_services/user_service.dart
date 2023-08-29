@@ -151,4 +151,18 @@ class UserService {
     }
     return ret;
   }
+
+  Future<GrpcResponse> updateUser(String address) async {
+    CommonService.userInfo?.ethAddress = address;
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.updateUser(CommonService.userInfo!);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      GrpcError error = e as GrpcError;
+      ret.msg = error.message.toString();
+    }
+    return ret;
+  }
 }

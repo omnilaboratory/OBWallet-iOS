@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package lnrpc;
+
+
+service eth {
+  rpc ETHGetAddress(ETHGetAddressRequest) returns (ETHGetAddressResponse);
+//  rpc ETHDumpKey(ETHDumpKeyRequest) returns (ETHDumpKeyResponse);
+//  rpc EthImportKey(EthImportKeyRequest) returns(EthImportKeyResponse);
+  rpc EthGetTokenBalalance(EthGetTokenBalalanceRequest) returns(EthGetTokenBalalanceResponse);
+  rpc EthGetBalalance(EthGetBalalanceRequest) returns(EthGetBalalanceResponse);
+//  rpc EthTransferEth (EthTransferEthRequest) returns (EthTransferEthResponse);
+  rpc EthAddToken (EthToken) returns (EthToken);
+//  rpc EthTransferToken (EthTransferTokenRequest) returns (EthTransferTokenResponse);
+  rpc EthListHistory (EthListHistoryRequest) returns (EthListHistoryResponse);
+  rpc EthGetAllToken(EthGetAllTokenRequest) returns (EthGetAllTokenResponse);
+  rpc StateTest(StateTestRequest) returns (StateTestResponse);
+  rpc EthTrackTx(EthTrackTxRequest) returns (EthTrackTxResponse);
+}
+
+message EthImportKeyRequest {
+  string keyhex=1;
+}
+message EthImportKeyResponse {
+  string address=1;
+}
+message EthGetTokenBalalanceRequest {
+  string token_address=1;
+}
+message EthGetTokenBalalanceResponse {
+  double balance=1;
+}
+
+message EthGetBalalanceRequest {
+}
+message EthGetBalalanceResponse {
+  double balance=1;
+}
+
+message ETHGetAddressRequest {
+
+}
+message ETHGetAddressResponse {
+  string address=1;
+}
+message ETHDumpKeyRequest {
+
+}
+message ETHDumpKeyResponse {
+  string key=1;
+}
+
+message StateTestRequest {
+
+}
+message StateTestResponse {
+  string msg=1;
+}
+message EthListHistoryRequest {
+//  token address
+    string token = 1;
+    int64 page = 2;
+    int64 size = 3;
+}
+message EthListHistoryResponse {
+    int64 count=3;
+    string token = 1;
+    int64 page = 2;
+    repeated EthHistory items=5;
+}
+
+message EthGetAddressRequest {
+}
+message EthGetAddressResponse {
+  string Address = 1;
+}
+message EthTransferEthRequest {
+  string to = 1;
+  double amt = 2;
+}
+message EthTransferEthResponse {
+  string tx_id = 1;
+}
+message EthTransferTokenRequest {
+  //token address
+  string token = 1;
+  string to = 2;
+  double amt = 3;
+}
+message EthTransferTokenResponse {
+  string tx_id = 1;
+}
+message EthTrackTxRequest {
+  string tx_id = 1;
+}
+message EthTrackTxResponse {
+}
+message EthAddTokenResponse {
+}
+message EthGetAllTokenRequest {
+}
+message EthGetAllTokenResponse {
+  repeated EthToken items=1;
+}
+
+message EthHistory {
+  int64 id = 1;
+  string TokenAddress = 2;
+  string TokenName = 3;
+  string To=4;
+  double amt = 5;
+  string tx_id= 6;
+  int64 updated_at =7;
+}
+message EthToken {
+  //token address
+  string address = 1;
+  //token symbol: usdt usdc ...
+  string token_name = 2 ;
+  uint64 decimals=3;
+  //set at server side
+  int64 id = 4;
+  //set at server side
+  int64 updated_at =5;
+}
