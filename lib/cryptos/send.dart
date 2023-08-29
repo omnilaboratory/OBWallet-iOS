@@ -42,13 +42,18 @@ class _SendState extends State<Send> {
 
     if (_amountController.value.text.toString().compareTo('0') == 0) {
       Fluttertoast.showToast(
-          msg: "The amount must be greater than 0", gravity: ToastGravity.CENTER);
+          msg: "The amount must be greater than 0",
+          gravity: ToastGravity.CENTER);
       return;
     }
 
-    if (_amountController.value.text.toString().compareTo(StringTools.formatCryptoNum(dropdownValue.balance)) > 0) {
+    if (_amountController.value.text
+            .toString()
+            .compareTo(StringTools.formatCryptoNum(dropdownValue.balance)) >
+        0) {
       Fluttertoast.showToast(
-          msg: "The amount cannot exceed the maximum", gravity: ToastGravity.CENTER);
+          msg: "The amount cannot exceed the maximum",
+          gravity: ToastGravity.CENTER);
       return;
     }
 
@@ -121,10 +126,13 @@ class _SendState extends State<Send> {
                       padding:
                           const EdgeInsets.only(left: 25, right: 25, top: 20),
                       child: buildChainButtons()),
-                  Padding(
-                      padding:
-                          const EdgeInsets.only(left: 15, right: 15, top: 15),
-                      child: buildChainTypeButtons()),
+                  Visibility(
+                    visible: false,
+                    child: Padding(
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 15),
+                        child: buildChainTypeButtons()),
+                  ),
                   Expanded(
                     flex: 1000,
                     child: SingleChildScrollView(
@@ -302,7 +310,11 @@ class _SendState extends State<Send> {
                                             child: GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  _amountController.text = StringTools.formatCryptoNum(dropdownValue.balance);
+                                                  _amountController.text =
+                                                      StringTools
+                                                          .formatCryptoNum(
+                                                              dropdownValue
+                                                                  .balance);
                                                 });
                                               },
                                               child: const Text(
@@ -320,158 +332,176 @@ class _SendState extends State<Send> {
                                   )
                                 ],
                               )),
-                          SizedBox(
-                            width: size.width * 0.8,
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 25, top: 15),
-                              child: Text(
-                                'Memo',
-                                style: TextStyle(
-                                  color: Color(0xFF999999),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                          Visibility(
+                            visible: false,
+                            child: SizedBox(
+                              width: size.width * 0.8,
+                              child: const Padding(
+                                padding: EdgeInsets.only(left: 25, top: 15),
+                                child: Text(
+                                  'Memo',
+                                  style: TextStyle(
+                                    color: Color(0xFF999999),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 25, right: 25, top: 5),
-                            child: TextField(
-                              maxLines: 10,
-                              minLines: 1,
-                              onChanged: (text) {
-                                setState(() {});
-                              },
-                              keyboardType: TextInputType.visiblePassword,
-                              cursorColor: const Color(0xFF4A92FF),
-                              style: const TextStyle(
-                                color: Color(0xFF666666),
-                                fontSize: 14,
-                              ),
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 7),
-                                isCollapsed: true,
-                                border: _outlineInputBorder,
-                                focusedBorder: _outlineInputBorder,
-                                enabledBorder: _outlineInputBorder,
-                                disabledBorder: _outlineInputBorder,
-                                focusedErrorBorder: _outlineInputBorder,
-                                errorBorder: _outlineInputBorder,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.8,
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 25, top: 15),
-                              child: Text(
-                                'Miner Fee',
-                                style: TextStyle(
-                                  color: Color(0xFF999999),
+                          Visibility(
+                            visible: false,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 25, right: 25, top: 5),
+                              child: TextField(
+                                maxLines: 10,
+                                minLines: 1,
+                                onChanged: (text) {
+                                  setState(() {});
+                                },
+                                keyboardType: TextInputType.visiblePassword,
+                                cursorColor: const Color(0xFF4A92FF),
+                                style: const TextStyle(
+                                  color: Color(0xFF666666),
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                                ),
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 7),
+                                  isCollapsed: true,
+                                  border: _outlineInputBorder,
+                                  focusedBorder: _outlineInputBorder,
+                                  enabledBorder: _outlineInputBorder,
+                                  disabledBorder: _outlineInputBorder,
+                                  focusedErrorBorder: _outlineInputBorder,
+                                  errorBorder: _outlineInputBorder,
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: size.width * 0.8,
-                            child: const Padding(
+                          Visibility(
+                            visible: false,
+                            child: SizedBox(
+                              width: size.width * 0.8,
+                              child: const Padding(
+                                padding: EdgeInsets.only(left: 25, top: 15),
+                                child: Text(
+                                  'Miner Fee',
+                                  style: TextStyle(
+                                    color: Color(0xFF999999),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: false,
+                            child: SizedBox(
+                              width: size.width * 0.8,
+                              child: const Padding(
+                                  padding: EdgeInsets.only(left: 25, top: 0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Estimated range',
+                                        style: TextStyle(
+                                          color: Color(0xFF333333),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Image(
+                                        width: 14,
+                                        height: 14,
+                                        image: AssetImage(
+                                            "asset/images/icon_refresh_small_black.png"),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        'Refresh in 5s',
+                                        style: TextStyle(
+                                          color: Color(0xFF333333),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                            ),
+                          ),
+                          Visibility(
+                            visible: false,
+                            child: SizedBox(
+                              width: size.width * 0.8,
+                              child: const Padding(
                                 padding: EdgeInsets.only(left: 25, top: 0),
+                                child: Text(
+                                  '\$100.00',
+                                  style: TextStyle(
+                                    color: Color(0xFF333333),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Visibility(
+                            visible: false,
+                            child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 25, right: 25, top: 0),
                                 child: Row(
                                   children: [
-                                    Text(
-                                      'Estimated range',
-                                      style: TextStyle(
-                                        color: Color(0xFF333333),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
+                                    Expanded(
+                                      child: Stack(
+                                        alignment:
+                                            AlignmentDirectional.centerStart,
+                                        children: [
+                                          Positioned(
+                                            child: Text(
+                                              "0.0001234 BTC",
+                                              style: TextStyle(
+                                                color: Color(0xFF666666),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                                height: 1.29,
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            right: 0,
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "Standard",
+                                                  style: TextStyle(
+                                                    color: Color(0xFF4A92FF),
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w400,
+                                                    height: 1.29,
+                                                  ),
+                                                ),
+                                                SizedBox(width: 7),
+                                                Image(
+                                                  width: 6,
+                                                  height: 12,
+                                                  image: AssetImage(
+                                                      "asset/images/icon_arrow_right_small_balck.png"),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    SizedBox(width: 10),
-                                    Image(
-                                      width: 14,
-                                      height: 14,
-                                      image: AssetImage(
-                                          "asset/images/icon_refresh_small_black.png"),
-                                    ),
-                                    SizedBox(width: 10),
-                                    Text(
-                                      'Refresh in 5s',
-                                      style: TextStyle(
-                                        color: Color(0xFF333333),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
+                                    )
                                   ],
                                 )),
                           ),
-                          SizedBox(
-                            width: size.width * 0.8,
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 25, top: 0),
-                              child: Text(
-                                '\$100.00',
-                                style: TextStyle(
-                                  color: Color(0xFF333333),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const Padding(
-                              padding:
-                                  EdgeInsets.only(left: 25, right: 25, top: 0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Stack(
-                                      alignment:
-                                          AlignmentDirectional.centerStart,
-                                      children: [
-                                        Positioned(
-                                          child: Text(
-                                            "0.0001234 BTC",
-                                            style: TextStyle(
-                                              color: Color(0xFF666666),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              height: 1.29,
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          right: 0,
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                "Standard",
-                                                style: TextStyle(
-                                                  color: Color(0xFF4A92FF),
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.29,
-                                                ),
-                                              ),
-                                              SizedBox(width: 7),
-                                              Image(
-                                                width: 6,
-                                                height: 12,
-                                                image: AssetImage(
-                                                    "asset/images/icon_arrow_right_small_balck.png"),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              )),
                         ],
                       ),
                     ),

@@ -44,10 +44,14 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                     padding:
                         const EdgeInsets.only(left: 25, right: 25, top: 20),
                     child: buildChainButtons()),
-                Padding(
-                    padding:
-                        const EdgeInsets.only(left: 15, right: 15, top: 15),
-                    child: buildChainTypeButtons()),
+                const SizedBox(height: 40),
+                Visibility(
+                  visible: false,
+                  child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: buildChainTypeButtons()),
+                ),
                 const SizedBox(height: 30),
                 const CryptoReceiveCenter(
                     address: "0x0f6eD175150e0......ad19A6e054CB",

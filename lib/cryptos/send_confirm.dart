@@ -159,7 +159,7 @@ class _SendConfirmState extends State<SendConfirm> {
                             visible: true,
                             child: Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 15, top: 10),
+                                    const EdgeInsets.only(left: 15, top: 10, bottom: 15),
                                 child: Row(children: [
                                   const Text('From: ',
                                       style: TextStyle(
@@ -179,7 +179,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                       ))
                                 ]))),
                         const Visibility(
-                            visible: true,
+                            visible: false,
                             child: Padding(
                                 padding: EdgeInsets.only(left: 15, top: 10),
                                 child: Row(children: [
@@ -197,7 +197,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                       ))
                                 ]))),
                         const Visibility(
-                            visible: true,
+                            visible: false,
                             child: Padding(
                                 padding: EdgeInsets.only(
                                     left: 15, top: 10, bottom: 15),
