@@ -1,6 +1,7 @@
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/logins/apply_card_step_one.dart';
+import 'package:awallet/tools/enum_exchange_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
@@ -308,7 +309,7 @@ class _CardPartState extends State<CardPart> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const Exchange(type: 'buy');
+                    return Exchange(type: EnumExchangeType.buy);
                   });
             }),
         SquareButton(

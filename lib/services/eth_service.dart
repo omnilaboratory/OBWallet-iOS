@@ -48,11 +48,7 @@ class EthService {
 
   List<TokenInfo> getTokenList() {
     if (_tokenList.isEmpty) {
-      _tokenList = [
-        TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
-        TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
-        TokenInfo(name: "USDC", iconUrl: 'asset/images/icon_tether.png'),
-      ];
+      _tokenList = LocalStorage.ethTokenList;
     }
     return _tokenList;
   }

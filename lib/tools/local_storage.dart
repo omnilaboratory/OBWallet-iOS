@@ -17,7 +17,7 @@ class LocalStorage {
     TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
     TokenInfo(name: "USDC", iconUrl: 'asset/images/icon_tether.png'),
   ];
-  static List<TokenInfo> legalList= [
+  static List<TokenInfo> currencyList= [
     TokenInfo(name: "USD", iconUrl: 'asset/images/icon_tether.png')
   ];
 

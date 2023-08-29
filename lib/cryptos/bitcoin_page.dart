@@ -6,6 +6,7 @@ import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
+import 'package:awallet/tools/enum_exchange_type.dart';
 import 'package:flutter/material.dart';
 
 class BitcoinPage extends StatefulWidget {
@@ -68,7 +69,7 @@ class _BitcoinPageState extends State<BitcoinPage> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const Exchange(type: 'send');
+                    return Exchange(type: EnumExchangeType.sell);
                   });
             }),
         SquareButton(
