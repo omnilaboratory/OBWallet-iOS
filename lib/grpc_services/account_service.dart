@@ -96,4 +96,18 @@ class AccountService {
     }
     return ret;
   }
+  Future<GrpcResponse> getTrackedTxList() async {
+    var request = GetSwapTxListRequest();
+
+    var ret = GrpcResponse();
+    try {
+      var resp = await accountServiceClient?.getTrackedTxList(request);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      GrpcError error = e as GrpcError;
+      ret.msg = error.message.toString();
+    }
+    return ret;
+  }
 }
