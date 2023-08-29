@@ -69,6 +69,11 @@ class _ExchangeState extends State<Exchange> {
     super.initState();
     if (widget.type == 'buy') {
     } else if (widget.type == 'send') {}
+
+    getTokenLegalList();
+    dropdownLegalValue=tokenLegalList[0];
+
+
     dropdownValue = tokenList[0];
     AccountService.getInstance().getAccountInfo().then((value) async {
       if (value.code == 1) {
