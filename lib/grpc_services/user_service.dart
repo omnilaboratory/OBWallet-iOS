@@ -35,8 +35,7 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      setError(e, ret);
     }
     return ret;
   }
@@ -55,8 +54,7 @@ class UserService {
       LocalStorage.save("userToken", resp.token);
       userServiceClient = null;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      setError(e, ret);
     }
     return ret;
   }
@@ -72,8 +70,7 @@ class UserService {
       CommonService.token = resp!.token;
       userServiceClient = null;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      setError(e, ret);
     }
     return ret;
   }
@@ -85,8 +82,7 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      setError(e, ret);
     }
     return ret;
   }
@@ -98,8 +94,7 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      setError(e, ret);
     }
     return ret;
   }
@@ -129,8 +124,7 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      setError(e, ret);
     }
     return ret;
   }
@@ -146,10 +140,15 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      setError(e, ret);
     }
     return ret;
+  }
+
+  void setError(Object e, GrpcResponse<dynamic> ret) {
+    log("$e");
+    GrpcError error = e as GrpcError;
+    ret.msg = error.message.toString();
   }
 
   Future<GrpcResponse> updateUser(String address) async {
@@ -160,8 +159,7 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      setError(e, ret);
     }
     return ret;
   }

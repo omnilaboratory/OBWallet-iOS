@@ -8,6 +8,7 @@ import 'package:awallet/logins/sign_up_step1.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -224,12 +225,14 @@ class _LoginState extends State<Login> {
   }
 
   void autoLogin(String localToken) {
+    log("autoLogin start");
     CommonService.token = localToken;
     UserService.userServiceClient = null;
     getUserInfoAndGoHome();
   }
 
   void login() {
+    log("login start");
     var username = _unameController.value.text.trim();
     var password = _pswController.value.text.trim();
     UserService.getInstance().signIn(username, password).then((loginInfo) {
@@ -239,11 +242,14 @@ class _LoginState extends State<Login> {
         getUserInfoAndGoHome();
       } else {
         log(loginInfo.msg);
+        Fluttertoast.showToast(
+            msg: loginInfo.msg, gravity: ToastGravity.CENTER);
       }
     });
   }
 
   void getUserInfoAndGoHome() {
+    log("getUserInfoAndGoHome");
     UserService.getInstance().getUserInfo().then((userInfoResp) {
       if (userInfoResp.code == 1) {
         var userInfo = userInfoResp.data as GetUserInfoResponse;
@@ -254,6 +260,8 @@ class _LoginState extends State<Login> {
         );
       } else {
         log(userInfoResp.msg);
+        Fluttertoast.showToast(
+            msg: userInfoResp.msg, gravity: ToastGravity.CENTER);
       }
     });
   }
