@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:awallet/bean/crypto_wallet_info.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/eth.dart';
+import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 
 class EthService {
@@ -59,19 +61,31 @@ class EthService {
     log('updateTokenBalances');
     String address = LocalStorage.get(LocalStorage.ethAddress);
     double totalBalance = 0;
+
     double balance = await Eth.getBalanceOfETH(address);
-    totalBalance += balance;
-    getTokenList()[0].balance = balance;
+    totalBalance = await setTokenUsdValue(getTokenList()[0], balance, totalBalance);
 
     balance = await Eth.getBalanceOfUSDT(address);
-    totalBalance += balance;
-    getTokenList()[1].balance = balance;
+    totalBalance = await setTokenUsdValue(getTokenList()[1], balance, totalBalance);
 
     balance = await Eth.getBalanceOfUSDC(address);
-    totalBalance += balance;
-    getTokenList()[2].balance = balance;
+    totalBalance = await setTokenUsdValue(getTokenList()[2], balance, totalBalance);
 
     _walletInfo = getWalletInfo();
     _walletInfo?.balance = totalBalance;
   }
+
+  Future<double> setTokenUsdValue(TokenInfo tokenInfo, double balance, double totalBalance) async {
+    tokenInfo.balance = balance;
+    var retInfo =
+        await AccountService.getInstance().getCoinPrice(tokenInfo.name);
+    if (retInfo.code == 1) {
+      var price = retInfo.data as GetCoinPriceResponse;
+      tokenInfo.balanceOfDollar = (balance * price.price)!;
+      totalBalance += tokenInfo.balanceOfDollar!;
+    }
+    return totalBalance;
+  }
+
+
 }

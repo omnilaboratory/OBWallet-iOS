@@ -33,7 +33,7 @@ class _TxHistoryState extends State<TxHistory> {
                     "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
                 txTime: DateTime.fromMillisecondsSinceEpoch(
                     (element.createdAt * 1000).toInt()),
-                amount: element.amt));
+                amount: element.amt,amountOfDollar: element.settleAmt));
           }
         } else {
           tips = "No Txs Data";
@@ -49,10 +49,11 @@ class _TxHistoryState extends State<TxHistory> {
         txHistoryList.clear();
         var resp = result.data as GetTrackedTxListResponse;
         var items = resp.items;
+        log("$items");
         if (items.isNotEmpty) {
           for (var element in items) {
             txHistoryList.add(CryptoTxInfo(
-                title: "Send",
+                title: "Send(${element.symbol.name})",
                 txTime: DateTime.fromMillisecondsSinceEpoch((element.createdAt * 1000).toInt()),
                 amount: element.amt));
           }

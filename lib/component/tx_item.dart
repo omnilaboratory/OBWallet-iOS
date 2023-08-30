@@ -62,15 +62,26 @@ class _CryptoTxItemState extends State<CryptoTxItem> {
           ),
         ),
         const Spacer(),
-        Text(
-          "\$ ${StringTools.formatCryptoNum(widget.txInfo.amount)}",
-          textAlign: TextAlign.right,
-          style: const TextStyle(
-            color: Color(0xFF666666),
-            fontSize: 16,
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w500,
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              StringTools.formatCryptoNum(widget.txInfo.amount),
+              style: const TextStyle(
+                color: Color(0xFF666666),
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              "\$ ${StringTools.formatCurrencyNum(widget.txInfo.amountOfDollar)}",
+              style: const TextStyle(
+                color: Color(0xFF666666),
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
         ),
       ]),
     );

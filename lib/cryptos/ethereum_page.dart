@@ -139,7 +139,7 @@ class _EthereumPageState extends State<EthereumPage> {
                       builder: (context) {
                         return const EthereumRecoverWallet();
                       });
-                  if (flag) {
+                  if (flag != null && flag) {
                     updateTokenBalances();
                     setState(() {});
                   }
@@ -153,9 +153,7 @@ class _EthereumPageState extends State<EthereumPage> {
   }
 
   void createNewWallet() {
-    EthService.getInstance()
-        .createWalletInfo()
-        .then((value) async {
+    EthService.getInstance().createWalletInfo().then((value) async {
       await updateTokenBalances();
     });
   }
