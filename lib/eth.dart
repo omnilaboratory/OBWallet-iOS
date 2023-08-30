@@ -14,7 +14,7 @@ class Eth {
   // static String apiUrl = "https://eth-mainnet.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
   static String apiUrl = "https://eth-goerli.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
 
-  static String goerliContractOfUSDT = '0x7A203Ad2432Ea8a2A97BAc74BA2fa87d3963f13b';
+  static String goerliContractOfUSDT = '0xC2C527C0CACF457746Bd31B2a698Fe89de2b6d49';
   // static String mainnetContractOfUSDT = '0xdAC17F958D2ee523a2206206994597C13D831ec7';
   static String contractOfUSDC = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48';
 
@@ -220,9 +220,9 @@ class Eth {
     }
   }
 
-  /// Estimate the amount of gas that would be necessary 
-  /// if the transaction was sent via sendTransaction (web3dart). 
-  /// Note that the estimate may be significantly higher 
+  /// Estimate the amount of gas that would be necessary
+  /// if the transaction was sent via sendTransaction (web3dart).
+  /// Note that the estimate may be significantly higher
   /// than the amount of gas actually used by the transaction.
   static Future<String> estimateGas() async {
     try {

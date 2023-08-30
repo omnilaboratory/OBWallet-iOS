@@ -3,6 +3,7 @@ import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/cryptos/send_confirm.dart';
 import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -20,6 +21,7 @@ class _SendState extends State<Send> {
 
   var tokenList = EthService.getInstance().getTokenList();
   late TokenInfo dropdownValue;
+  int num = 6;
 
   @override
   void initState() {
@@ -40,7 +42,7 @@ class _SendState extends State<Send> {
       return;
     }
 
-    if (_amountController.value.text.toString().compareTo('0') == 0) {
+    if (double.parse(_amountController.value.text.toString()) == 0) {
       Fluttertoast.showToast(
           msg: "The amount must be greater than 0",
           gravity: ToastGravity.CENTER);
@@ -210,7 +212,12 @@ class _SendState extends State<Send> {
                                       controller: _amountController,
                                       maxLines: 10,
                                       minLines: 1,
-                                      keyboardType: TextInputType.number,
+                                      inputFormatters: [
+                                        PrecisionLimitFormatter(num)
+                                      ],
+                                      keyboardType:
+                                          const TextInputType.numberWithOptions(
+                                              decimal: true),
                                       cursorColor: const Color(0xFF4A92FF),
                                       style: const TextStyle(
                                         color: Color(0xFF333333),
@@ -259,7 +266,13 @@ class _SendState extends State<Send> {
                                         items: buildCountryDropdownItemList(),
                                         onChanged: (value) {
                                           setState(() {
+                                            _amountController.text = '';
                                             dropdownValue = value!;
+                                            if (dropdownValue.name == 'ETH') {
+                                              num = 6;
+                                            } else {
+                                              num = 2;
+                                            }
                                           });
                                         },
                                       ),
@@ -294,8 +307,13 @@ class _SendState extends State<Send> {
                                               ),
                                             ),
                                             Text(
-                                              StringTools.formatCryptoNum(
-                                                  dropdownValue.balance),
+                                              dropdownValue.name == 'ETH'
+                                                  ? StringTools.formatCryptoNum(
+                                                      dropdownValue.balance)
+                                                  : StringTools
+                                                      .formatCurrencyNum(
+                                                          dropdownValue
+                                                              .balance),
                                               style: const TextStyle(
                                                 color: Color(0xFF666666),
                                                 fontSize: 12,

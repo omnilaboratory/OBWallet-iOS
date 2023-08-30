@@ -68,8 +68,8 @@ class EthService {
     balance = await Eth.getBalanceOfUSDT(address);
     totalBalance = await setTokenUsdValue(getTokenList()[1], balance, totalBalance);
 
-    balance = await Eth.getBalanceOfUSDC(address);
-    totalBalance = await setTokenUsdValue(getTokenList()[2], balance, totalBalance);
+    // balance = await Eth.getBalanceOfUSDC(address);
+    // totalBalance = await setTokenUsdValue(getTokenList()[2], balance, totalBalance);
 
     _walletInfo = getWalletInfo();
     _walletInfo?.balance = totalBalance;

@@ -10,9 +10,11 @@ import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/enum_exchange_type.dart';
 import 'package:awallet/tools/local_storage.dart';
+import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../component/number_controller_widget.dart';
 
@@ -37,6 +39,7 @@ class _ExchangeState extends State<Exchange> {
 
   late TokenInfo currSelectedToken;
   late TokenInfo currSelectedCurrency;
+  int num = 6;
 
   @override
   void initState() {
@@ -88,6 +91,87 @@ class _ExchangeState extends State<Exchange> {
   }
 
   onNext() {
+    if (widget.type == EnumExchangeType.sell) {
+      if (_amountFromController.value.text.toString().isEmpty) {
+        Fluttertoast.showToast(
+            msg: "The from amount cannot be empty",
+            gravity: ToastGravity.CENTER);
+        return;
+      }
+
+      if (_amountToController.value.text.toString().isEmpty) {
+        Fluttertoast.showToast(
+            msg: "The to amount cannot be empty", gravity: ToastGravity.CENTER);
+        return;
+      }
+
+      if (double.parse(_amountFromController.value.text.toString()) == 0) {
+        Fluttertoast.showToast(
+            msg: "The from amount must be greater than 0",
+            gravity: ToastGravity.CENTER);
+        return;
+      }
+
+      if (double.parse(_amountToController.value.text.toString()) == 0) {
+        Fluttertoast.showToast(
+            msg: "The to amount must be greater than 0",
+            gravity: ToastGravity.CENTER);
+        return;
+      }
+
+      if (_amountFromController.value.text.toString().compareTo(
+              StringTools.formatCryptoNum(currSelectedToken.balance)) >
+          0) {
+        Fluttertoast.showToast(
+            msg: "The from amount cannot exceed the maximum",
+            gravity: ToastGravity.CENTER);
+        return;
+      }
+    } else if (widget.type == EnumExchangeType.buy) {
+      if (_amountToController.value.text.toString().isEmpty) {
+        Fluttertoast.showToast(
+            msg: "The from amount cannot be empty",
+            gravity: ToastGravity.CENTER);
+        return;
+      }
+
+      if (_amountFromController.value.text.toString().isEmpty) {
+        Fluttertoast.showToast(
+            msg: "The to amount cannot be empty", gravity: ToastGravity.CENTER);
+        return;
+      }
+
+      if (double.parse(_amountToController.value.text.toString()) == 0) {
+        Fluttertoast.showToast(
+            msg: "The from amount must be greater than 0",
+            gravity: ToastGravity.CENTER);
+        return;
+      }
+
+      if (double.parse(_amountFromController.value.text.toString()) == 0) {
+        Fluttertoast.showToast(
+            msg: "The to amount must be greater than 0",
+            gravity: ToastGravity.CENTER);
+        return;
+      }
+
+      if (_amountFromController.value.text.toString().compareTo(
+              StringTools.formatCryptoNum(currSelectedToken.balance)) >
+          0) {
+        Fluttertoast.showToast(
+            msg: "The to amount cannot exceed the maximum",
+            gravity: ToastGravity.CENTER);
+        return;
+      }
+    }
+
+    if (LocalStorage.get(LocalStorage.ethAddress) == null) {
+      Fluttertoast.showToast(
+          msg: "Please create an Ethereum address",
+          gravity: ToastGravity.CENTER);
+      return;
+    }
+
     Navigator.pop(context);
     showDialog(
         context: context,
@@ -252,7 +336,9 @@ class _ExchangeState extends State<Exchange> {
                       Text(
                         widget.type == EnumExchangeType.sell
                             ? StringTools.formatCurrencyNum(coinPrice)
-                            : StringTools.formatCryptoNum(1 / coinPrice),
+                            : currSelectedToken.name == 'ETH'
+                                ? StringTools.formatCryptoNum(1 / coinPrice)
+                                : StringTools.formatCurrencyNum(1 / coinPrice),
                         style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
@@ -343,11 +429,17 @@ class _ExchangeState extends State<Exchange> {
                                         ? '0'
                                         : _amountToController.text) *
                                 0.95)
-                            : StringTools.formatCryptoNum(double.parse(
-                                    _amountFromController.text.isEmpty
-                                        ? '0'
-                                        : _amountFromController.text) *
-                                0.95),
+                            : currSelectedToken.name == 'ETH'
+                                ? StringTools.formatCryptoNum(double.parse(
+                                        _amountFromController.text.isEmpty
+                                            ? '0'
+                                            : _amountFromController.text) *
+                                    0.95)
+                                : StringTools.formatCurrencyNum(double.parse(
+                                        _amountFromController.text.isEmpty
+                                            ? '0'
+                                            : _amountFromController.text) *
+                                    0.95),
                         style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
@@ -398,13 +490,24 @@ class _ExchangeState extends State<Exchange> {
                   controller: _amountToController,
                   maxLines: 10,
                   minLines: 1,
+                  inputFormatters: [PrecisionLimitFormatter(2)],
                   onChanged: (text) {
                     setState(() {
-                      _amountFromController.text = StringTools.formatCryptoNum(
-                          double.parse(_amountToController.text) / coinPrice);
+                      if (currSelectedToken.name == 'ETH') {
+                        _amountFromController.text =
+                            StringTools.formatCryptoNum(
+                                double.parse(_amountToController.text) /
+                                    coinPrice);
+                      } else {
+                        _amountFromController.text =
+                            StringTools.formatCurrencyNum(
+                                double.parse(_amountToController.text) /
+                                    coinPrice);
+                      }
                     });
                   },
-                  keyboardType: TextInputType.number,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                   cursorColor: const Color(0xFF4A92FF),
                   style: const TextStyle(
                     color: Color(0xFF333333),
@@ -496,13 +599,15 @@ class _ExchangeState extends State<Exchange> {
                   controller: _amountFromController,
                   maxLines: 10,
                   minLines: 1,
+                  inputFormatters: [PrecisionLimitFormatter(num)],
                   onChanged: (text) {
                     setState(() {
                       _amountToController.text = StringTools.formatCurrencyNum(
                           double.parse(_amountFromController.text) * coinPrice);
                     });
                   },
-                  keyboardType: TextInputType.number,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                   cursorColor: const Color(0xFF4A92FF),
                   style: const TextStyle(
                     color: Color(0xFF333333),
@@ -548,6 +653,13 @@ class _ExchangeState extends State<Exchange> {
                       setState(() {
                         currSelectedToken = value!;
                         getCoinPrice(currSelectedToken.name);
+                        _amountFromController.text = '';
+                        _amountToController.text = '';
+                        if (currSelectedToken.name == 'ETH') {
+                          num = 6;
+                        } else {
+                          num = 2;
+                        }
                       });
                     },
                   ),
@@ -576,8 +688,11 @@ class _ExchangeState extends State<Exchange> {
                           ),
                         ),
                         Text(
-                          StringTools.formatCryptoNum(
-                              currSelectedToken.balance),
+                          currSelectedToken.name == 'ETH'
+                              ? StringTools.formatCryptoNum(
+                                  currSelectedToken.balance)
+                              : StringTools.formatCurrencyNum(
+                                  currSelectedToken.balance),
                           style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
@@ -593,9 +708,13 @@ class _ExchangeState extends State<Exchange> {
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            _amountFromController.text =
-                                StringTools.formatCryptoNum(
-                                    currSelectedToken.balance);
+                            currSelectedToken.name == 'ETH'
+                                ? _amountFromController.text =
+                                    StringTools.formatCryptoNum(
+                                        currSelectedToken.balance)
+                                : _amountFromController.text =
+                                    StringTools.formatCurrencyNum(
+                                        currSelectedToken.balance);
                           });
                         },
                         child: const Text(
