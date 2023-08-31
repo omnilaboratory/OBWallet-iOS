@@ -135,8 +135,10 @@ const TrackedTx$json = {
     {'1': 'tx_id', '3': 2, '4': 1, '5': 9, '10': 'txId'},
     {'1': 'from', '3': 3, '4': 1, '5': 9, '10': 'from'},
     {'1': 'to', '3': 4, '4': 1, '5': 9, '10': 'to'},
+    {'1': 'to_user_id', '3': 15, '4': 1, '5': 3, '10': 'toUserId'},
     {'1': 'token_address', '3': 5, '4': 1, '5': 9, '10': 'tokenAddress'},
     {'1': 'amt', '3': 6, '4': 1, '5': 1, '10': 'amt'},
+    {'1': 'usd_amt', '3': 16, '4': 1, '5': 1, '10': 'usdAmt'},
     {'1': 'commit_height', '3': 14, '4': 1, '5': 3, '10': 'commitHeight'},
     {'1': 'Symbol', '3': 7, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'Symbol'},
     {'1': 'confirms', '3': 8, '4': 1, '5': 3, '10': 'confirms'},
@@ -175,16 +177,17 @@ const TrackedTx_Status$json = {
 /// Descriptor for `TrackedTx`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List trackedTxDescriptor = $convert.base64Decode(
     'CglUcmFja2VkVHgSDgoCaWQYASABKANSAmlkEhcKB3VzZXJfaWQYDSABKANSBnVzZXJJZBITCg'
-    'V0eF9pZBgCIAEoCVIEdHhJZBISCgRmcm9tGAMgASgJUgRmcm9tEg4KAnRvGAQgASgJUgJ0bxIj'
-    'Cg10b2tlbl9hZGRyZXNzGAUgASgJUgx0b2tlbkFkZHJlc3MSEAoDYW10GAYgASgBUgNhbXQSIw'
-    'oNY29tbWl0X2hlaWdodBgOIAEoA1IMY29tbWl0SGVpZ2h0EjYKBlN5bWJvbBgHIAEoDjIeLnVz'
-    'ZXIuVHJhY2tlZFR4LkNvbnRyYWN0U3ltYm9sUgZTeW1ib2wSGgoIY29uZmlybXMYCCABKANSCG'
-    'NvbmZpcm1zEi4KBnN0YXR1cxgJIAEoDjIWLnVzZXIuVHJhY2tlZFR4LlN0YXR1c1IGc3RhdHVz'
-    'EhwKCnR4X2Vycl9tc2cYCiABKAlSCHR4RXJyTXNnEh0KCmNyZWF0ZWRfYXQYCyABKANSCWNyZW'
-    'F0ZWRBdBIdCgp1cGRhdGVkX2F0GAwgASgDUgl1cGRhdGVkQXQiNgoOQ29udHJhY3RTeW1ib2wS'
-    'BwoDVVNEEAASBwoDRVRIEAESCAoEVVNEVBACEggKBFVTREMQAyJpCgZTdGF0dXMSEQoNU3RhdH'
-    'VzVW5rbm93bhAAEgoKBlR4SW5pdBABEg4KClR4Q29tbWl0ZWQQAhIQCgxUeENvbmZpcm1pbmcQ'
-    'AxIQCgxUeENvbW1pdEZhaWwQBBIMCghUeEZpbmlzaBAF');
+    'V0eF9pZBgCIAEoCVIEdHhJZBISCgRmcm9tGAMgASgJUgRmcm9tEg4KAnRvGAQgASgJUgJ0bxIc'
+    'Cgp0b191c2VyX2lkGA8gASgDUgh0b1VzZXJJZBIjCg10b2tlbl9hZGRyZXNzGAUgASgJUgx0b2'
+    'tlbkFkZHJlc3MSEAoDYW10GAYgASgBUgNhbXQSFwoHdXNkX2FtdBgQIAEoAVIGdXNkQW10EiMK'
+    'DWNvbW1pdF9oZWlnaHQYDiABKANSDGNvbW1pdEhlaWdodBI2CgZTeW1ib2wYByABKA4yHi51c2'
+    'VyLlRyYWNrZWRUeC5Db250cmFjdFN5bWJvbFIGU3ltYm9sEhoKCGNvbmZpcm1zGAggASgDUghj'
+    'b25maXJtcxIuCgZzdGF0dXMYCSABKA4yFi51c2VyLlRyYWNrZWRUeC5TdGF0dXNSBnN0YXR1cx'
+    'IcCgp0eF9lcnJfbXNnGAogASgJUgh0eEVyck1zZxIdCgpjcmVhdGVkX2F0GAsgASgDUgljcmVh'
+    'dGVkQXQSHQoKdXBkYXRlZF9hdBgMIAEoA1IJdXBkYXRlZEF0IjYKDkNvbnRyYWN0U3ltYm9sEg'
+    'cKA1VTRBAAEgcKA0VUSBABEggKBFVTRFQQAhIICgRVU0RDEAMiaQoGU3RhdHVzEhEKDVN0YXR1'
+    'c1Vua25vd24QABIKCgZUeEluaXQQARIOCgpUeENvbW1pdGVkEAISEAoMVHhDb25maXJtaW5nEA'
+    'MSEAoMVHhDb21taXRGYWlsEAQSDAoIVHhGaW5pc2gQBQ==');
 
 @$core.Deprecated('Use swapTxDescriptor instead')
 const SwapTx$json = {
@@ -201,6 +204,7 @@ const SwapTx$json = {
     {'1': 'amt', '3': 4, '4': 1, '5': 1, '10': 'amt'},
     {'1': 'target_amt', '3': 5, '4': 1, '5': 1, '10': 'targetAmt'},
     {'1': 'settle_amt', '3': 15, '4': 1, '5': 1, '10': 'settleAmt'},
+    {'1': 'settle_price', '3': 19, '4': 1, '5': 1, '10': 'settlePrice'},
     {'1': 'from_symbol', '3': 6, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'fromSymbol'},
     {'1': 'target_symbol', '3': 7, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'targetSymbol'},
     {'1': 'created_at', '3': 11, '4': 1, '5': 3, '10': 'createdAt'},
@@ -215,11 +219,11 @@ final $typed_data.Uint8List swapTxDescriptor = $convert.base64Decode(
     'ASgOMhYudXNlci5UcmFja2VkVHguU3RhdHVzUgZzdGF0dXMSHAoKdHhfZXJyX21zZxgRIAEoCV'
     'IIdHhFcnJNc2cSHgoLaXNfYnV5X2NvaW4YEiABKAhSCWlzQnV5Q29pbhIdCgpjb2luX3ByaWNl'
     'GAggASgBUgljb2luUHJpY2USEAoDYW10GAQgASgBUgNhbXQSHQoKdGFyZ2V0X2FtdBgFIAEoAV'
-    'IJdGFyZ2V0QW10Eh0KCnNldHRsZV9hbXQYDyABKAFSCXNldHRsZUFtdBI/Cgtmcm9tX3N5bWJv'
-    'bBgGIAEoDjIeLnVzZXIuVHJhY2tlZFR4LkNvbnRyYWN0U3ltYm9sUgpmcm9tU3ltYm9sEkMKDX'
-    'RhcmdldF9zeW1ib2wYByABKA4yHi51c2VyLlRyYWNrZWRUeC5Db250cmFjdFN5bWJvbFIMdGFy'
-    'Z2V0U3ltYm9sEh0KCmNyZWF0ZWRfYXQYCyABKANSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GA'
-    'wgASgDUgl1cGRhdGVkQXQ=');
+    'IJdGFyZ2V0QW10Eh0KCnNldHRsZV9hbXQYDyABKAFSCXNldHRsZUFtdBIhCgxzZXR0bGVfcHJp'
+    'Y2UYEyABKAFSC3NldHRsZVByaWNlEj8KC2Zyb21fc3ltYm9sGAYgASgOMh4udXNlci5UcmFja2'
+    'VkVHguQ29udHJhY3RTeW1ib2xSCmZyb21TeW1ib2wSQwoNdGFyZ2V0X3N5bWJvbBgHIAEoDjIe'
+    'LnVzZXIuVHJhY2tlZFR4LkNvbnRyYWN0U3ltYm9sUgx0YXJnZXRTeW1ib2wSHQoKY3JlYXRlZF'
+    '9hdBgLIAEoA1IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYDCABKANSCXVwZGF0ZWRBdA==');
 
 @$core.Deprecated('Use sellCoinRequestDescriptor instead')
 const SellCoinRequest$json = {

@@ -187,14 +187,19 @@ const CardRechargeRequest$json = {
   '1': 'CardRechargeRequest',
   '2': [
     {'1': 'cardNo', '3': 1, '4': 1, '5': 9, '10': 'cardNo'},
-    {'1': 'amt', '3': 2, '4': 1, '5': 1, '10': 'amt'},
+    {'1': 'card_expire_month', '3': 2, '4': 1, '5': 9, '10': 'cardExpireMonth'},
+    {'1': 'card_expire_year', '3': 3, '4': 1, '5': 9, '10': 'cardExpireYear'},
+    {'1': 'card_security_code', '3': 4, '4': 1, '5': 9, '10': 'cardSecurityCode'},
+    {'1': 'amt', '3': 5, '4': 1, '5': 1, '10': 'amt'},
   ],
 };
 
 /// Descriptor for `CardRechargeRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardRechargeRequestDescriptor = $convert.base64Decode(
-    'ChNDYXJkUmVjaGFyZ2VSZXF1ZXN0EhYKBmNhcmRObxgBIAEoCVIGY2FyZE5vEhAKA2FtdBgCIA'
-    'EoAVIDYW10');
+    'ChNDYXJkUmVjaGFyZ2VSZXF1ZXN0EhYKBmNhcmRObxgBIAEoCVIGY2FyZE5vEioKEWNhcmRfZX'
+    'hwaXJlX21vbnRoGAIgASgJUg9jYXJkRXhwaXJlTW9udGgSKAoQY2FyZF9leHBpcmVfeWVhchgD'
+    'IAEoCVIOY2FyZEV4cGlyZVllYXISLAoSY2FyZF9zZWN1cml0eV9jb2RlGAQgASgJUhBjYXJkU2'
+    'VjdXJpdHlDb2RlEhAKA2FtdBgFIAEoAVIDYW10');
 
 @$core.Deprecated('Use cardRechargeResponseDescriptor instead')
 const CardRechargeResponse$json = {

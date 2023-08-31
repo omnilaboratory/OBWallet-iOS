@@ -81,8 +81,15 @@ message CardWithdrawRequest {
 message CardWithdrawResponse {
 }
 message CardRechargeRequest {
+//    卡号	16
   string cardNo = 1;
-  double amt = 2;
+//    	卡有效期(月)	2
+  string card_expire_month =2;
+//    卡有效期(年)	4
+  string card_expire_year =3;
+//  cardSecurityCode CVV2/CSC
+  string card_security_code=4;
+  double amt = 5;
 }
 message CardRechargeResponse {
 }

@@ -419,6 +419,8 @@ class TrackedTx extends $pb.GeneratedMessage {
     ..aInt64(12, _omitFieldNames ? '' : 'updatedAt')
     ..aInt64(13, _omitFieldNames ? '' : 'userId')
     ..aInt64(14, _omitFieldNames ? '' : 'commitHeight')
+    ..aInt64(15, _omitFieldNames ? '' : 'toUserId')
+    ..a<$core.double>(16, _omitFieldNames ? '' : 'usdAmt', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -568,6 +570,24 @@ class TrackedTx extends $pb.GeneratedMessage {
   $core.bool hasCommitHeight() => $_has(13);
   @$pb.TagNumber(14)
   void clearCommitHeight() => clearField(14);
+
+  @$pb.TagNumber(15)
+  $fixnum.Int64 get toUserId => $_getI64(14);
+  @$pb.TagNumber(15)
+  set toUserId($fixnum.Int64 v) { $_setInt64(14, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasToUserId() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearToUserId() => clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.double get usdAmt => $_getN(15);
+  @$pb.TagNumber(16)
+  set usdAmt($core.double v) { $_setDouble(15, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasUsdAmt() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearUsdAmt() => clearField(16);
 }
 
 class SwapTx extends $pb.GeneratedMessage {
@@ -592,6 +612,7 @@ class SwapTx extends $pb.GeneratedMessage {
     ..a<$core.double>(15, _omitFieldNames ? '' : 'settleAmt', $pb.PbFieldType.OD)
     ..aOS(17, _omitFieldNames ? '' : 'txErrMsg')
     ..aOB(18, _omitFieldNames ? '' : 'isBuyCoin')
+    ..a<$core.double>(19, _omitFieldNames ? '' : 'settlePrice', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -750,6 +771,15 @@ class SwapTx extends $pb.GeneratedMessage {
   $core.bool hasIsBuyCoin() => $_has(14);
   @$pb.TagNumber(18)
   void clearIsBuyCoin() => clearField(18);
+
+  @$pb.TagNumber(19)
+  $core.double get settlePrice => $_getN(15);
+  @$pb.TagNumber(19)
+  set settlePrice($core.double v) { $_setDouble(15, v); }
+  @$pb.TagNumber(19)
+  $core.bool hasSettlePrice() => $_has(15);
+  @$pb.TagNumber(19)
+  void clearSettlePrice() => clearField(19);
 }
 
 class SellCoinRequest extends $pb.GeneratedMessage {

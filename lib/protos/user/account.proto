@@ -50,9 +50,13 @@ message TrackedTx{
   int64 user_id = 13;
   string tx_id = 2;
   string from = 3;
+//  to_address
   string to = 4;
+  //to_user_id
+  int64 to_user_id = 15;
   string token_address = 5;
   double amt = 6;
+  double usd_amt = 16;
   int64 commit_height=14;
   ContractSymbol Symbol =7;
   int64 confirms = 8;
@@ -93,6 +97,7 @@ message SwapTx{
 
   double target_amt = 5;
   double settle_amt = 15;
+  double settle_price = 19;
   TrackedTx.ContractSymbol from_symbol = 6;
   TrackedTx.ContractSymbol target_symbol = 7;
   int64 created_at = 11;

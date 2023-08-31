@@ -753,7 +753,10 @@ class CardRechargeRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRechargeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'cardNo', protoName: 'cardNo')
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.OD)
+    ..aOS(2, _omitFieldNames ? '' : 'cardExpireMonth')
+    ..aOS(3, _omitFieldNames ? '' : 'cardExpireYear')
+    ..aOS(4, _omitFieldNames ? '' : 'cardSecurityCode')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -788,13 +791,40 @@ class CardRechargeRequest extends $pb.GeneratedMessage {
   void clearCardNo() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.double get amt => $_getN(1);
+  $core.String get cardExpireMonth => $_getSZ(1);
   @$pb.TagNumber(2)
-  set amt($core.double v) { $_setDouble(1, v); }
+  set cardExpireMonth($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasAmt() => $_has(1);
+  $core.bool hasCardExpireMonth() => $_has(1);
   @$pb.TagNumber(2)
-  void clearAmt() => clearField(2);
+  void clearCardExpireMonth() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get cardExpireYear => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set cardExpireYear($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCardExpireYear() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCardExpireYear() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get cardSecurityCode => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set cardSecurityCode($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasCardSecurityCode() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCardSecurityCode() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get amt => $_getN(4);
+  @$pb.TagNumber(5)
+  set amt($core.double v) { $_setDouble(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasAmt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearAmt() => clearField(5);
 }
 
 class CardRechargeResponse extends $pb.GeneratedMessage {
