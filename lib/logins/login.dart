@@ -24,10 +24,10 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     LocalStorage.initSP().then((value) {
-      var userToken = LocalStorage.get(LocalStorage.userToken);
-      if (userToken != null && userToken.toString().isNotEmpty) {
-        autoLogin(userToken);
-      }
+      // var userToken = LocalStorage.get(LocalStorage.userToken);
+      // if (userToken != null && userToken.toString().isNotEmpty) {
+      //   autoLogin(userToken);
+      // }
 
       Eth.initWeb3Client();
     });
