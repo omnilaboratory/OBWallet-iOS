@@ -111,7 +111,7 @@ class _CardPartState extends State<CardPart> {
                                       AssetImage("asset/images/img_visa.png")),
                             ),
                             const Visibility(
-                                visible: true,
+                                visible: false,
                                 child: Padding(
                                     padding:
                                         EdgeInsets.only(left: 15, bottom: 30),
@@ -141,7 +141,7 @@ class _CardPartState extends State<CardPart> {
                           ],
                         )),
                     Visibility(
-                        visible: true,
+                        visible: false,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 15),
                           child: GestureDetector(
@@ -162,7 +162,7 @@ class _CardPartState extends State<CardPart> {
                   ],
                 )),
             Visibility(
-              visible: false,
+              visible: true,
               child: Expanded(
                   flex: 1,
                   child: Column(
@@ -215,7 +215,7 @@ class _CardPartState extends State<CardPart> {
                   )),
             ),
             Visibility(
-                visible: true,
+                visible: false,
                 child: Expanded(
                     flex: 1,
                     child: Column(
