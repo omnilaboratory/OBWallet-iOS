@@ -8,7 +8,8 @@ import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
-import 'package:awallet/tools/enum_exchange_type.dart';
+import 'package:awallet/bean/enum_exchange_type.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:awallet/tools/string_tool.dart';
@@ -35,7 +36,7 @@ class _ExchangeState extends State<Exchange> {
   double coinPrice = 0;
 
   var tokenList = EthService.getInstance().getTokenList();
-  var currencyList = LocalStorage.currencyList;
+  var currencyList = GlobalParams.currencyList;
 
   late TokenInfo currSelectedToken;
   late TokenInfo currSelectedCurrency;

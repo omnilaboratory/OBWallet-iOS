@@ -8,7 +8,6 @@ import 'package:awallet/logins/sign_up_step1.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -25,7 +24,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     LocalStorage.initSP().then((value) {
-      var userToken = LocalStorage.get("userToken");
+      var userToken = LocalStorage.get(LocalStorage.userToken);
       if (userToken != null && userToken.toString().isNotEmpty) {
         autoLogin(userToken);
       }
@@ -183,11 +182,11 @@ class _LoginState extends State<Login> {
   }
 
   Widget buildInputFields() {
-    if (LocalStorage.get("username") != null) {
-      _unameController.text = LocalStorage.get("username");
+    if (LocalStorage.get(LocalStorage.username) != null) {
+      _unameController.text = LocalStorage.get(LocalStorage.username);
     }
-    if (LocalStorage.get("password") != null) {
-      _pswController.text = LocalStorage.get("password");
+    if (LocalStorage.get(LocalStorage.password) != null) {
+      _pswController.text = LocalStorage.get(LocalStorage.password);
     }
     return Container(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
@@ -237,8 +236,9 @@ class _LoginState extends State<Login> {
     var password = _pswController.value.text.trim();
     UserService.getInstance().login(username, password).then((loginInfo) {
       if (loginInfo.code == 1) {
-        LocalStorage.save("username", username);
-        LocalStorage.save("password", password);
+        LocalStorage.save(LocalStorage.username, username);
+        LocalStorage.save(LocalStorage.password, password);
+        LocalStorage.save(LocalStorage.userToken, (loginInfo.data as SignInResponse).token);
         getUserInfoAndGoHome();
       }
     });

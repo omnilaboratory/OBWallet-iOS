@@ -1,7 +1,7 @@
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/logins/apply_card_step_one.dart';
-import 'package:awallet/tools/enum_exchange_type.dart';
+import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 

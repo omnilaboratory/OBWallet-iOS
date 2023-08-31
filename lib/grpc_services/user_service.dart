@@ -4,6 +4,7 @@ import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/src/generated/user/country.pbenum.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
 import 'package:fixnum/src/int64.dart';
@@ -23,7 +24,7 @@ class UserService {
     userServiceClient ??= UserServiceClient(channel!,
         options: CallOptions(
             metadata: {"token": CommonService.token},
-            timeout: Duration(seconds: LocalStorage.grpcTimeout)));
+            timeout: Duration(seconds: GlobalParams.grpcTimeout)));
     return _instance;
   }
 

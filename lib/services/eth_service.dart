@@ -6,6 +6,7 @@ import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 
 class EthService {
@@ -52,7 +53,7 @@ class EthService {
 
   List<TokenInfo> getTokenList() {
     if (_tokenList.isEmpty) {
-      _tokenList = LocalStorage.ethTokenList;
+      _tokenList = GlobalParams.ethTokenList;
     }
     return _tokenList;
   }

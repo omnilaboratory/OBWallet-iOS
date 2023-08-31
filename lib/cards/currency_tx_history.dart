@@ -1,4 +1,3 @@
-import 'package:awallet/bean/currency_tx_info.dart';
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:flutter/material.dart';
