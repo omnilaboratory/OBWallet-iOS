@@ -80,7 +80,11 @@ class _SendState extends State<Send> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
-      body: Center(
+      body: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
         child: Column(
           children: [
             const SizedBox(height: 80),
