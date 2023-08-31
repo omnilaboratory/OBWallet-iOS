@@ -7,6 +7,7 @@ import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
 import 'package:fixnum/src/int64.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:grpc/grpc.dart';
 
 class UserService {
@@ -31,6 +32,7 @@ class UserService {
   Future<GrpcResponse> verifyCode(String email) async {
     var request = VerifyCodeRequest();
     request.email = email;
+    log("$request");
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.verifyCode(request);
@@ -46,7 +48,7 @@ class UserService {
     var request = SignInRequest();
     request.userName = username;
     request.password = Utils.generateMd5(password);
-
+    log("$request");
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.signIn(request);
@@ -62,8 +64,10 @@ class UserService {
   }
 
   Future<GrpcResponse> signUp(SignUpRequest req) async {
+    log("$req");
     req.password = Utils.generateMd5(req.password);
     req.confirmPassword = Utils.generateMd5(req.confirmPassword);
+    log("$req");
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.signUp(req);
@@ -90,6 +94,7 @@ class UserService {
   }
 
   Future<GrpcResponse> uploadImage(UploadRequest req) async {
+    log("$req");
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.upload(req);
@@ -119,7 +124,7 @@ class UserService {
     request.state = 'pending';
     request.postCode = '1';
     request.countryCode = CountryCode.CN;
-
+    log("$request");
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.kyc(request);
@@ -151,6 +156,8 @@ class UserService {
     log("$e");
     GrpcError error = e as GrpcError;
     ret.msg = error.message.toString();
+    Fluttertoast.showToast(
+        msg: ret.msg, gravity: ToastGravity.CENTER);
   }
 
   Future<GrpcResponse> updateUser(String address) async {

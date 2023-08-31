@@ -240,9 +240,6 @@ class _LoginState extends State<Login> {
         LocalStorage.save("username", username);
         LocalStorage.save("password", password);
         getUserInfoAndGoHome();
-      } else {
-        Fluttertoast.showToast(
-            msg: loginInfo.msg, gravity: ToastGravity.CENTER);
       }
     });
   }
@@ -257,10 +254,6 @@ class _LoginState extends State<Login> {
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
-      } else {
-        log(userInfoResp.msg);
-        Fluttertoast.showToast(
-            msg: userInfoResp.msg, gravity: ToastGravity.CENTER);
       }
     });
   }
