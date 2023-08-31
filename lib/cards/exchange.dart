@@ -156,14 +156,14 @@ class _ExchangeState extends State<Exchange> {
         return;
       }
 
-      if (_amountFromController.value.text.toString().compareTo(
-              StringTools.formatCryptoNum(currSelectedToken.balance)) >
-          0) {
-        Fluttertoast.showToast(
-            msg: "The to amount cannot exceed the maximum",
-            gravity: ToastGravity.CENTER);
-        return;
-      }
+      // if (_amountFromController.value.text.toString().compareTo(
+      //         StringTools.formatCryptoNum(currSelectedToken.balance)) >
+      //     0) {
+      //   Fluttertoast.showToast(
+      //       msg: "The to amount cannot exceed the maximum",
+      //       gravity: ToastGravity.CENTER);
+      //   return;
+      // }
     }
 
     if (LocalStorage.get(LocalStorage.ethAddress) == null) {
@@ -487,43 +487,49 @@ class _ExchangeState extends State<Exchange> {
               flex: 3,
               child: SizedBox(
                 height: 34,
-                child: TextField(
-                  controller: _amountToController,
-                  maxLines: 10,
-                  minLines: 1,
-                  inputFormatters: [PrecisionLimitFormatter(2)],
-                  onChanged: (text) {
-                    setState(() {
-                      if (currSelectedToken.name == 'ETH') {
-                        _amountFromController.text =
-                            StringTools.formatCryptoNum(
-                                double.parse(_amountToController.text) /
-                                    coinPrice);
-                      } else {
-                        _amountFromController.text =
-                            StringTools.formatCurrencyNum(
-                                double.parse(_amountToController.text) /
-                                    coinPrice);
-                      }
-                    });
-                  },
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  cursorColor: const Color(0xFF4A92FF),
-                  style: const TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  decoration: InputDecoration(
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-                    border: _outlineRightInputBorder,
-                    focusedBorder: _outlineRightInputBorder,
-                    enabledBorder: _outlineRightInputBorder,
-                    disabledBorder: _outlineRightInputBorder,
-                    focusedErrorBorder: _outlineRightInputBorder,
-                    errorBorder: _outlineRightInputBorder,
+                child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    },
+                  child: TextField(
+                    controller: _amountToController,
+                    maxLines: 10,
+                    minLines: 1,
+                    inputFormatters: [PrecisionLimitFormatter(2)],
+                    onChanged: (text) {
+                      setState(() {
+                        if (currSelectedToken.name == 'ETH') {
+                          _amountFromController.text =
+                              StringTools.formatCryptoNum(
+                                  double.parse(_amountToController.text) /
+                                      coinPrice);
+                        } else {
+                          _amountFromController.text =
+                              StringTools.formatCurrencyNum(
+                                  double.parse(_amountToController.text) /
+                                      coinPrice);
+                        }
+                      });
+                    },
+                    keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                    cursorColor: const Color(0xFF4A92FF),
+                    style: const TextStyle(
+                      color: Color(0xFF333333),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    decoration: InputDecoration(
+                      contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                      border: _outlineRightInputBorder,
+                      focusedBorder: _outlineRightInputBorder,
+                      enabledBorder: _outlineRightInputBorder,
+                      disabledBorder: _outlineRightInputBorder,
+                      focusedErrorBorder: _outlineRightInputBorder,
+                      errorBorder: _outlineRightInputBorder,
+                    ),
                   ),
                 ),
               ),
@@ -596,34 +602,42 @@ class _ExchangeState extends State<Exchange> {
               flex: 3,
               child: SizedBox(
                 height: 34,
-                child: TextField(
-                  controller: _amountFromController,
-                  maxLines: 10,
-                  minLines: 1,
-                  inputFormatters: [PrecisionLimitFormatter(num)],
-                  onChanged: (text) {
-                    setState(() {
-                      _amountToController.text = StringTools.formatCurrencyNum(
-                          double.parse(_amountFromController.text) * coinPrice);
-                    });
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
                   },
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  cursorColor: const Color(0xFF4A92FF),
-                  style: const TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  decoration: InputDecoration(
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-                    border: _outlineRightInputBorder,
-                    focusedBorder: _outlineRightInputBorder,
-                    enabledBorder: _outlineRightInputBorder,
-                    disabledBorder: _outlineRightInputBorder,
-                    focusedErrorBorder: _outlineRightInputBorder,
-                    errorBorder: _outlineRightInputBorder,
+                  child: TextField(
+                    controller: _amountFromController,
+                    maxLines: 10,
+                    minLines: 1,
+                    inputFormatters: [PrecisionLimitFormatter(num)],
+                    onChanged: (text) {
+                      setState(() {
+                        _amountToController.text =
+                            StringTools.formatCurrencyNum(
+                                double.parse(_amountFromController.text) *
+                                    coinPrice);
+                      });
+                    },
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
+                    cursorColor: const Color(0xFF4A92FF),
+                    style: const TextStyle(
+                      color: Color(0xFF333333),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 7),
+                      border: _outlineRightInputBorder,
+                      focusedBorder: _outlineRightInputBorder,
+                      enabledBorder: _outlineRightInputBorder,
+                      disabledBorder: _outlineRightInputBorder,
+                      focusedErrorBorder: _outlineRightInputBorder,
+                      errorBorder: _outlineRightInputBorder,
+                    ),
                   ),
                 ),
               ),
