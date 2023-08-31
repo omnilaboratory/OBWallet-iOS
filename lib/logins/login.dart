@@ -234,9 +234,9 @@ class _LoginState extends State<Login> {
     log("login start");
     var username = _unameController.value.text.trim();
     var password = _pswController.value.text.trim();
+    LocalStorage.save(LocalStorage.username, username);
     UserService.getInstance().login(username, password).then((loginInfo) {
       if (loginInfo.code == 1) {
-        LocalStorage.save(LocalStorage.username, username);
         LocalStorage.save(LocalStorage.password, password);
         LocalStorage.save(LocalStorage.userToken, (loginInfo.data as SignInResponse).token);
         getUserInfoAndGoHome();

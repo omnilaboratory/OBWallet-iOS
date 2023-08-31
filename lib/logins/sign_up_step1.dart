@@ -1,13 +1,13 @@
-import 'dart:developer';
-
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/grpc_services/user_service.dart';
-import 'package:awallet/logins/sign_up_step2.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
+import 'package:awallet/tools/local_storage.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import 'apply_card_step_one.dart';
 
 class SignUpStepOne extends StatefulWidget {
   const SignUpStepOne({super.key});
@@ -124,79 +124,68 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 10),
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                  labelText: "Email",
-                  hintText: "Email",
-                  prefixIcon: Icon(Icons.person)),
-              validator: (v) {
-                return v!.trim().isNotEmpty ? null : "wrong Email";
-              },
-            ),
+            const SizedBox(height: 30),
+            buildInputColumn("Email", _emailController, width: 300),
             const SizedBox(height: 20),
             Row(
               children: [
-                SizedBox(
-                  width: 180,
-                  child: TextFormField(
-                    controller: _codeController,
-                    decoration: const InputDecoration(
-                        labelText: "Code",
-                        hintText: "Code",
-                        prefixIcon: Icon(Icons.build_outlined)),
-                    validator: (v) {
-                      return v!.trim().isNotEmpty ? null : "wrong Code";
-                    },
-                  ),
-                ),
+                buildInputColumn("Code", _codeController),
                 const Spacer(),
-                TextButton(
-                    onPressed: () {
-                      getVerifyCode();
-                    },
-                    child: const Text("Get code"))
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: TextButton(
+                      onPressed: () {
+                        getVerifyCode();
+                      },
+                      child: const Text("Get code")),
+                )
               ],
             ),
             const SizedBox(height: 20),
-            TextFormField(
-              controller: _pswController,
-              decoration: const InputDecoration(
-                  labelText: "Password",
-                  hintText: "Password",
-                  prefixIcon: Icon(Icons.lock)),
-              obscureText: true,
-              validator: (v) {
-                return v!.trim().isNotEmpty ? null : "wrong password";
-              },
-            ),
+            buildInputColumn("Password", _pswController, width: 272),
             const SizedBox(height: 20),
-            TextFormField(
-              controller: _psw2Controller,
-              decoration: const InputDecoration(
-                  labelText: "Confirm Password",
-                  hintText: "Confirm Password",
-                  prefixIcon: Icon(Icons.lock)),
-              obscureText: true,
-              validator: (v) {
-                return v!.trim().isNotEmpty ? null : "wrong Confirm Password";
-              },
-            ),
+            buildInputColumn("Confirm Password", _psw2Controller, width: 272),
             const SizedBox(height: 20),
-            TextFormField(
-              controller: _unameController,
-              decoration: const InputDecoration(
-                  labelText: "Nickname",
-                  hintText: "Nickname",
-                  prefixIcon: Icon(Icons.person)),
-              validator: (v) {
-                return v!.trim().isNotEmpty ? null : "wrong Nickname";
-              },
-            ),
+            buildInputColumn("Nickname", _unameController, width: 272),
           ],
         ),
       ),
+    );
+  }
+
+  Column buildInputColumn(String title, TextEditingController controller,
+      {double width = 180}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            color: Color(0xFF999999),
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        Container(
+          width: width,
+          height: 36,
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: const BorderSide(width: 0.80, color: Color(0xFFE6E6E6)),
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          child: TextFormField(
+            controller: controller,
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+            ),
+            validator: (v) {
+              return v!.trim().isNotEmpty ? null : "wrong $title";
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -286,10 +275,10 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     signUpRequest.verifyCodeId = verifyCodeResponse!.verifyCodeId;
     UserService.getInstance().signUp(signUpRequest).then((value) async {
       if (value.code == 1) {
+        LocalStorage.remove(LocalStorage.ethAddress);
+        LocalStorage.remove(LocalStorage.ethPrivateKey);
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const SignUpStepTwo()));
-      } else {
-        log(value.msg);
+            MaterialPageRoute(builder: (context) => const ApplyCardStepOne()));
       }
     });
   }
