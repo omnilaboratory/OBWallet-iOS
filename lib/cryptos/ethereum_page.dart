@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/crypto_token_item.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
@@ -19,17 +21,35 @@ class EthereumPage extends StatefulWidget {
 }
 
 class _EthereumPageState extends State<EthereumPage> {
+  Timer? updateBalanceTimer;
+
   @override
   void initState() {
     var address = LocalStorage.get(LocalStorage.ethAddress);
     if (address != null) {
-      EthService.getInstance().updateTokenBalances().then((value) {
-        if (mounted) {
-          setState(() {});
-        }
-      });
+      updateBalance();
     }
+    updateBalanceTimer ??= Timer.periodic(const Duration(seconds: 30), (timer) {
+      updateBalance();
+    });
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (updateBalanceTimer != null && updateBalanceTimer!.isActive) {
+      updateBalanceTimer!.cancel();
+    }
+    super.dispose();
+  }
+
+  void updateBalance() {
+    EthService.getInstance().updateTokenBalances().then((value) {
+      if (mounted) {
+        setState(() {});
+      }
+    });
   }
 
   @override
