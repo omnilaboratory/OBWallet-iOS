@@ -60,5 +60,7 @@
 	<false/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App needs access to your camera roll to save and share photos.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App needs access to your camera to scan QR code.</string>
 </dict>
 </plist>
