@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/home.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +16,9 @@ class Kyc extends StatefulWidget {
 }
 
 class _KycState extends State<Kyc> {
+  final TextEditingController _address1Controller = TextEditingController();
+  final TextEditingController _address2Controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -68,10 +73,11 @@ class _KycState extends State<Kyc> {
                           ),
                         ),
                         const SizedBox(height: 6),
-                        const TextField(
+                        TextField(
+                          controller: _address1Controller,
                           maxLines: 1,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
+                          keyboardType: TextInputType.text,
+                          decoration: const InputDecoration(
                             hintText: "Address 1",
                             contentPadding:
                                 EdgeInsets.only(left: 10, top: 10, bottom: 10),
@@ -91,10 +97,11 @@ class _KycState extends State<Kyc> {
                           ),
                         ),
                         const SizedBox(height: 6),
-                        const TextField(
+                        TextField(
+                          controller: _address2Controller,
                           maxLines: 1,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
+                          keyboardType: TextInputType.text,
+                          decoration: const InputDecoration(
                             hintText: "Address 2",
                             contentPadding:
                                 EdgeInsets.only(left: 10, top: 10, bottom: 10),
@@ -105,28 +112,28 @@ class _KycState extends State<Kyc> {
                           ),
                         ),
                         const SizedBox(height: 40),
-                        const Text(
-                          'Address 3',
-                          style: TextStyle(
-                            color: Color(0xFF999999),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        const TextField(
-                          maxLines: 1,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            hintText: "Address 3",
-                            contentPadding:
-                                EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                            border: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.black, width: 1.0),
-                            ),
-                          ),
-                        ),
+                        // const Text(
+                        //   'Address 3',
+                        //   style: TextStyle(
+                        //     color: Color(0xFF999999),
+                        //     fontSize: 14,
+                        //     fontWeight: FontWeight.w400,
+                        //   ),
+                        // ),
+                        // const SizedBox(height: 6),
+                        // const TextField(
+                        //   maxLines: 1,
+                        //   keyboardType: TextInputType.number,
+                        //   decoration: InputDecoration(
+                        //     hintText: "Address 3",
+                        //     contentPadding:
+                        //         EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                        //     border: OutlineInputBorder(
+                        //       borderSide:
+                        //           BorderSide(color: Colors.black, width: 1.0),
+                        //     ),
+                        //   ),
+                        // ),
                         const Spacer(),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -204,14 +211,25 @@ class _KycState extends State<Kyc> {
   }
 
   void kyc() {
-    UserService.getInstance().kyc().then((value) async {
-      if (value.code == 1) {
-        var resp = value.data as UserInfo;
-        log(resp.toString());
+    var address1 = _address1Controller.value.text.trim();
+    var address2 = _address2Controller.value.text.trim();
+    UserService.getInstance().getUserInfo().then((userInfoResp) {
+      if (userInfoResp.code == 1) {
+        var userInfo = userInfoResp.data as GetUserInfoResponse;
+        CommonService.userInfo = userInfo.user;
+        UserService.getInstance().kyc(address1, address2).then((value) async {
+          if (value.code == 1) {
+            var resp = value.data as UserInfo;
+            log(resp.toString());
 
-        Navigator.pop(context);
-      } else {
-        log(value.msg);
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const HomePage()));
+          } else {
+            log(value.msg);
+          }
+        });
       }
     });
   }

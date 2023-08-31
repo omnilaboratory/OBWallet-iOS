@@ -15,6 +15,7 @@ import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Account extends StatefulWidget {
   Account({super.key});
@@ -141,17 +142,22 @@ class _AccountState extends State<Account> {
             icon: 'asset/images/icon_pay.png',
             iconWidth: iconWidth,
             text: 'Pay',
-            onPressed: () {}),
+            onPressed: () {
+              Fluttertoast.showToast(
+                  msg: "Coming Soon...", gravity: ToastGravity.CENTER);
+            }),
         SquareButton(
             icon: 'asset/images/icon_top_up.png',
             text: 'Top Up',
             iconWidth: iconWidth,
             onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const TopUp();
-                  });
+              Fluttertoast.showToast(
+                  msg: "Coming Soon...", gravity: ToastGravity.CENTER);
+              // showDialog(
+              //     context: context,
+              //     builder: (context) {
+              //       return const TopUp();
+              //     });
             }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',

@@ -28,8 +28,8 @@ class _LoginState extends State<Login> {
       // if (userToken != null && userToken.toString().isNotEmpty) {
       //   autoLogin(userToken);
       // }
-
       Eth.initWeb3Client();
+      setState(() {});
     });
     super.initState();
   }

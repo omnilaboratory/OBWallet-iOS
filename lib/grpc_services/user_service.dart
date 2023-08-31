@@ -107,28 +107,30 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> kyc() async {
-    var request = UserInfo();
-    request.id = Int64(9);
-    request.userName = 'hahaha';
-    request.updatedAt = Int64(1692602216);
-    request.createdAt = Int64(1692602216);
-    request.idNum = '130429198903091012';
-    request.firstName = '哈';
-    request.lastName = '哈哈';
-    request.email = 'healergyl@126.com';
-    request.mobile = '15116920267';
-    request.dob = '1996-06-06';
-    request.address1 = 'address1';
-    request.address2 = 'address2';
-    request.city = 'beijing';
-    request.state = 'pending';
-    request.postCode = '1';
-    request.countryCode = CountryCode.CN;
+  Future<GrpcResponse> kyc(String address1, String address2) async {
+    var request = CommonService.userInfo;
+    request?.address1 = address1;
+    request?.address2 = address2;
+    // request.id = Int64(9);
+    // request.userName = 'hahaha';
+    // request.updatedAt = Int64(1692602216);
+    // request.createdAt = Int64(1692602216);
+    // request.idNum = '130429198903091012';
+    // request.firstName = '哈';
+    // request.lastName = '哈哈';
+    // request.email = 'healergyl@126.com';
+    // request.mobile = '15116920267';
+    // request.dob = '1996-06-06';
+    // request.address1 = 'address1';
+    // request.address2 = 'address2';
+    // request.city = 'beijing';
+    // request.state = 'pending';
+    // request.postCode = '1';
+    // request.countryCode = CountryCode.CN;
     log("$request");
     var ret = GrpcResponse();
     try {
-      var resp = await userServiceClient?.kyc(request);
+      var resp = await userServiceClient?.kyc(request!);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
@@ -157,8 +159,7 @@ class UserService {
     log("$e");
     GrpcError error = e as GrpcError;
     ret.msg = error.message.toString();
-    Fluttertoast.showToast(
-        msg: ret.msg, gravity: ToastGravity.CENTER);
+    Fluttertoast.showToast(msg: ret.msg, gravity: ToastGravity.CENTER);
   }
 
   Future<GrpcResponse> updateUser(String address) async {

@@ -10,6 +10,7 @@ import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'ethereum_recover_wallet.dart';
 
@@ -95,7 +96,10 @@ class _EthereumPageState extends State<EthereumPage> {
             icon: 'asset/images/icon_pay.png',
             iconWidth: iconWidth,
             text: 'Pay',
-            onPressed: () {}),
+            onPressed: () {
+              Fluttertoast.showToast(
+                  msg: "Coming Soon...", gravity: ToastGravity.CENTER);
+            }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',
             text: 'Exchange',

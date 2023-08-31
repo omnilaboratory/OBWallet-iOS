@@ -79,7 +79,6 @@ class CryptoReceive extends StatelessWidget {
               child: AutoSizeText(
                 address,
                 maxLines: 1,
-                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 13,
                   color: Color(0xFF999999),

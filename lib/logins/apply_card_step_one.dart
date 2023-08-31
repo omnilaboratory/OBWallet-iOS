@@ -1,6 +1,6 @@
+import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/home.dart';
-import 'package:awallet/logins/apply_card_step_two.dart';
 import 'package:flutter/material.dart';
 
 class ApplyCardStepOne extends StatefulWidget {
@@ -139,10 +139,11 @@ class _ApplyCardStepOneState extends State<ApplyCardStepOne> {
                   icon: 'asset/images/icon_arrow_right_green.png',
                   text: 'CONTINUE',
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ApplyCardStepTwo()));
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const Kyc();
+                        });
                   },
                 )
               ]),

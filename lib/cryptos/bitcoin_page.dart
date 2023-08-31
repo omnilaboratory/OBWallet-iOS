@@ -8,6 +8,7 @@ import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class BitcoinPage extends StatefulWidget {
   const BitcoinPage({super.key});
@@ -22,8 +23,8 @@ class _BitcoinPageState extends State<BitcoinPage> {
     TokenInfo(
         name: "BTC",
         iconUrl: 'asset/images/icon_bitcoin.png',
-        balance: 100000.0,
-        balanceOfDollar: 1220222222000.0),
+        balance: 0.00,
+        balanceOfDollar: 0.00),
     TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
   ];
 
@@ -32,7 +33,7 @@ class _BitcoinPageState extends State<BitcoinPage> {
     return Center(
       child: Column(
         children: [
-          CryptoWalletCard(walletInfo: CryptoWalletInfo(address: "0xaaaaaaaadfafadf",balance: 151515)),
+          CryptoWalletCard(walletInfo: CryptoWalletInfo(address: "******",balance: 0)),
           const SizedBox(height: 20),
           buildTxButtons(),
           Expanded(
@@ -60,7 +61,10 @@ class _BitcoinPageState extends State<BitcoinPage> {
             icon: 'asset/images/icon_pay.png',
             iconWidth: iconWidth,
             text: 'Pay',
-            onPressed: () {}),
+            onPressed: () {
+              Fluttertoast.showToast(
+                  msg: "Coming Soon...", gravity: ToastGravity.CENTER);
+            }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',
             text: 'Exchange',
