@@ -55,7 +55,7 @@ class _TxHistoryState extends State<TxHistory> {
             txHistoryList.add(CryptoTxInfo(
                 title: "Send(${element.symbol.name})",
                 txTime: DateTime.fromMillisecondsSinceEpoch((element.createdAt * 1000).toInt()),
-                amount: element.amt));
+                amount: element.amt,amountOfDollar: element.usdAmt));
           }
         } else {
           tips = "No Txs Data";
