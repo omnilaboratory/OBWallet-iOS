@@ -25,14 +25,10 @@ class _EthereumPageState extends State<EthereumPage> {
 
   @override
   void initState() {
-    var address = LocalStorage.get(LocalStorage.ethAddress);
-    if (address != null) {
-      updateBalance();
-    }
+    updateBalance();
     updateBalanceTimer ??= Timer.periodic(const Duration(seconds: 30), (timer) {
       updateBalance();
     });
-
     super.initState();
   }
 
@@ -45,11 +41,14 @@ class _EthereumPageState extends State<EthereumPage> {
   }
 
   void updateBalance() {
-    EthService.getInstance().updateTokenBalances().then((value) {
-      if (mounted) {
-        setState(() {});
-      }
-    });
+    var address = LocalStorage.get(LocalStorage.ethAddress);
+    if (address != null) {
+      EthService.getInstance().updateTokenBalances().then((value) {
+        if (mounted) {
+          setState(() {});
+        }
+      });
+    }
   }
 
   @override
