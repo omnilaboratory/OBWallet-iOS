@@ -17,7 +17,7 @@ class SignUpStepOne extends StatefulWidget {
 }
 
 class _SignUpStepOneState extends State<SignUpStepOne> {
-  final GlobalKey _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _codeController = TextEditingController();
   final TextEditingController _unameController = TextEditingController();
@@ -129,7 +129,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
             const SizedBox(height: 20),
             Row(
               children: [
-                buildInputColumn("Code", _codeController),
+                buildInputColumn("Verify Code", _codeController),
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(top: 12),
@@ -180,9 +180,6 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
             decoration: const InputDecoration(
               border: InputBorder.none,
             ),
-            validator: (v) {
-              return v!.trim().isNotEmpty ? null : "wrong $title";
-            },
           ),
         ),
       ],
@@ -262,16 +259,30 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   }
 
   void signUp() {
+    SignUpRequest signUpRequest = SignUpRequest();
+    signUpRequest.email = _emailController.value.text.trim();
+    if (!RegExp(
+            r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
+        .hasMatch(signUpRequest.email)) {
+      Fluttertoast.showToast(msg: "wrong email");
+    }
     if (verifyCodeResponse == null) {
       Fluttertoast.showToast(msg: "please get verifyCode first");
       return;
     }
-    SignUpRequest signUpRequest = SignUpRequest();
-    signUpRequest.email = _emailController.value.text.trim();
     signUpRequest.password = _pswController.value.text.trim();
     signUpRequest.confirmPassword = _psw2Controller.value.text.trim();
+    if (signUpRequest.password != signUpRequest.confirmPassword) {
+      Fluttertoast.showToast(msg: "wrong password and confirmPassword");
+      return;
+    }
+
     signUpRequest.userName = _unameController.value.text.trim();
     signUpRequest.vcode = _codeController.value.text.trim();
+    if (signUpRequest.vcode=="") {
+      Fluttertoast.showToast(msg: "wrong verify code");
+      return;
+    }
     signUpRequest.verifyCodeId = verifyCodeResponse!.verifyCodeId;
     UserService.getInstance().signUp(signUpRequest).then((value) async {
       if (value.code == 1) {
