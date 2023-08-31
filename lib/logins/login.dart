@@ -235,13 +235,12 @@ class _LoginState extends State<Login> {
     log("login start");
     var username = _unameController.value.text.trim();
     var password = _pswController.value.text.trim();
-    UserService.getInstance().signIn(username, password).then((loginInfo) {
+    UserService.getInstance().login(username, password).then((loginInfo) {
       if (loginInfo.code == 1) {
         LocalStorage.save("username", username);
         LocalStorage.save("password", password);
         getUserInfoAndGoHome();
       } else {
-        log(loginInfo.msg);
         Fluttertoast.showToast(
             msg: loginInfo.msg, gravity: ToastGravity.CENTER);
       }

@@ -20,7 +20,9 @@ class UserService {
 
   static UserService getInstance() {
     userServiceClient ??= UserServiceClient(channel!,
-        options: CallOptions(metadata: {"token": CommonService.token}));
+        options: CallOptions(
+            metadata: {"token": CommonService.token},
+            timeout: Duration(seconds: LocalStorage.grpcTimeout)));
     return _instance;
   }
 
@@ -40,7 +42,7 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> signIn(String username, String password) async {
+  Future<GrpcResponse> login(String username, String password) async {
     var request = SignInRequest();
     request.userName = username;
     request.password = Utils.generateMd5(password);

@@ -2,6 +2,7 @@ import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/src/generated/user/country.pbenum.dart';
+import 'package:awallet/tools/local_storage.dart';
 import 'package:grpc/grpc.dart';
 
 class CardService {
@@ -15,7 +16,9 @@ class CardService {
 
   static CardService getInstance() {
     cardServiceClient ??= CardServiceClient(channel!,
-        options: CallOptions(metadata: {"token": CommonService.token}));
+        options: CallOptions(
+            metadata: {"token": CommonService.token},
+            timeout: Duration(seconds: LocalStorage.grpcTimeout)));
     return _instance;
   }
 

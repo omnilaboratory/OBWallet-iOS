@@ -2,6 +2,7 @@ import 'package:awallet/bean/token_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
+  static int grpcTimeout= 5;
   static String ethAddress= "ethAddress";
   static String ethPrivateKey= "private_key";
 

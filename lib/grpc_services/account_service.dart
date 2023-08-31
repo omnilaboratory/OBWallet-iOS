@@ -1,6 +1,7 @@
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/tools/local_storage.dart';
 import 'package:grpc/grpc.dart';
 
 class AccountService {
@@ -14,7 +15,9 @@ class AccountService {
 
   static AccountService getInstance() {
     accountServiceClient ??= accountClient(channel!,
-        options: CallOptions(metadata: {"token": CommonService.token}));
+        options: CallOptions(
+            metadata: {"token": CommonService.token},
+            timeout: Duration(seconds: LocalStorage.grpcTimeout)));
     return _instance;
   }
 
@@ -62,11 +65,11 @@ class AccountService {
 
   Future<GrpcResponse> getCoinPrice(String name) async {
     var request = GetCoinPriceRequest();
-    if(name == 'ETH'){
+    if (name == 'ETH') {
       request.symbol = TrackedTx_ContractSymbol.ETH;
-    }else if(name == 'USDT'){
+    } else if (name == 'USDT') {
       request.symbol = TrackedTx_ContractSymbol.USDT;
-    }else if(name == 'USDC'){
+    } else if (name == 'USDC') {
       request.symbol = TrackedTx_ContractSymbol.USDC;
     }
 
@@ -96,6 +99,7 @@ class AccountService {
     }
     return ret;
   }
+
   Future<GrpcResponse> getTrackedTxList() async {
     var request = GetSwapTxListRequest();
 
