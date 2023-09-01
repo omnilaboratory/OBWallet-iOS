@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:awallet/eth.dart';
@@ -20,6 +21,9 @@ class _LoginState extends State<Login> {
   final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _pswController = TextEditingController();
+  final TextEditingController _codeController = TextEditingController();
+
+  VerifyImageResponse? _verifyImageResponse;
 
   @override
   void initState() {
@@ -31,7 +35,20 @@ class _LoginState extends State<Login> {
       Eth.initWeb3Client();
       setState(() {});
     });
+
+    getVerifyImage();
+
     super.initState();
+  }
+
+  void getVerifyImage() {
+    UserService.getInstance().verifyImage(context).then((retInfo) {
+      if (retInfo.code == 1) {
+        _verifyImageResponse = retInfo.data as VerifyImageResponse;
+        log("$_verifyImageResponse");
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -85,7 +102,7 @@ class _LoginState extends State<Login> {
               children: [
                 Container(
                   width: 320,
-                  height: 260,
+                  height: 320,
                   decoration: ShapeDecoration(
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
@@ -137,8 +154,6 @@ class _LoginState extends State<Login> {
     return InkWell(
       onTap: () {
         if ((_formKey.currentState as FormState).validate()) {
-          log(_unameController.value.text);
-          log(_pswController.value.text);
           login();
         }
       },
@@ -217,6 +232,35 @@ class _LoginState extends State<Login> {
                 return v!.trim().isNotEmpty ? null : "wrong password";
               },
             ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  width: 130,
+                  child: TextFormField(
+                    controller: _codeController,
+                    decoration: const InputDecoration(
+                        labelText: "Verify Code", hintText: "Verify Code"),
+                    validator: (v) {
+                      return v!.trim().isNotEmpty ? null : "wrong Verify Code";
+                    },
+                  ),
+                ),
+                _verifyImageResponse == null
+                    ? const Text("loading")
+                    : InkWell(
+                      onTap: () {getVerifyImage();},
+                      child: Image(
+                        width: 120,
+                        height: 60,
+                        image: MemoryImage(base64Decode(
+                            _verifyImageResponse!.imageBs.substring(22))),
+                      ),
+                    ),
+              ],
+            ),
           ],
         ),
       ),
@@ -236,7 +280,14 @@ class _LoginState extends State<Login> {
     var password = _pswController.value.text.trim();
     LocalStorage.save(LocalStorage.username, username);
     // LocalStorage.remove(LocalStorage.ethAddress);
-    UserService.getInstance().login(context,username, password).then((loginInfo) {
+    SignInRequest req = SignInRequest();
+    req.userName =username;
+    req.password =password;
+    req.vcode = _codeController.value.text.trim();
+    req.verifyCodeId = _verifyImageResponse!.verifyCodeId;
+    UserService.getInstance()
+        .login(context, req)
+        .then((loginInfo) {
       if (loginInfo.code == 1) {
         LocalStorage.save(LocalStorage.password, password);
         LocalStorage.save(

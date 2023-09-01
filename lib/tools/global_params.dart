@@ -9,7 +9,7 @@ class GlobalParams {
 
   static EnumNetworkType currNetwork = EnumNetworkType.goerli;
 
-  static int grpcTimeout = 5;
+  static int grpcTimeout = 10;
 
   static Map<EnumNetworkType, dynamic> dataInNetwork = Map.from({
     EnumNetworkType.mainnet: Map.from({

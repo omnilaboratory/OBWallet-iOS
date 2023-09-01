@@ -46,14 +46,12 @@ class UserService {
   }
 
   Future<GrpcResponse> login(
-      BuildContext context, String username, String password) async {
-    var request = SignInRequest();
-    request.userName = username;
-    request.password = Utils.generateMd5(password);
-    log("$request");
+      BuildContext context, SignInRequest req) async {
+    req.password = Utils.generateMd5(req.password);
+    log("$req");
     var ret = GrpcResponse();
     try {
-      var resp = await userServiceClient?.signIn(request);
+      var resp = await userServiceClient?.signIn(req);
       ret.code = 1;
       ret.data = resp;
       CommonService.token = resp!.token;
@@ -65,6 +63,17 @@ class UserService {
     return ret;
   }
 
+  Future<GrpcResponse> verifyImage(BuildContext context) async {
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.verifyImage(VerifyImageRequest());
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      setError(context, e, ret);
+    }
+    return ret;
+  }
   Future<GrpcResponse> signUp(BuildContext context, SignUpRequest req) async {
     log("$req");
     req.password = Utils.generateMd5(req.password);
