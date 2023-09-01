@@ -59,6 +59,7 @@ dependencies:
   http: ^1.1.0
   decimal: ^2.3.3
   flutter_stripe: ^9.3.0
+  event_bus: ^2.0.0
 
 dev_dependencies:
   flutter_test:

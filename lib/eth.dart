@@ -2,27 +2,29 @@
 import 'dart:math' as math;
 import 'dart:developer';
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:decimal/decimal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart';
+import 'bean/enum_eth_key.dart';
 import 'contract_abis/USDT.g.dart';
 
 class Eth {
 
   // static String apiUrl = "https://eth-mainnet.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
-  static String apiUrl = "https://eth-goerli.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
+  // static String apiUrl = "https://eth-goerli.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
 
-  static String goerliContractOfUSDT = '0xC2C527C0CACF457746Bd31B2a698Fe89de2b6d49';
+  // static String goerliContractOfUSDT = '0xC2C527C0CACF457746Bd31B2a698Fe89de2b6d49';
   // static String mainnetContractOfUSDT = '0xdAC17F958D2ee523a2206206994597C13D831ec7';
-  static String contractOfUSDC = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48';
+  // static String contractOfUSDC = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48';
 
   static Web3Client? ethClient;
 
   static initWeb3Client() {
-    ethClient = Web3Client(apiUrl, Client());
+    ethClient = Web3Client(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.apiUrl]!, Client());
     log('ethClient -> $ethClient');
   }
 
@@ -107,7 +109,7 @@ class Eth {
   /// Get USDT balance of an Eth Address
   static Future<double> getBalanceOfUSDT(String address) async {
     try {
-      EthereumAddress contract = EthereumAddress.fromHex(goerliContractOfUSDT);
+      EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.usdt]!);
       EthereumAddress ethAddr  = EthereumAddress.fromHex(address);
 
       var usdt    = USDT(address: contract, client: ethClient!);
@@ -125,7 +127,7 @@ class Eth {
   /// Get USDC balance of an Eth Address
   static Future<double> getBalanceOfUSDC(String address) async {
     try {
-      EthereumAddress contract = EthereumAddress.fromHex(contractOfUSDC);
+      EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.usdc]!);
       EthereumAddress ethAddr  = EthereumAddress.fromHex(address);
 
       var usdc    = USDT(address: contract, client: ethClient!);
@@ -168,7 +170,7 @@ class Eth {
   /// Sending USDT to an address
   static Future<String> sendUsdtTo(String toAddress, double amount) async {
     try {
-      EthereumAddress contract = EthereumAddress.fromHex(goerliContractOfUSDT);
+      EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.usdt]!);
       EthereumAddress ethAddr  = EthereumAddress.fromHex(toAddress);
 
       // The USDT contract has 6 decimals, so has to process for BigInt with the code.
@@ -189,7 +191,7 @@ class Eth {
   /// Sending USDC to an address
   static Future<String> sendUsdcTo(String toAddress, double amount) async {
     try {
-      EthereumAddress contract = EthereumAddress.fromHex(contractOfUSDC);
+      EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.usdc]!);
       EthereumAddress ethAddr  = EthereumAddress.fromHex(toAddress);
 
       // The USDC contract has 6 decimals, so has to process for BigInt with the code.
