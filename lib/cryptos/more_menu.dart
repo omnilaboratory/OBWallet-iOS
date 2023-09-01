@@ -75,7 +75,7 @@ class _MoreMenuState extends State<MoreMenu> {
                 GestureDetector(
                   onTap: () {},
                   child: Container(
-                    padding: const EdgeInsets.only(top: 20, left: 20),
+                    padding: const EdgeInsets.only(top: 24, left: 6, right: 11),
                     width: 187,
                     height: 283,
                     decoration: const BoxDecoration(

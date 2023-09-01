@@ -34,6 +34,7 @@ class _EthereumPageState extends State<EthereumPage> {
 
     GlobalParams.eventBus.on().listen((event) {
       if (event == "MoreMenu_setNetwork") {
+
         updateBalance();
       }
     });
