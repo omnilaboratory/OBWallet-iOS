@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/review_exchange.dart';
 import 'package:awallet/component/bottom_button.dart';
@@ -8,7 +9,6 @@ import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
-import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/precision_limit_formatter.dart';
@@ -53,7 +53,7 @@ class _ExchangeState extends State<Exchange> {
 
     getCoinPrice(currSelectedToken.name);
 
-    AccountService.getInstance().getAccountInfo().then((value) async {
+    AccountService.getInstance().getAccountInfo(context).then((value) async {
       if (value.code == 1) {
         var resp = value.data as AccountInfo;
         log(resp.toString());
@@ -877,7 +877,9 @@ class _ExchangeState extends State<Exchange> {
   );
 
   void getCoinPrice(String name) {
-    AccountService.getInstance().getCoinPrice(name).then((value) async {
+    AccountService.getInstance()
+        .getCoinPrice(context, name)
+        .then((value) async {
       if (value.code == 1) {
         var resp = value.data as GetCoinPriceResponse;
         log(resp.price.toString());

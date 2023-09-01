@@ -75,9 +75,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
           text: 'FINISH',
           onPressed: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const Kyc()));
+                context, MaterialPageRoute(builder: (context) => const Kyc()));
           },
         ),
       ],
@@ -153,6 +151,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
               GestureDetector(
                 onTap: () {
                   getImage(0);
+                  UserService.getInstance().uploadImage(context, req);
                 },
                 child: cardImage0 == null
                     ? const Image(
@@ -171,6 +170,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
               GestureDetector(
                 onTap: () {
                   getImage(1);
+                  UserService.getInstance().uploadImage(context, req);
                 },
                 child: cardImage1 == null
                     ? const Image(
@@ -196,26 +196,18 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
   final picker = ImagePicker();
   XFile? cardImage0;
   XFile? cardImage1;
-
-  Future getImage(int type) async {
-    var image = await picker.pickImage(source: ImageSource.gallery);
-
-    var req = UploadRequest();
-    req.name = image!.name;
-    req.content = await image.readAsBytes();
-    var resp = await UserService.getInstance().uploadImage(req);
-    if (resp.code == 1) {
-      log(resp.data.toString());
-    } else {
-      log(resp.msg);
-    }
-
-    setState(() {
-      if (type == 0) {
-        cardImage0 = image;
-      } else {
-        cardImage1 = image;
-      }
+  var req = UploadRequest();
+  getImage(int type) {
+    picker.pickImage(source: ImageSource.gallery).then((image) async {
+      req.name = image!.name;
+      req.content = await image.readAsBytes();
+      setState(() {
+        if (type == 0) {
+          cardImage0 = image;
+        } else {
+          cardImage1 = image;
+        }
+      });
     });
   }
 

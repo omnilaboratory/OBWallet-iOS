@@ -21,7 +21,7 @@ class _TxHistoryState extends State<TxHistory> {
   List<CryptoTxInfo> txHistoryList = [];
 
   void getSwapTxList() {
-    AccountService.getInstance().getSwapTxList().then((result) {
+    AccountService.getInstance().getSwapTxList(context).then((result) {
       if (result.code == 1) {
         txHistoryList.clear();
         var resp = result.data as GetSwapTxListResponse;
@@ -44,12 +44,12 @@ class _TxHistoryState extends State<TxHistory> {
   }
 
   void getTrackedTxList() {
-    AccountService.getInstance().getTrackedTxList().then((result) {
+    AccountService.getInstance().getTrackedTxList(context).then((result) {
       if (result.code == 1) {
         txHistoryList.clear();
         var resp = result.data as GetTrackedTxListResponse;
         var items = resp.items;
-        log("$items");
+        log("getTrackedTxList  $items");
         if (items.isNotEmpty) {
           for (var element in items) {
             txHistoryList.add(CryptoTxInfo(

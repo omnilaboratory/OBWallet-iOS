@@ -180,7 +180,7 @@ class _ApplyCardStepTwoState extends State<ApplyCardStepTwo> {
 
   void applyCard() {
     CardService.getInstance()
-        .applyCard()
+        .applyCard(context)
         .then((value) async {
       if (value.code == 1) {
         var resp = value.data  as ApplyCardResponse;

@@ -19,21 +19,21 @@ class CardPart extends StatefulWidget {
   CardPart({super.key});
 
   final balances = [
-    BalanceInCurrencyInfo(name: "USD", icon: "\$", balance: 123),
-    BalanceInCurrencyInfo(name: "SGD", icon: "\$", balance: 20),
-    BalanceInCurrencyInfo(name: "CNY", icon: "￥", balance: 20),
+    BalanceInCurrencyInfo(name: "USD", icon: "\$", balance: 0),
+    BalanceInCurrencyInfo(name: "SGD", icon: "\$", balance: 0),
+    BalanceInCurrencyInfo(name: "CNY", icon: "￥", balance: 0),
   ];
   final txs = [
     CurrencyTxInfo(
-        name: "STARBUCKS FELIZ EN VIS, HO CHI STARBUCKS FELIZ EN VIS, HO CHI",
+        name: "STARBUCKS FELIZ EN VIS",
         currencyName: "VND",
-        amount: 123456789987654320,
-        amountOfDollar: 160),
+        amount: 0,
+        amountOfDollar: 0),
     CurrencyTxInfo(
         name: "STARBUCKS FELIZ EN VIS, HO CHI",
         currencyName: "VND",
-        amount: 20,
-        amountOfDollar: 160),
+        amount: 0,
+        amountOfDollar: 0),
   ];
 
   @override
@@ -130,7 +130,7 @@ class _CardPartState extends State<CardPart> {
                                         ),
                                         SizedBox(width: 6),
                                         Text(
-                                          '500,000.00',
+                                          '0',
                                           style: TextStyle(
                                             color: Color(0xFF333333),
                                             fontSize: 32,

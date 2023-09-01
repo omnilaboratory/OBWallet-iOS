@@ -23,8 +23,8 @@ class _BitcoinPageState extends State<BitcoinPage> {
     TokenInfo(
         name: "BTC",
         iconUrl: 'asset/images/icon_bitcoin.png',
-        balance: 0.00,
-        balanceOfDollar: 0.00),
+        balance: 0.0,
+        balanceOfDollar: 0.0),
     TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
   ];
 

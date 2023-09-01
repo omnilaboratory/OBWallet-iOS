@@ -51,20 +51,20 @@ class _AccountState extends State<Account> {
   void initState() {
     var address = LocalStorage.get(LocalStorage.ethAddress);
     if (address != null) {
-      UserService.getInstance().updateUser(address).then((value) {
+      UserService.getInstance().updateUser(context, address).then((value) {
         if (value.code == 1) {
           log(value.data.toString());
         } else {
           log(value.msg);
         }
       });
-      EthService.getInstance().updateTokenBalances().then((value) {
+      EthService.getInstance().updateTokenBalances(context).then((value) {
         if (mounted) {
           setState(() {});
         }
       });
     }
-    AccountService.getInstance().getAccountInfo().then((info) {
+    AccountService.getInstance().getAccountInfo(context).then((info) {
       if (info.code == 1) {
         var accountInfo = info.data as AccountInfo;
         log("$accountInfo");

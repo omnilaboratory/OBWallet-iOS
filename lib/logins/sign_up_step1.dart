@@ -33,7 +33,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
       return;
     }
     UserService.getInstance()
-        .verifyCode(_emailController.value.text)
+        .verifyCode(context, _emailController.value.text)
         .then((resp) => {
               if (resp.code == 0)
                 {
@@ -177,6 +177,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           ),
           child: TextFormField(
             controller: controller,
+            obscureText: title.contains("Password"),
             decoration: const InputDecoration(
               border: InputBorder.none,
             ),
@@ -279,12 +280,12 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
 
     signUpRequest.userName = _unameController.value.text.trim();
     signUpRequest.vcode = _codeController.value.text.trim();
-    if (signUpRequest.vcode=="") {
+    if (signUpRequest.vcode == "") {
       Fluttertoast.showToast(msg: "wrong verify code");
       return;
     }
     signUpRequest.verifyCodeId = verifyCodeResponse!.verifyCodeId;
-    UserService.getInstance().signUp(signUpRequest).then((value) async {
+    UserService.getInstance().signUp(context,signUpRequest).then((value) async {
       if (value.code == 1) {
         LocalStorage.remove(LocalStorage.ethAddress);
         LocalStorage.remove(LocalStorage.ethPrivateKey);

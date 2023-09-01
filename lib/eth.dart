@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:decimal/decimal.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart';
@@ -32,7 +33,7 @@ class Eth {
   }
 
   /// Generate a new eth address
-  static Future<String> genEthAddress() async {
+  static Future<String> genEthAddress(BuildContext context) async {
     try {
       // Generate a new ETH address
       var rng = math.Random.secure();
@@ -48,7 +49,7 @@ class Eth {
       // Save the address and private key to local storage on device
       LocalStorage.save(LocalStorage.ethAddress, address);
       LocalStorage.save(LocalStorage.ethPrivateKey, privateKey);
-      UserService.getInstance().updateUser(address);
+      UserService.getInstance().updateUser(context,address);
       return address;
     } catch (e) {
       log('genEthAddress -> error: $e');

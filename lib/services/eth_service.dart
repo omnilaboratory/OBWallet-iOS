@@ -8,6 +8,7 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
+import 'package:flutter/cupertino.dart';
 
 class EthService {
   static final EthService _instance = EthService._internal();
@@ -26,15 +27,15 @@ class EthService {
     return _walletInfo!;
   }
 
-  createWalletInfo() async {
+  createWalletInfo(BuildContext context) async {
     String? address = LocalStorage.get(LocalStorage.ethAddress);
     if (address == null || address.isEmpty) {
-      address = await Eth.genEthAddress();
+      address = await Eth.genEthAddress(context);
     }
     _walletInfo = CryptoWalletInfo(address: address, balance: 0);
   }
 
-  bool recoverWallet(String? wif) {
+  bool recoverWallet(BuildContext context, String? wif) {
     if (wif == null || wif.isEmpty) {
       return false;
     }
@@ -45,7 +46,7 @@ class EthService {
     _walletInfo = CryptoWalletInfo(address: address, balance: 0);
     LocalStorage.save(LocalStorage.ethAddress, address);
     LocalStorage.save(LocalStorage.ethPrivateKey, wif);
-    UserService.getInstance().updateUser(address);
+    UserService.getInstance().updateUser(context, address);
     return true;
   }
 
@@ -58,16 +59,18 @@ class EthService {
     return _tokenList;
   }
 
-  updateTokenBalances() async {
+  updateTokenBalances(BuildContext context) async {
     log('updateTokenBalances');
     String address = LocalStorage.get(LocalStorage.ethAddress);
     double totalBalance = 0;
 
     double balance = await Eth.getBalanceOfETH(address);
-    totalBalance = await setTokenUsdValue(getTokenList()[0], balance, totalBalance);
+    totalBalance =
+        await setTokenUsdValue(context, getTokenList()[0], balance, totalBalance);
 
     balance = await Eth.getBalanceOfUSDT(address);
-    totalBalance = await setTokenUsdValue(getTokenList()[1], balance, totalBalance);
+    totalBalance =
+        await setTokenUsdValue(context, getTokenList()[1], balance, totalBalance);
 
     // balance = await Eth.getBalanceOfUSDC(address);
     // totalBalance = await setTokenUsdValue(getTokenList()[2], balance, totalBalance);
@@ -76,10 +79,11 @@ class EthService {
     _walletInfo?.balance = totalBalance;
   }
 
-  Future<double> setTokenUsdValue(TokenInfo tokenInfo, double balance, double totalBalance) async {
+  Future<double> setTokenUsdValue(BuildContext context, tokenInfo,
+      double balance, double totalBalance) async {
     tokenInfo.balance = balance;
-    var retInfo =
-        await AccountService.getInstance().getCoinPrice(tokenInfo.name);
+    var retInfo = await AccountService.getInstance()
+        .getCoinPrice(context, tokenInfo.name);
     if (retInfo.code == 1) {
       var price = retInfo.data as GetCoinPriceResponse;
       tokenInfo.balanceOfDollar = (balance * price.price)!;
@@ -87,6 +91,4 @@ class EthService {
     }
     return totalBalance;
   }
-
-
 }

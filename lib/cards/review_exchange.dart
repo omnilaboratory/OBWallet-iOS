@@ -50,7 +50,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           try {
             if (value.isNotEmpty) {
               log('txId: $value');
-              EthGrpcService.getInstance().ethTrackTx(value);
+              EthGrpcService.getInstance().ethTrackTx(context,value);
               sellCoin(value);
             }
           } catch (e) {
@@ -66,7 +66,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           try {
             if (value.isNotEmpty) {
               log('txId: $value');
-              EthGrpcService.getInstance().ethTrackTx(value);
+              EthGrpcService.getInstance().ethTrackTx(context,value);
               sellCoin(value);
             }
           } catch (e) {
@@ -82,7 +82,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           try {
             if (value.isNotEmpty) {
               log('txId: $value');
-              EthGrpcService.getInstance().ethTrackTx(value);
+              EthGrpcService.getInstance().ethTrackTx(context,value);
               sellCoin(value);
             }
           } catch (e) {
@@ -453,7 +453,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
   }
 
   void getCoinPrice(name) {
-    AccountService.getInstance().getCoinPrice(name).then((value) async {
+    AccountService.getInstance().getCoinPrice(context,name).then((value) async {
       if (value.code == 1) {
         var resp = value.data as GetCoinPriceResponse;
         log(resp.price.toString());
@@ -479,7 +479,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     request.coinAmt = widget.fromAmt;
     request.usdAmt = widget.toAmt;
     request.rate = coinPrice;
-    AccountService.getInstance().sellCoin(request).then((value) async {
+    AccountService.getInstance().sellCoin(context,request).then((value) async {
       if (value.code == 1) {
         var resp = value.data as SellCoinResponse;
         log(resp.toString());
@@ -508,7 +508,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     request.coinAmt = widget.fromAmt;
     request.usdAmt = widget.toAmt;
     request.rate = coinPrice;
-    AccountService.getInstance().buyCoin(request).then((value) async {
+    AccountService.getInstance().buyCoin(context,request).then((value) async {
       if (value.code == 1) {
         var resp = value.data as BuyCoinResponse;
         log(resp.toString());

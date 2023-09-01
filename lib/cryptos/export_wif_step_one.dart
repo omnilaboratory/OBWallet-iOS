@@ -34,7 +34,7 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
 
     var password = _pswController.value.text.trim();
     UserService.getInstance()
-        .verifyPwd(LocalStorage.get("username"), password)
+        .verifyPwd(context, LocalStorage.get("username"), password)
         .then((value) async {
       if (value.code == 1) {
         var resp = value.data;

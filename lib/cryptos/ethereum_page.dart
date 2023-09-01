@@ -44,7 +44,7 @@ class _EthereumPageState extends State<EthereumPage> {
   void updateBalance() {
     var address = LocalStorage.get(LocalStorage.ethAddress);
     if (address != null) {
-      EthService.getInstance().updateTokenBalances().then((value) {
+      EthService.getInstance().updateTokenBalances(context).then((value) {
         if (mounted) {
           setState(() {});
         }
@@ -176,13 +176,13 @@ class _EthereumPageState extends State<EthereumPage> {
   }
 
   void createNewWallet() {
-    EthService.getInstance().createWalletInfo().then((value) async {
+    EthService.getInstance().createWalletInfo(context).then((value) async {
       await updateTokenBalances();
     });
   }
 
   Future<void> updateTokenBalances() async {
-    await EthService.getInstance().updateTokenBalances();
+    await EthService.getInstance().updateTokenBalances(context);
     if (mounted) {
       setState(() {});
     }

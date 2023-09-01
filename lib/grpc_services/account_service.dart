@@ -1,7 +1,9 @@
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
+import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class AccountService {
@@ -23,7 +25,7 @@ class AccountService {
 
   factory AccountService() => _instance;
 
-  Future<GrpcResponse> getAccountInfo() async {
+  Future<GrpcResponse> getAccountInfo(BuildContext context) async {
     var request = GetAccountInfoRequest();
     var ret = GrpcResponse();
     try {
@@ -31,39 +33,37 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      UserService.getInstance().setError(context, e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> sellCoin(SellCoinRequest req) async {
+  Future<GrpcResponse> sellCoin(
+      BuildContext context, SellCoinRequest req) async {
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.sellCoin(req);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      UserService.getInstance().setError(context, e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> buyCoin(BuyCoinRequest req) async {
+  Future<GrpcResponse> buyCoin(BuildContext context, BuyCoinRequest req) async {
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.buyCoin(req);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      UserService.getInstance().setError(context, e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> getCoinPrice(String name) async {
+  Future<GrpcResponse> getCoinPrice(BuildContext context, String name) async {
     var request = GetCoinPriceRequest();
     if (name == 'ETH') {
       request.symbol = TrackedTx_ContractSymbol.ETH;
@@ -79,13 +79,12 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      UserService.getInstance().setError(context, e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> getSwapTxList() async {
+  Future<GrpcResponse> getSwapTxList(BuildContext context) async {
     var request = GetSwapTxListRequest();
 
     var ret = GrpcResponse();
@@ -94,13 +93,14 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      UserService.getInstance().setError(context, e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> getTrackedTxList() async {
+  Future<GrpcResponse> getTrackedTxList(
+    BuildContext context,
+  ) async {
     var request = GetSwapTxListRequest();
 
     var ret = GrpcResponse();
@@ -109,8 +109,7 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      GrpcError error = e as GrpcError;
-      ret.msg = error.message.toString();
+      UserService.getInstance().setError(context, e, ret);
     }
     return ret;
   }

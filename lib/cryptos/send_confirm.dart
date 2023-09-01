@@ -37,7 +37,7 @@ class _SendConfirmState extends State<SendConfirm> {
         try {
           if (value.isNotEmpty) {
             log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(value);
+            EthGrpcService.getInstance().ethTrackTx(context, value);
             Navigator.pop(context);
             setState(() {
               loadingVisible = false;
@@ -54,7 +54,7 @@ class _SendConfirmState extends State<SendConfirm> {
         try {
           if (value.isNotEmpty) {
             log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(value);
+            EthGrpcService.getInstance().ethTrackTx(context, value);
             Navigator.pop(context);
             setState(() {
               loadingVisible = false;
@@ -71,7 +71,7 @@ class _SendConfirmState extends State<SendConfirm> {
         try {
           if (value.isNotEmpty) {
             log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(value);
+            EthGrpcService.getInstance().ethTrackTx(context, value);
             Navigator.pop(context);
             setState(() {
               loadingVisible = false;

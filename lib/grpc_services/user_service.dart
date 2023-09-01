@@ -2,12 +2,14 @@ import 'dart:developer';
 
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
+import 'package:awallet/logins/login.dart';
 import 'package:awallet/src/generated/user/country.pbenum.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
 import 'package:fixnum/src/int64.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:grpc/grpc.dart';
 
@@ -30,7 +32,7 @@ class UserService {
 
   factory UserService() => _instance;
 
-  Future<GrpcResponse> verifyCode(String email) async {
+  Future<GrpcResponse> verifyCode(BuildContext context, String email) async {
     var request = VerifyCodeRequest();
     request.email = email;
     log("$request");
@@ -40,12 +42,13 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(e, ret);
+      setError(context, e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> login(String username, String password) async {
+  Future<GrpcResponse> login(
+      BuildContext context, String username, String password) async {
     var request = SignInRequest();
     request.userName = username;
     request.password = Utils.generateMd5(password);
@@ -59,12 +62,12 @@ class UserService {
       LocalStorage.save("userToken", resp.token);
       userServiceClient = null;
     } catch (e) {
-      setError(e, ret);
+      setError(context, e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> signUp(SignUpRequest req) async {
+  Future<GrpcResponse> signUp(BuildContext context, SignUpRequest req) async {
     log("$req");
     req.password = Utils.generateMd5(req.password);
     req.confirmPassword = Utils.generateMd5(req.confirmPassword);
@@ -77,24 +80,26 @@ class UserService {
       CommonService.token = resp!.token;
       userServiceClient = null;
     } catch (e) {
-      setError(e, ret);
+      setError(context, e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> getUserInfo() async {
+  Future<GrpcResponse> getUserInfo(
+    BuildContext context,
+  ) async {
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.getUserInfo(GetUserInfoRequest());
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(e, ret);
+      setError(context, e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> uploadImage(UploadRequest req) async {
+  Future<GrpcResponse> uploadImage(BuildContext context, UploadRequest req) async {
     log("$req");
     var ret = GrpcResponse();
     try {
@@ -102,12 +107,12 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(e, ret);
+      setError(context, e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> kyc(String address1, String address2) async {
+  Future<GrpcResponse> kyc(BuildContext context, String address1, String address2) async {
     var request = CommonService.userInfo;
     request?.address1 = address1;
     request?.address2 = address2;
@@ -134,12 +139,13 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(e, ret);
+      setError(context, e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> verifyPwd(String username, String password) async {
+  Future<GrpcResponse> verifyPwd(
+      BuildContext context, String username, String password) async {
     var request = SignInRequest();
     request.userName = username;
     request.password = Utils.generateMd5(password);
@@ -150,19 +156,25 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(e, ret);
+      setError(context, e, ret);
     }
     return ret;
   }
 
-  void setError(Object e, GrpcResponse<dynamic> ret) {
+  void setError(BuildContext context, Object e, GrpcResponse<dynamic> ret) {
     log("$e");
     GrpcError error = e as GrpcError;
     ret.msg = error.message.toString();
     Fluttertoast.showToast(msg: ret.msg, gravity: ToastGravity.CENTER);
+    if (e.code == 2 || e.code == 16) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Login()),
+      );
+    }
   }
 
-  Future<GrpcResponse> updateUser(String address) async {
+  Future<GrpcResponse> updateUser(BuildContext context, String address) async {
     CommonService.userInfo?.ethAddress = address;
     var ret = GrpcResponse();
     try {
@@ -170,7 +182,7 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(e, ret);
+      setError(context, e, ret);
     }
     return ret;
   }

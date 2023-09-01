@@ -23,7 +23,7 @@ class _EthereumRecoverWalletState extends State<EthereumRecoverWallet> {
       return;
     }
 
-    bool right = EthService.getInstance().recoverWallet(wif);
+    bool right = EthService.getInstance().recoverWallet(context,wif);
 
     if(!right){
       Fluttertoast.showToast(

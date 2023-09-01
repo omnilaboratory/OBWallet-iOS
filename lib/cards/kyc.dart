@@ -213,11 +213,11 @@ class _KycState extends State<Kyc> {
   void kyc() {
     var address1 = _address1Controller.value.text.trim();
     var address2 = _address2Controller.value.text.trim();
-    UserService.getInstance().getUserInfo().then((userInfoResp) {
+    UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
         var userInfo = userInfoResp.data as GetUserInfoResponse;
         CommonService.userInfo = userInfo.user;
-        UserService.getInstance().kyc(address1, address2).then((value) async {
+        UserService.getInstance().kyc(context,address1, address2).then((value) async {
           if (value.code == 1) {
             var resp = value.data as UserInfo;
             log(resp.toString());

@@ -235,10 +235,12 @@ class _LoginState extends State<Login> {
     var username = _unameController.value.text.trim();
     var password = _pswController.value.text.trim();
     LocalStorage.save(LocalStorage.username, username);
-    UserService.getInstance().login(username, password).then((loginInfo) {
+    // LocalStorage.remove(LocalStorage.ethAddress);
+    UserService.getInstance().login(context,username, password).then((loginInfo) {
       if (loginInfo.code == 1) {
         LocalStorage.save(LocalStorage.password, password);
-        LocalStorage.save(LocalStorage.userToken, (loginInfo.data as SignInResponse).token);
+        LocalStorage.save(
+            LocalStorage.userToken, (loginInfo.data as SignInResponse).token);
         getUserInfoAndGoHome();
       }
     });
@@ -246,7 +248,7 @@ class _LoginState extends State<Login> {
 
   void getUserInfoAndGoHome() {
     log("getUserInfoAndGoHome");
-    UserService.getInstance().getUserInfo().then((userInfoResp) {
+    UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
         var userInfo = userInfoResp.data as GetUserInfoResponse;
         CommonService.userInfo = userInfo.user;
