@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
@@ -26,12 +29,65 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
 
   VerifyCodeResponse? verifyCodeResponse;
 
+  String getCodeTitle = "Get code";
+  bool getCodeTitleEnable = true;
+  Timer? codeTimer;
+
+  createTimer() {
+    if (codeTimer == null || !codeTimer!.isActive) {
+      codeTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        log("${timer.tick}");
+        var currTick = 60 - timer.tick;
+        if (currTick > 0) {
+          getCodeTitleEnable = false;
+          getCodeTitle = "Get code(${currTick}s)";
+          setState(() {});
+        } else {
+          resetCode();
+        }
+      });
+    } else {
+      if (codeTimer != null && codeTimer!.isActive) {
+        codeTimer!.cancel();
+      }
+      codeTimer = null;
+    }
+  }
+
+  resetCode() {
+    if (codeTimer != null && codeTimer!.isActive) {
+      getCodeTitleEnable = true;
+      codeTimer!.cancel();
+      getCodeTitle = "Get code";
+      codeTimer = null;
+    }
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    if (codeTimer != null && codeTimer!.isActive) {
+      codeTimer!.cancel();
+    }
+    super.dispose();
+  }
+
   getVerifyCode() async {
     var email = _emailController.value.text.trim();
     if (email.isEmpty || !EmailValidator.validate(email)) {
       Fluttertoast.showToast(msg: "wrong email", gravity: ToastGravity.CENTER);
       return;
     }
+
+    if (codeTimer != null) {
+      if (codeTimer!.isActive) {
+        Fluttertoast.showToast(msg: "please waiting");
+        return;
+      }
+    }
+
+    createTimer();
+
     UserService.getInstance()
         .verifyCode(context, _emailController.value.text)
         .then((resp) => {
@@ -128,16 +184,24 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
             buildInputColumn("Email", _emailController, width: 300),
             const SizedBox(height: 20),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                buildInputColumn("Verify Code", _codeController),
-                const Spacer(),
+                buildInputColumn("Verify Code", _codeController, width: 160),
+                // const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.only(top: 12),
+                  padding: const EdgeInsets.only(left: 4, top: 14),
                   child: TextButton(
                       onPressed: () {
                         getVerifyCode();
                       },
-                      child: const Text("Get code")),
+                      child: Text(
+                        getCodeTitle,
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: getCodeTitleEnable
+                                ? Colors.lightBlue
+                                : Colors.grey),
+                      )),
                 )
               ],
             ),
@@ -178,6 +242,11 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           child: TextFormField(
             controller: controller,
             obscureText: title.contains("Password"),
+            onChanged: (v) {
+              if (title == "Email") {
+                resetCode();
+              }
+            },
             decoration: const InputDecoration(
               border: InputBorder.none,
             ),
@@ -239,7 +308,6 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
-                fontFamily: 'MS UI Gothic',
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -251,7 +319,6 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           style: TextStyle(
             color: Color(0xD6999999),
             fontSize: 16,
-            fontFamily: 'Montserrat',
             fontWeight: FontWeight.w400,
           ),
         )
@@ -285,7 +352,9 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
       return;
     }
     signUpRequest.verifyCodeId = verifyCodeResponse!.verifyCodeId;
-    UserService.getInstance().signUp(context,signUpRequest).then((value) async {
+    UserService.getInstance()
+        .signUp(context, signUpRequest)
+        .then((value) async {
       if (value.code == 1) {
         LocalStorage.remove(LocalStorage.ethAddress);
         LocalStorage.remove(LocalStorage.ethPrivateKey);
