@@ -237,6 +237,74 @@ class ApplyCardResponse extends $pb.GeneratedMessage {
   CardInfo ensureCard() => $_ensure(0);
 }
 
+class CardListRequest extends $pb.GeneratedMessage {
+  factory CardListRequest() => create();
+  CardListRequest._() : super();
+  factory CardListRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardListRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CardListRequest clone() => CardListRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CardListRequest copyWith(void Function(CardListRequest) updates) => super.copyWith((message) => updates(message as CardListRequest)) as CardListRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CardListRequest create() => CardListRequest._();
+  CardListRequest createEmptyInstance() => create();
+  static $pb.PbList<CardListRequest> createRepeated() => $pb.PbList<CardListRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CardListRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardListRequest>(create);
+  static CardListRequest? _defaultInstance;
+}
+
+class CardListResponse extends $pb.GeneratedMessage {
+  factory CardListResponse() => create();
+  CardListResponse._() : super();
+  factory CardListResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardListResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardListResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..pc<CardInfo>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: CardInfo.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CardListResponse clone() => CardListResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CardListResponse copyWith(void Function(CardListResponse) updates) => super.copyWith((message) => updates(message as CardListResponse)) as CardListResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CardListResponse create() => CardListResponse._();
+  CardListResponse createEmptyInstance() => create();
+  static $pb.PbList<CardListResponse> createRepeated() => $pb.PbList<CardListResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CardListResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardListResponse>(create);
+  static CardListResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<CardInfo> get items => $_getList(0);
+}
+
 class CardHistoryRequest extends $pb.GeneratedMessage {
   factory CardHistoryRequest() => create();
   CardHistoryRequest._() : super();
@@ -877,6 +945,7 @@ class CardExchangeInfo extends $pb.GeneratedMessage {
     ..aOS(9, _omitFieldNames ? '' : 'tradeNo')
     ..e<CardExchangeInfo_Status>(10, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: CardExchangeInfo_Status.Unknow, valueOf: CardExchangeInfo_Status.valueOf, enumValues: CardExchangeInfo_Status.values)
     ..aOS(11, _omitFieldNames ? '' : 'errMsg')
+    ..aInt64(12, _omitFieldNames ? '' : 'userId')
     ..hasRequiredFields = false
   ;
 
@@ -999,6 +1068,15 @@ class CardExchangeInfo extends $pb.GeneratedMessage {
   $core.bool hasErrMsg() => $_has(10);
   @$pb.TagNumber(11)
   void clearErrMsg() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get userId => $_getI64(11);
+  @$pb.TagNumber(12)
+  set userId($fixnum.Int64 v) { $_setInt64(11, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasUserId() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearUserId() => clearField(12);
 }
 
 

@@ -29,6 +29,10 @@ class UserServiceClient extends $grpc.Client {
       '/user.UserService/VerifyCode',
       ($2.VerifyCodeRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.VerifyCodeResponse.fromBuffer(value));
+  static final _$verifyImage = $grpc.ClientMethod<$2.VerifyImageRequest, $2.VerifyImageResponse>(
+      '/user.UserService/VerifyImage',
+      ($2.VerifyImageRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.VerifyImageResponse.fromBuffer(value));
   static final _$signIn = $grpc.ClientMethod<$2.SignInRequest, $2.SignInResponse>(
       '/user.UserService/SignIn',
       ($2.SignInRequest value) => value.writeToBuffer(),
@@ -66,6 +70,10 @@ class UserServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$2.VerifyCodeResponse> verifyCode($2.VerifyCodeRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$verifyCode, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$2.VerifyImageResponse> verifyImage($2.VerifyImageRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$verifyImage, request, options: options);
   }
 
   $grpc.ResponseFuture<$2.SignInResponse> signIn($2.SignInRequest request, {$grpc.CallOptions? options}) {
@@ -112,6 +120,13 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $2.VerifyCodeRequest.fromBuffer(value),
         ($2.VerifyCodeResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.VerifyImageRequest, $2.VerifyImageResponse>(
+        'VerifyImage',
+        verifyImage_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.VerifyImageRequest.fromBuffer(value),
+        ($2.VerifyImageResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.SignInRequest, $2.SignInResponse>(
         'SignIn',
         signIn_Pre,
@@ -164,6 +179,10 @@ abstract class UserServiceBase extends $grpc.Service {
     return verifyCode(call, await request);
   }
 
+  $async.Future<$2.VerifyImageResponse> verifyImage_Pre($grpc.ServiceCall call, $async.Future<$2.VerifyImageRequest> request) async {
+    return verifyImage(call, await request);
+  }
+
   $async.Future<$2.SignInResponse> signIn_Pre($grpc.ServiceCall call, $async.Future<$2.SignInRequest> request) async {
     return signIn(call, await request);
   }
@@ -190,6 +209,7 @@ abstract class UserServiceBase extends $grpc.Service {
 
   $async.Future<$2.SignUpResponse> signUp($grpc.ServiceCall call, $2.SignUpRequest request);
   $async.Future<$2.VerifyCodeResponse> verifyCode($grpc.ServiceCall call, $2.VerifyCodeRequest request);
+  $async.Future<$2.VerifyImageResponse> verifyImage($grpc.ServiceCall call, $2.VerifyImageRequest request);
   $async.Future<$2.SignInResponse> signIn($grpc.ServiceCall call, $2.SignInRequest request);
   $async.Future<$2.SignInResponse> verifyPwd($grpc.ServiceCall call, $2.SignInRequest request);
   $async.Future<$2.UserInfo> kyc($grpc.ServiceCall call, $2.UserInfo request);

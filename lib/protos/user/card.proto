@@ -5,8 +5,10 @@ import "user/country.proto";
 
 service CardService{
   rpc ApplyCard(ApplyCardRequest) returns (ApplyCardResponse) {}
+  //History of payment at other website
   rpc CardHistory(CardHistoryRequest) returns (CardHistoryResponse) {}
   rpc CardDetail(CardDetailRequest) returns (CardDetailResponse) {}
+  rpc CardList(CardListRequest) returns (CardListResponse) {}
   rpc CardWithdraw(CardWithdrawRequest) returns (CardWithdrawResponse) {}
   rpc CardRecharge(CardRechargeRequest) returns (CardRechargeResponse) {}
 }
@@ -31,6 +33,12 @@ message ApplyCardResponse {
   CardInfo card=1;
 }
 
+message CardListRequest {
+
+}
+message CardListResponse {
+  repeated CardInfo items=1;
+}
 message CardHistoryRequest {
   string cardNo = 1;
 //  default 1
@@ -97,6 +105,7 @@ message CardRechargeResponse {
 //after recharge/withdraw , this record will insert
 message CardExchangeInfo {
   int64 id = 1;
+  int64 user_id =12;
   string card_no=2;
   string order_no=8;
   string trade_no=9;

@@ -321,6 +321,9 @@ class SignUpRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'email')
     ..aOS(5, _omitFieldNames ? '' : 'vcode')
     ..aOS(6, _omitFieldNames ? '' : 'verifyCodeId')
+    ..aOS(7, _omitFieldNames ? '' : 'deviceId')
+    ..aOS(8, _omitFieldNames ? '' : 'os')
+    ..aOS(9, _omitFieldNames ? '' : 'osVersion', protoName: 'osVersion')
     ..hasRequiredFields = false
   ;
 
@@ -398,6 +401,33 @@ class SignUpRequest extends $pb.GeneratedMessage {
   $core.bool hasVerifyCodeId() => $_has(5);
   @$pb.TagNumber(6)
   void clearVerifyCodeId() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get deviceId => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set deviceId($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasDeviceId() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearDeviceId() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get os => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set os($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasOs() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearOs() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get osVersion => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set osVersion($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasOsVersion() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearOsVersion() => clearField(9);
 }
 
 class SignUpResponse extends $pb.GeneratedMessage {
@@ -526,6 +556,90 @@ class VerifyCodeResponse extends $pb.GeneratedMessage {
   void clearVerifyCodeId() => clearField(1);
 }
 
+class VerifyImageRequest extends $pb.GeneratedMessage {
+  factory VerifyImageRequest() => create();
+  VerifyImageRequest._() : super();
+  factory VerifyImageRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory VerifyImageRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'VerifyImageRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  VerifyImageRequest clone() => VerifyImageRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  VerifyImageRequest copyWith(void Function(VerifyImageRequest) updates) => super.copyWith((message) => updates(message as VerifyImageRequest)) as VerifyImageRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static VerifyImageRequest create() => VerifyImageRequest._();
+  VerifyImageRequest createEmptyInstance() => create();
+  static $pb.PbList<VerifyImageRequest> createRepeated() => $pb.PbList<VerifyImageRequest>();
+  @$core.pragma('dart2js:noInline')
+  static VerifyImageRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<VerifyImageRequest>(create);
+  static VerifyImageRequest? _defaultInstance;
+}
+
+class VerifyImageResponse extends $pb.GeneratedMessage {
+  factory VerifyImageResponse() => create();
+  VerifyImageResponse._() : super();
+  factory VerifyImageResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory VerifyImageResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'VerifyImageResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'verifyCodeId')
+    ..aOS(2, _omitFieldNames ? '' : 'imageBs')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  VerifyImageResponse clone() => VerifyImageResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  VerifyImageResponse copyWith(void Function(VerifyImageResponse) updates) => super.copyWith((message) => updates(message as VerifyImageResponse)) as VerifyImageResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static VerifyImageResponse create() => VerifyImageResponse._();
+  VerifyImageResponse createEmptyInstance() => create();
+  static $pb.PbList<VerifyImageResponse> createRepeated() => $pb.PbList<VerifyImageResponse>();
+  @$core.pragma('dart2js:noInline')
+  static VerifyImageResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<VerifyImageResponse>(create);
+  static VerifyImageResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get verifyCodeId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set verifyCodeId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasVerifyCodeId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearVerifyCodeId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get imageBs => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set imageBs($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasImageBs() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearImageBs() => clearField(2);
+}
+
 class SignInRequest extends $pb.GeneratedMessage {
   factory SignInRequest() => create();
   SignInRequest._() : super();
@@ -535,6 +649,11 @@ class SignInRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SignInRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'userName')
     ..aOS(2, _omitFieldNames ? '' : 'password')
+    ..aOS(3, _omitFieldNames ? '' : 'vcode')
+    ..aOS(4, _omitFieldNames ? '' : 'verifyCodeId')
+    ..aOS(7, _omitFieldNames ? '' : 'deviceId')
+    ..aOS(8, _omitFieldNames ? '' : 'os')
+    ..aOS(9, _omitFieldNames ? '' : 'osVersion', protoName: 'osVersion')
     ..hasRequiredFields = false
   ;
 
@@ -576,6 +695,51 @@ class SignInRequest extends $pb.GeneratedMessage {
   $core.bool hasPassword() => $_has(1);
   @$pb.TagNumber(2)
   void clearPassword() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get vcode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set vcode($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasVcode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearVcode() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get verifyCodeId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set verifyCodeId($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasVerifyCodeId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearVerifyCodeId() => clearField(4);
+
+  @$pb.TagNumber(7)
+  $core.String get deviceId => $_getSZ(4);
+  @$pb.TagNumber(7)
+  set deviceId($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasDeviceId() => $_has(4);
+  @$pb.TagNumber(7)
+  void clearDeviceId() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get os => $_getSZ(5);
+  @$pb.TagNumber(8)
+  set os($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasOs() => $_has(5);
+  @$pb.TagNumber(8)
+  void clearOs() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get osVersion => $_getSZ(6);
+  @$pb.TagNumber(9)
+  set osVersion($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasOsVersion() => $_has(6);
+  @$pb.TagNumber(9)
+  void clearOsVersion() => clearField(9);
 }
 
 class SignInResponse extends $pb.GeneratedMessage {

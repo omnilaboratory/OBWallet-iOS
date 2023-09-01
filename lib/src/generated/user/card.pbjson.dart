@@ -64,6 +64,28 @@ final $typed_data.Uint8List applyCardResponseDescriptor = $convert.base64Decode(
     'ChFBcHBseUNhcmRSZXNwb25zZRIiCgRjYXJkGAEgASgLMg4udXNlci5DYXJkSW5mb1IEY2FyZA'
     '==');
 
+@$core.Deprecated('Use cardListRequestDescriptor instead')
+const CardListRequest$json = {
+  '1': 'CardListRequest',
+};
+
+/// Descriptor for `CardListRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cardListRequestDescriptor = $convert.base64Decode(
+    'Cg9DYXJkTGlzdFJlcXVlc3Q=');
+
+@$core.Deprecated('Use cardListResponseDescriptor instead')
+const CardListResponse$json = {
+  '1': 'CardListResponse',
+  '2': [
+    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.user.CardInfo', '10': 'items'},
+  ],
+};
+
+/// Descriptor for `CardListResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cardListResponseDescriptor = $convert.base64Decode(
+    'ChBDYXJkTGlzdFJlc3BvbnNlEiQKBWl0ZW1zGAEgAygLMg4udXNlci5DYXJkSW5mb1IFaXRlbX'
+    'M=');
+
 @$core.Deprecated('Use cardHistoryRequestDescriptor instead')
 const CardHistoryRequest$json = {
   '1': 'CardHistoryRequest',
@@ -215,6 +237,7 @@ const CardExchangeInfo$json = {
   '1': 'CardExchangeInfo',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'user_id', '3': 12, '4': 1, '5': 3, '10': 'userId'},
     {'1': 'card_no', '3': 2, '4': 1, '5': 9, '10': 'cardNo'},
     {'1': 'order_no', '3': 8, '4': 1, '5': 9, '10': 'orderNo'},
     {'1': 'trade_no', '3': 9, '4': 1, '5': 9, '10': 'tradeNo'},
@@ -241,12 +264,12 @@ const CardExchangeInfo_Status$json = {
 
 /// Descriptor for `CardExchangeInfo`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardExchangeInfoDescriptor = $convert.base64Decode(
-    'ChBDYXJkRXhjaGFuZ2VJbmZvEg4KAmlkGAEgASgDUgJpZBIXCgdjYXJkX25vGAIgASgJUgZjYX'
-    'JkTm8SGQoIb3JkZXJfbm8YCCABKAlSB29yZGVyTm8SGQoIdHJhZGVfbm8YCSABKAlSB3RyYWRl'
-    'Tm8SIwoNY291bnRlcl9wYXJ0eRgDIAEoCVIMY291bnRlclBhcnR5EigKEGNvdW50ZXJfcGFydH'
-    'lfbm8YBCABKAlSDmNvdW50ZXJQYXJ0eU5vEhAKA2FtdBgFIAEoAVIDYW10EjUKBnN0YXR1cxgK'
-    'IAEoDjIdLnVzZXIuQ2FyZEV4Y2hhbmdlSW5mby5TdGF0dXNSBnN0YXR1cxIXCgdlcnJfbXNnGA'
-    'sgASgJUgZlcnJNc2cSHQoKY3JlYXRlZF9hdBgGIAEoBFIJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRf'
-    'YXQYByABKARSCXVwZGF0ZWRBdCIrCgZTdGF0dXMSCgoGVW5rbm93EAASCwoHc3VjY2VzcxABEg'
-    'gKBGZhaWwQAg==');
+    'ChBDYXJkRXhjaGFuZ2VJbmZvEg4KAmlkGAEgASgDUgJpZBIXCgd1c2VyX2lkGAwgASgDUgZ1c2'
+    'VySWQSFwoHY2FyZF9ubxgCIAEoCVIGY2FyZE5vEhkKCG9yZGVyX25vGAggASgJUgdvcmRlck5v'
+    'EhkKCHRyYWRlX25vGAkgASgJUgd0cmFkZU5vEiMKDWNvdW50ZXJfcGFydHkYAyABKAlSDGNvdW'
+    '50ZXJQYXJ0eRIoChBjb3VudGVyX3BhcnR5X25vGAQgASgJUg5jb3VudGVyUGFydHlObxIQCgNh'
+    'bXQYBSABKAFSA2FtdBI1CgZzdGF0dXMYCiABKA4yHS51c2VyLkNhcmRFeGNoYW5nZUluZm8uU3'
+    'RhdHVzUgZzdGF0dXMSFwoHZXJyX21zZxgLIAEoCVIGZXJyTXNnEh0KCmNyZWF0ZWRfYXQYBiAB'
+    'KARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAcgASgEUgl1cGRhdGVkQXQiKwoGU3RhdHVzEg'
+    'oKBlVua25vdxAAEgsKB3N1Y2Nlc3MQARIICgRmYWlsEAI=');
 

@@ -7,6 +7,7 @@ service UserService {
   rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
   //verify code
   rpc VerifyCode(VerifyCodeRequest) returns (VerifyCodeResponse) {}
+  rpc VerifyImage(VerifyImageRequest) returns (VerifyImageResponse) {}
   //user login
   rpc SignIn(SignInRequest) returns (SignInResponse) {}
 
@@ -70,6 +71,13 @@ message SignUpRequest {
   string vcode = 5;
   //got from VerifyCodeRPC
   string verify_code_id = 6;
+
+  //[option]
+  string device_id=7;
+  //[option] android or ios
+  string os=8;
+  //[option]
+  string osVersion=9;
 }
 message SignUpResponse {
   string token = 1;
@@ -81,10 +89,27 @@ message VerifyCodeRequest {
 message VerifyCodeResponse {
   string verify_code_id = 1;
 }
+message VerifyImageRequest {
+}
+message VerifyImageResponse {
+  string verify_code_id = 1;
+  string image_bs = 2;
+}
 
 message SignInRequest {
   string user_name = 1;
   string password = 2;
+  //VerifyCode
+  string vcode = 3;
+  //got from VerifyImageRPC
+  string verify_code_id = 4;
+
+  //[option]
+  string device_id=7;
+  //[option] android or ios
+  string os=8;
+  //[option]
+  string osVersion=9;
 }
 message SignInResponse {
   string token = 1;

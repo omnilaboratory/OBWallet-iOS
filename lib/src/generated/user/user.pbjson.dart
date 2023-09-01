@@ -73,6 +73,9 @@ const SignUpRequest$json = {
     {'1': 'email', '3': 4, '4': 1, '5': 9, '10': 'email'},
     {'1': 'vcode', '3': 5, '4': 1, '5': 9, '10': 'vcode'},
     {'1': 'verify_code_id', '3': 6, '4': 1, '5': 9, '10': 'verifyCodeId'},
+    {'1': 'device_id', '3': 7, '4': 1, '5': 9, '10': 'deviceId'},
+    {'1': 'os', '3': 8, '4': 1, '5': 9, '10': 'os'},
+    {'1': 'osVersion', '3': 9, '4': 1, '5': 9, '10': 'osVersion'},
   ],
 };
 
@@ -81,7 +84,8 @@ final $typed_data.Uint8List signUpRequestDescriptor = $convert.base64Decode(
     'Cg1TaWduVXBSZXF1ZXN0EhsKCXVzZXJfbmFtZRgBIAEoCVIIdXNlck5hbWUSGgoIcGFzc3dvcm'
     'QYAiABKAlSCHBhc3N3b3JkEikKEGNvbmZpcm1fcGFzc3dvcmQYAyABKAlSD2NvbmZpcm1QYXNz'
     'd29yZBIUCgVlbWFpbBgEIAEoCVIFZW1haWwSFAoFdmNvZGUYBSABKAlSBXZjb2RlEiQKDnZlcm'
-    'lmeV9jb2RlX2lkGAYgASgJUgx2ZXJpZnlDb2RlSWQ=');
+    'lmeV9jb2RlX2lkGAYgASgJUgx2ZXJpZnlDb2RlSWQSGwoJZGV2aWNlX2lkGAcgASgJUghkZXZp'
+    'Y2VJZBIOCgJvcxgIIAEoCVICb3MSHAoJb3NWZXJzaW9uGAkgASgJUglvc1ZlcnNpb24=');
 
 @$core.Deprecated('Use signUpResponseDescriptor instead')
 const SignUpResponse$json = {
@@ -120,19 +124,49 @@ final $typed_data.Uint8List verifyCodeResponseDescriptor = $convert.base64Decode
     'ChJWZXJpZnlDb2RlUmVzcG9uc2USJAoOdmVyaWZ5X2NvZGVfaWQYASABKAlSDHZlcmlmeUNvZG'
     'VJZA==');
 
+@$core.Deprecated('Use verifyImageRequestDescriptor instead')
+const VerifyImageRequest$json = {
+  '1': 'VerifyImageRequest',
+};
+
+/// Descriptor for `VerifyImageRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List verifyImageRequestDescriptor = $convert.base64Decode(
+    'ChJWZXJpZnlJbWFnZVJlcXVlc3Q=');
+
+@$core.Deprecated('Use verifyImageResponseDescriptor instead')
+const VerifyImageResponse$json = {
+  '1': 'VerifyImageResponse',
+  '2': [
+    {'1': 'verify_code_id', '3': 1, '4': 1, '5': 9, '10': 'verifyCodeId'},
+    {'1': 'image_bs', '3': 2, '4': 1, '5': 9, '10': 'imageBs'},
+  ],
+};
+
+/// Descriptor for `VerifyImageResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List verifyImageResponseDescriptor = $convert.base64Decode(
+    'ChNWZXJpZnlJbWFnZVJlc3BvbnNlEiQKDnZlcmlmeV9jb2RlX2lkGAEgASgJUgx2ZXJpZnlDb2'
+    'RlSWQSGQoIaW1hZ2VfYnMYAiABKAlSB2ltYWdlQnM=');
+
 @$core.Deprecated('Use signInRequestDescriptor instead')
 const SignInRequest$json = {
   '1': 'SignInRequest',
   '2': [
     {'1': 'user_name', '3': 1, '4': 1, '5': 9, '10': 'userName'},
     {'1': 'password', '3': 2, '4': 1, '5': 9, '10': 'password'},
+    {'1': 'vcode', '3': 3, '4': 1, '5': 9, '10': 'vcode'},
+    {'1': 'verify_code_id', '3': 4, '4': 1, '5': 9, '10': 'verifyCodeId'},
+    {'1': 'device_id', '3': 7, '4': 1, '5': 9, '10': 'deviceId'},
+    {'1': 'os', '3': 8, '4': 1, '5': 9, '10': 'os'},
+    {'1': 'osVersion', '3': 9, '4': 1, '5': 9, '10': 'osVersion'},
   ],
 };
 
 /// Descriptor for `SignInRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List signInRequestDescriptor = $convert.base64Decode(
     'Cg1TaWduSW5SZXF1ZXN0EhsKCXVzZXJfbmFtZRgBIAEoCVIIdXNlck5hbWUSGgoIcGFzc3dvcm'
-    'QYAiABKAlSCHBhc3N3b3Jk');
+    'QYAiABKAlSCHBhc3N3b3JkEhQKBXZjb2RlGAMgASgJUgV2Y29kZRIkCg52ZXJpZnlfY29kZV9p'
+    'ZBgEIAEoCVIMdmVyaWZ5Q29kZUlkEhsKCWRldmljZV9pZBgHIAEoCVIIZGV2aWNlSWQSDgoCb3'
+    'MYCCABKAlSAm9zEhwKCW9zVmVyc2lvbhgJIAEoCVIJb3NWZXJzaW9u');
 
 @$core.Deprecated('Use signInResponseDescriptor instead')
 const SignInResponse$json = {
