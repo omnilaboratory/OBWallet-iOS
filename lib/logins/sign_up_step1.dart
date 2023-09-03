@@ -5,6 +5,7 @@ import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
+import 'package:awallet/utils.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
@@ -26,6 +27,8 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _pswController = TextEditingController();
   final TextEditingController _psw2Controller = TextEditingController();
+
+  String passwordTitle = "Weak";
 
   VerifyCodeResponse? verifyCodeResponse;
 
@@ -105,15 +108,21 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: SingleChildScrollView(
-          child: Column(children: [
-        const SizedBox(height: 55),
-        buildTitle(),
-        const SizedBox(height: 55),
-        buildInputField(),
-        const SizedBox(height: 20),
-        buildButtons(context)
-      ])),
+      body: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: SingleChildScrollView(
+            child: Column(children: [
+          const SizedBox(height: 55),
+          buildTitle(),
+          const SizedBox(height: 55),
+          buildInputField(),
+          const SizedBox(height: 20),
+          buildButtons(context)
+        ])),
+      ),
     );
   }
 
@@ -206,9 +215,22 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
               ],
             ),
             const SizedBox(height: 20),
-            buildInputColumn("Password", _pswController, width: 272),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                buildInputColumn("Password", _pswController,
+                    width: 200, maxLength: 16),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(passwordTitle,
+                      style: const TextStyle(color: Colors.blue)),
+                ),
+              ],
+            ),
             const SizedBox(height: 20),
-            buildInputColumn("Confirm Password", _psw2Controller, width: 272),
+            buildInputColumn("Confirm Password", _psw2Controller,
+                width: 272, maxLength: 16),
             const SizedBox(height: 20),
             buildInputColumn("Nickname", _unameController, width: 272),
           ],
@@ -218,7 +240,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   }
 
   Column buildInputColumn(String title, TextEditingController controller,
-      {double width = 180}) {
+      {double width = 180, maxLength = 40}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -241,10 +263,18 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           ),
           child: TextFormField(
             controller: controller,
+            maxLines: 1,
             obscureText: title.contains("Password"),
             onChanged: (v) {
               if (title == "Email") {
                 resetCode();
+              }
+              if (title == "Password") {
+                updatePswStrength(controller.text);
+              }
+              if (controller.value.text.trim().length > maxLength) {
+                controller.text = controller.text.substring(0, maxLength);
+                Fluttertoast.showToast(msg: "too long $title");
               }
             },
             decoration: const InputDecoration(
@@ -254,6 +284,20 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
         ),
       ],
     );
+  }
+
+  updatePswStrength(String psw) {
+    int strength = Utils.getStrength(psw);
+    if (strength < 1) {
+      passwordTitle = "Weak";
+    }
+    if (strength == 2) {
+      passwordTitle = "Normal";
+    }
+    if (strength > 2) {
+      passwordTitle = "Strong";
+    }
+    setState(() {});
   }
 
   Widget buildTitle() {
@@ -329,16 +373,20 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   void signUp() {
     SignUpRequest signUpRequest = SignUpRequest();
     signUpRequest.email = _emailController.value.text.trim();
-    if (!RegExp(
-            r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
-        .hasMatch(signUpRequest.email)) {
+    if (!Utils.isEmailValid(signUpRequest.email)) {
       Fluttertoast.showToast(msg: "wrong email");
     }
+
+    signUpRequest.password = _pswController.value.text.trim();
+    if (!Utils.isLoginPassword(signUpRequest.password)) {
+      Fluttertoast.showToast(msg: "wrong password");
+    }
+
     if (verifyCodeResponse == null) {
       Fluttertoast.showToast(msg: "please get verifyCode first");
       return;
     }
-    signUpRequest.password = _pswController.value.text.trim();
+
     signUpRequest.confirmPassword = _psw2Controller.value.text.trim();
     if (signUpRequest.password != signUpRequest.confirmPassword) {
       Fluttertoast.showToast(msg: "wrong password and confirmPassword");
@@ -346,6 +394,12 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     }
 
     signUpRequest.userName = _unameController.value.text.trim();
+    if (signUpRequest.userName.isNotEmpty) {
+      if (!Utils.isNickname(signUpRequest.userName)) {
+        Fluttertoast.showToast(msg: "wrong nickName");
+      }
+    }
+
     signUpRequest.vcode = _codeController.value.text.trim();
     if (signUpRequest.vcode == "") {
       Fluttertoast.showToast(msg: "wrong verify code");

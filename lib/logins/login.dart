@@ -55,97 +55,103 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, top: 80, right: 20),
-        child: Column(children: [
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image(
-                image: AssetImage("asset/images/image_logo.png"),
-                width: 72,
-                height: 72,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Text(
-                      'Welcome',
-                      style: TextStyle(
-                        color: Color(0xFF333333),
-                        fontSize: 48,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    'Wallet Description',
-                    style: TextStyle(
-                      color: Color(0xFF999999),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      height: 1.29,
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-          const SizedBox(height: 43),
-          const Image(image: AssetImage("asset/images/image_logo_banner.png")),
-          const SizedBox(height: 43),
-          Stack(alignment: AlignmentDirectional.bottomEnd, children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, top: 80, right: 20),
+          child: Column(children: [
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  width: 320,
-                  height: 320,
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    shadows: const [
-                      BoxShadow(
-                        color: Color(0x7AAAA9DD),
-                        blurRadius: 10,
-                        offset: Offset(2, 2),
-                        spreadRadius: 0,
-                      )
-                    ],
-                  ),
-                  child: buildInputFields(),
+                Image(
+                  image: AssetImage("asset/images/image_logo.png"),
+                  width: 72,
+                  height: 72,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12, left: 10, bottom: 20),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpStepOne()));
-                    },
-                    child: const Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        color: Color(0xFF06D78F),
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 4),
+                      child: Text(
+                        'Welcome',
+                        style: TextStyle(
+                          color: Color(0xFF333333),
+                          fontSize: 48,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
-                  ),
+                    Text(
+                      'Wallet Description',
+                      style: TextStyle(
+                        color: Color(0xFF999999),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        height: 1.29,
+                      ),
+                    )
+                  ],
                 )
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10, right: 20),
-              child: buildLoginBtn(context),
-            )
-          ])
-        ]),
+            const SizedBox(height: 43),
+            const Image(image: AssetImage("asset/images/image_logo_banner.png")),
+            const SizedBox(height: 43),
+            Stack(alignment: AlignmentDirectional.bottomEnd, children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 320,
+                    height: 320,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      shadows: const [
+                        BoxShadow(
+                          color: Color(0x7AAAA9DD),
+                          blurRadius: 10,
+                          offset: Offset(2, 2),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    child: buildInputFields(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12, left: 10, bottom: 20),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpStepOne()));
+                      },
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          color: Color(0xFF06D78F),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10, right: 20),
+                child: buildLoginBtn(context),
+              )
+            ])
+          ]),
+        ),
       ),
     ));
   }
@@ -241,6 +247,7 @@ class _LoginState extends State<Login> {
                   width: 130,
                   child: TextFormField(
                     controller: _codeController,
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                         labelText: "Verify Code", hintText: "Verify Code"),
                     validator: (v) {
