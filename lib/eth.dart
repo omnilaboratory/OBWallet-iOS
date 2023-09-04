@@ -157,7 +157,7 @@ class Eth {
           to:    EthereumAddress.fromHex(toAddress),
           value: EtherAmount.fromBigInt(EtherUnit.wei, weiAmount),
         ),
-        chainId: 5  // Goerli testnet - will be mainnet(1)
+        chainId: GlobalParams.currNetwork.chainId  // Goerli testnet - will be mainnet(1)
       );
 
       return response;
