@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/common_service.dart';
@@ -8,7 +9,9 @@ import 'package:awallet/home.dart';
 import 'package:awallet/logins/sign_up_step1.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -27,6 +30,7 @@ class _LoginState extends State<Login> {
 
   @override
   void initState() {
+    checkPermission();
     LocalStorage.initSP().then((value) {
       // var userToken = LocalStorage.get(LocalStorage.userToken);
       // if (userToken != null && userToken.toString().isNotEmpty) {
@@ -39,6 +43,38 @@ class _LoginState extends State<Login> {
     getVerifyImage();
 
     super.initState();
+  }
+
+  bool storage = true;
+  bool videos = true;
+  bool photos = true;
+  bool audio = true;
+
+  Future<void> checkPermission() async {
+    if (Platform.isAndroid) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      if (androidInfo.version.sdkInt >= 33) {
+        videos = await Permission.videos.request().isGranted;
+        photos = await Permission.photos.request().isGranted;
+        audio = await Permission.audio.request().isGranted;
+      } else {
+        storage = await Permission.storage.request().isGranted;
+      }
+    } else if (Platform.isIOS) {
+      storage = await Permission.storage.request().isGranted;
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+      if (int.parse(iosDeviceInfo.systemVersion) > 14) {
+        photos = await Permission.photos.request().isGranted;
+      }
+    }
+
+    if (storage || (videos && photos && audio)) {
+      log("Permission");
+    } else {
+      log("no Permission");
+    }
   }
 
   void getVerifyImage() {
