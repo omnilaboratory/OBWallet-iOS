@@ -8,6 +8,7 @@ import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -168,7 +169,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   Container buildInputField() {
     return Container(
       width: 320,
-      height: 450,
+      height: 480,
       padding: const EdgeInsets.only(left: 20, right: 20),
       decoration: ShapeDecoration(
         color: Colors.white,
@@ -195,7 +196,8 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                buildInputColumn("Verify Code", _codeController, width: 160),
+                buildInputColumn("Verify Code", _codeController,
+                    width: 160, maxLength: 8),
                 // const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(left: 4, top: 14),
@@ -232,7 +234,8 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
             buildInputColumn("Confirm Password", _psw2Controller,
                 width: 272, maxLength: 16),
             const SizedBox(height: 20),
-            buildInputColumn("Nickname", _unameController, width: 272),
+            buildInputColumn("Nickname", _unameController,
+                width: 272, maxLength: 28),
           ],
         ),
       ),
@@ -240,7 +243,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   }
 
   Column buildInputColumn(String title, TextEditingController controller,
-      {double width = 180, maxLength = 40}) {
+      {double width = 180, maxLength = 50}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -254,7 +257,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
         ),
         Container(
           width: width,
-          height: 36,
+          height: 48,
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: const BorderSide(width: 0.80, color: Color(0xFFE6E6E6)),
@@ -264,6 +267,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           child: TextFormField(
             controller: controller,
             maxLines: 1,
+            // maxLength: maxLength,
             obscureText: title.contains("Password"),
             onChanged: (v) {
               if (title == "Email") {
