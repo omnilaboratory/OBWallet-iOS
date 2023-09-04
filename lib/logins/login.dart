@@ -99,7 +99,8 @@ class _LoginState extends State<Login> {
               ],
             ),
             const SizedBox(height: 43),
-            const Image(image: AssetImage("asset/images/image_logo_banner.png")),
+            const Image(
+                image: AssetImage("asset/images/image_logo_banner.png")),
             const SizedBox(height: 43),
             Stack(alignment: AlignmentDirectional.bottomEnd, children: [
               Column(
@@ -125,7 +126,8 @@ class _LoginState extends State<Login> {
                     child: buildInputFields(),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 12, left: 10, bottom: 20),
+                    padding:
+                        const EdgeInsets.only(top: 12, left: 10, bottom: 20),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -256,16 +258,28 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 _verifyImageResponse == null
-                    ? const Text("loading")
+                    ? const Padding(
+                        padding: EdgeInsets.only(right: 10, bottom: 4),
+                        child: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            color: Color(0xFF666666),
+                            strokeWidth: 3,
+                          ),
+                        ),
+                      )
                     : InkWell(
-                      onTap: () {getVerifyImage();},
-                      child: Image(
-                        width: 120,
-                        height: 60,
-                        image: MemoryImage(base64Decode(
-                            _verifyImageResponse!.imageBs.substring(22))),
+                        onTap: () {
+                          getVerifyImage();
+                        },
+                        child: Image(
+                          width: 120,
+                          height: 60,
+                          image: MemoryImage(base64Decode(
+                              _verifyImageResponse!.imageBs.substring(22))),
+                        ),
                       ),
-                    ),
               ],
             ),
           ],
@@ -288,13 +302,11 @@ class _LoginState extends State<Login> {
     LocalStorage.save(LocalStorage.username, username);
     // LocalStorage.remove(LocalStorage.ethAddress);
     SignInRequest req = SignInRequest();
-    req.userName =username;
-    req.password =password;
+    req.userName = username;
+    req.password = password;
     req.vcode = _codeController.value.text.trim();
     req.verifyCodeId = _verifyImageResponse!.verifyCodeId;
-    UserService.getInstance()
-        .login(context, req)
-        .then((loginInfo) {
+    UserService.getInstance().login(context, req).then((loginInfo) {
       if (loginInfo.code == 1) {
         LocalStorage.save(LocalStorage.password, password);
         LocalStorage.save(
