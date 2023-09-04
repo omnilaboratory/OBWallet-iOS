@@ -105,7 +105,7 @@ class _CryptoHomeState extends State<CryptoHome> {
 
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      // backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
       title: const HeadLogo(title: "Crypto"),
       actions: <Widget>[
