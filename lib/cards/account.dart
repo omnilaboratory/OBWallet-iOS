@@ -1,8 +1,9 @@
+import 'dart:async';
 import 'dart:developer';
+import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/currency_tx_history.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/send.dart';
-import 'package:awallet/cards/top_up.dart';
 import 'package:awallet/component/account_balance_in_currency.dart';
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
@@ -11,6 +12,7 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
@@ -46,9 +48,25 @@ class _AccountState extends State<Account> {
   ];
 
   double totalBalanceUsd = 0;
+  Timer? updateBalanceTimer;
 
   @override
   void initState() {
+    updateBalance();
+    updateBalanceTimer ??= Timer.periodic(const Duration(seconds: 30), (timer) {
+      updateBalance();
+    });
+
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "MoreMenu_setNetwork") {
+
+        updateBalance();
+      }
+    });
+    super.initState();
+  }
+
+  void updateBalance() {
     var address = LocalStorage.get(LocalStorage.ethAddress);
     if (address != null) {
       UserService.getInstance().updateUser(context, address).then((value) {
@@ -72,7 +90,6 @@ class _AccountState extends State<Account> {
         setState(() {});
       }
     });
-    super.initState();
   }
 
   @override
@@ -151,13 +168,11 @@ class _AccountState extends State<Account> {
             text: 'Top Up',
             iconWidth: iconWidth,
             onPressed: () {
-              Fluttertoast.showToast(
-                  msg: "Coming Soon...", gravity: ToastGravity.CENTER);
-              // showDialog(
-              //     context: context,
-              //     builder: (context) {
-              //       return const TopUp();
-              //     });
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const CardRecharge();
+                  });
             }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',

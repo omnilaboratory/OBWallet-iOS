@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
@@ -37,7 +39,21 @@ class CardService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context,e, ret);
+      UserService.getInstance().setError(context, e, ret);
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> cardRecharge(
+      BuildContext context, CardRechargeRequest req) async {
+    log("$req");
+    var ret = GrpcResponse();
+    try {
+      var resp = await cardServiceClient?.cardRecharge(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context, e, ret);
     }
     return ret;
   }

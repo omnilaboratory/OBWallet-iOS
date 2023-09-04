@@ -60,6 +60,7 @@ dependencies:
   decimal: ^2.3.3
   flutter_stripe: ^9.3.0
   event_bus: ^2.0.0
+  flutter_credit_card: ^3.0.7
 
 dev_dependencies:
   flutter_test:

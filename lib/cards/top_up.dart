@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:awallet/bean/bank_card_info.dart';
 import 'package:awallet/component/bank_card_item.dart';
 import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/grpc_services/card_service.dart';
+import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
 class TopUp extends StatefulWidget {
@@ -107,7 +109,7 @@ class _TopUpState extends State<TopUp> {
                           icon: 'asset/images/icon_top_up_green.png',
                           text: 'Top Up',
                           onPressed: () {
-                            log("onTap");
+                            topUp();
                           },
                         )
                       ]),
@@ -212,5 +214,25 @@ class _TopUpState extends State<TopUp> {
         child: Text("Top Up", style: TextStyle(fontSize: 20)),
       ),
     );
+  }
+
+  void topUp() {
+    CardRechargeRequest request = CardRechargeRequest();
+    request.amt = 10;
+    request.cardNo = '4000000000000002';
+    request.cardSecurityCode = '222';
+    request.cardExpireMonth = '6';
+    request.cardExpireYear = '2026';
+    CardService.getInstance()
+        .cardRecharge(context, request)
+        .then((value) async {
+      if (value.code == 1) {
+        var resp = value.data as CardRechargeResponse;
+        log(resp.toString());
+        Navigator.pop(context);
+      } else {
+        log(value.msg);
+      }
+    });
   }
 }

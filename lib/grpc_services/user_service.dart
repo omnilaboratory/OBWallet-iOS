@@ -173,7 +173,7 @@ class UserService {
     GrpcError error = e as GrpcError;
     ret.msg = error.message.toString();
     Fluttertoast.showToast(msg: ret.msg, gravity: ToastGravity.CENTER);
-    if (e.code == 2 || e.code == 16) {
+    if (e.code == 16) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const Login()),
