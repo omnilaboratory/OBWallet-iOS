@@ -138,23 +138,21 @@ class _CardRechargeState extends State<CardRecharge> {
                           width: size.width * 0.9,
                           height: 40,
                           padding: const EdgeInsets.only(left: 16, right: 16),
-                          child: Expanded(
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                foregroundColor: const Color(0xFF000000),
-                                backgroundColor: const Color(0xFF4A92FF),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              foregroundColor: const Color(0xFF000000),
+                              backgroundColor: const Color(0xFF4A92FF),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              onPressed: onPay,
-                              child: const Text("Pay Now",
-                                  style: TextStyle(
-                                    color: Color(0xFFFFFFFF),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  )),
                             ),
+                            onPressed: onPay,
+                            child: const Text("Pay Now",
+                                style: TextStyle(
+                                  color: Color(0xFFFFFFFF),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                )),
                           ),
                         ),
                         const SizedBox(height: 50),
