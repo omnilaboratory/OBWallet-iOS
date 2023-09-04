@@ -8,7 +8,6 @@ import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -267,7 +266,6 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           child: TextFormField(
             controller: controller,
             maxLines: 1,
-            // maxLength: maxLength,
             obscureText: title.contains("Password"),
             onChanged: (v) {
               if (title == "Email") {
@@ -278,7 +276,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
               }
               if (controller.value.text.trim().length > maxLength) {
                 controller.text = controller.text.substring(0, maxLength);
-                Fluttertoast.showToast(msg: "too long $title");
+                Fluttertoast.showToast(msg: "too long $title($maxLength)");
               }
             },
             decoration: const InputDecoration(
@@ -379,17 +377,26 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     signUpRequest.email = _emailController.value.text.trim();
     if (!Utils.isEmailValid(signUpRequest.email)) {
       Fluttertoast.showToast(msg: "wrong email");
-    }
-
-    signUpRequest.password = _pswController.value.text.trim();
-    if (!Utils.isLoginPassword(signUpRequest.password)) {
-      Fluttertoast.showToast(msg: "wrong password");
+      return;
     }
 
     if (verifyCodeResponse == null) {
       Fluttertoast.showToast(msg: "please get verifyCode first");
       return;
     }
+
+    signUpRequest.vcode = _codeController.value.text.trim();
+    if (signUpRequest.vcode == "") {
+      Fluttertoast.showToast(msg: "wrong verify code");
+      return;
+    }
+
+    signUpRequest.password = _pswController.value.text.trim();
+    if (!Utils.isLoginPassword(signUpRequest.password)) {
+      Fluttertoast.showToast(msg: "wrong password");
+      return;
+    }
+
 
     signUpRequest.confirmPassword = _psw2Controller.value.text.trim();
     if (signUpRequest.password != signUpRequest.confirmPassword) {
@@ -401,14 +408,10 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     if (signUpRequest.userName.isNotEmpty) {
       if (!Utils.isNickname(signUpRequest.userName)) {
         Fluttertoast.showToast(msg: "wrong nickName");
+        return;
       }
     }
 
-    signUpRequest.vcode = _codeController.value.text.trim();
-    if (signUpRequest.vcode == "") {
-      Fluttertoast.showToast(msg: "wrong verify code");
-      return;
-    }
     signUpRequest.verifyCodeId = verifyCodeResponse!.verifyCodeId;
     UserService.getInstance()
         .signUp(context, signUpRequest)
