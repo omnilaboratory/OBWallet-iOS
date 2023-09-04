@@ -18,9 +18,9 @@ class MoreMenu extends StatefulWidget {
 
 class _MoreMenuState extends State<MoreMenu> {
   var btnInfoList = [
-    BtnInfo("asset/images/icon_channel_manage.png", "Channel Manage", null),
-    BtnInfo("asset/images/icon_plus.png", "Create Channel", null),
-    BtnInfo("asset/images/icon_backup.png", "Backup Now", null),
+    // BtnInfo("asset/images/icon_channel_manage.png", "Channel Manage", null),
+    // BtnInfo("asset/images/icon_plus.png", "Create Channel", null),
+    // BtnInfo("asset/images/icon_backup.png", "Backup Now", null),
     BtnInfo("asset/images/icon_export_wif.png", "Export WIF", null),
     // BtnInfo(
     //     "asset/images/icon_mainnet.png", EnumNetworkType.mainnet.value, null),
@@ -30,7 +30,7 @@ class _MoreMenuState extends State<MoreMenu> {
 
   @override
   void initState() {
-    btnInfoList[3].callback = () {
+    btnInfoList[0].callback = () {
       Navigator.pop(context);
       showDialog(
           context: context,
@@ -77,7 +77,7 @@ class _MoreMenuState extends State<MoreMenu> {
                   child: Container(
                     padding: const EdgeInsets.only(top: 24, left: 6, right: 11),
                     width: 187,
-                    height: 190,
+                    height: 80,
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                       image: AssetImage('asset/images/image_bg_more.png'),
