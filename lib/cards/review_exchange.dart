@@ -481,17 +481,17 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     request.rate = coinPrice;
     AccountService.getInstance().sellCoin(context,request).then((value) async {
       if (value.code == 1) {
+        setState(() {
+          loadingVisible = false;
+        });
         var resp = value.data as SellCoinResponse;
         log(resp.toString());
         Navigator.pop(context);
-        setState(() {
-          loadingVisible = false;
-        });
       } else {
-        log(value.msg);
         setState(() {
           loadingVisible = false;
         });
+        log(value.msg);
       }
     });
   }
@@ -510,17 +510,17 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     request.rate = coinPrice;
     AccountService.getInstance().buyCoin(context,request).then((value) async {
       if (value.code == 1) {
+        setState(() {
+          loadingVisible = false;
+        });
         var resp = value.data as BuyCoinResponse;
         log(resp.toString());
         Navigator.pop(context);
-        setState(() {
-          loadingVisible = false;
-        });
       } else {
-        log(value.msg);
         setState(() {
           loadingVisible = false;
         });
+        log(value.msg);
       }
     });
   }

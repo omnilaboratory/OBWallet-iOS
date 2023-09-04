@@ -213,17 +213,17 @@ class _CardRechargeState extends State<CardRecharge> {
           .cardRecharge(context, request)
           .then((value) async {
         if (value.code == 1) {
+          setState(() {
+            loadingVisible = false;
+          });
           var resp = value.data as CardRechargeResponse;
           log(resp.toString());
           Navigator.pop(context);
-          setState(() {
-            loadingVisible = true;
-          });
         } else {
-          log(value.msg);
           setState(() {
-            loadingVisible = true;
+            loadingVisible = false;
           });
+          log(value.msg);
         }
       });
     } else {

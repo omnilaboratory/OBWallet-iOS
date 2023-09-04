@@ -36,12 +36,12 @@ class _SendConfirmState extends State<SendConfirm> {
       Eth.sendEthTo(widget.address, double.parse(widget.amount)).then((value) {
         try {
           if (value.isNotEmpty) {
-            log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(context, value);
-            Navigator.pop(context);
             setState(() {
               loadingVisible = false;
             });
+            log('txId: $value');
+            EthGrpcService.getInstance().ethTrackTx(context, value);
+            Navigator.pop(context);
           }
         } catch (e) {
           setState(() {
@@ -53,12 +53,12 @@ class _SendConfirmState extends State<SendConfirm> {
       Eth.sendUsdtTo(widget.address, double.parse(widget.amount)).then((value) {
         try {
           if (value.isNotEmpty) {
-            log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(context, value);
-            Navigator.pop(context);
             setState(() {
               loadingVisible = false;
             });
+            log('txId: $value');
+            EthGrpcService.getInstance().ethTrackTx(context, value);
+            Navigator.pop(context);
           }
         } catch (e) {
           setState(() {
@@ -70,12 +70,12 @@ class _SendConfirmState extends State<SendConfirm> {
       Eth.sendUsdcTo(widget.address, double.parse(widget.amount)).then((value) {
         try {
           if (value.isNotEmpty) {
-            log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(context, value);
-            Navigator.pop(context);
             setState(() {
               loadingVisible = false;
             });
+            log('txId: $value');
+            EthGrpcService.getInstance().ethTrackTx(context, value);
+            Navigator.pop(context);
           }
         } catch (e) {
           setState(() {
