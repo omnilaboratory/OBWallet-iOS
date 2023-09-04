@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
@@ -7,6 +8,7 @@ import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:grpc/grpc.dart';
@@ -48,6 +50,8 @@ class UserService {
   Future<GrpcResponse> login(
       BuildContext context, SignInRequest req) async {
     req.password = Utils.generateMd5(req.password);
+    req.os = Platform.operatingSystem;
+    await setDeviceInfo(req);
     log("$req");
     var ret = GrpcResponse();
     try {
@@ -61,6 +65,22 @@ class UserService {
       setError(context, e, ret);
     }
     return ret;
+  }
+
+  Future<void> setDeviceInfo(SignInRequest req) async {
+    if(Platform.isAndroid){
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      req.osVersion = androidInfo.version.codename;
+      req.deviceId = androidInfo.device.toString();
+    }
+
+    if(Platform.isIOS){
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      IosDeviceInfo info = await deviceInfo.iosInfo;
+      req.osVersion = info.systemVersion;
+      req.deviceId = info.model;
+    }
   }
 
   Future<GrpcResponse> verifyImage(BuildContext context) async {
