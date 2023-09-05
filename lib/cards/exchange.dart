@@ -131,9 +131,8 @@ class _ExchangeState extends State<Exchange> {
         return;
       }
 
-      if (_amountFromController.value.text.toString().compareTo(
-              StringTools.formatCryptoNum(currSelectedToken.balance)) >
-          0) {
+      if (double.parse(_amountFromController.value.text.toString()) >
+          currSelectedToken.balance!) {
         Fluttertoast.showToast(
             msg: "The from amount cannot exceed the maximum",
             gravity: ToastGravity.CENTER);
@@ -167,9 +166,8 @@ class _ExchangeState extends State<Exchange> {
         return;
       }
 
-      if (_amountToController.value.text.toString().compareTo(
-              StringTools.formatCurrencyNum(currSelectedCurrency.balance)) >
-          0) {
+      if (double.parse(_amountToController.value.text.toString()) >
+          currSelectedCurrency.balance!) {
         Fluttertoast.showToast(
             msg: "The from amount cannot exceed the maximum",
             gravity: ToastGravity.CENTER);
@@ -626,11 +624,13 @@ class _ExchangeState extends State<Exchange> {
                             if (currSelectedToken.name == 'ETH') {
                               _amountFromController.text =
                                   StringTools.formatCryptoNum(
-                                      double.parse(_amountToController.text) / coinPrice);
+                                      double.parse(_amountToController.text) /
+                                          coinPrice);
                             } else {
                               _amountFromController.text =
                                   StringTools.formatCurrencyNum(
-                                      double.parse(_amountToController.text) / coinPrice);
+                                      double.parse(_amountToController.text) /
+                                          coinPrice);
                             }
                           });
                         },
@@ -789,7 +789,8 @@ class _ExchangeState extends State<Exchange> {
                                         currSelectedToken.balance);
                             _amountToController.text =
                                 StringTools.formatCurrencyNum(
-                                    double.parse(_amountFromController.text) * coinPrice);
+                                    double.parse(_amountFromController.text) *
+                                        coinPrice);
                           });
                         },
                         child: const Text(
