@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class SquareButton extends StatelessWidget {
@@ -24,11 +25,11 @@ class SquareButton extends StatelessWidget {
                 height: 32,
               ),
               const SizedBox(height: 5),
-              Text(
+              AutoSizeText(
                 text,
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
+                maxLines: 1,
+                maxFontSize: 14,
+                minFontSize: 10,
               ),
             ]
           ),

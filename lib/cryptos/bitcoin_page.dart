@@ -53,7 +53,7 @@ class _BitcoinPageState extends State<BitcoinPage> {
 
   Row buildTxButtons() {
     var size = MediaQuery.sizeOf(context);
-    var iconWidth = (size.width - 50) / 5;
+    var iconWidth = (size.width - 50) / 4;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
