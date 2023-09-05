@@ -34,7 +34,6 @@ class _EthereumPageState extends State<EthereumPage> {
 
     GlobalParams.eventBus.on().listen((event) {
       if (event == "MoreMenu_setNetwork") {
-
         updateBalance();
       }
     });
@@ -158,8 +157,7 @@ class _EthereumPageState extends State<EthereumPage> {
                 onTap: () {
                   createNewWallet();
                 },
-                child: const Image(
-                    image: AssetImage("asset/images/btn_new_wallet.png"))),
+                child: createBtn("icon_plus.png", "Create New Wallet")),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 40, bottom: 20),
@@ -175,11 +173,36 @@ class _EthereumPageState extends State<EthereumPage> {
                     setState(() {});
                   }
                 },
-                child: const Image(
-                    image: AssetImage("asset/images/btn_recover.png"))),
+                child: createBtn("image_recover_wallet.png", "Recover Wallet")),
           ),
         ])),
       ),
+    );
+  }
+
+  Column createBtn(String iconUrl, String btnName) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Image(
+            width: 36,
+            height: 36,
+            image: AssetImage("asset/images/$iconUrl"),
+            color: Colors.green,
+          ),
+        ),
+        Text(
+          btnName,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 4,
+          ),
+        )
+      ],
     );
   }
 
