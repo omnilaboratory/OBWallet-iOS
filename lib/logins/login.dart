@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:awallet/component/common.dart';
 import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
@@ -108,7 +109,7 @@ class _LoginState extends State<Login> {
                 children: [
                   Container(
                     width: 320,
-                    height: 320,
+                    height: 280,
                     decoration: ShapeDecoration(
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
@@ -212,50 +213,26 @@ class _LoginState extends State<Login> {
       _pswController.text = LocalStorage.get(LocalStorage.password);
     }
     return Container(
-      padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
       child: Form(
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextFormField(
-              controller: _unameController,
-              decoration: const InputDecoration(
-                  labelText: "Username",
-                  hintText: "Username",
-                  prefixIcon: Icon(Icons.person)),
-              validator: (v) {
-                return v!.trim().isNotEmpty ? null : "wrong username";
-              },
-            ),
-            const SizedBox(height: 30),
-            TextFormField(
-              controller: _pswController,
-              decoration: const InputDecoration(
-                  labelText: "Password",
-                  hintText: "Password",
-                  prefixIcon: Icon(Icons.lock)),
-              obscureText: true,
-              validator: (v) {
-                return v!.trim().isNotEmpty ? null : "wrong password";
-              },
-            ),
+            createTextFormField(
+                _unameController, "Username", const Icon(Icons.person), false),
+            const SizedBox(height: 10),
+            createTextFormField(
+                _pswController, "Password", const Icon(Icons.lock), true),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   width: 130,
-                  child: TextFormField(
-                    controller: _codeController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                        labelText: "Verify Code", hintText: "Verify Code"),
-                    validator: (v) {
-                      return v!.trim().isNotEmpty ? null : "wrong Verify Code";
-                    },
-                  ),
+                  child: createTextFormField(_codeController, "Verify Code",
+                      null, false),
                 ),
                 _verifyImageResponse == null
                     ? const Padding(

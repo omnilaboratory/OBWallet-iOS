@@ -76,11 +76,11 @@ class _AccountState extends State<Account> {
           log(value.msg);
         }
       });
-      EthService.getInstance().updateTokenBalances(context).then((value) {
-        if (mounted) {
-          setState(() {});
-        }
-      });
+      // EthService.getInstance().updateTokenBalances(context).then((value) {
+      //   if (mounted) {
+      //     setState(() {});
+      //   }
+      // });
     }
     AccountService.getInstance().getAccountInfo(context).then((info) {
       if (info.code == 1) {
