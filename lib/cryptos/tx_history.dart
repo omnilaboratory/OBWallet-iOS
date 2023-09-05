@@ -33,6 +33,8 @@ class _TxHistoryState extends State<TxHistory> {
                     "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
                 txTime: DateTime.fromMillisecondsSinceEpoch(
                     (element.createdAt * 1000).toInt()),
+                fromSymbol: element.fromSymbol.name,
+                targetSymbol:element.targetSymbol.name,
                 amount: element.amt,amountOfDollar: element.settleAmt));
           }
         } else {
@@ -55,6 +57,7 @@ class _TxHistoryState extends State<TxHistory> {
             txHistoryList.add(CryptoTxInfo(
                 title: "Send(${element.symbol.name})",
                 txTime: DateTime.fromMillisecondsSinceEpoch((element.createdAt * 1000).toInt()),
+                fromSymbol: element.symbol.name,
                 amount: element.amt,amountOfDollar: element.usdAmt));
           }
         } else {

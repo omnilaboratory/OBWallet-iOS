@@ -36,54 +36,85 @@ class _CryptoTxItemState extends State<CryptoTxItem> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
+        Expanded(
+          flex: 3,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.txInfo.title,
+                  style: const TextStyle(
+                    color: Color(0xFF333333),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  DateFormat("yyyy.MM.dd hh:mm a").format(widget.txInfo.txTime),
+                  style: const TextStyle(
+                    color: Color(0xFF999999),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                widget.txInfo.title,
-                style: const TextStyle(
-                  color: Color(0xFF333333),
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
+              buildAmount(widget.txInfo.fromSymbol, widget.txInfo.amount),
               const SizedBox(height: 4),
-              Text(
-                DateFormat("yyyy.MM.dd hh:mm a").format(widget.txInfo.txTime),
-                style: const TextStyle(
-                  color: Color(0xFF999999),
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
+              buildAmount(
+                  widget.txInfo.targetSymbol, widget.txInfo.amountOfDollar!),
             ],
           ),
         ),
-        const Spacer(),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              StringTools.formatCryptoNum(widget.txInfo.amount),
-              style: const TextStyle(
-                color: Color(0xFF666666),
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Text(
-              "\$ ${StringTools.formatCurrencyNum(widget.txInfo.amountOfDollar)}",
-              style: const TextStyle(
-                color: Color(0xFF666666),
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
       ]),
+    );
+  }
+
+  Row buildAmount(String symbol, double amount) {
+    String imageName = "icon_dollar.png";
+    String amountStr = StringTools.formatCurrencyNum(amount);
+    if (symbol != "USD") {
+      amountStr = StringTools.formatCryptoNum(amount);
+      switch (symbol) {
+        case "ETH":
+          imageName = "icon_eth_logo.png";
+          break;
+        case "USDT":
+          imageName = "icon_tether.png";
+          break;
+        case "USDC":
+          imageName = "icon_tether.png";
+          break;
+      }
+    }
+
+    return Row(
+      children: [
+        Image(
+          image: AssetImage('asset/images/$imageName'),
+          width: 16,
+          height: 16,
+        ),
+        const SizedBox(width: 4),
+        Text(
+          amountStr,
+          style: const TextStyle(
+            color: Color(0xFF666666),
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
     );
   }
 }
