@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
@@ -158,7 +160,9 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           icon: 'asset/images/icon_arrow_right_green.png',
           text: 'NEXT',
           onPressed: () {
-            signUp();
+            if ((_formKey.currentState as FormState).validate()) {
+              signUp();
+            }
           },
         ),
       ],
@@ -190,24 +194,35 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            buildInputColumn("Email", _emailController, width: 300),
-            const SizedBox(height: 20),
+            createTextFormField(
+                _emailController, "Email", const Icon(Icons.email), false,
+                maxLength: 50),
+            const SizedBox(height: 15),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                buildInputColumn("Verify Code", _codeController,
-                    width: 160, maxLength: 8),
-                // const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(left: 4, top: 14),
-                  child: TextButton(
-                      onPressed: () {
+                Expanded(
+                  flex: 3,
+                  child: SizedBox(
+                    width: 180,
+                    child: createTextFormField(_codeController, "Verify Code",
+                        const Icon(Icons.verified_user_outlined), false,
+                        maxLength: 6),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  flex: 1,
+                  child: GestureDetector(
+                      onTap: () {
                         getVerifyCode();
                       },
-                      child: Text(
+                      child: AutoSizeText(
                         getCodeTitle,
+                        maxLines: 1,
+                        maxFontSize: 12,
+                        minFontSize: 6,
                         style: TextStyle(
-                            fontSize: 12,
                             color: getCodeTitleEnable
                                 ? Colors.lightBlue
                                 : Colors.grey),
@@ -215,76 +230,60 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                 )
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                buildInputColumn("Password", _pswController,
-                    width: 200, maxLength: 16),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Text(passwordTitle,
-                      style: const TextStyle(color: Colors.blue)),
+                Expanded(
+                  flex: 3,
+                  child: SizedBox(
+                    width: 180,
+                    child: TextFormField(
+                      controller: _pswController,
+                      maxLines: 1,
+                      maxLength: 16,
+                      decoration: InputDecoration(
+                        hintText: "Password",
+                        hintStyle: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w400),
+                        prefixIcon: const Icon(Icons.password),
+                        border: outlineInputBorder,
+                        focusedBorder: outlineInputBorder,
+                        enabledBorder: outlineInputBorder,
+                        disabledBorder: outlineInputBorder,
+                        focusedErrorBorder: outlineInputBorder,
+                        errorBorder: outlineInputBorder,
+                        contentPadding:
+                            const EdgeInsets.only(right: 4, top: 1, bottom: 1),
+                      ),
+                      obscureText: true,
+                      onChanged: (v) {
+                        updatePswStrength(_pswController.text);
+                      },
+                      validator: (v) {
+                        return v!.trim().isNotEmpty ? null : "wrong Password";
+                      },
+                    ),
+                  ),
                 ),
+                const SizedBox(width: 10),
+                Expanded(
+                    flex: 1,
+                    child: Text(passwordTitle,
+                        style: const TextStyle(color: Colors.blue))),
               ],
             ),
+            const SizedBox(height: 15),
+            createTextFormField(_psw2Controller, "Confirm Password",
+                const Icon(Icons.password), true,
+                maxLength: 16),
             const SizedBox(height: 20),
-            buildInputColumn("Confirm Password", _psw2Controller,
-                width: 272, maxLength: 16),
-            const SizedBox(height: 20),
-            buildInputColumn("Nickname", _unameController,
-                width: 272, maxLength: 28),
+            createTextFormField(_unameController, "Nickname",
+                const Icon(Icons.person_pin), false,
+                maxLength: 30),
           ],
         ),
       ),
-    );
-  }
-
-  Column buildInputColumn(String title, TextEditingController controller,
-      {double width = 180, maxLength = 50}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            color: Color(0xFF999999),
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        Container(
-          width: width,
-          height: 48,
-          decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(
-              side: const BorderSide(width: 0.80, color: Color(0xFFE6E6E6)),
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          child: TextFormField(
-            controller: controller,
-            maxLines: 1,
-            obscureText: title.contains("Password"),
-            onChanged: (v) {
-              if (title == "Email") {
-                resetCode();
-              }
-              if (title == "Password") {
-                updatePswStrength(controller.text);
-              }
-              if (controller.value.text.trim().length > maxLength) {
-                controller.text = controller.text.substring(0, maxLength);
-                Fluttertoast.showToast(msg: "too long $title($maxLength)");
-              }
-            },
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -375,43 +374,23 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   void signUp() {
     SignUpRequest signUpRequest = SignUpRequest();
     signUpRequest.email = _emailController.value.text.trim();
-    if (!Utils.isEmailValid(signUpRequest.email)) {
-      Fluttertoast.showToast(msg: "wrong email");
+    if (!EmailValidator.validate(signUpRequest.email)) {
+      Fluttertoast.showToast(msg: "wrong email", gravity: ToastGravity.CENTER);
       return;
     }
-
     if (verifyCodeResponse == null) {
       Fluttertoast.showToast(msg: "please get verifyCode first");
       return;
     }
 
     signUpRequest.vcode = _codeController.value.text.trim();
-    if (signUpRequest.vcode == "") {
-      Fluttertoast.showToast(msg: "wrong verify code");
-      return;
-    }
-
     signUpRequest.password = _pswController.value.text.trim();
-    if (!Utils.isLoginPassword(signUpRequest.password)) {
-      Fluttertoast.showToast(msg: "wrong password");
-      return;
-    }
-
-
     signUpRequest.confirmPassword = _psw2Controller.value.text.trim();
     if (signUpRequest.password != signUpRequest.confirmPassword) {
       Fluttertoast.showToast(msg: "wrong password and confirmPassword");
       return;
     }
-
     signUpRequest.userName = _unameController.value.text.trim();
-    if (signUpRequest.userName.isNotEmpty) {
-      if (!Utils.isNickname(signUpRequest.userName)) {
-        Fluttertoast.showToast(msg: "wrong nickName");
-        return;
-      }
-    }
-
     signUpRequest.verifyCodeId = verifyCodeResponse!.verifyCodeId;
     UserService.getInstance()
         .signUp(context, signUpRequest)

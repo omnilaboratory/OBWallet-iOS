@@ -5,27 +5,27 @@ final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(8),
 );
 
-Widget createTextFormField(TextEditingController controller, String hintText,
-    Icon? icon, bool obscureText) {
-  return SizedBox(
-    height: 68,
-    child: TextFormField(
-      controller: controller,
-      maxLines: 1,
-      decoration: InputDecoration(
-        hintText: hintText,
-        prefixIcon: icon,
-        border: outlineInputBorder,
-        focusedBorder: outlineInputBorder,
-        enabledBorder: outlineInputBorder,
-        disabledBorder: outlineInputBorder,
-        focusedErrorBorder: outlineInputBorder,
-        errorBorder: outlineInputBorder,
-      ),
-      obscureText: obscureText,
-      validator: (v) {
-        return v!.trim().isNotEmpty ? null : "wrong $hintText";
-      },
+TextFormField createTextFormField(TextEditingController controller, String hintText,
+    Icon? icon, bool obscureText,{int? maxLength}) {
+  return TextFormField(
+    controller: controller,
+    maxLines: 1,
+    maxLength: maxLength,
+    decoration: InputDecoration(
+      hintText: hintText,
+      prefixIcon: icon,
+      hintStyle: const TextStyle(fontSize: 13,fontWeight: FontWeight.w400),
+      border: outlineInputBorder,
+      focusedBorder: outlineInputBorder,
+      enabledBorder: outlineInputBorder,
+      disabledBorder: outlineInputBorder,
+      focusedErrorBorder: outlineInputBorder,
+      errorBorder: outlineInputBorder,
+      contentPadding: const EdgeInsets.only(right: 4,top: 1,bottom: 1),
     ),
+    obscureText: obscureText,
+    validator: (v) {
+      return v!.trim().isNotEmpty ? null : "wrong $hintText";
+    },
   );
 }
