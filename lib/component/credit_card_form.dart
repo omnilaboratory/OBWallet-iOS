@@ -318,7 +318,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
                     color: widget.textColor,
                   ),
                   decoration: widget.cardNumberDecoration,
-                  keyboardType: TextInputType.number,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: false),
                   textInputAction: TextInputAction.next,
                   autofillHints: widget.disableCardNumberAutoFillHints
                       ? null
@@ -367,7 +368,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
                           color: widget.textColor,
                         ),
                         decoration: widget.expiryDateDecoration,
-                        keyboardType: TextInputType.number,
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: false),
                         textInputAction: TextInputAction.next,
                         autofillHints: const <String>[
                           AutofillHints.creditCardExpirationDate
@@ -424,7 +426,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
                           color: widget.textColor,
                         ),
                         decoration: widget.cvvCodeDecoration,
-                        keyboardType: TextInputType.number,
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: false),
                         textInputAction: widget.isHolderNameVisible
                             ? TextInputAction.next
                             : TextInputAction.done,

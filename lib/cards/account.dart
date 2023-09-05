@@ -52,21 +52,6 @@ class _AccountState extends State<Account> {
 
   @override
   void initState() {
-    updateBalance();
-    updateBalanceTimer ??= Timer.periodic(const Duration(seconds: 30), (timer) {
-      updateBalance();
-    });
-
-    GlobalParams.eventBus.on().listen((event) {
-      if (event == "MoreMenu_setNetwork") {
-
-        updateBalance();
-      }
-    });
-    super.initState();
-  }
-
-  void updateBalance() {
     var address = LocalStorage.get(LocalStorage.ethAddress);
     if (address != null) {
       UserService.getInstance().updateUser(context, address).then((value) {
@@ -82,6 +67,24 @@ class _AccountState extends State<Account> {
       //   }
       // });
     }
+    updateBalance();
+    updateBalanceTimer ??= Timer.periodic(const Duration(seconds: 30), (timer) {
+      if (mounted) {
+        setState(() {
+          updateBalance();
+        });
+      }
+    });
+
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "MoreMenu_setNetwork") {
+        updateBalance();
+      }
+    });
+    super.initState();
+  }
+
+  void updateBalance() {
     AccountService.getInstance().getAccountInfo(context).then((info) {
       if (info.code == 1) {
         var accountInfo = info.data as AccountInfo;
@@ -190,11 +193,13 @@ class _AccountState extends State<Account> {
             text: 'Send',
             iconWidth: iconWidth,
             onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const Send();
-                  });
+              Fluttertoast.showToast(
+                  msg: "Coming Soon...", gravity: ToastGravity.CENTER);
+              // showDialog(
+              //     context: context,
+              //     builder: (context) {
+              //       return const Send();
+              //     });
             }),
       ],
     );

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/review_exchange.dart';
@@ -65,6 +66,16 @@ class _ExchangeState extends State<Exchange> {
     });
 
     startCountdownTimer();
+
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "exchange") {
+        if (mounted) {
+          setState(() {
+            Navigator.pop(context);
+          });
+        }
+      }
+    });
   }
 
   late Timer _timer;
@@ -156,14 +167,14 @@ class _ExchangeState extends State<Exchange> {
         return;
       }
 
-      // if (_amountFromController.value.text.toString().compareTo(
-      //         StringTools.formatCryptoNum(currSelectedToken.balance)) >
-      //     0) {
-      //   Fluttertoast.showToast(
-      //       msg: "The to amount cannot exceed the maximum",
-      //       gravity: ToastGravity.CENTER);
-      //   return;
-      // }
+      if (_amountToController.value.text.toString().compareTo(
+              StringTools.formatCurrencyNum(currSelectedCurrency.balance)) >
+          0) {
+        Fluttertoast.showToast(
+            msg: "The from amount cannot exceed the maximum",
+            gravity: ToastGravity.CENTER);
+        return;
+      }
     }
 
     if (LocalStorage.get(LocalStorage.ethAddress) == null) {
@@ -173,7 +184,8 @@ class _ExchangeState extends State<Exchange> {
       return;
     }
 
-    Navigator.pop(context);
+    FocusScope.of(context).unfocus();
+    // Navigator.pop(context);
     showDialog(
         context: context,
         builder: (context) {
@@ -499,15 +511,21 @@ class _ExchangeState extends State<Exchange> {
                   onChanged: (text) {
                     setState(() {
                       if (currSelectedToken.name == 'ETH') {
-                        _amountFromController.text =
-                            StringTools.formatCryptoNum(
-                                double.parse(_amountToController.text) /
-                                    coinPrice);
+                        if (text.isEmpty) {
+                          _amountFromController.text = '';
+                        } else {
+                          _amountFromController.text =
+                              StringTools.formatCryptoNum(
+                                  double.parse(text) / coinPrice);
+                        }
                       } else {
-                        _amountFromController.text =
-                            StringTools.formatCurrencyNum(
-                                double.parse(_amountToController.text) /
-                                    coinPrice);
+                        if (text.isEmpty) {
+                          _amountFromController.text = '';
+                        } else {
+                          _amountFromController.text =
+                              StringTools.formatCurrencyNum(
+                                  double.parse(text) / coinPrice);
+                        }
                       }
                     });
                   },
@@ -567,24 +585,68 @@ class _ExchangeState extends State<Exchange> {
         ),
         Row(
           children: [
-            const Text(
-              "Balance: ",
-              style: TextStyle(
-                color: Color(0xFF666666),
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                height: 1.29,
+            Expanded(
+              child: Stack(
+                alignment: AlignmentDirectional.centerStart,
+                children: [
+                  Positioned(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Balance: ",
+                          style: TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            height: 1.29,
+                          ),
+                        ),
+                        Text(
+                          StringTools.formatCurrencyNum(
+                              currSelectedCurrency.balance),
+                          style: const TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            height: 1.29,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                      right: 0,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _amountToController.text =
+                                StringTools.formatCurrencyNum(
+                                    currSelectedCurrency.balance);
+                            if (currSelectedToken.name == 'ETH') {
+                              _amountFromController.text =
+                                  StringTools.formatCryptoNum(
+                                      double.parse(_amountToController.text) / coinPrice);
+                            } else {
+                              _amountFromController.text =
+                                  StringTools.formatCurrencyNum(
+                                      double.parse(_amountToController.text) / coinPrice);
+                            }
+                          });
+                        },
+                        child: const Text(
+                          "MAX",
+                          style: TextStyle(
+                            color: Color(0xFF4A92FF),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            height: 1.29,
+                          ),
+                        ),
+                      )),
+                ],
               ),
-            ),
-            Text(
-              StringTools.formatCurrencyNum(currSelectedCurrency.balance),
-              style: const TextStyle(
-                color: Color(0xFF666666),
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                height: 1.29,
-              ),
-            ),
+            )
           ],
         )
       ],
@@ -607,8 +669,13 @@ class _ExchangeState extends State<Exchange> {
                   inputFormatters: [PrecisionLimitFormatter(num)],
                   onChanged: (text) {
                     setState(() {
-                      _amountToController.text = StringTools.formatCurrencyNum(
-                          double.parse(_amountFromController.text) * coinPrice);
+                      if (text.isEmpty) {
+                        _amountToController.text = '';
+                      } else {
+                        _amountToController.text =
+                            StringTools.formatCurrencyNum(
+                                double.parse(text) * coinPrice);
+                      }
                     });
                   },
                   keyboardType:
@@ -720,6 +787,9 @@ class _ExchangeState extends State<Exchange> {
                                 : _amountFromController.text =
                                     StringTools.formatCurrencyNum(
                                         currSelectedToken.balance);
+                            _amountToController.text =
+                                StringTools.formatCurrencyNum(
+                                    double.parse(_amountFromController.text) * coinPrice);
                           });
                         },
                         child: const Text(
@@ -754,8 +824,10 @@ class _ExchangeState extends State<Exchange> {
               image: AssetImage(value.iconUrl),
             ),
             const SizedBox(width: 7),
-            Text(
+            AutoSizeText(
               value.name,
+              maxLines: 1,
+              minFontSize: 12,
               style: const TextStyle(
                 color: Color(0xFF333333),
                 fontSize: 16,
@@ -783,8 +855,10 @@ class _ExchangeState extends State<Exchange> {
               image: AssetImage(value.iconUrl),
             ),
             const SizedBox(width: 7),
-            Text(
+            AutoSizeText(
               value.name,
+              maxLines: 1,
+              minFontSize: 12,
               style: const TextStyle(
                 color: Color(0xFF333333),
                 fontSize: 16,

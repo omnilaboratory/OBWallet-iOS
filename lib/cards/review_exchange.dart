@@ -8,9 +8,11 @@ import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/eth_grpc_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'exchange.dart';
 
@@ -349,11 +351,11 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                               text: 'BACK',
                               onPressed: () {
                                 Navigator.pop(context);
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return Exchange(type: widget.type);
-                                    });
+                                // showDialog(
+                                //     context: context,
+                                //     builder: (context) {
+                                //       return Exchange(type: widget.type);
+                                //     });
                               },
                             ),
                             BottomButton(
@@ -486,7 +488,11 @@ class _ReviewExchangeState extends State<ReviewExchange> {
         });
         var resp = value.data as SellCoinResponse;
         log(resp.toString());
+        GlobalParams.eventBus.fire("exchange");
         Navigator.pop(context);
+        Fluttertoast.showToast(
+            msg: "Please waiting for a while to see the balance on the Card page",
+            gravity: ToastGravity.CENTER);
       } else {
         setState(() {
           loadingVisible = false;
@@ -515,7 +521,11 @@ class _ReviewExchangeState extends State<ReviewExchange> {
         });
         var resp = value.data as BuyCoinResponse;
         log(resp.toString());
+        GlobalParams.eventBus.fire("exchange");
         Navigator.pop(context);
+        Fluttertoast.showToast(
+            msg: "Please waiting for a while to see the balance on the Crypto page",
+            gravity: ToastGravity.CENTER);
       } else {
         setState(() {
           loadingVisible = false;
