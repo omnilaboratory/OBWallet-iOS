@@ -1,7 +1,6 @@
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/crypto_receive_center.dart';
 import 'package:awallet/tools/local_storage.dart';
-import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 
 class ReceiveWalletAddress extends StatefulWidget {
@@ -38,7 +37,7 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF333333),
-                    fontSize: 14,
+                    fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -46,7 +45,6 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                     padding:
                         const EdgeInsets.only(left: 25, right: 25, top: 20),
                     child: buildChainButtons()),
-                const SizedBox(height: 40),
                 Visibility(
                   visible: false,
                   child: Padding(
@@ -56,7 +54,7 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                 ),
                 const SizedBox(height: 30),
                 CryptoReceiveCenter(
-                    address: StringTools.starString(LocalStorage.get(LocalStorage.ethAddress),maxLength: 30),
+                    address: LocalStorage.get(LocalStorage.ethAddress),
                     tips: "Top up to wallet address"),
               ])),
           const SizedBox(height: 30),

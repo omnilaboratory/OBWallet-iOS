@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderSide: const BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
@@ -30,4 +31,9 @@ TextFormField createTextFormField(TextEditingController controller,
       return v!.trim().isNotEmpty ? null : "wrong $hintText";
     },
   );
+}
+
+showToast(String msg, {Toast toastLength = Toast.LENGTH_LONG}) {
+  Fluttertoast.showToast(
+      msg: msg, toastLength: toastLength, gravity: ToastGravity.CENTER);
 }

@@ -1,7 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:awallet/component/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import 'bottom_button.dart';
@@ -17,11 +16,12 @@ class CryptoReceiveCenter extends StatelessWidget {
       required this.tips,
       this.qrSize = 100});
 
-  onShare(BuildContext context) {}
+  onShare(BuildContext context) {
+    showToast("Coming Soon...");
+  }
 
   onCopy(BuildContext context) {
-    Fluttertoast.showToast(
-        msg: "address is on your Clipboard", gravity: ToastGravity.CENTER);
+    showToast("address is on your Clipboard");
     Clipboard.setData(ClipboardData(text: address));
   }
 
@@ -57,7 +57,7 @@ class CryptoReceiveCenter extends StatelessWidget {
           ),
         ),
         const Padding(
-          padding: EdgeInsets.only(top: 15),
+          padding: EdgeInsets.only(top: 20,bottom: 2),
           child: Text(
             'Wallet Address',
             textAlign: TextAlign.center,
@@ -68,36 +68,22 @@ class CryptoReceiveCenter extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.55,
-              child: AutoSizeText(
-                address,
-                maxLines: 1,
-                style: const TextStyle(
-                  fontSize: 13,
-                  color: Color(0xFF999999),
-                  fontWeight: FontWeight.w500,
-                  height: 1.47,
-                ),
+        InkWell(
+          onTap: () {
+            onCopy(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8, left: 30, right: 30),
+            child: Text(
+              address,
+              style: const TextStyle(
+                fontSize: 13,
+                color: Color(0xFF999999),
+                fontWeight: FontWeight.w500,
+                height: 1.5,
               ),
             ),
-            const SizedBox(width: 5),
-            InkWell(
-              onTap: () {
-                Clipboard.setData(ClipboardData(text: address));
-                Fluttertoast.showToast(
-                    msg: "address is on your Clipboard",
-                    gravity: ToastGravity.CENTER);
-              },
-              child: const Image(
-                  width: 16,
-                  height: 16,
-                  image: AssetImage("asset/images/icon_copy_gray.png")),
-            ),
-          ]),
+          ),
         ),
         const SizedBox(height: 30),
         Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
