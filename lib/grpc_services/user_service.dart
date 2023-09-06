@@ -47,8 +47,7 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> login(
-      BuildContext context, SignInRequest req) async {
+  Future<GrpcResponse> login(BuildContext context, SignInRequest req) async {
     req.password = Utils.generateMd5(req.password);
     req.os = Platform.operatingSystem;
     await setDeviceInfo(req);
@@ -68,14 +67,14 @@ class UserService {
   }
 
   Future<void> setDeviceInfo(SignInRequest req) async {
-    if(Platform.isAndroid){
+    if (Platform.isAndroid) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       req.osVersion = androidInfo.version.codename;
       req.deviceId = androidInfo.device.toString();
     }
 
-    if(Platform.isIOS){
+    if (Platform.isIOS) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       IosDeviceInfo info = await deviceInfo.iosInfo;
       req.osVersion = info.systemVersion;
@@ -94,6 +93,7 @@ class UserService {
     }
     return ret;
   }
+
   Future<GrpcResponse> signUp(BuildContext context, SignUpRequest req) async {
     log("$req");
     req.password = Utils.generateMd5(req.password);
@@ -126,7 +126,8 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> uploadImage(BuildContext context, UploadRequest req) async {
+  Future<GrpcResponse> uploadImage(
+      BuildContext context, UploadRequest req) async {
     log("$req");
     var ret = GrpcResponse();
     try {
@@ -139,7 +140,8 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> kyc(BuildContext context, String address1, String address2) async {
+  Future<GrpcResponse> kyc(
+      BuildContext context, String address1, String address2) async {
     var request = CommonService.userInfo;
     request?.address1 = address1;
     request?.address2 = address2;
@@ -192,7 +194,10 @@ class UserService {
     log("$e");
     GrpcError error = e as GrpcError;
     ret.msg = error.message.toString();
-    Fluttertoast.showToast(msg: ret.msg, gravity: ToastGravity.CENTER);
+    Fluttertoast.showToast(
+        msg: ret.msg,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER);
     if (e.code == 16) {
       Navigator.pushReplacement(
         context,

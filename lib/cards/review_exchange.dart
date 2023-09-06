@@ -525,6 +525,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
         Navigator.pop(context);
         Fluttertoast.showToast(
             msg: "Please waiting for a while to see the balance on the Crypto page",
+            toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.CENTER);
       } else {
         setState(() {

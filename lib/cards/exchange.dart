@@ -212,17 +212,19 @@ class _ExchangeState extends State<Exchange> {
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },
-          child: Column(
-            children: [
-              const SizedBox(height: 80),
-              buildMainBody(size, context),
-              const SizedBox(height: 30),
-              BottomWhiteButton(
-                icon: 'asset/images/icon_close_white.png',
-                text: 'CANCEL',
-                onPressed: onClose,
-              )
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: 40),
+                buildMainBody(size, context),
+                const SizedBox(height: 20),
+                BottomWhiteButton(
+                  icon: 'asset/images/icon_close_white.png',
+                  text: 'CANCEL',
+                  onPressed: onClose,
+                )
+              ],
+            ),
           ),
         ));
   }
@@ -234,7 +236,7 @@ class _ExchangeState extends State<Exchange> {
         borderRadius: BorderRadius.circular(20.0),
       ),
       width: size.width * 0.8,
-      height: size.height * 0.68,
+      height: size.height * 0.72,
       child: Column(children: [
         const SizedBox(height: 25),
         const Text(
@@ -481,13 +483,13 @@ class _ExchangeState extends State<Exchange> {
             ),
           ),
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 6),
         BottomButton(
           icon: 'asset/images/icon_arrow_right_green.png',
           text: 'NEXT',
           onPressed: onNext,
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 10),
       ]),
     );
   }
