@@ -723,6 +723,7 @@ class _ExchangeState extends State<Exchange> {
                             "asset/images/icon_arrow_down_black.png")),
                     value: currSelectedToken,
                     isExpanded: true,
+                    menuMaxHeight: 120,
                     items: buildTokenDropdownItemList(),
                     onChanged: (value) {
                       setState(() {

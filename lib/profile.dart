@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'logins/login.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -8,14 +10,29 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Profile Page!')
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Profile Page!'),
       ),
-
+      body: Center(
+          child: Column(
+        children: [
+          InkWell(
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Login()),
+                );
+              },
+              child: Container(
+                color: Colors.lightBlueAccent,
+                  width: 200,
+                  height: 80,
+                  child: const Center(child: Text('Log Out')))),
+        ],
+      )),
     );
   }
 }
