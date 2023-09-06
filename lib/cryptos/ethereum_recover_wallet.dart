@@ -46,14 +46,14 @@ class _EthereumRecoverWalletState extends State<EthereumRecoverWallet> {
       body: Center(
         child: SingleChildScrollView(
           child: Column(children: [
-            const SizedBox(height: 80),
+            const SizedBox(height: 60),
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20.0),
               ),
               width: size.width * 0.8,
-              height: size.height * 0.4,
+              height: size.height * 0.5,
               child: Column(
                 children: [
                   const SizedBox(height: 30),
@@ -62,14 +62,14 @@ class _EthereumRecoverWalletState extends State<EthereumRecoverWallet> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(0xFF333333),
-                      fontSize: 14,
+                      fontSize: 18,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   SizedBox(
                     width: size.width * 0.8,
                     child: const Padding(
-                      padding: EdgeInsets.only(left: 25, top: 45),
+                      padding: EdgeInsets.only(left: 25, top: 20),
                       child: Text(
                         'WIF',
                         style: TextStyle(

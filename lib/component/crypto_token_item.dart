@@ -67,8 +67,8 @@ class CryptoTokenItem extends StatelessWidget {
                     child: AutoSizeText(
                         StringTools.formatCryptoNum(tokenInfo.balance),
                         maxLines: 1,
-                        maxFontSize: 26,
-                        minFontSize: 12,
+                        maxFontSize: 28,
+                        minFontSize: 14,
                         textAlign: TextAlign.right,
                         style: const TextStyle(
                           color: Color(0xFF333333),
@@ -85,7 +85,6 @@ class CryptoTokenItem extends StatelessWidget {
                       textAlign: TextAlign.right,
                       style: const TextStyle(
                         color: Color(0xFF999999),
-                        fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
