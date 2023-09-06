@@ -1,5 +1,6 @@
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/cryptos/export_wif_step_one.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
@@ -53,15 +54,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
             child: Column(
               children: [
                 const SizedBox(height: 30),
-                const Text(
-                  'Export WIF',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                createText('Export WIF'),
                 const Padding(
                   padding: EdgeInsets.only(top: 90),
                   child: Image(

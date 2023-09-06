@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/account_service.dart';
@@ -37,7 +38,7 @@ class ReviewExchange extends StatefulWidget {
 }
 
 class _ReviewExchangeState extends State<ReviewExchange> {
-  double coinPrice = 0;
+  double coinPrice = 1;
   bool loadingVisible = false;
 
   onConfirm() {
@@ -130,16 +131,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                     height: size.height * 0.65,
                     child: Column(children: [
                       const SizedBox(height: 25),
-                      const Text(
-                        'Review Exchange',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 4,
-                        ),
-                      ),
+                      createText('Review Exchange'),
                       const SizedBox(height: 25),
                       buildTitle(),
                       const Padding(
@@ -492,6 +484,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
         Navigator.pop(context);
         Fluttertoast.showToast(
             msg: "Please waiting for a while to see the balance on the Card page",
+            toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.CENTER);
       } else {
         setState(() {

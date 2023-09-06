@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/home.dart';
@@ -41,10 +42,10 @@ class _KycState extends State<Kyc> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Center(
+                        Center(
                           child: Padding(
-                            padding: EdgeInsets.only(top: 28, bottom: 20),
-                            child: Text("KYC", style: TextStyle(fontSize: 20)),
+                            padding: const EdgeInsets.only(top: 28, bottom: 20),
+                            child: createText('KYC'),
                           ),
                         ),
                         const Padding(

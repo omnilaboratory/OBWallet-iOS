@@ -1,4 +1,5 @@
 import 'package:awallet/component/bottom_white_button.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_receive_center.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
@@ -33,15 +34,7 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                 height: size.height * 0.8,
                 child: Column(children: [
                   const SizedBox(height: 30),
-                  const Text(
-                    'Receive',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFF333333),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  createText('Receive'),
                   Padding(
                       padding:
                           const EdgeInsets.only(left: 25, right: 25, top: 20),

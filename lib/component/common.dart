@@ -33,6 +33,19 @@ TextFormField createTextFormField(
   );
 }
 
+Text createText(String text) {
+  return Text(
+    text,
+    textAlign: TextAlign.center,
+    style: const TextStyle(
+      color: Colors.black,
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 4,
+    ),
+  );
+}
+
 showToast(String msg, {Toast toastLength = Toast.LENGTH_LONG}) {
   Fluttertoast.showToast(
       msg: msg, toastLength: toastLength, gravity: ToastGravity.CENTER);

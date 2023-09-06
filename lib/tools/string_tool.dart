@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 
 class StringTools {
   static String starString(String? longText, {int maxLength = 16}) {
@@ -13,12 +14,11 @@ class StringTools {
 
   static String formatCryptoNum(double? num) {
     num ??= 0;
-    return num.toStringAsFixed(6);
+    return Decimal.parse(num.toString()).floor(scale: 6).toString();
   }
 
   static String formatCurrencyNum(double? num) {
     num ??= 0;
-    return num.toStringAsFixed(2);
+    return Decimal.parse(num.toString()).floor(scale: 2).toString();
   }
-
 }

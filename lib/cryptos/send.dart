@@ -102,23 +102,16 @@ class _SendState extends State<Send> {
               child: Column(
                 children: [
                   const SizedBox(height: 27),
-                  const Row(
+                  Row(
                     children: [
                       Expanded(
                         child: Stack(
                           alignment: AlignmentDirectional.centerEnd,
                           children: [
                             Center(
-                              child: Text(
-                                "Send",
-                                style: TextStyle(
-                                  color: Color(0xFF333333),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
+                              child: createText('Send'),
                             ),
-                            Positioned(
+                            const Positioned(
                               right: 24,
                               child: Image(
                                 width: 24,

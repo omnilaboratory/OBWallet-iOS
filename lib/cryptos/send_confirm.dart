@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/eth_grpc_service.dart';
@@ -117,13 +118,7 @@ class _SendConfirmState extends State<SendConfirm> {
                     height: size.height * 0.65,
                     child: Column(children: [
                       const SizedBox(height: 30),
-                      const Text('Send',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFF333333),
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          )),
+                      createText('Send'),
                       const SizedBox(height: 30),
                       Container(
                         width: 272,

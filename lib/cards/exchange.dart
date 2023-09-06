@@ -7,6 +7,7 @@ import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/review_exchange.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
@@ -34,7 +35,7 @@ class _ExchangeState extends State<Exchange> {
   final TextEditingController _amountToController = TextEditingController();
 
   double totalBalanceUsd = 0;
-  double coinPrice = 0;
+  double coinPrice = 1;
 
   var tokenList = EthService.getInstance().getTokenList();
   var currencyList = GlobalParams.currencyList;
@@ -131,12 +132,24 @@ class _ExchangeState extends State<Exchange> {
         return;
       }
 
-      if (double.parse(_amountFromController.value.text.toString()) >
-          currSelectedToken.balance!) {
-        Fluttertoast.showToast(
-            msg: "The from amount cannot exceed the maximum",
-            gravity: ToastGravity.CENTER);
-        return;
+      if (currSelectedToken.name == 'ETH') {
+        if (double.parse(_amountFromController.value.text.toString()) >
+            double.parse(
+                StringTools.formatCryptoNum(currSelectedToken.balance))) {
+          Fluttertoast.showToast(
+              msg: "The from amount cannot exceed the maximum",
+              gravity: ToastGravity.CENTER);
+          return;
+        }
+      } else {
+        if (double.parse(_amountFromController.value.text.toString()) >
+            double.parse(
+                StringTools.formatCurrencyNum(currSelectedToken.balance))) {
+          Fluttertoast.showToast(
+              msg: "The from amount cannot exceed the maximum",
+              gravity: ToastGravity.CENTER);
+          return;
+        }
       }
     } else if (widget.type == EnumExchangeType.buy) {
       if (_amountToController.value.text.toString().isEmpty) {
@@ -167,7 +180,8 @@ class _ExchangeState extends State<Exchange> {
       }
 
       if (double.parse(_amountToController.value.text.toString()) >
-          currSelectedCurrency.balance!) {
+          double.parse(
+              StringTools.formatCurrencyNum(currSelectedCurrency.balance))) {
         Fluttertoast.showToast(
             msg: "The from amount cannot exceed the maximum",
             gravity: ToastGravity.CENTER);
@@ -239,16 +253,7 @@ class _ExchangeState extends State<Exchange> {
       height: size.height * 0.72,
       child: Column(children: [
         const SizedBox(height: 25),
-        const Text(
-          'Exchange',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            letterSpacing: 4,
-          ),
-        ),
+        createText('Exchange'),
         const SizedBox(height: 25),
         buildSubTitleForStep(),
         Expanded(

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:awallet/component/bottom_white_button.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/component/credit_card_form.dart';
 import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/grpc_services/card_service.dart';
@@ -54,15 +55,7 @@ class _CardRechargeState extends State<CardRecharge> {
                     child: Column(
                       children: [
                         const SizedBox(height: 30),
-                        const Text(
-                          'Card Recharge',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFF333333),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        createText('Card Recharge'),
                         const SizedBox(height: 30),
                         CreditCardForm(
                           formKey: formKey,
