@@ -1,11 +1,15 @@
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/cryptos/send_confirm.dart';
+import 'package:awallet/eth.dart';
 import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Send extends StatefulWidget {
@@ -26,40 +30,40 @@ class _SendState extends State<Send> {
   @override
   void initState() {
     dropdownValue = tokenList[0];
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "SendConfirm_Close") {
+        onClose();
+      }
+    });
     super.initState();
   }
 
   onNext() {
-    if (_addressController.value.text.toString().isEmpty) {
-      Fluttertoast.showToast(
-          msg: "The address cannot be empty", gravity: ToastGravity.CENTER);
+    if (_addressController.value.text.toString().trim().isEmpty) {
+      showToast("The address cannot be empty");
+      return;
+    }
+
+    if (!Eth.validateAddress(_addressController.value.text.trim())) {
+      showToast("invalid address");
       return;
     }
 
     if (_amountController.value.text.toString().isEmpty) {
-      Fluttertoast.showToast(
-          msg: "The amount cannot be empty", gravity: ToastGravity.CENTER);
+      showToast("The amount cannot be empty");
       return;
     }
 
     if (double.parse(_amountController.value.text.toString()) == 0) {
-      Fluttertoast.showToast(
-          msg: "The amount must be greater than 0",
-          gravity: ToastGravity.CENTER);
+      showToast("The amount must be greater than 0",toastLength:Toast.LENGTH_SHORT);
       return;
     }
 
-    if (_amountController.value.text
-            .toString()
-            .compareTo(StringTools.formatCryptoNum(dropdownValue.balance)) >
-        0) {
-      Fluttertoast.showToast(
-          msg: "The amount cannot exceed the maximum",
-          gravity: ToastGravity.CENTER);
+    if (double.parse(_amountController.value.text) > dropdownValue.balance!) {
+      showToast("The amount cannot exceed the maximum");
       return;
     }
 
-    Navigator.pop(context);
     showDialog(
         context: context,
         builder: (context) {
@@ -109,7 +113,7 @@ class _SendState extends State<Send> {
                                 "Send",
                                 style: TextStyle(
                                   color: Color(0xFF333333),
-                                  fontSize: 14,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -160,16 +164,24 @@ class _SendState extends State<Send> {
                               ),
                             ),
                           ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(left: 25, right: 25),
+                          //   child: createTextFormField(_addressController,"address",false,icon: const Icon(Icons.person)),
+                          // ),
                           Padding(
                               padding: const EdgeInsets.only(
                                   left: 25, right: 25, top: 2),
                               child: SizedBox(
-                                height: 36,
+                                height: 68,
                                 child: TextField(
                                   controller: _addressController,
-                                  maxLines: 10,
-                                  minLines: 1,
+                                  maxLines: 1,
+                                  maxLength: 42,
                                   keyboardType: TextInputType.visiblePassword,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[a-zA-Z0-9]')),
+                                  ],
                                   cursorColor: const Color(0xFF4A92FF),
                                   style: const TextStyle(
                                     color: Color(0xFF333333),
@@ -177,9 +189,9 @@ class _SendState extends State<Send> {
                                     fontWeight: FontWeight.w400,
                                   ),
                                   decoration: InputDecoration(
-                                    suffixIcon: const Icon(Icons.person),
+                                    // suffixIcon: const Icon(Icons.person),
                                     contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 14, vertical: 7),
+                                        horizontal: 6, vertical: 0),
                                     border: _outlineInputBorder,
                                     focusedBorder: _outlineInputBorder,
                                     enabledBorder: _outlineInputBorder,

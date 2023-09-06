@@ -142,6 +142,10 @@ class Utils {
     RegExp reg = RegExp(r"^[a-zA-Z0-9_\-.]{4,20}$");
     return reg.hasMatch(input);
   }
+  static bool isNumericOrAlphabet(String input) {
+    RegExp reg = RegExp(r'^[a-zA-Z0-9]+$');
+    return reg.hasMatch(input);
+  }
 
   static int getStrength(String password) {
     int strength = 0;

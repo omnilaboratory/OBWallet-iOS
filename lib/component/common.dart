@@ -6,9 +6,9 @@ final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(8),
 );
 
-TextFormField createTextFormField(TextEditingController controller,
-    String hintText, Icon? icon, bool obscureText,
-    {int? maxLength}) {
+TextFormField createTextFormField(
+    TextEditingController controller, String hintText, bool obscureText,
+    {Icon? icon, int? maxLength}) {
   return TextFormField(
     controller: controller,
     maxLines: 1,

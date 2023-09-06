@@ -220,10 +220,13 @@ class _LoginState extends State<Login> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             createTextFormField(
-                _unameController, "Username", const Icon(Icons.person), false),
+                _unameController,
+                "Username",
+                icon: const Icon(Icons.person),
+                false),
             const SizedBox(height: 10),
             createTextFormField(
-                _pswController, "Password", const Icon(Icons.lock), true),
+                _pswController, "Password", icon: const Icon(Icons.lock), true),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -231,8 +234,8 @@ class _LoginState extends State<Login> {
               children: [
                 SizedBox(
                   width: 130,
-                  child: createTextFormField(_codeController, "Verify Code",
-                      null, false),
+                  child: createTextFormField(
+                      _codeController, "Verify Code", false),
                 ),
                 _verifyImageResponse == null
                     ? const Padding(

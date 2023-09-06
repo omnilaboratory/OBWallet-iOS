@@ -1,10 +1,12 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/eth_grpc_service.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +88,12 @@ class _SendConfirmState extends State<SendConfirm> {
     }
   }
 
+  onBack(){
+    Navigator.pop(context);
+  }
+
   onClose() {
+    GlobalParams.eventBus.fire("SendConfirm_Close");
     Navigator.pop(context);
   }
 
@@ -114,7 +121,7 @@ class _SendConfirmState extends State<SendConfirm> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color(0xFF333333),
-                            fontSize: 14,
+                            fontSize: 18,
                             fontWeight: FontWeight.w500,
                           )),
                       const SizedBox(height: 30),
@@ -173,7 +180,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                 visible: true,
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 15, top: 10),
+                                        left: 15, top: 10,right: 10),
                                     child: Row(children: [
                                       const Text('To: ',
                                           style: TextStyle(
@@ -181,12 +188,14 @@ class _SendConfirmState extends State<SendConfirm> {
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
                                           )),
-                                      Text(
+                                      AutoSizeText(
                                           StringTools.starString(widget.address,
                                               maxLength: 30),
+                                          maxLines: 1,
+                                          maxFontSize: 12,
+                                          minFontSize: 10,
                                           style: const TextStyle(
                                             color: Color(0xFF333333),
-                                            fontSize: 12,
                                             fontWeight: FontWeight.w400,
                                           ))
                                     ]))),
@@ -194,7 +203,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                 visible: true,
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 15, top: 10, bottom: 15),
+                                        left: 15, top: 10, bottom: 15,right: 15),
                                     child: Row(children: [
                                       const Text('From: ',
                                           style: TextStyle(
@@ -202,14 +211,16 @@ class _SendConfirmState extends State<SendConfirm> {
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
                                           )),
-                                      Text(
+                                      AutoSizeText(
                                           StringTools.starString(
                                               LocalStorage.get(
                                                   LocalStorage.ethAddress),
                                               maxLength: 30),
+                                          maxLines: 1,
+                                          maxFontSize: 12,
+                                          minFontSize: 10,
                                           style: const TextStyle(
                                             color: Color(0xFF333333),
-                                            fontSize: 12,
                                             fontWeight: FontWeight.w400,
                                           ))
                                     ]))),
@@ -301,10 +312,23 @@ class _SendConfirmState extends State<SendConfirm> {
                       const Spacer(
                         flex: 1,
                       ),
-                      BottomButton(
-                        icon: 'asset/images/icon_confirm_green.png',
-                        text: 'CONFIRM',
-                        onPressed: onConfirm,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            BottomButton(
+                              icon: 'asset/images/icon_arrow_left_green.png',
+                              text: 'BACK',
+                              onPressed: onBack,
+                            ),
+                            BottomButton(
+                              icon: 'asset/images/icon_confirm_green.png',
+                              text: 'CONFIRM',
+                              onPressed: onConfirm,
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 30),
                     ]),

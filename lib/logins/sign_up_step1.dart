@@ -195,7 +195,10 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           children: [
             const SizedBox(height: 30),
             createTextFormField(
-                _emailController, "Email", const Icon(Icons.email), false,
+                _emailController,
+                "Email",
+                icon: const Icon(Icons.email),
+                false,
                 maxLength: 50),
             const SizedBox(height: 15),
             Row(
@@ -205,8 +208,11 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                   flex: 3,
                   child: SizedBox(
                     width: 180,
-                    child: createTextFormField(_codeController, "Verify Code",
-                        const Icon(Icons.verified_user_outlined), false,
+                    child: createTextFormField(
+                        _codeController,
+                        "Verify Code",
+                        icon: const Icon(Icons.verified_user_outlined),
+                        false,
                         maxLength: 6),
                   ),
                 ),
@@ -274,12 +280,18 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
               ],
             ),
             const SizedBox(height: 15),
-            createTextFormField(_psw2Controller, "Confirm Password",
-                const Icon(Icons.password), true,
+            createTextFormField(
+                _psw2Controller,
+                "Confirm Password",
+                icon: const Icon(Icons.password),
+                true,
                 maxLength: 16),
             const SizedBox(height: 20),
-            createTextFormField(_unameController, "Nickname",
-                const Icon(Icons.person_pin), false,
+            createTextFormField(
+                _unameController,
+                "Nickname",
+                icon: const Icon(Icons.person_pin),
+                false,
                 maxLength: 30),
           ],
         ),

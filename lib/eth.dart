@@ -244,4 +244,13 @@ class Eth {
     }
   }
 
+  static bool validateAddress(String address) {
+    try {
+      EthereumAddress.fromHex(address);
+      return true;
+    } catch (e) {
+      log('Invalid address');
+    }
+    return false;
+  }
 }
