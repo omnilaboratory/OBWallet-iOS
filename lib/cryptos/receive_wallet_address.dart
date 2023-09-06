@@ -20,50 +20,52 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
-      body: Center(
-        child: Column(children: [
-          const SizedBox(height: 80),
-          Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              width: size.width * 0.8,
-              height: size.height * 0.65,
-              child: Column(children: [
-                const SizedBox(height: 30),
-                const Text(
-                  'Receive',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(children: [
+            const SizedBox(height: 70),
+            Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                width: size.width * 0.8,
+                height: size.height * 0.8,
+                child: Column(children: [
+                  const SizedBox(height: 30),
+                  const Text(
+                    'Receive',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xFF333333),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                Padding(
-                    padding:
-                        const EdgeInsets.only(left: 25, right: 25, top: 20),
-                    child: buildChainButtons()),
-                Visibility(
-                  visible: false,
-                  child: Padding(
+                  Padding(
                       padding:
-                          const EdgeInsets.only(left: 15, right: 15, top: 15),
-                      child: buildChainTypeButtons()),
-                ),
-                const SizedBox(height: 30),
-                CryptoReceiveCenter(
-                    address: LocalStorage.get(LocalStorage.ethAddress),
-                    tips: "Top up to wallet address"),
-              ])),
-          const SizedBox(height: 30),
-          BottomWhiteButton(
-            icon: 'asset/images/icon_close_white.png',
-            text: 'CANCEL',
-            onPressed: onClose,
-          )
-        ]),
+                          const EdgeInsets.only(left: 25, right: 25, top: 20),
+                      child: buildChainButtons()),
+                  Visibility(
+                    visible: false,
+                    child: Padding(
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 15),
+                        child: buildChainTypeButtons()),
+                  ),
+                  const SizedBox(height: 30),
+                  CryptoReceiveCenter(
+                      address: LocalStorage.get(LocalStorage.ethAddress),
+                      tips: "Top up to wallet address"),
+                ])),
+            const SizedBox(height: 30),
+            BottomWhiteButton(
+              icon: 'asset/images/icon_close_white.png',
+              text: 'CANCEL',
+              onPressed: onClose,
+            )
+          ]),
+        ),
       ),
     );
   }
