@@ -252,7 +252,7 @@ class _ExchangeState extends State<Exchange> {
         const SizedBox(height: 25),
         buildSubTitleForStep(),
         Expanded(
-          flex: 1000,
+          flex: 8,
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             reverse: false,
@@ -483,13 +483,14 @@ class _ExchangeState extends State<Exchange> {
             ),
           ),
         ),
-        const SizedBox(height: 6),
-        BottomButton(
-          icon: 'asset/images/icon_arrow_right_green.png',
-          text: 'NEXT',
-          onPressed: onNext,
+        Expanded(
+          flex: 2,
+          child: BottomButton(
+            icon: 'asset/images/icon_arrow_right_green.png',
+            text: 'NEXT',
+            onPressed: onNext,
+          ),
         ),
-        const SizedBox(height: 10),
       ]),
     );
   }
