@@ -21,17 +21,16 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
-      body: SingleChildScrollView(
-        child: Center(
+      body: Center(
+        child: SingleChildScrollView(
           child: Column(children: [
-            const SizedBox(height: 70),
             Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 width: size.width * 0.8,
-                height: size.height * 0.8,
+                height: 450,
                 child: Column(children: [
                   const SizedBox(height: 30),
                   createText('Receive'),
@@ -46,7 +45,7 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                             const EdgeInsets.only(left: 15, right: 15, top: 15),
                         child: buildChainTypeButtons()),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 10),
                   CryptoReceiveCenter(
                       address: LocalStorage.get(LocalStorage.ethAddress),
                       tips: "Top up to wallet address"),

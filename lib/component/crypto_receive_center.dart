@@ -14,7 +14,7 @@ class CryptoReceiveCenter extends StatelessWidget {
       {super.key,
       required this.address,
       required this.tips,
-      this.qrSize = 120});
+      this.qrSize = 110});
 
   onShare(BuildContext context) {
     showToast("Coming Soon...");
@@ -51,7 +51,7 @@ class CryptoReceiveCenter extends StatelessWidget {
             ),
           ]),
           Padding(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 0),
             child: QrImageView(
               data: address,
               version: QrVersions.auto,
@@ -61,7 +61,7 @@ class CryptoReceiveCenter extends StatelessWidget {
           Column(
             children: [
               const Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 2),
+                padding: EdgeInsets.only(top: 10, bottom: 2),
                 child: Text(
                   'Wallet Address',
                   textAlign: TextAlign.center,
