@@ -64,27 +64,25 @@ class CryptoTokenItem extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: size.width - 180,
-                    child: AutoSizeText(
+                    child: Text(
                         StringTools.formatCryptoNum(tokenInfo.balance),
                         maxLines: 1,
-                        maxFontSize: 28,
-                        minFontSize: 14,
                         textAlign: TextAlign.right,
                         style: const TextStyle(
                           color: Color(0xFF333333),
+                          fontSize: 16,
                           fontWeight: FontWeight.w700,
                         )),
                   ),
                   SizedBox(
                     width: size.width - 180,
-                    child: AutoSizeText(
+                    child: Text(
                       "\$ ${StringTools.formatCurrencyNum(tokenInfo.balanceOfDollar)}",
                       maxLines: 1,
-                      maxFontSize: 24,
-                      minFontSize: 10,
                       textAlign: TextAlign.right,
                       style: const TextStyle(
                         color: Color(0xFF999999),
+                        fontSize: 12,
                         fontWeight: FontWeight.w400,
                       ),
                     ),

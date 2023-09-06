@@ -11,6 +11,15 @@ class StringTools {
     }
     return longText!;
   }
+  static String starString2(String? longText, {int begin = 8,int end = 6}) {
+    if (longText != null && longText.isNotEmpty) {
+      int totalLength = longText.length;
+      if (totalLength > (begin+end)) {
+        return "${longText.substring(0, begin)}...${longText.substring(totalLength - end)}";
+      }
+    }
+    return longText!;
+  }
 
   static String formatCryptoNum(double? num) {
     num ??= 0;

@@ -184,8 +184,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                             fontWeight: FontWeight.w400,
                                           )),
                                       AutoSizeText(
-                                          StringTools.starString(widget.address,
-                                              maxLength: 30),
+                                          StringTools.starString2(widget.address),
                                           maxLines: 1,
                                           maxFontSize: 12,
                                           minFontSize: 10,
@@ -207,10 +206,9 @@ class _SendConfirmState extends State<SendConfirm> {
                                             fontWeight: FontWeight.w400,
                                           )),
                                       AutoSizeText(
-                                          StringTools.starString(
+                                          StringTools.starString2(
                                               LocalStorage.get(
-                                                  LocalStorage.ethAddress),
-                                              maxLength: 30),
+                                                  LocalStorage.ethAddress)),
                                           maxLines: 1,
                                           maxFontSize: 12,
                                           minFontSize: 10,
