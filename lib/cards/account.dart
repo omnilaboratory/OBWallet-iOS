@@ -61,11 +61,11 @@ class _AccountState extends State<Account> {
           log(value.msg);
         }
       });
-      EthService.getInstance().updateTokenBalances(context).then((value) {
-        if (mounted) {
-          setState(() {});
-        }
-      });
+      // EthService.getInstance().updateTokenBalances(context).then((value) {
+      //   if (mounted) {
+      //     setState(() {});
+      //   }
+      // });
     }
     updateBalance();
     updateBalanceTimer ??= Timer.periodic(const Duration(seconds: 30), (timer) {

@@ -47,14 +47,25 @@ class _ExchangeState extends State<Exchange> {
   @override
   void initState() {
     super.initState();
-    if (widget.type == EnumExchangeType.buy) {
-    } else if (widget.type == EnumExchangeType.sell) {}
 
+    //init data
     currSelectedCurrency = currencyList[0];
     currSelectedToken = tokenList[0];
 
+    // getCoinPrice
     getCoinPrice(currSelectedToken.name);
 
+    // updateTokenBalances for crypto
+    var address = LocalStorage.get(LocalStorage.ethAddress);
+    if (address != null) {
+      EthService.getInstance().updateTokenBalances(context).then((value) {
+        if (mounted) {
+          setState(() {});
+        }
+      });
+    }
+
+    // getAccountInfo for card
     AccountService.getInstance().getAccountInfo(context).then((value) async {
       if (value.code == 1) {
         var resp = value.data as AccountInfo;
@@ -66,6 +77,7 @@ class _ExchangeState extends State<Exchange> {
       }
     });
 
+    // startCountdownTimer
     startCountdownTimer();
 
     GlobalParams.eventBus.on().listen((event) {
