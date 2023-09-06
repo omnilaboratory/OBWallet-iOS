@@ -14,23 +14,39 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile Page!'),
+        title: const Text('Profile'),
       ),
       body: Center(
-          child: Column(
+        child: Column(
         children: [
+          const SizedBox(height: 300),
           InkWell(
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Login()),
-                );
-              },
-              child: Container(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Login()),
+              );
+            },
+
+            child: Container(
+              width: 200,
+              height: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
                 color: Colors.lightBlueAccent,
-                  width: 200,
-                  height: 80,
-                  child: const Center(child: Text('Log Out')))),
+              ),
+              child: const Center(
+                child: Text(
+                  'Log Out',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                )
+              )
+            )
+          ),
         ],
       )),
     );
