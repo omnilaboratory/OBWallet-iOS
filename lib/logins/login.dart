@@ -280,7 +280,7 @@ class _LoginState extends State<Login> {
     var username = _unameController.value.text.trim();
     var password = _pswController.value.text.trim();
     LocalStorage.save(LocalStorage.username, username);
-    LocalStorage.remove(LocalStorage.ethAddress);
+    // LocalStorage.remove(LocalStorage.ethAddress);
     SignInRequest req = SignInRequest();
     req.userName = username;
     req.password = password;
