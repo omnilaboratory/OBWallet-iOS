@@ -116,20 +116,9 @@ class AccountService {
     return ret;
   }
 
-  Future<GrpcResponse> getDcPayUrl(
-      BuildContext context, double amt, String name) async {
+  Future<GrpcResponse> getDcPayUrl(BuildContext context, double amt) async {
     var request = GetDcPayUrlRequest();
     request.usdAmt = amt;
-    if (name == 'ETH') {
-      request.coin = TrackedTx_ContractSymbol.ETH;
-    } else if (name == 'USDT') {
-      request.coin = TrackedTx_ContractSymbol.USDT;
-    } else if (name == 'USDC') {
-      request.coin = TrackedTx_ContractSymbol.USDC;
-    } else if (name == 'USD') {
-      request.coin = TrackedTx_ContractSymbol.USD;
-    }
-
     log("$request");
     var ret = GrpcResponse();
     try {

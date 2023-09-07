@@ -73,7 +73,8 @@ class _CardRechargeState extends State<CardRecharge> {
                           themeColor: Colors.blue,
                           textColor: Colors.black,
                           cardHolderDecoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.account_balance_wallet),
+                            prefixIcon:
+                                const Icon(Icons.account_balance_wallet),
                             hintText: 'Amount',
                             hintStyle: const TextStyle(color: Colors.grey),
                             border: _outlineInputBorder,
@@ -187,49 +188,49 @@ class _CardRechargeState extends State<CardRecharge> {
 
   onPay() {
     if (formKey.currentState!.validate()) {
-      setState(() {
-        loadingVisible = true;
-      });
-      log(cardHolderName);
-      log(cardNumber);
-      log(cardNumber.length.toString());
-      log(expiryDate);
-      log(cvcCode);
-      log('valid!');
-      CardRechargeRequest request = CardRechargeRequest();
-      request.amt = double.parse(cardHolderName);
-      request.cardNo = cardNumber.replaceAll(' ', '');
-      request.cardSecurityCode = cvcCode;
-      request.cardExpireMonth =
-          expiryDate.substring(0, expiryDate.indexOf('/'));
-      request.cardExpireYear =
-          '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
-      CardService.getInstance()
-          .cardRecharge(context, request)
-          .then((value) async {
-        if (value.code == 1) {
-          setState(() {
-            loadingVisible = false;
-          });
-          var resp = value.data as CardRechargeResponse;
-          log(resp.toString());
-          Navigator.pop(context);
-        } else {
-          setState(() {
-            loadingVisible = false;
-          });
-          log(value.msg);
-        }
-      });
-    } else {
-      log('invalid!');
-    }
+      if (double.parse(cardHolderName) <= 100) {
+        setState(() {
+          loadingVisible = true;
+        });
+        log(cardHolderName);
+        log(cardNumber);
+        log(cardNumber.length.toString());
+        log(expiryDate);
+        log(cvcCode);
+        log('valid!');
+        CardRechargeRequest request = CardRechargeRequest();
+        request.amt = double.parse(cardHolderName);
+        request.cardNo = cardNumber.replaceAll(' ', '');
+        request.cardSecurityCode = cvcCode;
+        request.cardExpireMonth =
+            expiryDate.substring(0, expiryDate.indexOf('/'));
+        request.cardExpireYear =
+            '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
+        CardService.getInstance()
+            .cardRecharge(context, request)
+            .then((value) async {
+          if (value.code == 1) {
+            setState(() {
+              loadingVisible = false;
+            });
+            var resp = value.data as CardRechargeResponse;
+            log(resp.toString());
+            Navigator.pop(context);
+          } else {
+            setState(() {
+              loadingVisible = false;
+            });
+            log(value.msg);
+          }
+        });
+      } else {
+        log('invalid!');
+      }
+    } else {}
   }
 
-  void getDcPayUrl(double amt, String name) {
-    AccountService.getInstance()
-        .getDcPayUrl(context, amt, name)
-        .then((value) async {
+  void getDcPayUrl(double amt) {
+    AccountService.getInstance().getDcPayUrl(context, amt).then((value) async {
       if (value.code == 1) {
         var resp = value.data as GetDcPayUrlResponse;
         log(resp.urlPath.toString());
