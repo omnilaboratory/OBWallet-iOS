@@ -34,8 +34,10 @@ class _TxHistoryState extends State<TxHistory> {
                 txTime: DateTime.fromMillisecondsSinceEpoch(
                     (element.createdAt * 1000).toInt()),
                 fromSymbol: element.fromSymbol.name,
-                targetSymbol:element.targetSymbol.name,
-                amount: element.amt,amountOfDollar: element.settleAmt));
+                targetSymbol: element.targetSymbol.name,
+                amount: element.amt,
+                amountOfDollar: element.settleAmt,
+                status: element.status.value > 2 ? element.status.value-2 : 0));
           }
         } else {
           tips = "No Txs Data";
@@ -56,9 +58,12 @@ class _TxHistoryState extends State<TxHistory> {
           for (var element in items) {
             txHistoryList.add(CryptoTxInfo(
                 title: "Send(${element.symbol.name})",
-                txTime: DateTime.fromMillisecondsSinceEpoch((element.createdAt * 1000).toInt()),
+                txTime: DateTime.fromMillisecondsSinceEpoch(
+                    (element.createdAt * 1000).toInt()),
                 fromSymbol: element.symbol.name,
-                amount: element.amt,amountOfDollar: element.usdAmt));
+                amount: element.amt,
+                amountOfDollar: element.usdAmt,
+                status: element.status.value > 2 ? element.status.value-2 : 0));
           }
         } else {
           tips = "No Txs Data";
@@ -115,13 +120,14 @@ class _TxHistoryState extends State<TxHistory> {
           txHistoryList.isEmpty
               ? Center(child: Text(tips))
               : Expanded(
-                child: ListView.builder(
-                    padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                    itemCount: txHistoryList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CryptoTxItem(txInfo: txHistoryList[index]);
-                    }),
-              )
+                  child: ListView.builder(
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, top: 10),
+                      itemCount: txHistoryList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CryptoTxItem(txInfo: txHistoryList[index]);
+                      }),
+                )
         ],
       ),
     );

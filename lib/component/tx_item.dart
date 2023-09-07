@@ -4,16 +4,13 @@ import 'package:intl/intl.dart';
 
 import '../bean/crypto_tx_info.dart';
 
-class CryptoTxItem extends StatefulWidget {
+var circleClrs = [Colors.grey, Colors.yellow, Colors.red, Colors.green];
+
+class CryptoTxItem extends StatelessWidget {
   final CryptoTxInfo txInfo;
 
   const CryptoTxItem({super.key, required this.txInfo});
 
-  @override
-  State<CryptoTxItem> createState() => _CryptoTxItemState();
-}
-
-class _CryptoTxItemState extends State<CryptoTxItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,20 +18,11 @@ class _CryptoTxItemState extends State<CryptoTxItem> {
       height: 40,
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Container(
-          width: 24,
-          height: 24,
+          width: 12,
+          height: 12,
           decoration: BoxDecoration(
-              color: const Color(0xff257B7D),
-              borderRadius: BorderRadius.circular(12)),
-          child: Text(
-            widget.txInfo.title.substring(0, 1).toUpperCase(),
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+              color: circleClrs[txInfo.status],
+              borderRadius: BorderRadius.circular(6)),
         ),
         Expanded(
           flex: 3,
@@ -44,7 +32,7 @@ class _CryptoTxItemState extends State<CryptoTxItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.txInfo.title,
+                  txInfo.title,
                   style: const TextStyle(
                     color: Color(0xFF333333),
                     fontSize: 12,
@@ -53,7 +41,7 @@ class _CryptoTxItemState extends State<CryptoTxItem> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  DateFormat("yyyy.MM.dd hh:mm a").format(widget.txInfo.txTime),
+                  DateFormat("yyyy.MM.dd hh:mm a").format(txInfo.txTime),
                   style: const TextStyle(
                     color: Color(0xFF999999),
                     fontSize: 12,
@@ -69,10 +57,9 @@ class _CryptoTxItemState extends State<CryptoTxItem> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildAmount(widget.txInfo.fromSymbol, widget.txInfo.amount),
+              buildAmount(txInfo.fromSymbol, txInfo.amount),
               const SizedBox(height: 4),
-              buildAmount(
-                  widget.txInfo.targetSymbol, widget.txInfo.amountOfDollar!),
+              buildAmount(txInfo.targetSymbol, txInfo.amountOfDollar!),
             ],
           ),
         ),

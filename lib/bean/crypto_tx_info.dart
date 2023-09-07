@@ -5,6 +5,7 @@ class CryptoTxInfo {
   late final double amount;
   late final String targetSymbol;
   late final double? amountOfDollar;
+  late final int status;
 
   CryptoTxInfo(
       {required this.title,
@@ -12,5 +13,6 @@ class CryptoTxInfo {
       required this.amount,
       required this.fromSymbol,
       this.targetSymbol = "USD",
-      this.amountOfDollar = 0});
+      this.amountOfDollar = 0,
+      this.status = 0});
 }
