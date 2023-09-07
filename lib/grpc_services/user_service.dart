@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:awallet/bean/grpc_response.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/logins/login.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
@@ -194,10 +195,7 @@ class UserService {
     log("$e");
     GrpcError error = e as GrpcError;
     ret.msg = error.message.toString();
-    Fluttertoast.showToast(
-        msg: ret.msg,
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.CENTER);
+    showToast(ret.msg);
     if (e.code == 16) {
       Navigator.pushReplacement(
         context,

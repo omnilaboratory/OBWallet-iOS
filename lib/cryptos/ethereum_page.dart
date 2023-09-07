@@ -4,6 +4,7 @@ import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/crypto_token_item.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
+import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
@@ -23,6 +24,8 @@ class EthereumPage extends StatefulWidget {
 }
 
 class _EthereumPageState extends State<EthereumPage> {
+  bool loadingVisible = false;
+
   Timer? updateBalanceTimer;
 
   @override
@@ -62,7 +65,6 @@ class _EthereumPageState extends State<EthereumPage> {
   @override
   Widget build(BuildContext context) {
     var address = LocalStorage.get(LocalStorage.ethAddress);
-
     if (address == null) {
       return createOrRecoverWallet();
     }
@@ -145,41 +147,47 @@ class _EthereumPageState extends State<EthereumPage> {
   }
 
   Widget createOrRecoverWallet() {
-    return Center(
-      child: SingleChildScrollView(
-        child: SizedBox(
-          height: 380,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child:
-                      Image(image: AssetImage("asset/images/img_wallet.png")),
-                ),
-                InkWell(
-                    onTap: () {
-                      createNewWallet();
-                    },
-                    child: createBtn("icon_plus.png", "Create New Wallet")),
-                InkWell(
-                    onTap: () async {
-                      var flag = await showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const EthereumRecoverWallet();
-                          });
-                      if (flag != null && flag) {
-                        updateTokenBalances();
-                        setState(() {});
-                      }
-                    },
-                    child: createBtn(
-                        "image_recover_wallet.png", "Recover Wallet")),
-              ]),
+    return Stack(children: [
+      Center(
+        child: SingleChildScrollView(
+          child: SizedBox(
+            height: 380,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 30),
+                    child:
+                        Image(image: AssetImage("asset/images/img_wallet.png")),
+                  ),
+                  InkWell(
+                      onTap: () {
+                        createNewWallet();
+                      },
+                      child: createBtn("icon_plus.png", "Create New Wallet")),
+                  InkWell(
+                      onTap: () async {
+                        var flag = await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const EthereumRecoverWallet();
+                            });
+                        if (flag != null && flag) {
+                          updateTokenBalances();
+                          setState(() {});
+                        }
+                      },
+                      child: createBtn(
+                          "image_recover_wallet.png", "Recover Wallet")),
+                ]),
+          ),
         ),
       ),
-    );
+      Offstage(
+        offstage: !loadingVisible,
+        child: const LoadingDialog(),
+      )
+    ]);
   }
 
   Column createBtn(String iconUrl, String btnName) {
@@ -209,7 +217,10 @@ class _EthereumPageState extends State<EthereumPage> {
   }
 
   void createNewWallet() {
+    loadingVisible = true;
+    setState(() {});
     EthService.getInstance().createWalletInfo(context).then((value) async {
+      loadingVisible = false;
       await updateTokenBalances();
     });
   }
