@@ -64,6 +64,7 @@ class _SendState extends State<Send> {
       return;
     }
 
+    FocusScope.of(context).unfocus();
     showDialog(
         context: context,
         builder: (context) {
@@ -214,7 +215,7 @@ class _SendState extends State<Send> {
                             child: Row(
                               children: [
                                 Expanded(
-                                  flex: 3,
+                                  flex: 4,
                                   child: SizedBox(
                                     height: 34,
                                     child: TextField(
@@ -250,7 +251,7 @@ class _SendState extends State<Send> {
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 2,
+                                  flex: 3,
                                   child: Container(
                                     height: 34,
                                     decoration: const ShapeDecoration(

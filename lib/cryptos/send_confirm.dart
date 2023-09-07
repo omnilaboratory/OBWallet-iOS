@@ -44,6 +44,7 @@ class _SendConfirmState extends State<SendConfirm> {
             });
             log('txId: $value');
             EthGrpcService.getInstance().ethTrackTx(context, value);
+            GlobalParams.eventBus.fire("SendConfirm_Close");
             Navigator.pop(context);
           }
         } catch (e) {
@@ -61,6 +62,7 @@ class _SendConfirmState extends State<SendConfirm> {
             });
             log('txId: $value');
             EthGrpcService.getInstance().ethTrackTx(context, value);
+            GlobalParams.eventBus.fire("SendConfirm_Close");
             Navigator.pop(context);
           }
         } catch (e) {
@@ -78,6 +80,7 @@ class _SendConfirmState extends State<SendConfirm> {
             });
             log('txId: $value');
             EthGrpcService.getInstance().ethTrackTx(context, value);
+            GlobalParams.eventBus.fire("SendConfirm_Close");
             Navigator.pop(context);
           }
         } catch (e) {

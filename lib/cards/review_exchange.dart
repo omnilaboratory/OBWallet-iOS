@@ -101,6 +101,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
   }
 
   onClose() {
+    GlobalParams.eventBus.fire("exchange");
     Navigator.pop(context);
   }
 

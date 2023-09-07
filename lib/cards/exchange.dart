@@ -518,7 +518,7 @@ class _ExchangeState extends State<Exchange> {
         Row(
           children: [
             Expanded(
-              flex: 3,
+              flex: 4,
               child: SizedBox(
                 height: 34,
                 child: TextField(
@@ -569,7 +569,7 @@ class _ExchangeState extends State<Exchange> {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Container(
                 height: 34,
                 decoration: const ShapeDecoration(
@@ -679,7 +679,7 @@ class _ExchangeState extends State<Exchange> {
         Row(
           children: [
             Expanded(
-              flex: 3,
+              flex: 4,
               child: SizedBox(
                 height: 34,
                 child: TextField(
@@ -720,7 +720,7 @@ class _ExchangeState extends State<Exchange> {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Container(
                 height: 34,
                 decoration: const ShapeDecoration(
