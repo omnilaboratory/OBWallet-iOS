@@ -63,86 +63,86 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
-      body: Center(
-        child: Column(children: [
-          const SizedBox(height: 80),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            width: size.width * 0.8,
-            height: size.height * 0.65,
-            child: Column(
-              children: [
-                const SizedBox(height: 30),
-                createText('Export WIF'),
-                SizedBox(
-                  width: size.width * 0.8,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 25, top: 45),
-                    child: Text(
-                      'Password',
-                      style: TextStyle(
-                        color: Color(0xFF999999),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+      body: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                width: size.width * 0.8,
+                height: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    createText('Export WIF'),
+                    const SizedBox(height: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Password',
+                          style: TextStyle(
+                            color: Color(0xFF999999),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        TextField(
+                          controller: _pswController,
+                          maxLines: 1,
+                          keyboardType: TextInputType.visiblePassword,
+                          cursorColor: const Color(0xFF4A92FF),
+                          style: const TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 7),
+                            isCollapsed: true,
+                            border: _outlineInputBorder,
+                            focusedBorder: _outlineInputBorder,
+                            enabledBorder: _outlineInputBorder,
+                            disabledBorder: _outlineInputBorder,
+                            focusedErrorBorder: _outlineInputBorder,
+                            errorBorder: _outlineInputBorder,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25, top: 5),
-                  child: TextField(
-                    controller: _pswController,
-                    maxLines: 10,
-                    minLines: 1,
-                    keyboardType: TextInputType.visiblePassword,
-                    cursorColor: const Color(0xFF4A92FF),
-                    style: const TextStyle(
-                      color: Color(0xFF666666),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        BottomButton(
+                          icon: 'asset/images/icon_arrow_right_green.png',
+                          text: 'NEXT',
+                          onPressed: onNext,
+                        ),
+                      ],
                     ),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 7),
-                      isCollapsed: true,
-                      border: _outlineInputBorder,
-                      focusedBorder: _outlineInputBorder,
-                      enabledBorder: _outlineInputBorder,
-                      disabledBorder: _outlineInputBorder,
-                      focusedErrorBorder: _outlineInputBorder,
-                      errorBorder: _outlineInputBorder,
-                    ),
-                  ),
+                  ],
                 ),
-                const Spacer(
-                  flex: 1,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      BottomButton(
-                        icon: 'asset/images/icon_arrow_right_green.png',
-                        text: 'NEXT',
-                        onPressed: onNext,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 30),
+              BottomWhiteButton(
+                icon: 'asset/images/icon_close_white.png',
+                text: 'CANCEL',
+                onPressed: onClose,
+              )
+            ]),
           ),
-          const SizedBox(height: 30),
-          BottomWhiteButton(
-            icon: 'asset/images/icon_close_white.png',
-            text: 'CANCEL',
-            onPressed: onClose,
-          )
-        ]),
+        ),
       ),
     );
   }
