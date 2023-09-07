@@ -61,7 +61,7 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
