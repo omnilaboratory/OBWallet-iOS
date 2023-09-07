@@ -9,12 +9,15 @@ import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
+import 'package:awallet/tools/global_params.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 
 class CardRecharge extends StatefulWidget {
-  const CardRecharge({super.key});
+  String amt;
+
+  CardRecharge({super.key, required this.amt});
 
   @override
   State<CardRecharge> createState() => _CardRechargeState();
@@ -27,6 +30,16 @@ class _CardRechargeState extends State<CardRecharge> {
   String cvcCode = '';
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool loadingVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (mounted) {
+      setState(() {
+        cardHolderName = widget.amt;
+      });
+    }
+  }
 
   onClose() {
     Navigator.pop(context);
@@ -189,7 +202,7 @@ class _CardRechargeState extends State<CardRecharge> {
 
   onPay() {
     if (formKey.currentState!.validate()) {
-      if (double.parse(cardHolderName) <= 100) {
+      if (double.parse(cardHolderName) < 100) {
         setState(() {
           loadingVisible = true;
         });
@@ -216,6 +229,7 @@ class _CardRechargeState extends State<CardRecharge> {
             });
             var resp = value.data as CardRechargeResponse;
             log(resp.toString());
+            GlobalParams.eventBus.fire("topup");
             Navigator.pop(context);
           } else {
             setState(() {
@@ -226,6 +240,8 @@ class _CardRechargeState extends State<CardRecharge> {
         });
       } else {
         FocusScope.of(context).unfocus();
+        GlobalParams.eventBus.fire("topup");
+        Navigator.pop(context);
         getDcPayUrl(double.parse(cardHolderName));
       }
     } else {

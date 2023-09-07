@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/token_info.dart';
+import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/review_exchange.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
@@ -82,6 +83,16 @@ class _ExchangeState extends State<Exchange> {
 
     GlobalParams.eventBus.on().listen((event) {
       if (event == "exchange") {
+        if (mounted) {
+          setState(() {
+            Navigator.pop(context);
+          });
+        }
+      }
+    });
+
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "topup") {
         if (mounted) {
           setState(() {
             Navigator.pop(context);
@@ -668,7 +679,49 @@ class _ExchangeState extends State<Exchange> {
               ),
             )
           ],
-        )
+        ),
+        Visibility(
+            visible: widget.type == EnumExchangeType.buy ? true : false,
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Text(
+                        "Your account balance is insufficient, please Top Up",
+                        style: TextStyle(
+                          color: Color(0xFF666666),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          height: 1.29,
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        FocusScope.of(context).unfocus();
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return CardRecharge(
+                                  amt: _amountToController.text);
+                            });
+                      },
+                      child: const Text(
+                        "Top Up",
+                        style: TextStyle(
+                          color: Color(0xFF4A92FF),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          height: 1.29,
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ))
       ],
     );
   }

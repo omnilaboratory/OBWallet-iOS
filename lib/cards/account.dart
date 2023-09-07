@@ -3,13 +3,11 @@ import 'dart:developer';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/currency_tx_history.dart';
 import 'package:awallet/cards/exchange.dart';
-import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/account_balance_in_currency.dart';
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
-import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -174,7 +172,7 @@ class _AccountState extends State<Account> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const CardRecharge();
+                    return CardRecharge(amt: '');
                   });
             }),
         SquareButton(
