@@ -4,7 +4,9 @@ import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/credit_card_form.dart';
 import 'package:awallet/component/loading_dialog.dart';
+import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 
 import 'package:flutter/material.dart';
@@ -222,5 +224,18 @@ class _CardRechargeState extends State<CardRecharge> {
     } else {
       log('invalid!');
     }
+  }
+
+  void getDcPayUrl(double amt, String name) {
+    AccountService.getInstance()
+        .getDcPayUrl(context, amt, name)
+        .then((value) async {
+      if (value.code == 1) {
+        var resp = value.data as GetDcPayUrlResponse;
+        log(resp.urlPath.toString());
+      } else {
+        log(value.msg);
+      }
+    });
   }
 }

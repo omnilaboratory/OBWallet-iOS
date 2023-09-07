@@ -281,6 +281,32 @@ const BuyCoinResponse$json = {
 final $typed_data.Uint8List buyCoinResponseDescriptor = $convert.base64Decode(
     'Cg9CdXlDb2luUmVzcG9uc2USEgoEdHhpZBgGIAEoCVIEdHhpZA==');
 
+@$core.Deprecated('Use getDcPayUrlRequestDescriptor instead')
+const GetDcPayUrlRequest$json = {
+  '1': 'GetDcPayUrlRequest',
+  '2': [
+    {'1': 'usd_amt', '3': 1, '4': 1, '5': 1, '10': 'usdAmt'},
+    {'1': 'coin', '3': 2, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'coin'},
+  ],
+};
+
+/// Descriptor for `GetDcPayUrlRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getDcPayUrlRequestDescriptor = $convert.base64Decode(
+    'ChJHZXREY1BheVVybFJlcXVlc3QSFwoHdXNkX2FtdBgBIAEoAVIGdXNkQW10EjIKBGNvaW4YAi'
+    'ABKA4yHi51c2VyLlRyYWNrZWRUeC5Db250cmFjdFN5bWJvbFIEY29pbg==');
+
+@$core.Deprecated('Use getDcPayUrlResponseDescriptor instead')
+const GetDcPayUrlResponse$json = {
+  '1': 'GetDcPayUrlResponse',
+  '2': [
+    {'1': 'url_path', '3': 1, '4': 1, '5': 9, '10': 'urlPath'},
+  ],
+};
+
+/// Descriptor for `GetDcPayUrlResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getDcPayUrlResponseDescriptor = $convert.base64Decode(
+    'ChNHZXREY1BheVVybFJlc3BvbnNlEhkKCHVybF9wYXRoGAEgASgJUgd1cmxQYXRo');
+
 @$core.Deprecated('Use accountHistoryDescriptor instead')
 const AccountHistory$json = {
   '1': 'AccountHistory',
