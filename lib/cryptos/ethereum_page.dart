@@ -145,37 +145,39 @@ class _EthereumPageState extends State<EthereumPage> {
   }
 
   Widget createOrRecoverWallet() {
-    return SingleChildScrollView(
-      child: Center(
-        child: Center(
-            child: Column(children: [
-          const SizedBox(height: 60),
-          const Image(image: AssetImage("asset/images/img_wallet.png")),
-          Padding(
-            padding: const EdgeInsets.only(top: 40, bottom: 20),
-            child: InkWell(
-                onTap: () {
-                  createNewWallet();
-                },
-                child: createBtn("icon_plus.png", "Create New Wallet")),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 40, bottom: 20),
-            child: InkWell(
-                onTap: () async {
-                  var flag = await showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const EthereumRecoverWallet();
-                      });
-                  if (flag != null && flag) {
-                    updateTokenBalances();
-                    setState(() {});
-                  }
-                },
-                child: createBtn("image_recover_wallet.png", "Recover Wallet")),
-          ),
-        ])),
+    return Center(
+      child: SingleChildScrollView(
+        child: SizedBox(
+          height: 380,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 30),
+                  child:
+                      Image(image: AssetImage("asset/images/img_wallet.png")),
+                ),
+                InkWell(
+                    onTap: () {
+                      createNewWallet();
+                    },
+                    child: createBtn("icon_plus.png", "Create New Wallet")),
+                InkWell(
+                    onTap: () async {
+                      var flag = await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const EthereumRecoverWallet();
+                          });
+                      if (flag != null && flag) {
+                        updateTokenBalances();
+                        setState(() {});
+                      }
+                    },
+                    child: createBtn(
+                        "image_recover_wallet.png", "Recover Wallet")),
+              ]),
+        ),
       ),
     );
   }
