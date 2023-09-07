@@ -91,11 +91,6 @@ class _TxHistoryState extends State<TxHistory> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leadingWidth: 42,
-        leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: const Image(image: AssetImage('asset/images/btn_back.png'))),
         titleSpacing: 0,
         title: HeadLogo(title: "Crypto$title"),
       ),

@@ -979,9 +979,11 @@ class _ExchangeState extends State<Exchange> {
       if (value.code == 1) {
         var resp = value.data as GetCoinPriceResponse;
         log(resp.price.toString());
-        setState(() {
-          coinPrice = resp.price;
-        });
+        if (mounted) {
+          setState(() {
+            coinPrice = resp.price;
+          });
+        }
       } else {
         log(value.msg);
       }

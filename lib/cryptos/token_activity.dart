@@ -124,11 +124,6 @@ class _TokenActivityState extends State<TokenActivity> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       leadingWidth: 42,
-      leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: const Image(image: AssetImage('asset/images/btn_back.png'))),
       titleSpacing: 0,
       title:HeadLogo(title: "${widget.tokenInfo.name} Activity"),
     );
