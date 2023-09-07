@@ -4,6 +4,7 @@ import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/credit_card_form.dart';
 import 'package:awallet/component/loading_dialog.dart';
+import 'package:awallet/component/web_view.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
@@ -224,9 +225,12 @@ class _CardRechargeState extends State<CardRecharge> {
           }
         });
       } else {
-        log('invalid!');
+        FocusScope.of(context).unfocus();
+        getDcPayUrl(double.parse(cardHolderName));
       }
-    } else {}
+    } else {
+      log('invalid!');
+    }
   }
 
   void getDcPayUrl(double amt) {
@@ -234,6 +238,11 @@ class _CardRechargeState extends State<CardRecharge> {
       if (value.code == 1) {
         var resp = value.data as GetDcPayUrlResponse;
         log(resp.urlPath.toString());
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    WebViewPage(url: resp.urlPath.toString())));
       } else {
         log(value.msg);
       }
