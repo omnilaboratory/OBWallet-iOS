@@ -27,7 +27,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
   }
 
   onCopy() {
-    showToast("WIF is on your Clipboard",toastLength: Toast.LENGTH_SHORT)
+    showToast("WIF is on your Clipboard",toastLength: Toast.LENGTH_SHORT);
     Clipboard.setData(
         ClipboardData(text: LocalStorage.get(LocalStorage.ethPrivateKey)));
   }
