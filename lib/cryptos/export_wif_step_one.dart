@@ -99,7 +99,7 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
                         TextField(
                           controller: _pswController,
                           maxLines: 1,
-                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: true,
                           cursorColor: const Color(0xFF4A92FF),
                           style: const TextStyle(
                             color: Color(0xFF666666),
