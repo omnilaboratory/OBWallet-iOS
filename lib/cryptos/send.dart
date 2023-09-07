@@ -338,11 +338,18 @@ class _SendState extends State<Send> {
                                             child: GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  _amountController.text =
-                                                      StringTools
-                                                          .formatCryptoNum(
-                                                              dropdownValue
-                                                                  .balance);
+                                                  dropdownValue.name == 'ETH'
+                                                      ? _amountController.text =
+                                                      StringTools.formatCryptoNum(
+                                                          dropdownValue.balance)
+                                                      : _amountController.text =
+                                                      StringTools.formatCurrencyNum(
+                                                          dropdownValue.balance);
+                                                  // _amountController.text =
+                                                  //     StringTools
+                                                  //         .formatCryptoNum(
+                                                  //             dropdownValue
+                                                  //                 .balance);
                                                 });
                                               },
                                               child: const Text(
