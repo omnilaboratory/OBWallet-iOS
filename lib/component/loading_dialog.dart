@@ -26,7 +26,7 @@ class LoadingDialog extends Dialog {
                   ),
                   Padding(padding: EdgeInsets.only(top: 10.0)),
                   Text(
-                    "loading...",
+                    "Loading...",
                     style: TextStyle(fontSize: 16.0, color: Colors.black),
                   )
                 ],
