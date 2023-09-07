@@ -1010,6 +1010,100 @@ class BuyCoinResponse extends $pb.GeneratedMessage {
   void clearTxid() => clearField(6);
 }
 
+class GetDcPayUrlRequest extends $pb.GeneratedMessage {
+  factory GetDcPayUrlRequest() => create();
+  GetDcPayUrlRequest._() : super();
+  factory GetDcPayUrlRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetDcPayUrlRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetDcPayUrlRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'usdAmt', $pb.PbFieldType.OD)
+    ..e<TrackedTx_ContractSymbol>(2, _omitFieldNames ? '' : 'coin', $pb.PbFieldType.OE, defaultOrMaker: TrackedTx_ContractSymbol.USD, valueOf: TrackedTx_ContractSymbol.valueOf, enumValues: TrackedTx_ContractSymbol.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetDcPayUrlRequest clone() => GetDcPayUrlRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetDcPayUrlRequest copyWith(void Function(GetDcPayUrlRequest) updates) => super.copyWith((message) => updates(message as GetDcPayUrlRequest)) as GetDcPayUrlRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetDcPayUrlRequest create() => GetDcPayUrlRequest._();
+  GetDcPayUrlRequest createEmptyInstance() => create();
+  static $pb.PbList<GetDcPayUrlRequest> createRepeated() => $pb.PbList<GetDcPayUrlRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetDcPayUrlRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetDcPayUrlRequest>(create);
+  static GetDcPayUrlRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.double get usdAmt => $_getN(0);
+  @$pb.TagNumber(1)
+  set usdAmt($core.double v) { $_setDouble(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUsdAmt() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUsdAmt() => clearField(1);
+
+  @$pb.TagNumber(2)
+  TrackedTx_ContractSymbol get coin => $_getN(1);
+  @$pb.TagNumber(2)
+  set coin(TrackedTx_ContractSymbol v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCoin() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCoin() => clearField(2);
+}
+
+class GetDcPayUrlResponse extends $pb.GeneratedMessage {
+  factory GetDcPayUrlResponse() => create();
+  GetDcPayUrlResponse._() : super();
+  factory GetDcPayUrlResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetDcPayUrlResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetDcPayUrlResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'urlPath')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetDcPayUrlResponse clone() => GetDcPayUrlResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetDcPayUrlResponse copyWith(void Function(GetDcPayUrlResponse) updates) => super.copyWith((message) => updates(message as GetDcPayUrlResponse)) as GetDcPayUrlResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetDcPayUrlResponse create() => GetDcPayUrlResponse._();
+  GetDcPayUrlResponse createEmptyInstance() => create();
+  static $pb.PbList<GetDcPayUrlResponse> createRepeated() => $pb.PbList<GetDcPayUrlResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetDcPayUrlResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetDcPayUrlResponse>(create);
+  static GetDcPayUrlResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get urlPath => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set urlPath($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUrlPath() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUrlPath() => clearField(1);
+}
+
 class AccountHistory extends $pb.GeneratedMessage {
   factory AccountHistory() => create();
   AccountHistory._() : super();

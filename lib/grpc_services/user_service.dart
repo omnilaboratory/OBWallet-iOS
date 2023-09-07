@@ -49,7 +49,7 @@ class UserService {
   }
 
   Future<GrpcResponse> login(BuildContext context, SignInRequest req) async {
-    req.password = Utils.generateMd5(req.password);
+    req.password = req.password;
     req.os = Platform.operatingSystem;
     await setDeviceInfo(req);
     log("$req");

@@ -37,6 +37,10 @@ class accountClient extends $grpc.Client {
       '/user.account/BuyCoin',
       ($0.BuyCoinRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.BuyCoinResponse.fromBuffer(value));
+  static final _$getDcPayUrl = $grpc.ClientMethod<$0.GetDcPayUrlRequest, $0.GetDcPayUrlResponse>(
+      '/user.account/GetDcPayUrl',
+      ($0.GetDcPayUrlRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.GetDcPayUrlResponse.fromBuffer(value));
   static final _$getSwapTxList = $grpc.ClientMethod<$0.GetSwapTxListRequest, $0.GetSwapTxListResponse>(
       '/user.account/GetSwapTxList',
       ($0.GetSwapTxListRequest value) => value.writeToBuffer(),
@@ -70,6 +74,10 @@ class accountClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.BuyCoinResponse> buyCoin($0.BuyCoinRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$buyCoin, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.GetDcPayUrlResponse> getDcPayUrl($0.GetDcPayUrlRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getDcPayUrl, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.GetSwapTxListResponse> getSwapTxList($0.GetSwapTxListRequest request, {$grpc.CallOptions? options}) {
@@ -118,6 +126,13 @@ abstract class accountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.BuyCoinRequest.fromBuffer(value),
         ($0.BuyCoinResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetDcPayUrlRequest, $0.GetDcPayUrlResponse>(
+        'GetDcPayUrl',
+        getDcPayUrl_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetDcPayUrlRequest.fromBuffer(value),
+        ($0.GetDcPayUrlResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetSwapTxListRequest, $0.GetSwapTxListResponse>(
         'GetSwapTxList',
         getSwapTxList_Pre,
@@ -157,6 +172,10 @@ abstract class accountServiceBase extends $grpc.Service {
     return buyCoin(call, await request);
   }
 
+  $async.Future<$0.GetDcPayUrlResponse> getDcPayUrl_Pre($grpc.ServiceCall call, $async.Future<$0.GetDcPayUrlRequest> request) async {
+    return getDcPayUrl(call, await request);
+  }
+
   $async.Future<$0.GetSwapTxListResponse> getSwapTxList_Pre($grpc.ServiceCall call, $async.Future<$0.GetSwapTxListRequest> request) async {
     return getSwapTxList(call, await request);
   }
@@ -173,6 +192,7 @@ abstract class accountServiceBase extends $grpc.Service {
   $async.Future<$0.GetAccountHistoryResponse> getAccountHistory($grpc.ServiceCall call, $0.GetAccountHistoryRequest request);
   $async.Future<$0.SellCoinResponse> sellCoin($grpc.ServiceCall call, $0.SellCoinRequest request);
   $async.Future<$0.BuyCoinResponse> buyCoin($grpc.ServiceCall call, $0.BuyCoinRequest request);
+  $async.Future<$0.GetDcPayUrlResponse> getDcPayUrl($grpc.ServiceCall call, $0.GetDcPayUrlRequest request);
   $async.Future<$0.GetSwapTxListResponse> getSwapTxList($grpc.ServiceCall call, $0.GetSwapTxListRequest request);
   $async.Future<$0.GetTrackedTxListResponse> getTrackedTxList($grpc.ServiceCall call, $0.GetSwapTxListRequest request);
   $async.Future<$0.GetCoinPriceResponse> getCoinPrice($grpc.ServiceCall call, $0.GetCoinPriceRequest request);

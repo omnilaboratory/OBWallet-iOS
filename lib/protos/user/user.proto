@@ -58,6 +58,7 @@ message UserInfo {
   uint64 updated_at = 19;
   bool kycinfo_ok =20;
   string open_id=21;
+  //passed or pending
   string kyc_status=22;
   uint64 created_at = 24;
 }

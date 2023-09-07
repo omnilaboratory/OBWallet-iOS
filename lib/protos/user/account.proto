@@ -9,6 +9,7 @@ service account{
   rpc GetAccountHistory(GetAccountHistoryRequest) returns (GetAccountHistoryResponse) {}
   rpc SellCoin(SellCoinRequest) returns (SellCoinResponse) {}
   rpc BuyCoin(BuyCoinRequest) returns (BuyCoinResponse) {}
+  rpc GetDcPayUrl(GetDcPayUrlRequest) returns (GetDcPayUrlResponse) {}
   rpc GetSwapTxList(GetSwapTxListRequest) returns (GetSwapTxListResponse) {}
   rpc GetTrackedTxList(GetSwapTxListRequest) returns (GetTrackedTxListResponse) {}
   rpc GetCoinPrice(GetCoinPriceRequest) returns (GetCoinPriceResponse) {}
@@ -123,6 +124,13 @@ message BuyCoinRequest {
 }
 message BuyCoinResponse {
   string txid=6;
+}
+message GetDcPayUrlRequest {
+  double usd_amt =1;
+  TrackedTx.ContractSymbol coin=2;
+}
+message GetDcPayUrlResponse {
+  string url_path=1;
 }
 
 message AccountHistory{

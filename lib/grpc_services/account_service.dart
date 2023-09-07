@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
@@ -106,6 +108,32 @@ class AccountService {
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.getTrackedTxList(request);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context, e, ret);
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> getDcPayUrl(
+      BuildContext context, double amt, String name) async {
+    var request = GetDcPayUrlRequest();
+    request.usdAmt = amt;
+    if (name == 'ETH') {
+      request.coin = TrackedTx_ContractSymbol.ETH;
+    } else if (name == 'USDT') {
+      request.coin = TrackedTx_ContractSymbol.USDT;
+    } else if (name == 'USDC') {
+      request.coin = TrackedTx_ContractSymbol.USDC;
+    } else if (name == 'USD') {
+      request.coin = TrackedTx_ContractSymbol.USD;
+    }
+
+    log("$request");
+    var ret = GrpcResponse();
+    try {
+      var resp = await accountServiceClient?.getDcPayUrl(request);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
