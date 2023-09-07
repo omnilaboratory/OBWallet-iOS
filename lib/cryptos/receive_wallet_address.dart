@@ -33,7 +33,7 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                 height: 450,
                 child: Column(children: [
                   const SizedBox(height: 30),
-                  createText('Receive'),
+                  createDialogTitle('Receive'),
                   Padding(
                       padding:
                           const EdgeInsets.only(left: 25, right: 25, top: 20),

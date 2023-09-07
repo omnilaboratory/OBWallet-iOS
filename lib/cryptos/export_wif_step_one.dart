@@ -82,7 +82,7 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    createText('Export WIF'),
+                    createDialogTitle('Export WIF'),
                     const SizedBox(height: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

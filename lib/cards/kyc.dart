@@ -45,7 +45,7 @@ class _KycState extends State<Kyc> {
                         Center(
                           child: Padding(
                             padding: const EdgeInsets.only(top: 28, bottom: 20),
-                            child: createText('KYC'),
+                            child: createDialogTitle('KYC'),
                           ),
                         ),
                         const Padding(

@@ -8,11 +8,12 @@ final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
 
 TextFormField createTextFormField(
     TextEditingController controller, String hintText, bool obscureText,
-    {Icon? icon, int? maxLength}) {
+    {Icon? icon, int? maxLength,TextInputType? keyboardType = TextInputType.text}) {
   return TextFormField(
     controller: controller,
     maxLines: 1,
     maxLength: maxLength,
+    keyboardType: keyboardType,
     decoration: InputDecoration(
       hintText: hintText,
       prefixIcon: icon,
@@ -33,7 +34,7 @@ TextFormField createTextFormField(
   );
 }
 
-Text createText(String text) {
+Text createDialogTitle(String text) {
   return Text(
     text,
     textAlign: TextAlign.center,

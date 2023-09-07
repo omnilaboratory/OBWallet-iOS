@@ -199,7 +199,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                 "Email",
                 icon: const Icon(Icons.email),
                 false,
-                maxLength: 50),
+                maxLength: 50,keyboardType: TextInputType.emailAddress),
             const SizedBox(height: 15),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -213,7 +213,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                         "Verify Code",
                         icon: const Icon(Icons.verified_user_outlined),
                         false,
-                        maxLength: 6),
+                        maxLength: 6,keyboardType: TextInputType.number),
                   ),
                 ),
                 const SizedBox(width: 10),

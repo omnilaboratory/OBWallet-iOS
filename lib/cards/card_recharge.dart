@@ -55,7 +55,7 @@ class _CardRechargeState extends State<CardRecharge> {
                     child: Column(
                       children: [
                         const SizedBox(height: 30),
-                        createText('Card Recharge'),
+                        createDialogTitle('Card Recharge'),
                         const SizedBox(height: 30),
                         CreditCardForm(
                           formKey: formKey,

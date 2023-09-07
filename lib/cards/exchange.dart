@@ -265,7 +265,7 @@ class _ExchangeState extends State<Exchange> {
       height: size.height * 0.72,
       child: Column(children: [
         const SizedBox(height: 25),
-        createText('Exchange'),
+        createDialogTitle('Exchange'),
         const SizedBox(height: 25),
         buildSubTitleForStep(),
         Expanded(

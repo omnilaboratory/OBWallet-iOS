@@ -235,7 +235,8 @@ class _LoginState extends State<Login> {
                 SizedBox(
                   width: 130,
                   child: createTextFormField(
-                      _codeController, "Verify Code", false),
+                      _codeController, "Verify Code", false,
+                      keyboardType: TextInputType.number),
                 ),
                 _verifyImageResponse == null
                     ? const Padding(

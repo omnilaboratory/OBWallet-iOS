@@ -132,7 +132,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                     height: size.height * 0.65,
                     child: Column(children: [
                       const SizedBox(height: 25),
-                      createText('Review Exchange'),
+                      createDialogTitle('Review Exchange'),
                       const SizedBox(height: 25),
                       buildTitle(),
                       const Padding(

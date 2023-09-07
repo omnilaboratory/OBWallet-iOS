@@ -121,7 +121,7 @@ class _SendConfirmState extends State<SendConfirm> {
                     height: size.height * 0.65,
                     child: Column(children: [
                       const SizedBox(height: 30),
-                      createText('Send'),
+                      createDialogTitle('Send'),
                       const SizedBox(height: 30),
                       Container(
                         width: 272,

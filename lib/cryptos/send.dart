@@ -110,7 +110,7 @@ class _SendState extends State<Send> {
                           alignment: AlignmentDirectional.centerEnd,
                           children: [
                             Center(
-                              child: createText('Send'),
+                              child: createDialogTitle('Send'),
                             ),
                             const Positioned(
                               right: 24,
