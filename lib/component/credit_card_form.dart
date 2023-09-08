@@ -278,7 +278,6 @@ class _CreditCardFormState extends State<CreditCardForm> {
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                   textInputAction: TextInputAction.done,
-                  autofillHints: const <String>[AutofillHints.creditCardName],
                   onEditingComplete: () {
                     FocusScope.of(context).unfocus();
                     onCreditCardModelChange(creditCardModel);
@@ -321,7 +320,6 @@ class _CreditCardFormState extends State<CreditCardForm> {
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: false),
                   textInputAction: TextInputAction.next,
-                  autofillHints: const <String>[AutofillHints.creditCardNumber],
                   autovalidateMode: widget.autovalidateMode,
                   validator: widget.cardNumberValidator ??
                       (String? value) {
@@ -369,9 +367,6 @@ class _CreditCardFormState extends State<CreditCardForm> {
                         keyboardType: const TextInputType.numberWithOptions(
                             decimal: false),
                         textInputAction: TextInputAction.next,
-                        autofillHints: const <String>[
-                          AutofillHints.creditCardExpirationDate
-                        ],
                         validator: widget.expiryDateValidator ??
                             (String? value) {
                               if (value!.isEmpty) {
@@ -429,9 +424,6 @@ class _CreditCardFormState extends State<CreditCardForm> {
                         textInputAction: widget.isHolderNameVisible
                             ? TextInputAction.next
                             : TextInputAction.done,
-                        autofillHints: const <String>[
-                          AutofillHints.creditCardSecurityCode
-                        ],
                         onChanged: (String text) {
                           setState(() {
                             cvvCode = text;

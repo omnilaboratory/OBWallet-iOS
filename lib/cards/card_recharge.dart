@@ -88,7 +88,7 @@ class _CardRechargeState extends State<CardRecharge> {
                           textColor: Colors.black,
                           cardHolderDecoration: InputDecoration(
                             prefixIcon:
-                                const Icon(Icons.account_balance_wallet),
+                                const Icon(Icons.attach_money),
                             hintText: 'Amount',
                             hintStyle: const TextStyle(color: Colors.grey),
                             border: _outlineInputBorder,

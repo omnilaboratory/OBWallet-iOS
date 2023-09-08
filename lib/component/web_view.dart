@@ -48,6 +48,12 @@ class _WebViewPageState extends State<WebViewPage> {
             debugPrint('Page started loading: $url');
           },
           onPageFinished: (String url) {
+            controller.runJavaScript("window.close()").then((result) {
+              setState(() {
+                Navigator.pop(context);
+              });
+            });
+
             debugPrint('Page finished loading: $url');
           },
           onWebResourceError: (WebResourceError error) {
