@@ -185,7 +185,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
   late void Function(CreditCardModel) onCreditCardModelChange;
   late CreditCardModel creditCardModel;
 
-  final MaskedTextController _cardNumberController =
+  final TextEditingController _cardNumberController =
       MaskedTextController(mask: '0000 0000 0000 0000');
   final TextEditingController _expiryDateController =
       MaskedTextController(mask: '00/00');
@@ -319,9 +319,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
                     color: widget.textColor,
                   ),
                   decoration: widget.cardNumberDecoration,
-                  keyboardType:
-                      TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  keyboardType: const TextInputType.numberWithOptions(
+                      decimal: false),
                   textInputAction: TextInputAction.next,
                   autofillHints: widget.disableCardNumberAutoFillHints
                       ? null
