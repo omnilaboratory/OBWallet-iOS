@@ -1,6 +1,5 @@
 import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class CreditCardForm extends StatefulWidget {
@@ -185,7 +184,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
   late void Function(CreditCardModel) onCreditCardModelChange;
   late CreditCardModel creditCardModel;
 
-  final TextEditingController _cardNumberController =
+  final MaskedTextController _cardNumberController =
       MaskedTextController(mask: '0000 0000 0000 0000');
   final TextEditingController _expiryDateController =
       MaskedTextController(mask: '00/00');
@@ -277,7 +276,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                   ),
                   decoration: widget.cardHolderDecoration,
                   keyboardType:
-                      const TextInputType.numberWithOptions(decimal: false),
+                      const TextInputType.numberWithOptions(decimal: true),
                   textInputAction: TextInputAction.done,
                   autofillHints: const <String>[AutofillHints.creditCardName],
                   onEditingComplete: () {
@@ -319,11 +318,10 @@ class _CreditCardFormState extends State<CreditCardForm> {
                     color: widget.textColor,
                   ),
                   decoration: widget.cardNumberDecoration,
-                  keyboardType: const TextInputType.numberWithOptions(decimal: false),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: false),
                   textInputAction: TextInputAction.next,
-                  // autofillHints: widget.disableCardNumberAutoFillHints
-                  //     ? null
-                  //     : const <String>[AutofillHints.creditCardNumber],
+                  autofillHints: const <String>[AutofillHints.creditCardNumber],
                   autovalidateMode: widget.autovalidateMode,
                   validator: widget.cardNumberValidator ??
                       (String? value) {
