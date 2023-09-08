@@ -1,5 +1,6 @@
 import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class CreditCardForm extends StatefulWidget {
@@ -319,7 +320,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
                   ),
                   decoration: widget.cardNumberDecoration,
                   keyboardType:
-                      const TextInputType.numberWithOptions(decimal: false),
+                      TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   textInputAction: TextInputAction.next,
                   autofillHints: widget.disableCardNumberAutoFillHints
                       ? null
