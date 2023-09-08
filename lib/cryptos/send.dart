@@ -1,3 +1,4 @@
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
@@ -40,27 +41,27 @@ class _SendState extends State<Send> {
 
   onNext() {
     if (_addressController.value.text.toString().trim().isEmpty) {
-      showToast("The address cannot be empty");
+      showToast(Tips.emptyAddress.value);
       return;
     }
 
     if (!Eth.validateAddress(_addressController.value.text.trim())) {
-      showToast("invalid address");
+      showToast(Tips.invalidAddress.value);
       return;
     }
 
     if (_amountController.value.text.toString().isEmpty) {
-      showToast("The amount cannot be empty");
+      showToast(Tips.emptyAmount.value);
       return;
     }
 
     if (double.parse(_amountController.value.text.toString()) == 0) {
-      showToast("The amount must be greater than 0",toastLength:Toast.LENGTH_SHORT);
+      showToast(Tips.zeroAmount.value,toastLength:Toast.LENGTH_SHORT);
       return;
     }
 
     if (double.parse(_amountController.value.text) > dropdownValue.balance!) {
-      showToast("The amount cannot exceed the maximum");
+      showToast(Tips.maxAmount.value);
       return;
     }
 

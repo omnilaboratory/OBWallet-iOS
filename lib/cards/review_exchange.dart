@@ -4,6 +4,7 @@ import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/loading_dialog.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/eth_grpc_service.dart';
@@ -13,6 +14,7 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+
 
 class ReviewExchange extends StatefulWidget {
   double fromAmt = 0;
@@ -480,7 +482,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
         log(resp.toString());
         GlobalParams.eventBus.fire("exchange");
         Navigator.pop(context);
-        showToast("Please waiting for a while to see the balance on the Card page");
+        showToast(Tips.waitingBalance.value);
       } else {
         setState(() {
           loadingVisible = false;
@@ -511,7 +513,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
         log(resp.toString());
         GlobalParams.eventBus.fire("exchange");
         Navigator.pop(context);
-        showToast("Please waiting for a while to see the balance on the Crypto page");
+        showToast(Tips.waitingBalance.value);
       } else {
         setState(() {
           loadingVisible = false;

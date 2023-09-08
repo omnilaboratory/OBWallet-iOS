@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cryptos/token_activity.dart';
 import 'package:awallet/tools/string_tool.dart';

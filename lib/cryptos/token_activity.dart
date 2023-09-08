@@ -6,11 +6,13 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_token_card.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/square_button.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/tx_item.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+
 
 class TokenActivity extends StatefulWidget {
   final TokenInfo tokenInfo;
@@ -75,7 +77,7 @@ class _TokenActivityState extends State<TokenActivity> {
             text: 'Pay',
             iconWidth: iconWidth,
             onPressed: () {
-              showToast("Coming Soon...");
+              showToast(Tips.comeSoon.value);
             }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',

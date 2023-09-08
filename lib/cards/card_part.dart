@@ -1,5 +1,6 @@
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/send.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/logins/apply_card_step_one.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
@@ -203,7 +204,7 @@ class _CardPartState extends State<CardPart> {
                               icon: 'asset/images/icon_arrow_right_green.png',
                               text: 'APPLY CARD',
                               onPressed: () {
-                                showToast("Coming Soon...");
+                                showToast(Tips.comeSoon.value);
                                 // Navigator.push(
                                 //     context,
                                 //     MaterialPageRoute(
@@ -292,7 +293,7 @@ class _CardPartState extends State<CardPart> {
             iconWidth: iconWidth,
             text: 'Pay',
             onPressed: () {
-              showToast("Coming Soon...");
+              showToast(Tips.comeSoon.value);
             }),
         SquareButton(
             icon: 'asset/images/icon_top_up.png',

@@ -1,10 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:awallet/component/common.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import 'bottom_button.dart';
+import 'common.dart';
 
 class CryptoReceive extends StatelessWidget {
   final String address;
@@ -20,7 +21,8 @@ class CryptoReceive extends StatelessWidget {
   onShare(BuildContext context) {}
 
   onCopy(BuildContext context) {
-    showToast("address is on your Clipboard");
+    showToast(Tips.addressIsOnClipboard.value);
+    Clipboard.setData(ClipboardData(text: address));
   }
 
   @override
@@ -89,7 +91,7 @@ class CryptoReceive extends StatelessWidget {
             InkWell(
               onTap: () {
                 Clipboard.setData(ClipboardData(text: address));
-                showToast("address is on your Clipboard");
+                showToast(Tips.addressIsOnClipboard.value);
               },
               child: const Image(
                   width: 16,

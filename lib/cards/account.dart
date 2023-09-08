@@ -7,6 +7,7 @@ import 'package:awallet/component/account_balance_in_currency.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
@@ -161,7 +162,7 @@ class _AccountState extends State<Account> {
             iconWidth: iconWidth,
             text: 'Pay',
             onPressed: () {
-              showToast("Coming Soon...");
+              showToast(Tips.comeSoon.value);
             }),
         SquareButton(
             icon: 'asset/images/icon_top_up.png',
@@ -190,7 +191,7 @@ class _AccountState extends State<Account> {
             text: 'Send',
             iconWidth: iconWidth,
             onPressed: () {
-              showToast("Coming Soon...");
+              showToast(Tips.comeSoon.value);
               // showDialog(
               //     context: context,
               //     builder: (context) {

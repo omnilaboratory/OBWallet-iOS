@@ -1,3 +1,4 @@
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
@@ -27,7 +28,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
   }
 
   onCopy() {
-    showToast("WIF is on your Clipboard",toastLength: Toast.LENGTH_SHORT);
+    showToast(Tips.wifIsOnClipboard.value,toastLength: Toast.LENGTH_SHORT);
     Clipboard.setData(
         ClipboardData(text: LocalStorage.get(LocalStorage.ethPrivateKey)));
   }
@@ -78,7 +79,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
                     onTap: () {
                       Clipboard.setData(ClipboardData(
                           text: LocalStorage.get(LocalStorage.ethPrivateKey)));
-                      showToast("WIF is on your Clipboard",
+                      showToast(Tips.wifIsOnClipboard.value,
                           toastLength: Toast.LENGTH_SHORT);
                     },
                     child: Text(

@@ -5,6 +5,7 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_token_item.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/component/square_button.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
@@ -62,7 +63,7 @@ class _BitcoinPageState extends State<BitcoinPage> {
             iconWidth: iconWidth,
             text: 'Pay',
             onPressed: () {
-              showToast("Coming Soon...");
+              showToast(Tips.comeSoon.value);
             }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',

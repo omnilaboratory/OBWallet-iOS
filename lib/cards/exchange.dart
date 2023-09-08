@@ -9,6 +9,7 @@ import 'package:awallet/cards/review_exchange.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
@@ -128,22 +129,22 @@ class _ExchangeState extends State<Exchange> {
   onNext() {
     if (widget.type == EnumExchangeType.sell) {
       if (_amountFromController.value.text.toString().isEmpty) {
-        showToast("The from amount cannot be empty");
+        showToast(Tips.emptyAmount1.value);
         return;
       }
 
       if (_amountToController.value.text.toString().isEmpty) {
-        showToast("The to amount cannot be empty");
+        showToast(Tips.emptyAmount2.value);
         return;
       }
 
       if (double.parse(_amountFromController.value.text.toString()) == 0) {
-        showToast("The from amount must be greater than 0");
+        showToast(Tips.zeroAmount1.value);
         return;
       }
 
       if (double.parse(_amountToController.value.text.toString()) == 0) {
-        showToast("The to amount must be greater than 0");
+        showToast(Tips.zeroAmount2.value);
         return;
       }
 
@@ -151,48 +152,48 @@ class _ExchangeState extends State<Exchange> {
         if (double.parse(_amountFromController.value.text.toString()) >
             double.parse(
                 StringTools.formatCryptoNum(currSelectedToken.balance))) {
-          showToast("The from amount cannot exceed the maximum");
+          showToast(Tips.maxAmount1.value);
           return;
         }
       } else {
         if (double.parse(_amountFromController.value.text.toString()) >
             double.parse(
                 StringTools.formatCurrencyNum(currSelectedToken.balance))) {
-          showToast("The from amount cannot exceed the maximum");
+          showToast(Tips.maxAmount1.value);
           return;
         }
       }
     } else if (widget.type == EnumExchangeType.buy) {
       if (_amountToController.value.text.toString().isEmpty) {
-        showToast("The from amount cannot be empty");
+        showToast(Tips.emptyAmount1.value);
         return;
       }
 
       if (_amountFromController.value.text.toString().isEmpty) {
-        showToast("The to amount cannot be empty");
+        showToast(Tips.emptyAmount2.value);
         return;
       }
 
       if (double.parse(_amountToController.value.text.toString()) == 0) {
-        showToast("The from amount must be greater than 0");
+        showToast(Tips.zeroAmount1.value);
         return;
       }
 
       if (double.parse(_amountFromController.value.text.toString()) == 0) {
-        showToast("The to amount must be greater than 0");
+        showToast(Tips.zeroAmount2.value);
         return;
       }
 
       if (double.parse(_amountToController.value.text.toString()) >
           double.parse(
               StringTools.formatCurrencyNum(currSelectedCurrency.balance))) {
-        showToast("The from amount cannot exceed the maximum");
+        showToast(Tips.maxAmount1.value);
         return;
       }
     }
 
     if (LocalStorage.get(LocalStorage.ethAddress) == null) {
-      showToast("Please create an Ethereum address");
+      showToast(Tips.createEthAddress.value);
       return;
     }
 
