@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:awallet/component/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import 'bottom_button.dart';
@@ -20,9 +20,7 @@ class CryptoReceive extends StatelessWidget {
   onShare(BuildContext context) {}
 
   onCopy(BuildContext context) {
-    Fluttertoast.showToast(
-        msg: "address is on your Clipboard", gravity: ToastGravity.CENTER);
-    Clipboard.setData(ClipboardData(text: address));
+    showToast("address is on your Clipboard");
   }
 
   @override
@@ -91,9 +89,7 @@ class CryptoReceive extends StatelessWidget {
             InkWell(
               onTap: () {
                 Clipboard.setData(ClipboardData(text: address));
-                Fluttertoast.showToast(
-                    msg: "address is on your Clipboard",
-                    gravity: ToastGravity.CENTER);
+                showToast("address is on your Clipboard");
               },
               child: const Image(
                   width: 16,

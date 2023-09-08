@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/cards/exchange.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_token_item.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/component/loading_dialog.dart';
@@ -12,7 +13,6 @@ import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'ethereum_recover_wallet.dart';
 
@@ -106,8 +106,7 @@ class _EthereumPageState extends State<EthereumPage> {
             iconWidth: iconWidth,
             text: 'Pay',
             onPressed: () {
-              Fluttertoast.showToast(
-                  msg: "Coming Soon...", gravity: ToastGravity.CENTER);
+              showToast("Coming Soon...");
             }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',

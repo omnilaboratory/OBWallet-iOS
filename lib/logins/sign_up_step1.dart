@@ -11,7 +11,6 @@ import 'package:awallet/utils.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'apply_card_step_one.dart';
 
@@ -80,13 +79,13 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   getVerifyCode() async {
     var email = _emailController.value.text.trim();
     if (email.isEmpty || !EmailValidator.validate(email)) {
-      Fluttertoast.showToast(msg: "wrong email", gravity: ToastGravity.CENTER);
+      showToast("wrong email");
       return;
     }
 
     if (codeTimer != null) {
       if (codeTimer!.isActive) {
-        Fluttertoast.showToast(msg: "please waiting");
+        showToast("please waiting");
         return;
       }
     }
@@ -97,10 +96,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
         .verifyCode(context, _emailController.value.text)
         .then((resp) => {
               if (resp.code == 0)
-                {
-                  Fluttertoast.showToast(
-                      msg: resp.msg, gravity: ToastGravity.CENTER)
-                }
+                {showToast(resp.msg)}
               else
                 {verifyCodeResponse = resp.data}
             });
@@ -199,7 +195,8 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                 "Email",
                 icon: const Icon(Icons.email),
                 false,
-                maxLength: 50,keyboardType: TextInputType.emailAddress),
+                maxLength: 50,
+                keyboardType: TextInputType.emailAddress),
             const SizedBox(height: 15),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -213,7 +210,8 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                         "Verify Code",
                         icon: const Icon(Icons.verified_user_outlined),
                         false,
-                        maxLength: 6,keyboardType: TextInputType.number),
+                        maxLength: 6,
+                        keyboardType: TextInputType.number),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -387,11 +385,11 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     SignUpRequest signUpRequest = SignUpRequest();
     signUpRequest.email = _emailController.value.text.trim();
     if (!EmailValidator.validate(signUpRequest.email)) {
-      Fluttertoast.showToast(msg: "wrong email", gravity: ToastGravity.CENTER);
+      showToast("wrong email");
       return;
     }
     if (verifyCodeResponse == null) {
-      Fluttertoast.showToast(msg: "please get verifyCode first");
+      showToast("please get verifyCode first");
       return;
     }
 
@@ -399,7 +397,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     signUpRequest.password = _pswController.value.text.trim();
     signUpRequest.confirmPassword = _psw2Controller.value.text.trim();
     if (signUpRequest.password != signUpRequest.confirmPassword) {
-      Fluttertoast.showToast(msg: "wrong password and confirmPassword");
+      showToast("wrong password and confirmPassword");
       return;
     }
     signUpRequest.userName = _unameController.value.text.trim();

@@ -7,7 +7,6 @@ import 'package:awallet/cryptos/export_wif_step_two.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class ExportWifStepOne extends StatefulWidget {
   const ExportWifStepOne({super.key});
@@ -21,15 +20,12 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
 
   onNext() {
     if (_pswController.value.text.toString().isEmpty) {
-      Fluttertoast.showToast(
-          msg: "The password cannot be empty", gravity: ToastGravity.CENTER);
+      showToast("The password cannot be empty");
       return;
     }
 
     if (_pswController.value.text.toString() != LocalStorage.get("password")) {
-      Fluttertoast.showToast(
-          msg: "Please enter the correct password",
-          gravity: ToastGravity.CENTER);
+      showToast("Please enter the correct password");
       return;
     }
 

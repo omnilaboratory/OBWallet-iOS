@@ -13,9 +13,6 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
-import 'exchange.dart';
 
 class ReviewExchange extends StatefulWidget {
   double fromAmt = 0;
@@ -483,10 +480,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
         log(resp.toString());
         GlobalParams.eventBus.fire("exchange");
         Navigator.pop(context);
-        Fluttertoast.showToast(
-            msg: "Please waiting for a while to see the balance on the Card page",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER);
+        showToast("Please waiting for a while to see the balance on the Card page");
       } else {
         setState(() {
           loadingVisible = false;
@@ -517,10 +511,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
         log(resp.toString());
         GlobalParams.eventBus.fire("exchange");
         Navigator.pop(context);
-        Fluttertoast.showToast(
-            msg: "Please waiting for a while to see the balance on the Crypto page",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER);
+        showToast("Please waiting for a while to see the balance on the Crypto page");
       } else {
         setState(() {
           loadingVisible = false;

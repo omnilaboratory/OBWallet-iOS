@@ -4,6 +4,7 @@ import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/currency_tx_history.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/account_balance_in_currency.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/grpc_services/account_service.dart';
@@ -15,7 +16,6 @@ import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class Account extends StatefulWidget {
   Account({super.key});
@@ -161,8 +161,7 @@ class _AccountState extends State<Account> {
             iconWidth: iconWidth,
             text: 'Pay',
             onPressed: () {
-              Fluttertoast.showToast(
-                  msg: "Coming Soon...", gravity: ToastGravity.CENTER);
+              showToast("Coming Soon...");
             }),
         SquareButton(
             icon: 'asset/images/icon_top_up.png',
@@ -191,8 +190,7 @@ class _AccountState extends State<Account> {
             text: 'Send',
             iconWidth: iconWidth,
             onPressed: () {
-              Fluttertoast.showToast(
-                  msg: "Coming Soon...", gravity: ToastGravity.CENTER);
+              showToast("Coming Soon...");
               // showDialog(
               //     context: context,
               //     builder: (context) {

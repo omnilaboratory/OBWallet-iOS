@@ -18,7 +18,6 @@ import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../component/number_controller_widget.dart';
 
@@ -129,29 +128,22 @@ class _ExchangeState extends State<Exchange> {
   onNext() {
     if (widget.type == EnumExchangeType.sell) {
       if (_amountFromController.value.text.toString().isEmpty) {
-        Fluttertoast.showToast(
-            msg: "The from amount cannot be empty",
-            gravity: ToastGravity.CENTER);
+        showToast("The from amount cannot be empty");
         return;
       }
 
       if (_amountToController.value.text.toString().isEmpty) {
-        Fluttertoast.showToast(
-            msg: "The to amount cannot be empty", gravity: ToastGravity.CENTER);
+        showToast("The to amount cannot be empty");
         return;
       }
 
       if (double.parse(_amountFromController.value.text.toString()) == 0) {
-        Fluttertoast.showToast(
-            msg: "The from amount must be greater than 0",
-            gravity: ToastGravity.CENTER);
+        showToast("The from amount must be greater than 0");
         return;
       }
 
       if (double.parse(_amountToController.value.text.toString()) == 0) {
-        Fluttertoast.showToast(
-            msg: "The to amount must be greater than 0",
-            gravity: ToastGravity.CENTER);
+        showToast("The to amount must be greater than 0");
         return;
       }
 
@@ -159,63 +151,48 @@ class _ExchangeState extends State<Exchange> {
         if (double.parse(_amountFromController.value.text.toString()) >
             double.parse(
                 StringTools.formatCryptoNum(currSelectedToken.balance))) {
-          Fluttertoast.showToast(
-              msg: "The from amount cannot exceed the maximum",
-              gravity: ToastGravity.CENTER);
+          showToast("The from amount cannot exceed the maximum");
           return;
         }
       } else {
         if (double.parse(_amountFromController.value.text.toString()) >
             double.parse(
                 StringTools.formatCurrencyNum(currSelectedToken.balance))) {
-          Fluttertoast.showToast(
-              msg: "The from amount cannot exceed the maximum",
-              gravity: ToastGravity.CENTER);
+          showToast("The from amount cannot exceed the maximum");
           return;
         }
       }
     } else if (widget.type == EnumExchangeType.buy) {
       if (_amountToController.value.text.toString().isEmpty) {
-        Fluttertoast.showToast(
-            msg: "The from amount cannot be empty",
-            gravity: ToastGravity.CENTER);
+        showToast("The from amount cannot be empty");
         return;
       }
 
       if (_amountFromController.value.text.toString().isEmpty) {
-        Fluttertoast.showToast(
-            msg: "The to amount cannot be empty", gravity: ToastGravity.CENTER);
+        showToast("The to amount cannot be empty");
         return;
       }
 
       if (double.parse(_amountToController.value.text.toString()) == 0) {
-        Fluttertoast.showToast(
-            msg: "The from amount must be greater than 0",
-            gravity: ToastGravity.CENTER);
+        showToast("The from amount must be greater than 0");
         return;
       }
 
       if (double.parse(_amountFromController.value.text.toString()) == 0) {
-        Fluttertoast.showToast(
-            msg: "The to amount must be greater than 0",
-            gravity: ToastGravity.CENTER);
+        showToast("The to amount must be greater than 0");
         return;
       }
 
       if (double.parse(_amountToController.value.text.toString()) >
           double.parse(
               StringTools.formatCurrencyNum(currSelectedCurrency.balance))) {
-        Fluttertoast.showToast(
-            msg: "The from amount cannot exceed the maximum",
-            gravity: ToastGravity.CENTER);
+        showToast("The from amount cannot exceed the maximum");
         return;
       }
     }
 
     if (LocalStorage.get(LocalStorage.ethAddress) == null) {
-      Fluttertoast.showToast(
-          msg: "Please create an Ethereum address",
-          gravity: ToastGravity.CENTER);
+      showToast("Please create an Ethereum address");
       return;
     }
 

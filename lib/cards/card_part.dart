@@ -1,10 +1,10 @@
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/send.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/logins/apply_card_step_one.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../bean/balance_in_currency_info.dart';
 import '../bean/currency_tx_info.dart';
@@ -203,8 +203,7 @@ class _CardPartState extends State<CardPart> {
                               icon: 'asset/images/icon_arrow_right_green.png',
                               text: 'APPLY CARD',
                               onPressed: () {
-                                Fluttertoast.showToast(
-                                    msg: "Coming Soon...", gravity: ToastGravity.CENTER);
+                                showToast("Coming Soon...");
                                 // Navigator.push(
                                 //     context,
                                 //     MaterialPageRoute(
@@ -293,8 +292,7 @@ class _CardPartState extends State<CardPart> {
             iconWidth: iconWidth,
             text: 'Pay',
             onPressed: () {
-              Fluttertoast.showToast(
-                  msg: "Coming Soon...", gravity: ToastGravity.CENTER);
+              showToast("Coming Soon...");
             }),
         SquareButton(
             icon: 'asset/images/icon_top_up.png',

@@ -3,7 +3,6 @@ import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class EthereumRecoverWallet extends StatefulWidget {
   const EthereumRecoverWallet({super.key});
@@ -18,14 +17,14 @@ class _EthereumRecoverWalletState extends State<EthereumRecoverWallet> {
   onConfirm(BuildContext context) {
     String wif = _wifController.value.text;
     if (wif.isEmpty) {
-      Fluttertoast.showToast(msg: "empty wif");
+      showToast("empty wif");
       return;
     }
 
     bool right = EthService.getInstance().recoverWallet(context, wif);
 
     if (!right) {
-      Fluttertoast.showToast(msg: "wrong wif");
+      showToast("wrong wif");
       return;
     }
 
