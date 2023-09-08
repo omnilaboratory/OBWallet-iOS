@@ -277,7 +277,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                   ),
                   decoration: widget.cardHolderDecoration,
                   keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
+                      const TextInputType.numberWithOptions(decimal: false),
                   textInputAction: TextInputAction.done,
                   autofillHints: const <String>[AutofillHints.creditCardName],
                   onEditingComplete: () {
@@ -319,12 +319,11 @@ class _CreditCardFormState extends State<CreditCardForm> {
                     color: widget.textColor,
                   ),
                   decoration: widget.cardNumberDecoration,
-                  keyboardType: const TextInputType.numberWithOptions(
-                      decimal: false),
+                  keyboardType: const TextInputType.numberWithOptions(decimal: false),
                   textInputAction: TextInputAction.next,
-                  autofillHints: widget.disableCardNumberAutoFillHints
-                      ? null
-                      : const <String>[AutofillHints.creditCardNumber],
+                  // autofillHints: widget.disableCardNumberAutoFillHints
+                  //     ? null
+                  //     : const <String>[AutofillHints.creditCardNumber],
                   autovalidateMode: widget.autovalidateMode,
                   validator: widget.cardNumberValidator ??
                       (String? value) {
