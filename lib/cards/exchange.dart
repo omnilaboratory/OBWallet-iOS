@@ -681,7 +681,7 @@ class _ExchangeState extends State<Exchange> {
           ],
         ),
         Visibility(
-            visible: widget.type == EnumExchangeType.buy ? true : false,
+            visible: isShow(_amountToController.text),
             child: Column(
               children: [
                 const SizedBox(height: 10),
@@ -724,6 +724,17 @@ class _ExchangeState extends State<Exchange> {
             ))
       ],
     );
+  }
+
+  isShow(String input) {
+    if (widget.type == EnumExchangeType.buy) {
+      if (input.isNotEmpty) {
+        if (double.parse(input) > currSelectedCurrency.balance!) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   Widget buildToken() {
