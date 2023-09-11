@@ -27,10 +27,16 @@ class _SendState extends State<Send> {
   var tokenList = EthService.getInstance().getTokenList();
   late TokenInfo dropdownValue;
   int num = 6;
+  late bool canClick;
 
   @override
   void initState() {
     dropdownValue = tokenList[0];
+    if (dropdownValue.balance == 0) {
+      canClick = false;
+    } else {
+      canClick = true;
+    }
     GlobalParams.eventBus.on().listen((event) {
       if (event == "SendConfirm_Close") {
         onClose();
@@ -284,6 +290,11 @@ class _SendState extends State<Send> {
                                             } else {
                                               num = 2;
                                             }
+                                            if (dropdownValue.balance == 0) {
+                                              canClick = false;
+                                            } else {
+                                              canClick = true;
+                                            }
                                           });
                                         },
                                       ),
@@ -337,7 +348,7 @@ class _SendState extends State<Send> {
                                         Positioned(
                                             right: 0,
                                             child: GestureDetector(
-                                              onTap: () {
+                                              onTap: canClick ? () {
                                                 setState(() {
                                                   dropdownValue.name == 'ETH'
                                                       ? _amountController.text =
@@ -352,11 +363,11 @@ class _SendState extends State<Send> {
                                                   //             dropdownValue
                                                   //                 .balance);
                                                 });
-                                              },
-                                              child: const Text(
+                                              } : null,
+                                              child: Text(
                                                 "MAX",
                                                 style: TextStyle(
-                                                  color: Color(0xFF4A92FF),
+                                                  color: canClick ? const Color(0xFF4A92FF) : const Color(0xFF999999),
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w400,
                                                   height: 1.29,

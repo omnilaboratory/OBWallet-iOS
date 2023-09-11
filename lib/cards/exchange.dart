@@ -44,6 +44,8 @@ class _ExchangeState extends State<Exchange> {
   late TokenInfo currSelectedToken;
   late TokenInfo currSelectedCurrency;
   int num = 6;
+  late bool canCurrencyClick;
+  late bool canTokenClick;
 
   @override
   void initState() {
@@ -52,6 +54,16 @@ class _ExchangeState extends State<Exchange> {
     //init data
     currSelectedCurrency = currencyList[0];
     currSelectedToken = tokenList[0];
+    if (currSelectedCurrency.balance == 0) {
+      canCurrencyClick = false;
+    } else {
+      canCurrencyClick = true;
+    }
+    if (currSelectedToken.balance == 0) {
+      canTokenClick = false;
+    } else {
+      canTokenClick = true;
+    }
 
     // getCoinPrice
     getCoinPrice(currSelectedToken.name);
@@ -582,6 +594,11 @@ class _ExchangeState extends State<Exchange> {
                     onChanged: (value) {
                       setState(() {
                         currSelectedCurrency = value!;
+                        if (currSelectedCurrency.balance == 0) {
+                          canCurrencyClick = false;
+                        } else {
+                          canCurrencyClick = true;
+                        }
                       });
                     },
                   ),
@@ -625,7 +642,7 @@ class _ExchangeState extends State<Exchange> {
                   Positioned(
                       right: 0,
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: canCurrencyClick ? () {
                           setState(() {
                             _amountToController.text =
                                 StringTools.formatCurrencyNum(
@@ -642,11 +659,11 @@ class _ExchangeState extends State<Exchange> {
                                           coinPrice);
                             }
                           });
-                        },
-                        child: const Text(
+                        } : null,
+                        child: Text(
                           "MAX",
                           style: TextStyle(
-                            color: Color(0xFF4A92FF),
+                            color: canCurrencyClick ? const Color(0xFF4A92FF) : const Color(0xFF999999),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             height: 1.29,
@@ -795,6 +812,11 @@ class _ExchangeState extends State<Exchange> {
                         } else {
                           num = 2;
                         }
+                        if (currSelectedToken.balance == 0) {
+                          canTokenClick = false;
+                        } else {
+                          canTokenClick = true;
+                        }
                       });
                     },
                   ),
@@ -841,7 +863,7 @@ class _ExchangeState extends State<Exchange> {
                   Positioned(
                       right: 0,
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: canTokenClick ? () {
                           setState(() {
                             currSelectedToken.name == 'ETH'
                                 ? _amountFromController.text =
@@ -855,11 +877,11 @@ class _ExchangeState extends State<Exchange> {
                                     double.parse(_amountFromController.text) *
                                         coinPrice);
                           });
-                        },
-                        child: const Text(
+                        } : null,
+                        child: Text(
                           "MAX",
                           style: TextStyle(
-                            color: Color(0xFF4A92FF),
+                            color: canTokenClick ? const Color(0xFF4A92FF) : const Color(0xFF999999),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             height: 1.29,
