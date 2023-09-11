@@ -1,20 +1,19 @@
 import 'dart:developer';
 
+import 'package:awallet/bean/enum_exchange_type.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/loading_dialog.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/eth_grpc_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
-import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-
 
 class ReviewExchange extends StatefulWidget {
   double fromAmt = 0;
@@ -52,7 +51,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           try {
             if (value.isNotEmpty) {
               log('txId: $value');
-              EthGrpcService.getInstance().ethTrackTx(context,value);
+              EthGrpcService.getInstance().ethTrackTx(context, value);
               sellCoin(value);
             }
           } catch (e) {
@@ -68,7 +67,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           try {
             if (value.isNotEmpty) {
               log('txId: $value');
-              EthGrpcService.getInstance().ethTrackTx(context,value);
+              EthGrpcService.getInstance().ethTrackTx(context, value);
               sellCoin(value);
             }
           } catch (e) {
@@ -84,7 +83,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           try {
             if (value.isNotEmpty) {
               log('txId: $value');
-              EthGrpcService.getInstance().ethTrackTx(context,value);
+              EthGrpcService.getInstance().ethTrackTx(context, value);
               sellCoin(value);
             }
           } catch (e) {
@@ -108,6 +107,13 @@ class _ReviewExchangeState extends State<ReviewExchange> {
   void initState() {
     super.initState();
     getCoinPrice(widget.fromCoin);
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "exchange_showTips") {
+        if(mounted){
+          alert(Tips.waitingBalance.value,context,onClose);
+        }
+      }
+    });
   }
 
   @override
@@ -267,8 +273,10 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                               widget.type == EnumExchangeType.sell
                                   ? StringTools.formatCurrencyNum(coinPrice)
                                   : widget.fromCoin == 'ETH'
-                                  ? StringTools.formatCryptoNum(1 / coinPrice)
-                                  : StringTools.formatCurrencyNum(1 / coinPrice),
+                                      ? StringTools.formatCryptoNum(
+                                          1 / coinPrice)
+                                      : StringTools.formatCurrencyNum(
+                                          1 / coinPrice),
                               style: const TextStyle(
                                 color: Color(0xFF666666),
                                 fontSize: 12,
@@ -447,7 +455,9 @@ class _ReviewExchangeState extends State<ReviewExchange> {
   }
 
   void getCoinPrice(name) {
-    AccountService.getInstance().getCoinPrice(context,name).then((value) async {
+    AccountService.getInstance()
+        .getCoinPrice(context, name)
+        .then((value) async {
       if (value.code == 1) {
         var resp = value.data as GetCoinPriceResponse;
         log(resp.price.toString());
@@ -473,21 +483,19 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     request.coinAmt = widget.fromAmt;
     request.usdAmt = widget.toAmt;
     request.rate = coinPrice;
-    AccountService.getInstance().sellCoin(context,request).then((value) async {
+    AccountService.getInstance().sellCoin(context, request).then((value) async {
       if (value.code == 1) {
         setState(() {
           loadingVisible = false;
         });
         var resp = value.data as SellCoinResponse;
         log(resp.toString());
-        GlobalParams.eventBus.fire("exchange");
-        Navigator.pop(context);
-        alert(Tips.waitingBalance.value,context);
+        GlobalParams.eventBus.fire("exchange_showTips");
       } else {
         setState(() {
           loadingVisible = false;
         });
-        log(value.msg);
+        showToast(value.msg);
       }
     });
   }
@@ -504,21 +512,19 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     request.coinAmt = widget.fromAmt;
     request.usdAmt = widget.toAmt;
     request.rate = coinPrice;
-    AccountService.getInstance().buyCoin(context,request).then((value) async {
+    AccountService.getInstance().buyCoin(context, request).then((value) async {
       if (value.code == 1) {
         setState(() {
           loadingVisible = false;
         });
         var resp = value.data as BuyCoinResponse;
         log(resp.toString());
-        GlobalParams.eventBus.fire("exchange");
-        Navigator.pop(context);
-        alert(Tips.waitingBalance.value,context);
+        GlobalParams.eventBus.fire("exchange_showTips");
       } else {
         setState(() {
           loadingVisible = false;
         });
-        log(value.msg);
+        showToast(value.msg);
       }
     });
   }

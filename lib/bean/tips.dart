@@ -12,7 +12,7 @@ enum Tips {
   zeroAmount2("The to amount must be greater than 0"),
   createEthAddress("Please create an ethereum address"),
   waitingBalance(
-      "Please waiting for a while to see the balance on the Card page"),
+      "Please waiting for a while to see the balance."),
   addressIsOnClipboard("Address is on your clipboard"),
   wifIsOnClipboard("WIF is on your clipboard"),
   emptyWif("Empty WIF"),

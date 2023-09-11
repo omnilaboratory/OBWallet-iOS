@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -55,14 +57,19 @@ showToast(String msg, {Toast toastLength = Toast.LENGTH_LONG}) {
       msg: msg, toastLength: toastLength, gravity: ToastGravity.CENTER);
 }
 
-alert(String msg, BuildContext context) {
+alert(String msg, BuildContext context,Function callback) {
+  log("alert $msg");
   Alert(
     context: context,
     type: AlertType.none,
+    onWillPopActive:true,
     desc: msg,
     buttons: [
       DialogButton(
-        onPressed: () => Navigator.pop(context),
+        onPressed: ()  {
+          callback();
+          Navigator.pop(context);
+        },
         width: 120,
         color: Colors.blueAccent,
         child: const Text(
