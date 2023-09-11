@@ -482,7 +482,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
         log(resp.toString());
         GlobalParams.eventBus.fire("exchange");
         Navigator.pop(context);
-        showToast(Tips.waitingBalance.value);
+        alert(Tips.waitingBalance.value,context);
       } else {
         setState(() {
           loadingVisible = false;
@@ -513,7 +513,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
         log(resp.toString());
         GlobalParams.eventBus.fire("exchange");
         Navigator.pop(context);
-        showToast(Tips.waitingBalance.value);
+        alert(Tips.waitingBalance.value,context);
       } else {
         setState(() {
           loadingVisible = false;

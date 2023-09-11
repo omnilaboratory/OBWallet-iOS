@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderSide: const BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
@@ -8,7 +9,9 @@ final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
 
 TextFormField createTextFormField(
     TextEditingController controller, String hintText, bool obscureText,
-    {Icon? icon, int? maxLength,TextInputType? keyboardType = TextInputType.text}) {
+    {Icon? icon,
+    int? maxLength,
+    TextInputType? keyboardType = TextInputType.text}) {
   return TextFormField(
     controller: controller,
     maxLines: 1,
@@ -50,4 +53,23 @@ Text createDialogTitle(String text) {
 showToast(String msg, {Toast toastLength = Toast.LENGTH_LONG}) {
   Fluttertoast.showToast(
       msg: msg, toastLength: toastLength, gravity: ToastGravity.CENTER);
+}
+
+alert(String msg, BuildContext context) {
+  Alert(
+    context: context,
+    type: AlertType.none,
+    desc: msg,
+    buttons: [
+      DialogButton(
+        onPressed: () => Navigator.pop(context),
+        width: 120,
+        color: Colors.blueAccent,
+        child: const Text(
+          "OK",
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+      )
+    ],
+  ).show();
 }

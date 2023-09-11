@@ -1,7 +1,7 @@
 enum Tips {
   comeSoon("Coming Soon..."),
   emptyAddress("The address cannot be empty"),
-  invalidAddress("invalid address"),
+  invalidAddress("Invalid address"),
   emptyAmount("The amount cannot be empty"),
   zeroAmount("The amount must be greater than 0"),
   maxAmount("The amount cannot exceed the maximum"),
