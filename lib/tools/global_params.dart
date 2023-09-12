@@ -26,10 +26,14 @@ class GlobalParams {
     }),
   });
 
-  static List<TokenInfo> ethTokenList = [
+  static List<TokenInfo> ethGoerliTokenList = [
     TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
     TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
-    // TokenInfo(name: "USDC", iconUrl: 'asset/images/icon_usdc_logo.png'),
+  ];
+  static List<TokenInfo> ethMainnetTokenList = [
+    TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
+    TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
+    TokenInfo(name: "USDC", iconUrl: 'asset/images/icon_usdc_logo.png'),
   ];
   static List<TokenInfo> currencyList = [
     TokenInfo(name: "USD", iconUrl: 'asset/images/icon_dollar.png')

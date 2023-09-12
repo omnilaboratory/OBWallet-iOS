@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/crypto_wallet_info.dart';
+import 'package:awallet/bean/enum_network_type.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/account_service.dart';
@@ -54,7 +55,11 @@ class EthService {
 
   List<TokenInfo> getTokenList() {
     if (_tokenList.isEmpty) {
-      _tokenList = GlobalParams.ethTokenList;
+      if (GlobalParams.currNetwork == EnumNetworkType.goerli) {
+        _tokenList = GlobalParams.ethGoerliTokenList;
+      } else {
+        _tokenList = GlobalParams.ethMainnetTokenList;
+      }
     }
     return _tokenList;
   }
@@ -74,8 +79,10 @@ class EthService {
     totalBalance =
         await setTokenUsdValue(context, getTokenList()[1], balance, totalBalance);
 
-    // balance = await Eth.getBalanceOfUSDC(address);
-    // totalBalance = await setTokenUsdValue(getTokenList()[2], balance, totalBalance);
+    if (GlobalParams.currNetwork == EnumNetworkType.mainnet) {
+      balance = await Eth.getBalanceOfUSDC(address);
+      totalBalance = await setTokenUsdValue(context, getTokenList()[2], balance, totalBalance);
+    }
 
     _walletInfo = getWalletInfo();
     _walletInfo?.balance = totalBalance;
