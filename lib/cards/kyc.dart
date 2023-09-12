@@ -223,10 +223,7 @@ class _KycState extends State<Kyc> {
             var resp = value.data as UserInfo;
             log(resp.toString());
 
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const HomePage()));
+            Navigator.pop(context);
           } else {
             log(value.msg);
           }
