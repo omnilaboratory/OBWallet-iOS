@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:awallet/services/eth_service.dart';
-import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 // Import for Android features.
@@ -52,13 +51,6 @@ class _WebViewPageState extends State<WebViewPage> {
             debugPrint('Page started loading: $url');
           },
           onPageFinished: (String url) {
-            // controller.runJavaScript("window.close();").then((result) {
-            //   setState(() {
-            //     EthService.getInstance().createWalletInfo(context);
-            //     Navigator.pop(context);
-            //   });
-            // });
-
             debugPrint('Page finished loading: $url');
           },
           onWebResourceError: (WebResourceError error) {
