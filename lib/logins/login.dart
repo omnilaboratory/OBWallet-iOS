@@ -22,9 +22,6 @@ class _LoginState extends State<Login> {
   final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _pswController = TextEditingController();
-  final TextEditingController _codeController = TextEditingController();
-
-  VerifyImageResponse? _verifyImageResponse;
 
   @override
   void initState() {
@@ -37,20 +34,9 @@ class _LoginState extends State<Login> {
       setState(() {});
     });
 
-    getVerifyImage();
-
     super.initState();
   }
 
-  void getVerifyImage() {
-    UserService.getInstance().verifyImage(context).then((retInfo) {
-      if (retInfo.code == 1) {
-        _verifyImageResponse = retInfo.data as VerifyImageResponse;
-        log("$_verifyImageResponse");
-        setState(() {});
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -249,8 +235,6 @@ class _LoginState extends State<Login> {
     SignInRequest req = SignInRequest();
     req.userName = username;
     req.password = password;
-    req.vcode = _codeController.value.text.trim();
-    req.verifyCodeId = _verifyImageResponse!.verifyCodeId;
     UserService.getInstance().login(context, req).then((loginInfo) {
       if (loginInfo.code == 1) {
         LocalStorage.save(LocalStorage.password, password);

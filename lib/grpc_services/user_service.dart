@@ -112,9 +112,7 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> getUserInfo(
-    BuildContext context,
-  ) async {
+  Future<GrpcResponse> getUserInfo(BuildContext context,) async {
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.getUserInfo(GetUserInfoRequest());
@@ -126,8 +124,8 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> uploadImage(
-      BuildContext context, UploadRequest req) async {
+  Future<GrpcResponse> uploadImage(BuildContext context,
+      UploadRequest req) async {
     log("$req");
     var ret = GrpcResponse();
     try {
@@ -140,8 +138,8 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> kyc(
-      BuildContext context, String address1, String address2) async {
+  Future<GrpcResponse> kyc(BuildContext context, String address1,
+      String address2) async {
     var request = CommonService.userInfo;
     request?.address1 = address1;
     request?.address2 = address2;
@@ -173,8 +171,8 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> verifyPwd(
-      BuildContext context, String username, String password) async {
+  Future<GrpcResponse> verifyPwd(BuildContext context, String username,
+      String password) async {
     var request = SignInRequest();
     request.userName = username;
     request.password = Utils.generateMd5(password);
@@ -190,7 +188,10 @@ class UserService {
     return ret;
   }
 
-  void setError(BuildContext context, Object e, GrpcResponse<dynamic> ret) {
+  void setError(BuildContext context, Object? e, GrpcResponse<dynamic> ret) {
+    if (e == null) {
+      return;
+    }
     log("$e");
     GrpcError error = e as GrpcError;
     ret.msg = error.message.toString();
@@ -201,18 +202,17 @@ class UserService {
         MaterialPageRoute(builder: (context) => const Login()),
       );
     }
-  }
-
-  Future<GrpcResponse> updateUser(BuildContext context, String address) async {
-    CommonService.userInfo?.ethAddress = address;
-    var ret = GrpcResponse();
-    try {
-      var resp = await userServiceClient?.updateUser(CommonService.userInfo!);
-      ret.code = 1;
-      ret.data = resp;
-    } catch (e) {
-      setError(context, e, ret);
-    }
-    return ret;
-  }
 }
+
+Future<GrpcResponse> updateUser(BuildContext context, String address) async {
+  CommonService.userInfo?.ethAddress = address;
+  var ret = GrpcResponse();
+  try {
+    var resp = await userServiceClient?.updateUser(CommonService.userInfo!);
+    ret.code = 1;
+    ret.data = resp;
+  } catch (e) {
+    setError(context, e, ret);
+  }
+  return ret;
+}}

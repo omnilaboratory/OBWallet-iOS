@@ -4,7 +4,6 @@ import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:grpc/grpc.dart';
 
-
 mixin CommonService {
   static ClientChannel? channel;
   static String token = "";
@@ -12,9 +11,9 @@ mixin CommonService {
 
   static ClientChannel? getGrpcChannel() {
     if (channel == null) {
-      var str =GlobalParams.currNetwork.tlsData;
+      var str = GlobalParams.currNetwork.tlsData;
       channel = ClientChannel(GlobalParams.currNetwork.serverIp,
-          port: 19090,
+          port: GlobalParams.currNetwork.port,
           options: ChannelOptions(
               credentials: ChannelCredentials.secure(
             certificates: utf8.encode(str),

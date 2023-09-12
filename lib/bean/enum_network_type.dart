@@ -1,5 +1,5 @@
 enum EnumNetworkType {
-  mainnet("Mainnet", 1,"43.138.107.248",'''-----BEGIN CERTIFICATE-----
+  mainnet("Mainnet", 1,"gapi.obwlt.top",443,'''-----BEGIN CERTIFICATE-----
 MIICCTCCAbCgAwIBAgIQLQFqfGZHdVS4WO7rLiGSZDAKBggqhkjOPQQDAjA1MR8w
 HQYDVQQKExZsbmQgYXV0b2dlbmVyYXRlZCBjZXJ0MRIwEAYDVQQDEwlsb2NhbGhv
 c3QwHhcNMjMwODE3MDQ0MzMzWhcNMjYwNTE0MDQ0MzMzWjA1MR8wHQYDVQQKExZs
@@ -13,7 +13,7 @@ AAAAAAAAAAEwCgYIKoZIzj0EAwIDRwAwRAIgYqaOcB2PvjH8hR34JRRgduh9Ks9U
 p5fy9yg5itlqSZMCIEJ73XIYi8nGqD2a4Cmn129VzU/vOo39ucMvC+E9Da0C
 -----END CERTIFICATE-----
 '''),
-  goerli("Goerli Testnet", 5,"43.138.107.248",'''-----BEGIN CERTIFICATE-----
+  goerli("Goerli Testnet", 5,"43.138.107.248",19090,'''-----BEGIN CERTIFICATE-----
 MIICCTCCAbCgAwIBAgIQLQFqfGZHdVS4WO7rLiGSZDAKBggqhkjOPQQDAjA1MR8w
 HQYDVQQKExZsbmQgYXV0b2dlbmVyYXRlZCBjZXJ0MRIwEAYDVQQDEwlsb2NhbGhv
 c3QwHhcNMjMwODE3MDQ0MzMzWhcNMjYwNTE0MDQ0MzMzWjA1MR8wHQYDVQQKExZs
@@ -32,7 +32,8 @@ p5fy9yg5itlqSZMCIEJ73XIYi8nGqD2a4Cmn129VzU/vOo39ucMvC+E9Da0C
   final String value;
   final int chainId;
   final String serverIp;
+  final int port;
   final String tlsData;
 
-  const EnumNetworkType(this.value, this.chainId,this.serverIp,this.tlsData);
+  const EnumNetworkType(this.value, this.chainId,this.serverIp,this.port,this.tlsData);
 }
