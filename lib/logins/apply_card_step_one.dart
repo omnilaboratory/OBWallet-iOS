@@ -124,29 +124,16 @@ class _ApplyCardStepOneState extends State<ApplyCardStepOne> {
               const Spacer(
                 flex: 1,
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                BottomButton(
-                  icon: 'asset/images/icon_skip_green.png',
-                  text: 'SKIP',
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()));
-                  },
-                ),
-                BottomButton(
-                  icon: 'asset/images/icon_arrow_right_green.png',
-                  text: 'CONTINUE',
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const Kyc();
-                        });
-                  },
-                )
-              ]),
+              BottomButton(
+                icon: 'asset/images/icon_arrow_right_green.png',
+                text: 'APPLY LATER',
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
+                },
+              ),
               const SizedBox(height: 75)
             ],
           ),

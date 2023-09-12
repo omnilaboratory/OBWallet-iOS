@@ -41,7 +41,6 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   createTimer() {
     if (codeTimer == null || !codeTimer!.isActive) {
       codeTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        log("${timer.tick}");
         var currTick = 60 - timer.tick;
         if (currTick > 0) {
           getCodeTitleEnable = false;
