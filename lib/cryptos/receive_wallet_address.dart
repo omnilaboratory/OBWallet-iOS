@@ -47,7 +47,7 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                   ),
                   const SizedBox(height: 10),
                   CryptoReceiveCenter(
-                      address: LocalStorage.get(LocalStorage.ethAddress),
+                      address: LocalStorage.getEthAddress()!,
                       tips: "Top up to wallet address"),
                 ])),
             const SizedBox(height: 30),

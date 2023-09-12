@@ -69,7 +69,7 @@ class _ExchangeState extends State<Exchange> {
     getCoinPrice(currSelectedToken.name);
 
     // updateTokenBalances for crypto
-    var address = LocalStorage.get(LocalStorage.ethAddress);
+    var address = LocalStorage.getEthAddress();
     if (address != null) {
       EthService.getInstance().updateTokenBalances(context).then((value) {
         if (mounted) {
@@ -204,7 +204,7 @@ class _ExchangeState extends State<Exchange> {
       }
     }
 
-    if (LocalStorage.get(LocalStorage.ethAddress) == null) {
+    if (LocalStorage.getEthAddress() == null) {
       showToast(Tips.createEthAddress.value);
       return;
     }

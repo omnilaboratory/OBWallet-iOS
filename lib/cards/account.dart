@@ -51,7 +51,7 @@ class _AccountState extends State<Account> {
 
   @override
   void initState() {
-    var address = LocalStorage.get(LocalStorage.ethAddress);
+    var address = LocalStorage.getEthAddress();
     if (address != null) {
       UserService.getInstance().updateUser(context, address).then((value) {
         if (value.code == 1) {

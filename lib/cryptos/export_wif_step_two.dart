@@ -30,7 +30,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
   onCopy() {
     showToast(Tips.wifIsOnClipboard.value,toastLength: Toast.LENGTH_SHORT);
     Clipboard.setData(
-        ClipboardData(text: LocalStorage.get(LocalStorage.ethPrivateKey)));
+        ClipboardData(text: LocalStorage.getEthPrivateKey()));
   }
 
   onClose() {
@@ -58,7 +58,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
                   createDialogTitle('Export WIF'),
                   const SizedBox(height: 30),
                   QrImageView(
-                    data: LocalStorage.get(LocalStorage.ethPrivateKey),
+                    data: LocalStorage.getEthPrivateKey(),
                     version: QrVersions.auto,
                     size: 160,
                   ),
@@ -78,13 +78,13 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
                   GestureDetector(
                     onTap: () {
                       Clipboard.setData(ClipboardData(
-                          text: LocalStorage.get(LocalStorage.ethPrivateKey)));
+                          text: LocalStorage.getEthPrivateKey()));
                       showToast(Tips.wifIsOnClipboard.value,
                           toastLength: Toast.LENGTH_SHORT);
                     },
                     child: Text(
                       StringTools.starString(
-                          LocalStorage.get(LocalStorage.ethPrivateKey),
+                          LocalStorage.getEthPrivateKey(),
                           maxLength: 26),
                       style: const TextStyle(
                         fontSize: 13,

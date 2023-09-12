@@ -13,6 +13,7 @@ mixin CommonService {
   static ClientChannel? channel;
   static String token = "";
   static UserInfo? userInfo;
+  static String userId = "1";
 
   static ClientChannel? getGrpcChannel() {
     if (channel == null) {

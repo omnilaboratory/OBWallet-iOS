@@ -24,12 +24,12 @@ class EthService {
 
   CryptoWalletInfo getWalletInfo() {
     _walletInfo ??=
-        CryptoWalletInfo(address: LocalStorage.get(LocalStorage.ethAddress));
+        CryptoWalletInfo(address: LocalStorage.getEthAddress()!);
     return _walletInfo!;
   }
 
   createWalletInfo(BuildContext context) async {
-    String? address = LocalStorage.get(LocalStorage.ethAddress);
+    String? address = LocalStorage.getEthAddress();
     if (address == null || address.isEmpty) {
       address = await Eth.genEthAddress(context);
     }
@@ -45,8 +45,8 @@ class EthService {
       return false;
     }
     _walletInfo = CryptoWalletInfo(address: address, balance: 0);
-    LocalStorage.save(LocalStorage.ethAddress, address);
-    LocalStorage.save(LocalStorage.ethPrivateKey, wif);
+    LocalStorage.setEthAddress(address);
+    LocalStorage.setEthPrivateKey(wif);
     UserService.getInstance().updateUser(context, address);
     return true;
   }
@@ -66,7 +66,7 @@ class EthService {
 
   updateTokenBalances(BuildContext context) async {
     log('updateTokenBalances');
-    String address = LocalStorage.get(LocalStorage.ethAddress);
+    String address = LocalStorage.getEthAddress()!;
     double totalBalance = 0;
 
     double balance = await Eth.getBalanceOfETH(address);

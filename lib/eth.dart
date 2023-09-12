@@ -29,7 +29,7 @@ class Eth {
   }
 
   static getCredentials() {
-    var privateKey  = LocalStorage.get(LocalStorage.ethPrivateKey);
+    var privateKey  = LocalStorage.getEthPrivateKey();
     var credentials = EthPrivateKey.fromHex(privateKey);
     return credentials;
   }
@@ -49,8 +49,8 @@ class Eth {
       log('privateKey: $privateKey');
 
       // Save the address and private key to local storage on device
-      LocalStorage.save(LocalStorage.ethAddress, address);
-      LocalStorage.save(LocalStorage.ethPrivateKey, privateKey);
+      LocalStorage.setEthAddress(address);
+      LocalStorage.setEthPrivateKey(privateKey);
       UserService.getInstance().updateUser(context,address);
       return address;
     } catch (e) {
@@ -62,7 +62,7 @@ class Eth {
   /// Get currently ETH account (address)
   static String getEthAccount() {
     try {
-      var result = LocalStorage.get(LocalStorage.ethAddress);
+      var result = LocalStorage.getEthAddress()!;
       return result;
     } catch (e) {
       log('getEthAccount -> error: $e');
@@ -73,7 +73,7 @@ class Eth {
   /// Get the private key of currently ETH account (address)
   static String getPrivateKeyOfEthAccount() {
     try {
-      var result = LocalStorage.get(LocalStorage.ethPrivateKey);
+      var result = LocalStorage.getEthPrivateKey();
       return result;
     } catch (e) {
       log('getPrivateKeyOfEthAccount -> error: $e');

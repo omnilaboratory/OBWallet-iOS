@@ -406,8 +406,6 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
         .signUp(context, signUpRequest)
         .then((value) async {
       if (value.code == 1) {
-        LocalStorage.remove(LocalStorage.ethAddress);
-        LocalStorage.remove(LocalStorage.ethPrivateKey);
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const ApplyCardStepOne()));
       }

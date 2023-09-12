@@ -53,7 +53,7 @@ class _EthereumPageState extends State<EthereumPage> {
   }
 
   void updateBalance() {
-    var address = LocalStorage.get(LocalStorage.ethAddress);
+    var address = LocalStorage.getEthAddress();
     if (address != null) {
       EthService.getInstance().updateTokenBalances(context).then((value) {
         if (mounted) {
@@ -65,7 +65,7 @@ class _EthereumPageState extends State<EthereumPage> {
 
   @override
   Widget build(BuildContext context) {
-    var address = LocalStorage.get(LocalStorage.ethAddress);
+    var address = LocalStorage.getEthAddress();
     if (address == null) {
       return createOrRecoverWallet();
     }

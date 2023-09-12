@@ -1,12 +1,34 @@
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
+  static String userToken = "userToken";
+  static String username = "username";
+  static String password = "password";
+  static String ethAddress = "ethAddress";
+  static String ethPrivateKey = "privateKey";
 
-  static String userToken= "userToken";
-  static String username= "username";
-  static String password= "password";
-  static String ethAddress= "ethAddress";
-  static String ethPrivateKey= "private_key";
+  static String? getEthAddress() {
+    return get("${ethAddress}_${CommonService.userId}");
+  }
+
+  static removeEthAddress() {
+    remove("${ethAddress}_${CommonService.userId}");
+  }
+
+  static setEthAddress(String value) {
+    save("${ethAddress}_${CommonService.userId}", value);
+  }
+
+  static String getEthPrivateKey() {
+    var temp = get("${ethPrivateKey}_${CommonService.userId}");
+    temp ??= "";
+    return temp;
+  }
+
+  static setEthPrivateKey(String value) {
+    save("${ethPrivateKey}_${CommonService.userId}", value);
+  }
 
   static SharedPreferences? prefs;
 

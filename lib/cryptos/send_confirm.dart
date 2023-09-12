@@ -210,8 +210,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                           )),
                                       AutoSizeText(
                                           StringTools.starString2(
-                                              LocalStorage.get(
-                                                  LocalStorage.ethAddress)),
+                                              LocalStorage.getEthAddress()),
                                           maxLines: 1,
                                           maxFontSize: 12,
                                           minFontSize: 10,
