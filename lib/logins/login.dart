@@ -109,7 +109,7 @@ class _LoginState extends State<Login> {
                 children: [
                   Container(
                     width: 320,
-                    height: 280,
+                    height: 200,
                     decoration: ShapeDecoration(
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
@@ -224,45 +224,9 @@ class _LoginState extends State<Login> {
                 "Username",
                 icon: const Icon(Icons.person),
                 false),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             createTextFormField(
                 _pswController, "Password", icon: const Icon(Icons.lock), true),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 130,
-                  child: createTextFormField(
-                      _codeController, "Verify Code", false,
-                      keyboardType: TextInputType.number),
-                ),
-                _verifyImageResponse == null
-                    ? const Padding(
-                        padding: EdgeInsets.only(right: 10, bottom: 4),
-                        child: SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            color: Color(0xFF666666),
-                            strokeWidth: 3,
-                          ),
-                        ),
-                      )
-                    : InkWell(
-                        onTap: () {
-                          getVerifyImage();
-                        },
-                        child: Image(
-                          width: 120,
-                          height: 60,
-                          image: MemoryImage(base64Decode(
-                              _verifyImageResponse!.imageBs.substring(22))),
-                        ),
-                      ),
-              ],
-            ),
           ],
         ),
       ),
