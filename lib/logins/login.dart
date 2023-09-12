@@ -250,7 +250,7 @@ class _LoginState extends State<Login> {
         var userInfo = userInfoResp.data as GetUserInfoResponse;
         CommonService.userInfo = userInfo.user;
         CommonService.userId = userInfo.user.id.toString();
-        LocalStorage.removeEthAddress();
+        // LocalStorage.removeEthAddress();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
