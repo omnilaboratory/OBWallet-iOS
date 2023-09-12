@@ -1,3 +1,4 @@
+import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
 import 'logins/login.dart';
@@ -22,6 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(height: 300),
           InkWell(
             onTap: () {
+              LocalStorage.remove(LocalStorage.userToken);
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const Login()),

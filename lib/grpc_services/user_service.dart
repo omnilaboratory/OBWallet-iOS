@@ -57,9 +57,10 @@ class UserService {
       var resp = await userServiceClient?.signIn(req);
       ret.code = 1;
       ret.data = resp;
+      log("$resp");
       CommonService.token = resp!.token;
       LocalStorage.save("userToken", resp.token);
-      userServiceClient = null;
+      resetServices();
     } catch (e) {
       setError(context, e, ret);
     }
@@ -105,7 +106,7 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
       CommonService.token = resp!.token;
-      userServiceClient = null;
+      resetServices();
     } catch (e) {
       setError(context, e, ret);
     }
@@ -115,6 +116,7 @@ class UserService {
   Future<GrpcResponse> getUserInfo(BuildContext context,) async {
     var ret = GrpcResponse();
     try {
+      log("getUserInfo ${CommonService.token} ${CommonService.userInfo?.email}");
       var resp = await userServiceClient?.getUserInfo(GetUserInfoRequest());
       ret.code = 1;
       ret.data = resp;
@@ -197,6 +199,7 @@ class UserService {
     ret.msg = error.message.toString();
     showToast(ret.msg);
     if (e.code == 16) {
+      LocalStorage.remove(LocalStorage.userToken);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const Login()),

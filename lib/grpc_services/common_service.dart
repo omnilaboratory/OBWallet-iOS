@@ -1,8 +1,13 @@
 import 'dart:convert';
 
+import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:grpc/grpc.dart';
+
+import 'account_service.dart';
+import 'card_service.dart';
+import 'eth_grpc_service.dart';
 
 mixin CommonService {
   static ClientChannel? channel;
@@ -22,4 +27,11 @@ mixin CommonService {
     }
     return channel;
   }
+}
+// when login and signup ,need fresh the user login token auth
+resetServices() {
+  UserService.userServiceClient = null;
+  AccountService.accountServiceClient = null;
+  CardService.cardServiceClient = null;
+  EthGrpcService.ethServiceClient = null;
 }

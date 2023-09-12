@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:awallet/component/common.dart';
@@ -26,17 +25,17 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     LocalStorage.initSP().then((value) {
-      // var userToken = LocalStorage.get(LocalStorage.userToken);
-      // if (userToken != null && userToken.toString().isNotEmpty) {
-      //   autoLogin(userToken);
-      // }
+      var userToken = LocalStorage.get(LocalStorage.userToken);
+      if (userToken != null && userToken.toString().isNotEmpty) {
+        log("login token $userToken");
+        autoLogin(userToken);
+      }
       Eth.initWeb3Client();
       setState(() {});
     });
 
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
