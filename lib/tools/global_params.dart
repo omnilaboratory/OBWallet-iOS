@@ -9,6 +9,8 @@ class GlobalParams {
 
   static EnumNetworkType currNetwork = EnumNetworkType.mainnet;
 
+  static String platformAddress = mainnetPlatformAddress;
+
   static int grpcTimeout = 10;
 
   static Map<EnumNetworkType, dynamic> dataInNetwork = Map.from({
@@ -38,4 +40,7 @@ class GlobalParams {
   static List<TokenInfo> currencyList = [
     TokenInfo(name: "USD", iconUrl: 'asset/images/icon_dollar.png')
   ];
+
+  static String goerliPlatformAddress = '0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347';
+  static String mainnetPlatformAddress = '0x22e5a8f66246B987Ef05E180eC555C93bBCdAF2a';
 }

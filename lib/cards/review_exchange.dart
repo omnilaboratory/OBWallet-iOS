@@ -45,8 +45,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     });
     if (widget.type == EnumExchangeType.sell) {
       if (widget.fromCoin == 'ETH') {
-        Eth.sendEthTo(
-                '0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347', widget.fromAmt)
+        Eth.sendEthTo(GlobalParams.platformAddress, widget.fromAmt)
             .then((value) {
           try {
             if (value.isNotEmpty) {
@@ -61,8 +60,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           }
         });
       } else if (widget.fromCoin == 'USDT') {
-        Eth.sendUsdtTo(
-                '0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347', widget.fromAmt)
+        Eth.sendUsdtTo(GlobalParams.platformAddress, widget.fromAmt)
             .then((value) {
           try {
             if (value.isNotEmpty) {
@@ -77,8 +75,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           }
         });
       } else if (widget.fromCoin == 'USDC') {
-        Eth.sendUsdcTo(
-                '0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347', widget.fromAmt)
+        Eth.sendUsdcTo(GlobalParams.platformAddress, widget.fromAmt)
             .then((value) {
           try {
             if (value.isNotEmpty) {
@@ -109,8 +106,8 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     getCoinPrice(widget.fromCoin);
     GlobalParams.eventBus.on().listen((event) {
       if (event == "exchange_showTips") {
-        if(mounted){
-          alert(Tips.waitingBalance.value,context,onClose);
+        if (mounted) {
+          alert(Tips.waitingBalance.value, context, onClose);
         }
       }
     });
