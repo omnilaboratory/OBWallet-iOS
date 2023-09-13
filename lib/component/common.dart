@@ -13,7 +13,7 @@ TextFormField createTextFormField(
     TextEditingController controller, String hintText, bool obscureText,
     {Icon? icon,
     int? maxLength,
-    TextInputType? keyboardType = TextInputType.text}) {
+    TextInputType? keyboardType = TextInputType.text,bool needCheck=true}) {
   return TextFormField(
     controller: controller,
     maxLines: 1,
@@ -34,6 +34,9 @@ TextFormField createTextFormField(
     ),
     obscureText: obscureText,
     validator: (v) {
+      if(!needCheck){
+        return null;
+      }
       return v!.trim().isNotEmpty ? null : "wrong $hintText";
     },
   );

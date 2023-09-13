@@ -22,6 +22,7 @@ enum Tips {
   getVerifyCode("Please get verification code first."),
   wrongPass("Please enter the correct password."),
   wrongPassMatch("Wrong password and confirmation password."),
+  selectCountry("Please select the country."),
   ;
 
   final String value;

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:awallet/src/generated/user/country.pbenum.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:path/path.dart' as path;
@@ -142,6 +143,7 @@ class Utils {
     RegExp reg = RegExp(r"^[a-zA-Z0-9_\-.]{4,20}$");
     return reg.hasMatch(input);
   }
+
   static bool isNumericOrAlphabet(String input) {
     RegExp reg = RegExp(r'^[a-zA-Z0-9]+$');
     return reg.hasMatch(input);
@@ -161,5 +163,14 @@ class Utils {
       strength += symbolRegex.hasMatch(password) ? 1 : 0;
     }
     return strength;
+  }
+
+  static CountryCode getCountryCodeByCode(String code) {
+    for (var value in CountryCode.values) {
+      if (value.name.toLowerCase() == code.toLowerCase()) {
+        return value;
+      }
+    }
+    return CountryCode.AD;
   }
 }

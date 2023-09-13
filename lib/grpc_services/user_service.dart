@@ -140,11 +140,7 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> kyc(BuildContext context, String address1,
-      String address2) async {
-    var request = CommonService.userInfo;
-    request?.address1 = address1;
-    request?.address2 = address2;
+  Future<GrpcResponse> kyc(BuildContext context, UserInfo req) async {
     // request.id = Int64(9);
     // request.userName = 'hahaha';
     // request.updatedAt = Int64(1692602216);
@@ -161,10 +157,10 @@ class UserService {
     // request.state = 'pending';
     // request.postCode = '1';
     // request.countryCode = CountryCode.CN;
-    log("$request");
+    log("$req");
     var ret = GrpcResponse();
     try {
-      var resp = await userServiceClient?.kyc(request!);
+      var resp = await userServiceClient?.kyc(req);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {

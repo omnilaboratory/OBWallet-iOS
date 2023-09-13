@@ -1,10 +1,13 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
-import 'package:awallet/home.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
+import 'package:awallet/utils.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../component/bottom_button.dart';
@@ -17,212 +20,230 @@ class Kyc extends StatefulWidget {
 }
 
 class _KycState extends State<Kyc> {
+  final GlobalKey _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _mobileNumberController = TextEditingController();
+  final TextEditingController _dateOfBirthController = TextEditingController();
   final TextEditingController _address1Controller = TextEditingController();
   final TextEditingController _address2Controller = TextEditingController();
+  final TextEditingController _stateController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _postalController = TextEditingController();
+  Country? selectedCountry;
+  Country? selectedPhoneCountry;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-        backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
-        body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 80),
-                Container(
-                  padding:
-                      const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  width: size.width * 0.8,
-                  height: size.height * 0.65,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 28, bottom: 20),
-                            child: createDialogTitle('KYC'),
-                          ),
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+          backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
+          body: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                width: size.width * 0.8,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 28, bottom: 20),
+                          child: createDialogTitle('KYC'),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 30),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image(
-                                  width: 30,
-                                  height: 30,
-                                  image: AssetImage(
-                                      "asset/images/icon_smile.png")),
-                              SizedBox(width: 10),
-                              Text("KYC address verification",
-                                  style: TextStyle(
-                                      fontSize: 16, color: Color(0xFF333333))),
-                            ],
-                          ),
-                        ),
-                        const Text(
-                          'Address 1',
-                          style: TextStyle(
-                            color: Color(0xFF999999),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        TextField(
-                          controller: _address1Controller,
-                          maxLines: 1,
-                          keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
-                            hintText: "Address 1",
-                            contentPadding:
-                                EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                            border: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: createTextFormField(
+                                        _firstNameController,
+                                        "First Name",
+                                        false)),
+                                const SizedBox(width: 20),
+                                Expanded(
+                                    child: createTextFormField(
+                                        _lastNameController,
+                                        "Last Name",
+                                        false)),
+                              ],
                             ),
-                          ),
-                        ),
-                        const SizedBox(height: 40),
-                        const Text(
-                          'Address 2',
-                          style: TextStyle(
-                            color: Color(0xFF999999),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        TextField(
-                          controller: _address2Controller,
-                          maxLines: 1,
-                          keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
-                            hintText: "Address 2",
-                            contentPadding:
-                                EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                            border: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.black, width: 1.0),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                InkWell(
+                                    onTap: () {
+                                      showCountryPicker(
+                                        context: context,
+                                        showPhoneCode: true,
+                                        useSafeArea: true,
+                                        onSelect: (Country country) {
+                                          selectedPhoneCountry = country;
+                                          setState(() {});
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      width: 60,
+                                      height: 48,
+                                      decoration: ShapeDecoration(
+                                        shape: outlineInputBorder,
+                                      ),
+                                      child: Center(
+                                        child: Text(selectedPhoneCountry == null
+                                            ? "+1"
+                                            : "+${selectedPhoneCountry!.phoneCode}"),
+                                      ),
+                                    )),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: createTextFormField(
+                                      _mobileNumberController,
+                                      "Mobile Number",
+                                      false),
+                                ),
+                              ],
                             ),
-                          ),
+                            const SizedBox(height: 16),
+                            createTextFormField(_dateOfBirthController,
+                                "Date of birth (DD-MM-YYYY)", false,
+                                icon: const Icon(Icons.date_range)),
+                            const SizedBox(height: 16),
+                            createTextFormField(
+                                _address1Controller, "Address Line", false),
+                            const SizedBox(height: 16),
+                            createTextFormField(_address2Controller,
+                                "Address Line 2(Optional)", false,
+                                needCheck: false),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: createTextFormField(_stateController,
+                                        "State/Region", false)),
+                                const SizedBox(width: 20),
+                                Expanded(
+                                    child: createTextFormField(
+                                        _cityController, "City", false)),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                    child: createTextFormField(
+                                        _postalController,
+                                        "Postal/Zip Code",
+                                        false)),
+                                const SizedBox(width: 20),
+                                InkWell(
+                                    onTap: () {
+                                      showCountryPicker(
+                                        context: context,
+                                        showPhoneCode: false,
+                                        useSafeArea: true,
+                                        onSelect: (Country country) {
+                                          selectedCountry = country;
+                                          setState(() {});
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 4),
+                                      width: 135,
+                                      height: 48,
+                                      decoration: ShapeDecoration(
+                                        shape: outlineInputBorder,
+                                      ),
+                                      child: Center(
+                                        child: AutoSizeText(
+                                          selectedCountry == null
+                                              ? "Country"
+                                              : selectedCountry!.name,
+                                          maxLines: 1,
+                                          minFontSize: 12,
+                                        ),
+                                      ),
+                                    ))
+                              ],
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 40),
-                        // const Text(
-                        //   'Address 3',
-                        //   style: TextStyle(
-                        //     color: Color(0xFF999999),
-                        //     fontSize: 14,
-                        //     fontWeight: FontWeight.w400,
-                        //   ),
-                        // ),
-                        // const SizedBox(height: 6),
-                        // const TextField(
-                        //   maxLines: 1,
-                        //   keyboardType: TextInputType.number,
-                        //   decoration: InputDecoration(
-                        //     hintText: "Address 3",
-                        //     contentPadding:
-                        //         EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                        //     border: OutlineInputBorder(
-                        //       borderSide:
-                        //           BorderSide(color: Colors.black, width: 1.0),
-                        //     ),
-                        //   ),
-                        // ),
-                        const Spacer(),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              BottomButton(
-                                icon: 'asset/images/icon_skip_green.png',
-                                text: 'SKIP',
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                              BottomButton(
-                                icon: 'asset/images/icon_confirm_green.png',
-                                text: 'DONE',
-                                onPressed: () {
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            BottomButton(
+                              icon: 'asset/images/icon_arrow_left_green.png',
+                              text: 'CANCEL',
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            BottomButton(
+                              icon: 'asset/images/icon_confirm_green.png',
+                              text: 'DONE',
+                              onPressed: () {
+                                if ((_formKey.currentState as FormState)
+                                    .validate()) {
                                   kyc();
-                                },
-                              )
-                            ]),
-                      ]),
-                ),
-                const SizedBox(height: 20),
-                InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Image(
-                        image: AssetImage("asset/images/btn_cancel.png")))
-              ],
-            ),
-          ),
-        ));
-  }
-
-  Widget buildBalance() {
-    return const SizedBox(
-      height: 80,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '\$',
-                style: TextStyle(
-                  color: Color(0xFF333333),
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
-                ),
+                                }
+                              },
+                            )
+                          ]),
+                    ]),
               ),
-              Text(
-                "50000",
-                style: TextStyle(
-                  color: Color(0xFF333333),
-                  fontSize: 32,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-          Text(
-            'Balance',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color(0xFF666666),
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
             ),
-          )
-        ],
-      ),
+          )),
     );
   }
 
   void kyc() {
-    var address1 = _address1Controller.value.text.trim();
-    var address2 = _address2Controller.value.text.trim();
+    if (selectedCountry == null) {
+      showToast(Tips.selectCountry.value);
+      return;
+    }
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
         var userInfo = userInfoResp.data as GetUserInfoResponse;
         CommonService.userInfo = userInfo.user;
-        UserService.getInstance().kyc(context,address1, address2).then((value) async {
+        UserInfo info = userInfo.user;
+        info.firstName = _firstNameController.value.text.trim();
+        info.lastName = _lastNameController.value.text.trim();
+        info.mobile = _mobileNumberController.value.text.trim();
+        info.dob = _dateOfBirthController.value.text.trim();
+        info.address1 = _address1Controller.value.text.trim();
+        info.address2 = _address2Controller.value.text.trim();
+        info.state = _stateController.value.text.trim();
+        info.city = _cityController.value.text.trim();
+        info.postCode = _postalController.value.text.trim();
+        info.countryCode =
+            Utils.getCountryCodeByCode(selectedCountry!.countryCode);
+        UserService.getInstance().kyc(context, info).then((value) async {
           if (value.code == 1) {
             var resp = value.data as UserInfo;
             log(resp.toString());
-
             Navigator.pop(context);
           } else {
             log(value.msg);

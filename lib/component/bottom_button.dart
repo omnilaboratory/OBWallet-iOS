@@ -5,7 +5,7 @@ class BottomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const BottomButton({super.key, required this.icon, required this.text, required this.onPressed});
+  BottomButton({super.key, required this.icon, required this.text ,required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
