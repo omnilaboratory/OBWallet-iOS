@@ -31,8 +31,8 @@ class _KycState extends State<Kyc> {
   final TextEditingController _stateController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _postalController = TextEditingController();
-  Country? selectedCountry;
-  Country? selectedPhoneCountry;
+  Country? selectedCountry = CountryService().findByCode("SG");
+  Country? selectedPhoneCountry = CountryService().findByCode("SG");
 
   @override
   void initState() {
@@ -77,13 +77,13 @@ class _KycState extends State<Kyc> {
                                     child: createTextFormField(
                                         _firstNameController,
                                         "First Name",
-                                        false)),
+                                        false,maxLength: 20)),
                                 const SizedBox(width: 20),
                                 Expanded(
                                     child: createTextFormField(
                                         _lastNameController,
                                         "Last Name",
-                                        false)),
+                                        false,maxLength: 20)),
                               ],
                             ),
                             const SizedBox(height: 16),
@@ -118,13 +118,13 @@ class _KycState extends State<Kyc> {
                                   child: createTextFormField(
                                       _mobileNumberController,
                                       "Mobile Number",
-                                      false),
+                                      false,keyboardType: TextInputType.phone),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 16),
                             createTextFormField(_dateOfBirthController,
-                                "Date of birth (DD-MM-YYYY)", false,
+                                "Date of birth (DD-MM-YYYY)", false,maxLength: 10,
                                 icon: const Icon(Icons.date_range)),
                             const SizedBox(height: 16),
                             createTextFormField(
@@ -147,13 +147,13 @@ class _KycState extends State<Kyc> {
                             ),
                             const SizedBox(height: 16),
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
                                     child: createTextFormField(
                                         _postalController,
                                         "Postal/Zip Code",
-                                        false)),
+                                        false,maxLength: 6)),
                                 const SizedBox(width: 20),
                                 InkWell(
                                     onTap: () {
@@ -231,7 +231,8 @@ class _KycState extends State<Kyc> {
         UserInfo info = userInfo.user;
         info.firstName = _firstNameController.value.text.trim();
         info.lastName = _lastNameController.value.text.trim();
-        info.mobile = _mobileNumberController.value.text.trim();
+        info.mobile = selectedPhoneCountry!.phoneCode +
+            _mobileNumberController.value.text.trim();
         info.dob = _dateOfBirthController.value.text.trim();
         info.address1 = _address1Controller.value.text.trim();
         info.address2 = _address2Controller.value.text.trim();
