@@ -7,7 +7,7 @@ class GlobalParams {
 
   static EventBus eventBus = EventBus();
 
-  static EnumNetworkType currNetwork = EnumNetworkType.mainnet;
+  static EnumNetworkType currNetwork = EnumNetworkType.goerli;
 
   static String platformAddress = mainnetPlatformAddress;
 

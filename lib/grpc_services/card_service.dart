@@ -28,6 +28,20 @@ class CardService {
 
   factory CardService() => _instance;
 
+  Future<GrpcResponse> cardInfo(BuildContext context) async {
+    var ret = GrpcResponse();
+    try {
+      var resp = await cardServiceClient?.cardList(CardListRequest());
+      ret.code = 1;
+      if(resp!.items.isNotEmpty){
+        ret.data = resp.items[0];
+      }
+    } catch (e) {
+      UserService.getInstance().setError(context, e, ret);
+    }
+    return ret;
+  }
+
   Future<GrpcResponse> applyCard(BuildContext context) async {
     var request = ApplyCardRequest();
     request.icNo = '130429198903091012';

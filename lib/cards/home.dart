@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:awallet/cards/account.dart';
 import 'package:awallet/cards/card_part.dart';
 import 'package:awallet/cards/currency_tx_history.dart';
 import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:flutter/material.dart';
 
 import '../cryptos/more_menu.dart';
+
+var kycClr = [Colors.blue, Colors.yellow, Colors.green];
 
 class CardHome extends StatefulWidget {
   const CardHome({super.key});
@@ -16,15 +21,20 @@ class CardHome extends StatefulWidget {
 
 class _CardHomeState extends State<CardHome> {
   var tabNames = ['Account', 'Card'];
+  var currKycClrIndex = 0;
 
   List<Widget> tabList = [];
   List<Widget> tabViewList = [
     Account(),
-    CardPart(),
+    const CardPart(),
   ];
 
   @override
   void initState() {
+    super.initState();
+
+    log("CardHome initState");
+
     for (var e in tabNames) {
       tabList.add(Tab(
         child: Text(
@@ -36,7 +46,15 @@ class _CardHomeState extends State<CardHome> {
         ),
       ));
     }
-    super.initState();
+
+    // passed or pending
+    var kycStatus = CommonService.userInfo!.kycStatus;
+    if(kycStatus=="pending"){
+      currKycClrIndex = 1;
+    }
+    if(kycStatus=="passed"){
+      currKycClrIndex = 2;
+    }
   }
 
   @override
@@ -55,6 +73,7 @@ class _CardHomeState extends State<CardHome> {
                   ButtonForAppBarAction(
                       width: 22,
                       height: 16,
+                      imageClr: kycClr[currKycClrIndex],
                       imageUrl: "asset/images/icon_kyc.png",
                       onTap: () {
                         showDialog(
@@ -68,7 +87,10 @@ class _CardHomeState extends State<CardHome> {
                       height: 24,
                       imageUrl: "asset/images/icon_tx_history.png",
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const TxHistory()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const TxHistory()));
                       }),
                   ButtonForAppBarAction(
                       width: 18,
@@ -128,15 +150,16 @@ class ButtonForAppBarAction extends StatelessWidget {
   final double width;
   final double height;
   final String imageUrl;
+  final Color? imageClr;
   final GestureTapCallback onTap;
 
-  const ButtonForAppBarAction({
-    super.key,
-    required this.width,
-    required this.height,
-    required this.imageUrl,
-    required this.onTap,
-  });
+  const ButtonForAppBarAction(
+      {super.key,
+      required this.width,
+      required this.height,
+      required this.imageUrl,
+      required this.onTap,
+      this.imageClr});
 
   @override
   Widget build(BuildContext context) {
@@ -144,8 +167,11 @@ class ButtonForAppBarAction extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
           onTap: onTap,
-          child:
-              Image(width: width, height: height, image: AssetImage(imageUrl))),
+          child: Image(
+              color: imageClr ?? imageClr,
+              width: width,
+              height: height,
+              image: AssetImage(imageUrl))),
     );
   }
 }
