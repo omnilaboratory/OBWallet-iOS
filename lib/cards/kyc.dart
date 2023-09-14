@@ -102,15 +102,22 @@ class _KycState extends State<Kyc> {
                                       );
                                     },
                                     child: Container(
-                                      width: 60,
+                                      padding: const EdgeInsets.only(left: 6,right: 6),
+                                      width: 92,
                                       height: 48,
                                       decoration: ShapeDecoration(
                                         shape: outlineInputBorder,
                                       ),
                                       child: Center(
-                                        child: Text(selectedPhoneCountry == null
-                                            ? "+1"
-                                            : "+${selectedPhoneCountry!.phoneCode}"),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                            SizedBox(
+                                              width: 52,
+                                                child: Text("+${selectedPhoneCountry!.phoneCode}")),
+                                            const SizedBox(width:20,child: Icon(Icons.keyboard_arrow_down_sharp))
+                                          ],
+                                        ),
                                       ),
                                     )),
                                 const SizedBox(width: 10),
@@ -168,20 +175,27 @@ class _KycState extends State<Kyc> {
                                       );
                                     },
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 4),
+                                      padding: const EdgeInsets.only(
+                                          left: 6),
                                       width: 135,
                                       height: 48,
                                       decoration: ShapeDecoration(
                                         shape: outlineInputBorder,
                                       ),
                                       child: Center(
-                                        child: AutoSizeText(
-                                          selectedCountry == null
-                                              ? "Country"
-                                              : selectedCountry!.name,
-                                          maxLines: 1,
-                                          minFontSize: 12,
+                                        child: Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 100,
+                                              child: AutoSizeText(
+                                                selectedCountry!.name,
+                                                maxLines: 2,
+                                                minFontSize: 10,
+                                                maxFontSize: 16,
+                                              ),
+                                            ),
+                                            const Icon(Icons.keyboard_arrow_down_sharp)
+                                          ],
                                         ),
                                       ),
                                     ))
