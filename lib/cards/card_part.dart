@@ -11,6 +11,7 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/string_tool.dart';
+import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
@@ -32,19 +33,10 @@ class CardPart extends StatefulWidget {
 
 class _CardPartState extends State<CardPart> {
   var txs = [
-    CurrencyTxInfo(
-        name: "STARBUCKS FELIZ EN VIS",
-        currencyName: "VND",
-        amount: 0,
-        amountOfDollar: 0),
-    CurrencyTxInfo(
-        name: "STARBUCKS FELIZ EN VIS, HO CHI",
-        currencyName: "VND",
-        amount: 0,
-        amountOfDollar: 0),
   ];
 
   bool hasCard = false;
+  String cardNo = "";
   double balance = 0;
 
   @override
@@ -60,20 +52,39 @@ class _CardPartState extends State<CardPart> {
         CardInfo info = resp.data;
         hasCard = true;
         balance = info.balance;
+        cardNo = info.cardNo;
+        CardService.getInstance().cardHistory(context, info.cardNo,1 as Int64,5 as Int64).then((hresp) {
+          if(hresp.code==1){
+            var items = (hresp.data as CardHistoryResponse).items;
+            if(items.isNotEmpty){
+              for (var element in items) {
+                txs.add(CurrencyTxInfo(
+                    name: element.authMerchant,
+                    currencyName: element.settleCurrency,
+                    amount: double.parse(element.settleAmt),
+                    amountOfDollar: 0));
+              }
+              setState(() {});
+            }
+          }
+        });
       }
+
       setState(() {});
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 20),
-        buildCard(context),
-        const SizedBox(height: 15),
-        hasCard ? buildCardDetail(context) : buildApplyCardPart(),
-      ],
+    return Center(
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
+          buildCard(context),
+          const SizedBox(height: 15),
+          hasCard ? buildCardDetail(context) : buildApplyCardPart(),
+        ],
+      ),
     );
   }
 
@@ -185,8 +196,7 @@ class _CardPartState extends State<CardPart> {
               ),
             ),
           ),
-          const Spacer(
-          ),
+          const Spacer(),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             BottomButton(
               icon: 'asset/images/icon_arrow_right_green.png',
@@ -196,7 +206,8 @@ class _CardPartState extends State<CardPart> {
               },
             )
           ]),
-          const SizedBox(height: 75)
+          // const SizedBox(height: 75)
+          const Spacer(),
         ],
       ),
     );
