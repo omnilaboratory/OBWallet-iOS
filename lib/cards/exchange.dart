@@ -805,8 +805,8 @@ class _ExchangeState extends State<Exchange> {
                       setState(() {
                         currSelectedToken = value!;
                         getCoinPrice(currSelectedToken.name);
-                        _amountFromController.text = '';
-                        _amountToController.text = '';
+                        // _amountFromController.text = '';
+                        // _amountToController.text = '';
                         if (currSelectedToken.name == 'ETH') {
                           num = 6;
                         } else {
@@ -1046,6 +1046,17 @@ class _ExchangeState extends State<Exchange> {
         if (mounted) {
           setState(() {
             coinPrice = resp.price;
+            if (currSelectedToken.name == 'ETH') {
+              _amountFromController.text =
+                  StringTools.formatCryptoNum(
+                      double.parse(_amountToController.text) /
+                          coinPrice);
+            } else {
+              _amountFromController.text =
+                  StringTools.formatCurrencyNum(
+                      double.parse(_amountToController.text) /
+                          coinPrice);
+            }
           });
         }
       } else {
