@@ -13,10 +13,10 @@ TextFormField createTextFormField(
     TextEditingController controller, String hintText, bool obscureText,
     {Icon? icon,
     int? maxLength,
-    TextInputType? keyboardType = TextInputType.text,bool needCheck=true}) {
+    TextInputType? keyboardType = TextInputType.text,bool needCheck=true,int maxLines =1}) {
   return TextFormField(
     controller: controller,
-    maxLines: 1,
+    maxLines: maxLines,
     maxLength: maxLength,
     keyboardType: keyboardType,
     decoration: InputDecoration(

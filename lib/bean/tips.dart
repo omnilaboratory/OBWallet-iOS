@@ -23,6 +23,8 @@ enum Tips {
   wrongPass("Please enter the correct password."),
   wrongPassMatch("Wrong password and confirmation password."),
   selectCountry("Please select the country."),
+  checkKycResult("Please wait the kyc result."),
+  checkInputSocialId("Please input the social Id."),
   ;
 
   final String value;

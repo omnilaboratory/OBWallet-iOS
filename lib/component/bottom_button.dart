@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 class BottomButton extends StatelessWidget {
   final String icon;
   final String text;
+  Color? imageClr;
   final VoidCallback onPressed;
 
-  BottomButton({super.key, required this.icon, required this.text ,required this.onPressed});
+  BottomButton({super.key, required this.icon, required this.text,this.imageClr ,required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class BottomButton extends StatelessWidget {
               children: [
                 Image(
                   image: AssetImage(icon),
+                  color: imageClr??imageClr,
                   width: 36,
                   height: 36,
                 ),

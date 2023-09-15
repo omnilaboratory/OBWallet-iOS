@@ -6,6 +6,7 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
@@ -209,8 +210,9 @@ class _KycState extends State<Kyc> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             BottomButton(
-                              icon: 'asset/images/icon_arrow_left_green.png',
+                              icon: 'asset/images/x.png',
                               text: 'CANCEL',
+                              imageClr: Colors.grey,
                               onPressed: () {
                                 Navigator.pop(context);
                               },
@@ -258,7 +260,8 @@ class _KycState extends State<Kyc> {
         UserService.getInstance().kyc(context, info).then((value) async {
           if (value.code == 1) {
             var resp = value.data as UserInfo;
-            log(resp.toString());
+            CommonService.userInfo = resp;
+            GlobalParams.eventBus.fire("kyc_state");
             Navigator.pop(context);
           } else {
             log(value.msg);

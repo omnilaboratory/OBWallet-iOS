@@ -21,14 +21,11 @@ class _EthereumRecoverWalletState extends State<EthereumRecoverWallet> {
       showToast(Tips.emptyWif.value);
       return;
     }
-
     bool right = EthService.getInstance().recoverWallet(context, wif);
-
     if (!right) {
       showToast(Tips.emptyWif.value);
       return;
     }
-
     Navigator.pop(context, true);
   }
 
