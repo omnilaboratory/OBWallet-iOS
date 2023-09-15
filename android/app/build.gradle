@@ -75,6 +75,6 @@ repositories {
 }
 
 dependencies {
-    implementation(name: "Obdmobile", ext: "aar")
+//    implementation(name: "Obdmobile", ext: "aar")
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

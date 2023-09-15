@@ -114,9 +114,10 @@ class _CardHomeState extends State<CardHome> {
             children: [
               buildTabBars(),
               Expanded(
-                  child: TabBarView(
-                children: tabViewList,
-              ))
+                child: TabBarView(
+                  children: tabViewList,
+                ),
+              )
             ],
           ),
         ),

@@ -42,11 +42,11 @@ class CardService {
     return ret;
   }
 
-  Future<GrpcResponse> applyCard(BuildContext context) async {
+  Future<GrpcResponse> applyCard(BuildContext context,String icNo) async {
     var request = ApplyCardRequest();
-    request.icNo = '130429198903091012';
-    request.currency = CurrencyCode.CNY;
-
+    request.icNo = icNo;
+    request.currency = CurrencyCode.USD;
+    log("$request");
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient?.applyCard(request);

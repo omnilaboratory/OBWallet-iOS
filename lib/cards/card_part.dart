@@ -8,17 +8,13 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
-import 'package:awallet/logins/apply_card_step_one.dart';
-import 'package:awallet/logins/apply_card_step_two.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
-import '../bean/balance_in_currency_info.dart';
 import '../bean/currency_tx_info.dart';
-import '../component/account_balance_in_currency.dart';
 import '../component/bottom_button.dart';
 import '../component/currency_tx_item.dart';
 import '../component/square_button.dart';
@@ -35,11 +31,6 @@ class CardPart extends StatefulWidget {
 }
 
 class _CardPartState extends State<CardPart> {
-  var balances = [
-    BalanceInCurrencyInfo(name: "USD", icon: "\$", balance: 0),
-    BalanceInCurrencyInfo(name: "SGD", icon: "\$", balance: 0),
-    BalanceInCurrencyInfo(name: "CNY", icon: "￥", balance: 0),
-  ];
   var txs = [
     CurrencyTxInfo(
         name: "STARBUCKS FELIZ EN VIS",
@@ -76,15 +67,13 @@ class _CardPartState extends State<CardPart> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(height: 20),
-          buildCard(context),
-          const SizedBox(height: 15),
-          hasCard ? buildCardDetail(context) : buildApplyCardPart(),
-        ],
-      ),
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+        buildCard(context),
+        const SizedBox(height: 15),
+        hasCard ? buildCardDetail(context) : buildApplyCardPart(),
+      ],
     );
   }
 
@@ -170,58 +159,62 @@ class _CardPartState extends State<CardPart> {
     );
   }
 
-  Expanded buildApplyCardPart() {
+  Widget buildApplyCardPart() {
     return Expanded(
-        flex: 1,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Our new virtual card allows you to：',
-              textAlign: TextAlign.center,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Our new virtual card allows you to：',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Color(0xFF333333),
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 0, top: 17),
+            child: Text(
+              '- Pay conveniently for online transactions\n- Exchange Currencies & Crypto\n- Send & Receive',
               style: TextStyle(
-                color: Color(0xFF333333),
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+                color: Color(0xFF666666),
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                height: 1.82,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 0, top: 17),
-              child: Text(
-                '- Pay conveniently for online transactions\n- Exchange Currencies & Crypto\n- Send & Receive',
-                style: TextStyle(
-                  color: Color(0xFF666666),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  height: 1.82,
-                ),
-              ),
-            ),
-            const Spacer(
-              flex: 1,
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              BottomButton(
-                icon: 'asset/images/icon_arrow_right_green.png',
-                text: 'APPLY CARD',
-                onPressed: () {
-                  // onClickApplyCard();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ApplyCard()));
-                },
-              )
-            ]),
-            const SizedBox(height: 75)
-          ],
-        ));
+          ),
+          const Spacer(
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            BottomButton(
+              icon: 'asset/images/icon_arrow_right_green.png',
+              text: 'APPLY CARD',
+              onPressed: () {
+                // onClickApplyCard();
+
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const ApplyCard();
+                    });
+              },
+            )
+          ]),
+          const SizedBox(height: 75)
+        ],
+      ),
+    );
   }
 
   onClickApplyCard() {
     if (CommonService.userInfo!.kycStatus == "passed") {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const ApplyCard()));
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const ApplyCard();
+          });
     } else {
       UserService.getInstance().getUserInfo(context).then((resp) {
         log("$resp");
@@ -240,71 +233,69 @@ class _CardPartState extends State<CardPart> {
           }
 
           if (CommonService.userInfo!.kycStatus == "passed") {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ApplyCard()));
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return const ApplyCard();
+                });
           }
         }
       });
     }
   }
 
-  Expanded buildCardDetail(BuildContext context) {
+  Widget buildCardDetail(BuildContext context) {
     return Expanded(
-        flex: 1,
-        child: Column(
-          children: [
-            buildBalanceInCurrency(),
-            const SizedBox(height: 15),
-            buildTxButtons(),
-            const SizedBox(height: 15),
-            Dash(
-              dashColor: const Color(0xFFCFCFCF),
-              length: MediaQuery.of(context).size.width - 40,
-            ),
-            const SizedBox(height: 15),
-            Row(
-              children: [
-                const Text(
-                  'Recent Transactions',
+      child: Column(
+        children: [
+          const SizedBox(height: 15),
+          buildTxButtons(),
+          const SizedBox(height: 15),
+          Dash(
+            dashColor: const Color(0xFFCFCFCF),
+            length: MediaQuery.of(context).size.width - 40,
+          ),
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              const Text(
+                'Recent Transactions',
+                style: TextStyle(
+                  color: Color(0xFF999999),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const Spacer(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TxHistory()));
+                },
+                child: const Text(
+                  'View All',
                   style: TextStyle(
-                    color: Color(0xFF999999),
-                    fontSize: 15,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF06D78F),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const TxHistory()));
-                  },
-                  child: const Text(
-                    'View All',
-                    style: TextStyle(
-                      color: Color(0xFF06D78F),
-                      fontSize: 16,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Expanded(
-              child: ListView.builder(
-                  padding: const EdgeInsets.only(top: 20),
-                  itemCount: txs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CurrencyTxItem(txInfo: txs[index]);
-                  }),
-            ),
-          ],
-        ));
+              )
+            ],
+          ),
+          Expanded(
+            child: ListView.builder(
+                padding: const EdgeInsets.only(top: 20),
+                itemCount: txs.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CurrencyTxItem(txInfo: txs[index]);
+                }),
+          ),
+        ],
+      ),
+    );
   }
 
   Row buildTxButtons() {
@@ -354,20 +345,6 @@ class _CardPartState extends State<CardPart> {
                   });
             }),
       ],
-    );
-  }
-
-  Widget buildBalanceInCurrency() {
-    return SizedBox(
-      height: 76,
-      child: ListView.builder(
-          padding: const EdgeInsets.only(top: 4, bottom: 4),
-          scrollDirection: Axis.horizontal,
-          itemExtent: 141,
-          itemCount: balances.length,
-          itemBuilder: (BuildContext context, int index) {
-            return BalanceInCurrency(balanceInfo: balances[index]);
-          }),
     );
   }
 }
