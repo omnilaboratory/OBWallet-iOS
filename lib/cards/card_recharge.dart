@@ -115,7 +115,7 @@ class _CardRechargeState extends State<CardRecharge> {
                           ),
                           expiryDateDecoration: InputDecoration(
                             prefixIcon: const Icon(Icons.date_range),
-                            hintText: 'Expired Date',
+                            hintText: 'MM/YY',
                             hintStyle: const TextStyle(color: Colors.grey),
                             border: _outlineInputBorder,
                             focusedBorder: _outlineInputBorder,
