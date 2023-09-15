@@ -1,8 +1,6 @@
 import 'dart:developer';
 
-import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/tips.dart';
-import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/card_service.dart';
@@ -32,15 +30,18 @@ class CardPart extends StatefulWidget {
 }
 
 class _CardPartState extends State<CardPart> {
-  var txs = [
-  ];
+  var txs = [];
 
   bool hasCard = false;
   String cardNo = "";
   double balance = 0;
+  CardInfo cardInfo = CardInfo();
 
   @override
   void initState() {
+    cardInfo.cardNo="****************";
+    cardInfo.expiryDate="****";
+    cardInfo.cvv="***";
     super.initState();
     getBalance();
   }
@@ -49,14 +50,15 @@ class _CardPartState extends State<CardPart> {
     CardService.getInstance().cardInfo(context).then((resp) {
       log("$resp");
       if (resp.code == 1 && resp.data != null) {
-        CardInfo info = resp.data;
+        cardInfo = resp.data;
         hasCard = true;
-        balance = info.balance;
-        cardNo = info.cardNo;
-        CardService.getInstance().cardHistory(context, info.cardNo,1 as Int64,5 as Int64).then((hresp) {
-          if(hresp.code==1){
-            var items = (hresp.data as CardHistoryResponse).items;
-            if(items.isNotEmpty){
+        CardService.getInstance()
+            .cardHistory(context, cardInfo.cardNo, Int64.parseInt("1"),
+                Int64.parseInt("5"))
+            .then((hResp) {
+          if (hResp.code == 1) {
+            var items = (hResp.data as CardHistoryResponse).items;
+            if (items.isNotEmpty) {
               for (var element in items) {
                 txs.add(CurrencyTxInfo(
                     name: element.authMerchant,
@@ -64,18 +66,24 @@ class _CardPartState extends State<CardPart> {
                     amount: double.parse(element.settleAmt),
                     amountOfDollar: 0));
               }
-              setState(() {});
+              if(mounted){
+                setState(() {});
+              }
             }
           }
         });
       }
 
-      setState(() {});
+      if(mounted){
+        setState(() {});
+      }
+
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Center(
       child: Column(
         children: [
@@ -143,6 +151,41 @@ class _CardPartState extends State<CardPart> {
               image: AssetImage("asset/images/img_visa.png")),
         ),
         Padding(
+          padding: const EdgeInsets.only(bottom: 80, right: 170),
+          child: Text(
+            getCardNo(),
+            style: const TextStyle(
+              color: Color(0xFF666666),
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              height: 0,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10, right: 120),
+          child: Text(
+            getCardExpiryDate(),
+            style: const TextStyle(
+              color: Color(0xFF333333),
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10, right: 20),
+          child: Text(
+           "CVV ${cardInfo.cvv}",
+            style: const TextStyle(
+              color: Color(0xFF333333),
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+
+        Padding(
             padding: const EdgeInsets.only(left: 15, bottom: 30),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -151,7 +194,7 @@ class _CardPartState extends State<CardPart> {
                   '\$',
                   style: TextStyle(
                     color: Color(0xFF333333),
-                    fontSize: 22,
+                    fontSize: 14,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -213,13 +256,18 @@ class _CardPartState extends State<CardPart> {
     );
   }
 
+  String getCardExpiryDate() {
+    String expiryDate = cardInfo.expiryDate;
+    return "Exp. ${expiryDate.substring(2, 4)}/${expiryDate.substring(0, 2)}";
+  }
+  String getCardNo() {
+    String cardNo = cardInfo.cardNo;
+    return "${cardNo.substring(0, 4)} ${cardNo.substring(4, 8)} ${cardNo.substring(8, 12)} ${cardNo.substring(12)}";
+  }
+
   onClickApplyCard() {
     if (CommonService.userInfo!.kycStatus == "passed") {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return const ApplyCard();
-          });
+      applyCardFunc();
     } else {
       UserService.getInstance().getUserInfo(context).then((resp) {
         log("$resp");
@@ -238,14 +286,21 @@ class _CardPartState extends State<CardPart> {
           }
 
           if (CommonService.userInfo!.kycStatus == "passed") {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return const ApplyCard();
-                });
+            applyCardFunc();
           }
         }
       });
+    }
+  }
+
+  applyCardFunc() async {
+    var flag = await showDialog(
+        context: context,
+        builder: (context) {
+          return const ApplyCard();
+        });
+    if (flag != null && flag == true) {
+      setState(() {});
     }
   }
 
@@ -305,7 +360,7 @@ class _CardPartState extends State<CardPart> {
 
   Row buildTxButtons() {
     var size = MediaQuery.sizeOf(context);
-    var iconWidth = (size.width - 40) / 4;
+    var iconWidth = (size.width - 40) / 3;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -318,7 +373,7 @@ class _CardPartState extends State<CardPart> {
             }),
         SquareButton(
             icon: 'asset/images/icon_top_up.png',
-            text: 'Top Up',
+            text: 'Deposit',
             iconWidth: iconWidth,
             onPressed: () {
               showDialog(
@@ -328,19 +383,8 @@ class _CardPartState extends State<CardPart> {
                   });
             }),
         SquareButton(
-            icon: 'asset/images/icon_exchange.png',
-            text: 'Exchange',
-            iconWidth: iconWidth,
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return Exchange(type: EnumExchangeType.buy);
-                  });
-            }),
-        SquareButton(
             icon: 'asset/images/icon_send.png',
-            text: 'Send',
+            text: 'Withdraw',
             iconWidth: iconWidth,
             onPressed: () {
               showDialog(

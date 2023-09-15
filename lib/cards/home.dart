@@ -6,6 +6,7 @@ import 'package:awallet/cards/currency_tx_history.dart';
 import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/grpc_services/common_service.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 
 import '../cryptos/more_menu.dart';
@@ -32,9 +33,6 @@ class _CardHomeState extends State<CardHome> {
   @override
   void initState() {
     super.initState();
-
-    log("CardHome initState");
-
     for (var e in tabNames) {
       tabList.add(Tab(
         child: Text(
@@ -46,13 +44,21 @@ class _CardHomeState extends State<CardHome> {
         ),
       ));
     }
+    updateKycState();
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "kyc_state") {
+        updateKycState();
+      }
+    });
+  }
 
+  updateKycState() {
     // passed or pending
     var kycStatus = CommonService.userInfo!.kycStatus;
-    if(kycStatus=="pending"){
+    if (kycStatus == "pending") {
       currKycClrIndex = 1;
     }
-    if(kycStatus=="passed"){
+    if (kycStatus == "passed") {
       currKycClrIndex = 2;
     }
   }

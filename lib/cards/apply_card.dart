@@ -25,7 +25,7 @@ class _ApplyCardState extends State<ApplyCard> {
 
     CardService.getInstance().applyCard(context, input).then((value) {
       if (value.code == 1) {
-        Navigator.pop(context);
+        Navigator.pop(context, true);
       } else {
         log(value.msg);
       }
@@ -89,8 +89,9 @@ class _ApplyCardState extends State<ApplyCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         BottomButton(
-                          icon: 'asset/images/icon_arrow_left_green.png',
+                          icon: 'asset/images/x.png',
                           text: 'CANCEL',
+                          imageClr: Colors.grey,
                           onPressed: () {
                             Navigator.pop(context);
                           },
