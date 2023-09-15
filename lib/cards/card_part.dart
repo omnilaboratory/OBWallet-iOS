@@ -192,13 +192,7 @@ class _CardPartState extends State<CardPart> {
               icon: 'asset/images/icon_arrow_right_green.png',
               text: 'APPLY CARD',
               onPressed: () {
-                // onClickApplyCard();
-
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const ApplyCard();
-                    });
+                onClickApplyCard();
               },
             )
           ]),
