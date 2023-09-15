@@ -305,6 +305,104 @@ class CardListResponse extends $pb.GeneratedMessage {
   $core.List<CardInfo> get items => $_getList(0);
 }
 
+class CardExchangeInfoListRequest extends $pb.GeneratedMessage {
+  factory CardExchangeInfoListRequest() => create();
+  CardExchangeInfoListRequest._() : super();
+  factory CardExchangeInfoListRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardExchangeInfoListRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardExchangeInfoListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'cardNo', protoName: 'cardNo')
+    ..aInt64(2, _omitFieldNames ? '' : 'pageNo', protoName: 'pageNo')
+    ..aInt64(3, _omitFieldNames ? '' : 'pageSize', protoName: 'pageSize')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CardExchangeInfoListRequest clone() => CardExchangeInfoListRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CardExchangeInfoListRequest copyWith(void Function(CardExchangeInfoListRequest) updates) => super.copyWith((message) => updates(message as CardExchangeInfoListRequest)) as CardExchangeInfoListRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CardExchangeInfoListRequest create() => CardExchangeInfoListRequest._();
+  CardExchangeInfoListRequest createEmptyInstance() => create();
+  static $pb.PbList<CardExchangeInfoListRequest> createRepeated() => $pb.PbList<CardExchangeInfoListRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CardExchangeInfoListRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardExchangeInfoListRequest>(create);
+  static CardExchangeInfoListRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get cardNo => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set cardNo($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCardNo() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCardNo() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get pageNo => $_getI64(1);
+  @$pb.TagNumber(2)
+  set pageNo($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPageNo() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPageNo() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get pageSize => $_getI64(2);
+  @$pb.TagNumber(3)
+  set pageSize($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasPageSize() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPageSize() => clearField(3);
+}
+
+class CardExchangeInfoListResponse extends $pb.GeneratedMessage {
+  factory CardExchangeInfoListResponse() => create();
+  CardExchangeInfoListResponse._() : super();
+  factory CardExchangeInfoListResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardExchangeInfoListResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardExchangeInfoListResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..pc<CardExchangeInfo>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: CardExchangeInfo.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CardExchangeInfoListResponse clone() => CardExchangeInfoListResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CardExchangeInfoListResponse copyWith(void Function(CardExchangeInfoListResponse) updates) => super.copyWith((message) => updates(message as CardExchangeInfoListResponse)) as CardExchangeInfoListResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CardExchangeInfoListResponse create() => CardExchangeInfoListResponse._();
+  CardExchangeInfoListResponse createEmptyInstance() => create();
+  static $pb.PbList<CardExchangeInfoListResponse> createRepeated() => $pb.PbList<CardExchangeInfoListResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CardExchangeInfoListResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardExchangeInfoListResponse>(create);
+  static CardExchangeInfoListResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<CardExchangeInfo> get items => $_getList(0);
+}
+
 class CardHistoryRequest extends $pb.GeneratedMessage {
   factory CardHistoryRequest() => create();
   CardHistoryRequest._() : super();

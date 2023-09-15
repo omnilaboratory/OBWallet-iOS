@@ -16,6 +16,110 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'country.pbenum.dart' as $3;
 
+class ForgetPwdRequest extends $pb.GeneratedMessage {
+  factory ForgetPwdRequest() => create();
+  ForgetPwdRequest._() : super();
+  factory ForgetPwdRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ForgetPwdRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ForgetPwdRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'email')
+    ..aOS(2, _omitFieldNames ? '' : 'password')
+    ..aOS(3, _omitFieldNames ? '' : 'vcode')
+    ..aOS(4, _omitFieldNames ? '' : 'verifyCodeId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ForgetPwdRequest clone() => ForgetPwdRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ForgetPwdRequest copyWith(void Function(ForgetPwdRequest) updates) => super.copyWith((message) => updates(message as ForgetPwdRequest)) as ForgetPwdRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ForgetPwdRequest create() => ForgetPwdRequest._();
+  ForgetPwdRequest createEmptyInstance() => create();
+  static $pb.PbList<ForgetPwdRequest> createRepeated() => $pb.PbList<ForgetPwdRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ForgetPwdRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ForgetPwdRequest>(create);
+  static ForgetPwdRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get email => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set email($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEmail() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEmail() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get password => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set password($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPassword() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPassword() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get vcode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set vcode($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasVcode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearVcode() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get verifyCodeId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set verifyCodeId($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasVerifyCodeId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearVerifyCodeId() => clearField(4);
+}
+
+class ForgetPwdResponse extends $pb.GeneratedMessage {
+  factory ForgetPwdResponse() => create();
+  ForgetPwdResponse._() : super();
+  factory ForgetPwdResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ForgetPwdResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ForgetPwdResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ForgetPwdResponse clone() => ForgetPwdResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ForgetPwdResponse copyWith(void Function(ForgetPwdResponse) updates) => super.copyWith((message) => updates(message as ForgetPwdResponse)) as ForgetPwdResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ForgetPwdResponse create() => ForgetPwdResponse._();
+  ForgetPwdResponse createEmptyInstance() => create();
+  static $pb.PbList<ForgetPwdResponse> createRepeated() => $pb.PbList<ForgetPwdResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ForgetPwdResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ForgetPwdResponse>(create);
+  static ForgetPwdResponse? _defaultInstance;
+}
+
 class UserInfo extends $pb.GeneratedMessage {
   factory UserInfo() => create();
   UserInfo._() : super();
@@ -792,6 +896,90 @@ class SignInResponse extends $pb.GeneratedMessage {
   $core.bool hasKycOk() => $_has(1);
   @$pb.TagNumber(2)
   void clearKycOk() => clearField(2);
+}
+
+class UpdatePwdRequest extends $pb.GeneratedMessage {
+  factory UpdatePwdRequest() => create();
+  UpdatePwdRequest._() : super();
+  factory UpdatePwdRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdatePwdRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdatePwdRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(2, _omitFieldNames ? '' : 'oldPassword')
+    ..aOS(3, _omitFieldNames ? '' : 'newPassword')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdatePwdRequest clone() => UpdatePwdRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdatePwdRequest copyWith(void Function(UpdatePwdRequest) updates) => super.copyWith((message) => updates(message as UpdatePwdRequest)) as UpdatePwdRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdatePwdRequest create() => UpdatePwdRequest._();
+  UpdatePwdRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdatePwdRequest> createRepeated() => $pb.PbList<UpdatePwdRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdatePwdRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdatePwdRequest>(create);
+  static UpdatePwdRequest? _defaultInstance;
+
+  @$pb.TagNumber(2)
+  $core.String get oldPassword => $_getSZ(0);
+  @$pb.TagNumber(2)
+  set oldPassword($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOldPassword() => $_has(0);
+  @$pb.TagNumber(2)
+  void clearOldPassword() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get newPassword => $_getSZ(1);
+  @$pb.TagNumber(3)
+  set newPassword($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasNewPassword() => $_has(1);
+  @$pb.TagNumber(3)
+  void clearNewPassword() => clearField(3);
+}
+
+class UpdatePwdResponse extends $pb.GeneratedMessage {
+  factory UpdatePwdResponse() => create();
+  UpdatePwdResponse._() : super();
+  factory UpdatePwdResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdatePwdResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdatePwdResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdatePwdResponse clone() => UpdatePwdResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdatePwdResponse copyWith(void Function(UpdatePwdResponse) updates) => super.copyWith((message) => updates(message as UpdatePwdResponse)) as UpdatePwdResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdatePwdResponse create() => UpdatePwdResponse._();
+  UpdatePwdResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdatePwdResponse> createRepeated() => $pb.PbList<UpdatePwdResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdatePwdResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdatePwdResponse>(create);
+  static UpdatePwdResponse? _defaultInstance;
 }
 
 class KycRequest extends $pb.GeneratedMessage {

@@ -10,9 +10,11 @@ service UserService {
   rpc VerifyImage(VerifyImageRequest) returns (VerifyImageResponse) {}
   //user login
   rpc SignIn(SignInRequest) returns (SignInResponse) {}
+  rpc UpdatePwd(UpdatePwdRequest) returns (UpdatePwdResponse) {}
 
   //same as SignIn, but willn't gen token ,  if pwd  ok,the return SignInResponse is emputy;  if pwd err, thrown an error
   rpc VerifyPwd(SignInRequest) returns (SignInResponse) {}
+  rpc ForgetPwd(ForgetPwdRequest) returns (ForgetPwdResponse) {}
   //same as UpdateUser-rpc ,but with kyc commit.
   rpc Kyc(UserInfo) returns (UserInfo) {}
   // input parameter UserInfo-Obj must first get from GetUserInfo-rpc,
@@ -22,7 +24,17 @@ service UserService {
   rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
 }
 
+message ForgetPwdRequest {
+  string email = 1;
+  string password = 2;
+  //VerifyCode
+  string vcode = 3;
+  //got from VerifyImageRPC
+  string verify_code_id = 4;
+}
+message ForgetPwdResponse {
 
+}
 message UserInfo {
   int64 id = 1;
   string user_name = 2;
@@ -115,6 +127,12 @@ message SignInRequest {
 message SignInResponse {
   string token = 1;
   bool kyc_ok = 2;
+}
+message UpdatePwdRequest {
+  string old_password = 2;
+  string new_password = 3;
+}
+message UpdatePwdResponse {
 }
 
 message KycRequest {

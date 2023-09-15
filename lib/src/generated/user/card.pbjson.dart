@@ -86,6 +86,34 @@ final $typed_data.Uint8List cardListResponseDescriptor = $convert.base64Decode(
     'ChBDYXJkTGlzdFJlc3BvbnNlEiQKBWl0ZW1zGAEgAygLMg4udXNlci5DYXJkSW5mb1IFaXRlbX'
     'M=');
 
+@$core.Deprecated('Use cardExchangeInfoListRequestDescriptor instead')
+const CardExchangeInfoListRequest$json = {
+  '1': 'CardExchangeInfoListRequest',
+  '2': [
+    {'1': 'cardNo', '3': 1, '4': 1, '5': 9, '10': 'cardNo'},
+    {'1': 'pageNo', '3': 2, '4': 1, '5': 3, '10': 'pageNo'},
+    {'1': 'pageSize', '3': 3, '4': 1, '5': 3, '10': 'pageSize'},
+  ],
+};
+
+/// Descriptor for `CardExchangeInfoListRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cardExchangeInfoListRequestDescriptor = $convert.base64Decode(
+    'ChtDYXJkRXhjaGFuZ2VJbmZvTGlzdFJlcXVlc3QSFgoGY2FyZE5vGAEgASgJUgZjYXJkTm8SFg'
+    'oGcGFnZU5vGAIgASgDUgZwYWdlTm8SGgoIcGFnZVNpemUYAyABKANSCHBhZ2VTaXpl');
+
+@$core.Deprecated('Use cardExchangeInfoListResponseDescriptor instead')
+const CardExchangeInfoListResponse$json = {
+  '1': 'CardExchangeInfoListResponse',
+  '2': [
+    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.user.CardExchangeInfo', '10': 'items'},
+  ],
+};
+
+/// Descriptor for `CardExchangeInfoListResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cardExchangeInfoListResponseDescriptor = $convert.base64Decode(
+    'ChxDYXJkRXhjaGFuZ2VJbmZvTGlzdFJlc3BvbnNlEiwKBWl0ZW1zGAEgAygLMhYudXNlci5DYX'
+    'JkRXhjaGFuZ2VJbmZvUgVpdGVtcw==');
+
 @$core.Deprecated('Use cardHistoryRequestDescriptor instead')
 const CardHistoryRequest$json = {
   '1': 'CardHistoryRequest',

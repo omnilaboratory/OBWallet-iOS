@@ -7,6 +7,7 @@ service CardService{
   rpc ApplyCard(ApplyCardRequest) returns (ApplyCardResponse) {}
   //History of payment at other website
   rpc CardHistory(CardHistoryRequest) returns (CardHistoryResponse) {}
+  rpc CardExchangeInfoList(CardExchangeInfoListRequest) returns (CardExchangeInfoListResponse) {}
   rpc CardDetail(CardDetailRequest) returns (CardDetailResponse) {}
   rpc CardList(CardListRequest) returns (CardListResponse) {}
   rpc CardWithdraw(CardWithdrawRequest) returns (CardWithdrawResponse) {}
@@ -39,6 +40,17 @@ message CardListRequest {
 message CardListResponse {
   repeated CardInfo items=1;
 }
+message CardExchangeInfoListRequest {
+  string cardNo = 1;
+//  default 1
+  int64 pageNo = 2;
+  //default 20
+  int64   pageSize = 3;
+}
+message CardExchangeInfoListResponse {
+  repeated CardExchangeInfo items=1;
+}
+
 message CardHistoryRequest {
   string cardNo = 1;
 //  default 1

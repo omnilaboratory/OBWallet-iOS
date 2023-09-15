@@ -37,10 +37,18 @@ class UserServiceClient extends $grpc.Client {
       '/user.UserService/SignIn',
       ($2.SignInRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.SignInResponse.fromBuffer(value));
+  static final _$updatePwd = $grpc.ClientMethod<$2.UpdatePwdRequest, $2.UpdatePwdResponse>(
+      '/user.UserService/UpdatePwd',
+      ($2.UpdatePwdRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.UpdatePwdResponse.fromBuffer(value));
   static final _$verifyPwd = $grpc.ClientMethod<$2.SignInRequest, $2.SignInResponse>(
       '/user.UserService/VerifyPwd',
       ($2.SignInRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.SignInResponse.fromBuffer(value));
+  static final _$forgetPwd = $grpc.ClientMethod<$2.ForgetPwdRequest, $2.ForgetPwdResponse>(
+      '/user.UserService/ForgetPwd',
+      ($2.ForgetPwdRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.ForgetPwdResponse.fromBuffer(value));
   static final _$kyc = $grpc.ClientMethod<$2.UserInfo, $2.UserInfo>(
       '/user.UserService/Kyc',
       ($2.UserInfo value) => value.writeToBuffer(),
@@ -80,8 +88,16 @@ class UserServiceClient extends $grpc.Client {
     return $createUnaryCall(_$signIn, request, options: options);
   }
 
+  $grpc.ResponseFuture<$2.UpdatePwdResponse> updatePwd($2.UpdatePwdRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updatePwd, request, options: options);
+  }
+
   $grpc.ResponseFuture<$2.SignInResponse> verifyPwd($2.SignInRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$verifyPwd, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$2.ForgetPwdResponse> forgetPwd($2.ForgetPwdRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$forgetPwd, request, options: options);
   }
 
   $grpc.ResponseFuture<$2.UserInfo> kyc($2.UserInfo request, {$grpc.CallOptions? options}) {
@@ -134,6 +150,13 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $2.SignInRequest.fromBuffer(value),
         ($2.SignInResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UpdatePwdRequest, $2.UpdatePwdResponse>(
+        'UpdatePwd',
+        updatePwd_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.UpdatePwdRequest.fromBuffer(value),
+        ($2.UpdatePwdResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.SignInRequest, $2.SignInResponse>(
         'VerifyPwd',
         verifyPwd_Pre,
@@ -141,6 +164,13 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $2.SignInRequest.fromBuffer(value),
         ($2.SignInResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ForgetPwdRequest, $2.ForgetPwdResponse>(
+        'ForgetPwd',
+        forgetPwd_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.ForgetPwdRequest.fromBuffer(value),
+        ($2.ForgetPwdResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.UserInfo, $2.UserInfo>(
         'Kyc',
         kyc_Pre,
@@ -187,8 +217,16 @@ abstract class UserServiceBase extends $grpc.Service {
     return signIn(call, await request);
   }
 
+  $async.Future<$2.UpdatePwdResponse> updatePwd_Pre($grpc.ServiceCall call, $async.Future<$2.UpdatePwdRequest> request) async {
+    return updatePwd(call, await request);
+  }
+
   $async.Future<$2.SignInResponse> verifyPwd_Pre($grpc.ServiceCall call, $async.Future<$2.SignInRequest> request) async {
     return verifyPwd(call, await request);
+  }
+
+  $async.Future<$2.ForgetPwdResponse> forgetPwd_Pre($grpc.ServiceCall call, $async.Future<$2.ForgetPwdRequest> request) async {
+    return forgetPwd(call, await request);
   }
 
   $async.Future<$2.UserInfo> kyc_Pre($grpc.ServiceCall call, $async.Future<$2.UserInfo> request) async {
@@ -211,7 +249,9 @@ abstract class UserServiceBase extends $grpc.Service {
   $async.Future<$2.VerifyCodeResponse> verifyCode($grpc.ServiceCall call, $2.VerifyCodeRequest request);
   $async.Future<$2.VerifyImageResponse> verifyImage($grpc.ServiceCall call, $2.VerifyImageRequest request);
   $async.Future<$2.SignInResponse> signIn($grpc.ServiceCall call, $2.SignInRequest request);
+  $async.Future<$2.UpdatePwdResponse> updatePwd($grpc.ServiceCall call, $2.UpdatePwdRequest request);
   $async.Future<$2.SignInResponse> verifyPwd($grpc.ServiceCall call, $2.SignInRequest request);
+  $async.Future<$2.ForgetPwdResponse> forgetPwd($grpc.ServiceCall call, $2.ForgetPwdRequest request);
   $async.Future<$2.UserInfo> kyc($grpc.ServiceCall call, $2.UserInfo request);
   $async.Future<$2.UserInfo> updateUser($grpc.ServiceCall call, $2.UserInfo request);
   $async.Future<$2.UploadResponse> upload($grpc.ServiceCall call, $2.UploadRequest request);

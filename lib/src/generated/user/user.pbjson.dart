@@ -13,6 +13,32 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use forgetPwdRequestDescriptor instead')
+const ForgetPwdRequest$json = {
+  '1': 'ForgetPwdRequest',
+  '2': [
+    {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
+    {'1': 'password', '3': 2, '4': 1, '5': 9, '10': 'password'},
+    {'1': 'vcode', '3': 3, '4': 1, '5': 9, '10': 'vcode'},
+    {'1': 'verify_code_id', '3': 4, '4': 1, '5': 9, '10': 'verifyCodeId'},
+  ],
+};
+
+/// Descriptor for `ForgetPwdRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List forgetPwdRequestDescriptor = $convert.base64Decode(
+    'ChBGb3JnZXRQd2RSZXF1ZXN0EhQKBWVtYWlsGAEgASgJUgVlbWFpbBIaCghwYXNzd29yZBgCIA'
+    'EoCVIIcGFzc3dvcmQSFAoFdmNvZGUYAyABKAlSBXZjb2RlEiQKDnZlcmlmeV9jb2RlX2lkGAQg'
+    'ASgJUgx2ZXJpZnlDb2RlSWQ=');
+
+@$core.Deprecated('Use forgetPwdResponseDescriptor instead')
+const ForgetPwdResponse$json = {
+  '1': 'ForgetPwdResponse',
+};
+
+/// Descriptor for `ForgetPwdResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List forgetPwdResponseDescriptor = $convert.base64Decode(
+    'ChFGb3JnZXRQd2RSZXNwb25zZQ==');
+
 @$core.Deprecated('Use userInfoDescriptor instead')
 const UserInfo$json = {
   '1': 'UserInfo',
@@ -181,6 +207,29 @@ const SignInResponse$json = {
 final $typed_data.Uint8List signInResponseDescriptor = $convert.base64Decode(
     'Cg5TaWduSW5SZXNwb25zZRIUCgV0b2tlbhgBIAEoCVIFdG9rZW4SFQoGa3ljX29rGAIgASgIUg'
     'VreWNPaw==');
+
+@$core.Deprecated('Use updatePwdRequestDescriptor instead')
+const UpdatePwdRequest$json = {
+  '1': 'UpdatePwdRequest',
+  '2': [
+    {'1': 'old_password', '3': 2, '4': 1, '5': 9, '10': 'oldPassword'},
+    {'1': 'new_password', '3': 3, '4': 1, '5': 9, '10': 'newPassword'},
+  ],
+};
+
+/// Descriptor for `UpdatePwdRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updatePwdRequestDescriptor = $convert.base64Decode(
+    'ChBVcGRhdGVQd2RSZXF1ZXN0EiEKDG9sZF9wYXNzd29yZBgCIAEoCVILb2xkUGFzc3dvcmQSIQ'
+    'oMbmV3X3Bhc3N3b3JkGAMgASgJUgtuZXdQYXNzd29yZA==');
+
+@$core.Deprecated('Use updatePwdResponseDescriptor instead')
+const UpdatePwdResponse$json = {
+  '1': 'UpdatePwdResponse',
+};
+
+/// Descriptor for `UpdatePwdResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updatePwdResponseDescriptor = $convert.base64Decode(
+    'ChFVcGRhdGVQd2RSZXNwb25zZQ==');
 
 @$core.Deprecated('Use kycRequestDescriptor instead')
 const KycRequest$json = {
