@@ -14,7 +14,7 @@ mixin CommonService {
   static ClientChannel? channel;
   static String token = "";
   static UserInfo? userInfo;
-  static CardInfo? cardInfo;
+  static CardInfo cardInfo = CardInfo();
   static String userId = "1";
 
   static ClientChannel? getGrpcChannel() {

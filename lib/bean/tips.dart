@@ -14,6 +14,7 @@ enum Tips {
   waitingBalance(
       "Please wait for a while to see the balance."),
   addressIsOnClipboard("Address is on your clipboard."),
+  cardNoIsOnClipboard("Card NO is on your clipboard."),
   wifIsOnClipboard("WIF is on your clipboard."),
   emptyWif("Empty WIF."),
   wrongEmail("Wrong email."),

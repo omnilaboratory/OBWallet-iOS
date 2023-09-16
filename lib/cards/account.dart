@@ -75,13 +75,13 @@ class _AccountState extends State<Account> {
         if (items.isNotEmpty) {
           for (var element in items) {
             txs.add(CryptoTxInfo(
-                title: "Exchange",
+                title: element.sourceType.name,
                 txTime: DateTime.fromMillisecondsSinceEpoch(
                     (element.createdAt * 1000).toInt()),
                 fromSymbol: element.sourceId,
                 targetSymbol: "",
                 amount: element.amt,
-                amountOfDollar: element.amt,
+                amountOfDollar: null,
                 status: 1));
           }
           if (mounted) {
@@ -190,12 +190,14 @@ class _AccountState extends State<Account> {
         ),
         const SizedBox(height: 10),
         Expanded(
-          child: ListView.builder(
-              padding: const EdgeInsets.only(top: 20),
-              itemCount: txs.length,
-              itemBuilder: (BuildContext context, int index) {
-                return CryptoTxItem(txInfo: txs[index]);
-              }),
+          child: txs.isEmpty
+              ? const Center(child: Text("no Data"))
+              : ListView.builder(
+                  padding: const EdgeInsets.only(top: 20),
+                  itemCount: txs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CryptoTxItem(txInfo: txs[index]);
+                  }),
         )
       ],
     );

@@ -12,6 +12,7 @@ import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
 import '../bean/currency_tx_info.dart';
@@ -36,9 +37,7 @@ class _CardPartState extends State<CardPart> {
   @override
   void initState() {
     super.initState();
-    if (CommonService.cardInfo == null) {
-      CommonService.cardInfo = CardInfo();
-    } else {
+    if (CommonService.cardInfo.cardNo.isNotEmpty) {
       hasCard = true;
       getOfflineTxList();
     }
@@ -77,7 +76,7 @@ class _CardPartState extends State<CardPart> {
 
   getOnlineTxList() {
     CardService.getInstance()
-        .cardExchangeInfoList(context, CommonService.cardInfo!.cardNo,
+        .cardExchangeInfoList(context, CommonService.cardInfo.cardNo,
             Int64.parseInt("1"), Int64.parseInt("50"))
         .then((resp) {
       if (resp.code == 1) {
@@ -100,7 +99,7 @@ class _CardPartState extends State<CardPart> {
 
   getOfflineTxList() {
     CardService.getInstance()
-        .cardHistory(context, CommonService.cardInfo!.cardNo,
+        .cardHistory(context, CommonService.cardInfo.cardNo,
             Int64.parseInt("1"), Int64.parseInt("50"))
         .then((resp) {
       if (resp.code == 1) {
@@ -191,17 +190,26 @@ class _CardPartState extends State<CardPart> {
               image: AssetImage("asset/images/img_visa.png")),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 17,bottom: 80),
+          padding: const EdgeInsets.only(left: 17, bottom: 80),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                getCardNo(),
-                style: const TextStyle(
-                  color: Color(0xFF666666),
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  height: 0,
+              GestureDetector(
+                onTap: () {
+                  if (CommonService.cardInfo.cardNo.isNotEmpty) {
+                    showToast(Tips.cardNoIsOnClipboard.value);
+                    Clipboard.setData(
+                        ClipboardData(text: CommonService.cardInfo.cardNo));
+                  }
+                },
+                child: Text(
+                  getCardNo(),
+                  style: const TextStyle(
+                    color: Color(0xFF666666),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    height: 0,
+                  ),
                 ),
               )
             ],
@@ -221,7 +229,7 @@ class _CardPartState extends State<CardPart> {
         Padding(
           padding: const EdgeInsets.only(bottom: 10, right: 20),
           child: Text(
-            "CVV ${CommonService.cardInfo?.cvv}",
+            "CVV ${CommonService.cardInfo.cvv}",
             style: const TextStyle(
               color: Color(0xFF333333),
               fontSize: 15,
@@ -244,8 +252,7 @@ class _CardPartState extends State<CardPart> {
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  StringTools.formatCurrencyNum(
-                      CommonService.cardInfo?.balance),
+                  StringTools.formatCurrencyNum(CommonService.cardInfo.balance),
                   style: const TextStyle(
                     color: Color(0xFF333333),
                     fontSize: 32,
@@ -302,16 +309,16 @@ class _CardPartState extends State<CardPart> {
   }
 
   String getCardExpiryDate() {
-    String? expiryDate = CommonService.cardInfo?.expiryDate;
-    if (expiryDate == null || expiryDate.isEmpty) {
+    String expiryDate = CommonService.cardInfo.expiryDate;
+    if (expiryDate.isEmpty) {
       expiryDate = "****";
     }
     return "Exp. ${expiryDate.substring(2, 4)}/${expiryDate.substring(0, 2)}";
   }
 
   String getCardNo() {
-    String? cardNo = CommonService.cardInfo?.cardNo;
-    if (cardNo == null || cardNo.isEmpty) {
+    String cardNo = CommonService.cardInfo.cardNo;
+    if (cardNo.isEmpty) {
       cardNo = "****************";
     }
     return "${cardNo.substring(0, 4)} ${cardNo.substring(4, 8)} ${cardNo.substring(8, 12)} ${cardNo.substring(12)}";
@@ -385,7 +392,7 @@ class _CardPartState extends State<CardPart> {
                   onTap: () {
                     onClickType(0);
                   },
-                  child: Text("offline",
+                  child: Text("Offline",
                       style: TextStyle(
                           color: currTypeIndex == 0
                               ? Colors.lightBlueAccent
@@ -394,7 +401,7 @@ class _CardPartState extends State<CardPart> {
                   onTap: () {
                     onClickType(1);
                   },
-                  child: Text("online",
+                  child: Text("Online",
                       style: TextStyle(
                           color: currTypeIndex == 1
                               ? Colors.lightBlueAccent
@@ -403,12 +410,14 @@ class _CardPartState extends State<CardPart> {
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: ListView.builder(
-                padding: const EdgeInsets.only(top: 20),
-                itemCount: txs.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return CurrencyTxItem(txInfo: txs[index]);
-                }),
+            child: txs.isEmpty
+                ? const Center(child: Text("no Data"))
+                : ListView.builder(
+                    padding: const EdgeInsets.only(top: 20),
+                    itemCount: txs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return CurrencyTxItem(txInfo: txs[index]);
+                    }),
           ),
         ],
       ),
