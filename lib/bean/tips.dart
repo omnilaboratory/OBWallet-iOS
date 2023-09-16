@@ -25,6 +25,7 @@ enum Tips {
   selectCountry("Please select the country."),
   checkKycResult("Please wait the kyc result."),
   checkInputSocialId("Please input the social Id."),
+  emptyCardNumber("The card number cannot be empty."),
   ;
 
   final String value;

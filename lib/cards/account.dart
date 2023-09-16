@@ -3,11 +3,10 @@ import 'dart:developer';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/currency_tx_history.dart';
 import 'package:awallet/cards/exchange.dart';
+import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/account_balance_in_currency.dart';
-import 'package:awallet/component/common.dart';
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
@@ -150,26 +149,30 @@ class _AccountState extends State<Account> {
 
   Row buildTxButtons() {
     var size = MediaQuery.sizeOf(context);
-    var iconWidth = (size.width - 40) / 4;
+    var iconWidth = (size.width - 40) / 3;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SquareButton(
-            icon: 'asset/images/icon_pay.png',
-            iconWidth: iconWidth,
-            text: 'Pay',
-            onPressed: () {
-              showToast(Tips.comeSoon.value);
-            }),
-        SquareButton(
             icon: 'asset/images/icon_top_up.png',
-            text: 'Top Up',
+            text: 'Deposit',
             iconWidth: iconWidth,
             onPressed: () {
               showDialog(
                   context: context,
                   builder: (context) {
                     return CardRecharge(amt: '');
+                  });
+            }),
+        SquareButton(
+            icon: 'asset/images/icon_top_up.png',
+            text: 'Withdraw',
+            iconWidth: iconWidth,
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Send();
                   });
             }),
         SquareButton(
@@ -182,18 +185,6 @@ class _AccountState extends State<Account> {
                   builder: (context) {
                     return Exchange(type: EnumExchangeType.buy);
                   });
-            }),
-        SquareButton(
-            icon: 'asset/images/icon_send.png',
-            text: 'Send',
-            iconWidth: iconWidth,
-            onPressed: () {
-              showToast(Tips.comeSoon.value);
-              // showDialog(
-              //     context: context,
-              //     builder: (context) {
-              //       return const Send();
-              //     });
             }),
       ],
     );

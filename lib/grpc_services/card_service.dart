@@ -107,4 +107,21 @@ class CardService {
     }
     return ret;
   }
+
+  Future<GrpcResponse> cardWithdraw(
+      BuildContext context, String cardNo, double amt) async {
+    var request = CardWithdrawRequest();
+    request.cardNo = cardNo;
+    request.amt = amt;
+    log("$request");
+    var ret = GrpcResponse();
+    try {
+      var resp = await cardServiceClient?.cardWithdraw(request);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context, e, ret);
+    }
+    return ret;
+  }
 }

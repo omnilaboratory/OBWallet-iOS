@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/tips.dart';
+import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/card_service.dart';
@@ -19,7 +20,6 @@ import '../component/currency_tx_item.dart';
 import '../component/square_button.dart';
 import 'apply_card.dart';
 import 'kyc.dart';
-import 'top_up.dart';
 
 class CardPart extends StatefulWidget {
   const CardPart({super.key});
@@ -189,15 +189,20 @@ class _CardPartState extends State<CardPart> {
               image: AssetImage("asset/images/img_visa.png")),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 80, right: 170),
-          child: Text(
-            getCardNo(),
-            style: const TextStyle(
-              color: Color(0xFF666666),
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              height: 0,
-            ),
+          padding: const EdgeInsets.only(left: 17,bottom: 80),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                getCardNo(),
+                style: const TextStyle(
+                  color: Color(0xFF666666),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  height: 0,
+                ),
+              )
+            ],
           ),
         ),
         Padding(
@@ -429,7 +434,7 @@ class _CardPartState extends State<CardPart> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const TopUp();
+                    return const Send();
                   });
             }),
         SquareButton(
@@ -440,7 +445,7 @@ class _CardPartState extends State<CardPart> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const Send();
+                    return CardRecharge(amt: '');
                   });
             }),
       ],
