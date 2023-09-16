@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/credit_card_form.dart';
@@ -7,6 +8,7 @@ import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/component/web_view.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -38,6 +40,20 @@ class _CardRechargeState extends State<CardRecharge> {
       setState(() {
         cardHolderName = widget.amt;
       });
+    }
+    updateKycState();
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "kyc_state") {
+        updateKycState();
+      }
+    });
+  }
+
+  updateKycState() {
+    // passed or pending
+    var kycStatus = CommonService.userInfo!.kycStatus;
+    if (kycStatus == "pending") {
+      getDcPayUrl(double.parse(cardHolderName));
     }
   }
 
@@ -71,7 +87,7 @@ class _CardRechargeState extends State<CardRecharge> {
                     child: Column(
                       children: [
                         const SizedBox(height: 30),
-                        createDialogTitle('Card Recharge'),
+                        createDialogTitle('Deposit'),
                         const SizedBox(height: 30),
                         CreditCardForm(
                           formKey: formKey,
@@ -219,7 +235,7 @@ class _CardRechargeState extends State<CardRecharge> {
         request.cardExpireMonth =
             expiryDate.substring(0, expiryDate.indexOf('/'));
         request.cardExpireYear =
-            '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
+        '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
         CardService.getInstance()
             .cardRecharge(context, request)
             .then((value) async {
@@ -239,10 +255,21 @@ class _CardRechargeState extends State<CardRecharge> {
           }
         });
       } else {
-        FocusScope.of(context).unfocus();
-        GlobalParams.eventBus.fire("topup");
-        Navigator.pop(context);
-        getDcPayUrl(double.parse(cardHolderName));
+        var kycStatus = CommonService.userInfo!.kycStatus;
+        if (kycStatus.isNotEmpty) {
+          if (kycStatus == "passed") {
+            FocusScope.of(context).unfocus();
+            GlobalParams.eventBus.fire("topup");
+            Navigator.pop(context);
+            getDcPayUrl(double.parse(cardHolderName));
+          }
+        } else {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return const Kyc();
+              });
+        }
       }
     } else {
       log('invalid!');

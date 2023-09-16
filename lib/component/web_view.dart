@@ -102,7 +102,7 @@ Page resource error:
       backgroundColor: Colors.green,
       appBar: AppBar(
         title: const Text(
-          'Card Recharge',
+          'Deposit',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.black,
