@@ -17,7 +17,6 @@ import '../bean/currency_tx_info.dart';
 import '../component/bottom_button.dart';
 import '../component/currency_tx_item.dart';
 import '../component/square_button.dart';
-import '../cryptos/tx_history.dart';
 import 'apply_card.dart';
 import 'kyc.dart';
 import 'top_up.dart';
@@ -33,57 +32,96 @@ class _CardPartState extends State<CardPart> {
   var txs = [];
 
   bool hasCard = false;
-  String cardNo = "";
-  double balance = 0;
-  CardInfo cardInfo = CardInfo();
 
   @override
   void initState() {
-    cardInfo.cardNo="****************";
-    cardInfo.expiryDate="****";
-    cardInfo.cvv="***";
     super.initState();
+    if (CommonService.cardInfo == null) {
+      CommonService.cardInfo = CardInfo();
+    } else {
+      hasCard = true;
+      getOfflineTxList();
+    }
     getBalance();
   }
 
   getBalance() {
     CardService.getInstance().cardInfo(context).then((resp) {
       log("$resp");
-      if (resp.code == 1 && resp.data != null) {
-        cardInfo = resp.data;
+      if (resp.code == 1) {
         hasCard = true;
-        CardService.getInstance()
-            .cardHistory(context, cardInfo.cardNo, Int64.parseInt("1"),
-                Int64.parseInt("5"))
-            .then((hResp) {
-          if (hResp.code == 1) {
-            var items = (hResp.data as CardHistoryResponse).items;
-            if (items.isNotEmpty) {
-              for (var element in items) {
-                txs.add(CurrencyTxInfo(
-                    name: element.authMerchant,
-                    currencyName: element.settleCurrency,
-                    amount: double.parse(element.settleAmt),
-                    amountOfDollar: 0));
-              }
-              if(mounted){
-                setState(() {});
-              }
-            }
-          }
-        });
+        getOnlineTxList();
       }
-
-      if(mounted){
+      if (mounted) {
         setState(() {});
       }
+    });
+  }
 
+  int currTypeIndex = 0;
+
+  onClickType(int type) {
+    currTypeIndex = type;
+    if(currTypeIndex==0){
+      txs = [];
+      getOfflineTxList();
+    }else{
+      txs = [];
+      getOnlineTxList();
+    }
+    setState(() {});
+  }
+
+  getOnlineTxList() {
+    CardService.getInstance()
+        .cardExchangeInfoList(context, CommonService.cardInfo!.cardNo,
+            Int64.parseInt("1"), Int64.parseInt("5"))
+        .then((resp) {
+      if (resp.code == 1) {
+        var items = (resp.data as CardExchangeInfoListResponse).items;
+        log("$items");
+        if (items.isNotEmpty) {
+          for (var element in items) {
+            txs.add(CurrencyTxInfo(
+                name: element.counterParty,
+                currencyName: "USD",
+                amount: element.amt,
+                amountOfDollar: 0));
+          }
+          if (mounted) {
+            setState(() {});
+          }
+        }
+      }
+    });
+  }
+
+  getOfflineTxList() {
+    CardService.getInstance()
+        .cardHistory(context, CommonService.cardInfo!.cardNo,
+            Int64.parseInt("1"), Int64.parseInt("5"))
+        .then((resp) {
+      if (resp.code == 1) {
+        var items = (resp.data as CardHistoryResponse).items;
+        log("$items");
+        if (items.isNotEmpty) {
+          for (var element in items) {
+            txs.add(CurrencyTxInfo(
+                name: element.authMerchant,
+                currencyName: element.settleCurrency,
+                amount: double.parse(element.settleAmt),
+                amountOfDollar: 0));
+          }
+          if (mounted) {
+            setState(() {});
+          }
+        }
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Center(
       child: Column(
         children: [
@@ -176,7 +214,7 @@ class _CardPartState extends State<CardPart> {
         Padding(
           padding: const EdgeInsets.only(bottom: 10, right: 20),
           child: Text(
-           "CVV ${cardInfo.cvv}",
+            "CVV ${CommonService.cardInfo?.cvv}",
             style: const TextStyle(
               color: Color(0xFF333333),
               fontSize: 15,
@@ -184,7 +222,6 @@ class _CardPartState extends State<CardPart> {
             ),
           ),
         ),
-
         Padding(
             padding: const EdgeInsets.only(left: 15, bottom: 30),
             child: Row(
@@ -200,7 +237,8 @@ class _CardPartState extends State<CardPart> {
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  StringTools.formatCurrencyNum(balance),
+                  StringTools.formatCurrencyNum(
+                      CommonService.cardInfo?.balance),
                   style: const TextStyle(
                     color: Color(0xFF333333),
                     fontSize: 32,
@@ -257,11 +295,18 @@ class _CardPartState extends State<CardPart> {
   }
 
   String getCardExpiryDate() {
-    String expiryDate = cardInfo.expiryDate;
+    String? expiryDate = CommonService.cardInfo?.expiryDate;
+    if (expiryDate == null || expiryDate.isEmpty) {
+      expiryDate = "****";
+    }
     return "Exp. ${expiryDate.substring(2, 4)}/${expiryDate.substring(0, 2)}";
   }
+
   String getCardNo() {
-    String cardNo = cardInfo.cardNo;
+    String? cardNo = CommonService.cardInfo?.cardNo;
+    if (cardNo == null || cardNo.isEmpty) {
+      cardNo = "****************";
+    }
     return "${cardNo.substring(0, 4)} ${cardNo.substring(4, 8)} ${cardNo.substring(8, 12)} ${cardNo.substring(12)}";
   }
 
@@ -307,6 +352,7 @@ class _CardPartState extends State<CardPart> {
   Widget buildCardDetail(BuildContext context) {
     return Expanded(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 15),
           buildTxButtons(),
@@ -316,35 +362,39 @@ class _CardPartState extends State<CardPart> {
             length: MediaQuery.of(context).size.width - 40,
           ),
           const SizedBox(height: 15),
+          const Text(
+            'Recent Transactions',
+            style: TextStyle(
+              color: Color(0xFF999999),
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          const SizedBox(height: 10),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text(
-                'Recent Transactions',
-                style: TextStyle(
-                  color: Color(0xFF999999),
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              const Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TxHistory()));
-                },
-                child: const Text(
-                  'View All',
-                  style: TextStyle(
-                    color: Color(0xFF06D78F),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              )
+              InkWell(
+                  onTap: () {
+                    onClickType(0);
+                  },
+                  child: Text("offline",
+                      style: TextStyle(
+                          color: currTypeIndex == 0
+                              ? Colors.lightBlueAccent
+                              : Colors.black))),
+              InkWell(
+                  onTap: () {
+                    onClickType(1);
+                  },
+                  child: Text("online",
+                      style: TextStyle(
+                          color: currTypeIndex == 1
+                              ? Colors.lightBlueAccent
+                              : Colors.black)))
             ],
           ),
+          const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
                 padding: const EdgeInsets.only(top: 20),

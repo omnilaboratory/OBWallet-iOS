@@ -84,7 +84,9 @@ class _AccountState extends State<Account> {
         var accountInfo = info.data as AccountInfo;
         log("$accountInfo");
         totalBalanceUsd = accountInfo.balanceUsd;
-        setState(() {});
+        if(mounted){
+          setState(() {});
+        }
       }
     });
   }

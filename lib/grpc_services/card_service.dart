@@ -35,7 +35,7 @@ class CardService {
       var resp = await cardServiceClient?.cardList(CardListRequest());
       ret.code = 1;
       if (resp!.items.isNotEmpty) {
-        ret.data = resp.items[0];
+        CommonService.cardInfo = resp.items[0];
       }
     } catch (e) {
       UserService.getInstance().setError(context, e, ret);
@@ -69,6 +69,23 @@ class CardService {
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient?.cardHistory(request);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context, e, ret);
+    }
+    return ret;
+  }
+  Future<GrpcResponse> cardExchangeInfoList(
+      BuildContext context, String cardNo, Int64 pageNo, Int64 pageSize) async {
+    var request = CardExchangeInfoListRequest();
+    request.cardNo = cardNo;
+    request.pageNo = pageNo;
+    request.pageSize = pageSize;
+    log("$request");
+    var ret = GrpcResponse();
+    try {
+      var resp = await cardServiceClient?.cardExchangeInfoList(request);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {

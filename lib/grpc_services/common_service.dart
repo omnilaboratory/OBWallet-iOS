@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:grpc/grpc.dart';
@@ -13,6 +14,7 @@ mixin CommonService {
   static ClientChannel? channel;
   static String token = "";
   static UserInfo? userInfo;
+  static CardInfo? cardInfo;
   static String userId = "1";
 
   static ClientChannel? getGrpcChannel() {

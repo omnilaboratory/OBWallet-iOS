@@ -10,6 +10,8 @@ import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
+import '../grpc_services/card_service.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -245,6 +247,7 @@ class _LoginState extends State<Login> {
 
   void getUserInfoAndGoHome() {
     log("getUserInfoAndGoHome");
+    CardService.getInstance().cardInfo(context);
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
         var userInfo = userInfoResp.data as GetUserInfoResponse;

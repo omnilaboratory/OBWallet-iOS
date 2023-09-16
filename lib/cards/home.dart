@@ -89,16 +89,6 @@ class _CardHomeState extends State<CardHome> {
                             });
                       }),
                   ButtonForAppBarAction(
-                      width: 24,
-                      height: 24,
-                      imageUrl: "asset/images/icon_tx_history.png",
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TxHistory()));
-                      }),
-                  ButtonForAppBarAction(
                       width: 18,
                       height: 18,
                       imageUrl: "asset/images/icon_more_3line.png",
