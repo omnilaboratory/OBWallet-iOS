@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'dart:developer';
+
+import 'package:awallet/bean/crypto_tx_info.dart';
+import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/cards/card_recharge.dart';
-import 'package:awallet/cards/currency_tx_history.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/account_balance_in_currency.dart';
-import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
+import 'package:awallet/component/tx_item.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
-import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
@@ -20,30 +21,76 @@ import 'package:flutter_dash/flutter_dash.dart';
 class Account extends StatefulWidget {
   Account({super.key});
 
-  final balances = [
-    // BalanceInCurrencyInfo(name: "USD", icon: "\$", balance: 123),
-    // BalanceInCurrencyInfo(name: "SGD", icon: "\$", balance: 20),
-    // BalanceInCurrencyInfo(name: "CNY", icon: "￥", balance: 20),
-  ];
+  final balances = [];
 
   @override
   State<Account> createState() => _AccountState();
 }
 
 class _AccountState extends State<Account> {
+  var txs = [];
+  var currTypeIndex = 0;
 
-  final txs = [
-    // CurrencyTxInfo(
-    //     name: "STARBUCKS FELIZ EN VIS, HO CHI STARBUCKS FELIZ EN VIS, HO CHI",
-    //     currencyName: "VND",
-    //     amount: 9234567891230.01,
-    //     amountOfDollar: 160),
-    // CurrencyTxInfo(
-    //     name: "STARBUCKS FELIZ EN VIS, HO CHI",
-    //     currencyName: "VND",
-    //     amount: 20,
-    //     amountOfDollar: 160),
-  ];
+  void onClickType(int type) {
+    txs = [];
+    currTypeIndex = type;
+    if (type == 0) {
+      getSwapTxList();
+    }
+    if (type == 1) {
+      getAccountHistory();
+    }
+  }
+
+  getSwapTxList() {
+    AccountService.getInstance().getSwapTxList(context).then((resp) {
+      if (resp.code == 1) {
+        var items = (resp.data as GetSwapTxListResponse).items;
+        if (items.isNotEmpty) {
+          for (var element in items) {
+            txs.add(CryptoTxInfo(
+                title:
+                    "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
+                txTime: DateTime.fromMillisecondsSinceEpoch(
+                    (element.createdAt * 1000).toInt()),
+                fromSymbol: element.fromSymbol.name,
+                targetSymbol: element.targetSymbol.name,
+                amount: element.amt,
+                amountOfDollar: element.settleAmt,
+                status:
+                    element.status.value > 2 ? element.status.value - 2 : 0));
+          }
+          if (mounted) {
+            setState(() {});
+          }
+        }
+      }
+    });
+  }
+
+  getAccountHistory() {
+    AccountService.getInstance().getAccountHistory(context).then((resp) {
+      if (resp.code == 1) {
+        var items = (resp.data as GetAccountHistoryResponse).items;
+        if (items.isNotEmpty) {
+          for (var element in items) {
+            txs.add(CryptoTxInfo(
+                title: "Exchange",
+                txTime: DateTime.fromMillisecondsSinceEpoch(
+                    (element.createdAt * 1000).toInt()),
+                fromSymbol: element.sourceId,
+                targetSymbol: "",
+                amount: element.amt,
+                amountOfDollar: element.amt,
+                status: 1));
+          }
+          if (mounted) {
+            setState(() {});
+          }
+        }
+      }
+    });
+  }
 
   double totalBalanceUsd = 0;
   Timer? updateBalanceTimer;
@@ -61,6 +108,7 @@ class _AccountState extends State<Account> {
       });
     }
     updateBalance();
+    onClickType(0);
     updateBalanceTimer ??= Timer.periodic(const Duration(seconds: 30), (timer) {
       if (mounted) {
         setState(() {
@@ -83,7 +131,7 @@ class _AccountState extends State<Account> {
         var accountInfo = info.data as AccountInfo;
         log("$accountInfo");
         totalBalanceUsd = accountInfo.balanceUsd;
-        if(mounted){
+        if (mounted) {
           setState(() {});
         }
       }
@@ -93,54 +141,60 @@ class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 28),
         buildBalance(),
-        txs.isNotEmpty?buildBalanceInCurrency(): const SizedBox(height: 0),
+        // txs.isNotEmpty ? buildBalanceInCurrency() : const SizedBox(height: 0),
         const SizedBox(height: 30),
         buildTxButtons(),
         Padding(
-          padding: const EdgeInsets.only(top: 25, bottom: 25),
+          padding: const EdgeInsets.only(top: 25, bottom: 10),
           child: Dash(
             dashColor: const Color(0xFFCFCFCF),
             length: MediaQuery.of(context).size.width - 40,
           ),
         ),
+        const Text(
+          'Recent Transactions',
+          style: TextStyle(
+            color: Color(0xFF999999),
+            fontSize: 15,
+            fontFamily: 'Montserrat',
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        const SizedBox(height: 10),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const Text(
-              'Recent Transactions',
-              style: TextStyle(
-                color: Color(0xFF999999),
-                fontSize: 15,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            const Spacer(),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const TxHistory()));
-              },
-              child: const Text(
-                'View All',
-                style: TextStyle(
-                  color: Color(0xFF06D78F),
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            )
+            InkWell(
+                onTap: () {
+                  onClickType(0);
+                },
+                child: Text("SwapTx",
+                    style: TextStyle(
+                        color: currTypeIndex == 0
+                            ? Colors.lightBlueAccent
+                            : Colors.black))),
+            InkWell(
+                onTap: () {
+                  onClickType(1);
+                },
+                child: Text("AccountHistory",
+                    style: TextStyle(
+                        color: currTypeIndex == 1
+                            ? Colors.lightBlueAccent
+                            : Colors.black)))
           ],
         ),
+        const SizedBox(height: 10),
         Expanded(
           child: ListView.builder(
               padding: const EdgeInsets.only(top: 20),
               itemCount: txs.length,
               itemBuilder: (BuildContext context, int index) {
-                return CurrencyTxItem(txInfo: txs[index]);
+                return CryptoTxItem(txInfo: txs[index]);
               }),
         )
       ],

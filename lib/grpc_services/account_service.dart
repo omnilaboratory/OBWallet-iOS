@@ -99,6 +99,19 @@ class AccountService {
     }
     return ret;
   }
+  Future<GrpcResponse> getAccountHistory(BuildContext context) async {
+    var request = GetAccountHistoryRequest();
+    request.symbol = TrackedTx_ContractSymbol.USD;
+    var ret = GrpcResponse();
+    try {
+      var resp = await accountServiceClient?.getAccountHistory(request);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context, e, ret);
+    }
+    return ret;
+  }
 
   Future<GrpcResponse> getTrackedTxList(
     BuildContext context,

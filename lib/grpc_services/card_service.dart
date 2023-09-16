@@ -9,6 +9,7 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:intl/intl.dart';
 
 class CardService {
   static final CardService _instance = CardService._internal();
@@ -65,6 +66,10 @@ class CardService {
     request.cardNo = cardNo;
     request.pageNo = pageNo;
     request.pageSize = pageSize;
+    var now = DateTime.now();
+    request.startDate =
+        DateFormat("yyyy-MM-dd").format(now.add(const Duration(days: -180)));
+    request.endDate = DateFormat("yyyy-MM-dd").format(now);
     log("$request");
     var ret = GrpcResponse();
     try {
@@ -76,6 +81,7 @@ class CardService {
     }
     return ret;
   }
+
   Future<GrpcResponse> cardExchangeInfoList(
       BuildContext context, String cardNo, Int64 pageNo, Int64 pageSize) async {
     var request = CardExchangeInfoListRequest();

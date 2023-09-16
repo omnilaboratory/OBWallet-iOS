@@ -47,10 +47,11 @@ class _CardPartState extends State<CardPart> {
 
   getBalance() {
     CardService.getInstance().cardInfo(context).then((resp) {
-      log("$resp");
       if (resp.code == 1) {
         hasCard = true;
-        getOnlineTxList();
+        if (mounted) {
+          getOnlineTxList();
+        }
       }
       if (mounted) {
         setState(() {});
@@ -62,12 +63,14 @@ class _CardPartState extends State<CardPart> {
 
   onClickType(int type) {
     currTypeIndex = type;
-    if(currTypeIndex==0){
+    if (currTypeIndex == 0) {
       txs = [];
       getOfflineTxList();
-    }else{
+    } else {
       txs = [];
-      getOnlineTxList();
+      if (mounted) {
+        getOnlineTxList();
+      }
     }
     setState(() {});
   }
@@ -75,11 +78,10 @@ class _CardPartState extends State<CardPart> {
   getOnlineTxList() {
     CardService.getInstance()
         .cardExchangeInfoList(context, CommonService.cardInfo!.cardNo,
-            Int64.parseInt("1"), Int64.parseInt("5"))
+            Int64.parseInt("1"), Int64.parseInt("50"))
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as CardExchangeInfoListResponse).items;
-        log("$items");
         if (items.isNotEmpty) {
           for (var element in items) {
             txs.add(CurrencyTxInfo(
@@ -99,7 +101,7 @@ class _CardPartState extends State<CardPart> {
   getOfflineTxList() {
     CardService.getInstance()
         .cardHistory(context, CommonService.cardInfo!.cardNo,
-            Int64.parseInt("1"), Int64.parseInt("5"))
+            Int64.parseInt("1"), Int64.parseInt("50"))
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as CardHistoryResponse).items;
