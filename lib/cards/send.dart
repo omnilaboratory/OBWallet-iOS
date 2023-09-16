@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/loading_dialog.dart';
+import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,13 @@ class _SendState extends State<Send> {
   final TextEditingController _amountController = TextEditingController();
   bool loadingVisible = false;
   String amount = '0';
+  double totalBalanceUsd = 0;
+
+  @override
+  void initState() {
+    getAccountBalance();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +57,10 @@ class _SendState extends State<Send> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Center(
+                            Center(
                               child: Padding(
-                                padding: EdgeInsets.only(top: 28, bottom: 20),
-                                child: Text("Send", style: TextStyle(fontSize: 20)),
+                                padding: const EdgeInsets.only(top: 28, bottom: 20),
+                                child: createDialogTitle('Withdraw'),
                               ),
                             ),
                             buildBalance(),
@@ -115,7 +124,7 @@ class _SendState extends State<Send> {
                             const Spacer(),
                             BottomButton(
                               icon: 'asset/images/icon_confirm_green.png',
-                              text: 'SEND',
+                              text: 'WITHDRAW',
                               onPressed: () {
                                 withDraw();
                               },
@@ -199,6 +208,12 @@ class _SendState extends State<Send> {
       showToast(Tips.zeroAmount.value, toastLength: Toast.LENGTH_SHORT);
       return;
     }
+
+    if (double.parse(_amountController.value.text.toString()) > totalBalanceUsd) {
+      showToast(Tips.maxAmount.value, toastLength: Toast.LENGTH_SHORT);
+      return;
+    }
+
     setState(() {
       loadingVisible = true;
     });
@@ -218,6 +233,19 @@ class _SendState extends State<Send> {
           loadingVisible = false;
         });
         log(value.msg);
+      }
+    });
+  }
+
+  void getAccountBalance() {
+    AccountService.getInstance().getAccountInfo(context).then((info) {
+      if (info.code == 1) {
+        var accountInfo = info.data as AccountInfo;
+        log("$accountInfo");
+        totalBalanceUsd = accountInfo.balanceUsd;
+        if(mounted){
+          setState(() {});
+        }
       }
     });
   }
