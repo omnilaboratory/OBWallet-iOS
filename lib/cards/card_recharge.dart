@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
@@ -18,8 +19,9 @@ import 'package:flutter_credit_card/credit_card_model.dart';
 
 class CardRecharge extends StatefulWidget {
   String amt;
+  EnumChargeType type;
 
-  CardRecharge({super.key, required this.amt});
+  CardRecharge({super.key, required this.amt , this.type = EnumChargeType.deposit});
 
   @override
   State<CardRecharge> createState() => _CardRechargeState();
@@ -87,7 +89,9 @@ class _CardRechargeState extends State<CardRecharge> {
                     child: Column(
                       children: [
                         const SizedBox(height: 30),
-                        createDialogTitle('Deposit'),
+                        createDialogTitle(widget.type == EnumChargeType.deposit
+                            ? 'Deposit'
+                            : 'Withdraw'),
                         const SizedBox(height: 30),
                         CreditCardForm(
                           formKey: formKey,

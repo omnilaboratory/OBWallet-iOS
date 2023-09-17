@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/card_recharge.dart';
@@ -700,7 +701,7 @@ class _ExchangeState extends State<Exchange> {
                             context: context,
                             builder: (context) {
                               return CardRecharge(
-                                  amt: _amountToController.text);
+                                  amt: _amountToController.text, type: EnumChargeType.deposit);
                             });
                       },
                       child: const Text(

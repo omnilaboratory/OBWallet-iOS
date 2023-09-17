@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/loading_dialog.dart';
@@ -14,7 +15,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../component/bottom_button.dart';
 
 class Send extends StatefulWidget {
-  const Send({super.key});
+  EnumChargeType type;
+
+  Send({super.key, this.type = EnumChargeType.withdraw});
 
   @override
   State<Send> createState() => _SendState();
@@ -60,7 +63,9 @@ class _SendState extends State<Send> {
                             Center(
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 28, bottom: 20),
-                                child: createDialogTitle('Withdraw'),
+                                child: createDialogTitle(widget.type == EnumChargeType.withdraw
+                                    ? 'Withdraw'
+                                    : 'Deposit'),
                               ),
                             ),
                             buildBalance(),
@@ -124,7 +129,9 @@ class _SendState extends State<Send> {
                             const Spacer(),
                             BottomButton(
                               icon: 'asset/images/icon_confirm_green.png',
-                              text: 'WITHDRAW',
+                              text: widget.type == EnumChargeType.withdraw
+                                  ? 'WITHDRAW'
+                                  : 'DEPOSIT',
                               onPressed: () {
                                 withDraw();
                               },

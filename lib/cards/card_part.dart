@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/send.dart';
@@ -445,7 +446,7 @@ class _CardPartState extends State<CardPart> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const Send();
+                    return Send(type: EnumChargeType.deposit);
                   });
             }),
         SquareButton(
@@ -456,7 +457,7 @@ class _CardPartState extends State<CardPart> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return CardRecharge(amt: '');
+                    return CardRecharge(amt: '', type: EnumChargeType.withdraw);
                   });
             }),
       ],

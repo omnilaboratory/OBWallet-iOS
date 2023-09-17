@@ -64,7 +64,7 @@ class _KycState extends State<Kyc> {
                     children: [
                       Center(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 28, bottom: 20),
+                          padding: const EdgeInsets.only(top: 28, bottom: 10),
                           child: createDialogTitle('KYC'),
                         ),
                       ),
@@ -72,6 +72,25 @@ class _KycState extends State<Kyc> {
                         key: _formKey,
                         child: Column(
                           children: [
+                            const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                              Image(
+                                  width: 30,
+                                  height: 30,
+                                  image: AssetImage("asset/images/icon_smile.png")),
+                              SizedBox(width: 8),
+                              SizedBox(
+                                child: Text(
+                                  'Please input English and Number.',
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    color: Color(0xFF999999),
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    height: 1.47,
+                                  ),
+                                ),
+                              ),
+                            ]),
                             Row(
                               children: [
                                 Expanded(
@@ -161,7 +180,7 @@ class _KycState extends State<Kyc> {
                                     child: createTextFormField(
                                         _postalController,
                                         "Postal/Zip Code",
-                                        false,maxLength: 6)),
+                                        false,maxLength: 6,keyboardType: TextInputType.number)),
                                 const SizedBox(width: 20),
                                 InkWell(
                                     onTap: () {
