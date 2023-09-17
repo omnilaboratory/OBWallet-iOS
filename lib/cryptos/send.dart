@@ -14,7 +14,9 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Send extends StatefulWidget {
-  const Send({super.key});
+  String name;
+
+  Send({super.key, required this.name});
 
   @override
   State<Send> createState() => _SendState();
@@ -24,13 +26,22 @@ class _SendState extends State<Send> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
 
-  var tokenList = EthService.getInstance().getTokenList();
+  var initTokenList = EthService.getInstance().getTokenList();
+  List<TokenInfo> tokenList = [];
   late TokenInfo dropdownValue;
   int num = 6;
   late bool canClick;
 
   @override
   void initState() {
+    tokenList.addAll(initTokenList);
+    for(int i = 0; i < tokenList.length; i++){
+      TokenInfo tokenInfo = tokenList[i];
+      if (tokenInfo.name == widget.name) {
+        int index = tokenList.indexOf(tokenInfo);
+        tokenList.insert(0, tokenList.removeAt(index));
+      }
+    }
     dropdownValue = tokenList[0];
     if (dropdownValue.balance == 0) {
       canClick = false;

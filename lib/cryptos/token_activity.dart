@@ -87,7 +87,7 @@ class _TokenActivityState extends State<TokenActivity> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return Exchange(type: EnumExchangeType.sell);
+                    return Exchange(type: EnumExchangeType.sell, name: widget.tokenInfo.name);
                   });
             }),
         SquareButton(
@@ -109,7 +109,7 @@ class _TokenActivityState extends State<TokenActivity> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const Send();
+                    return Send(name: widget.tokenInfo.name);
                   });
             }),
         // SquareButton(

@@ -117,7 +117,7 @@ class _EthereumPageState extends State<EthereumPage> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return Exchange(type: EnumExchangeType.sell);
+                    return Exchange(type: EnumExchangeType.sell, name: 'ETH');
                   });
             }),
         SquareButton(
@@ -139,7 +139,7 @@ class _EthereumPageState extends State<EthereumPage> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const Send();
+                    return Send(name: 'ETH');
                   });
             }),
       ],

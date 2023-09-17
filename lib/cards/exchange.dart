@@ -25,8 +25,9 @@ import '../component/number_controller_widget.dart';
 
 class Exchange extends StatefulWidget {
   EnumExchangeType type;
+  String name;
 
-  Exchange({super.key, this.type = EnumExchangeType.sell});
+  Exchange({super.key, this.type = EnumExchangeType.sell, required this.name});
 
   @override
   State<Exchange> createState() => _ExchangeState();
@@ -39,7 +40,8 @@ class _ExchangeState extends State<Exchange> {
   double totalBalanceUsd = 0;
   double coinPrice = 1;
 
-  var tokenList = EthService.getInstance().getTokenList();
+  var initTokenList = EthService.getInstance().getTokenList();
+  List<TokenInfo> tokenList = [];
   var currencyList = GlobalParams.currencyList;
 
   late TokenInfo currSelectedToken;
@@ -53,6 +55,14 @@ class _ExchangeState extends State<Exchange> {
     super.initState();
 
     //init data
+    tokenList.addAll(initTokenList);
+    for(int i = 0; i < tokenList.length; i++){
+      TokenInfo tokenInfo = tokenList[i];
+      if (tokenInfo.name == widget.name) {
+        int index = tokenList.indexOf(tokenInfo);
+        tokenList.insert(0, tokenList.removeAt(index));
+      }
+    }
     currSelectedCurrency = currencyList[0];
     currSelectedToken = tokenList[0];
     if (currSelectedCurrency.balance == 0) {

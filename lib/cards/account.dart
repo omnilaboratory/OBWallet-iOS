@@ -240,7 +240,7 @@ class _AccountState extends State<Account> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return Exchange(type: EnumExchangeType.buy);
+                    return Exchange(type: EnumExchangeType.buy, name: 'ETH');
                   });
             }),
       ],
