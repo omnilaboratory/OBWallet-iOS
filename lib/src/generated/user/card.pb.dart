@@ -313,8 +313,8 @@ class CardExchangeInfoListRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardExchangeInfoListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'cardNo', protoName: 'cardNo')
-    ..aInt64(2, _omitFieldNames ? '' : 'pageNo', protoName: 'pageNo')
-    ..aInt64(3, _omitFieldNames ? '' : 'pageSize', protoName: 'pageSize')
+    ..aInt64(2, _omitFieldNames ? '' : 'start')
+    ..aInt64(3, _omitFieldNames ? '' : 'limit')
     ..hasRequiredFields = false
   ;
 
@@ -349,22 +349,22 @@ class CardExchangeInfoListRequest extends $pb.GeneratedMessage {
   void clearCardNo() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get pageNo => $_getI64(1);
+  $fixnum.Int64 get start => $_getI64(1);
   @$pb.TagNumber(2)
-  set pageNo($fixnum.Int64 v) { $_setInt64(1, v); }
+  set start($fixnum.Int64 v) { $_setInt64(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasPageNo() => $_has(1);
+  $core.bool hasStart() => $_has(1);
   @$pb.TagNumber(2)
-  void clearPageNo() => clearField(2);
+  void clearStart() => clearField(2);
 
   @$pb.TagNumber(3)
-  $fixnum.Int64 get pageSize => $_getI64(2);
+  $fixnum.Int64 get limit => $_getI64(2);
   @$pb.TagNumber(3)
-  set pageSize($fixnum.Int64 v) { $_setInt64(2, v); }
+  set limit($fixnum.Int64 v) { $_setInt64(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasPageSize() => $_has(2);
+  $core.bool hasLimit() => $_has(2);
   @$pb.TagNumber(3)
-  void clearPageSize() => clearField(3);
+  void clearLimit() => clearField(3);
 }
 
 class CardExchangeInfoListResponse extends $pb.GeneratedMessage {
@@ -411,8 +411,8 @@ class CardHistoryRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardHistoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'cardNo', protoName: 'cardNo')
-    ..aInt64(2, _omitFieldNames ? '' : 'pageNo', protoName: 'pageNo')
-    ..aInt64(3, _omitFieldNames ? '' : 'pageSize', protoName: 'pageSize')
+    ..aInt64(2, _omitFieldNames ? '' : 'start')
+    ..aInt64(3, _omitFieldNames ? '' : 'limit')
     ..aOS(4, _omitFieldNames ? '' : 'startDate', protoName: 'startDate')
     ..aOS(5, _omitFieldNames ? '' : 'endDate', protoName: 'endDate')
     ..hasRequiredFields = false
@@ -449,22 +449,22 @@ class CardHistoryRequest extends $pb.GeneratedMessage {
   void clearCardNo() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get pageNo => $_getI64(1);
+  $fixnum.Int64 get start => $_getI64(1);
   @$pb.TagNumber(2)
-  set pageNo($fixnum.Int64 v) { $_setInt64(1, v); }
+  set start($fixnum.Int64 v) { $_setInt64(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasPageNo() => $_has(1);
+  $core.bool hasStart() => $_has(1);
   @$pb.TagNumber(2)
-  void clearPageNo() => clearField(2);
+  void clearStart() => clearField(2);
 
   @$pb.TagNumber(3)
-  $fixnum.Int64 get pageSize => $_getI64(2);
+  $fixnum.Int64 get limit => $_getI64(2);
   @$pb.TagNumber(3)
-  set pageSize($fixnum.Int64 v) { $_setInt64(2, v); }
+  set limit($fixnum.Int64 v) { $_setInt64(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasPageSize() => $_has(2);
+  $core.bool hasLimit() => $_has(2);
   @$pb.TagNumber(3)
-  void clearPageSize() => clearField(3);
+  void clearLimit() => clearField(3);
 
   @$pb.TagNumber(4)
   $core.String get startDate => $_getSZ(3);

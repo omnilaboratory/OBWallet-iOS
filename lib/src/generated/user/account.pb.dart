@@ -109,6 +109,9 @@ class GetSwapTxListRequest extends $pb.GeneratedMessage {
   factory GetSwapTxListRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSwapTxListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'start')
+    ..aInt64(2, _omitFieldNames ? '' : 'limit')
+    ..e<TrackedTx_ContractSymbol>(3, _omitFieldNames ? '' : 'Symbol', $pb.PbFieldType.OE, protoName: 'Symbol', defaultOrMaker: TrackedTx_ContractSymbol.USD, valueOf: TrackedTx_ContractSymbol.valueOf, enumValues: TrackedTx_ContractSymbol.values)
     ..hasRequiredFields = false
   ;
 
@@ -132,6 +135,33 @@ class GetSwapTxListRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetSwapTxListRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSwapTxListRequest>(create);
   static GetSwapTxListRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get start => $_getI64(0);
+  @$pb.TagNumber(1)
+  set start($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStart() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStart() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get limit => $_getI64(1);
+  @$pb.TagNumber(2)
+  set limit($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasLimit() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLimit() => clearField(2);
+
+  @$pb.TagNumber(3)
+  TrackedTx_ContractSymbol get symbol => $_getN(2);
+  @$pb.TagNumber(3)
+  set symbol(TrackedTx_ContractSymbol v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSymbol() => clearField(3);
 }
 
 class GetSwapTxListResponse extends $pb.GeneratedMessage {

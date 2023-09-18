@@ -42,10 +42,10 @@ message CardListResponse {
 }
 message CardExchangeInfoListRequest {
   string cardNo = 1;
-//  default 1
-  int64 pageNo = 2;
-  //default 20
-  int64   pageSize = 3;
+  //same as mysql's offsset; default(0)
+  int64 start =2;
+  //same as mysql's limit; default(20)
+  int64 limit =3;
 }
 message CardExchangeInfoListResponse {
   repeated CardExchangeInfo items=1;
@@ -53,10 +53,15 @@ message CardExchangeInfoListResponse {
 
 message CardHistoryRequest {
   string cardNo = 1;
-//  default 1
-  int64 pageNo = 2;
-  //default 20
-  int64   pageSize = 3;
+////  default 1
+//  int64 pageNo = 2;
+//  //default 20
+//  int64   pageSize = 3;
+
+  //same as mysql's offsset; default(0)
+  int64 start =2;
+  //same as mysql's limit; default(20)
+  int64 limit =3;
   //format 2023-08-08
   string startDate = 4;
   //format 2023-08-08

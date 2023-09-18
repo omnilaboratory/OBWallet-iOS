@@ -91,15 +91,15 @@ const CardExchangeInfoListRequest$json = {
   '1': 'CardExchangeInfoListRequest',
   '2': [
     {'1': 'cardNo', '3': 1, '4': 1, '5': 9, '10': 'cardNo'},
-    {'1': 'pageNo', '3': 2, '4': 1, '5': 3, '10': 'pageNo'},
-    {'1': 'pageSize', '3': 3, '4': 1, '5': 3, '10': 'pageSize'},
+    {'1': 'start', '3': 2, '4': 1, '5': 3, '10': 'start'},
+    {'1': 'limit', '3': 3, '4': 1, '5': 3, '10': 'limit'},
   ],
 };
 
 /// Descriptor for `CardExchangeInfoListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardExchangeInfoListRequestDescriptor = $convert.base64Decode(
-    'ChtDYXJkRXhjaGFuZ2VJbmZvTGlzdFJlcXVlc3QSFgoGY2FyZE5vGAEgASgJUgZjYXJkTm8SFg'
-    'oGcGFnZU5vGAIgASgDUgZwYWdlTm8SGgoIcGFnZVNpemUYAyABKANSCHBhZ2VTaXpl');
+    'ChtDYXJkRXhjaGFuZ2VJbmZvTGlzdFJlcXVlc3QSFgoGY2FyZE5vGAEgASgJUgZjYXJkTm8SFA'
+    'oFc3RhcnQYAiABKANSBXN0YXJ0EhQKBWxpbWl0GAMgASgDUgVsaW1pdA==');
 
 @$core.Deprecated('Use cardExchangeInfoListResponseDescriptor instead')
 const CardExchangeInfoListResponse$json = {
@@ -119,8 +119,8 @@ const CardHistoryRequest$json = {
   '1': 'CardHistoryRequest',
   '2': [
     {'1': 'cardNo', '3': 1, '4': 1, '5': 9, '10': 'cardNo'},
-    {'1': 'pageNo', '3': 2, '4': 1, '5': 3, '10': 'pageNo'},
-    {'1': 'pageSize', '3': 3, '4': 1, '5': 3, '10': 'pageSize'},
+    {'1': 'start', '3': 2, '4': 1, '5': 3, '10': 'start'},
+    {'1': 'limit', '3': 3, '4': 1, '5': 3, '10': 'limit'},
     {'1': 'startDate', '3': 4, '4': 1, '5': 9, '10': 'startDate'},
     {'1': 'endDate', '3': 5, '4': 1, '5': 9, '10': 'endDate'},
   ],
@@ -128,9 +128,9 @@ const CardHistoryRequest$json = {
 
 /// Descriptor for `CardHistoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardHistoryRequestDescriptor = $convert.base64Decode(
-    'ChJDYXJkSGlzdG9yeVJlcXVlc3QSFgoGY2FyZE5vGAEgASgJUgZjYXJkTm8SFgoGcGFnZU5vGA'
-    'IgASgDUgZwYWdlTm8SGgoIcGFnZVNpemUYAyABKANSCHBhZ2VTaXplEhwKCXN0YXJ0RGF0ZRgE'
-    'IAEoCVIJc3RhcnREYXRlEhgKB2VuZERhdGUYBSABKAlSB2VuZERhdGU=');
+    'ChJDYXJkSGlzdG9yeVJlcXVlc3QSFgoGY2FyZE5vGAEgASgJUgZjYXJkTm8SFAoFc3RhcnQYAi'
+    'ABKANSBXN0YXJ0EhQKBWxpbWl0GAMgASgDUgVsaW1pdBIcCglzdGFydERhdGUYBCABKAlSCXN0'
+    'YXJ0RGF0ZRIYCgdlbmREYXRlGAUgASgJUgdlbmREYXRl');
 
 @$core.Deprecated('Use cardHistoryResponseDescriptor instead')
 const CardHistoryResponse$json = {

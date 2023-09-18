@@ -41,11 +41,18 @@ final $typed_data.Uint8List getCoinPriceResponseDescriptor = $convert.base64Deco
 @$core.Deprecated('Use getSwapTxListRequestDescriptor instead')
 const GetSwapTxListRequest$json = {
   '1': 'GetSwapTxListRequest',
+  '2': [
+    {'1': 'start', '3': 1, '4': 1, '5': 3, '10': 'start'},
+    {'1': 'limit', '3': 2, '4': 1, '5': 3, '10': 'limit'},
+    {'1': 'Symbol', '3': 3, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'Symbol'},
+  ],
 };
 
 /// Descriptor for `GetSwapTxListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getSwapTxListRequestDescriptor = $convert.base64Decode(
-    'ChRHZXRTd2FwVHhMaXN0UmVxdWVzdA==');
+    'ChRHZXRTd2FwVHhMaXN0UmVxdWVzdBIUCgVzdGFydBgBIAEoA1IFc3RhcnQSFAoFbGltaXQYAi'
+    'ABKANSBWxpbWl0EjYKBlN5bWJvbBgDIAEoDjIeLnVzZXIuVHJhY2tlZFR4LkNvbnRyYWN0U3lt'
+    'Ym9sUgZTeW1ib2w=');
 
 @$core.Deprecated('Use getSwapTxListResponseDescriptor instead')
 const GetSwapTxListResponse$json = {

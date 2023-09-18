@@ -21,6 +21,12 @@ message GetCoinPriceResponse {
   double price = 1;
 }
 message GetSwapTxListRequest{
+  //same as mysql's offsset; default(0)
+  int64 start =1;
+  //same as mysql's limit; default(20)
+  int64 limit =2;
+  //coin Symbol: eth/usdc/usdt ;  if usd used, will return all record
+  TrackedTx.ContractSymbol Symbol = 3;
 }
 message GetSwapTxListResponse{
    repeated SwapTx items =1;
