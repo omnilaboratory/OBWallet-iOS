@@ -84,14 +84,15 @@ final $typed_data.Uint8List getTrackedTxListResponseDescriptor = $convert.base64
 const GetAccountHistoryRequest$json = {
   '1': 'GetAccountHistoryRequest',
   '2': [
-    {'1': 'Symbol', '3': 1, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'Symbol'},
+    {'1': 'start', '3': 1, '4': 1, '5': 3, '10': 'start'},
+    {'1': 'limit', '3': 2, '4': 1, '5': 3, '10': 'limit'},
   ],
 };
 
 /// Descriptor for `GetAccountHistoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getAccountHistoryRequestDescriptor = $convert.base64Decode(
-    'ChhHZXRBY2NvdW50SGlzdG9yeVJlcXVlc3QSNgoGU3ltYm9sGAEgASgOMh4udXNlci5UcmFja2'
-    'VkVHguQ29udHJhY3RTeW1ib2xSBlN5bWJvbA==');
+    'ChhHZXRBY2NvdW50SGlzdG9yeVJlcXVlc3QSFAoFc3RhcnQYASABKANSBXN0YXJ0EhQKBWxpbW'
+    'l0GAIgASgDUgVsaW1pdA==');
 
 @$core.Deprecated('Use getAccountHistoryResponseDescriptor instead')
 const GetAccountHistoryResponse$json = {

@@ -105,7 +105,6 @@ class AccountService {
 
   Future<GrpcResponse> getAccountHistory(BuildContext context) async {
     var request = GetAccountHistoryRequest();
-    request.symbol = TrackedTx_ContractSymbol.USD;
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.getAccountHistory(request);

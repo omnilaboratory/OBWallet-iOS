@@ -243,7 +243,8 @@ class GetAccountHistoryRequest extends $pb.GeneratedMessage {
   factory GetAccountHistoryRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetAccountHistoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..e<TrackedTx_ContractSymbol>(1, _omitFieldNames ? '' : 'Symbol', $pb.PbFieldType.OE, protoName: 'Symbol', defaultOrMaker: TrackedTx_ContractSymbol.USD, valueOf: TrackedTx_ContractSymbol.valueOf, enumValues: TrackedTx_ContractSymbol.values)
+    ..aInt64(1, _omitFieldNames ? '' : 'start')
+    ..aInt64(2, _omitFieldNames ? '' : 'limit')
     ..hasRequiredFields = false
   ;
 
@@ -269,13 +270,22 @@ class GetAccountHistoryRequest extends $pb.GeneratedMessage {
   static GetAccountHistoryRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  TrackedTx_ContractSymbol get symbol => $_getN(0);
+  $fixnum.Int64 get start => $_getI64(0);
   @$pb.TagNumber(1)
-  set symbol(TrackedTx_ContractSymbol v) { setField(1, v); }
+  set start($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSymbol() => $_has(0);
+  $core.bool hasStart() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSymbol() => clearField(1);
+  void clearStart() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get limit => $_getI64(1);
+  @$pb.TagNumber(2)
+  set limit($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasLimit() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLimit() => clearField(2);
 }
 
 class GetAccountHistoryResponse extends $pb.GeneratedMessage {
