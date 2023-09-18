@@ -58,9 +58,10 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
       log("$resp");
+      resetServices();
       CommonService.token = resp!.token;
       LocalStorage.save("userToken", resp.token);
-      resetServices();
+
     } catch (e) {
       setError(context, "signIn", e, ret);
     }
@@ -105,8 +106,8 @@ class UserService {
       var resp = await userServiceClient?.signUp(req);
       ret.code = 1;
       ret.data = resp;
-      CommonService.token = resp!.token;
       resetServices();
+      CommonService.token = resp!.token;
     } catch (e) {
       setError(context, "signUp", e, ret);
     }

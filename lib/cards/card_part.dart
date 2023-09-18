@@ -35,6 +35,8 @@ class CardPart extends StatefulWidget {
 
 class _CardPartState extends State<CardPart> {
   var txs = [];
+  int currTypeIndex = 1;
+  int dataStartIndex = 0;
   bool hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
 
   final RefreshController _refreshListController =
@@ -46,18 +48,12 @@ class _CardPartState extends State<CardPart> {
   @override
   void initState() {
     super.initState();
-    if (CommonService.cardInfo.cardNo.isNotEmpty) {
-      hasCard = true;
-      onClickType(0);
-    }
     getCardBalanceFromServer();
   }
 
-  int currTypeIndex = 0;
-  int dataStartIndex = 0;
-
   @override
   Widget build(BuildContext context) {
+    log("hasCard $hasCard");
     return SmartRefresher(
       controller: _refreshBalanceController,
       onRefresh: _onBalanceRefresh,
@@ -274,6 +270,15 @@ class _CardPartState extends State<CardPart> {
             children: [
               InkWell(
                   onTap: () {
+                    onClickType(1);
+                  },
+                  child: Text("Online",
+                      style: TextStyle(
+                          color: currTypeIndex == 1
+                              ? Colors.lightBlueAccent
+                              : Colors.black))),
+              InkWell(
+                  onTap: () {
                     onClickType(0);
                   },
                   child: Text("Offline",
@@ -281,15 +286,6 @@ class _CardPartState extends State<CardPart> {
                           color: currTypeIndex == 0
                               ? Colors.lightBlueAccent
                               : Colors.black))),
-              InkWell(
-                  onTap: () {
-                    onClickType(1);
-                  },
-                  child: Text("Online",
-                      style: TextStyle(
-                          color: currTypeIndex == 1
-                              ? Colors.lightBlueAccent
-                              : Colors.black)))
             ],
           ),
           const SizedBox(height: 10),
@@ -342,7 +338,9 @@ class _CardPartState extends State<CardPart> {
   void _onBalanceRefresh() async {
     CardService.getInstance().cardInfo(context).then((resp) {
       if (resp.code == 1) {
-        setState(() {});
+        if(mounted){
+          setState(() {});
+        }
       }
       _refreshBalanceController.refreshCompleted();
     });
@@ -464,8 +462,7 @@ class _CardPartState extends State<CardPart> {
     if (currTypeIndex == type) {
       return;
     }
-
-    if (_refreshListController.isRefresh) {
+    if (_refreshListController.isRefresh || _refreshListController.isLoading) {
       return;
     }
 
@@ -478,19 +475,16 @@ class _CardPartState extends State<CardPart> {
   getCardBalanceFromServer() {
     CardService.getInstance().cardInfo(context).then((resp) {
       if (resp.code == 1) {
-        hasCard = true;
-        if (mounted) {
-          onClickType(0);
-        }
+        hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
       }
       if (mounted) {
         setState(() {});
       }
+      _refreshBalanceController.refreshCompleted();
     });
   }
 
   getOnlineCardExchangeInfoList() {
-    log("getOnlineCardExchangeInfoList");
     CardService.getInstance()
         .cardExchangeInfoList(
             context,
@@ -525,8 +519,11 @@ class _CardPartState extends State<CardPart> {
 
   getOfflineCardHistoryListFromServer() {
     CardService.getInstance()
-        .cardHistory(context, CommonService.cardInfo.cardNo,
-            Int64.parseInt(dataStartIndex.toString()), Int64.parseInt(pageSize.toString()))
+        .cardHistory(
+            context,
+            CommonService.cardInfo.cardNo,
+            Int64.parseInt(dataStartIndex.toString()),
+            Int64.parseInt(pageSize.toString()))
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as CardHistoryResponse).items;

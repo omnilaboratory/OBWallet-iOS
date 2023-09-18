@@ -5,7 +5,10 @@ import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/tx_item.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/tools/global_params.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TxHistory extends StatefulWidget {
   const TxHistory({super.key});
@@ -15,15 +18,136 @@ class TxHistory extends StatefulWidget {
 }
 
 class _TxHistoryState extends State<TxHistory> {
-  String tips = "Loading";
-  String title = "(Exchange)";
+  int dataStartIndex = 0;
+  final RefreshController _refreshListController =
+      RefreshController(initialRefresh: true);
 
   List<CryptoTxInfo> txHistoryList = [];
+  var currTypeIndex = 0;
+
+  void onClickType(int type) {
+    if (currTypeIndex == type) {
+      return;
+    }
+    if (_refreshListController.isRefresh || _refreshListController.isLoading) {
+      return;
+    }
+
+    txHistoryList = [];
+    currTypeIndex = type;
+    dataStartIndex = 0;
+
+    if (type == 0) {
+      getSwapTxList();
+    } else {
+      getTrackedTxList();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leadingWidth: 42,
+        titleSpacing: 0,
+        title: const HeadLogo(title: "Crypto"),
+      ),
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InkWell(
+                  onTap: () {
+                    onClickType(0);
+                  },
+                  child: Text("Exchange",
+                      style: TextStyle(
+                          color: currTypeIndex == 0
+                              ? Colors.lightBlueAccent
+                              : Colors.black))),
+              InkWell(
+                  onTap: () {
+                    onClickType(1);
+                  },
+                  child: Text("Send",
+                      style: TextStyle(
+                          color: currTypeIndex == 1
+                              ? Colors.lightBlueAccent
+                              : Colors.black)))
+            ],
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: SmartRefresher(
+                controller: _refreshListController,
+                enablePullDown: true,
+                enablePullUp: true,
+                header: const WaterDropHeader(),
+                footer: CustomFooter(
+                  builder: (BuildContext context, LoadStatus? mode) {
+                    Widget body;
+                    if (mode == LoadStatus.idle) {
+                      body = const Text("pull up load");
+                    } else if (mode == LoadStatus.loading) {
+                      body = const CupertinoActivityIndicator();
+                    } else if (mode == LoadStatus.failed) {
+                      body = const Text("Load Failed!Click retry!");
+                    } else if (mode == LoadStatus.canLoading) {
+                      body = const Text("release to load more");
+                    } else {
+                      body = const Text("No more Data");
+                    }
+                    return SizedBox(
+                      height: 55.0,
+                      child: Center(child: body),
+                    );
+                  },
+                ),
+                onRefresh: _onListRefresh,
+                onLoading: _onListLoading,
+                child: txHistoryList.isEmpty
+                    ? const Center(child: Text("No Data"))
+                    : ListView.builder(
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 10),
+                        itemCount: txHistoryList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (index < txHistoryList.length) {
+                            return CryptoTxItem(txInfo: txHistoryList[index]);
+                          }
+                          return null;
+                        })),
+          )
+        ],
+      ),
+    );
+  }
+
+  void _onListRefresh() async {
+    txHistoryList = [];
+    dataStartIndex = 0;
+    if (currTypeIndex == 0) {
+      getSwapTxList();
+    } else {
+      getTrackedTxList();
+    }
+  }
+
+  void _onListLoading() async {
+    dataStartIndex += pageSize;
+    if (currTypeIndex == 0) {
+      getSwapTxList();
+    } else {
+      getTrackedTxList();
+    }
+  }
 
   void getSwapTxList() {
-    AccountService.getInstance().getSwapTxList(context).then((result) {
+    AccountService.getInstance()
+        .getSwapTxList(context, dataStartIndex, pageSize)
+        .then((result) {
       if (result.code == 1) {
-        txHistoryList.clear();
         var resp = result.data as GetSwapTxListResponse;
         var items = resp.items;
         if (items.isNotEmpty) {
@@ -37,23 +161,29 @@ class _TxHistoryState extends State<TxHistory> {
                 targetSymbol: element.targetSymbol.name,
                 amount: element.amt,
                 amountOfDollar: element.settleAmt,
-                status: element.status.value > 2 ? element.status.value-2 : 0));
+                status:
+                    element.status.value > 2 ? element.status.value - 2 : 0));
           }
-        } else {
-          tips = "No Txs Data";
         }
         setState(() {});
+      }
+      if (_refreshListController.isRefresh) {
+        _refreshListController.refreshCompleted();
+      }
+      if (_refreshListController.isLoading) {
+        _refreshListController.loadComplete();
       }
     });
   }
 
   void getTrackedTxList() {
-    AccountService.getInstance().getTrackedTxList(context).then((result) {
+    AccountService.getInstance()
+        .getTrackedTxList(context, dataStartIndex, pageSize)
+        .then((result) {
       if (result.code == 1) {
-        txHistoryList.clear();
         var resp = result.data as GetTrackedTxListResponse;
         var items = resp.items;
-        log("getTrackedTxList  $items");
+        // log("getTrackedTxList  $items");
         if (items.isNotEmpty) {
           for (var element in items) {
             txHistoryList.add(CryptoTxInfo(
@@ -63,73 +193,18 @@ class _TxHistoryState extends State<TxHistory> {
                 fromSymbol: element.symbol.name,
                 amount: element.amt,
                 amountOfDollar: element.usdAmt,
-                status: element.status.value > 2 ? element.status.value-2 : 0));
+                status:
+                    element.status.value > 2 ? element.status.value - 2 : 0));
           }
-        } else {
-          tips = "No Txs Data";
         }
         setState(() {});
       }
+      if (_refreshListController.isRefresh) {
+        _refreshListController.refreshCompleted();
+      }
+      if (_refreshListController.isLoading) {
+        _refreshListController.loadComplete();
+      }
     });
-  }
-
-  void onClickType(int type) {
-    tips = "Loading";
-    if (type == 0) {
-      title = "(Exchange)";
-      getSwapTxList();
-    } else {
-      title = "(Send)";
-      getTrackedTxList();
-    }
-  }
-
-  @override
-  void initState() {
-    getSwapTxList();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leadingWidth: 42,
-        titleSpacing: 0,
-        title: HeadLogo(title: "Crypto$title"),
-      ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                  onTap: () {
-                    onClickType(0);
-                  },
-                  child: const Text("Exchange")),
-              InkWell(
-                  onTap: () {
-                    onClickType(1);
-                  },
-                  child: const Text("Send"))
-            ],
-          ),
-          const SizedBox(height: 10),
-          txHistoryList.isEmpty
-              ? Center(child: Text(tips))
-              : Expanded(
-                  child: ListView.builder(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 20, top: 10),
-                      itemCount: txHistoryList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CryptoTxItem(txInfo: txHistoryList[index]);
-                      }),
-                )
-        ],
-      ),
-    );
   }
 }

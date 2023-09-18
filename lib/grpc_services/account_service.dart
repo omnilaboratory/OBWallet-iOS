@@ -5,6 +5,7 @@ import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
@@ -86,9 +87,11 @@ class AccountService {
     return ret;
   }
 
-  Future<GrpcResponse> getSwapTxList(BuildContext context) async {
+  Future<GrpcResponse> getSwapTxList(
+      BuildContext context, int start, int limit) async {
     var request = GetSwapTxListRequest();
-
+    request.start = Int64.parseInt(start.toString());
+    request.limit = Int64.parseInt(limit.toString());
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.getSwapTxList(request);
@@ -115,10 +118,10 @@ class AccountService {
   }
 
   Future<GrpcResponse> getTrackedTxList(
-    BuildContext context,
-  ) async {
+      BuildContext context, int start, int limit) async {
     var request = GetSwapTxListRequest();
-
+    request.start = Int64.parseInt(start.toString());
+    request.limit = Int64.parseInt(limit.toString());
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.getTrackedTxList(request);

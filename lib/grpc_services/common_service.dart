@@ -33,6 +33,9 @@ mixin CommonService {
 }
 // when login and signup ,need fresh the user login token auth
 resetServices() {
+  CommonService.token = "";
+  CommonService.userInfo = null;
+  CommonService.cardInfo = CardInfo();
   UserService.userServiceClient = null;
   AccountService.accountServiceClient = null;
   CardService.cardServiceClient = null;
