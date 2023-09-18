@@ -54,7 +54,6 @@ class _CardPartState extends State<CardPart> {
 
   int currTypeIndex = 0;
   int currPageNo = 1;
-  bool isRequestDataFromServer = false;
 
   @override
   Widget build(BuildContext context) {
@@ -327,7 +326,10 @@ class _CardPartState extends State<CardPart> {
                       padding: const EdgeInsets.only(top: 20),
                       itemCount: txs.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return CurrencyTxItem(txInfo: txs[index]);
+                        if (index < txs.length) {
+                          return CurrencyTxItem(txInfo: txs[index]);
+                        }
+                        return null;
                       }),
             ),
           ),
@@ -338,9 +340,8 @@ class _CardPartState extends State<CardPart> {
 
   void _onBalanceRefresh() async {
     CardService.getInstance().cardInfo(context).then((resp) {
-      if(resp.code==1){
-        setState(() {
-        });
+      if (resp.code == 1) {
+        setState(() {});
       }
       _refreshBalanceController.refreshCompleted();
     });
@@ -354,7 +355,6 @@ class _CardPartState extends State<CardPart> {
       getOnlineCardExchangeInfoList();
     }
   }
-
 
   Row buildTxButtons() {
     var size = MediaQuery.sizeOf(context);
@@ -459,6 +459,14 @@ class _CardPartState extends State<CardPart> {
   }
 
   onClickType(int type) {
+    if (currTypeIndex == type) {
+      return;
+    }
+
+    if (_refreshListController.isRefresh) {
+      return;
+    }
+
     currTypeIndex = type;
     currPageNo = 1;
     _onListRefresh();
@@ -480,15 +488,11 @@ class _CardPartState extends State<CardPart> {
   }
 
   getOnlineCardExchangeInfoList() {
-    if (isRequestDataFromServer) {
-      return;
-    }
-    isRequestDataFromServer = true;
+    log("getOnlineCardExchangeInfoList");
     CardService.getInstance()
         .cardExchangeInfoList(context, CommonService.cardInfo.cardNo,
             Int64.parseInt(currPageNo.toString()), Int64.parseInt("2"))
         .then((resp) {
-      isRequestDataFromServer = false;
       if (resp.code == 1) {
         var items = (resp.data as CardExchangeInfoListResponse).items;
         if (items.isNotEmpty) {
@@ -515,15 +519,10 @@ class _CardPartState extends State<CardPart> {
   }
 
   getOfflineCardHistoryListFromServer() {
-    if (isRequestDataFromServer) {
-      return;
-    }
-    isRequestDataFromServer = true;
     CardService.getInstance()
         .cardHistory(context, CommonService.cardInfo.cardNo,
             Int64.parseInt(currPageNo.toString()), Int64.parseInt("2"))
         .then((resp) {
-      isRequestDataFromServer = false;
       if (resp.code == 1) {
         var items = (resp.data as CardHistoryResponse).items;
         log("$items");
