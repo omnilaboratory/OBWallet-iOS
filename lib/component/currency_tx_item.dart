@@ -3,6 +3,7 @@ import 'package:awallet/bean/currency_tx_info.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 
+var circleClrs = [Colors.grey, Colors.green, Colors.red];
 class CurrencyTxItem extends StatelessWidget {
   final CurrencyTxInfo txInfo;
 
@@ -16,20 +17,11 @@ class CurrencyTxItem extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 24,
-            height: 24,
+            width: 12,
+            height: 12,
             decoration: BoxDecoration(
-                color: const Color(0xff257B7D),
-                borderRadius: BorderRadius.circular(12)),
-            child: Text(
-              txInfo.name.substring(0, 1).toUpperCase(),
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+                color: circleClrs[txInfo.status],
+                borderRadius: BorderRadius.circular(6)),
           ),
           const SizedBox(width: 6),
           SizedBox(
@@ -65,14 +57,6 @@ class CurrencyTxItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                '\$ ${txInfo.amountOfDollar}',
-                style: const TextStyle(
-                  color: Color(0xFF999999),
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ),
-              )
             ],
           )
         ],

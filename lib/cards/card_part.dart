@@ -32,7 +32,6 @@ class CardPart extends StatefulWidget {
 
 class _CardPartState extends State<CardPart> {
   var txs = [];
-
   bool hasCard = false;
 
   @override
@@ -40,7 +39,7 @@ class _CardPartState extends State<CardPart> {
     super.initState();
     if (CommonService.cardInfo.cardNo.isNotEmpty) {
       hasCard = true;
-      getOfflineTxList();
+      onClickType(0);
     }
     getBalance();
   }
@@ -50,7 +49,7 @@ class _CardPartState extends State<CardPart> {
       if (resp.code == 1) {
         hasCard = true;
         if (mounted) {
-          getOnlineTxList();
+          onClickType(0);
         }
       }
       if (mounted) {
@@ -76,6 +75,7 @@ class _CardPartState extends State<CardPart> {
   }
 
   getOnlineTxList() {
+    txs = [];
     CardService.getInstance()
         .cardExchangeInfoList(context, CommonService.cardInfo.cardNo,
             Int64.parseInt("1"), Int64.parseInt("50"))
@@ -88,7 +88,8 @@ class _CardPartState extends State<CardPart> {
                 name: element.counterParty,
                 currencyName: "USD",
                 amount: element.amt,
-                amountOfDollar: 0));
+                status: element.status.value,
+                amountOfDollar: element.amt));
           }
           if (mounted) {
             setState(() {});
@@ -99,6 +100,7 @@ class _CardPartState extends State<CardPart> {
   }
 
   getOfflineTxList() {
+    txs = [];
     CardService.getInstance()
         .cardHistory(context, CommonService.cardInfo.cardNo,
             Int64.parseInt("1"), Int64.parseInt("50"))
