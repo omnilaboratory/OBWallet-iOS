@@ -61,11 +61,11 @@ class CardService {
   }
 
   Future<GrpcResponse> cardHistory(
-      BuildContext context, String cardNo, Int64 pageNo, Int64 pageSize) async {
+      BuildContext context, String cardNo, Int64 start, Int64 limit) async {
     var request = CardHistoryRequest();
     request.cardNo = cardNo;
-    request.pageNo = pageNo;
-    request.pageSize = pageSize;
+    request.start = start;
+    request.limit = limit;
     var now = DateTime.now();
     request.startDate =
         DateFormat("yyyy-MM-dd").format(now.add(const Duration(days: -180)));
@@ -83,11 +83,11 @@ class CardService {
   }
 
   Future<GrpcResponse> cardExchangeInfoList(
-      BuildContext context, String cardNo, Int64 pageNo, Int64 pageSize) async {
+      BuildContext context, String cardNo, Int64 start,Int64 limit) async {
     var request = CardExchangeInfoListRequest();
     request.cardNo = cardNo;
-    request.pageNo = pageNo;
-    request.pageSize = pageSize;
+    request.start = start;
+    request.limit = limit;
     log("$request");
     var ret = GrpcResponse();
     try {

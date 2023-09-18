@@ -3,6 +3,8 @@ import 'package:awallet/bean/enum_network_type.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:event_bus/event_bus.dart';
 
+int pageSize = 2;
+
 class GlobalParams {
 
   static EventBus eventBus = EventBus();

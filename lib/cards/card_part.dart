@@ -10,6 +10,7 @@ import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/cupertino.dart';
@@ -53,7 +54,7 @@ class _CardPartState extends State<CardPart> {
   }
 
   int currTypeIndex = 0;
-  int currPageNo = 1;
+  int dataStartIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -349,6 +350,7 @@ class _CardPartState extends State<CardPart> {
 
   void _onListRefresh() async {
     txs = [];
+    dataStartIndex = 0;
     if (currTypeIndex == 0) {
       getOfflineCardHistoryListFromServer();
     } else {
@@ -412,7 +414,7 @@ class _CardPartState extends State<CardPart> {
   }
 
   void _onListLoading() async {
-    currPageNo += 1;
+    dataStartIndex += pageSize;
     if (currTypeIndex == 0) {
       getOfflineCardHistoryListFromServer();
     } else {
@@ -468,7 +470,7 @@ class _CardPartState extends State<CardPart> {
     }
 
     currTypeIndex = type;
-    currPageNo = 1;
+    dataStartIndex = 1;
     _onListRefresh();
     setState(() {});
   }
@@ -490,8 +492,11 @@ class _CardPartState extends State<CardPart> {
   getOnlineCardExchangeInfoList() {
     log("getOnlineCardExchangeInfoList");
     CardService.getInstance()
-        .cardExchangeInfoList(context, CommonService.cardInfo.cardNo,
-            Int64.parseInt(currPageNo.toString()), Int64.parseInt("2"))
+        .cardExchangeInfoList(
+            context,
+            CommonService.cardInfo.cardNo,
+            Int64.parseInt(dataStartIndex.toString()),
+            Int64.parseInt(pageSize.toString()))
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as CardExchangeInfoListResponse).items;
@@ -521,7 +526,7 @@ class _CardPartState extends State<CardPart> {
   getOfflineCardHistoryListFromServer() {
     CardService.getInstance()
         .cardHistory(context, CommonService.cardInfo.cardNo,
-            Int64.parseInt(currPageNo.toString()), Int64.parseInt("2"))
+            Int64.parseInt(dataStartIndex.toString()), Int64.parseInt(pageSize.toString()))
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as CardHistoryResponse).items;
