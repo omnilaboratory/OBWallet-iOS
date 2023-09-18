@@ -34,9 +34,12 @@ class CardPart extends StatefulWidget {
 
 class _CardPartState extends State<CardPart> {
   var txs = [];
-  bool hasCard = false;
+  bool hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
 
   final RefreshController _refreshListController =
+      RefreshController(initialRefresh: true);
+
+  final RefreshController _refreshBalanceController =
       RefreshController(initialRefresh: true);
 
   @override
@@ -46,116 +49,27 @@ class _CardPartState extends State<CardPart> {
       hasCard = true;
       onClickType(0);
     }
-    getBalance();
-  }
-
-  getBalance() {
-    CardService.getInstance().cardInfo(context).then((resp) {
-      if (resp.code == 1) {
-        hasCard = true;
-        if (mounted) {
-          onClickType(0);
-        }
-      }
-      if (mounted) {
-        setState(() {});
-      }
-    });
+    getCardBalanceFromServer();
   }
 
   int currTypeIndex = 0;
   int currPageNo = 1;
   bool isRequestDataFromServer = false;
 
-  onClickType(int type) {
-    currTypeIndex = type;
-    currPageNo = 1;
-    _onListRefresh();
-    setState(() {});
-  }
-
-  getOnlineTxList() {
-    if (isRequestDataFromServer) {
-      return;
-    }
-    isRequestDataFromServer = true;
-    CardService.getInstance()
-        .cardExchangeInfoList(context, CommonService.cardInfo.cardNo,
-            Int64.parseInt(currPageNo.toString()), Int64.parseInt("2"))
-        .then((resp) {
-      isRequestDataFromServer = false;
-      if (resp.code == 1) {
-        var items = (resp.data as CardExchangeInfoListResponse).items;
-        log("$items");
-        if (items.isNotEmpty) {
-          for (var element in items) {
-            txs.add(CurrencyTxInfo(
-                name: element.counterParty,
-                currencyName: "USD",
-                amount: element.amt.abs(),
-                status: element.status.value,
-                amountOfDollar: element.amt.abs()));
-          }
-          if (mounted) {
-            setState(() {});
-          }
-        }
-      }
-      if(_refreshListController.isRefresh){
-        _refreshListController.refreshCompleted();
-      }
-      if(_refreshListController.isLoading){
-        _refreshListController.loadComplete();
-      }
-
-    });
-  }
-
-  getOfflineTxList() {
-    if (isRequestDataFromServer) {
-      return;
-    }
-    isRequestDataFromServer = true;
-    CardService.getInstance()
-        .cardHistory(context, CommonService.cardInfo.cardNo,
-            Int64.parseInt(currPageNo.toString()), Int64.parseInt("2"))
-        .then((resp) {
-      isRequestDataFromServer = false;
-      if (resp.code == 1) {
-        var items = (resp.data as CardHistoryResponse).items;
-        log("$items");
-        if (items.isNotEmpty) {
-          for (var element in items) {
-            txs.add(CurrencyTxInfo(
-                name: element.authMerchant,
-                currencyName: element.settleCurrency,
-                amount: double.parse(element.settleAmt),
-                amountOfDollar: 0));
-          }
-          if (mounted) {
-            setState(() {});
-          }
-        }
-      }
-      if(_refreshListController.isRefresh){
-        _refreshListController.refreshCompleted();
-      }
-      if(_refreshListController.isLoading){
-        _refreshListController.loadComplete();
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          const SizedBox(height: 20),
-          buildCard(context),
-          const SizedBox(height: 15),
-          hasCard ? buildCardDetail(context) : buildApplyCardPart(),
-        ],
+    return SmartRefresher(
+      controller: _refreshBalanceController,
+      onRefresh: _onBalanceRefresh,
+      child: Center(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            buildCard(context),
+            const SizedBox(height: 15),
+            hasCard ? buildCardDetail(context) : buildApplyCardPart(),
+          ],
+        ),
       ),
     );
   }
@@ -333,61 +247,6 @@ class _CardPartState extends State<CardPart> {
     );
   }
 
-  String getCardExpiryDate() {
-    String expiryDate = CommonService.cardInfo.expiryDate;
-    if (expiryDate.isEmpty) {
-      expiryDate = "****";
-    }
-    return "Exp. ${expiryDate.substring(2, 4)}/${expiryDate.substring(0, 2)}";
-  }
-
-  String getCardNo() {
-    String cardNo = CommonService.cardInfo.cardNo;
-    if (cardNo.isEmpty) {
-      cardNo = "****************";
-    }
-    return "${cardNo.substring(0, 4)} ${cardNo.substring(4, 8)} ${cardNo.substring(8, 12)} ${cardNo.substring(12)}";
-  }
-
-  onClickApplyCard() {
-    if (CommonService.userInfo!.kycStatus == "passed") {
-      applyCardFunc();
-    } else {
-      UserService.getInstance().getUserInfo(context).then((resp) {
-        log("$resp");
-        if (resp.code == 1 && resp.data != null) {
-          CommonService.userInfo = (resp.data as GetUserInfoResponse).user;
-          if (CommonService.userInfo!.kycStatus == "") {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return const Kyc();
-                });
-          }
-
-          if (CommonService.userInfo!.kycStatus == "pending") {
-            showToast(Tips.checkKycResult.value);
-          }
-
-          if (CommonService.userInfo!.kycStatus == "passed") {
-            applyCardFunc();
-          }
-        }
-      });
-    }
-  }
-
-  applyCardFunc() async {
-    var flag = await showDialog(
-        context: context,
-        builder: (context) {
-          return const ApplyCard();
-        });
-    if (flag != null && flag == true) {
-      setState(() {});
-    }
-  }
-
   Widget buildCardDetail(BuildContext context) {
     return Expanded(
       child: Column(
@@ -462,12 +321,14 @@ class _CardPartState extends State<CardPart> {
               ),
               onRefresh: _onListRefresh,
               onLoading: _onListLoading,
-              child: ListView.builder(
-                  padding: const EdgeInsets.only(top: 20),
-                  itemCount: txs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CurrencyTxItem(txInfo: txs[index]);
-                  }),
+              child: txs.isEmpty
+                  ? const Center(child: Text("No Data"))
+                  : ListView.builder(
+                      padding: const EdgeInsets.only(top: 20),
+                      itemCount: txs.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CurrencyTxItem(txInfo: txs[index]);
+                      }),
             ),
           ),
         ],
@@ -475,22 +336,25 @@ class _CardPartState extends State<CardPart> {
     );
   }
 
+  void _onBalanceRefresh() async {
+    CardService.getInstance().cardInfo(context).then((resp) {
+      if(resp.code==1){
+        setState(() {
+        });
+      }
+      _refreshBalanceController.refreshCompleted();
+    });
+  }
+
   void _onListRefresh() async {
     txs = [];
     if (currTypeIndex == 0) {
-      getOfflineTxList();
+      getOfflineCardHistoryListFromServer();
     } else {
-      getOnlineTxList();
+      getOnlineCardExchangeInfoList();
     }
   }
-  void _onListLoading() async{
-    currPageNo += 1;
-    if (currTypeIndex == 0) {
-      getOfflineTxList();
-    } else {
-      getOnlineTxList();
-    }
-  }
+
 
   Row buildTxButtons() {
     var size = MediaQuery.sizeOf(context);
@@ -529,5 +393,159 @@ class _CardPartState extends State<CardPart> {
             }),
       ],
     );
+  }
+
+  String getCardExpiryDate() {
+    String expiryDate = CommonService.cardInfo.expiryDate;
+    if (expiryDate.isEmpty) {
+      expiryDate = "****";
+    }
+    return "Exp. ${expiryDate.substring(2, 4)}/${expiryDate.substring(0, 2)}";
+  }
+
+  String getCardNo() {
+    String cardNo = CommonService.cardInfo.cardNo;
+    if (cardNo.isEmpty) {
+      cardNo = "****************";
+    }
+    return "${cardNo.substring(0, 4)} ${cardNo.substring(4, 8)} ${cardNo.substring(8, 12)} ${cardNo.substring(12)}";
+  }
+
+  void _onListLoading() async {
+    currPageNo += 1;
+    if (currTypeIndex == 0) {
+      getOfflineCardHistoryListFromServer();
+    } else {
+      getOnlineCardExchangeInfoList();
+    }
+  }
+
+  onClickApplyCard() {
+    if (CommonService.userInfo!.kycStatus == "passed") {
+      applyCardFromServer();
+    } else {
+      UserService.getInstance().getUserInfo(context).then((resp) {
+        if (resp.code == 1 && resp.data != null) {
+          CommonService.userInfo = (resp.data as GetUserInfoResponse).user;
+          if (CommonService.userInfo!.kycStatus == "") {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return const Kyc();
+                });
+          }
+
+          if (CommonService.userInfo!.kycStatus == "pending") {
+            showToast(Tips.checkKycResult.value);
+          }
+
+          if (CommonService.userInfo!.kycStatus == "passed") {
+            applyCardFromServer();
+          }
+        }
+      });
+    }
+  }
+
+  applyCardFromServer() async {
+    var flag = await showDialog(
+        context: context,
+        builder: (context) {
+          return const ApplyCard();
+        });
+    if (flag != null && flag == true) {
+      setState(() {});
+    }
+  }
+
+  onClickType(int type) {
+    currTypeIndex = type;
+    currPageNo = 1;
+    _onListRefresh();
+    setState(() {});
+  }
+
+  getCardBalanceFromServer() {
+    CardService.getInstance().cardInfo(context).then((resp) {
+      if (resp.code == 1) {
+        hasCard = true;
+        if (mounted) {
+          onClickType(0);
+        }
+      }
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  getOnlineCardExchangeInfoList() {
+    if (isRequestDataFromServer) {
+      return;
+    }
+    isRequestDataFromServer = true;
+    CardService.getInstance()
+        .cardExchangeInfoList(context, CommonService.cardInfo.cardNo,
+            Int64.parseInt(currPageNo.toString()), Int64.parseInt("2"))
+        .then((resp) {
+      isRequestDataFromServer = false;
+      if (resp.code == 1) {
+        var items = (resp.data as CardExchangeInfoListResponse).items;
+        if (items.isNotEmpty) {
+          for (var element in items) {
+            txs.add(CurrencyTxInfo(
+                name: element.counterParty,
+                currencyName: "USD",
+                amount: element.amt.abs(),
+                status: element.status.value,
+                amountOfDollar: element.amt.abs()));
+          }
+          if (mounted) {
+            setState(() {});
+          }
+        }
+      }
+      if (_refreshListController.isRefresh) {
+        _refreshListController.refreshCompleted();
+      }
+      if (_refreshListController.isLoading) {
+        _refreshListController.loadComplete();
+      }
+    });
+  }
+
+  getOfflineCardHistoryListFromServer() {
+    if (isRequestDataFromServer) {
+      return;
+    }
+    isRequestDataFromServer = true;
+    CardService.getInstance()
+        .cardHistory(context, CommonService.cardInfo.cardNo,
+            Int64.parseInt(currPageNo.toString()), Int64.parseInt("2"))
+        .then((resp) {
+      isRequestDataFromServer = false;
+      if (resp.code == 1) {
+        var items = (resp.data as CardHistoryResponse).items;
+        log("$items");
+        if (items.isNotEmpty) {
+          for (var element in items) {
+            txs.add(CurrencyTxInfo(
+                name: element.authMerchant,
+                currencyName: element.settleCurrency,
+                amount: double.parse(element.settleAmt),
+                amountOfDollar: 0));
+          }
+          if (mounted) {
+            setState(() {});
+          }
+        }
+      }
+      if (_refreshListController.isRefresh) {
+        _refreshListController.refreshCompleted();
+      }
+      if (_refreshListController.isLoading) {
+        _refreshListController.loadComplete();
+      }
+    });
   }
 }
