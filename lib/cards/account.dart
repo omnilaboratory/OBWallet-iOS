@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:developer';
 
 import 'package:awallet/bean/crypto_tx_info.dart';
@@ -13,11 +12,11 @@ import 'package:awallet/component/tx_item.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
-import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class Account extends StatefulWidget {
   Account({super.key});
@@ -32,69 +31,10 @@ class _AccountState extends State<Account> {
   var txs = [];
   var currTypeIndex = 0;
 
-  void onClickType(int type) {
-    txs = [];
-    currTypeIndex = type;
-    if (type == 0) {
-      getSwapTxList();
-    }
-    if (type == 1) {
-      getAccountHistory();
-    }
-  }
-
-  getSwapTxList() {
-    AccountService.getInstance().getSwapTxList(context).then((resp) {
-      if (resp.code == 1) {
-        var items = (resp.data as GetSwapTxListResponse).items;
-        if (items.isNotEmpty) {
-          for (var element in items) {
-            txs.add(CryptoTxInfo(
-                title:
-                    "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
-                txTime: DateTime.fromMillisecondsSinceEpoch(
-                    (element.createdAt * 1000).toInt()),
-                fromSymbol: element.fromSymbol.name,
-                targetSymbol: element.targetSymbol.name,
-                amount: element.amt,
-                amountOfDollar: element.settleAmt,
-                status:
-                    element.status.value > 2 ? element.status.value - 2 : 0));
-          }
-          if (mounted) {
-            setState(() {});
-          }
-        }
-      }
-    });
-  }
-
-  getAccountHistory() {
-    AccountService.getInstance().getAccountHistory(context).then((resp) {
-      if (resp.code == 1) {
-        var items = (resp.data as GetAccountHistoryResponse).items;
-        if (items.isNotEmpty) {
-          for (var element in items) {
-            txs.add(CryptoTxInfo(
-                title: element.sourceType.name,
-                txTime: DateTime.fromMillisecondsSinceEpoch(
-                    (element.createdAt * 1000).toInt()),
-                fromSymbol: element.sourceId,
-                targetSymbol: "",
-                amount: element.amt.abs(),
-                amountOfDollar: null,
-                status: 3));
-          }
-          if (mounted) {
-            setState(() {});
-          }
-        }
-      }
-    });
-  }
+  final RefreshController _refreshBalanceController =
+  RefreshController(initialRefresh: true);
 
   double totalBalanceUsd = 0;
-  Timer? updateBalanceTimer;
 
   @override
   void initState() {
@@ -108,99 +48,76 @@ class _AccountState extends State<Account> {
         }
       });
     }
-    updateBalance();
     onClickType(0);
-    updateBalanceTimer ??= Timer.periodic(const Duration(seconds: 30), (timer) {
-      if (mounted) {
-        setState(() {
-          updateBalance();
-        });
-      }
-    });
-
-    GlobalParams.eventBus.on().listen((event) {
-      if (event == "MoreMenu_setNetwork") {
-        updateBalance();
-      }
-    });
     super.initState();
-  }
-
-  void updateBalance() {
-    AccountService.getInstance().getAccountInfo(context).then((info) {
-      if (info.code == 1) {
-        var accountInfo = info.data as AccountInfo;
-        log("$accountInfo");
-        totalBalanceUsd = accountInfo.balanceUsd;
-        if (mounted) {
-          setState(() {});
-        }
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 28),
-        buildBalance(),
-        // txs.isNotEmpty ? buildBalanceInCurrency() : const SizedBox(height: 0),
-        const SizedBox(height: 30),
-        buildTxButtons(),
-        Padding(
-          padding: const EdgeInsets.only(top: 25, bottom: 10),
-          child: Dash(
-            dashColor: const Color(0xFFCFCFCF),
-            length: MediaQuery.of(context).size.width - 40,
+    return SmartRefresher(
+      controller: _refreshBalanceController,
+      onRefresh: _onBalanceRefresh,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 28),
+          buildBalance(),
+          // txs.isNotEmpty ? buildBalanceInCurrency() : const SizedBox(height: 0),
+          const SizedBox(height: 30),
+          buildTxButtons(),
+          Padding(
+            padding: const EdgeInsets.only(top: 25, bottom: 10),
+            child: Dash(
+              dashColor: const Color(0xFFCFCFCF),
+              length: MediaQuery.of(context).size.width - 40,
+            ),
           ),
-        ),
-        const Text(
-          'Recent Transactions',
-          style: TextStyle(
-            color: Color(0xFF999999),
-            fontSize: 15,
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w400,
+          const Text(
+            'Recent Transactions',
+            style: TextStyle(
+              color: Color(0xFF999999),
+              fontSize: 15,
+              fontFamily: 'Montserrat',
+              fontWeight: FontWeight.w400,
+            ),
           ),
-        ),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            InkWell(
-                onTap: () {
-                  onClickType(0);
-                },
-                child: Text("SwapTx",
-                    style: TextStyle(
-                        color: currTypeIndex == 0
-                            ? Colors.lightBlueAccent
-                            : Colors.black))),
-            InkWell(
-                onTap: () {
-                  onClickType(1);
-                },
-                child: Text("AccountHistory",
-                    style: TextStyle(
-                        color: currTypeIndex == 1
-                            ? Colors.lightBlueAccent
-                            : Colors.black)))
-          ],
-        ),
-        const SizedBox(height: 10),
-        Expanded(
-          child: txs.isEmpty
-              ? const Center(child: Text("no Data"))
-              : ListView.builder(
-                  padding: const EdgeInsets.only(top: 20),
-                  itemCount: txs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CryptoTxItem(txInfo: txs[index]);
-                  }),
-        )
-      ],
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InkWell(
+                  onTap: () {
+                    onClickType(0);
+                  },
+                  child: Text("SwapTx",
+                      style: TextStyle(
+                          color: currTypeIndex == 0
+                              ? Colors.lightBlueAccent
+                              : Colors.black))),
+              InkWell(
+                  onTap: () {
+                    onClickType(1);
+                  },
+                  child: Text("AccountHistory",
+                      style: TextStyle(
+                          color: currTypeIndex == 1
+                              ? Colors.lightBlueAccent
+                              : Colors.black)))
+            ],
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: txs.isEmpty
+                ? const Center(child: Text("no Data"))
+                : ListView.builder(
+                    padding: const EdgeInsets.only(top: 20),
+                    itemCount: txs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return CryptoTxItem(txInfo: txs[index]);
+                    }),
+          )
+        ],
+      ),
     );
   }
 
@@ -298,5 +215,79 @@ class _AccountState extends State<Account> {
             ),
           )),
     );
+  }
+
+  void onClickType(int type) {
+    txs = [];
+    currTypeIndex = type;
+    if (type == 0) {
+      getSwapTxList();
+    }
+    if (type == 1) {
+      getAccountHistory();
+    }
+  }
+
+  getSwapTxList() {
+    AccountService.getInstance().getSwapTxList(context).then((resp) {
+      if (resp.code == 1) {
+        var items = (resp.data as GetSwapTxListResponse).items;
+        if (items.isNotEmpty) {
+          for (var element in items) {
+            txs.add(CryptoTxInfo(
+                title:
+                "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
+                txTime: DateTime.fromMillisecondsSinceEpoch(
+                    (element.createdAt * 1000).toInt()),
+                fromSymbol: element.fromSymbol.name,
+                targetSymbol: element.targetSymbol.name,
+                amount: element.amt,
+                amountOfDollar: element.settleAmt,
+                status:
+                element.status.value > 2 ? element.status.value - 2 : 0));
+          }
+          if (mounted) {
+            setState(() {});
+          }
+        }
+      }
+    });
+  }
+
+  getAccountHistory() {
+    AccountService.getInstance().getAccountHistory(context).then((resp) {
+      if (resp.code == 1) {
+        var items = (resp.data as GetAccountHistoryResponse).items;
+        if (items.isNotEmpty) {
+          for (var element in items) {
+            txs.add(CryptoTxInfo(
+                title: element.sourceType.name,
+                txTime: DateTime.fromMillisecondsSinceEpoch(
+                    (element.createdAt * 1000).toInt()),
+                fromSymbol: element.sourceId,
+                targetSymbol: "",
+                amount: element.amt.abs(),
+                amountOfDollar: null,
+                status: 3));
+          }
+          if (mounted) {
+            setState(() {});
+          }
+        }
+      }
+    });
+  }
+
+  void _onBalanceRefresh() {
+    AccountService.getInstance().getAccountInfo(context).then((info) {
+      if (info.code == 1) {
+        var accountInfo = info.data as AccountInfo;
+        totalBalanceUsd = accountInfo.balanceUsd;
+        if (mounted) {
+          setState(() {});
+        }
+      }
+      _refreshBalanceController.refreshCompleted();
+    });
   }
 }
