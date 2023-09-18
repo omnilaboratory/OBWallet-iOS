@@ -103,8 +103,10 @@ class AccountService {
     return ret;
   }
 
-  Future<GrpcResponse> getAccountHistory(BuildContext context) async {
+  Future<GrpcResponse> getAccountHistory(BuildContext context, int start, int limit) async {
     var request = GetAccountHistoryRequest();
+    request.start = Int64.parseInt(start.toString());
+    request.limit = Int64.parseInt(limit.toString());
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.getAccountHistory(request);

@@ -52,7 +52,6 @@ class _AccountState extends State<Account> {
         }
       });
     }
-    onClickType(0);
     super.initState();
   }
 
@@ -144,7 +143,10 @@ class _AccountState extends State<Account> {
                           padding: const EdgeInsets.only(top: 20),
                           itemCount: txs.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return CryptoTxItem(txInfo: txs[index]);
+                            if (index < txs.length) {
+                              return CryptoTxItem(txInfo: txs[index]);
+                            }
+                            return null;
                           })))
         ],
       ),
@@ -252,7 +254,6 @@ class _AccountState extends State<Account> {
   }
 
   void onClickType(int type) {
-
     if (currTypeIndex == type) {
       return;
     }
@@ -260,6 +261,7 @@ class _AccountState extends State<Account> {
       return;
     }
 
+    log("onClickType ");
     txs = [];
     currTypeIndex = type;
     dataStartIndex = 0;
@@ -268,6 +270,9 @@ class _AccountState extends State<Account> {
     }
     if (type == 1) {
       getAccountHistory();
+    }
+    if (mounted) {
+      setState(() {});
     }
   }
 
@@ -306,7 +311,9 @@ class _AccountState extends State<Account> {
   }
 
   getAccountHistory() {
-    AccountService.getInstance().getAccountHistory(context).then((resp) {
+    AccountService.getInstance()
+        .getAccountHistory(context, dataStartIndex, pageSize)
+        .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as GetAccountHistoryResponse).items;
         if (items.isNotEmpty) {
