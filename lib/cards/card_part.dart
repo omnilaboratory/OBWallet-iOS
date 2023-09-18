@@ -12,9 +12,11 @@ import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:fixnum/src/int64.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../bean/currency_tx_info.dart';
 import '../component/bottom_button.dart';
@@ -33,6 +35,9 @@ class CardPart extends StatefulWidget {
 class _CardPartState extends State<CardPart> {
   var txs = [];
   bool hasCard = false;
+
+  final RefreshController _refreshListController =
+      RefreshController(initialRefresh: true);
 
   @override
   void initState() {
@@ -59,36 +64,29 @@ class _CardPartState extends State<CardPart> {
   }
 
   int currTypeIndex = 0;
+  int currPageNo = 1;
+  bool isRequestDataFromServer = false;
 
   onClickType(int type) {
     currTypeIndex = type;
-    if (currTypeIndex == 0) {
-      txs = [];
-      getOfflineTxList();
-    } else {
-      txs = [];
-      if (mounted) {
-        getOnlineTxList();
-      }
-    }
+    currPageNo = 1;
+    _onListRefresh();
     setState(() {});
   }
-
-  bool isRequestDataFromServer = false;
 
   getOnlineTxList() {
     if (isRequestDataFromServer) {
       return;
     }
-    txs = [];
     isRequestDataFromServer = true;
     CardService.getInstance()
         .cardExchangeInfoList(context, CommonService.cardInfo.cardNo,
-            Int64.parseInt("1"), Int64.parseInt("50"))
+            Int64.parseInt(currPageNo.toString()), Int64.parseInt("2"))
         .then((resp) {
       isRequestDataFromServer = false;
       if (resp.code == 1) {
         var items = (resp.data as CardExchangeInfoListResponse).items;
+        log("$items");
         if (items.isNotEmpty) {
           for (var element in items) {
             txs.add(CurrencyTxInfo(
@@ -103,6 +101,13 @@ class _CardPartState extends State<CardPart> {
           }
         }
       }
+      if(_refreshListController.isRefresh){
+        _refreshListController.refreshCompleted();
+      }
+      if(_refreshListController.isLoading){
+        _refreshListController.loadComplete();
+      }
+
     });
   }
 
@@ -110,11 +115,10 @@ class _CardPartState extends State<CardPart> {
     if (isRequestDataFromServer) {
       return;
     }
-    txs = [];
     isRequestDataFromServer = true;
     CardService.getInstance()
         .cardHistory(context, CommonService.cardInfo.cardNo,
-            Int64.parseInt("1"), Int64.parseInt("50"))
+            Int64.parseInt(currPageNo.toString()), Int64.parseInt("2"))
         .then((resp) {
       isRequestDataFromServer = false;
       if (resp.code == 1) {
@@ -132,6 +136,12 @@ class _CardPartState extends State<CardPart> {
             setState(() {});
           }
         }
+      }
+      if(_refreshListController.isRefresh){
+        _refreshListController.refreshCompleted();
+      }
+      if(_refreshListController.isLoading){
+        _refreshListController.loadComplete();
       }
     });
   }
@@ -425,18 +435,61 @@ class _CardPartState extends State<CardPart> {
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: txs.isEmpty
-                ? const Center(child: Text("no Data"))
-                : ListView.builder(
-                    padding: const EdgeInsets.only(top: 20),
-                    itemCount: txs.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CurrencyTxItem(txInfo: txs[index]);
-                    }),
+            child: SmartRefresher(
+              controller: _refreshListController,
+              enablePullDown: true,
+              enablePullUp: true,
+              header: const WaterDropHeader(),
+              footer: CustomFooter(
+                builder: (BuildContext context, LoadStatus? mode) {
+                  Widget body;
+                  if (mode == LoadStatus.idle) {
+                    body = const Text("pull up load");
+                  } else if (mode == LoadStatus.loading) {
+                    body = const CupertinoActivityIndicator();
+                  } else if (mode == LoadStatus.failed) {
+                    body = const Text("Load Failed!Click retry!");
+                  } else if (mode == LoadStatus.canLoading) {
+                    body = const Text("release to load more");
+                  } else {
+                    body = const Text("No more Data");
+                  }
+                  return SizedBox(
+                    height: 55.0,
+                    child: Center(child: body),
+                  );
+                },
+              ),
+              onRefresh: _onListRefresh,
+              onLoading: _onListLoading,
+              child: ListView.builder(
+                  padding: const EdgeInsets.only(top: 20),
+                  itemCount: txs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CurrencyTxItem(txInfo: txs[index]);
+                  }),
+            ),
           ),
         ],
       ),
     );
+  }
+
+  void _onListRefresh() async {
+    txs = [];
+    if (currTypeIndex == 0) {
+      getOfflineTxList();
+    } else {
+      getOnlineTxList();
+    }
+  }
+  void _onListLoading() async{
+    currPageNo += 1;
+    if (currTypeIndex == 0) {
+      getOfflineTxList();
+    } else {
+      getOnlineTxList();
+    }
   }
 
   Row buildTxButtons() {

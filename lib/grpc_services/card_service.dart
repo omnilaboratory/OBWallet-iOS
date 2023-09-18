@@ -88,7 +88,7 @@ class CardService {
     request.cardNo = cardNo;
     request.pageNo = pageNo;
     request.pageSize = pageSize;
-    // log("$request");
+    log("$request");
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient?.cardExchangeInfoList(request);
