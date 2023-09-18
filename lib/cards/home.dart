@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:awallet/cards/account.dart';
 import 'package:awallet/cards/card_part.dart';
-import 'package:awallet/cards/currency_tx_history.dart';
 import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/grpc_services/common_service.dart';

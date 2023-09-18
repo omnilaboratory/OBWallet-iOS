@@ -23,8 +23,7 @@ class EthService {
   CryptoWalletInfo? _walletInfo;
 
   CryptoWalletInfo getWalletInfo() {
-    _walletInfo ??=
-        CryptoWalletInfo(address: LocalStorage.getEthAddress()!);
+    _walletInfo ??= CryptoWalletInfo(address: LocalStorage.getEthAddress()!);
     return _walletInfo!;
   }
 
@@ -71,17 +70,18 @@ class EthService {
 
     double balance = await Eth.getBalanceOfETH(address);
     log("eth getBalanceOfETH $address $balance");
-    totalBalance =
-        await setTokenUsdValue(context, getTokenList()[0], balance, totalBalance);
+    totalBalance = await setTokenUsdValue(
+        context, getTokenList()[0], balance, totalBalance);
 
     balance = await Eth.getBalanceOfUSDT(address);
     log("eth getBalanceOfUSDT $address $balance");
-    totalBalance =
-        await setTokenUsdValue(context, getTokenList()[1], balance, totalBalance);
+    totalBalance = await setTokenUsdValue(
+        context, getTokenList()[1], balance, totalBalance);
 
     if (GlobalParams.currNetwork == EnumNetworkType.mainnet) {
       balance = await Eth.getBalanceOfUSDC(address);
-      totalBalance = await setTokenUsdValue(context, getTokenList()[2], balance, totalBalance);
+      totalBalance = await setTokenUsdValue(
+          context, getTokenList()[2], balance, totalBalance);
     }
 
     _walletInfo = getWalletInfo();

@@ -81,9 +81,9 @@ class _AccountState extends State<Account> {
                     (element.createdAt * 1000).toInt()),
                 fromSymbol: element.sourceId,
                 targetSymbol: "",
-                amount: element.amt,
+                amount: element.amt.abs(),
                 amountOfDollar: null,
-                status: 1));
+                status: 3));
           }
           if (mounted) {
             setState(() {});

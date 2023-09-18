@@ -74,12 +74,19 @@ class _CardPartState extends State<CardPart> {
     setState(() {});
   }
 
+  bool isRequestDataFromServer = false;
+
   getOnlineTxList() {
+    if (isRequestDataFromServer) {
+      return;
+    }
     txs = [];
+    isRequestDataFromServer = true;
     CardService.getInstance()
         .cardExchangeInfoList(context, CommonService.cardInfo.cardNo,
             Int64.parseInt("1"), Int64.parseInt("50"))
         .then((resp) {
+      isRequestDataFromServer = false;
       if (resp.code == 1) {
         var items = (resp.data as CardExchangeInfoListResponse).items;
         if (items.isNotEmpty) {
@@ -87,9 +94,9 @@ class _CardPartState extends State<CardPart> {
             txs.add(CurrencyTxInfo(
                 name: element.counterParty,
                 currencyName: "USD",
-                amount: element.amt,
+                amount: element.amt.abs(),
                 status: element.status.value,
-                amountOfDollar: element.amt));
+                amountOfDollar: element.amt.abs()));
           }
           if (mounted) {
             setState(() {});
@@ -100,11 +107,16 @@ class _CardPartState extends State<CardPart> {
   }
 
   getOfflineTxList() {
+    if (isRequestDataFromServer) {
+      return;
+    }
     txs = [];
+    isRequestDataFromServer = true;
     CardService.getInstance()
         .cardHistory(context, CommonService.cardInfo.cardNo,
             Int64.parseInt("1"), Int64.parseInt("50"))
         .then((resp) {
+      isRequestDataFromServer = false;
       if (resp.code == 1) {
         var items = (resp.data as CardHistoryResponse).items;
         log("$items");

@@ -39,7 +39,7 @@ class CardService {
         CommonService.cardInfo = resp.items[0];
       }
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "cardList", e, ret);
     }
     return ret;
   }
@@ -55,7 +55,7 @@ class CardService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "applyCard", e, ret);
     }
     return ret;
   }
@@ -70,14 +70,14 @@ class CardService {
     request.startDate =
         DateFormat("yyyy-MM-dd").format(now.add(const Duration(days: -180)));
     request.endDate = DateFormat("yyyy-MM-dd").format(now);
-    log("$request");
+    // log("$request");
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient?.cardHistory(request);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "cardHistory", e, ret);
     }
     return ret;
   }
@@ -88,14 +88,15 @@ class CardService {
     request.cardNo = cardNo;
     request.pageNo = pageNo;
     request.pageSize = pageSize;
-    log("$request");
+    // log("$request");
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient?.cardExchangeInfoList(request);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance()
+          .setError(context, "cardExchangeInfoList", e, ret);
     }
     return ret;
   }
@@ -109,7 +110,7 @@ class CardService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "cardRecharge", e, ret);
     }
     return ret;
   }
@@ -126,7 +127,7 @@ class CardService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "cardWithdraw", e, ret);
     }
     return ret;
   }

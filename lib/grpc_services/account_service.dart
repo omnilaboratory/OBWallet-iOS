@@ -35,7 +35,7 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "getAccountInfo", e, ret);
     }
     return ret;
   }
@@ -48,7 +48,7 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "sellCoin", e, ret);
     }
     return ret;
   }
@@ -60,7 +60,7 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "buyCoin", e, ret);
     }
     return ret;
   }
@@ -81,7 +81,7 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "getCoinPrice", e, ret);
     }
     return ret;
   }
@@ -95,10 +95,11 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "getSwapTxList", e, ret);
     }
     return ret;
   }
+
   Future<GrpcResponse> getAccountHistory(BuildContext context) async {
     var request = GetAccountHistoryRequest();
     request.symbol = TrackedTx_ContractSymbol.USD;
@@ -108,7 +109,7 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "getAccountHistory", e, ret);
     }
     return ret;
   }
@@ -124,7 +125,7 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "getTrackedTxList", e, ret);
     }
     return ret;
   }
@@ -139,7 +140,7 @@ class AccountService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, e, ret);
+      UserService.getInstance().setError(context, "getDcPayUrl", e, ret);
     }
     return ret;
   }

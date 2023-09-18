@@ -42,7 +42,7 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(context, e, ret);
+      setError(context, "verifyCode", e, ret);
     }
     return ret;
   }
@@ -62,7 +62,7 @@ class UserService {
       LocalStorage.save("userToken", resp.token);
       resetServices();
     } catch (e) {
-      setError(context, e, ret);
+      setError(context, "signIn", e, ret);
     }
     return ret;
   }
@@ -90,7 +90,7 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(context, e, ret);
+      setError(context, "verifyImage", e, ret);
     }
     return ret;
   }
@@ -108,12 +108,14 @@ class UserService {
       CommonService.token = resp!.token;
       resetServices();
     } catch (e) {
-      setError(context, e, ret);
+      setError(context, "signUp", e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> getUserInfo(BuildContext context,) async {
+  Future<GrpcResponse> getUserInfo(
+    BuildContext context,
+  ) async {
     var ret = GrpcResponse();
     try {
       log("getUserInfo ${CommonService.token} ${CommonService.userInfo?.email}");
@@ -121,13 +123,13 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(context, e, ret);
+      setError(context, "getUserInfo", e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> uploadImage(BuildContext context,
-      UploadRequest req) async {
+  Future<GrpcResponse> uploadImage(
+      BuildContext context, UploadRequest req) async {
     log("$req");
     var ret = GrpcResponse();
     try {
@@ -135,28 +137,12 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(context, e, ret);
+      setError(context, "uploadImage", e, ret);
     }
     return ret;
   }
 
   Future<GrpcResponse> kyc(BuildContext context, UserInfo req) async {
-    // request.id = Int64(9);
-    // request.userName = 'hahaha';
-    // request.updatedAt = Int64(1692602216);
-    // request.createdAt = Int64(1692602216);
-    // request.idNum = '130429198903091012';
-    // request.firstName = '哈';
-    // request.lastName = '哈哈';
-    // request.email = 'healergyl@126.com';
-    // request.mobile = '15116920267';
-    // request.dob = '1996-06-06';
-    // request.address1 = 'address1';
-    // request.address2 = 'address2';
-    // request.city = 'beijing';
-    // request.state = 'pending';
-    // request.postCode = '1';
-    // request.countryCode = CountryCode.CN;
     log("$req");
     var ret = GrpcResponse();
     try {
@@ -164,13 +150,13 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(context, e, ret);
+      setError(context, "kyc", e, ret);
     }
     return ret;
   }
 
-  Future<GrpcResponse> verifyPwd(BuildContext context, String username,
-      String password) async {
+  Future<GrpcResponse> verifyPwd(
+      BuildContext context, String username, String password) async {
     var request = SignInRequest();
     request.userName = username;
     request.password = Utils.generateMd5(password);
@@ -181,16 +167,17 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(context, e, ret);
+      setError(context, "verifyPwd", e, ret);
     }
     return ret;
   }
 
-  void setError(BuildContext context, Object? e, GrpcResponse<dynamic> ret) {
+  void setError(BuildContext context, String funcName, Object? e,
+      GrpcResponse<dynamic> ret) {
     if (e == null) {
       return;
     }
-    log("$e");
+    log("$funcName $e");
     GrpcError error = e as GrpcError;
     ret.msg = error.message.toString();
     showToast(ret.msg);
@@ -201,17 +188,18 @@ class UserService {
         MaterialPageRoute(builder: (context) => const Login()),
       );
     }
-}
-
-Future<GrpcResponse> updateUser(BuildContext context, String address) async {
-  CommonService.userInfo?.ethAddress = address;
-  var ret = GrpcResponse();
-  try {
-    var resp = await userServiceClient?.updateUser(CommonService.userInfo!);
-    ret.code = 1;
-    ret.data = resp;
-  } catch (e) {
-    setError(context, e, ret);
   }
-  return ret;
-}}
+
+  Future<GrpcResponse> updateUser(BuildContext context, String address) async {
+    CommonService.userInfo?.ethAddress = address;
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.updateUser(CommonService.userInfo!);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      setError(context, "updateUser", e, ret);
+    }
+    return ret;
+  }
+}
