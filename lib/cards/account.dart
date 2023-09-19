@@ -44,13 +44,7 @@ class _AccountState extends State<Account> {
   void initState() {
     var address = LocalStorage.getEthAddress();
     if (address != null) {
-      UserService.getInstance().updateUser(context, address).then((value) {
-        if (value.code == 1) {
-          log(value.data.toString());
-        } else {
-          log(value.msg);
-        }
-      });
+      UserService.getInstance().updateUser(context, address);
     }
     _onBalanceRefresh();
     _onListRefresh();

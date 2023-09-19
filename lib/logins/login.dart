@@ -250,9 +250,6 @@ class _LoginState extends State<Login> {
     CardService.getInstance().cardInfo(context);
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
-        var userInfo = userInfoResp.data as GetUserInfoResponse;
-        CommonService.userInfo = userInfo.user;
-        CommonService.userId = userInfo.user.id.toString();
         // LocalStorage.removeEthAddress();
         Navigator.pushReplacement(
           context,

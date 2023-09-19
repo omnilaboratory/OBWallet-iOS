@@ -5,6 +5,7 @@ import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/grpc_services/common_service.dart';
+import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 
@@ -43,6 +44,15 @@ class _CardHomeState extends State<CardHome> {
         ),
       ));
     }
+    UserService.getInstance().getUserInfo(context).then((resp) {
+      if (resp.code == 1) {
+        updateKycState();
+        if (mounted) {
+          setState(() {});
+        }
+      }
+    });
+
     updateKycState();
     GlobalParams.eventBus.on().listen((event) {
       if (event == "kyc_state") {

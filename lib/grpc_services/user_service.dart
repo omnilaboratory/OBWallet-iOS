@@ -123,6 +123,9 @@ class UserService {
       var resp = await userServiceClient?.getUserInfo(GetUserInfoRequest());
       ret.code = 1;
       ret.data = resp;
+      var userInfo = resp as GetUserInfoResponse;
+      CommonService.userInfo = userInfo.user;
+      CommonService.userId = userInfo.user.id.toString();
     } catch (e) {
       setError(context, "getUserInfo", e, ret);
     }
