@@ -3,12 +3,16 @@ import 'dart:developer';
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/send.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/component/tx_item.dart';
 import 'package:awallet/grpc_services/account_service.dart';
+import 'package:awallet/grpc_services/card_service.dart';
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -39,6 +43,7 @@ class _AccountState extends State<Account> {
       RefreshController(initialRefresh: false);
 
   double totalBalanceUsd = 0;
+  bool hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
 
   @override
   void initState() {
@@ -48,6 +53,7 @@ class _AccountState extends State<Account> {
     }
     _onBalanceRefresh();
     _onListRefresh();
+    getCardBalanceFromServer();
     super.initState();
   }
 
@@ -163,7 +169,7 @@ class _AccountState extends State<Account> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return CardRecharge(amt: '', type: EnumChargeType.deposit);
+                    return CardRecharge(amt: '', type: EnumChargeType.deposit, cardNo: '', date: '', cvc: '');
                   });
             }),
         SquareButton(
@@ -171,11 +177,15 @@ class _AccountState extends State<Account> {
             text: 'Withdraw',
             iconWidth: iconWidth,
             onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return Send(type: EnumChargeType.withdraw);
-                  });
+              if (hasCard == false) {
+                alert(Tips.applyCardFirst.value, context, onJump);
+              } else {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Send(type: EnumChargeType.withdraw,cardNo: CommonService.cardInfo.cardNo);
+                    });
+              }
             }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',
@@ -228,6 +238,18 @@ class _AccountState extends State<Account> {
             ),
           )),
     );
+  }
+
+  onJump() {
+    GlobalParams.eventBus.fire("changeTab");
+  }
+
+  getCardBalanceFromServer() {
+    CardService.getInstance().cardInfo(context).then((resp) {
+      if (resp.code == 1) {
+        hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
+      }
+    });
   }
 
   void _onListRefresh() async {

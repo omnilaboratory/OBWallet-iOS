@@ -20,7 +20,7 @@ class CardHome extends StatefulWidget {
   State<CardHome> createState() => _CardHomeState();
 }
 
-class _CardHomeState extends State<CardHome> {
+class _CardHomeState extends State<CardHome> with SingleTickerProviderStateMixin {
   var tabNames = ['Account', 'Card'];
   var currKycClrIndex = 0;
 
@@ -29,6 +29,7 @@ class _CardHomeState extends State<CardHome> {
     Account(),
     const CardPart(),
   ];
+  late TabController _tabController;
 
   @override
   void initState() {
@@ -53,6 +54,7 @@ class _CardHomeState extends State<CardHome> {
       }
     });
 
+    _tabController = TabController(length: tabNames.length, vsync: this, initialIndex: 0);
     updateKycState();
     GlobalParams.eventBus.on().listen((event) {
       if (event == "kyc_state") {
@@ -60,6 +62,11 @@ class _CardHomeState extends State<CardHome> {
         if (mounted) {
           setState(() {});
         }
+      }
+    });
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "changeTab") {
+        _tabController.animateTo(1);
       }
     });
   }
@@ -130,6 +137,7 @@ class _CardHomeState extends State<CardHome> {
               buildTabBars(),
               Expanded(
                 child: TabBarView(
+                  controller: _tabController,
                   children: tabViewList,
                 ),
               )
@@ -148,6 +156,7 @@ class _CardHomeState extends State<CardHome> {
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: TabBar(
+        controller: _tabController,
         padding: const EdgeInsets.only(left: 4, right: 4),
         indicator: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(4.0)),

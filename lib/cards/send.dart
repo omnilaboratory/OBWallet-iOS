@@ -16,8 +16,9 @@ import '../component/bottom_button.dart';
 
 class Send extends StatefulWidget {
   EnumChargeType type;
+  String cardNo;
 
-  Send({super.key, this.type = EnumChargeType.withdraw});
+  Send({super.key, this.type = EnumChargeType.withdraw, required this.cardNo});
 
   @override
   State<Send> createState() => _SendState();
@@ -32,6 +33,7 @@ class _SendState extends State<Send> {
 
   @override
   void initState() {
+    _cardNumberController.text = widget.cardNo;
     getAccountBalance();
     super.initState();
   }
@@ -82,14 +84,18 @@ class _SendState extends State<Send> {
                               controller: _cardNumberController,
                               maxLines: 1,
                               keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 hintText: "Card Number",
+                                hintStyle: const TextStyle(color: Colors.grey),
+                                border: _outlineInputBorder,
+                                focusedBorder: _outlineInputBorder,
+                                enabledBorder: _outlineInputBorder,
+                                disabledBorder: _outlineInputBorder,
+                                focusedErrorBorder: _outlineInputBorder,
+                                errorBorder: _outlineInputBorder,
                                 contentPadding:
-                                EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                                border: OutlineInputBorder(
-                                  borderSide:
-                                  BorderSide(color: Colors.black, width: 1.0),
-                                ),
+                                const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 0),
                               ),
                             ),
                             const SizedBox(height: 40),
@@ -116,14 +122,18 @@ class _SendState extends State<Send> {
                                   }
                                 });
                               },
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 hintText: "Amount",
+                                hintStyle: const TextStyle(color: Colors.grey),
+                                border: _outlineInputBorder,
+                                focusedBorder: _outlineInputBorder,
+                                enabledBorder: _outlineInputBorder,
+                                disabledBorder: _outlineInputBorder,
+                                focusedErrorBorder: _outlineInputBorder,
+                                errorBorder: _outlineInputBorder,
                                 contentPadding:
-                                EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                                border: OutlineInputBorder(
-                                  borderSide:
-                                  BorderSide(color: Colors.black, width: 1.0),
-                                ),
+                                const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 0),
                               ),
                             ),
                             const Spacer(),
@@ -199,6 +209,11 @@ class _SendState extends State<Send> {
       ),
     );
   }
+
+  final OutlineInputBorder _outlineInputBorder = OutlineInputBorder(
+    borderSide: const BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
+    borderRadius: BorderRadius.circular(8),
+  );
 
   void withDraw() {
     if (_cardNumberController.value.text.toString().isEmpty) {

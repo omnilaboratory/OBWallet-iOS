@@ -711,7 +711,7 @@ class _ExchangeState extends State<Exchange> {
                             context: context,
                             builder: (context) {
                               return CardRecharge(
-                                  amt: _amountToController.text, type: EnumChargeType.deposit);
+                                  amt: _amountToController.text, type: EnumChargeType.deposit, cardNo: '', date: '', cvc: '');
                             });
                       },
                       child: const Text(

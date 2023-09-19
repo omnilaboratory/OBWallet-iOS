@@ -19,9 +19,12 @@ import 'package:flutter_credit_card/credit_card_model.dart';
 
 class CardRecharge extends StatefulWidget {
   String amt;
+  String cardNo;
+  String date;
+  String cvc;
   EnumChargeType type;
 
-  CardRecharge({super.key, required this.amt , this.type = EnumChargeType.deposit});
+  CardRecharge({super.key, required this.amt , this.type = EnumChargeType.deposit, required this.cardNo, required this.date, required this.cvc});
 
   @override
   State<CardRecharge> createState() => _CardRechargeState();
@@ -41,6 +44,9 @@ class _CardRechargeState extends State<CardRecharge> {
     if (mounted) {
       setState(() {
         cardHolderName = widget.amt;
+        cardNumber = widget.cardNo;
+        expiryDate = widget.date;
+        cvcCode = widget.cvc;
       });
     }
     updateKycState();
@@ -148,7 +154,7 @@ class _CardRechargeState extends State<CardRecharge> {
                           ),
                           cvvCodeDecoration: InputDecoration(
                             prefixIcon: const Icon(Icons.credit_score),
-                            hintText: 'CVC',
+                            hintText: 'CVV',
                             hintStyle: const TextStyle(color: Colors.grey),
                             border: _outlineInputBorder,
                             focusedBorder: _outlineInputBorder,

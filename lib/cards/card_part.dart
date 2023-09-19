@@ -379,7 +379,7 @@ class _CardPartState extends State<CardPart> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return Send(type: EnumChargeType.deposit);
+                    return Send(type: EnumChargeType.deposit,cardNo: CommonService.cardInfo.cardNo);
                   });
             }),
         SquareButton(
@@ -390,11 +390,19 @@ class _CardPartState extends State<CardPart> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return CardRecharge(amt: '', type: EnumChargeType.withdraw);
+                    return CardRecharge(amt: '', type: EnumChargeType.withdraw, cardNo: CommonService.cardInfo.cardNo, date: formatCardExpiryDate(), cvc: CommonService.cardInfo.cvv);
                   });
             }),
       ],
     );
+  }
+
+  String formatCardExpiryDate() {
+    String expiryDate = CommonService.cardInfo.expiryDate;
+    if (expiryDate.isEmpty) {
+      expiryDate = "****";
+    }
+    return "${expiryDate.substring(2, 4)}/${expiryDate.substring(0, 2)}";
   }
 
   String getCardExpiryDate() {
