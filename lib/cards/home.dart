@@ -89,7 +89,7 @@ class _CardHomeState extends State<CardHome> with SingleTickerProviderStateMixin
       child: Scaffold(
         appBar: AppBar(
           // backgroundColor: Colors.transparent,
-          title: const HeadLogo(title: "Card"),
+          title: const HeadLogo(title: "Home"),
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 20.0),

@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.credit_card),
-              label: 'Card',
+              label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.currency_bitcoin_sharp),
