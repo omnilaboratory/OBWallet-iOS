@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import 'loading_dialog.dart';
+
 final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderSide: const BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
   borderRadius: BorderRadius.circular(8),
@@ -13,7 +15,9 @@ TextFormField createTextFormField(
     TextEditingController controller, String hintText, bool obscureText,
     {Icon? icon,
     int? maxLength,
-    TextInputType? keyboardType = TextInputType.text,bool needCheck=true,int maxLines =1}) {
+    TextInputType? keyboardType = TextInputType.text,
+    bool needCheck = true,
+    int maxLines = 1}) {
   return TextFormField(
     controller: controller,
     maxLines: maxLines,
@@ -34,7 +38,7 @@ TextFormField createTextFormField(
     ),
     obscureText: obscureText,
     validator: (v) {
-      if(!needCheck){
+      if (!needCheck) {
         return null;
       }
       return v!.trim().isNotEmpty ? null : "wrong $hintText";
@@ -60,16 +64,16 @@ showToast(String msg, {Toast toastLength = Toast.LENGTH_LONG}) {
       msg: msg, toastLength: toastLength, gravity: ToastGravity.CENTER);
 }
 
-alert(String msg, BuildContext context,Function callback) {
+alert(String msg, BuildContext context, Function callback) {
   log("alert $msg");
   Alert(
     context: context,
     type: AlertType.none,
-    onWillPopActive:true,
+    onWillPopActive: true,
     desc: msg,
     buttons: [
       DialogButton(
-        onPressed: ()  {
+        onPressed: () {
           callback();
           Navigator.pop(context);
         },
@@ -82,4 +86,12 @@ alert(String msg, BuildContext context,Function callback) {
       )
     ],
   ).show();
+}
+
+OverlayEntry showLoading(BuildContext context) {
+  OverlayEntry entry = OverlayEntry(
+    builder: (context) => const LoadingDialog(),
+  );
+  Overlay.of(context).insert(entry);
+  return entry;
 }

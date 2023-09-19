@@ -487,6 +487,9 @@ class _CardPartState extends State<CardPart> {
   }
 
   getOnlineCardExchangeInfoList() {
+    if(CommonService.cardInfo.cardNo.isEmpty){
+      return;
+    }
     CardService.getInstance()
         .cardExchangeInfoList(
             context,
@@ -520,6 +523,9 @@ class _CardPartState extends State<CardPart> {
   }
 
   getOfflineCardHistoryListFromServer() {
+    if(CommonService.cardInfo.cardNo.isEmpty){
+      return;
+    }
     CardService.getInstance()
         .cardHistory(
             context,

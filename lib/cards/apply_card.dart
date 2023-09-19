@@ -23,13 +23,18 @@ class _ApplyCardState extends State<ApplyCard> {
       showToast(Tips.checkInputSocialId.value);
       return;
     }
+    FocusScope.of(context).requestFocus(FocusNode());
+    OverlayEntry entry = showLoading(context);
 
     CardService.getInstance().applyCard(context, input).then((value) {
       if (value.code == 1) {
-        Navigator.pop(context, true);
+        alert(Tips.waitForReview.value, context, (){
+          Navigator.pop(context, true);
+        });
       } else {
         log(value.msg);
       }
+      entry.remove();
     });
   }
 

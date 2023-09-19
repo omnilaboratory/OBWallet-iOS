@@ -57,6 +57,9 @@ class _CardHomeState extends State<CardHome> {
     GlobalParams.eventBus.on().listen((event) {
       if (event == "kyc_state") {
         updateKycState();
+        if (mounted) {
+          setState(() {});
+        }
       }
     });
   }
@@ -92,10 +95,10 @@ class _CardHomeState extends State<CardHome> {
                       imageUrl: "asset/images/icon_kyc.png",
                       onTap: () {
                         if (CommonService.userInfo!.kycStatus == "passed") {
-                          showToast(Tips.kycPassed.value);
+                          alert(Tips.kycPassed.value,context,(){});
                         } else if (CommonService.userInfo!.kycStatus ==
                             "pending") {
-                          showToast(Tips.checkKycResult.value);
+                          alert(Tips.checkKycResult.value,context,(){});
                         } else {
                           showDialog(
                               context: context,

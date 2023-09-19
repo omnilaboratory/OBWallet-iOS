@@ -18,7 +18,7 @@ class TxHistory extends StatefulWidget {
 class _TxHistoryState extends State<TxHistory> {
   int dataStartIndex = 0;
   final RefreshController _refreshListController =
-      RefreshController(initialRefresh: true);
+      RefreshController(initialRefresh: false);
 
   List<CryptoTxInfo> txHistoryList = [];
   var currTypeIndex = 0;
@@ -35,11 +35,17 @@ class _TxHistoryState extends State<TxHistory> {
     currTypeIndex = type;
     dataStartIndex = 0;
 
-    if (type == 0) {
+    if (dataStartIndex == 0) {
       getSwapTxList();
     } else {
       getTrackedTxList();
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _onListRefresh();
   }
 
   @override

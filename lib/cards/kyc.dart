@@ -56,7 +56,8 @@ class _KycState extends State<Kyc> {
               child: Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                    padding:
+                        const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20.0),
@@ -67,7 +68,8 @@ class _KycState extends State<Kyc> {
                         children: [
                           Center(
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 28, bottom: 10),
+                              padding:
+                                  const EdgeInsets.only(top: 28, bottom: 10),
                               child: createDialogTitle('KYC'),
                             ),
                           ),
@@ -75,38 +77,43 @@ class _KycState extends State<Kyc> {
                             key: _formKey,
                             child: Column(
                               children: [
-                                const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                                  Image(
-                                      width: 30,
-                                      height: 30,
-                                      image: AssetImage("asset/images/icon_smile.png")),
-                                  SizedBox(width: 8),
-                                  SizedBox(
-                                    child: Text(
-                                      'Please input English and Number.',
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        color: Color(0xFF999999),
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        height: 1.47,
+                                const Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image(
+                                          width: 30,
+                                          height: 30,
+                                          image: AssetImage(
+                                              "asset/images/icon_smile.png")),
+                                      SizedBox(width: 8),
+                                      SizedBox(
+                                        child: Text(
+                                          'Please input English and Number.',
+                                          maxLines: 2,
+                                          style: TextStyle(
+                                            color: Color(0xFF999999),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                            height: 1.47,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                ]),
+                                    ]),
                                 Row(
                                   children: [
                                     Expanded(
                                         child: createTextFormField(
                                             _firstNameController,
                                             "First Name",
-                                            false,maxLength: 20)),
+                                            false,
+                                            maxLength: 20)),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
                                             _lastNameController,
                                             "Last Name",
-                                            false,maxLength: 20)),
+                                            false,
+                                            maxLength: 20)),
                                   ],
                                 ),
                                 const SizedBox(height: 16),
@@ -125,7 +132,8 @@ class _KycState extends State<Kyc> {
                                           );
                                         },
                                         child: Container(
-                                          padding: const EdgeInsets.only(left: 6,right: 6),
+                                          padding: const EdgeInsets.only(
+                                              left: 6, right: 6),
                                           width: 92,
                                           height: 48,
                                           decoration: ShapeDecoration(
@@ -133,12 +141,17 @@ class _KycState extends State<Kyc> {
                                           ),
                                           child: Center(
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
                                               children: [
                                                 SizedBox(
-                                                  width: 52,
-                                                    child: Text("+${selectedPhoneCountry!.phoneCode}")),
-                                                const SizedBox(width:20,child: Icon(Icons.keyboard_arrow_down_sharp))
+                                                    width: 52,
+                                                    child: Text(
+                                                        "+${selectedPhoneCountry!.phoneCode}")),
+                                                const SizedBox(
+                                                    width: 20,
+                                                    child: Icon(Icons
+                                                        .keyboard_arrow_down_sharp))
                                               ],
                                             ),
                                           ),
@@ -148,13 +161,15 @@ class _KycState extends State<Kyc> {
                                       child: createTextFormField(
                                           _mobileNumberController,
                                           "Mobile Number",
-                                          false,keyboardType: TextInputType.phone),
+                                          false,
+                                          keyboardType: TextInputType.phone),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 16),
                                 createTextFormField(_dateOfBirthController,
-                                    "Date of birth (DD-MM-YYYY)", false,maxLength: 10,
+                                    "Date of birth (DD-MM-YYYY)", false,
+                                    maxLength: 10,
                                     icon: const Icon(Icons.date_range)),
                                 const SizedBox(height: 16),
                                 createTextFormField(
@@ -167,8 +182,10 @@ class _KycState extends State<Kyc> {
                                 Row(
                                   children: [
                                     Expanded(
-                                        child: createTextFormField(_stateController,
-                                            "State/Region", false)),
+                                        child: createTextFormField(
+                                            _stateController,
+                                            "State/Region",
+                                            false)),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
@@ -183,7 +200,10 @@ class _KycState extends State<Kyc> {
                                         child: createTextFormField(
                                             _postalController,
                                             "Postal/Zip Code",
-                                            false,maxLength: 6,keyboardType: TextInputType.number)),
+                                            false,
+                                            maxLength: 6,
+                                            keyboardType:
+                                                TextInputType.number)),
                                     const SizedBox(width: 20),
                                     InkWell(
                                         onTap: () {
@@ -198,8 +218,8 @@ class _KycState extends State<Kyc> {
                                           );
                                         },
                                         child: Container(
-                                          padding: const EdgeInsets.only(
-                                              left: 6),
+                                          padding:
+                                              const EdgeInsets.only(left: 6),
                                           width: 135,
                                           height: 48,
                                           decoration: ShapeDecoration(
@@ -217,7 +237,8 @@ class _KycState extends State<Kyc> {
                                                     maxFontSize: 16,
                                                   ),
                                                 ),
-                                                const Icon(Icons.keyboard_arrow_down_sharp)
+                                                const Icon(Icons
+                                                    .keyboard_arrow_down_sharp)
                                               ],
                                             ),
                                           ),
@@ -240,11 +261,13 @@ class _KycState extends State<Kyc> {
                           ),
                         ]),
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   BottomWhiteButton(
                     icon: 'asset/images/icon_close_white.png',
                     text: 'CANCEL',
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.pop(context);
                     },
                   )
@@ -260,6 +283,9 @@ class _KycState extends State<Kyc> {
       showToast(Tips.selectCountry.value);
       return;
     }
+    FocusScope.of(context).requestFocus(FocusNode());
+    OverlayEntry entry = showLoading(context);
+
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
         var userInfo = userInfoResp.data as GetUserInfoResponse;
@@ -282,10 +308,13 @@ class _KycState extends State<Kyc> {
             var resp = value.data as UserInfo;
             CommonService.userInfo = resp;
             GlobalParams.eventBus.fire("kyc_state");
-            Navigator.pop(context);
+            alert(Tips.waitForReview.value, context, () {
+              Navigator.pop(context);
+            });
           } else {
             log(value.msg);
           }
+          entry.remove();
         });
       }
     });

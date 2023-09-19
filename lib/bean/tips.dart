@@ -28,6 +28,7 @@ enum Tips {
   kycPassed("KYC has been passed."),
   checkInputSocialId("Please input the social Id."),
   emptyCardNumber("The card number cannot be empty."),
+  waitForReview("Please wait for manual review."),
   ;
 
   final String value;
