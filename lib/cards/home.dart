@@ -1,6 +1,8 @@
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/account.dart';
 import 'package:awallet/cards/card_part.dart';
 import 'package:awallet/cards/kyc.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -79,11 +81,18 @@ class _CardHomeState extends State<CardHome> {
                       imageClr: kycClr[currKycClrIndex],
                       imageUrl: "asset/images/icon_kyc.png",
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return const Kyc();
-                            });
+                        if (CommonService.userInfo!.kycStatus == "passed") {
+                          showToast(Tips.kycPassed.value);
+                        } else if (CommonService.userInfo!.kycStatus ==
+                            "pending") {
+                          showToast(Tips.checkKycResult.value);
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const Kyc();
+                              });
+                        }
                       }),
                   ButtonForAppBarAction(
                       width: 18,

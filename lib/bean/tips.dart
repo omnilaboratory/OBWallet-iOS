@@ -25,6 +25,7 @@ enum Tips {
   wrongPassMatch("Wrong password and confirmation password."),
   selectCountry("Please select the country."),
   checkKycResult("Please wait the kyc result."),
+  kycPassed("KYC has been passed."),
   checkInputSocialId("Please input the social Id."),
   emptyCardNumber("The card number cannot be empty."),
   ;
