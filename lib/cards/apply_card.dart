@@ -88,25 +88,13 @@ class _ApplyCardState extends State<ApplyCard> {
                         ),
                       ),
                       const Spacer(),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            // BottomButton(
-                            //   icon: 'asset/images/x.png',
-                            //   text: 'CANCEL',
-                            //   imageClr: Colors.grey,
-                            //   onPressed: () {
-                            //     Navigator.pop(context);
-                            //   },
-                            // ),
-                            BottomButton(
-                              icon: 'asset/images/icon_confirm_green.png',
-                              text: 'Apply Card',
-                              onPressed: () {
-                                onClickApply();
-                              },
-                            )
-                          ]),
+                      BottomButton(
+                        icon: 'asset/images/icon_confirm_green.png',
+                        text: 'Apply Card',
+                        onPressed: () {
+                          onClickApply();
+                        },
+                      ),
                     ],
                   ),
                 ),

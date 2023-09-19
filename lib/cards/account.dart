@@ -33,10 +33,10 @@ class _AccountState extends State<Account> {
   var currTypeIndex = 0;
   int dataStartIndex = 0;
   final RefreshController _refreshListController =
-      RefreshController(initialRefresh: true);
+      RefreshController(initialRefresh: false);
 
   final RefreshController _refreshBalanceController =
-      RefreshController(initialRefresh: true);
+      RefreshController(initialRefresh: false);
 
   double totalBalanceUsd = 0;
 
@@ -52,6 +52,8 @@ class _AccountState extends State<Account> {
         }
       });
     }
+    _onBalanceRefresh();
+    _onListRefresh();
     super.initState();
   }
 

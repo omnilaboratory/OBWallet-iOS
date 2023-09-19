@@ -40,15 +40,16 @@ class _CardPartState extends State<CardPart> {
   bool hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
 
   final RefreshController _refreshListController =
-      RefreshController(initialRefresh: true);
+      RefreshController(initialRefresh: false);
 
   final RefreshController _refreshBalanceController =
-      RefreshController(initialRefresh: true);
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
     super.initState();
-    getCardBalanceFromServer();
+    _onBalanceRefresh();
+    _onListRefresh();
   }
 
   @override
@@ -454,7 +455,8 @@ class _CardPartState extends State<CardPart> {
           return const ApplyCard();
         });
     if (flag != null && flag == true) {
-      setState(() {});
+      getCardBalanceFromServer();
+
     }
   }
 

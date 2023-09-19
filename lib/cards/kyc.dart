@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/tips.dart';
+import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
@@ -52,202 +53,202 @@ class _KycState extends State<Kyc> {
           backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
           body: Center(
             child: SingleChildScrollView(
-              child: Container(
-                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                width: size.width * 0.8,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 28, bottom: 10),
-                          child: createDialogTitle('KYC'),
-                        ),
-                      ),
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          children: [
-                            const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                              Image(
-                                  width: 30,
-                                  height: 30,
-                                  image: AssetImage("asset/images/icon_smile.png")),
-                              SizedBox(width: 8),
-                              SizedBox(
-                                child: Text(
-                                  'Please input English and Number.',
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                    color: Color(0xFF999999),
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500,
-                                    height: 1.47,
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    width: size.width * 0.8,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 28, bottom: 10),
+                              child: createDialogTitle('KYC'),
+                            ),
+                          ),
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                                  Image(
+                                      width: 30,
+                                      height: 30,
+                                      image: AssetImage("asset/images/icon_smile.png")),
+                                  SizedBox(width: 8),
+                                  SizedBox(
+                                    child: Text(
+                                      'Please input English and Number.',
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        color: Color(0xFF999999),
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        height: 1.47,
+                                      ),
+                                    ),
                                   ),
+                                ]),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                        child: createTextFormField(
+                                            _firstNameController,
+                                            "First Name",
+                                            false,maxLength: 20)),
+                                    const SizedBox(width: 20),
+                                    Expanded(
+                                        child: createTextFormField(
+                                            _lastNameController,
+                                            "Last Name",
+                                            false,maxLength: 20)),
+                                  ],
                                 ),
-                              ),
-                            ]),
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: createTextFormField(
-                                        _firstNameController,
-                                        "First Name",
-                                        false,maxLength: 20)),
-                                const SizedBox(width: 20),
-                                Expanded(
-                                    child: createTextFormField(
-                                        _lastNameController,
-                                        "Last Name",
-                                        false,maxLength: 20)),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                InkWell(
-                                    onTap: () {
-                                      showCountryPicker(
-                                        context: context,
-                                        showPhoneCode: true,
-                                        useSafeArea: true,
-                                        onSelect: (Country country) {
-                                          selectedPhoneCountry = country;
-                                          setState(() {});
+                                const SizedBox(height: 16),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                        onTap: () {
+                                          showCountryPicker(
+                                            context: context,
+                                            showPhoneCode: true,
+                                            useSafeArea: true,
+                                            onSelect: (Country country) {
+                                              selectedPhoneCountry = country;
+                                              setState(() {});
+                                            },
+                                          );
                                         },
-                                      );
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.only(left: 6,right: 6),
-                                      width: 92,
-                                      height: 48,
-                                      decoration: ShapeDecoration(
-                                        shape: outlineInputBorder,
-                                      ),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                          children: [
-                                            SizedBox(
-                                              width: 52,
-                                                child: Text("+${selectedPhoneCountry!.phoneCode}")),
-                                            const SizedBox(width:20,child: Icon(Icons.keyboard_arrow_down_sharp))
-                                          ],
-                                        ),
-                                      ),
-                                    )),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: createTextFormField(
-                                      _mobileNumberController,
-                                      "Mobile Number",
-                                      false,keyboardType: TextInputType.phone),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            createTextFormField(_dateOfBirthController,
-                                "Date of birth (DD-MM-YYYY)", false,maxLength: 10,
-                                icon: const Icon(Icons.date_range)),
-                            const SizedBox(height: 16),
-                            createTextFormField(
-                                _address1Controller, "Address Line", false),
-                            const SizedBox(height: 16),
-                            createTextFormField(_address2Controller,
-                                "Address Line 2(Optional)", false,
-                                needCheck: false),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: createTextFormField(_stateController,
-                                        "State/Region", false)),
-                                const SizedBox(width: 20),
-                                Expanded(
-                                    child: createTextFormField(
-                                        _cityController, "City", false)),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                    child: createTextFormField(
-                                        _postalController,
-                                        "Postal/Zip Code",
-                                        false,maxLength: 6,keyboardType: TextInputType.number)),
-                                const SizedBox(width: 20),
-                                InkWell(
-                                    onTap: () {
-                                      showCountryPicker(
-                                        context: context,
-                                        showPhoneCode: false,
-                                        useSafeArea: true,
-                                        onSelect: (Country country) {
-                                          selectedCountry = country;
-                                          setState(() {});
-                                        },
-                                      );
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.only(
-                                          left: 6),
-                                      width: 135,
-                                      height: 48,
-                                      decoration: ShapeDecoration(
-                                        shape: outlineInputBorder,
-                                      ),
-                                      child: Center(
-                                        child: Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 100,
-                                              child: AutoSizeText(
-                                                selectedCountry!.name,
-                                                maxLines: 2,
-                                                minFontSize: 10,
-                                                maxFontSize: 16,
-                                              ),
+                                        child: Container(
+                                          padding: const EdgeInsets.only(left: 6,right: 6),
+                                          width: 92,
+                                          height: 48,
+                                          decoration: ShapeDecoration(
+                                            shape: outlineInputBorder,
+                                          ),
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                              children: [
+                                                SizedBox(
+                                                  width: 52,
+                                                    child: Text("+${selectedPhoneCountry!.phoneCode}")),
+                                                const SizedBox(width:20,child: Icon(Icons.keyboard_arrow_down_sharp))
+                                              ],
                                             ),
-                                            const Icon(Icons.keyboard_arrow_down_sharp)
-                                          ],
-                                        ),
-                                      ),
-                                    ))
+                                          ),
+                                        )),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: createTextFormField(
+                                          _mobileNumberController,
+                                          "Mobile Number",
+                                          false,keyboardType: TextInputType.phone),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
+                                createTextFormField(_dateOfBirthController,
+                                    "Date of birth (DD-MM-YYYY)", false,maxLength: 10,
+                                    icon: const Icon(Icons.date_range)),
+                                const SizedBox(height: 16),
+                                createTextFormField(
+                                    _address1Controller, "Address Line", false),
+                                const SizedBox(height: 16),
+                                createTextFormField(_address2Controller,
+                                    "Address Line 2(Optional)", false,
+                                    needCheck: false),
+                                const SizedBox(height: 16),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                        child: createTextFormField(_stateController,
+                                            "State/Region", false)),
+                                    const SizedBox(width: 20),
+                                    Expanded(
+                                        child: createTextFormField(
+                                            _cityController, "City", false)),
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                        child: createTextFormField(
+                                            _postalController,
+                                            "Postal/Zip Code",
+                                            false,maxLength: 6,keyboardType: TextInputType.number)),
+                                    const SizedBox(width: 20),
+                                    InkWell(
+                                        onTap: () {
+                                          showCountryPicker(
+                                            context: context,
+                                            showPhoneCode: false,
+                                            useSafeArea: true,
+                                            onSelect: (Country country) {
+                                              selectedCountry = country;
+                                              setState(() {});
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.only(
+                                              left: 6),
+                                          width: 135,
+                                          height: 48,
+                                          decoration: ShapeDecoration(
+                                            shape: outlineInputBorder,
+                                          ),
+                                          child: Center(
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 100,
+                                                  child: AutoSizeText(
+                                                    selectedCountry!.name,
+                                                    maxLines: 2,
+                                                    minFontSize: 10,
+                                                    maxFontSize: 16,
+                                                  ),
+                                                ),
+                                                const Icon(Icons.keyboard_arrow_down_sharp)
+                                              ],
+                                            ),
+                                          ),
+                                        ))
+                                  ],
+                                ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            BottomButton(
-                              icon: 'asset/images/x.png',
-                              text: 'CANCEL',
-                              imageClr: Colors.grey,
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                            BottomButton(
-                              icon: 'asset/images/icon_confirm_green.png',
-                              text: 'DONE',
-                              onPressed: () {
-                                if ((_formKey.currentState as FormState)
-                                    .validate()) {
-                                  kyc();
-                                }
-                              },
-                            )
-                          ]),
-                    ]),
+                          ),
+                          const SizedBox(height: 20),
+                          BottomButton(
+                            icon: 'asset/images/icon_confirm_green.png',
+                            text: 'DONE',
+                            onPressed: () {
+                              if ((_formKey.currentState as FormState)
+                                  .validate()) {
+                                kyc();
+                              }
+                            },
+                          ),
+                        ]),
+                  ),
+                  const SizedBox(height: 20,),
+                  BottomWhiteButton(
+                    icon: 'asset/images/icon_close_white.png',
+                    text: 'CANCEL',
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
               ),
             ),
           )),
