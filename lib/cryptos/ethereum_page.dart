@@ -1,19 +1,21 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:awallet/bean/enum_exchange_type.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_token_item.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/component/square_button.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'ethereum_recover_wallet.dart';
 
@@ -27,38 +29,33 @@ class EthereumPage extends StatefulWidget {
 class _EthereumPageState extends State<EthereumPage> {
   bool loadingVisible = false;
 
-  Timer? updateBalanceTimer;
+  final RefreshController _refreshBalanceController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
-    updateBalance();
-    updateBalanceTimer ??= Timer.periodic(const Duration(seconds: 30), (timer) {
-      updateBalance();
-    });
-
     GlobalParams.eventBus.on().listen((event) {
       if (event == "MoreMenu_setNetwork") {
-        updateBalance();
+        _updateBalance();
       }
     });
     super.initState();
+    _updateBalance();
   }
 
   @override
   void dispose() {
-    if (updateBalanceTimer != null && updateBalanceTimer!.isActive) {
-      updateBalanceTimer!.cancel();
-    }
     super.dispose();
   }
 
-  void updateBalance() {
+  _updateBalance() {
     var address = LocalStorage.getEthAddress();
     if (address != null) {
       EthService.getInstance().updateTokenBalances(context).then((value) {
         if (mounted) {
           setState(() {});
         }
+        _refreshBalanceController.refreshCompleted();
       });
     }
   }
@@ -69,12 +66,12 @@ class _EthereumPageState extends State<EthereumPage> {
     if (address == null) {
       return createOrRecoverWallet();
     }
-
     var walletInfo = EthService.getInstance().getWalletInfo();
-
     var tokenList = EthService.getInstance().getTokenList();
 
-    return Center(
+    return SmartRefresher(
+      controller: _refreshBalanceController,
+      onRefresh: _updateBalance,
       child: Column(
         children: [
           CryptoWalletCard(walletInfo: walletInfo),

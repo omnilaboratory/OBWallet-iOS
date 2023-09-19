@@ -1,4 +1,3 @@
-import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/home.dart';
 import 'package:flutter/material.dart';

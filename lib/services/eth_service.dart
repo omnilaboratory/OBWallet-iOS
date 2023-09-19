@@ -69,12 +69,10 @@ class EthService {
     double totalBalance = 0;
 
     double balance = await Eth.getBalanceOfETH(address);
-    log("eth getBalanceOfETH $address $balance");
     totalBalance = await setTokenUsdValue(
         context, getTokenList()[0], balance, totalBalance);
 
     balance = await Eth.getBalanceOfUSDT(address);
-    log("eth getBalanceOfUSDT $address $balance");
     totalBalance = await setTokenUsdValue(
         context, getTokenList()[1], balance, totalBalance);
 
@@ -94,9 +92,8 @@ class EthService {
     var retInfo = await AccountService.getInstance()
         .getCoinPrice(context, tokenInfo.name);
     if (retInfo.code == 1) {
-      log("setTokenUsdValue ${tokenInfo.balance} ${retInfo.data}");
       var price = retInfo.data as GetCoinPriceResponse;
-      tokenInfo.balanceOfDollar = (balance * price.price)!;
+      tokenInfo.balanceOfDollar = (balance * price.price);
       totalBalance += tokenInfo.balanceOfDollar!;
     }
     return totalBalance;

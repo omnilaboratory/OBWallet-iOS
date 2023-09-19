@@ -191,9 +191,4 @@ class _UpdateState extends State<Update> {
       ),
     );
   }
-
-  final OutlineInputBorder _outlineInputBorder = OutlineInputBorder(
-    borderSide: const BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
-    borderRadius: BorderRadius.circular(8),
-  );
 }
