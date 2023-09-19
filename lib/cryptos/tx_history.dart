@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/tx_item.dart';
@@ -24,6 +26,7 @@ class _TxHistoryState extends State<TxHistory> {
   var currTypeIndex = 0;
 
   void onClickType(int type) {
+    log("$currTypeIndex $type");
     if (currTypeIndex == type) {
       return;
     }
@@ -32,10 +35,10 @@ class _TxHistoryState extends State<TxHistory> {
     }
 
     txHistoryList = [];
-    currTypeIndex = type;
     dataStartIndex = 0;
 
-    if (dataStartIndex == 0) {
+    currTypeIndex = type;
+    if (currTypeIndex == 0) {
       getSwapTxList();
     } else {
       getTrackedTxList();
