@@ -339,6 +339,7 @@ class _CardPartState extends State<CardPart> {
   void _onBalanceRefresh() async {
     CardService.getInstance().cardInfo(context).then((resp) {
       if (resp.code == 1) {
+        hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
         if(mounted){
           setState(() {});
         }
@@ -455,8 +456,7 @@ class _CardPartState extends State<CardPart> {
           return const ApplyCard();
         });
     if (flag != null && flag == true) {
-      getCardBalanceFromServer();
-
+      _onBalanceRefresh();
     }
   }
 
