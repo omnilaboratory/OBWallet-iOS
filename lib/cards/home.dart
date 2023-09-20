@@ -9,8 +9,6 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 
-import '../cryptos/more_menu.dart';
-
 var kycClr = [Colors.blue, Colors.yellow, Colors.green];
 
 class CardHome extends StatefulWidget {
@@ -88,7 +86,6 @@ class _CardHomeState extends State<CardHome> with SingleTickerProviderStateMixin
       length: tabNames.length,
       child: Scaffold(
         appBar: AppBar(
-          // backgroundColor: Colors.transparent,
           title: const HeadLogo(title: "Home"),
           actions: <Widget>[
             Padding(
@@ -114,17 +111,17 @@ class _CardHomeState extends State<CardHome> with SingleTickerProviderStateMixin
                               });
                         }
                       }),
-                  ButtonForAppBarAction(
-                      width: 18,
-                      height: 18,
-                      imageUrl: "asset/images/icon_more_3line.png",
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return const MoreMenu();
-                            });
-                      }),
+                  // ButtonForAppBarAction(
+                  //     width: 18,
+                  //     height: 18,
+                  //     imageUrl: "asset/images/icon_more_3line.png",
+                  //     onTap: () {
+                  //       showDialog(
+                  //           context: context,
+                  //           builder: (context) {
+                  //             return const MoreMenu();
+                  //           });
+                  //     }),
                 ],
               ),
             ),
