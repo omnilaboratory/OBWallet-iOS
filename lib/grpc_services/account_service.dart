@@ -95,11 +95,13 @@ class AccountService {
     if (symbol != null) {
       request.symbol = symbol;
     }
+    log("getSwapTxList $request");
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.getSwapTxList(request);
       ret.code = 1;
       ret.data = resp;
+      log("getSwapTxList $resp");
     } catch (e) {
       UserService.getInstance().setError(context, "getSwapTxList", e, ret);
     }

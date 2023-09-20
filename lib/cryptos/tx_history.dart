@@ -5,7 +5,6 @@ import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/tx_item.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
-import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -19,6 +18,7 @@ class TxHistory extends StatefulWidget {
 
 class _TxHistoryState extends State<TxHistory> {
   int dataStartIndex = 0;
+  int localPageSize = 15;
   final RefreshController _refreshListController =
       RefreshController(initialRefresh: false);
 
@@ -142,7 +142,7 @@ class _TxHistoryState extends State<TxHistory> {
   }
 
   void _onListLoading() async {
-    dataStartIndex += pageSize;
+    dataStartIndex += localPageSize;
     if (currTypeIndex == 0) {
       getSwapTxList();
     } else {
@@ -152,7 +152,7 @@ class _TxHistoryState extends State<TxHistory> {
 
   void getSwapTxList() {
     AccountService.getInstance()
-        .getSwapTxList(context, dataStartIndex, pageSize,null)
+        .getSwapTxList(context, dataStartIndex, localPageSize, null)
         .then((result) {
       if (result.code == 1) {
         var resp = result.data as GetSwapTxListResponse;
@@ -173,6 +173,8 @@ class _TxHistoryState extends State<TxHistory> {
           }
         }
         setState(() {});
+      } else {
+        dataStartIndex -= localPageSize;
       }
       if (_refreshListController.isRefresh) {
         _refreshListController.refreshCompleted();
@@ -185,12 +187,11 @@ class _TxHistoryState extends State<TxHistory> {
 
   void getTrackedTxList() {
     AccountService.getInstance()
-        .getTrackedTxList(context, dataStartIndex, pageSize)
+        .getTrackedTxList(context, dataStartIndex, localPageSize)
         .then((result) {
       if (result.code == 1) {
         var resp = result.data as GetTrackedTxListResponse;
         var items = resp.items;
-        // log("getTrackedTxList  $items");
         if (items.isNotEmpty) {
           for (var element in items) {
             txHistoryList.add(CryptoTxInfo(
@@ -205,6 +206,8 @@ class _TxHistoryState extends State<TxHistory> {
           }
         }
         setState(() {});
+      } else {
+        dataStartIndex -= localPageSize;
       }
       if (_refreshListController.isRefresh) {
         _refreshListController.refreshCompleted();
