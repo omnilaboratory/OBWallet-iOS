@@ -1,3 +1,4 @@
+import 'package:awallet/profile/home.dart';
 import 'package:flutter/material.dart';
 
 import 'cards/home.dart';
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   static final List<Widget> _pages = <Widget>[
     const CardHome(),
     const CryptoHome(),
-    const ProfilePage()
+    const ProfileHome()
   ];
 
   void _onItemTapped(int index) {
