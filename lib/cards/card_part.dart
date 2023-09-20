@@ -300,7 +300,7 @@ class _CardPartState extends State<CardPart> {
                 builder: (BuildContext context, LoadStatus? mode) {
                   Widget body;
                   if (mode == LoadStatus.idle) {
-                    body = const Text("pull up load");
+                    body = const Text("No more Data");
                   } else if (mode == LoadStatus.loading) {
                     body = const CupertinoActivityIndicator();
                   } else if (mode == LoadStatus.failed) {

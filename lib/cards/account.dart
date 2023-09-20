@@ -121,7 +121,7 @@ class _AccountState extends State<Account> {
                     builder: (BuildContext context, LoadStatus? mode) {
                       Widget body;
                       if (mode == LoadStatus.idle) {
-                        body = const Text("pull up load");
+                        body = const Text("No more Data");
                       } else if (mode == LoadStatus.loading) {
                         body = const CupertinoActivityIndicator();
                       } else if (mode == LoadStatus.failed) {
@@ -296,7 +296,7 @@ class _AccountState extends State<Account> {
 
   getSwapTxList() {
     AccountService.getInstance()
-        .getSwapTxList(context, dataStartIndex, pageSize)
+        .getSwapTxList(context, dataStartIndex, pageSize,null)
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as GetSwapTxListResponse).items;

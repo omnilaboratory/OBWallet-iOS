@@ -1,18 +1,23 @@
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_token_card.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/square_button.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/tx_item.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
+import 'package:awallet/grpc_services/account_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/tools/global_params.dart';
+import 'package:awallet/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TokenActivity extends StatefulWidget {
   final TokenInfo tokenInfo;
@@ -24,14 +29,61 @@ class TokenActivity extends StatefulWidget {
 }
 
 class _TokenActivityState extends State<TokenActivity> {
+  List<CryptoTxInfo> txHistoryList = [];
+  var dataStartIndex = 0;
+  final RefreshController _refreshListController =
+      RefreshController(initialRefresh: false);
 
-  List<CryptoTxInfo> txHistoryList = [
-    // CryptoTxInfo(title: "Scan Pay", txTime: DateTime.now(), amount: 122.0),
-    // CryptoTxInfo(
-    //     title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-    // CryptoTxInfo(
-    //     title: "Exchange (USD - USDC)", txTime: DateTime.now(), amount: 142.0),
-  ];
+  void onFreshList() {
+    txHistoryList = [];
+    dataStartIndex = 0;
+    getSwapTxList();
+  }
+
+  void onLoadingList() {
+    dataStartIndex += pageSize;
+    getSwapTxList();
+  }
+
+  void getSwapTxList() {
+    AccountService.getInstance()
+        .getSwapTxList(context, dataStartIndex, pageSize,
+            Utils.getContractSymbol(widget.tokenInfo.name))
+        .then((result) {
+      if (result.code == 1) {
+        var resp = result.data as GetSwapTxListResponse;
+        var items = resp.items;
+        if (items.isNotEmpty) {
+          for (var element in items) {
+            txHistoryList.add(CryptoTxInfo(
+                title:
+                    "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
+                txTime: DateTime.fromMillisecondsSinceEpoch(
+                    (element.createdAt * 1000).toInt()),
+                fromSymbol: element.fromSymbol.name,
+                targetSymbol: element.targetSymbol.name,
+                amount: element.amt,
+                amountOfDollar: element.settleAmt,
+                status:
+                    element.status.value > 2 ? element.status.value - 2 : 0));
+          }
+        }
+        setState(() {});
+      }
+      if (_refreshListController.isRefresh) {
+        _refreshListController.refreshCompleted();
+      }
+      if (_refreshListController.isLoading) {
+        _refreshListController.loadComplete();
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getSwapTxList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +109,44 @@ class _TokenActivityState extends State<TokenActivity> {
                 dashColor: const Color(0xFFCFCFCF)),
           ),
           Expanded(
-            child: ListView.builder(
-                itemCount: txHistoryList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return CryptoTxItem(txInfo: txHistoryList[index]);
-                }),
+            child: SmartRefresher(
+              controller: _refreshListController,
+              enablePullDown: true,
+              enablePullUp: true,
+              header: const WaterDropHeader(),
+              footer: CustomFooter(
+                builder: (BuildContext context, LoadStatus? mode) {
+                  Widget body;
+                  if (mode == LoadStatus.idle) {
+                    body = const Text("No more Data");
+                  } else if (mode == LoadStatus.loading) {
+                    body = const CupertinoActivityIndicator();
+                  } else if (mode == LoadStatus.failed) {
+                    body = const Text("Load Failed!Click retry!");
+                  } else if (mode == LoadStatus.canLoading) {
+                    body = const Text("Release to load more");
+                  } else {
+                    body = const Text("No more Data");
+                  }
+                  return SizedBox(
+                    height: 55.0,
+                    child: Center(child: body),
+                  );
+                },
+              ),
+              onRefresh: onFreshList,
+              onLoading: onLoadingList,
+              child: txHistoryList.isEmpty
+                  ? const Center(child: Text("No Data"))
+                  : ListView.builder(
+                      itemCount: txHistoryList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index >= txHistoryList.length) {
+                          return null;
+                        }
+                        return CryptoTxItem(txInfo: txHistoryList[index]);
+                      }),
+            ),
           )
         ]),
       ),
@@ -87,7 +172,9 @@ class _TokenActivityState extends State<TokenActivity> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return Exchange(type: EnumExchangeType.sell, name: widget.tokenInfo.name);
+                    return Exchange(
+                        type: EnumExchangeType.sell,
+                        name: widget.tokenInfo.name);
                   });
             }),
         SquareButton(
@@ -125,7 +212,7 @@ class _TokenActivityState extends State<TokenActivity> {
     return AppBar(
       leadingWidth: 42,
       titleSpacing: 0,
-      title:HeadLogo(title: "${widget.tokenInfo.name} Activity"),
+      title: HeadLogo(title: "${widget.tokenInfo.name} Activity"),
     );
   }
 }

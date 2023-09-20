@@ -87,11 +87,14 @@ class AccountService {
     return ret;
   }
 
-  Future<GrpcResponse> getSwapTxList(
-      BuildContext context, int start, int limit) async {
+  Future<GrpcResponse> getSwapTxList(BuildContext context, int start, int limit,
+      TrackedTx_ContractSymbol? symbol) async {
     var request = GetSwapTxListRequest();
     request.start = Int64.parseInt(start.toString());
     request.limit = Int64.parseInt(limit.toString());
+    if (symbol != null) {
+      request.symbol = symbol;
+    }
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.getSwapTxList(request);
@@ -103,7 +106,8 @@ class AccountService {
     return ret;
   }
 
-  Future<GrpcResponse> getAccountHistory(BuildContext context, int start, int limit) async {
+  Future<GrpcResponse> getAccountHistory(
+      BuildContext context, int start, int limit) async {
     var request = GetAccountHistoryRequest();
     request.start = Int64.parseInt(start.toString());
     request.limit = Int64.parseInt(limit.toString());

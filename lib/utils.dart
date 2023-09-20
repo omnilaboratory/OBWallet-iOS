@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:awallet/src/generated/user/account.pb.dart';
 import 'package:awallet/src/generated/user/country.pbenum.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
@@ -172,5 +173,13 @@ class Utils {
       }
     }
     return CountryCode.AD;
+  }
+  static TrackedTx_ContractSymbol? getContractSymbol(String code) {
+    for (var value in TrackedTx_ContractSymbol.values) {
+      if (value.name.toLowerCase() == code.toLowerCase()) {
+        return value;
+      }
+    }
+    return null;
   }
 }
