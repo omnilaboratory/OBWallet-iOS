@@ -301,9 +301,9 @@ class _ForgetPswState extends State<ForgetPsw> {
   }
 
   void onClickDone() {
-    ForgetPwdRequest resquest = ForgetPwdRequest();
-    resquest.email = _emailController.value.text.trim();
-    if (!EmailValidator.validate(resquest.email)) {
+    ForgetPwdRequest request = ForgetPwdRequest();
+    request.email = _emailController.value.text.trim();
+    if (!EmailValidator.validate(request.email)) {
       showToast(Tips.wrongEmail.value);
       return;
     }
@@ -312,16 +312,16 @@ class _ForgetPswState extends State<ForgetPsw> {
       return;
     }
 
-    resquest.vcode = _codeController.value.text.trim();
-    resquest.password = _pswController.value.text.trim();
+    request.vcode = _codeController.value.text.trim();
+    request.password = _pswController.value.text.trim();
     var confirmPassword = _psw2Controller.value.text.trim();
-    if (resquest.password != confirmPassword) {
+    if (request.password != confirmPassword) {
       showToast(Tips.wrongPassMatch.value);
       return;
     }
-    resquest.verifyCodeId = verifyCodeResponse!.verifyCodeId;
+    request.verifyCodeId = verifyCodeResponse!.verifyCodeId;
     UserService.getInstance()
-        .forgetPwd(context, resquest)
+        .forgetPwd(context, request)
         .then((value) async {
       if (value.code == 1) {
         LocalStorage.remove(LocalStorage.password);

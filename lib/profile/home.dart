@@ -1,5 +1,6 @@
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/grpc_services/common_service.dart';
+import 'package:awallet/profile/update_psw.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,11 @@ class _ProfileHomeState extends State<ProfileHome> {
           children: [
             buildUserInfo(),
             const SizedBox(height: 40),
-            btnBtnItem(Icons.verified_user_outlined, "Update Password", () {}),
+            btnBtnItem(Icons.verified_user_outlined, "Update Password", () {
+              showDialog(context: context,  builder: (context) {
+                return const UpdatePsw();
+              });
+            }),
             const SizedBox(height: 20),
             btnBtnItem(Icons.logout_outlined, "Logout", () {
               LocalStorage.remove(LocalStorage.userToken);

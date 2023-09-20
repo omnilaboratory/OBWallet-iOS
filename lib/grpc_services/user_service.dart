@@ -127,6 +127,21 @@ class UserService {
     }
     return ret;
   }
+  Future<GrpcResponse> updatePwd(BuildContext context, UpdatePwdRequest req) async {
+    req.oldPassword = Utils.generateMd5(req.oldPassword);
+    req.newPassword = Utils.generateMd5(req.newPassword);
+    log("$req");
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.updatePwd(req);
+      ret.code = 1;
+      ret.data = resp;
+      resetServices();
+    } catch (e) {
+      setError(context, "updatePwd", e, ret);
+    }
+    return ret;
+  }
 
   Future<GrpcResponse> getUserInfo(
     BuildContext context,
