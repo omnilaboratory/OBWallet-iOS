@@ -31,22 +31,25 @@ class _BitcoinPageState extends State<BitcoinPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CryptoWalletCard(walletInfo: CryptoWalletInfo(address: "******",balance: 0)),
-          const SizedBox(height: 20),
-          buildTxButtons(),
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (BuildContext context, int index){
-                return CryptoTokenItem(tokenInfo: tokenList[index]);
-              },
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 20),
-              itemCount: tokenList.length,
-            ),
-          )
+          Text('Coming Soon…',
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500,color: Colors.black)),
+          // CryptoWalletCard(walletInfo: CryptoWalletInfo(address: "******",balance: 0)),
+          // const SizedBox(height: 20),
+          // buildTxButtons(),
+          // Expanded(
+          //   child: ListView.builder(
+          //     itemBuilder: (BuildContext context, int index){
+          //       return CryptoTokenItem(tokenInfo: tokenList[index]);
+          //     },
+          //     shrinkWrap: true,
+          //     padding: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 20),
+          //     itemCount: tokenList.length,
+          //   ),
+          // )
         ],
       ),
     );
