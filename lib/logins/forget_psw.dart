@@ -12,8 +12,6 @@ import 'package:awallet/utils.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
-import 'apply_card_step_one.dart';
-
 class ForgetPsw extends StatefulWidget {
   const ForgetPsw({super.key});
 
@@ -320,15 +318,13 @@ class _ForgetPswState extends State<ForgetPsw> {
       return;
     }
     request.verifyCodeId = verifyCodeResponse!.verifyCodeId;
-    UserService.getInstance()
-        .forgetPwd(context, request)
-        .then((value) async {
+    UserService.getInstance().forgetPwd(context, request).then((value) async {
       if (value.code == 1) {
         LocalStorage.remove(LocalStorage.userToken);
         LocalStorage.remove(LocalStorage.password);
         showToast(Tips.updatedPassword.value);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const Login()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Login()));
       }
     });
   }
