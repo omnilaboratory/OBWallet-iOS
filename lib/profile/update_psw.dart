@@ -95,7 +95,8 @@ class _UpdatePswState extends State<UpdatePsw> {
         LocalStorage.remove(LocalStorage.userToken);
         LocalStorage.remove(LocalStorage.password);
         showToast(Tips.updatedPassword.value);
-        Navigator.push(
+        Navigator.pop(context);
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const Login()));
       }
     });

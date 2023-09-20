@@ -323,7 +323,7 @@ class _ForgetPswState extends State<ForgetPsw> {
         LocalStorage.remove(LocalStorage.userToken);
         LocalStorage.remove(LocalStorage.password);
         showToast(Tips.updatedPassword.value);
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const Login()));
       }
     });
