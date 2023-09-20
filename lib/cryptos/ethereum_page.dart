@@ -27,8 +27,6 @@ class EthereumPage extends StatefulWidget {
 }
 
 class _EthereumPageState extends State<EthereumPage> {
-  bool loadingVisible = false;
-
   final RefreshController _refreshBalanceController =
       RefreshController(initialRefresh: false);
 
@@ -144,47 +142,41 @@ class _EthereumPageState extends State<EthereumPage> {
   }
 
   Widget createOrRecoverWallet() {
-    return Stack(children: [
-      Center(
-        child: SingleChildScrollView(
-          child: SizedBox(
-            height: 380,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 30),
-                    child:
-                        Image(image: AssetImage("asset/images/img_wallet.png")),
-                  ),
-                  InkWell(
-                      onTap: () {
-                        createNewWallet();
-                      },
-                      child: createBtn("icon_plus.png", "Create New Wallet")),
-                  InkWell(
-                      onTap: () async {
-                        var flag = await showDialog(
-                            context: context,
-                            builder: (context) {
-                              return const EthereumRecoverWallet();
-                            });
-                        if (flag != null && flag) {
-                          updateTokenBalances();
-                          setState(() {});
-                        }
-                      },
-                      child: createBtn(
-                          "image_recover_wallet.png", "Recover Wallet")),
-                ]),
-          ),
+    return Center(
+      child: SingleChildScrollView(
+        child: SizedBox(
+          height: 380,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 30),
+                  child:
+                      Image(image: AssetImage("asset/images/img_wallet.png")),
+                ),
+                InkWell(
+                    onTap: () {
+                      createNewWallet();
+                    },
+                    child: createBtn("icon_plus.png", "Create New Wallet")),
+                InkWell(
+                    onTap: () async {
+                      var flag = await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const EthereumRecoverWallet();
+                          });
+                      if (flag != null && flag) {
+                        updateTokenBalances();
+                        setState(() {});
+                      }
+                    },
+                    child: createBtn(
+                        "image_recover_wallet.png", "Recover Wallet")),
+              ]),
         ),
       ),
-      Offstage(
-        offstage: !loadingVisible,
-        child: const LoadingDialog(),
-      )
-    ]);
+    );
   }
 
   Column createBtn(String iconUrl, String btnName) {
@@ -214,11 +206,10 @@ class _EthereumPageState extends State<EthereumPage> {
   }
 
   void createNewWallet() {
-    loadingVisible = true;
-    setState(() {});
+    var loading = showLoading(context);
     EthService.getInstance().createWalletInfo(context).then((value) async {
-      loadingVisible = false;
       await updateTokenBalances();
+      loading.remove();
     });
   }
 
