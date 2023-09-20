@@ -372,7 +372,7 @@ class _CardPartState extends State<CardPart> {
               showToast(Tips.comeSoon.value);
             }),
         SquareButton(
-            icon: 'asset/images/icon_top_up.png',
+            icon: 'asset/images/icon_deposit.png',
             text: 'Deposit',
             iconWidth: iconWidth,
             onPressed: () {
@@ -383,7 +383,7 @@ class _CardPartState extends State<CardPart> {
                   });
             }),
         SquareButton(
-            icon: 'asset/images/icon_send.png',
+            icon: 'asset/images/icon_withdraw.png',
             text: 'Withdraw',
             iconWidth: iconWidth,
             onPressed: () {

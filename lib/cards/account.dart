@@ -162,7 +162,7 @@ class _AccountState extends State<Account> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SquareButton(
-            icon: 'asset/images/icon_top_up.png',
+            icon: 'asset/images/icon_deposit.png',
             text: 'Deposit',
             iconWidth: iconWidth,
             onPressed: () {
@@ -173,7 +173,7 @@ class _AccountState extends State<Account> {
                   });
             }),
         SquareButton(
-            icon: 'asset/images/icon_top_up.png',
+            icon: 'asset/images/icon_withdraw.png',
             text: 'Withdraw',
             iconWidth: iconWidth,
             onPressed: () {

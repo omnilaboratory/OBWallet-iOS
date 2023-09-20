@@ -695,7 +695,7 @@ class _ExchangeState extends State<Exchange> {
                   children: [
                     const Expanded(
                       child: Text(
-                        "Your account balance is insufficient, please Top Up",
+                        "Your account balance is insufficient, please deposit.",
                         style: TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
@@ -715,7 +715,7 @@ class _ExchangeState extends State<Exchange> {
                             });
                       },
                       child: const Text(
-                        "Top Up",
+                        "Deposit",
                         style: TextStyle(
                           color: Color(0xFF4A92FF),
                           fontSize: 12,
