@@ -20,18 +20,19 @@ message CardInfo {
   CurrencyCode symbol=3;
   string expiry_date =9;
   string cvv =10;
+  string open_id =11;
   int64  user_id=4;
   double balance=5;
   uint64 created_at = 6;
   uint64 updated_at = 7;
 }
 message ApplyCardRequest {
-  string ic_no=1;
+//  string ic_no=1;  //set at kyc stage
   //default USD
   CurrencyCode currency=2;
 }
 message ApplyCardResponse {
-  CardInfo card=1;
+//  CardInfo card=1;
 }
 
 message CardListRequest {

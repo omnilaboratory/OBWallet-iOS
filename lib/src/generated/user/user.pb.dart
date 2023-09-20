@@ -153,6 +153,7 @@ class UserInfo extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(24, _omitFieldNames ? '' : 'createdAt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(25, _omitFieldNames ? '' : 'ethAddress')
     ..aOS(26, _omitFieldNames ? '' : 'btcAddress')
+    ..a<$fixnum.Int64>(27, _omitFieldNames ? '' : 'cardCount', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -410,6 +411,15 @@ class UserInfo extends $pb.GeneratedMessage {
   $core.bool hasBtcAddress() => $_has(25);
   @$pb.TagNumber(26)
   void clearBtcAddress() => clearField(26);
+
+  @$pb.TagNumber(27)
+  $fixnum.Int64 get cardCount => $_getI64(26);
+  @$pb.TagNumber(27)
+  set cardCount($fixnum.Int64 v) { $_setInt64(26, v); }
+  @$pb.TagNumber(27)
+  $core.bool hasCardCount() => $_has(26);
+  @$pb.TagNumber(27)
+  void clearCardCount() => clearField(27);
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {

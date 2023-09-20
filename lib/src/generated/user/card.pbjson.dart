@@ -22,6 +22,7 @@ const CardInfo$json = {
     {'1': 'symbol', '3': 3, '4': 1, '5': 14, '6': '.user.CurrencyCode', '10': 'symbol'},
     {'1': 'expiry_date', '3': 9, '4': 1, '5': 9, '10': 'expiryDate'},
     {'1': 'cvv', '3': 10, '4': 1, '5': 9, '10': 'cvv'},
+    {'1': 'open_id', '3': 11, '4': 1, '5': 9, '10': 'openId'},
     {'1': 'user_id', '3': 4, '4': 1, '5': 3, '10': 'userId'},
     {'1': 'balance', '3': 5, '4': 1, '5': 1, '10': 'balance'},
     {'1': 'created_at', '3': 6, '4': 1, '5': 4, '10': 'createdAt'},
@@ -33,36 +34,32 @@ const CardInfo$json = {
 final $typed_data.Uint8List cardInfoDescriptor = $convert.base64Decode(
     'CghDYXJkSW5mbxIOCgJpZBgBIAEoA1ICaWQSFwoHY2FyZF9ubxgCIAEoCVIGY2FyZE5vEioKBn'
     'N5bWJvbBgDIAEoDjISLnVzZXIuQ3VycmVuY3lDb2RlUgZzeW1ib2wSHwoLZXhwaXJ5X2RhdGUY'
-    'CSABKAlSCmV4cGlyeURhdGUSEAoDY3Z2GAogASgJUgNjdnYSFwoHdXNlcl9pZBgEIAEoA1IGdX'
-    'NlcklkEhgKB2JhbGFuY2UYBSABKAFSB2JhbGFuY2USHQoKY3JlYXRlZF9hdBgGIAEoBFIJY3Jl'
-    'YXRlZEF0Eh0KCnVwZGF0ZWRfYXQYByABKARSCXVwZGF0ZWRBdA==');
+    'CSABKAlSCmV4cGlyeURhdGUSEAoDY3Z2GAogASgJUgNjdnYSFwoHb3Blbl9pZBgLIAEoCVIGb3'
+    'BlbklkEhcKB3VzZXJfaWQYBCABKANSBnVzZXJJZBIYCgdiYWxhbmNlGAUgASgBUgdiYWxhbmNl'
+    'Eh0KCmNyZWF0ZWRfYXQYBiABKARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAcgASgEUgl1cG'
+    'RhdGVkQXQ=');
 
 @$core.Deprecated('Use applyCardRequestDescriptor instead')
 const ApplyCardRequest$json = {
   '1': 'ApplyCardRequest',
   '2': [
-    {'1': 'ic_no', '3': 1, '4': 1, '5': 9, '10': 'icNo'},
     {'1': 'currency', '3': 2, '4': 1, '5': 14, '6': '.user.CurrencyCode', '10': 'currency'},
   ],
 };
 
 /// Descriptor for `ApplyCardRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List applyCardRequestDescriptor = $convert.base64Decode(
-    'ChBBcHBseUNhcmRSZXF1ZXN0EhMKBWljX25vGAEgASgJUgRpY05vEi4KCGN1cnJlbmN5GAIgAS'
-    'gOMhIudXNlci5DdXJyZW5jeUNvZGVSCGN1cnJlbmN5');
+    'ChBBcHBseUNhcmRSZXF1ZXN0Ei4KCGN1cnJlbmN5GAIgASgOMhIudXNlci5DdXJyZW5jeUNvZG'
+    'VSCGN1cnJlbmN5');
 
 @$core.Deprecated('Use applyCardResponseDescriptor instead')
 const ApplyCardResponse$json = {
   '1': 'ApplyCardResponse',
-  '2': [
-    {'1': 'card', '3': 1, '4': 1, '5': 11, '6': '.user.CardInfo', '10': 'card'},
-  ],
 };
 
 /// Descriptor for `ApplyCardResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List applyCardResponseDescriptor = $convert.base64Decode(
-    'ChFBcHBseUNhcmRSZXNwb25zZRIiCgRjYXJkGAEgASgLMg4udXNlci5DYXJkSW5mb1IEY2FyZA'
-    '==');
+    'ChFBcHBseUNhcmRSZXNwb25zZQ==');
 
 @$core.Deprecated('Use cardListRequestDescriptor instead')
 const CardListRequest$json = {

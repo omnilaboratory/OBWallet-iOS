@@ -46,7 +46,6 @@ class CardService {
 
   Future<GrpcResponse> applyCard(BuildContext context, String icNo) async {
     var request = ApplyCardRequest();
-    request.icNo = icNo;
     request.currency = CurrencyCode.USD;
     log("$request");
     var ret = GrpcResponse();
