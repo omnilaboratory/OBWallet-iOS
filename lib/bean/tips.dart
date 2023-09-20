@@ -11,8 +11,7 @@ enum Tips {
   emptyAmount2("The to amount cannot be empty."),
   zeroAmount2("The to amount must be greater than 0."),
   createEthAddress("Please create an ethereum address."),
-  waitingBalance(
-      "Please wait for a while to see the balance."),
+  waitingBalance("Please wait for a while to see the balance."),
   addressIsOnClipboard("Address is on your clipboard."),
   cardNoIsOnClipboard("Card NO is on your clipboard."),
   wifIsOnClipboard("WIF is on your clipboard."),
@@ -25,8 +24,12 @@ enum Tips {
   wrongPassMatch("Wrong password and confirmation password."),
   updatedPassword("Password updated."),
   selectCountry("Please select the country."),
-  checkKycResult("Please wait the kyc result."),
-  kycPassed("Please check the page again after a while."),
+
+  kycPending("KYC is pending."),
+  kycRejected("KYC is rejected and please do it again."),
+  kycPassed(
+      "KYC has been passed and please check the card page after a while."),
+
   checkInputSocialId("Please input the social Id."),
   emptyCardNumber("The card number cannot be empty."),
   applyCardFirst("Please apply for a new card first."),

@@ -154,6 +154,7 @@ class UserService {
       ret.data = resp;
       var userInfo = resp as GetUserInfoResponse;
       CommonService.userInfo = userInfo.user;
+      log("getUserInfo cardCount ${userInfo.user.cardCount}");
       CommonService.userId = userInfo.user.id.toString();
     } catch (e) {
       setError(context, "getUserInfo", e, ret);

@@ -1,3 +1,4 @@
+import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/account.dart';
 import 'package:awallet/cards/card_part.dart';
@@ -98,12 +99,15 @@ class _CardHomeState extends State<CardHome> with SingleTickerProviderStateMixin
                       imageClr: kycClr[currKycClrIndex],
                       imageUrl: "asset/images/icon_kyc.png",
                       onTap: () {
-                        if (CommonService.userInfo!.kycStatus == "passed") {
+                        if (CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
                           alert(Tips.kycPassed.value,context,(){});
                         } else if (CommonService.userInfo!.kycStatus ==
-                            "pending") {
-                          alert(Tips.checkKycResult.value,context,(){});
-                        } else {
+                            EnumKycStatus.pending.value) {
+                          alert(Tips.kycPending.value,context,(){});
+                        }else if (CommonService.userInfo!.kycStatus ==
+                            EnumKycStatus.rejected.value) {
+                          alert(Tips.kycRejected.value,context,(){});
+                        }  else {
                           showDialog(
                               context: context,
                               builder: (context) {

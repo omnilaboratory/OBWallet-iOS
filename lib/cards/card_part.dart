@@ -446,7 +446,7 @@ class _CardPartState extends State<CardPart> {
           }
 
           if (CommonService.userInfo!.kycStatus == "pending") {
-            showToast(Tips.checkKycResult.value);
+            showToast(Tips.kycPending.value);
           }
 
           if (CommonService.userInfo!.kycStatus == "passed") {
