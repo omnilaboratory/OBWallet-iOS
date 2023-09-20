@@ -92,6 +92,7 @@ class _UpdatePswState extends State<UpdatePsw> {
     }
     UserService.getInstance().updatePwd(context, request).then((value) async {
       if (value.code == 1) {
+        LocalStorage.remove(LocalStorage.userToken);
         LocalStorage.remove(LocalStorage.password);
         showToast(Tips.updatedPassword.value);
         Navigator.push(

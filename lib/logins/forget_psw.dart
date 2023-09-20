@@ -324,6 +324,7 @@ class _ForgetPswState extends State<ForgetPsw> {
         .forgetPwd(context, request)
         .then((value) async {
       if (value.code == 1) {
+        LocalStorage.remove(LocalStorage.userToken);
         LocalStorage.remove(LocalStorage.password);
         showToast(Tips.updatedPassword.value);
         Navigator.push(context,
