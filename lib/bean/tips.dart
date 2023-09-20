@@ -29,7 +29,7 @@ enum Tips {
   checkInputSocialId("Please input the social Id."),
   emptyCardNumber("The card number cannot be empty."),
   applyCardFirst("Please apply for a new card first."),
-  waitForReview("Please wait for manual review and you will get a new card. "),
+  waitForReview("Please wait for manual review and you will get a new card."),
   ;
 
   final String value;
