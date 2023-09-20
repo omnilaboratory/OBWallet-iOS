@@ -169,7 +169,12 @@ class _AccountState extends State<Account> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return CardRecharge(amt: '', type: EnumChargeType.deposit, cardNo: '', date: '', cvc: '');
+                    return CardRecharge(
+                        amt: '',
+                        type: EnumChargeType.deposit,
+                        cardNo: '',
+                        date: '',
+                        cvc: '');
                   });
             }),
         SquareButton(
@@ -183,7 +188,9 @@ class _AccountState extends State<Account> {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      return Send(type: EnumChargeType.withdraw,cardNo: CommonService.cardInfo.cardNo);
+                      return Send(
+                          type: EnumChargeType.withdraw,
+                          cardNo: CommonService.cardInfo.cardNo);
                     });
               }
             }),
@@ -296,7 +303,7 @@ class _AccountState extends State<Account> {
 
   getSwapTxList() {
     AccountService.getInstance()
-        .getSwapTxList(context, dataStartIndex, pageSize,null)
+        .getSwapTxList(context, dataStartIndex, pageSize, null)
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as GetSwapTxListResponse).items;
@@ -317,6 +324,8 @@ class _AccountState extends State<Account> {
           if (mounted) {
             setState(() {});
           }
+        } else {
+          dataStartIndex -= pageSize;
         }
       }
       if (_refreshListController.isRefresh) {
@@ -349,6 +358,8 @@ class _AccountState extends State<Account> {
           if (mounted) {
             setState(() {});
           }
+        } else {
+          dataStartIndex -= pageSize;
         }
       }
       if (_refreshListController.isRefresh) {

@@ -519,6 +519,8 @@ class _CardPartState extends State<CardPart> {
           if (mounted) {
             setState(() {});
           }
+        } else {
+          dataStartIndex -= pageSize;
         }
       }
       if (_refreshListController.isRefresh) {
@@ -555,6 +557,8 @@ class _CardPartState extends State<CardPart> {
           if (mounted) {
             setState(() {});
           }
+        } else {
+          dataStartIndex -= pageSize;
         }
       }
       if (_refreshListController.isRefresh) {
