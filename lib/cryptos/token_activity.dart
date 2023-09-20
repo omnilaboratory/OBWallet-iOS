@@ -220,7 +220,9 @@ class _TokenActivityState extends State<TokenActivity> {
                 status:
                     element.status.value > 2 ? element.status.value - 2 : 0));
           }
-          setState(() {});
+          if (mounted) {
+            setState(() {});
+          }
         } else {
           dataStartIndex -= pageSize;
         }

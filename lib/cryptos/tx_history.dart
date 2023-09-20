@@ -172,7 +172,9 @@ class _TxHistoryState extends State<TxHistory> {
                     element.status.value > 2 ? element.status.value - 2 : 0));
           }
         }
-        setState(() {});
+        if (mounted) {
+          setState(() {});
+        }
       } else {
         dataStartIndex -= localPageSize;
       }
@@ -205,7 +207,9 @@ class _TxHistoryState extends State<TxHistory> {
                     element.status.value > 2 ? element.status.value - 2 : 0));
           }
         }
-        setState(() {});
+        if (mounted) {
+          setState(() {});
+        }
       } else {
         dataStartIndex -= localPageSize;
       }
