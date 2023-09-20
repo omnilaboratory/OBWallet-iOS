@@ -37,8 +37,9 @@ class _TokenActivityState extends State<TokenActivity> {
   final RefreshController _refreshBalanceController =
       RefreshController(initialRefresh: false);
 
+
   void onFreshBalance() {
-    EthService.getInstance().updateTokenBalances(context).then((value) {
+    EthService.getInstance().getTokenBalance(context,widget.tokenInfo).then((value) {
       if (mounted) {
         setState(() {});
       }
@@ -181,11 +182,6 @@ class _TokenActivityState extends State<TokenActivity> {
                     return Send(name: widget.tokenInfo.name);
                   });
             }),
-        // SquareButton(
-        //     icon: 'asset/images/icon_gift.png',
-        //     text: 'Gift',
-        //     iconWidth: iconWidth,
-        //     onPressed: () {}),
       ],
     );
   }

@@ -98,4 +98,29 @@ class EthService {
     }
     return totalBalance;
   }
+
+  Future<TokenInfo> getTokenBalance(BuildContext context,TokenInfo tokenInfo) async {
+    String address = LocalStorage.getEthAddress()!;
+    double balance = 0;
+    if(tokenInfo.name=="ETH"){
+      balance = await Eth.getBalanceOfETH(address);
+      log("getTokenBalance $balance");
+    }
+    if(tokenInfo.name=="USDT"){
+      balance = await Eth.getBalanceOfUSDT(address);
+    }
+    if (GlobalParams.currNetwork == EnumNetworkType.mainnet) {
+      if(tokenInfo.name=="USDC"){
+        balance = await Eth.getBalanceOfUSDC(address);
+      }
+    }
+    tokenInfo.balance = balance;
+    var retInfo = await AccountService.getInstance()
+        .getCoinPrice(context, tokenInfo.name);
+    if (retInfo.code == 1) {
+      var price = retInfo.data as GetCoinPriceResponse;
+      tokenInfo.balanceOfDollar = (balance * price.price);
+    }
+    return tokenInfo;
+  }
 }
