@@ -23,6 +23,7 @@ enum Tips {
   getVerifyCode("Please get verification code first."),
   wrongPass("Please enter the correct password."),
   wrongPassMatch("Wrong password and confirmation password."),
+  updatedPassword("Password updated."),
   selectCountry("Please select the country."),
   checkKycResult("Please wait the kyc result."),
   kycPassed("Please check the page again after a while."),

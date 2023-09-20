@@ -114,6 +114,20 @@ class UserService {
     return ret;
   }
 
+  Future<GrpcResponse> forgetPwd(BuildContext context, ForgetPwdRequest req) async {
+    req.password = Utils.generateMd5(req.password);
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.forgetPwd(req);
+      ret.code = 1;
+      ret.data = resp;
+      resetServices();
+    } catch (e) {
+      setError(context, "forgetPwd", e, ret);
+    }
+    return ret;
+  }
+
   Future<GrpcResponse> getUserInfo(
     BuildContext context,
   ) async {

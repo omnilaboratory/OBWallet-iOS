@@ -11,6 +11,7 @@ import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
 import '../grpc_services/card_service.dart';
+import 'forget_psw.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -132,14 +133,36 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10, right: 20),
                 child: buildLoginBtn(context),
               )
-            ])
+            ]),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ForgetPsw()));
+                  },
+                  child: const Text(
+                    'Forgot Password?',
+                    style: TextStyle(
+                      color: Color(0xFF666666),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+            )
           ]),
         ),
       ),
