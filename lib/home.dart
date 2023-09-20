@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'cards/home.dart';
 import 'cryptos/home.dart';
-import 'profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
