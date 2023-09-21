@@ -227,168 +227,112 @@ class _CardRechargeState extends State<CardRecharge> {
     });
   }
 
-  onPay() {
-    if (formKey.currentState!.validate()) {
-      if (double.parse(cardHolderName) < 100) {
-        setState(() {
-          loadingVisible = true;
-        });
-        log(cardHolderName);
-        log(cardNumber);
-        log(cardNumber.length.toString());
-        log(expiryDate);
-        log(cvcCode);
-        log('valid!');
-        CardRechargeRequest request = CardRechargeRequest();
-        request.amt = double.parse(cardHolderName);
-        request.cardNo = cardNumber.replaceAll(' ', '');
-        request.cardSecurityCode = cvcCode;
-        request.cardExpireMonth =
-            expiryDate.substring(0, expiryDate.indexOf('/'));
-        request.cardExpireYear =
-        '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
-        CardService.getInstance()
-            .cardRecharge(context, request)
-            .then((value) async {
-          if (value.code == 1) {
-            setState(() {
-              loadingVisible = false;
-            });
-            var resp = value.data as CardRechargeResponse;
-            log(resp.toString());
-            GlobalParams.eventBus.fire("topup");
-            Navigator.pop(context);
-          } else {
-            setState(() {
-              loadingVisible = false;
-            });
-            log(value.msg);
-          }
-        });
-      } else {
-        var kycStatus = CommonService.userInfo!.kycStatus;
-        if (kycStatus.isNotEmpty) {
-          if (kycStatus == "passed") {
-            FocusScope.of(context).unfocus();
-            GlobalParams.eventBus.fire("topup");
-            Navigator.pop(context);
-            getDcPayUrl(double.parse(cardHolderName));
-          }
-        } else {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return const Kyc();
-              });
-        }
-      }
-    } else {
-      log('invalid!');
-    }
-  }
-
   // onPay() {
   //   if (formKey.currentState!.validate()) {
-  //     if (widget.type == EnumChargeType.deposit){
-  //       if (double.parse(cardHolderName) < 100) {
-  //         setState(() {
-  //           loadingVisible = true;
-  //         });
-  //         log(cardHolderName);
-  //         log(cardNumber);
-  //         log(cardNumber.length.toString());
-  //         log(expiryDate);
-  //         log(cvcCode);
-  //         log('valid!');
-  //         CardRechargeRequest request = CardRechargeRequest();
-  //         request.amt = double.parse(cardHolderName);
-  //         request.cardNo = cardNumber.replaceAll(' ', '');
-  //         request.cardSecurityCode = cvcCode;
-  //         request.cardExpireMonth =
-  //             expiryDate.substring(0, expiryDate.indexOf('/'));
-  //         request.cardExpireYear =
-  //         '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
-  //         CardService.getInstance()
-  //             .cardRecharge(context, request)
-  //             .then((value) async {
-  //           if (value.code == 1) {
-  //             setState(() {
-  //               loadingVisible = false;
-  //             });
-  //             var resp = value.data as CardRechargeResponse;
-  //             log(resp.toString());
-  //             GlobalParams.eventBus.fire("topup");
-  //             Navigator.pop(context);
-  //           } else {
-  //             setState(() {
-  //               loadingVisible = false;
-  //             });
-  //             log(value.msg);
-  //           }
-  //         });
-  //       } else {
-  //         var kycStatus = CommonService.userInfo!.kycStatus;
-  //         if (kycStatus.isNotEmpty) {
-  //           if (kycStatus == "passed") {
-  //             FocusScope.of(context).unfocus();
-  //             GlobalParams.eventBus.fire("topup");
-  //             Navigator.pop(context);
-  //             getDcPayUrl(double.parse(cardHolderName));
-  //           }
-  //         } else {
-  //           showDialog(
-  //               context: context,
-  //               builder: (context) {
-  //                 return const Kyc();
-  //               });
-  //         }
-  //       }
+  //     if (double.parse(cardHolderName) < 100) {
+  //       cardRecharge();
   //     } else {
-  //       if (double.parse(cardHolderName) > CommonService.cardInfo.balance) {
-  //         showToast(Tips.maxAmount.value, toastLength: Toast.LENGTH_SHORT);
-  //         return;
+  //       var kycStatus = CommonService.userInfo!.kycStatus;
+  //       if (kycStatus.isNotEmpty) {
+  //         if (kycStatus == "passed") {
+  //           FocusScope.of(context).unfocus();
+  //           GlobalParams.eventBus.fire("topup");
+  //           Navigator.pop(context);
+  //           getDcPayUrl(double.parse(cardHolderName));
+  //         }
   //       } else {
-  //         setState(() {
-  //           loadingVisible = true;
-  //         });
-  //         log(cardHolderName);
-  //         log(cardNumber);
-  //         log(cardNumber.length.toString());
-  //         log(expiryDate);
-  //         log(cvcCode);
-  //         log('valid!');
-  //         CardRechargeRequest request = CardRechargeRequest();
-  //         request.amt = double.parse(cardHolderName);
-  //         request.cardNo = cardNumber.replaceAll(' ', '');
-  //         request.cardSecurityCode = cvcCode;
-  //         request.cardExpireMonth =
-  //             expiryDate.substring(0, expiryDate.indexOf('/'));
-  //         request.cardExpireYear =
-  //         '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
-  //         CardService.getInstance()
-  //             .cardRecharge(context, request)
-  //             .then((value) async {
-  //           if (value.code == 1) {
-  //             setState(() {
-  //               loadingVisible = false;
+  //         showDialog(
+  //             context: context,
+  //             builder: (context) {
+  //               return const Kyc();
   //             });
-  //             var resp = value.data as CardRechargeResponse;
-  //             log(resp.toString());
-  //             GlobalParams.eventBus.fire("topup");
-  //             Navigator.pop(context);
-  //           } else {
-  //             setState(() {
-  //               loadingVisible = false;
-  //             });
-  //             log(value.msg);
-  //           }
-  //         });
   //       }
   //     }
   //   } else {
   //     log('invalid!');
   //   }
   // }
+
+  onPay() {
+    if (formKey.currentState!.validate()) {
+      if (widget.type == EnumChargeType.deposit){
+        if (cardNumber.replaceAll(' ', '') == CommonService.cardInfo.cardNo) {
+          virtualCardPay();
+        } else {
+          if (double.parse(cardHolderName) < 100) {
+            cardRecharge();
+          } else {
+            var kycStatus = CommonService.userInfo!.kycStatus;
+            if (kycStatus.isNotEmpty) {
+              if (kycStatus == "passed") {
+                FocusScope.of(context).unfocus();
+                GlobalParams.eventBus.fire("topup");
+                Navigator.pop(context);
+                getDcPayUrl(double.parse(cardHolderName));
+              }
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Kyc();
+                  });
+            }
+          }
+        }
+      } else {
+        virtualCardPay();
+      }
+    } else {
+      log('invalid!');
+    }
+  }
+
+  void virtualCardPay() {
+    if (double.parse(cardHolderName) > CommonService.cardInfo.balance) {
+      showToast(Tips.maxAmount.value, toastLength: Toast.LENGTH_SHORT);
+      return;
+    } else {
+      cardRecharge();
+    }
+  }
+
+  void cardRecharge() {
+    setState(() {
+      loadingVisible = true;
+    });
+    log(cardHolderName);
+    log(cardNumber);
+    log(cardNumber.length.toString());
+    log(expiryDate);
+    log(cvcCode);
+    log('valid!');
+    CardRechargeRequest request = CardRechargeRequest();
+    request.amt = double.parse(cardHolderName);
+    request.cardNo = cardNumber.replaceAll(' ', '');
+    request.cardSecurityCode = cvcCode;
+    request.cardExpireMonth =
+        expiryDate.substring(0, expiryDate.indexOf('/'));
+    request.cardExpireYear =
+    '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
+    CardService.getInstance()
+        .cardRecharge(context, request)
+        .then((value) async {
+      if (value.code == 1) {
+        setState(() {
+          loadingVisible = false;
+        });
+        var resp = value.data as CardRechargeResponse;
+        log(resp.toString());
+        GlobalParams.eventBus.fire("topup");
+        Navigator.pop(context);
+      } else {
+        setState(() {
+          loadingVisible = false;
+        });
+        log(value.msg);
+      }
+    });
+  }
 
   void getDcPayUrl(double amt) {
     AccountService.getInstance().getDcPayUrl(context, amt).then((value) async {

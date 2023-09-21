@@ -43,7 +43,7 @@ class _AccountState extends State<Account> {
       RefreshController(initialRefresh: false);
 
   double totalBalanceUsd = 0;
-  bool hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
+  bool hasCard = CommonService.userInfo!.cardCount > 0;
 
   @override
   void initState() {
