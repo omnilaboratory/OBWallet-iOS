@@ -314,6 +314,7 @@ class _KycState extends State<Kyc> {
         CommonService.userInfo = userInfo.user;
         UserInfo info = userInfo.user;
         info.socialId = _socialIdController.value.text.trim();
+        info.idNum = info.socialId;
         info.firstName = _firstNameController.value.text.trim();
         info.lastName = _lastNameController.value.text.trim();
         info.mobile = selectedPhoneCountry!.phoneCode +
