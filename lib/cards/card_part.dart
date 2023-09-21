@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/enum_charge_type.dart';
+import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/send.dart';
@@ -9,7 +10,6 @@ import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
-import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:fixnum/src/int64.dart';
@@ -23,7 +23,6 @@ import '../bean/currency_tx_info.dart';
 import '../component/bottom_button.dart';
 import '../component/currency_tx_item.dart';
 import '../component/square_button.dart';
-import 'apply_card.dart';
 import 'kyc.dart';
 
 class CardPart extends StatefulWidget {
@@ -37,7 +36,7 @@ class _CardPartState extends State<CardPart> {
   var txs = [];
   int currTypeIndex = 1;
   int dataStartIndex = 0;
-  bool hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
+  bool hasCard = CommonService.userInfo!.cardCount > 0;
 
   final RefreshController _refreshListController =
       RefreshController(initialRefresh: false);
@@ -340,7 +339,7 @@ class _CardPartState extends State<CardPart> {
     CardService.getInstance().cardInfo(context).then((resp) {
       if (resp.code == 1) {
         hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
-        if(mounted){
+        if (mounted) {
           setState(() {});
         }
       }
@@ -379,7 +378,9 @@ class _CardPartState extends State<CardPart> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return Send(type: EnumChargeType.deposit,cardNo: CommonService.cardInfo.cardNo);
+                    return Send(
+                        type: EnumChargeType.deposit,
+                        cardNo: CommonService.cardInfo.cardNo);
                   });
             }),
         SquareButton(
@@ -390,7 +391,12 @@ class _CardPartState extends State<CardPart> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return CardRecharge(amt: '', type: EnumChargeType.withdraw, cardNo: CommonService.cardInfo.cardNo, date: formatCardExpiryDate(), cvc: CommonService.cardInfo.cvv);
+                    return CardRecharge(
+                        amt: '',
+                        type: EnumChargeType.withdraw,
+                        cardNo: CommonService.cardInfo.cardNo,
+                        date: formatCardExpiryDate(),
+                        cvc: CommonService.cardInfo.cvv);
                   });
             }),
       ],
@@ -431,40 +437,28 @@ class _CardPartState extends State<CardPart> {
   }
 
   onClickApplyCard() {
-    if (CommonService.userInfo!.kycStatus == "passed") {
-      applyCardFromServer();
-    } else {
-      UserService.getInstance().getUserInfo(context).then((resp) {
+    if (CommonService.userInfo!.kycStatus == EnumKycStatus.none.value) {
+      UserService.getInstance().getUserInfo(context).then((resp) async {
         if (resp.code == 1 && resp.data != null) {
-          CommonService.userInfo = (resp.data as GetUserInfoResponse).user;
-          if (CommonService.userInfo!.kycStatus == "") {
-            showDialog(
+          if (CommonService.userInfo!.kycStatus == EnumKycStatus.none.value) {
+            var flag = await showDialog(
                 context: context,
                 builder: (context) {
                   return const Kyc();
                 });
-          }
-
-          if (CommonService.userInfo!.kycStatus == "pending") {
-            showToast(Tips.kycPending.value);
-          }
-
-          if (CommonService.userInfo!.kycStatus == "passed") {
-            applyCardFromServer();
+            if (flag) {
+              _onBalanceRefresh();
+              if (mounted) {
+                setState(() {});
+              }
+            }
+          } else {
+            showKycTips(context);
           }
         }
       });
-    }
-  }
-
-  applyCardFromServer() async {
-    var flag = await showDialog(
-        context: context,
-        builder: (context) {
-          return const ApplyCard();
-        });
-    if (flag != null && flag == true) {
-      _onBalanceRefresh();
+    } else {
+      showKycTips(context);
     }
   }
 
@@ -482,20 +476,8 @@ class _CardPartState extends State<CardPart> {
     setState(() {});
   }
 
-  getCardBalanceFromServer() {
-    CardService.getInstance().cardInfo(context).then((resp) {
-      if (resp.code == 1) {
-        hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
-      }
-      if (mounted) {
-        setState(() {});
-      }
-      _refreshBalanceController.refreshCompleted();
-    });
-  }
-
   getOnlineCardExchangeInfoList() {
-    if(CommonService.cardInfo.cardNo.isEmpty){
+    if (CommonService.cardInfo.cardNo.isEmpty) {
       return;
     }
     CardService.getInstance()
@@ -533,7 +515,7 @@ class _CardPartState extends State<CardPart> {
   }
 
   getOfflineCardHistoryListFromServer() {
-    if(CommonService.cardInfo.cardNo.isEmpty){
+    if (CommonService.cardInfo.cardNo.isEmpty) {
       return;
     }
     CardService.getInstance()

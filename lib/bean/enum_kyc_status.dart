@@ -1,7 +1,7 @@
 enum EnumKycStatus {
   none(""),
-  passed("passed"),
   pending("pend"),
+  passed("passed"),
   rejected("rejected"),
   ;
 

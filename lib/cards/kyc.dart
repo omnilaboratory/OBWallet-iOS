@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
@@ -14,6 +15,17 @@ import 'package:flutter/material.dart';
 
 import '../component/bottom_button.dart';
 
+showKycTips(BuildContext context) {
+  if (CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
+    alert(Tips.kycPassed.value, context, () {});
+  } else if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value) {
+    alert(Tips.kycPending.value, context, () {});
+  } else if (CommonService.userInfo!.kycStatus ==
+      EnumKycStatus.rejected.value) {
+    alert(Tips.kycRejected.value, context, () {});
+  }
+}
+
 class Kyc extends StatefulWidget {
   const Kyc({super.key});
 
@@ -24,6 +36,7 @@ class Kyc extends StatefulWidget {
 class _KycState extends State<Kyc> {
   final GlobalKey _formKey = GlobalKey<FormState>();
 
+  final TextEditingController _socialIdController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _mobileNumberController = TextEditingController();
@@ -99,6 +112,11 @@ class _KycState extends State<Kyc> {
                                         ),
                                       ),
                                     ]),
+                                const SizedBox(height: 16),
+                                createTextFormField(_socialIdController,
+                                    "Identity Id", false,
+                                    maxLength: 30,
+                                    icon: const Icon(Icons.credit_card)),
                                 Row(
                                   children: [
                                     Expanded(
@@ -255,7 +273,7 @@ class _KycState extends State<Kyc> {
                             onPressed: () {
                               if ((_formKey.currentState as FormState)
                                   .validate()) {
-                                kyc();
+                                onKyc();
                               }
                             },
                           ),
@@ -278,7 +296,7 @@ class _KycState extends State<Kyc> {
     );
   }
 
-  void kyc() {
+  void onKyc() {
     if (selectedCountry == null) {
       showToast(Tips.selectCountry.value);
       return;
@@ -291,6 +309,7 @@ class _KycState extends State<Kyc> {
         var userInfo = userInfoResp.data as GetUserInfoResponse;
         CommonService.userInfo = userInfo.user;
         UserInfo info = userInfo.user;
+        info.socialId = _socialIdController.value.text.trim();
         info.firstName = _firstNameController.value.text.trim();
         info.lastName = _lastNameController.value.text.trim();
         info.mobile = selectedPhoneCountry!.phoneCode +
@@ -309,7 +328,7 @@ class _KycState extends State<Kyc> {
             CommonService.userInfo = resp;
             GlobalParams.eventBus.fire("kyc_state");
             alert(Tips.waitForReview.value, context, () {
-              Navigator.pop(context);
+              Navigator.pop(context,true);
             });
           } else {
             log(value.msg);

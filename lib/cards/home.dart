@@ -1,16 +1,15 @@
 import 'package:awallet/bean/enum_kyc_status.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/account.dart';
 import 'package:awallet/cards/card_part.dart';
 import 'package:awallet/cards/kyc.dart';
-import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 
-var kycClr = [Colors.blue, Colors.yellow, Colors.green];
+var kycClr = [Colors.blue, Colors.yellow, Colors.green, Colors.red];
 
 class CardHome extends StatefulWidget {
   const CardHome({super.key});
@@ -19,7 +18,8 @@ class CardHome extends StatefulWidget {
   State<CardHome> createState() => _CardHomeState();
 }
 
-class _CardHomeState extends State<CardHome> with SingleTickerProviderStateMixin {
+class _CardHomeState extends State<CardHome>
+    with SingleTickerProviderStateMixin {
   var tabNames = ['Account', 'Card'];
   var currKycClrIndex = 0;
 
@@ -53,7 +53,8 @@ class _CardHomeState extends State<CardHome> with SingleTickerProviderStateMixin
       }
     });
 
-    _tabController = TabController(length: tabNames.length, vsync: this, initialIndex: 0);
+    _tabController =
+        TabController(length: tabNames.length, vsync: this, initialIndex: 0);
     updateKycState();
     GlobalParams.eventBus.on().listen((event) {
       if (event == "kyc_state") {
@@ -71,14 +72,8 @@ class _CardHomeState extends State<CardHome> with SingleTickerProviderStateMixin
   }
 
   updateKycState() {
-    // passed or pending
-    var kycStatus = CommonService.userInfo!.kycStatus;
-    if (kycStatus == "pending") {
-      currKycClrIndex = 1;
-    }
-    if (kycStatus == "passed") {
-      currKycClrIndex = 2;
-    }
+    currKycClrIndex = CommonService.userInfo==null?0:
+        Utils.getEnumKycStatus(CommonService.userInfo!.kycStatus).index;
   }
 
   @override
@@ -99,33 +94,17 @@ class _CardHomeState extends State<CardHome> with SingleTickerProviderStateMixin
                       imageClr: kycClr[currKycClrIndex],
                       imageUrl: "asset/images/icon_kyc.png",
                       onTap: () {
-                        if (CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
-                          alert(Tips.kycPassed.value,context,(){});
-                        } else if (CommonService.userInfo!.kycStatus ==
-                            EnumKycStatus.pending.value) {
-                          alert(Tips.kycPending.value,context,(){});
-                        }else if (CommonService.userInfo!.kycStatus ==
-                            EnumKycStatus.rejected.value) {
-                          alert(Tips.kycRejected.value,context,(){});
-                        }  else {
+                        if (CommonService.userInfo!.kycStatus ==
+                            EnumKycStatus.none.value) {
                           showDialog(
                               context: context,
                               builder: (context) {
                                 return const Kyc();
                               });
+                        }else{
+                          showKycTips(context);
                         }
                       }),
-                  // ButtonForAppBarAction(
-                  //     width: 18,
-                  //     height: 18,
-                  //     imageUrl: "asset/images/icon_more_3line.png",
-                  //     onTap: () {
-                  //       showDialog(
-                  //           context: context,
-                  //           builder: (context) {
-                  //             return const MoreMenu();
-                  //           });
-                  //     }),
                 ],
               ),
             ),

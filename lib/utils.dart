@@ -9,6 +9,8 @@ import 'package:dio/dio.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
+import 'bean/enum_kyc_status.dart';
+
 // Data of downloading state
 bool isDownloading = false;
 bool isDownloaded = false;
@@ -181,5 +183,13 @@ class Utils {
       }
     }
     return null;
+  }
+  static EnumKycStatus getEnumKycStatus(String code) {
+    for (var value in EnumKycStatus.values) {
+      if (value.value.toLowerCase() == code.toLowerCase()) {
+        return value;
+      }
+    }
+    return EnumKycStatus.none;
   }
 }
