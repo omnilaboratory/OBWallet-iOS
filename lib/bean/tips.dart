@@ -26,9 +26,9 @@ enum Tips {
   selectCountry("Please select the country."),
 
   kycPending("KYC is pending."),
-  kycRejected("KYC is rejected and please do it again."),
   kycPassed(
       "KYC has been passed and please check the card page after a while."),
+  kycRejected("KYC is rejected and please do it again."),
 
   checkInputSocialId("Please input the social Id."),
   emptyCardNumber("The card number cannot be empty."),
