@@ -18,11 +18,15 @@ import '../component/bottom_button.dart';
 showKycTips(BuildContext context) {
   if (CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
     alert(Tips.kycPassed.value, context, () {});
-  } else if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value) {
+    return;
+  }
+  if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value) {
     alert(Tips.kycPending.value, context, () {});
-  } else if (CommonService.userInfo!.kycStatus ==
-      EnumKycStatus.rejected.value) {
+    return;
+  }
+  if (CommonService.userInfo!.kycStatus == EnumKycStatus.rejected.value) {
     alert(Tips.kycRejected.value, context, () {});
+    return;
   }
 }
 
@@ -113,8 +117,8 @@ class _KycState extends State<Kyc> {
                                       ),
                                     ]),
                                 const SizedBox(height: 16),
-                                createTextFormField(_socialIdController,
-                                    "Identity Id", false,
+                                createTextFormField(
+                                    _socialIdController, "Identity Id", false,
                                     maxLength: 30,
                                     icon: const Icon(Icons.credit_card)),
                                 Row(
@@ -328,7 +332,7 @@ class _KycState extends State<Kyc> {
             CommonService.userInfo = resp;
             GlobalParams.eventBus.fire("kyc_state");
             alert(Tips.waitForReview.value, context, () {
-              Navigator.pop(context,true);
+              Navigator.pop(context, true);
             });
           } else {
             log(value.msg);
