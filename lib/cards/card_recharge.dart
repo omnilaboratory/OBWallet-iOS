@@ -40,6 +40,7 @@ class _CardRechargeState extends State<CardRecharge> {
   String cvcCode = '';
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool loadingVisible = false;
+  double totalBalanceUsd = 0;
 
   @override
   void initState() {
@@ -52,6 +53,7 @@ class _CardRechargeState extends State<CardRecharge> {
         cvcCode = widget.cvc;
       });
     }
+    getAccountBalance();
     updateKycState();
     GlobalParams.eventBus.on().listen((event) {
       if (event == "kyc_state") {
@@ -99,7 +101,8 @@ class _CardRechargeState extends State<CardRecharge> {
                         createDialogTitle(widget.type == EnumChargeType.deposit
                             ? 'Deposit'
                             : 'Withdraw'),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 20),
+                        buildBalance(),
                         CreditCardForm(
                           formKey: formKey,
                           obscureCvv: false,
@@ -107,8 +110,9 @@ class _CardRechargeState extends State<CardRecharge> {
                           cardNumber: cardNumber,
                           cvvCode: cvcCode,
                           isHolderNameVisible: true,
-                          isCardNumberVisible: true,
-                          isExpiryDateVisible: true,
+                          isCardNumberVisible: widget.type == EnumChargeType.deposit ? true : false,
+                          isExpiryDateVisible: widget.type == EnumChargeType.deposit ? true : false,
+                          enableCvv: widget.type == EnumChargeType.deposit ? true : false,
                           cardHolderName: cardHolderName,
                           expiryDate: expiryDate,
                           themeColor: Colors.blue,
@@ -128,6 +132,7 @@ class _CardRechargeState extends State<CardRecharge> {
                                 horizontal: 0, vertical: 0),
                           ),
                           cardNumberDecoration: InputDecoration(
+                            enabled: widget.type == EnumChargeType.deposit ? true : false,
                             prefixIcon: const Icon(Icons.credit_card),
                             hintText: 'Card Number',
                             hintStyle: const TextStyle(color: Colors.grey),
@@ -141,6 +146,7 @@ class _CardRechargeState extends State<CardRecharge> {
                                 horizontal: 0, vertical: 0),
                           ),
                           expiryDateDecoration: InputDecoration(
+                            enabled: widget.type == EnumChargeType.deposit ? true : false,
                             prefixIcon: const Icon(Icons.date_range),
                             hintText: 'MM/YY',
                             hintStyle: const TextStyle(color: Colors.grey),
@@ -154,6 +160,7 @@ class _CardRechargeState extends State<CardRecharge> {
                                 horizontal: 0, vertical: 0),
                           ),
                           cvvCodeDecoration: InputDecoration(
+                            enabled: widget.type == EnumChargeType.deposit ? true : false,
                             prefixIcon: const Icon(Icons.credit_score),
                             hintText: 'CVV',
                             hintStyle: const TextStyle(color: Colors.grey),
@@ -184,8 +191,9 @@ class _CardRechargeState extends State<CardRecharge> {
                               ),
                             ),
                             onPressed: onPay,
-                            child: const Text("Pay Now",
-                                style: TextStyle(
+                            child: Text(
+                                widget.type == EnumChargeType.deposit ? 'Deposit' : 'Withdraw',
+                                style: const TextStyle(
                                   color: Color(0xFFFFFFFF),
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -210,6 +218,49 @@ class _CardRechargeState extends State<CardRecharge> {
           child: const LoadingDialog(),
         )
       ],
+    );
+  }
+
+  Widget buildBalance() {
+    return SizedBox(
+      height: 80,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                '\$',
+                style: TextStyle(
+                  color: Color(0xFF333333),
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(width: 6),
+              Text(
+                widget.type == EnumChargeType.deposit ? '$totalBalanceUsd' : CommonService.cardInfo.balance.toString(),
+                style: const TextStyle(
+                  color: Color(0xFF333333),
+                  fontSize: 32,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+          Text(
+            widget.type == EnumChargeType.deposit ? 'Account Balance' : 'Card Balance',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Color(0xFF666666),
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -346,6 +397,19 @@ class _CardRechargeState extends State<CardRecharge> {
                     WebViewPage(url: resp.urlPath.toString())));
       } else {
         log(value.msg);
+      }
+    });
+  }
+
+  void getAccountBalance() {
+    AccountService.getInstance().getAccountInfo(context).then((info) {
+      if (info.code == 1) {
+        var accountInfo = info.data as AccountInfo;
+        log("$accountInfo");
+        totalBalanceUsd = accountInfo.balanceUsd;
+        if(mounted){
+          setState(() {});
+        }
       }
     });
   }

@@ -45,117 +45,124 @@ class _SendState extends State<Send> {
       children: [
         Scaffold(
             backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
-            body: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 80),
-                    Container(
-                      padding:
-                      const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20.0),
+            body: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 80),
+                      Container(
+                        padding:
+                        const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        width: size.width * 0.8,
+                        height: size.height * 0.65,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 28, bottom: 20),
+                                  child: createDialogTitle(widget.type == EnumChargeType.withdraw
+                                      ? 'Withdraw'
+                                      : 'Deposit'),
+                                ),
+                              ),
+                              buildBalance(),
+                              const Text(
+                                'Card Number',
+                                style: TextStyle(
+                                  color: Color(0xFF999999),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              TextField(
+                                enabled: widget.type == EnumChargeType.withdraw ? true : false,
+                                controller: _cardNumberController,
+                                maxLines: 1,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  hintText: "Card Number",
+                                  hintStyle: const TextStyle(color: Colors.grey),
+                                  border: _outlineInputBorder,
+                                  focusedBorder: _outlineInputBorder,
+                                  enabledBorder: _outlineInputBorder,
+                                  disabledBorder: _outlineInputBorder,
+                                  focusedErrorBorder: _outlineInputBorder,
+                                  errorBorder: _outlineInputBorder,
+                                  contentPadding:
+                                  const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 0),
+                                ),
+                              ),
+                              const SizedBox(height: 40),
+                              const Text(
+                                'Amount',
+                                style: TextStyle(
+                                  color: Color(0xFF999999),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              TextField(
+                                controller: _amountController,
+                                maxLines: 1,
+                                inputFormatters: [PrecisionLimitFormatter(2)],
+                                keyboardType: TextInputType.number,
+                                // onChanged: (value) {
+                                //   setState(() {
+                                //     if (_amountController.text.isEmpty) {
+                                //       amount = '0';
+                                //     } else {
+                                //       amount = _amountController.text;
+                                //     }
+                                //   });
+                                // },
+                                decoration: InputDecoration(
+                                  hintText: 'Amount',
+                                  hintStyle: const TextStyle(color: Colors.grey),
+                                  border: _outlineInputBorder,
+                                  focusedBorder: _outlineInputBorder,
+                                  enabledBorder: _outlineInputBorder,
+                                  disabledBorder: _outlineInputBorder,
+                                  focusedErrorBorder: _outlineInputBorder,
+                                  errorBorder: _outlineInputBorder,
+                                  contentPadding:
+                                  const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 0),
+                                ),
+                              ),
+                              const Spacer(),
+                              BottomButton(
+                                icon: 'asset/images/icon_confirm_green.png',
+                                text: widget.type == EnumChargeType.withdraw
+                                    ? 'WITHDRAW'
+                                    : 'DEPOSIT',
+                                onPressed: () {
+                                  withDraw();
+                                },
+                              )
+                            ]),
                       ),
-                      width: size.width * 0.8,
-                      height: size.height * 0.65,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 28, bottom: 20),
-                                child: createDialogTitle(widget.type == EnumChargeType.withdraw
-                                    ? 'Withdraw'
-                                    : 'Deposit'),
-                              ),
-                            ),
-                            buildBalance(),
-                            const Text(
-                              'Card Number',
-                              style: TextStyle(
-                                color: Color(0xFF999999),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            TextField(
-                              controller: _cardNumberController,
-                              maxLines: 1,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                hintText: "Card Number",
-                                hintStyle: const TextStyle(color: Colors.grey),
-                                border: _outlineInputBorder,
-                                focusedBorder: _outlineInputBorder,
-                                enabledBorder: _outlineInputBorder,
-                                disabledBorder: _outlineInputBorder,
-                                focusedErrorBorder: _outlineInputBorder,
-                                errorBorder: _outlineInputBorder,
-                                contentPadding:
-                                const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 0),
-                              ),
-                            ),
-                            const SizedBox(height: 40),
-                            const Text(
-                              'Amount',
-                              style: TextStyle(
-                                color: Color(0xFF999999),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            TextField(
-                              controller: _amountController,
-                              maxLines: 1,
-                              inputFormatters: [PrecisionLimitFormatter(2)],
-                              keyboardType: TextInputType.number,
-                              onChanged: (value) {
-                                setState(() {
-                                  if (_amountController.text.isEmpty) {
-                                    amount = '0';
-                                  } else {
-                                    amount = _amountController.text;
-                                  }
-                                });
-                              },
-                              decoration: InputDecoration(
-                                hintText: "Amount",
-                                hintStyle: const TextStyle(color: Colors.grey),
-                                border: _outlineInputBorder,
-                                focusedBorder: _outlineInputBorder,
-                                enabledBorder: _outlineInputBorder,
-                                disabledBorder: _outlineInputBorder,
-                                focusedErrorBorder: _outlineInputBorder,
-                                errorBorder: _outlineInputBorder,
-                                contentPadding:
-                                const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 0),
-                              ),
-                            ),
-                            const Spacer(),
-                            BottomButton(
-                              icon: 'asset/images/icon_confirm_green.png',
-                              text: widget.type == EnumChargeType.withdraw
-                                  ? 'WITHDRAW'
-                                  : 'DEPOSIT',
-                              onPressed: () {
-                                withDraw();
-                              },
-                            )
-                          ]),
-                    ),
-                    const SizedBox(height: 20),
-                    InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Image(
-                            image: AssetImage("asset/images/btn_cancel.png")))
-                  ],
+                      const SizedBox(height: 20),
+                      InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Image(
+                              image: AssetImage("asset/images/btn_cancel.png")))
+                    ],
+                  ),
                 ),
               ),
             )),
@@ -186,7 +193,7 @@ class _SendState extends State<Send> {
               ),
               const SizedBox(width: 6),
               Text(
-                amount,
+                '$totalBalanceUsd',
                 style: const TextStyle(
                   color: Color(0xFF333333),
                   fontSize: 32,
