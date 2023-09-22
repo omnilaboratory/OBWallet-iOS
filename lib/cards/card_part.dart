@@ -446,7 +446,7 @@ class _CardPartState extends State<CardPart> {
                 builder: (context) {
                   return const Kyc();
                 });
-            if (flag) {
+            if (flag != null && flag) {
               _onBalanceRefresh();
               if (mounted) {
                 setState(() {});
