@@ -25,7 +25,13 @@ showKycTips(BuildContext context) {
     return;
   }
   if (CommonService.userInfo!.kycStatus == EnumKycStatus.rejected.value) {
-    alert(Tips.kycRejected.value, context, () {});
+    alert(Tips.kycRejected.value, context, () {
+      showDialog(
+          context: context,
+          builder: (context) {
+        return const Kyc();
+      });
+    });
     return;
   }
 }

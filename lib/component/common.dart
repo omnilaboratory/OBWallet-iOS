@@ -74,8 +74,8 @@ alert(String msg, BuildContext context, Function callback) {
     buttons: [
       DialogButton(
         onPressed: () {
-          callback();
           Navigator.pop(context);
+          callback();
         },
         width: 120,
         color: Colors.blueAccent,
