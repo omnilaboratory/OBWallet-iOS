@@ -1,11 +1,13 @@
 import 'dart:developer';
 
+import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/component/tx_item.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
@@ -19,9 +21,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../bean/currency_tx_info.dart';
 import '../component/bottom_button.dart';
-import '../component/currency_tx_item.dart';
 import '../component/square_button.dart';
 import 'kyc.dart';
 
@@ -324,7 +324,7 @@ class _CardPartState extends State<CardPart> {
                       itemCount: txs.length,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < txs.length) {
-                          return CurrencyTxItem(txInfo: txs[index]);
+                          return CryptoTxItem(txInfo: txs[index]);
                         }
                         return null;
                       }),
@@ -489,14 +489,22 @@ class _CardPartState extends State<CardPart> {
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as CardExchangeInfoListResponse).items;
+        log("$items");
         if (items.isNotEmpty) {
           for (var element in items) {
-            txs.add(CurrencyTxInfo(
-                name: element.counterParty,
-                currencyName: "USD",
+            int status = element.status.value;
+            if (status == 1) {
+              status = 3;
+            }
+            txs.add(CryptoTxInfo(
+                title: element.counterParty,
+                txTime: DateTime.fromMillisecondsSinceEpoch(
+                    (element.createdAt * 1000).toInt()),
+                fromSymbol: "USD",
+                targetSymbol: "",
                 amount: element.amt.abs(),
-                status: element.status.value,
-                amountOfDollar: element.amt.abs()));
+                amountOfDollar: null,
+                status: status));
           }
           if (mounted) {
             setState(() {});
@@ -530,11 +538,14 @@ class _CardPartState extends State<CardPart> {
         log("$items");
         if (items.isNotEmpty) {
           for (var element in items) {
-            txs.add(CurrencyTxInfo(
-                name: element.authMerchant,
-                currencyName: element.settleCurrency,
+            txs.add(CryptoTxInfo(
+                title: element.authMerchant,
+                txTime: DateTime.now(),
+                fromSymbol: "USD",
+                targetSymbol: "",
                 amount: double.parse(element.settleAmt),
-                amountOfDollar: 0));
+                amountOfDollar: double.parse(element.settleAmt),
+                status: 3));
           }
           if (mounted) {
             setState(() {});
