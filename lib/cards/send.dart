@@ -76,6 +76,7 @@ class _SendState extends State<Send> {
                                 ),
                               ),
                               buildBalance(),
+                              const SizedBox(height: 20),
                               const Text(
                                 'Card Number',
                                 style: TextStyle(
@@ -204,7 +205,7 @@ class _SendState extends State<Send> {
             ],
           ),
           const Text(
-            'Balance',
+            'Account Balance',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Color(0xFF666666),

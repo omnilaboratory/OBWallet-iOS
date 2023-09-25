@@ -4,6 +4,7 @@ import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/kyc.dart';
+import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/credit_card_form.dart';
@@ -103,6 +104,7 @@ class _CardRechargeState extends State<CardRecharge> {
                             : 'Withdraw'),
                         const SizedBox(height: 20),
                         buildBalance(),
+                        const SizedBox(height: 20),
                         CreditCardForm(
                           formKey: formKey,
                           obscureCvv: false,
@@ -178,27 +180,12 @@ class _CardRechargeState extends State<CardRecharge> {
                         const Spacer(
                           flex: 1,
                         ),
-                        Container(
-                          width: size.width * 0.9,
-                          height: 40,
-                          padding: const EdgeInsets.only(left: 16, right: 16),
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: const Color(0xFF000000),
-                              backgroundColor: const Color(0xFF4A92FF),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                            onPressed: onPay,
-                            child: Text(
-                                widget.type == EnumChargeType.deposit ? 'Deposit' : 'Withdraw',
-                                style: const TextStyle(
-                                  color: Color(0xFFFFFFFF),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                )),
-                          ),
+                        BottomButton(
+                          icon: 'asset/images/icon_confirm_green.png',
+                          text:  widget.type == EnumChargeType.deposit ? 'Deposit' : 'Withdraw',
+                          onPressed: () {
+                            onPay();
+                          },
                         ),
                         const SizedBox(height: 50),
                       ],
