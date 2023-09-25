@@ -71,8 +71,8 @@ class _SendState extends State<Send> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 28, bottom: 20),
                                   child: createDialogTitle(widget.type == EnumChargeType.withdraw
-                                      ? 'WITHDRAW'
-                                      : 'DEPOSIT'),
+                                      ? 'Withdraw'
+                                      : 'Deposit'),
                                 ),
                               ),
                               buildBalance(),

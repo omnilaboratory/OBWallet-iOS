@@ -182,7 +182,7 @@ class _CardRechargeState extends State<CardRecharge> {
                         ),
                         BottomButton(
                           icon: 'asset/images/icon_confirm_green.png',
-                          text:  widget.type == EnumChargeType.deposit ? 'Deposit' : 'Withdraw',
+                          text:  widget.type == EnumChargeType.deposit ? 'DEPOSIT' : 'WITHDRAW',
                           onPressed: () {
                             onPay();
                           },
@@ -264,32 +264,6 @@ class _CardRechargeState extends State<CardRecharge> {
       cvcCode = creditCardModel.cvvCode;
     });
   }
-
-  // onPay() {
-  //   if (formKey.currentState!.validate()) {
-  //     if (double.parse(cardHolderName) < 100) {
-  //       cardRecharge();
-  //     } else {
-  //       var kycStatus = CommonService.userInfo!.kycStatus;
-  //       if (kycStatus.isNotEmpty) {
-  //         if (kycStatus == "passed") {
-  //           FocusScope.of(context).unfocus();
-  //           GlobalParams.eventBus.fire("topup");
-  //           Navigator.pop(context);
-  //           getDcPayUrl(double.parse(cardHolderName));
-  //         }
-  //       } else {
-  //         showDialog(
-  //             context: context,
-  //             builder: (context) {
-  //               return const Kyc();
-  //             });
-  //       }
-  //     }
-  //   } else {
-  //     log('invalid!');
-  //   }
-  // }
 
   onPay() {
     if (formKey.currentState!.validate()) {
