@@ -57,7 +57,7 @@ class _SendState extends State<Send> {
                       const SizedBox(height: 80),
                       Container(
                         padding:
-                        const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                        const EdgeInsets.only(left: 20, right: 20, bottom: 30),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20.0),

@@ -187,7 +187,7 @@ class _CardRechargeState extends State<CardRecharge> {
                             onPay();
                           },
                         ),
-                        const SizedBox(height: 50),
+                        const SizedBox(height: 30),
                       ],
                     ),
                   ),
