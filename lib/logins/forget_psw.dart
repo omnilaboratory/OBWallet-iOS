@@ -241,7 +241,7 @@ class _ForgetPswState extends State<ForgetPsw> {
                       maxLines: 1,
                       maxLength: 16,
                       decoration: InputDecoration(
-                        hintText: "Password",
+                        hintText: "New Password",
                         hintStyle: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w400),
                         prefixIcon: const Icon(Icons.password),
@@ -259,7 +259,7 @@ class _ForgetPswState extends State<ForgetPsw> {
                         updatePswStrength(_pswController.text);
                       },
                       validator: (v) {
-                        return v!.trim().isNotEmpty ? null : "wrong Password";
+                        return v!.trim().isNotEmpty ? null : "wrong New Password";
                       },
                     ),
                   ),
@@ -274,7 +274,7 @@ class _ForgetPswState extends State<ForgetPsw> {
             const SizedBox(height: 15),
             createTextFormField(
                 _psw2Controller,
-                "Confirm Password",
+                "Confirm New Password",
                 icon: const Icon(Icons.password),
                 true,
                 maxLength: 16),

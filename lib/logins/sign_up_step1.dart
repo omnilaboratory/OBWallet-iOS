@@ -186,6 +186,13 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
           children: [
             const SizedBox(height: 30),
             createTextFormField(
+                _unameController,
+                "Nickname",
+                icon: const Icon(Icons.person_pin),
+                false,
+                maxLength: 30),
+            const SizedBox(height: 15),
+            createTextFormField(
                 _emailController,
                 "Email",
                 icon: const Icon(Icons.email),
@@ -279,13 +286,6 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                 icon: const Icon(Icons.password),
                 true,
                 maxLength: 16),
-            const SizedBox(height: 20),
-            createTextFormField(
-                _unameController,
-                "Nickname",
-                icon: const Icon(Icons.person_pin),
-                false,
-                maxLength: 30),
           ],
         ),
       ),
