@@ -45,7 +45,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     });
     if (widget.type == EnumExchangeType.sell) {
       if (widget.fromCoin == 'ETH') {
-        Eth.sendEthTo(GlobalParams.platformAddress, widget.fromAmt)
+        Eth.sendEthTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
             .then((value) {
           try {
             if (value.isNotEmpty) {
@@ -60,7 +60,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           }
         });
       } else if (widget.fromCoin == 'USDT') {
-        Eth.sendUsdtTo(GlobalParams.platformAddress, widget.fromAmt)
+        Eth.sendUsdtTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
             .then((value) {
           try {
             if (value.isNotEmpty) {
@@ -75,7 +75,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           }
         });
       } else if (widget.fromCoin == 'USDC') {
-        Eth.sendUsdcTo(GlobalParams.platformAddress, widget.fromAmt)
+        Eth.sendUsdcTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
             .then((value) {
           try {
             if (value.isNotEmpty) {
