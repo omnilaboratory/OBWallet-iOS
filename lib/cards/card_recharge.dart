@@ -64,8 +64,10 @@ class _CardRechargeState extends State<CardRecharge> {
   }
 
   updateKycState() {
-    if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value) {
-      getDcPayUrl(double.parse(cardHolderName));
+    if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value || CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
+      if (cardHolderName != null && cardHolderName.isNotEmpty) {
+        getDcPayUrl(double.parse(cardHolderName));
+      }
     }
   }
 
