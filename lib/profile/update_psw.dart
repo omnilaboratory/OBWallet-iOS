@@ -161,7 +161,7 @@ class _UpdatePswState extends State<UpdatePsw> {
           const SizedBox(height: 15),
           createTextFormField(
               _psw2Controller,
-              "Confirm Password",
+              "Confirm New Password",
               icon: const Icon(Icons.password),
               true,
               maxLength: 16),

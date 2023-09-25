@@ -111,8 +111,6 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
         child: SingleChildScrollView(
             child: Column(children: [
           const SizedBox(height: 55),
-          buildTitle(),
-          const SizedBox(height: 55),
           buildInputField(),
           const SizedBox(height: 20),
           buildButtons(context)

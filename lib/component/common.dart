@@ -64,7 +64,7 @@ showToast(String msg, {Toast toastLength = Toast.LENGTH_LONG}) {
       msg: msg, toastLength: toastLength, gravity: ToastGravity.CENTER);
 }
 
-alert(String msg, BuildContext context, Function callback) {
+alert(String msg, BuildContext context, Function? callback) {
   log("alert $msg");
   Alert(
     context: context,
@@ -75,7 +75,9 @@ alert(String msg, BuildContext context, Function callback) {
       DialogButton(
         onPressed: () {
           Navigator.pop(context);
-          callback();
+          if (callback != null) {
+            callback();
+          }
         },
         width: 120,
         color: Colors.blueAccent,
