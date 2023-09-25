@@ -34,7 +34,7 @@ class CardPart extends StatefulWidget {
 
 class _CardPartState extends State<CardPart> {
   var txs = [];
-  int currTypeIndex = 1;
+  int currTypeIndex = 0;
   int dataStartIndex = 0;
   bool hasCard = CommonService.userInfo!.cardCount > 0;
 
@@ -270,20 +270,20 @@ class _CardPartState extends State<CardPart> {
             children: [
               InkWell(
                   onTap: () {
-                    onClickType(1);
+                    onClickType(0);
                   },
                   child: Text("Payment",
                       style: TextStyle(
-                          color: currTypeIndex == 1
+                          color: currTypeIndex == 0
                               ? Colors.lightBlueAccent
                               : Colors.black))),
               InkWell(
                   onTap: () {
-                    onClickType(0);
+                    onClickType(1);
                   },
                   child: Text("Account",
                       style: TextStyle(
-                          color: currTypeIndex == 0
+                          color: currTypeIndex == 1
                               ? Colors.lightBlueAccent
                               : Colors.black))),
             ],
