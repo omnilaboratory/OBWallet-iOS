@@ -272,7 +272,7 @@ class _CardPartState extends State<CardPart> {
                   onTap: () {
                     onClickType(1);
                   },
-                  child: Text("Online",
+                  child: Text("Payment",
                       style: TextStyle(
                           color: currTypeIndex == 1
                               ? Colors.lightBlueAccent
@@ -281,7 +281,7 @@ class _CardPartState extends State<CardPart> {
                   onTap: () {
                     onClickType(0);
                   },
-                  child: Text("Offline",
+                  child: Text("Account",
                       style: TextStyle(
                           color: currTypeIndex == 0
                               ? Colors.lightBlueAccent

@@ -94,7 +94,7 @@ class _AccountState extends State<Account> {
                   onTap: () {
                     onClickType(0);
                   },
-                  child: Text("SwapTx",
+                  child: Text("Exchange",
                       style: TextStyle(
                           color: currTypeIndex == 0
                               ? Colors.lightBlueAccent
@@ -103,7 +103,7 @@ class _AccountState extends State<Account> {
                   onTap: () {
                     onClickType(1);
                   },
-                  child: Text("AccountHistory",
+                  child: Text("Account",
                       style: TextStyle(
                           color: currTypeIndex == 1
                               ? Colors.lightBlueAccent
