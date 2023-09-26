@@ -9,7 +9,7 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 
-var kycClr = [Colors.blue, Colors.yellow, Colors.green, Colors.red];
+var kycClr = [Colors.purple, Colors.blue, Colors.green, Colors.red];
 
 class CardHome extends StatefulWidget {
   const CardHome({super.key});
@@ -89,8 +89,8 @@ class _CardHomeState extends State<CardHome>
               child: Row(
                 children: [
                   ButtonForAppBarAction(
-                      width: 22,
-                      height: 16,
+                      width: 32,
+                      height: 24,
                       imageClr: kycClr[currKycClrIndex],
                       imageUrl: "asset/images/icon_kyc.png",
                       onTap: () {
