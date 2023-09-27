@@ -165,8 +165,8 @@ class _AccountState extends State<Account> {
             icon: 'asset/images/icon_deposit.png',
             text: 'Deposit',
             iconWidth: iconWidth,
-            onPressed: () {
-              showDialog(
+            onPressed: () async {
+              var flag = await showDialog(
                   context: context,
                   builder: (context) {
                     return CardRecharge(
@@ -176,22 +176,28 @@ class _AccountState extends State<Account> {
                         date: '',
                         cvc: '');
                   });
+              if (flag != null && flag) {
+                _onBalanceRefresh();
+              }
             }),
         SquareButton(
             icon: 'asset/images/icon_withdraw.png',
             text: 'Withdraw',
             iconWidth: iconWidth,
-            onPressed: () {
+            onPressed: () async {
               if (hasCard == false) {
                 alert(Tips.applyCardFirst.value, context, onJump);
               } else {
-                showDialog(
+                var flag = await showDialog(
                     context: context,
                     builder: (context) {
                       return Send(
                           type: EnumChargeType.withdraw,
                           cardNo: CommonService.cardInfo.cardNo);
                     });
+                if (flag != null && flag) {
+                  _onBalanceRefresh();
+                }
               }
             }),
         SquareButton(

@@ -7,7 +7,6 @@ import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
-import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -250,19 +249,23 @@ class _SendState extends State<Send> {
     CardService.getInstance()
         .cardWithdraw(context, _cardNumberController.text,
             double.parse(_amountController.text))
-        .then((value) async {
-      if (value.code == 1) {
+        .then((resp) async {
+      if (resp.code == 1) {
         setState(() {
           loadingVisible = false;
         });
-        var resp = value.data as CardWithdrawResponse;
-        log(resp.toString());
-        Navigator.pop(context);
+
+        if(widget.type == EnumChargeType.withdraw){
+          showToast(Tips.successWithdraw.value);
+        }
+        Navigator.pop(context,true);
       } else {
+        if(widget.type == EnumChargeType.withdraw){
+          showToast(Tips.failWithdraw.value);
+        }
         setState(() {
           loadingVisible = false;
         });
-        log(value.msg);
       }
     });
   }

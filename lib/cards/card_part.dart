@@ -374,21 +374,25 @@ class _CardPartState extends State<CardPart> {
             icon: 'asset/images/icon_deposit.png',
             text: 'Deposit',
             iconWidth: iconWidth,
-            onPressed: () {
-              showDialog(
+            onPressed: () async {
+              var flag = await showDialog(
                   context: context,
                   builder: (context) {
                     return Send(
                         type: EnumChargeType.deposit,
                         cardNo: CommonService.cardInfo.cardNo);
                   });
+
+              if (flag != null && flag) {
+                _onBalanceRefresh();
+              }
             }),
         SquareButton(
             icon: 'asset/images/icon_withdraw.png',
             text: 'Withdraw',
             iconWidth: iconWidth,
-            onPressed: () {
-              showDialog(
+            onPressed: () async {
+              var flag = await showDialog(
                   context: context,
                   builder: (context) {
                     return CardRecharge(
@@ -398,6 +402,10 @@ class _CardPartState extends State<CardPart> {
                         date: formatCardExpiryDate(),
                         cvc: CommonService.cardInfo.cvv);
                   });
+
+              if (flag != null && flag) {
+                _onBalanceRefresh();
+              }
             }),
       ],
     );

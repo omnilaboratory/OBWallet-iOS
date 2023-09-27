@@ -335,10 +335,8 @@ class _CardRechargeState extends State<CardRecharge> {
         setState(() {
           loadingVisible = false;
         });
-        var resp = value.data as CardRechargeResponse;
-        log(resp.toString());
         GlobalParams.eventBus.fire("topup");
-        Navigator.pop(context);
+        Navigator.pop(context,true);
       } else {
         setState(() {
           loadingVisible = false;

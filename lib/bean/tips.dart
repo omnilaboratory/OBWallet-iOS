@@ -34,6 +34,8 @@ enum Tips {
   emptyCardNumber("The card number cannot be empty."),
   applyCardFirst("Please apply for a new card first."),
   waitForReview("Please wait for manual review and you will get a new card."),
+  successWithdraw("Withdraw successful."),
+  failWithdraw("Withdraw failed, please try again later."),
   ;
 
   final String value;
