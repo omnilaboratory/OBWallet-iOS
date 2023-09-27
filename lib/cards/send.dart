@@ -227,11 +227,15 @@ class _SendState extends State<Send> {
       if (resp.code == 1) {
         if (widget.type == EnumChargeType.withdraw) {
           showToast(Tips.successWithdraw.value);
+        } else if (widget.type == EnumChargeType.deposit){
+          showToast(Tips.successDeposit.value);
         }
         Navigator.pop(context, true);
       } else {
         if (widget.type == EnumChargeType.withdraw) {
           showToast(Tips.failWithdraw.value);
+        } else if (widget.type == EnumChargeType.deposit) {
+          showToast(Tips.failDeposit.value);
         }
       }
       loading.remove();

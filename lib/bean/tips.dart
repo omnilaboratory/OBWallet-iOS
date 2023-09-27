@@ -36,6 +36,8 @@ enum Tips {
   waitForReview("Please wait for manual review and you will get a new card."),
   successWithdraw("Withdraw successful."),
   failWithdraw("Withdraw failed, please try again later."),
+  successDeposit("Deposit successful."),
+  failDeposit("Deposit failed, please try again later."),
   ;
 
   final String value;
