@@ -40,7 +40,6 @@ class _CardRechargeState extends State<CardRecharge> {
   String cardHolderName = '';
   String cvcCode = '';
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  bool loadingVisible = false;
   double totalBalanceUsd = 0;
 
   @override
@@ -78,136 +77,128 @@ class _CardRechargeState extends State<CardRecharge> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        Scaffold(
-            resizeToAvoidBottomInset: false,
-            backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
-            body: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
-              child: Column(
-                children: [
-                  const SizedBox(height: 80),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20.0),
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
+        body: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: Column(
+            children: [
+              const SizedBox(height: 80),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                width: size.width * 0.9,
+                height: size.height * 0.65,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 30),
+                    createDialogTitle(widget.type == EnumChargeType.deposit
+                        ? 'Deposit'
+                        : 'Withdraw'),
+                    const SizedBox(height: 10),
+                    buildBalance(),
+                    const SizedBox(height: 10),
+                    CreditCardForm(
+                      formKey: formKey,
+                      obscureCvv: false,
+                      obscureNumber: false,
+                      cardNumber: cardNumber,
+                      cvvCode: cvcCode,
+                      isHolderNameVisible: true,
+                      isCardNumberVisible: widget.type == EnumChargeType.deposit ? true : false,
+                      isExpiryDateVisible: widget.type == EnumChargeType.deposit ? true : false,
+                      enableCvv: widget.type == EnumChargeType.deposit ? true : false,
+                      cardHolderName: cardHolderName,
+                      expiryDate: expiryDate,
+                      themeColor: Colors.blue,
+                      textColor: Colors.black,
+                      cardHolderDecoration: InputDecoration(
+                        prefixIcon:
+                            const Icon(Icons.attach_money),
+                        hintText: 'Amount',
+                        hintStyle: const TextStyle(color: Colors.grey),
+                        border: _outlineInputBorder,
+                        focusedBorder: _outlineInputBorder,
+                        enabledBorder: _outlineInputBorder,
+                        disabledBorder: _outlineInputBorder,
+                        focusedErrorBorder: _outlineInputBorder,
+                        errorBorder: _outlineInputBorder,
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 0),
+                      ),
+                      cardNumberDecoration: InputDecoration(
+                        enabled: widget.type == EnumChargeType.deposit ? true : false,
+                        prefixIcon: const Icon(Icons.credit_card),
+                        hintText: 'Card Number',
+                        hintStyle: const TextStyle(color: Colors.grey),
+                        border: _outlineInputBorder,
+                        focusedBorder: _outlineInputBorder,
+                        enabledBorder: _outlineInputBorder,
+                        disabledBorder: _outlineInputBorder,
+                        focusedErrorBorder: _outlineInputBorder,
+                        errorBorder: _outlineInputBorder,
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 0),
+                      ),
+                      expiryDateDecoration: InputDecoration(
+                        enabled: widget.type == EnumChargeType.deposit ? true : false,
+                        prefixIcon: const Icon(Icons.date_range),
+                        hintText: 'MM/YY',
+                        hintStyle: const TextStyle(color: Colors.grey),
+                        border: _outlineInputBorder,
+                        focusedBorder: _outlineInputBorder,
+                        enabledBorder: _outlineInputBorder,
+                        disabledBorder: _outlineInputBorder,
+                        focusedErrorBorder: _outlineInputBorder,
+                        errorBorder: _outlineInputBorder,
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 0),
+                      ),
+                      cvvCodeDecoration: InputDecoration(
+                        enabled: widget.type == EnumChargeType.deposit ? true : false,
+                        prefixIcon: const Icon(Icons.credit_score),
+                        hintText: 'CVV',
+                        hintStyle: const TextStyle(color: Colors.grey),
+                        border: _outlineInputBorder,
+                        focusedBorder: _outlineInputBorder,
+                        enabledBorder: _outlineInputBorder,
+                        disabledBorder: _outlineInputBorder,
+                        focusedErrorBorder: _outlineInputBorder,
+                        errorBorder: _outlineInputBorder,
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 0),
+                      ),
+                      onCreditCardModelChange: onCreditCardModelChange,
                     ),
-                    width: size.width * 0.9,
-                    height: size.height * 0.65,
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 30),
-                        createDialogTitle(widget.type == EnumChargeType.deposit
-                            ? 'Deposit'
-                            : 'Withdraw'),
-                        const SizedBox(height: 10),
-                        buildBalance(),
-                        const SizedBox(height: 10),
-                        CreditCardForm(
-                          formKey: formKey,
-                          obscureCvv: false,
-                          obscureNumber: false,
-                          cardNumber: cardNumber,
-                          cvvCode: cvcCode,
-                          isHolderNameVisible: true,
-                          isCardNumberVisible: widget.type == EnumChargeType.deposit ? true : false,
-                          isExpiryDateVisible: widget.type == EnumChargeType.deposit ? true : false,
-                          enableCvv: widget.type == EnumChargeType.deposit ? true : false,
-                          cardHolderName: cardHolderName,
-                          expiryDate: expiryDate,
-                          themeColor: Colors.blue,
-                          textColor: Colors.black,
-                          cardHolderDecoration: InputDecoration(
-                            prefixIcon:
-                                const Icon(Icons.attach_money),
-                            hintText: 'Amount',
-                            hintStyle: const TextStyle(color: Colors.grey),
-                            border: _outlineInputBorder,
-                            focusedBorder: _outlineInputBorder,
-                            enabledBorder: _outlineInputBorder,
-                            disabledBorder: _outlineInputBorder,
-                            focusedErrorBorder: _outlineInputBorder,
-                            errorBorder: _outlineInputBorder,
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
-                          ),
-                          cardNumberDecoration: InputDecoration(
-                            enabled: widget.type == EnumChargeType.deposit ? true : false,
-                            prefixIcon: const Icon(Icons.credit_card),
-                            hintText: 'Card Number',
-                            hintStyle: const TextStyle(color: Colors.grey),
-                            border: _outlineInputBorder,
-                            focusedBorder: _outlineInputBorder,
-                            enabledBorder: _outlineInputBorder,
-                            disabledBorder: _outlineInputBorder,
-                            focusedErrorBorder: _outlineInputBorder,
-                            errorBorder: _outlineInputBorder,
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
-                          ),
-                          expiryDateDecoration: InputDecoration(
-                            enabled: widget.type == EnumChargeType.deposit ? true : false,
-                            prefixIcon: const Icon(Icons.date_range),
-                            hintText: 'MM/YY',
-                            hintStyle: const TextStyle(color: Colors.grey),
-                            border: _outlineInputBorder,
-                            focusedBorder: _outlineInputBorder,
-                            enabledBorder: _outlineInputBorder,
-                            disabledBorder: _outlineInputBorder,
-                            focusedErrorBorder: _outlineInputBorder,
-                            errorBorder: _outlineInputBorder,
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
-                          ),
-                          cvvCodeDecoration: InputDecoration(
-                            enabled: widget.type == EnumChargeType.deposit ? true : false,
-                            prefixIcon: const Icon(Icons.credit_score),
-                            hintText: 'CVV',
-                            hintStyle: const TextStyle(color: Colors.grey),
-                            border: _outlineInputBorder,
-                            focusedBorder: _outlineInputBorder,
-                            enabledBorder: _outlineInputBorder,
-                            disabledBorder: _outlineInputBorder,
-                            focusedErrorBorder: _outlineInputBorder,
-                            errorBorder: _outlineInputBorder,
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
-                          ),
-                          onCreditCardModelChange: onCreditCardModelChange,
-                        ),
-                        const Spacer(
-                          flex: 1,
-                        ),
-                        BottomButton(
-                          icon: 'asset/images/icon_confirm_green.png',
-                          text:  widget.type == EnumChargeType.deposit ? 'DEPOSIT' : 'WITHDRAW',
-                          onPressed: () {
-                            onPay();
-                          },
-                        ),
-                        const SizedBox(height: 30),
-                      ],
+                    const Spacer(
+                      flex: 1,
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                  BottomWhiteButton(
-                    icon: 'asset/images/icon_close_white.png',
-                    text: 'CANCEL',
-                    onPressed: onClose,
-                  )
-                ],
+                    BottomButton(
+                      icon: 'asset/images/icon_confirm_green.png',
+                      text:  widget.type == EnumChargeType.deposit ? 'DEPOSIT' : 'WITHDRAW',
+                      onPressed: () {
+                        onPay();
+                      },
+                    ),
+                    const SizedBox(height: 30),
+                  ],
+                ),
               ),
-            )),
-        Offstage(
-          offstage: !loadingVisible,
-          child: const LoadingDialog(),
-        )
-      ],
-    );
+              const SizedBox(height: 30),
+              BottomWhiteButton(
+                icon: 'asset/images/icon_close_white.png',
+                text: 'CANCEL',
+                onPressed: onClose,
+              )
+            ],
+          ),
+        ));
   }
 
   Widget buildBalance() {
@@ -311,9 +302,7 @@ class _CardRechargeState extends State<CardRecharge> {
   }
 
   void cardRecharge() {
-    setState(() {
-      loadingVisible = true;
-    });
+    var loading = showLoading(context);
     log(cardHolderName);
     log(cardNumber);
     log(cardNumber.length.toString());
@@ -332,17 +321,12 @@ class _CardRechargeState extends State<CardRecharge> {
         .cardRecharge(context, request)
         .then((value) async {
       if (value.code == 1) {
-        setState(() {
-          loadingVisible = false;
-        });
         GlobalParams.eventBus.fire("topup");
         Navigator.pop(context,true);
       } else {
-        setState(() {
-          loadingVisible = false;
-        });
         log(value.msg);
       }
+      loading.remove();
     });
   }
 

@@ -12,17 +12,27 @@ final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
 );
 
 TextFormField createTextFormField(
-    TextEditingController controller, String hintText, bool obscureText,
+    TextEditingController controller, String hintText,
     {Icon? icon,
     int? maxLength,
     TextInputType? keyboardType = TextInputType.text,
+    bool obscureText = false,
     bool needCheck = true,
+    bool enabled = true,
+    Function? onChanged,
+    Function? validator,
     int maxLines = 1}) {
   return TextFormField(
     controller: controller,
     maxLines: maxLines,
     maxLength: maxLength,
     keyboardType: keyboardType,
+    enabled: enabled,
+    onChanged: (value) {
+      if (onChanged != null) {
+        onChanged(value);
+      }
+    },
     decoration: InputDecoration(
       hintText: hintText,
       prefixIcon: icon,
@@ -40,6 +50,9 @@ TextFormField createTextFormField(
     validator: (v) {
       if (!needCheck) {
         return null;
+      }
+      if (validator != null) {
+        return validator(v);
       }
       return v!.trim().isNotEmpty ? null : "wrong $hintText";
     },

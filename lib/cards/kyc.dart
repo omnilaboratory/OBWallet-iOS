@@ -124,7 +124,7 @@ class _KycState extends State<Kyc> {
                                     ]),
                                 const SizedBox(height: 16),
                                 createTextFormField(
-                                    _socialIdController, "Identity Id", false,
+                                    _socialIdController, "Identity Id",
                                     maxLength: 30,
                                     icon: const Icon(Icons.credit_card)),
                                 Row(
@@ -133,14 +133,12 @@ class _KycState extends State<Kyc> {
                                         child: createTextFormField(
                                             _firstNameController,
                                             "First Name",
-                                            false,
                                             maxLength: 20)),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
                                             _lastNameController,
                                             "Last Name",
-                                            false,
                                             maxLength: 20)),
                                   ],
                                 ),
@@ -189,22 +187,21 @@ class _KycState extends State<Kyc> {
                                       child: createTextFormField(
                                           _mobileNumberController,
                                           "Mobile Number",
-                                          false,
                                           keyboardType: TextInputType.phone),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 16),
                                 createTextFormField(_dateOfBirthController,
-                                    "Date of birth (DD-MM-YYYY)", false,
+                                    "Date of birth (DD-MM-YYYY)",
                                     maxLength: 10,
                                     icon: const Icon(Icons.date_range)),
                                 const SizedBox(height: 16),
                                 createTextFormField(
-                                    _address1Controller, "Address Line", false),
+                                    _address1Controller, "Address Line"),
                                 const SizedBox(height: 16),
                                 createTextFormField(_address2Controller,
-                                    "Address Line 2(Optional)", false,
+                                    "Address Line 2(Optional)",
                                     needCheck: false),
                                 const SizedBox(height: 16),
                                 Row(
@@ -212,12 +209,11 @@ class _KycState extends State<Kyc> {
                                     Expanded(
                                         child: createTextFormField(
                                             _stateController,
-                                            "State/Region",
-                                            false)),
+                                            "State/Region")),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
-                                            _cityController, "City", false)),
+                                            _cityController, "City")),
                                   ],
                                 ),
                                 const SizedBox(height: 16),
@@ -228,7 +224,6 @@ class _KycState extends State<Kyc> {
                                         child: createTextFormField(
                                             _postalController,
                                             "Postal/Zip Code",
-                                            false,
                                             maxLength: 6,
                                             keyboardType:
                                                 TextInputType.number)),

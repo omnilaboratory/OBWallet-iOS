@@ -3,11 +3,9 @@ import 'dart:developer';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/common.dart';
-import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
-import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -24,9 +22,10 @@ class Send extends StatefulWidget {
 }
 
 class _SendState extends State<Send> {
+  final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _cardNumberController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
-  bool loadingVisible = false;
+
   String amount = '0';
   double totalBalanceUsd = 0;
 
@@ -40,138 +39,118 @@ class _SendState extends State<Send> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        Scaffold(
-            backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
-            body: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 80),
-                      Container(
-                        padding:
-                        const EdgeInsets.only(left: 20, right: 20, bottom: 30),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        width: size.width * 0.8,
-                        height: size.height * 0.65,
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 28, bottom: 20),
-                                  child: createDialogTitle(widget.type == EnumChargeType.withdraw
-                                      ? 'Withdraw'
-                                      : 'Deposit'),
-                                ),
-                              ),
-                              buildBalance(),
-                              const SizedBox(height: 20),
-                              const Text(
-                                'Card Number',
-                                style: TextStyle(
-                                  color: Color(0xFF999999),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(height: 6),
-                              TextField(
-                                enabled: widget.type == EnumChargeType.withdraw ? true : false,
-                                controller: _cardNumberController,
-                                maxLines: 1,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  hintText: "Card Number",
-                                  hintStyle: const TextStyle(color: Colors.grey),
-                                  border: _outlineInputBorder,
-                                  focusedBorder: _outlineInputBorder,
-                                  enabledBorder: _outlineInputBorder,
-                                  disabledBorder: _outlineInputBorder,
-                                  focusedErrorBorder: _outlineInputBorder,
-                                  errorBorder: _outlineInputBorder,
-                                  contentPadding:
-                                  const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 0),
-                                ),
-                              ),
-                              const SizedBox(height: 40),
-                              const Text(
-                                'Amount',
-                                style: TextStyle(
-                                  color: Color(0xFF999999),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(height: 6),
-                              TextField(
-                                controller: _amountController,
-                                maxLines: 1,
-                                inputFormatters: [PrecisionLimitFormatter(2)],
-                                keyboardType: TextInputType.number,
-                                // onChanged: (value) {
-                                //   setState(() {
-                                //     if (_amountController.text.isEmpty) {
-                                //       amount = '0';
-                                //     } else {
-                                //       amount = _amountController.text;
-                                //     }
-                                //   });
-                                // },
-                                decoration: InputDecoration(
-                                  hintText: 'Amount',
-                                  hintStyle: const TextStyle(color: Colors.grey),
-                                  border: _outlineInputBorder,
-                                  focusedBorder: _outlineInputBorder,
-                                  enabledBorder: _outlineInputBorder,
-                                  disabledBorder: _outlineInputBorder,
-                                  focusedErrorBorder: _outlineInputBorder,
-                                  errorBorder: _outlineInputBorder,
-                                  contentPadding:
-                                  const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 0),
-                                ),
-                              ),
-                              const Spacer(),
-                              BottomButton(
-                                icon: 'asset/images/icon_confirm_green.png',
-                                text: widget.type == EnumChargeType.withdraw
-                                    ? 'WITHDRAW'
-                                    : 'DEPOSIT',
-                                onPressed: () {
-                                  withDraw();
-                                },
-                              )
-                            ]),
+    return Scaffold(
+        backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
+        body: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: Center(
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 80),
+                    Container(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 30),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
-                      const SizedBox(height: 20),
-                      InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Image(
-                              image: AssetImage("asset/images/btn_cancel.png")))
-                    ],
-                  ),
+                      width: size.width * 0.8,
+                      height: size.height * 0.65,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 28, bottom: 20),
+                                child: createDialogTitle(
+                                    widget.type == EnumChargeType.withdraw
+                                        ? 'Withdraw'
+                                        : 'Deposit'),
+                              ),
+                            ),
+                            buildBalance(),
+                            const SizedBox(height: 20),
+                            const Text(
+                              'Card Number',
+                              style: TextStyle(
+                                color: Color(0xFF999999),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            createTextFormField(
+                                _cardNumberController, "Card Number",
+                                enabled:
+                                    widget.type == EnumChargeType.withdraw),
+                            const SizedBox(height: 40),
+                            const Text(
+                              'Amount',
+                              style: TextStyle(
+                                color: Color(0xFF999999),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            createTextFormField(_amountController, "Amount",
+                                keyboardType: TextInputType.number,
+                                validator: (v) {
+                              if (v == null || v.trim().isEmpty) {
+                                return Tips.emptyAmount.value;
+                              }
+
+                              double currentValue = double.tryParse(v) ?? 0;
+                              if (currentValue > totalBalanceUsd) {
+                                return Tips.maxAmount.value;
+                              }
+                              if (currentValue <= 0) {
+                                return Tips.zeroAmount.value;
+                              }
+                              return null;
+                            }, onChanged: (value) {
+                              double currentValue = double.tryParse(value) ?? 0;
+                              if (currentValue > totalBalanceUsd) {
+                                _amountController.text =
+                                    totalBalanceUsd.toString();
+                                setState(() {});
+                              }
+                            }),
+                            const Spacer(),
+                            BottomButton(
+                              icon: 'asset/images/icon_confirm_green.png',
+                              text: widget.type == EnumChargeType.withdraw
+                                  ? 'WITHDRAW'
+                                  : 'DEPOSIT',
+                              onPressed: () {
+                                if ((_formKey.currentState as FormState)
+                                    .validate()) {
+                                  withDraw();
+                                }
+                              },
+                            )
+                          ]),
+                    ),
+                    const SizedBox(height: 20),
+                    InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Image(
+                            image: AssetImage("asset/images/btn_cancel.png")))
+                  ],
                 ),
               ),
-            )),
-        Offstage(
-          offstage: !loadingVisible,
-          child: const LoadingDialog(),
-        )
-      ],
-    );
+            ),
+          ),
+        ));
   }
 
   Widget buildBalance() {
@@ -217,11 +196,6 @@ class _SendState extends State<Send> {
     );
   }
 
-  final OutlineInputBorder _outlineInputBorder = OutlineInputBorder(
-    borderSide: const BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
-    borderRadius: BorderRadius.circular(8),
-  );
-
   void withDraw() {
     if (_cardNumberController.value.text.toString().isEmpty) {
       showToast(Tips.emptyCardNumber.value);
@@ -238,35 +212,29 @@ class _SendState extends State<Send> {
       return;
     }
 
-    if (double.parse(_amountController.value.text.toString()) > totalBalanceUsd) {
+    if (double.parse(_amountController.value.text.toString()) >
+        totalBalanceUsd) {
       showToast(Tips.maxAmount.value, toastLength: Toast.LENGTH_SHORT);
       return;
     }
 
-    setState(() {
-      loadingVisible = true;
-    });
+    var loading = showLoading(context);
+
     CardService.getInstance()
         .cardWithdraw(context, _cardNumberController.text,
             double.parse(_amountController.text))
         .then((resp) async {
       if (resp.code == 1) {
-        setState(() {
-          loadingVisible = false;
-        });
-
-        if(widget.type == EnumChargeType.withdraw){
+        if (widget.type == EnumChargeType.withdraw) {
           showToast(Tips.successWithdraw.value);
         }
-        Navigator.pop(context,true);
+        Navigator.pop(context, true);
       } else {
-        if(widget.type == EnumChargeType.withdraw){
+        if (widget.type == EnumChargeType.withdraw) {
           showToast(Tips.failWithdraw.value);
         }
-        setState(() {
-          loadingVisible = false;
-        });
       }
+      loading.remove();
     });
   }
 
@@ -276,7 +244,7 @@ class _SendState extends State<Send> {
         var accountInfo = info.data as AccountInfo;
         log("$accountInfo");
         totalBalanceUsd = accountInfo.balanceUsd;
-        if(mounted){
+        if (mounted) {
           setState(() {});
         }
       }

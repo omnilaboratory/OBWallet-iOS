@@ -113,7 +113,7 @@ class _UpdatePswState extends State<UpdatePsw> {
               _oldPswController,
               "Old Password",
               icon: const Icon(Icons.password),
-              true,
+              obscureText: true,
               maxLength: 16),
           const SizedBox(height: 15),
           Row(
@@ -163,7 +163,7 @@ class _UpdatePswState extends State<UpdatePsw> {
               _psw2Controller,
               "Confirm New Password",
               icon: const Icon(Icons.password),
-              true,
+              obscureText: true,
               maxLength: 16),
         ],
       ),

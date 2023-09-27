@@ -235,11 +235,10 @@ class _LoginState extends State<Login> {
             createTextFormField(
                 _unameController,
                 "Username",
-                icon: const Icon(Icons.person),
-                false),
+                icon: const Icon(Icons.person)),
             const SizedBox(height: 20),
             createTextFormField(
-                _pswController, "Password", icon: const Icon(Icons.lock), true),
+                _pswController, "Password", icon: const Icon(Icons.lock), obscureText: true),
           ],
         ),
       ),
