@@ -25,6 +25,7 @@ enum Tips {
   updatedPassword("Password updated."),
   selectCountry("Please select the country."),
 
+  kycNeed("You need KYC first."),
   kycPending("KYC is pending."),
   kycPassed(
       "KYC has been passed and please check the card page after a while."),

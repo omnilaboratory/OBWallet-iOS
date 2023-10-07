@@ -6,6 +6,7 @@ import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/exchange.dart';
+import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/square_button.dart';
@@ -166,18 +167,29 @@ class _AccountState extends State<Account> {
             text: 'Deposit',
             iconWidth: iconWidth,
             onPressed: () async {
-              var flag = await showDialog(
-                  context: context,
-                  builder: (context) {
-                    return CardRecharge(
-                        amt: '',
-                        type: EnumChargeType.deposit,
-                        cardNo: '',
-                        date: '',
-                        cvc: '');
-                  });
-              if (flag != null && flag) {
-                _onBalanceRefresh();
+              if (CommonService.userInfo == null ||
+                  CommonService.userInfo?.kycStatus == "") {
+                alert(Tips.kycNeed.value, context, () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const Kyc();
+                      });
+                });
+              } else {
+                var flag = await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return CardRecharge(
+                          amt: '',
+                          type: EnumChargeType.deposit,
+                          cardNo: '',
+                          date: '',
+                          cvc: '');
+                    });
+                if (flag != null && flag) {
+                  _onBalanceRefresh();
+                }
               }
             }),
         SquareButton(
