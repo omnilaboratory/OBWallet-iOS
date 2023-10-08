@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
+import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/exchange.dart';
@@ -168,7 +169,10 @@ class _AccountState extends State<Account> {
             iconWidth: iconWidth,
             onPressed: () async {
               if (CommonService.userInfo == null ||
-                  CommonService.userInfo?.kycStatus == "") {
+                  CommonService.userInfo!.kycStatus ==
+                      EnumKycStatus.none.value ||
+                  CommonService.userInfo!.kycStatus ==
+                      EnumKycStatus.rejected.value) {
                 alert(Tips.kycNeed.value, context, () {
                   showDialog(
                       context: context,
