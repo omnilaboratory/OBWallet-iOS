@@ -28,7 +28,8 @@ class _CardHomeState extends State<CardHome>
     Account(),
     const CardPart(),
   ];
-  late TabController _tabController;
+  late TabController _tabController =
+      TabController(length: tabNames.length, vsync: this, initialIndex: 0);
 
   @override
   void initState() {
