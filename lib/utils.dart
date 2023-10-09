@@ -176,6 +176,7 @@ class Utils {
     }
     return CountryCode.AD;
   }
+
   static TrackedTx_ContractSymbol? getContractSymbol(String code) {
     for (var value in TrackedTx_ContractSymbol.values) {
       if (value.name.toLowerCase() == code.toLowerCase()) {

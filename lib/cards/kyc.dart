@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
+import 'package:awallet/cards/select_card_type.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/common_service.dart';
@@ -273,11 +274,12 @@ class _KycState extends State<Kyc> {
                           ),
                           const SizedBox(height: 20),
                           BottomButton(
-                            icon: 'asset/images/icon_confirm_green.png',
-                            text: 'DONE',
+                            icon: 'asset/images/icon_arrow_right_green.png',
+                            text: 'NEXT',
                             onPressed: () {
                               if ((_formKey.currentState as FormState)
                                   .validate()) {
+
                                 onKyc();
                               }
                             },
@@ -307,8 +309,6 @@ class _KycState extends State<Kyc> {
       return;
     }
     FocusScope.of(context).requestFocus(FocusNode());
-    OverlayEntry entry = showLoading(context);
-
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
         var userInfo = userInfoResp.data as GetUserInfoResponse;
@@ -328,18 +328,8 @@ class _KycState extends State<Kyc> {
         info.postCode = _postalController.value.text.trim();
         info.countryCode =
             Utils.getCountryCodeByCode(selectedCountry!.countryCode);
-        UserService.getInstance().kyc(context, info).then((value) async {
-          if (value.code == 1) {
-            var resp = value.data as UserInfo;
-            CommonService.userInfo = resp;
-            GlobalParams.eventBus.fire("kyc_state");
-            alert(Tips.waitForReview.value, context, () {
-              Navigator.pop(context, true);
-            });
-          } else {
-            log(value.msg);
-          }
-          entry.remove();
+        showDialog(context: context,  builder: (context) {
+          return SelectCardType(userInfo: info,);
         });
       }
     });

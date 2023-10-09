@@ -72,8 +72,9 @@ class _CardHomeState extends State<CardHome>
   }
 
   updateKycState() {
-    currKycClrIndex = CommonService.userInfo==null?0:
-        Utils.getEnumKycStatus(CommonService.userInfo!.kycStatus).index;
+    currKycClrIndex = CommonService.userInfo == null
+        ? 0
+        : Utils.getEnumKycStatus(CommonService.userInfo!.kycStatus).index;
   }
 
   @override
@@ -101,7 +102,7 @@ class _CardHomeState extends State<CardHome>
                               builder: (context) {
                                 return const Kyc();
                               });
-                        }else{
+                        } else {
                           showKycTips(context);
                         }
                       }),

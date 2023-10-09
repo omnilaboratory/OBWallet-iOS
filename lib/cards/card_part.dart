@@ -1,11 +1,13 @@
 import 'dart:developer';
 
+import 'package:awallet/bean/card_item_info.dart';
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/send.dart';
+import 'package:awallet/component/card_item.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/tx_item.dart';
 import 'package:awallet/grpc_services/card_service.dart';
@@ -13,11 +15,9 @@ import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
-import 'package:awallet/tools/string_tool.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -61,142 +61,17 @@ class _CardPartState extends State<CardPart> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            buildCard(context),
+            CardItem(
+                cardItemInfo: CardItemInfo(
+                    cardNo: CommonService.cardInfo.cardNo,
+                    balance: CommonService.cardInfo.balance,
+                    exp: CommonService.cardInfo.expiryDate,
+                    cvv: CommonService.cardInfo.cvv)),
             const SizedBox(height: 15),
             hasCard ? buildCardDetail(context) : buildApplyCardPart(),
           ],
         ),
       ),
-    );
-  }
-
-  Stack buildCard(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return Stack(
-      alignment: AlignmentDirectional.bottomEnd,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: size.width,
-              height: 159,
-              decoration: ShapeDecoration(
-                color: const Color(0x23C1C1C1),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 15),
-                    child: Container(
-                      width: 102,
-                      height: 30,
-                      alignment: Alignment.center,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                              'asset/images/image_virtual_card_bg.png'),
-                        ),
-                      ),
-                      child: const Text(
-                        'Virtual Card',
-                        style: TextStyle(
-                          color: Color(0xFF666666),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        const Padding(
-          padding: EdgeInsets.only(right: 15),
-          child: Image(
-              width: 214,
-              height: 108,
-              image: AssetImage("asset/images/img_visa.png")),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 17, bottom: 80),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  if (CommonService.cardInfo.cardNo.isNotEmpty) {
-                    showToast(Tips.cardNoIsOnClipboard.value);
-                    Clipboard.setData(
-                        ClipboardData(text: CommonService.cardInfo.cardNo));
-                  }
-                },
-                child: Text(
-                  getCardNo(),
-                  style: const TextStyle(
-                    color: Color(0xFF666666),
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10, right: 120),
-          child: Text(
-            getCardExpiryDate(),
-            style: const TextStyle(
-              color: Color(0xFF333333),
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10, right: 20),
-          child: Text(
-            "CVV ${CommonService.cardInfo.cvv}",
-            style: const TextStyle(
-              color: Color(0xFF333333),
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        Padding(
-            padding: const EdgeInsets.only(left: 15, bottom: 30),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  '\$',
-                  style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(width: 6),
-                Text(
-                  StringTools.formatCurrencyNum(CommonService.cardInfo.balance),
-                  style: const TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 32,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
-            )),
-      ],
     );
   }
 
@@ -337,6 +212,7 @@ class _CardPartState extends State<CardPart> {
 
   void _onBalanceRefresh() async {
     CardService.getInstance().cardInfo(context).then((resp) {
+      log("cardInfo ${CommonService.cardInfo}");
       if (resp.code == 1) {
         hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
         if (mounted) {
@@ -417,22 +293,6 @@ class _CardPartState extends State<CardPart> {
       expiryDate = "****";
     }
     return "${expiryDate.substring(2, 4)}/${expiryDate.substring(0, 2)}";
-  }
-
-  String getCardExpiryDate() {
-    String expiryDate = CommonService.cardInfo.expiryDate;
-    if (expiryDate.isEmpty) {
-      expiryDate = "****";
-    }
-    return "Exp. ${expiryDate.substring(2, 4)}/${expiryDate.substring(0, 2)}";
-  }
-
-  String getCardNo() {
-    String cardNo = CommonService.cardInfo.cardNo;
-    if (cardNo.isEmpty) {
-      cardNo = "****************";
-    }
-    return "${cardNo.substring(0, 4)} ${cardNo.substring(4, 8)} ${cardNo.substring(8, 12)} ${cardNo.substring(12)}";
   }
 
   void _onListLoading() async {
