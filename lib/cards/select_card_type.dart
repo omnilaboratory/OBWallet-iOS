@@ -18,10 +18,10 @@ List<CardItemInfo> cardItemInfoArr = [
     country: "Hong Kong",
     iconUrl: "asset/images/icon_master.png",
   ),
-  CardItemInfo(
-    country: "Singapore",
-    iconUrl: "asset/images/icon_visa.png",
-  )
+  // CardItemInfo(
+  //   country: "Singapore",
+  //   iconUrl: "asset/images/icon_visa.png",
+  // )
 ];
 
 class SelectCardType extends StatefulWidget {

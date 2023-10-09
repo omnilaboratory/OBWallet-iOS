@@ -11,7 +11,7 @@ class CardItemInfo {
     this.balance = 0,
     this.exp = "****",
     this.cvv = "***",
-    this.iconUrl = "asset/images/icon_visa.png",
+    this.iconUrl = "asset/images/icon_master.png",
     this.country = "Hong Kong",
   });
 }
