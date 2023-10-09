@@ -74,7 +74,7 @@ class _SelectCardTypeState extends State<SelectCardType> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     width: size.width * 0.8,
-                    height: 550,
+                    height: 240 + 160.0 * cardItemInfoArr.length,
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
