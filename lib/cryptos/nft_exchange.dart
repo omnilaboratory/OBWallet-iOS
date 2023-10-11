@@ -45,6 +45,7 @@ class _NftExchangeState extends State<NftExchange> {
 
   @override
   Widget build(BuildContext context) {
+    log("build");
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -67,6 +68,24 @@ class _NftExchangeState extends State<NftExchange> {
               buildNftPart(EnumDollarFace.values[currSelectedFace.faceType]),
               const SizedBox(height: 40),
               buildDollarPart(),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.only(left: 40),
+                child: Row(
+                  children: [
+                    Text(
+                      _amountNftController.text.isEmpty
+                          ? ""
+                          : 'Exchange ${_amountNftController.text} NFT to \$${_amountDollarController.text}',
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               const SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -116,21 +135,23 @@ class _NftExchangeState extends State<NftExchange> {
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     onChanged: (value) {
                   int? amount = int.tryParse(value);
-                  if (amount != null) {
-                    if (amount <= 0) {
-                      _amountNftController.text = "0";
-                      return;
-                    }
-                    if (amount > currSelectedFace.amount) {
-                      _amountNftController.text =
-                          currSelectedFace.amount.toString();
-                      setDollarAmount();
+                  setState(() {
+                    if (amount != null) {
+                      if (amount <= 0) {
+                        _amountNftController.text = "0";
+                        return;
+                      }
+                      if (amount > currSelectedFace.amount) {
+                        _amountNftController.text =
+                            currSelectedFace.amount.toString();
+                        setDollarAmount();
+                      } else {
+                        setDollarAmount();
+                      }
                     } else {
                       setDollarAmount();
                     }
-                  } else {
-                    setDollarAmount();
-                  }
+                  });
                 }),
               ),
               Expanded(
