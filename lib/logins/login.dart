@@ -275,7 +275,6 @@ class _LoginState extends State<Login> {
     CardService.getInstance().cardInfo(context);
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
-        // LocalStorage.removeEthAddress();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),

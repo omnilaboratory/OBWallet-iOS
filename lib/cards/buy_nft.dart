@@ -1,0 +1,105 @@
+import 'dart:developer';
+
+import 'package:awallet/bean/tips.dart';
+import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/component/common.dart';
+import 'package:awallet/component/dollar_face.dart';
+import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/tools/string_tool.dart';
+import 'package:flutter/material.dart';
+
+class BuyNft extends StatefulWidget {
+  final double amount;
+
+  const BuyNft({super.key, required this.amount});
+
+  @override
+  State<BuyNft> createState() => _BuyNftState();
+}
+
+class _BuyNftState extends State<BuyNft> {
+  List<DollarFace> faceList = [];
+  int nftTotalCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    List<int> nftCountList =
+        StringTools.getNftCountByMoneyAmount(widget.amount);
+    for (int i = 0; i < nftCountList.length; i++) {
+      if (nftCountList[i] > 0) {
+        faceList.add(DollarFace(faceType: i, amount: nftCountList[i]));
+        nftTotalCount += nftCountList[i];
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    String tips =
+        "You are depositing \$${widget.amount} and will get $nftTotalCount NFTs.";
+
+    return Scaffold(
+      appBar: AppBar(
+        leadingWidth: 42,
+        titleSpacing: 0,
+        title: const HeadLogo(title: "BuyNft"),
+      ),
+      body: Column(
+        children: [
+          const SizedBox(height: 40),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: Text(tips,
+                style: const TextStyle(
+                  color: Color(0xFF999999),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                )),
+          ),
+          const SizedBox(height: 60),
+          Wrap(
+            spacing: 20,
+            runSpacing: 16.0,
+            children: faceList,
+          ),
+          const SizedBox(height: 40),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              BottomButton(
+                icon: 'asset/images/icon_arrow_left_green.png',
+                text: 'BACK',
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              BottomButton(
+                icon: 'asset/images/icon_confirm_green.png',
+                text: 'DONE',
+                onPressed: () {
+                  alert(tips, context, () {
+                    onClickDone();
+                  }, showCancel: true);
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  onClickDone() async {
+    log("onClickDone request server");
+    var loading = showLoading(context);
+    await Future.delayed(const Duration(seconds: 3), () {
+      log('3 seconds passed');
+      loading.remove();
+      alert(Tips.buyNftSuccess.value, context, () {
+        Navigator.pop(context);
+        Navigator.pop(context);
+      });
+    });
+  }
+}

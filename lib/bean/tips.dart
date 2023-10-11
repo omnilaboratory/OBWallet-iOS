@@ -39,6 +39,7 @@ enum Tips {
   failWithdraw("Withdraw failed, please try again later."),
   successDeposit("Deposit successful."),
   failDeposit("Deposit failed, please try again later."),
+  buyNftSuccess("Buy NFT Successfully."),
   ;
 
   final String value;

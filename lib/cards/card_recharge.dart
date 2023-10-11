@@ -3,12 +3,11 @@ import 'dart:developer';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
-import 'package:awallet/cards/kyc.dart';
+import 'package:awallet/cards/buy_nft.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/credit_card_form.dart';
-import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/component/web_view.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
@@ -16,7 +15,6 @@ import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -28,7 +26,13 @@ class CardRecharge extends StatefulWidget {
   String cvc;
   EnumChargeType type;
 
-  CardRecharge({super.key, required this.amt , this.type = EnumChargeType.deposit, required this.cardNo, required this.date, required this.cvc});
+  CardRecharge(
+      {super.key,
+      required this.amt,
+      this.type = EnumChargeType.deposit,
+      required this.cardNo,
+      required this.date,
+      required this.cvc});
 
   @override
   State<CardRecharge> createState() => _CardRechargeState();
@@ -63,7 +67,8 @@ class _CardRechargeState extends State<CardRecharge> {
   }
 
   updateKycState() {
-    if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value || CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
+    if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value ||
+        CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
       if (cardHolderName != null && cardHolderName.isNotEmpty) {
         getDcPayUrl(double.parse(cardHolderName));
       }
@@ -111,16 +116,18 @@ class _CardRechargeState extends State<CardRecharge> {
                       cardNumber: cardNumber,
                       cvvCode: cvcCode,
                       isHolderNameVisible: true,
-                      isCardNumberVisible: widget.type == EnumChargeType.deposit ? true : false,
-                      isExpiryDateVisible: widget.type == EnumChargeType.deposit ? true : false,
-                      enableCvv: widget.type == EnumChargeType.deposit ? true : false,
+                      isCardNumberVisible:
+                          widget.type == EnumChargeType.deposit ? true : false,
+                      isExpiryDateVisible:
+                          widget.type == EnumChargeType.deposit ? true : false,
+                      enableCvv:
+                          widget.type == EnumChargeType.deposit ? true : false,
                       cardHolderName: cardHolderName,
                       expiryDate: expiryDate,
                       themeColor: Colors.blue,
                       textColor: Colors.black,
                       cardHolderDecoration: InputDecoration(
-                        prefixIcon:
-                            const Icon(Icons.attach_money),
+                        prefixIcon: const Icon(Icons.attach_money),
                         hintText: 'Amount',
                         hintStyle: const TextStyle(color: Colors.grey),
                         border: _outlineInputBorder,
@@ -133,7 +140,9 @@ class _CardRechargeState extends State<CardRecharge> {
                             horizontal: 0, vertical: 0),
                       ),
                       cardNumberDecoration: InputDecoration(
-                        enabled: widget.type == EnumChargeType.deposit ? true : false,
+                        enabled: widget.type == EnumChargeType.deposit
+                            ? true
+                            : false,
                         prefixIcon: const Icon(Icons.credit_card),
                         hintText: 'Card Number',
                         hintStyle: const TextStyle(color: Colors.grey),
@@ -147,7 +156,9 @@ class _CardRechargeState extends State<CardRecharge> {
                             horizontal: 0, vertical: 0),
                       ),
                       expiryDateDecoration: InputDecoration(
-                        enabled: widget.type == EnumChargeType.deposit ? true : false,
+                        enabled: widget.type == EnumChargeType.deposit
+                            ? true
+                            : false,
                         prefixIcon: const Icon(Icons.date_range),
                         hintText: 'MM/YY',
                         hintStyle: const TextStyle(color: Colors.grey),
@@ -161,7 +172,9 @@ class _CardRechargeState extends State<CardRecharge> {
                             horizontal: 0, vertical: 0),
                       ),
                       cvvCodeDecoration: InputDecoration(
-                        enabled: widget.type == EnumChargeType.deposit ? true : false,
+                        enabled: widget.type == EnumChargeType.deposit
+                            ? true
+                            : false,
                         prefixIcon: const Icon(Icons.credit_score),
                         hintText: 'CVV',
                         hintStyle: const TextStyle(color: Colors.grey),
@@ -181,7 +194,9 @@ class _CardRechargeState extends State<CardRecharge> {
                     ),
                     BottomButton(
                       icon: 'asset/images/icon_confirm_green.png',
-                      text:  widget.type == EnumChargeType.deposit ? 'DEPOSIT' : 'WITHDRAW',
+                      text: widget.type == EnumChargeType.deposit
+                          ? 'DEPOSIT'
+                          : 'WITHDRAW',
                       onPressed: () {
                         onPay();
                       },
@@ -220,7 +235,9 @@ class _CardRechargeState extends State<CardRecharge> {
               ),
               const SizedBox(width: 6),
               Text(
-                widget.type == EnumChargeType.deposit ? '$totalBalanceUsd' : CommonService.cardInfo.balance.toString(),
+                widget.type == EnumChargeType.deposit
+                    ? '$totalBalanceUsd'
+                    : CommonService.cardInfo.balance.toString(),
                 style: const TextStyle(
                   color: Color(0xFF333333),
                   fontSize: 32,
@@ -231,7 +248,9 @@ class _CardRechargeState extends State<CardRecharge> {
             ],
           ),
           Text(
-            widget.type == EnumChargeType.deposit ? 'Account Balance' : 'Card Balance',
+            widget.type == EnumChargeType.deposit
+                ? 'Account Balance'
+                : 'Card Balance',
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Color(0xFF666666),
@@ -259,30 +278,37 @@ class _CardRechargeState extends State<CardRecharge> {
   }
 
   onPay() {
+    FocusScope.of(context).requestFocus(FocusNode());
     if (formKey.currentState!.validate()) {
-      if (widget.type == EnumChargeType.deposit){
+      if (widget.type == EnumChargeType.deposit) {
         if (cardNumber.replaceAll(' ', '') == CommonService.cardInfo.cardNo) {
           virtualCardPay();
         } else {
-          if (double.parse(cardHolderName) < 100) {
-            cardRecharge();
-          } else {
-            var kycStatus = CommonService.userInfo!.kycStatus;
-            if (kycStatus.isNotEmpty) {
-              if (kycStatus == "passed") {
-                FocusScope.of(context).unfocus();
-                GlobalParams.eventBus.fire("topup");
-                Navigator.pop(context);
-                getDcPayUrl(double.parse(cardHolderName));
-              }
-            } else {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const Kyc();
-                  });
-            }
-          }
+          // if (double.parse(cardHolderName) < 100) {
+          //   cardRecharge();
+          // } else {
+          //   var kycStatus = CommonService.userInfo!.kycStatus;
+          //   if (kycStatus.isNotEmpty) {
+          //     if (kycStatus == "passed") {
+          //       FocusScope.of(context).unfocus();
+          //       GlobalParams.eventBus.fire("topup");
+          //       Navigator.pop(context);
+          //       getDcPayUrl(double.parse(cardHolderName));
+          //     }
+          //   } else {
+          //     showDialog(
+          //         context: context,
+          //         builder: (context) {
+          //           return const Kyc();
+          //         });
+          //   }
+          // }
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    BuyNft(amount: double.parse(cardHolderName))),
+          );
         }
       } else {
         virtualCardPay();
@@ -313,19 +339,18 @@ class _CardRechargeState extends State<CardRecharge> {
     request.amt = double.parse(cardHolderName);
     request.cardNo = cardNumber.replaceAll(' ', '');
     request.cardSecurityCode = cvcCode;
-    request.cardExpireMonth =
-        expiryDate.substring(0, expiryDate.indexOf('/'));
+    request.cardExpireMonth = expiryDate.substring(0, expiryDate.indexOf('/'));
     request.cardExpireYear =
-    '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
+        '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
     CardService.getInstance()
         .cardRecharge(context, request)
         .then((value) async {
       if (value.code == 1) {
         GlobalParams.eventBus.fire("topup");
-        Navigator.pop(context,true);
+        Navigator.pop(context, true);
         if (widget.type == EnumChargeType.withdraw) {
           showToast(Tips.successWithdraw.value);
-        } else if (widget.type == EnumChargeType.deposit){
+        } else if (widget.type == EnumChargeType.deposit) {
           showToast(Tips.successDeposit.value);
         }
       } else {
@@ -362,7 +387,7 @@ class _CardRechargeState extends State<CardRecharge> {
         var accountInfo = info.data as AccountInfo;
         log("$accountInfo");
         totalBalanceUsd = accountInfo.balanceUsd;
-        if(mounted){
+        if (mounted) {
           setState(() {});
         }
       }

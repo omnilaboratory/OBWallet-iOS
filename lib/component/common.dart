@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -77,29 +75,43 @@ showToast(String msg, {Toast toastLength = Toast.LENGTH_LONG}) {
       msg: msg, toastLength: toastLength, gravity: ToastGravity.CENTER);
 }
 
-alert(String msg, BuildContext context, Function? callback) {
-  log("alert $msg");
+alert(String msg, BuildContext context, Function? callback,
+    {bool showCancel = false}) {
+  List<DialogButton> btns = [];
+  if (showCancel) {
+    btns.add(DialogButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      width: 120,
+      color: Colors.grey,
+      child: const Text(
+        "Cancel",
+        style: TextStyle(color: Colors.white, fontSize: 20),
+      ),
+    ));
+  }
+  btns.add(DialogButton(
+    onPressed: () {
+      Navigator.pop(context);
+      if (callback != null) {
+        callback();
+      }
+    },
+    width: 120,
+    color: Colors.blueAccent,
+    child: const Text(
+      "OK",
+      style: TextStyle(color: Colors.white, fontSize: 20),
+    ),
+  ));
+
   Alert(
     context: context,
     type: AlertType.none,
     onWillPopActive: true,
     desc: msg,
-    buttons: [
-      DialogButton(
-        onPressed: () {
-          Navigator.pop(context);
-          if (callback != null) {
-            callback();
-          }
-        },
-        width: 120,
-        color: Colors.blueAccent,
-        child: const Text(
-          "OK",
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-      )
-    ],
+    buttons: btns,
   ).show();
 }
 
