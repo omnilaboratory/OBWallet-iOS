@@ -76,7 +76,7 @@ class _NftExchangeState extends State<NftExchange> {
                     Text(
                       _amountNftController.text.isEmpty
                           ? ""
-                          : 'Exchange ${_amountNftController.text} NFT to \$${_amountDollarController.text}',
+                          : 'Exchange ${_amountNftController.text} NFT to ${_amountDollarController.text} ${currSelectedToken.name}',
                       style: const TextStyle(
                         color: Colors.blue,
                         fontSize: 14,
