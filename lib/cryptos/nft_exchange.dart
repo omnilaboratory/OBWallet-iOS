@@ -353,7 +353,6 @@ class _NftExchangeState extends State<NftExchange> {
   }
 
   void setDollarAmount() {
-    _amountDollarController.text = _amountNftController.text;
     int? amount = int.tryParse(_amountNftController.text);
     if (amount != null) {
       var dollars = amount *
