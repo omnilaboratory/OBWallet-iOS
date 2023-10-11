@@ -312,7 +312,7 @@ class _NftExchangeState extends State<NftExchange> {
                       items: buildTokenDropdownItemList(),
                       onChanged: (value) {
                         if (value != null) {
-                          getCoinPrice(value!.name);
+                          getCoinPrice(value.name);
                           setState(() {
                             currSelectedToken = value;
                           });
