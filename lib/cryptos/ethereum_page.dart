@@ -1,13 +1,15 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:awallet/bean/dollar_face_info.dart';
+import 'package:awallet/bean/enum_dollar_face.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_token_item.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
-import 'package:awallet/component/loading_dialog.dart';
+import 'package:awallet/component/dollar_face.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
@@ -15,6 +17,7 @@ import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'ethereum_recover_wallet.dart';
@@ -29,6 +32,16 @@ class EthereumPage extends StatefulWidget {
 class _EthereumPageState extends State<EthereumPage> {
   final RefreshController _refreshBalanceController =
       RefreshController(initialRefresh: false);
+
+  List<Widget> nftList = [];
+  List<DollarFaceInfo> nftInfoList = [
+    DollarFaceInfo(faceType: 0, amount: 10),
+    DollarFaceInfo(faceType: 1, amount: 10),
+    DollarFaceInfo(faceType: 2, amount: 10),
+    DollarFaceInfo(faceType: 3, amount: 10),
+    DollarFaceInfo(faceType: 4, amount: 10),
+    DollarFaceInfo(faceType: 5, amount: 10),
+  ];
 
   @override
   void initState() {
@@ -67,6 +80,8 @@ class _EthereumPageState extends State<EthereumPage> {
     var walletInfo = EthService.getInstance().getWalletInfo();
     var tokenList = EthService.getInstance().getTokenList();
 
+    log("build currTypeIndex $currTypeIndex");
+
     return SmartRefresher(
       controller: _refreshBalanceController,
       onRefresh: _updateBalance,
@@ -75,16 +90,54 @@ class _EthereumPageState extends State<EthereumPage> {
           CryptoWalletCard(walletInfo: walletInfo),
           const SizedBox(height: 20),
           buildTxButtons(),
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return CryptoTokenItem(tokenInfo: tokenList[index]);
-              },
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(
-                  left: 10, top: 20, right: 10, bottom: 20),
-              itemCount: tokenList.length,
+          Padding(
+            padding: const EdgeInsets.only(top: 25, bottom: 10),
+            child: Dash(
+              dashColor: const Color(0xFFCFCFCF),
+              length: MediaQuery.of(context).size.width - 60,
             ),
+          ),
+          const SizedBox(height: 2),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InkWell(
+                  onTap: () {
+                    onClickType(0);
+                  },
+                  child: Text("Tokens",
+                      style: TextStyle(
+                          color: currTypeIndex == 0
+                              ? Colors.lightBlueAccent
+                              : Colors.black))),
+              InkWell(
+                  onTap: () {
+                    onClickType(1);
+                  },
+                  child: Text("NFTs",
+                      style: TextStyle(
+                          color: currTypeIndex == 1
+                              ? Colors.lightBlueAccent
+                              : Colors.black)))
+            ],
+          ),
+          const SizedBox(height: 20),
+          Expanded(
+            child: currTypeIndex == 0
+                ? ListView.builder(
+                    itemBuilder: (BuildContext context, int index) {
+                      return CryptoTokenItem(tokenInfo: tokenList[index]);
+                    },
+                    itemCount: tokenList.length,
+                    shrinkWrap: true,
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                  )
+                : Wrap(
+                    spacing: 20,
+                    runSpacing: 16.0,
+                    children: nftList,
+                  ),
           )
         ],
       ),
@@ -215,6 +268,39 @@ class _EthereumPageState extends State<EthereumPage> {
 
   Future<void> updateTokenBalances() async {
     await EthService.getInstance().updateTokenBalances(context);
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  final RefreshController _refreshListController =
+      RefreshController(initialRefresh: false);
+  var currTypeIndex = 0;
+
+  void onClickType(int type) {
+    if (currTypeIndex == type) {
+      return;
+    }
+    if (_refreshListController.isRefresh || _refreshListController.isLoading) {
+      return;
+    }
+
+    currTypeIndex = type;
+    if (type == 0) {}
+    if (type == 1) {
+      nftList.clear();
+      for (int i = 0; i < nftInfoList.length; i++) {
+        var nodeInfo = nftInfoList[i];
+        nftList.add(GestureDetector(
+          onTap: () {
+            alert(
+                EnumDollarFace.values[nodeInfo.faceType].name, context, () {});
+          },
+          child:
+              DollarFace(faceType: nodeInfo.faceType, amount: nodeInfo.amount),
+        ));
+      }
+    }
     if (mounted) {
       setState(() {});
     }
