@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:awallet/bean/dollar_face_info.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
@@ -14,6 +15,14 @@ mixin CommonService {
   static ClientChannel? channel;
   static String token = "";
   static UserInfo? userInfo;
+  static List<DollarFaceInfo> nftInfoList = [
+    DollarFaceInfo(faceType: 0, amount: 10),
+    DollarFaceInfo(faceType: 1, amount: 12),
+    DollarFaceInfo(faceType: 2, amount: 13),
+    DollarFaceInfo(faceType: 3, amount: 14),
+    DollarFaceInfo(faceType: 4, amount: 15),
+    DollarFaceInfo(faceType: 5, amount: 16),
+  ];
   static CardInfo cardInfo = CardInfo();
   static String userId = "1";
 

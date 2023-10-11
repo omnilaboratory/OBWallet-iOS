@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:awallet/bean/dollar_face_info.dart';
-import 'package:awallet/bean/enum_dollar_face.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/exchange.dart';
@@ -11,8 +9,10 @@ import 'package:awallet/component/crypto_token_item.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
 import 'package:awallet/component/dollar_face.dart';
 import 'package:awallet/component/square_button.dart';
+import 'package:awallet/cryptos/nft_exchange.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
@@ -34,14 +34,6 @@ class _EthereumPageState extends State<EthereumPage> {
       RefreshController(initialRefresh: false);
 
   List<Widget> nftList = [];
-  List<DollarFaceInfo> nftInfoList = [
-    DollarFaceInfo(faceType: 0, amount: 10),
-    DollarFaceInfo(faceType: 1, amount: 10),
-    DollarFaceInfo(faceType: 2, amount: 10),
-    DollarFaceInfo(faceType: 3, amount: 10),
-    DollarFaceInfo(faceType: 4, amount: 10),
-    DollarFaceInfo(faceType: 5, amount: 10),
-  ];
 
   @override
   void initState() {
@@ -289,12 +281,14 @@ class _EthereumPageState extends State<EthereumPage> {
     if (type == 0) {}
     if (type == 1) {
       nftList.clear();
-      for (int i = 0; i < nftInfoList.length; i++) {
-        var nodeInfo = nftInfoList[i];
+      for (int i = 0; i < CommonService.nftInfoList.length; i++) {
+        var nodeInfo = CommonService.nftInfoList[i];
         nftList.add(GestureDetector(
           onTap: () {
-            alert(
-                EnumDollarFace.values[nodeInfo.faceType].name, context, () {});
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => NftExchange(faceInfo: nodeInfo)));
           },
           child:
               DollarFace(faceType: nodeInfo.faceType, amount: nodeInfo.amount),

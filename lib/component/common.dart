@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -7,6 +8,12 @@ import 'loading_dialog.dart';
 final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderSide: const BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
   borderRadius: BorderRadius.circular(8),
+);
+
+const OutlineInputBorder outlineRightInputBorder = OutlineInputBorder(
+  borderSide: BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
+  borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
 );
 
 TextFormField createTextFormField(
@@ -54,6 +61,40 @@ TextFormField createTextFormField(
       }
       return v!.trim().isNotEmpty ? null : "wrong $hintText";
     },
+  );
+}
+
+TextField createTextField(TextEditingController controller,
+    {TextInputType? keyboardType = TextInputType.text,
+    List<TextInputFormatter>? inputFormatters,
+    bool enabled = true,
+    Function? onChanged}) {
+  return TextField(
+    controller: controller,
+    maxLines: 1,
+    inputFormatters: inputFormatters,
+    keyboardType: keyboardType,
+    enabled: enabled,
+    onChanged: (text) {
+      if (onChanged != null) {
+        onChanged(text);
+      }
+    },
+    cursorColor: const Color(0xFF4A92FF),
+    style: const TextStyle(
+      color: Color(0xFF333333),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+    decoration: const InputDecoration(
+      contentPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+      border: outlineRightInputBorder,
+      focusedBorder: outlineRightInputBorder,
+      enabledBorder: outlineRightInputBorder,
+      disabledBorder: outlineRightInputBorder,
+      focusedErrorBorder: outlineRightInputBorder,
+      errorBorder: outlineRightInputBorder,
+    ),
   );
 }
 
