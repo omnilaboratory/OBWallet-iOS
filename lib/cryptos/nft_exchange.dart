@@ -1,11 +1,18 @@
+import 'dart:developer';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/dollar_face_info.dart';
 import 'package:awallet/bean/enum_dollar_face.dart';
+import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_face.dart';
 import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
+import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,6 +29,19 @@ class _NftExchangeState extends State<NftExchange> {
   final TextEditingController _amountNftController = TextEditingController();
   final TextEditingController _amountDollarController = TextEditingController();
   late DollarFaceInfo currSelectedFace = widget.faceInfo;
+  double currCurrencyRatio = 1;
+
+  var initTokenList = EthService.getInstance().getTokenList();
+  List<TokenInfo> tokenList = [];
+  late TokenInfo currSelectedToken;
+
+  @override
+  void initState() {
+    super.initState();
+    tokenList.addAll(GlobalParams.currencyList);
+    tokenList.addAll(initTokenList);
+    currSelectedToken = tokenList[0];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,17 +92,6 @@ class _NftExchangeState extends State<NftExchange> {
     );
   }
 
-  void getDollarAmount(EnumDollarFace enumDollarFace) {
-    _amountDollarController.text = _amountNftController.text;
-    int? amount = int.tryParse(_amountNftController.text);
-    if (amount != null) {
-      _amountDollarController.text =
-          (amount * double.parse(enumDollarFace.value)).toString();
-    } else {
-      _amountDollarController.text = "";
-    }
-  }
-
   Widget buildNftPart(EnumDollarFace enumDollarFace) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -108,15 +117,19 @@ class _NftExchangeState extends State<NftExchange> {
                     onChanged: (value) {
                   int? amount = int.tryParse(value);
                   if (amount != null) {
+                    if (amount <= 0) {
+                      _amountNftController.text = "0";
+                      return;
+                    }
                     if (amount > currSelectedFace.amount) {
                       _amountNftController.text =
                           currSelectedFace.amount.toString();
-                      getDollarAmount(enumDollarFace);
+                      setDollarAmount();
                     } else {
-                      getDollarAmount(enumDollarFace);
+                      setDollarAmount();
                     }
                   } else {
-                    getDollarAmount(enumDollarFace);
+                    setDollarAmount();
                   }
                 }),
               ),
@@ -145,8 +158,7 @@ class _NftExchangeState extends State<NftExchange> {
                       onChanged: (value) {
                         setState(() {
                           currSelectedFace = value!;
-                          _amountDollarController.text = "";
-                          _amountNftController.text = "";
+                          resetValues();
                         });
                       },
                     ),
@@ -172,7 +184,7 @@ class _NftExchangeState extends State<NftExchange> {
                 onTap: () {
                   _amountNftController.text =
                       currSelectedFace.amount.toString();
-                  getDollarAmount(enumDollarFace);
+                  setDollarAmount();
                 },
                 child: const Text(
                   'MAX',
@@ -190,6 +202,11 @@ class _NftExchangeState extends State<NftExchange> {
     );
   }
 
+  resetValues() {
+    _amountDollarController.text = "";
+    _amountNftController.text = "";
+  }
+
   List<DropdownMenuItem<DollarFaceInfo>> buildNftDropdownItemList() {
     List<DropdownMenuItem<DollarFaceInfo>> list =
         CommonService.nftInfoList.map((DollarFaceInfo value) {
@@ -200,6 +217,36 @@ class _NftExchangeState extends State<NftExchange> {
             const SizedBox(width: 7),
             AutoSizeText(
               EnumDollarFace.values[value.faceType].name,
+              maxLines: 1,
+              minFontSize: 12,
+              style: const TextStyle(
+                color: Color(0xFF333333),
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+      );
+    }).toList();
+    return list;
+  }
+
+  List<DropdownMenuItem<TokenInfo>> buildTokenDropdownItemList() {
+    List<DropdownMenuItem<TokenInfo>> list = tokenList.map((TokenInfo value) {
+      return DropdownMenuItem<TokenInfo>(
+        value: value,
+        child: Row(
+          children: [
+            const SizedBox(width: 7),
+            Image(
+              width: 20,
+              height: 20,
+              image: AssetImage(value.iconUrl),
+            ),
+            const SizedBox(width: 7),
+            AutoSizeText(
+              value.name,
               maxLines: 1,
               minFontSize: 12,
               style: const TextStyle(
@@ -253,14 +300,24 @@ class _NftExchangeState extends State<NftExchange> {
                           bottomRight: Radius.circular(8)),
                     ),
                   ),
-                  child: const Center(
-                    child: Text(
-                      'USD',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<TokenInfo>(
+                      icon: const Image(
+                          width: 24,
+                          height: 24,
+                          image: AssetImage(
+                              "asset/images/icon_arrow_down_black.png")),
+                      value: currSelectedToken,
+                      isExpanded: true,
+                      items: buildTokenDropdownItemList(),
+                      onChanged: (value) {
+                        if (value != null) {
+                          getCoinPrice(value!.name);
+                          setState(() {
+                            currSelectedToken = value;
+                          });
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -270,5 +327,41 @@ class _NftExchangeState extends State<NftExchange> {
         ],
       ),
     );
+  }
+
+  void getCoinPrice(String name) {
+    if (name.toLowerCase() == "usd") {
+      currCurrencyRatio = 1;
+      setDollarAmount();
+    } else {
+      AccountService.getInstance()
+          .getCoinPrice(context, name)
+          .then((value) async {
+        if (value.code == 1) {
+          var resp = value.data as GetCoinPriceResponse;
+          log(resp.price.toString());
+          if (mounted) {
+            setState(() {
+              currCurrencyRatio =
+                  double.parse((1.0 / resp.price).toStringAsFixed(8));
+              setDollarAmount();
+            });
+          }
+        }
+      });
+    }
+  }
+
+  void setDollarAmount() {
+    _amountDollarController.text = _amountNftController.text;
+    int? amount = int.tryParse(_amountNftController.text);
+    if (amount != null) {
+      var dollars = amount *
+          double.parse(EnumDollarFace.values[currSelectedFace.faceType].value);
+      _amountDollarController.text =
+          (dollars * currCurrencyRatio).toStringAsFixed(8);
+    } else {
+      _amountDollarController.text = "";
+    }
   }
 }
