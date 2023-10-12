@@ -125,11 +125,13 @@ class _EthereumPageState extends State<EthereumPage> {
                     padding:
                         const EdgeInsets.only(left: 10, right: 10, bottom: 20),
                   )
-                : Wrap(
-                    spacing: 20,
-                    runSpacing: 16.0,
-                    children: nftList,
-                  ),
+                : SingleChildScrollView(
+                  child: Wrap(
+                      spacing: 20,
+                      runSpacing: 16.0,
+                      children: nftList,
+                    ),
+                ),
           )
         ],
       ),
