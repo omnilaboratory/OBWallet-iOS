@@ -74,6 +74,23 @@ class _EthereumPageState extends State<EthereumPage> {
 
     log("build currTypeIndex $currTypeIndex");
 
+    Widget buildTokenAndNftList() {
+      return currTypeIndex == 0
+          ? ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return CryptoTokenItem(tokenInfo: tokenList[index]);
+              },
+              itemCount: tokenList.length,
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
+            )
+          : Wrap(
+              spacing: 20,
+              runSpacing: 16.0,
+              children: nftList,
+            );
+    }
+
     return SmartRefresher(
       controller: _refreshBalanceController,
       onRefresh: _updateBalance,
@@ -115,23 +132,10 @@ class _EthereumPageState extends State<EthereumPage> {
           ),
           const SizedBox(height: 20),
           Expanded(
-            child: currTypeIndex == 0
-                ? ListView.builder(
-                    itemBuilder: (BuildContext context, int index) {
-                      return CryptoTokenItem(tokenInfo: tokenList[index]);
-                    },
-                    itemCount: tokenList.length,
-                    shrinkWrap: true,
-                    padding:
-                        const EdgeInsets.only(left: 10, right: 10, bottom: 20),
-                  )
-                : SingleChildScrollView(
-                  child: Wrap(
-                      spacing: 20,
-                      runSpacing: 16.0,
-                      children: nftList,
-                    ),
-                ),
+            child: SingleChildScrollView(
+                child: Column(
+              children: [buildTokenAndNftList(), const SizedBox(height: 20)],
+            )),
           )
         ],
       ),

@@ -22,6 +22,7 @@ mixin CommonService {
     DollarFaceInfo(faceType: 3, amount: 14),
     DollarFaceInfo(faceType: 4, amount: 15),
     DollarFaceInfo(faceType: 5, amount: 16),
+    DollarFaceInfo(faceType: 6, amount: 17),
   ];
   static CardInfo cardInfo = CardInfo();
   static String userId = "1";

@@ -33,34 +33,34 @@ class StringTools {
   }
 
   static List<int> getNftCountByMoneyAmount(double amount) {
-    // 100d,10d,5d,1d,10c,1c
-    List<int> arr = [0, 0, 0, 0, 0, 0];
+    // 100,50,20,10,5,2,1
+    List<int> arr = [0, 0, 0, 0, 0, 0, 0];
     if (amount.isNaN) {
       amount = 0;
     }
-    String amountStr = (amount * 100).toInt().toString();
+    String amountStr = (amount).toInt().toString();
     int length = amountStr.length;
     if (length > 0) {
-      arr[5] = int.parse(amountStr[length - 1]);
+      int value = int.parse(amountStr[length - 1]);
+      if (value > 4) {
+        arr[4] = 1;
+        value -= 5;
+      }
+      arr[5] = value ~/ 2;
+      arr[6] = (value % 2).toInt();
     }
+
     if (length > 1) {
-      arr[4] = int.parse(amountStr[length - 2]);
+      int value = int.parse(amountStr[length - 2]);
+      if (value > 4) {
+        arr[1] = 1;
+        value -= 5;
+      }
+      arr[2] = value ~/ 2;
+      arr[3] = (value % 2).toInt();
     }
     if (length > 2) {
-      int value = int.parse(amountStr[length - 3]);
-      if (value > 4) {
-        arr[3] = value - 5;
-        arr[2] = 1;
-      } else {
-        arr[3] = value;
-        arr[2] = 0;
-      }
-    }
-    if (length > 3) {
-      arr[1] = int.parse(amountStr[length - 4]);
-    }
-    if (length > 4) {
-      arr[0] = int.parse(amountStr.substring(0, length - 4));
+      arr[0] = int.parse(amountStr.substring(0, length - 2));
     }
     return arr;
   }
