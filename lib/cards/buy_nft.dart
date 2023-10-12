@@ -100,6 +100,7 @@ class _BuyNftState extends State<BuyNft> {
         .cardRecharge(context, widget.rechargeRequest)
         .then((resp) {
       if (resp.code == 1) {
+        log("${resp.data}");
         alert(Tips.buyNftSuccess.value, context, () {
           Navigator.pop(context);
           Navigator.pop(context);

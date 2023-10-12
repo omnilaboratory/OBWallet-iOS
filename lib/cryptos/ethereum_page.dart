@@ -299,11 +299,12 @@ class _EthereumPageState extends State<EthereumPage> {
           CommonService.nftInfoList.clear();
           List<NftToken> nftInfos = resp.data;
           if (nftInfos.isNotEmpty) {
+            nftInfos.sort((a,b)=>b.tokenId.compareTo(a.tokenId));
+
             for (int i = 0; i < nftInfos.length; i++) {
               NftToken token = nftInfos[i];
               DollarFaceInfo nodeInfo = DollarFaceInfo(
-                  faceType: Utils.getEnumDollarFaceIndex(
-                      token.itemPrice.toInt().toString()),
+                  faceType: Utils.getEnumDollarFaceIndex(token.tokenId.toString()),
                   amount: token.amt.toInt());
 
               CommonService.nftInfoList.add(nodeInfo);
@@ -321,10 +322,15 @@ class _EthereumPageState extends State<EthereumPage> {
             }
           }
         }
+        if (mounted) {
+          setState(() {
+          });
+        }
       });
     }
     if (mounted) {
-      setState(() {});
+      setState(() {
+      });
     }
   }
 }
