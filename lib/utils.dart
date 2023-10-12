@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:awallet/bean/enum_dollar_face.dart';
 import 'package:awallet/src/generated/user/account.pb.dart';
 import 'package:awallet/src/generated/user/country.pbenum.dart';
 import 'package:crypto/crypto.dart';
@@ -185,6 +186,7 @@ class Utils {
     }
     return null;
   }
+
   static EnumKycStatus getEnumKycStatus(String code) {
     for (var value in EnumKycStatus.values) {
       if (value.value.toLowerCase() == code.toLowerCase()) {
@@ -192,5 +194,14 @@ class Utils {
       }
     }
     return EnumKycStatus.none;
+  }
+
+  static int getEnumDollarFaceIndex(String value) {
+    for (int i = 0; i < EnumDollarFace.values.length; i++) {
+      if (EnumDollarFace.values[i].value.toLowerCase() == value.toLowerCase()) {
+        return i;
+      }
+    }
+    return 0;
   }
 }

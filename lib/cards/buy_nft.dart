@@ -5,13 +5,15 @@ import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_face.dart';
 import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/grpc_services/card_service.dart';
+import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 
 class BuyNft extends StatefulWidget {
-  final double amount;
+  final CardRechargeRequest rechargeRequest;
 
-  const BuyNft({super.key, required this.amount});
+  const BuyNft({super.key, required this.rechargeRequest});
 
   @override
   State<BuyNft> createState() => _BuyNftState();
@@ -25,7 +27,7 @@ class _BuyNftState extends State<BuyNft> {
   void initState() {
     super.initState();
     List<int> nftCountList =
-        StringTools.getNftCountByMoneyAmount(widget.amount);
+        StringTools.getNftCountByMoneyAmount(widget.rechargeRequest.amt);
     for (int i = 0; i < nftCountList.length; i++) {
       if (nftCountList[i] > 0) {
         faceList.add(DollarFace(faceType: i, amount: nftCountList[i]));
@@ -37,7 +39,7 @@ class _BuyNftState extends State<BuyNft> {
   @override
   Widget build(BuildContext context) {
     String tips =
-        "You are depositing \$${widget.amount} and will get $nftTotalCount NFTs.";
+        "You are depositing \$${widget.rechargeRequest.amt} and will get $nftTotalCount NFTs.";
 
     return Scaffold(
       appBar: AppBar(
@@ -91,15 +93,21 @@ class _BuyNftState extends State<BuyNft> {
   }
 
   onClickDone() async {
-    log("onClickDone request server");
+    log("onClickDone");
     var loading = showLoading(context);
-    await Future.delayed(const Duration(seconds: 3), () {
-      log('3 seconds passed');
+    widget.rechargeRequest.chargeForNft = true;
+    CardService.getInstance()
+        .cardRecharge(context, widget.rechargeRequest)
+        .then((resp) {
+      if (resp.code == 1) {
+        alert(Tips.buyNftSuccess.value, context, () {
+          Navigator.pop(context);
+          Navigator.pop(context);
+        });
+      } else {
+        alert(resp.msg, context, () {});
+      }
       loading.remove();
-      alert(Tips.buyNftSuccess.value, context, () {
-        Navigator.pop(context);
-        Navigator.pop(context);
-      });
     });
   }
 }

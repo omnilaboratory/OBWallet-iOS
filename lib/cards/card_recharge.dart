@@ -299,7 +299,7 @@ class _CardRechargeState extends State<CardRecharge> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          BuyNft(amount: double.parse(cardHolderName))),
+                          BuyNft(rechargeRequest: createCardRechargeRequest())),
                 );
               }
             } else {
@@ -336,13 +336,7 @@ class _CardRechargeState extends State<CardRecharge> {
     log(expiryDate);
     log(cvcCode);
     log('valid!');
-    CardRechargeRequest request = CardRechargeRequest();
-    request.amt = double.parse(cardHolderName);
-    request.cardNo = cardNumber.replaceAll(' ', '');
-    request.cardSecurityCode = cvcCode;
-    request.cardExpireMonth = expiryDate.substring(0, expiryDate.indexOf('/'));
-    request.cardExpireYear =
-        '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
+    CardRechargeRequest request = createCardRechargeRequest();
     CardService.getInstance()
         .cardRecharge(context, request)
         .then((value) async {
@@ -364,6 +358,17 @@ class _CardRechargeState extends State<CardRecharge> {
       }
       loading.remove();
     });
+  }
+
+  CardRechargeRequest createCardRechargeRequest() {
+    CardRechargeRequest request = CardRechargeRequest();
+    request.amt = double.parse(cardHolderName);
+    request.cardNo = cardNumber.replaceAll(' ', '');
+    request.cardSecurityCode = cvcCode;
+    request.cardExpireMonth = expiryDate.substring(0, expiryDate.indexOf('/'));
+    request.cardExpireYear =
+        '20${expiryDate.substring(expiryDate.indexOf('/') + 1, expiryDate.length)}';
+    return request;
   }
 
   void getDcPayUrl(double amt) {

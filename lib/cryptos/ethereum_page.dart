@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:awallet/bean/dollar_face_info.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/exchange.dart';
@@ -12,10 +13,13 @@ import 'package:awallet/component/square_button.dart';
 import 'package:awallet/cryptos/nft_exchange.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
+import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
+import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -84,11 +88,13 @@ class _EthereumPageState extends State<EthereumPage> {
               shrinkWrap: true,
               padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
             )
-          : Wrap(
-              spacing: 20,
-              runSpacing: 16.0,
-              children: nftList,
-            );
+          : nftList.isEmpty
+              ? const Text("No NFTs")
+              : Wrap(
+                  spacing: 20,
+                  runSpacing: 16.0,
+                  children: nftList,
+                );
     }
 
     return SmartRefresher(
@@ -287,19 +293,35 @@ class _EthereumPageState extends State<EthereumPage> {
     if (type == 0) {}
     if (type == 1) {
       nftList.clear();
-      for (int i = 0; i < CommonService.nftInfoList.length; i++) {
-        var nodeInfo = CommonService.nftInfoList[i];
-        nftList.add(GestureDetector(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => NftExchange(faceInfo: nodeInfo)));
-          },
-          child:
-              DollarFace(faceType: nodeInfo.faceType, amount: nodeInfo.amount),
-        ));
-      }
+      AccountService.getInstance().getNftBalance(context).then((resp) {
+        log("getNftBalance ${resp.code} ${resp.data}");
+        if (resp.code == 1) {
+          CommonService.nftInfoList.clear();
+          List<NftToken> nftInfos = resp.data;
+          if (nftInfos.isNotEmpty) {
+            for (int i = 0; i < nftInfos.length; i++) {
+              NftToken token = nftInfos[i];
+              DollarFaceInfo nodeInfo = DollarFaceInfo(
+                  faceType: Utils.getEnumDollarFaceIndex(
+                      token.itemPrice.toInt().toString()),
+                  amount: token.amt.toInt());
+
+              CommonService.nftInfoList.add(nodeInfo);
+              nftList.add(GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              NftExchange(faceInfo: nodeInfo)));
+                },
+                child: DollarFace(
+                    faceType: nodeInfo.faceType, amount: nodeInfo.amount),
+              ));
+            }
+          }
+        }
+      });
     }
     if (mounted) {
       setState(() {});

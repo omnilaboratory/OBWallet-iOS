@@ -138,6 +138,19 @@ class AccountService {
     return ret;
   }
 
+  Future<GrpcResponse> getNftBalance(BuildContext context) async {
+    var request = GetNftBlanceRequest();
+    var ret = GrpcResponse();
+    try {
+      var resp = await accountServiceClient?.getNftBlance(request);
+      ret.code = 1;
+      ret.data = resp?.items;
+    } catch (e) {
+      UserService.getInstance().setError(context, "getNftBalance", e, ret);
+    }
+    return ret;
+  }
+
   Future<GrpcResponse> getDcPayUrl(BuildContext context, double amt) async {
     var request = GetDcPayUrlRequest();
     request.usdAmt = amt;
