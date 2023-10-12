@@ -94,13 +94,16 @@ class _NftExchangeState extends State<NftExchange> {
                     icon: 'asset/images/icon_arrow_left_green.png',
                     text: 'BACK',
                     onPressed: () {
+                      FocusScope.of(context).unfocus();
                       Navigator.pop(context);
                     },
                   ),
                   BottomButton(
                     icon: 'asset/images/icon_confirm_green.png',
                     text: 'DONE',
-                    onPressed: () {},
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                    },
                   ),
                 ],
               ),

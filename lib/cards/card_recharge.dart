@@ -19,6 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'kyc.dart';
+
 class CardRecharge extends StatefulWidget {
   String amt;
   String cardNo;
@@ -278,37 +280,36 @@ class _CardRechargeState extends State<CardRecharge> {
   }
 
   onPay() {
-    FocusScope.of(context).requestFocus(FocusNode());
+    FocusScope.of(context).unfocus();
     if (formKey.currentState!.validate()) {
       if (widget.type == EnumChargeType.deposit) {
         if (cardNumber.replaceAll(' ', '') == CommonService.cardInfo.cardNo) {
           virtualCardPay();
         } else {
-          // if (double.parse(cardHolderName) < 100) {
-          //   cardRecharge();
-          // } else {
-          //   var kycStatus = CommonService.userInfo!.kycStatus;
-          //   if (kycStatus.isNotEmpty) {
-          //     if (kycStatus == "passed") {
-          //       FocusScope.of(context).unfocus();
-          //       GlobalParams.eventBus.fire("topup");
-          //       Navigator.pop(context);
-          //       getDcPayUrl(double.parse(cardHolderName));
-          //     }
-          //   } else {
-          //     showDialog(
-          //         context: context,
-          //         builder: (context) {
-          //           return const Kyc();
-          //         });
-          //   }
-          // }
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    BuyNft(amount: double.parse(cardHolderName))),
-          );
+          if (double.parse(cardHolderName) < 100) {
+            cardRecharge();
+          } else {
+            var kycStatus = CommonService.userInfo!.kycStatus;
+            if (kycStatus.isNotEmpty) {
+              if (kycStatus == "passed") {
+                GlobalParams.eventBus.fire("topup");
+                // Navigator.pop(context);
+                // getDcPayUrl(double.parse(cardHolderName));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          BuyNft(amount: double.parse(cardHolderName))),
+                );
+              }
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Kyc();
+                  });
+            }
+          }
         }
       } else {
         virtualCardPay();
