@@ -116,8 +116,11 @@ message CardRechargeRequest {
 //  cardSecurityCode CVV2/CSC
   string card_security_code=4;
   double amt = 5;
+  bool chargeForNft=6;
 }
 message CardRechargeResponse {
+  //only for buy nft
+  string nft_txid =1;
 }
 
 //after recharge/withdraw , this record will insert
@@ -127,6 +130,8 @@ message CardExchangeInfo {
   string card_no=2;
   string order_no=8;
   string trade_no=9;
+  //only for buy nft
+  string nft_txid=13;
   string counter_party=3;
   // counter_party card number
   string counter_party_no=4;

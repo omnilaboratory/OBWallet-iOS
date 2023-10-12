@@ -1,5 +1,6 @@
 import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class CreditCardForm extends StatefulWidget {
@@ -259,7 +260,9 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 margin: const EdgeInsets.only(left: 16, top: 0, right: 16),
                 child: TextFormField(
-                  inputFormatters: [PrecisionLimitFormatter(2)],
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
                   key: widget.cardHolderKey,
                   controller: _cardHolderNameController,
                   onChanged: (String value) {
@@ -275,8 +278,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                     color: widget.textColor,
                   ),
                   decoration: widget.cardHolderDecoration,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.done,
                   onEditingComplete: () {
                     FocusScope.of(context).unfocus();

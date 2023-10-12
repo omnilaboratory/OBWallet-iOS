@@ -238,6 +238,7 @@ const CardRechargeRequest$json = {
     {'1': 'card_expire_year', '3': 3, '4': 1, '5': 9, '10': 'cardExpireYear'},
     {'1': 'card_security_code', '3': 4, '4': 1, '5': 9, '10': 'cardSecurityCode'},
     {'1': 'amt', '3': 5, '4': 1, '5': 1, '10': 'amt'},
+    {'1': 'chargeForNft', '3': 6, '4': 1, '5': 8, '10': 'chargeForNft'},
   ],
 };
 
@@ -246,16 +247,20 @@ final $typed_data.Uint8List cardRechargeRequestDescriptor = $convert.base64Decod
     'ChNDYXJkUmVjaGFyZ2VSZXF1ZXN0EhYKBmNhcmRObxgBIAEoCVIGY2FyZE5vEioKEWNhcmRfZX'
     'hwaXJlX21vbnRoGAIgASgJUg9jYXJkRXhwaXJlTW9udGgSKAoQY2FyZF9leHBpcmVfeWVhchgD'
     'IAEoCVIOY2FyZEV4cGlyZVllYXISLAoSY2FyZF9zZWN1cml0eV9jb2RlGAQgASgJUhBjYXJkU2'
-    'VjdXJpdHlDb2RlEhAKA2FtdBgFIAEoAVIDYW10');
+    'VjdXJpdHlDb2RlEhAKA2FtdBgFIAEoAVIDYW10EiIKDGNoYXJnZUZvck5mdBgGIAEoCFIMY2hh'
+    'cmdlRm9yTmZ0');
 
 @$core.Deprecated('Use cardRechargeResponseDescriptor instead')
 const CardRechargeResponse$json = {
   '1': 'CardRechargeResponse',
+  '2': [
+    {'1': 'nft_txid', '3': 1, '4': 1, '5': 9, '10': 'nftTxid'},
+  ],
 };
 
 /// Descriptor for `CardRechargeResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardRechargeResponseDescriptor = $convert.base64Decode(
-    'ChRDYXJkUmVjaGFyZ2VSZXNwb25zZQ==');
+    'ChRDYXJkUmVjaGFyZ2VSZXNwb25zZRIZCghuZnRfdHhpZBgBIAEoCVIHbmZ0VHhpZA==');
 
 @$core.Deprecated('Use cardExchangeInfoDescriptor instead')
 const CardExchangeInfo$json = {
@@ -266,6 +271,7 @@ const CardExchangeInfo$json = {
     {'1': 'card_no', '3': 2, '4': 1, '5': 9, '10': 'cardNo'},
     {'1': 'order_no', '3': 8, '4': 1, '5': 9, '10': 'orderNo'},
     {'1': 'trade_no', '3': 9, '4': 1, '5': 9, '10': 'tradeNo'},
+    {'1': 'nft_txid', '3': 13, '4': 1, '5': 9, '10': 'nftTxid'},
     {'1': 'counter_party', '3': 3, '4': 1, '5': 9, '10': 'counterParty'},
     {'1': 'counter_party_no', '3': 4, '4': 1, '5': 9, '10': 'counterPartyNo'},
     {'1': 'amt', '3': 5, '4': 1, '5': 1, '10': 'amt'},
@@ -291,10 +297,11 @@ const CardExchangeInfo_Status$json = {
 final $typed_data.Uint8List cardExchangeInfoDescriptor = $convert.base64Decode(
     'ChBDYXJkRXhjaGFuZ2VJbmZvEg4KAmlkGAEgASgDUgJpZBIXCgd1c2VyX2lkGAwgASgDUgZ1c2'
     'VySWQSFwoHY2FyZF9ubxgCIAEoCVIGY2FyZE5vEhkKCG9yZGVyX25vGAggASgJUgdvcmRlck5v'
-    'EhkKCHRyYWRlX25vGAkgASgJUgd0cmFkZU5vEiMKDWNvdW50ZXJfcGFydHkYAyABKAlSDGNvdW'
-    '50ZXJQYXJ0eRIoChBjb3VudGVyX3BhcnR5X25vGAQgASgJUg5jb3VudGVyUGFydHlObxIQCgNh'
-    'bXQYBSABKAFSA2FtdBI1CgZzdGF0dXMYCiABKA4yHS51c2VyLkNhcmRFeGNoYW5nZUluZm8uU3'
-    'RhdHVzUgZzdGF0dXMSFwoHZXJyX21zZxgLIAEoCVIGZXJyTXNnEh0KCmNyZWF0ZWRfYXQYBiAB'
-    'KARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAcgASgEUgl1cGRhdGVkQXQiKwoGU3RhdHVzEg'
-    'oKBlVua25vdxAAEgsKB3N1Y2Nlc3MQARIICgRmYWlsEAI=');
+    'EhkKCHRyYWRlX25vGAkgASgJUgd0cmFkZU5vEhkKCG5mdF90eGlkGA0gASgJUgduZnRUeGlkEi'
+    'MKDWNvdW50ZXJfcGFydHkYAyABKAlSDGNvdW50ZXJQYXJ0eRIoChBjb3VudGVyX3BhcnR5X25v'
+    'GAQgASgJUg5jb3VudGVyUGFydHlObxIQCgNhbXQYBSABKAFSA2FtdBI1CgZzdGF0dXMYCiABKA'
+    '4yHS51c2VyLkNhcmRFeGNoYW5nZUluZm8uU3RhdHVzUgZzdGF0dXMSFwoHZXJyX21zZxgLIAEo'
+    'CVIGZXJyTXNnEh0KCmNyZWF0ZWRfYXQYBiABKARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GA'
+    'cgASgEUgl1cGRhdGVkQXQiKwoGU3RhdHVzEgoKBlVua25vdxAAEgsKB3N1Y2Nlc3MQARIICgRm'
+    'YWlsEAI=');
 

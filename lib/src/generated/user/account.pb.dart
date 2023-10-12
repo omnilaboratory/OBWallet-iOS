@@ -200,6 +200,94 @@ class GetSwapTxListResponse extends $pb.GeneratedMessage {
   $core.List<SwapTx> get items => $_getList(0);
 }
 
+class GetNftBlanceRequest extends $pb.GeneratedMessage {
+  factory GetNftBlanceRequest() => create();
+  GetNftBlanceRequest._() : super();
+  factory GetNftBlanceRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetNftBlanceRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetNftBlanceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'address')
+    ..aOB(2, _omitFieldNames ? '' : 'fromChain')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetNftBlanceRequest clone() => GetNftBlanceRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetNftBlanceRequest copyWith(void Function(GetNftBlanceRequest) updates) => super.copyWith((message) => updates(message as GetNftBlanceRequest)) as GetNftBlanceRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetNftBlanceRequest create() => GetNftBlanceRequest._();
+  GetNftBlanceRequest createEmptyInstance() => create();
+  static $pb.PbList<GetNftBlanceRequest> createRepeated() => $pb.PbList<GetNftBlanceRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetNftBlanceRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetNftBlanceRequest>(create);
+  static GetNftBlanceRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get address => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set address($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAddress() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAddress() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.bool get fromChain => $_getBF(1);
+  @$pb.TagNumber(2)
+  set fromChain($core.bool v) { $_setBool(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFromChain() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFromChain() => clearField(2);
+}
+
+class GetNftBlanceResponse extends $pb.GeneratedMessage {
+  factory GetNftBlanceResponse() => create();
+  GetNftBlanceResponse._() : super();
+  factory GetNftBlanceResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetNftBlanceResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetNftBlanceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..pc<NftToken>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: NftToken.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetNftBlanceResponse clone() => GetNftBlanceResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetNftBlanceResponse copyWith(void Function(GetNftBlanceResponse) updates) => super.copyWith((message) => updates(message as GetNftBlanceResponse)) as GetNftBlanceResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetNftBlanceResponse create() => GetNftBlanceResponse._();
+  GetNftBlanceResponse createEmptyInstance() => create();
+  static $pb.PbList<GetNftBlanceResponse> createRepeated() => $pb.PbList<GetNftBlanceResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetNftBlanceResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetNftBlanceResponse>(create);
+  static GetNftBlanceResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<NftToken> get items => $_getList(0);
+}
+
 class GetTrackedTxListResponse extends $pb.GeneratedMessage {
   factory GetTrackedTxListResponse() => create();
   GetTrackedTxListResponse._() : super();
@@ -1050,6 +1138,172 @@ class BuyCoinResponse extends $pb.GeneratedMessage {
   void clearTxid() => clearField(6);
 }
 
+class SellNftRequest extends $pb.GeneratedMessage {
+  factory SellNftRequest() => create();
+  SellNftRequest._() : super();
+  factory SellNftRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SellNftRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SellNftRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..p<$fixnum.Int64>(1, _omitFieldNames ? '' : 'tokenIds', $pb.PbFieldType.KU6)
+    ..p<$fixnum.Int64>(2, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.KU6)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SellNftRequest clone() => SellNftRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SellNftRequest copyWith(void Function(SellNftRequest) updates) => super.copyWith((message) => updates(message as SellNftRequest)) as SellNftRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SellNftRequest create() => SellNftRequest._();
+  SellNftRequest createEmptyInstance() => create();
+  static $pb.PbList<SellNftRequest> createRepeated() => $pb.PbList<SellNftRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SellNftRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SellNftRequest>(create);
+  static SellNftRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$fixnum.Int64> get tokenIds => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.List<$fixnum.Int64> get amt => $_getList(1);
+}
+
+class SellNftResponse extends $pb.GeneratedMessage {
+  factory SellNftResponse() => create();
+  SellNftResponse._() : super();
+  factory SellNftResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SellNftResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SellNftResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'txid')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SellNftResponse clone() => SellNftResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SellNftResponse copyWith(void Function(SellNftResponse) updates) => super.copyWith((message) => updates(message as SellNftResponse)) as SellNftResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SellNftResponse create() => SellNftResponse._();
+  SellNftResponse createEmptyInstance() => create();
+  static $pb.PbList<SellNftResponse> createRepeated() => $pb.PbList<SellNftResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SellNftResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SellNftResponse>(create);
+  static SellNftResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get txid => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set txid($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTxid() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTxid() => clearField(1);
+}
+
+class BuyNftRequest extends $pb.GeneratedMessage {
+  factory BuyNftRequest() => create();
+  BuyNftRequest._() : super();
+  factory BuyNftRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory BuyNftRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BuyNftRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'usdAmt', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  BuyNftRequest clone() => BuyNftRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  BuyNftRequest copyWith(void Function(BuyNftRequest) updates) => super.copyWith((message) => updates(message as BuyNftRequest)) as BuyNftRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BuyNftRequest create() => BuyNftRequest._();
+  BuyNftRequest createEmptyInstance() => create();
+  static $pb.PbList<BuyNftRequest> createRepeated() => $pb.PbList<BuyNftRequest>();
+  @$core.pragma('dart2js:noInline')
+  static BuyNftRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BuyNftRequest>(create);
+  static BuyNftRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.double get usdAmt => $_getN(0);
+  @$pb.TagNumber(1)
+  set usdAmt($core.double v) { $_setDouble(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUsdAmt() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUsdAmt() => clearField(1);
+}
+
+class BuyNftResponse extends $pb.GeneratedMessage {
+  factory BuyNftResponse() => create();
+  BuyNftResponse._() : super();
+  factory BuyNftResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory BuyNftResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BuyNftResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'txid')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  BuyNftResponse clone() => BuyNftResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  BuyNftResponse copyWith(void Function(BuyNftResponse) updates) => super.copyWith((message) => updates(message as BuyNftResponse)) as BuyNftResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BuyNftResponse create() => BuyNftResponse._();
+  BuyNftResponse createEmptyInstance() => create();
+  static $pb.PbList<BuyNftResponse> createRepeated() => $pb.PbList<BuyNftResponse>();
+  @$core.pragma('dart2js:noInline')
+  static BuyNftResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BuyNftResponse>(create);
+  static BuyNftResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get txid => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set txid($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTxid() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTxid() => clearField(1);
+}
+
 class GetDcPayUrlRequest extends $pb.GeneratedMessage {
   factory GetDcPayUrlRequest() => create();
   GetDcPayUrlRequest._() : super();
@@ -1142,6 +1396,78 @@ class GetDcPayUrlResponse extends $pb.GeneratedMessage {
   $core.bool hasUrlPath() => $_has(0);
   @$pb.TagNumber(1)
   void clearUrlPath() => clearField(1);
+}
+
+class NftToken extends $pb.GeneratedMessage {
+  factory NftToken() => create();
+  NftToken._() : super();
+  factory NftToken.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory NftToken.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'NftToken', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'imageUrl')
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'tokenId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'itemPrice', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  NftToken clone() => NftToken()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  NftToken copyWith(void Function(NftToken) updates) => super.copyWith((message) => updates(message as NftToken)) as NftToken;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NftToken create() => NftToken._();
+  NftToken createEmptyInstance() => create();
+  static $pb.PbList<NftToken> createRepeated() => $pb.PbList<NftToken>();
+  @$core.pragma('dart2js:noInline')
+  static NftToken getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<NftToken>(create);
+  static NftToken? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get imageUrl => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set imageUrl($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasImageUrl() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearImageUrl() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get tokenId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set tokenId($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTokenId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTokenId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get amt => $_getI64(2);
+  @$pb.TagNumber(3)
+  set amt($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAmt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAmt() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get itemPrice => $_getN(3);
+  @$pb.TagNumber(4)
+  set itemPrice($core.double v) { $_setDouble(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasItemPrice() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearItemPrice() => clearField(4);
 }
 
 class AccountHistory extends $pb.GeneratedMessage {

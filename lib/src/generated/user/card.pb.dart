@@ -911,6 +911,7 @@ class CardRechargeRequest extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'cardExpireYear')
     ..aOS(4, _omitFieldNames ? '' : 'cardSecurityCode')
     ..a<$core.double>(5, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.OD)
+    ..aOB(6, _omitFieldNames ? '' : 'chargeForNft', protoName: 'chargeForNft')
     ..hasRequiredFields = false
   ;
 
@@ -979,6 +980,15 @@ class CardRechargeRequest extends $pb.GeneratedMessage {
   $core.bool hasAmt() => $_has(4);
   @$pb.TagNumber(5)
   void clearAmt() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.bool get chargeForNft => $_getBF(5);
+  @$pb.TagNumber(6)
+  set chargeForNft($core.bool v) { $_setBool(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasChargeForNft() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearChargeForNft() => clearField(6);
 }
 
 class CardRechargeResponse extends $pb.GeneratedMessage {
@@ -988,6 +998,7 @@ class CardRechargeResponse extends $pb.GeneratedMessage {
   factory CardRechargeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRechargeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'nftTxid')
     ..hasRequiredFields = false
   ;
 
@@ -1011,6 +1022,15 @@ class CardRechargeResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CardRechargeResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardRechargeResponse>(create);
   static CardRechargeResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get nftTxid => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set nftTxid($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasNftTxid() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNftTxid() => clearField(1);
 }
 
 class CardExchangeInfo extends $pb.GeneratedMessage {
@@ -1032,6 +1052,7 @@ class CardExchangeInfo extends $pb.GeneratedMessage {
     ..e<CardExchangeInfo_Status>(10, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: CardExchangeInfo_Status.Unknow, valueOf: CardExchangeInfo_Status.valueOf, enumValues: CardExchangeInfo_Status.values)
     ..aOS(11, _omitFieldNames ? '' : 'errMsg')
     ..aInt64(12, _omitFieldNames ? '' : 'userId')
+    ..aOS(13, _omitFieldNames ? '' : 'nftTxid')
     ..hasRequiredFields = false
   ;
 
@@ -1163,6 +1184,15 @@ class CardExchangeInfo extends $pb.GeneratedMessage {
   $core.bool hasUserId() => $_has(11);
   @$pb.TagNumber(12)
   void clearUserId() => clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.String get nftTxid => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set nftTxid($core.String v) { $_setString(12, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasNftTxid() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearNftTxid() => clearField(13);
 }
 
 
