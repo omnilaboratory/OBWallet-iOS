@@ -33,8 +33,8 @@ class StringTools {
   }
 
   static List<int> getNftCountByMoneyAmount(double amount) {
-    // 100,50,20,10,5,2,1
-    List<int> arr = [0, 0, 0, 0, 0, 0, 0];
+    // 1000, 500,200,100, 50,20,10, 5,2,1
+    List<int> arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     if (amount.isNaN) {
       amount = 0;
     }
@@ -43,15 +43,24 @@ class StringTools {
     if (length > 0) {
       int value = int.parse(amountStr[length - 1]);
       if (value > 4) {
+        arr[7] = 1;
+        value -= 5;
+      }
+      arr[8] = value ~/ 2;
+      arr[9] = (value % 2).toInt();
+    }
+
+    if (length > 1) {
+      int value = int.parse(amountStr[length - 2]);
+      if (value > 4) {
         arr[4] = 1;
         value -= 5;
       }
       arr[5] = value ~/ 2;
       arr[6] = (value % 2).toInt();
     }
-
-    if (length > 1) {
-      int value = int.parse(amountStr[length - 2]);
+    if (length > 2) {
+      int value = int.parse(amountStr[length - 3]);
       if (value > 4) {
         arr[1] = 1;
         value -= 5;
@@ -59,8 +68,9 @@ class StringTools {
       arr[2] = value ~/ 2;
       arr[3] = (value % 2).toInt();
     }
-    if (length > 2) {
-      arr[0] = int.parse(amountStr.substring(0, length - 2));
+
+    if (length > 3) {
+      arr[0] = int.parse(amountStr.substring(0, length - 3));
     }
     return arr;
   }
