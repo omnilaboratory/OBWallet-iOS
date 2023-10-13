@@ -40,33 +40,16 @@ class StringTools {
     }
     String amountStr = (amount).toInt().toString();
     int length = amountStr.length;
-    if (length > 0) {
-      int value = int.parse(amountStr[length - 1]);
-      if (value > 4) {
-        arr[7] = 1;
-        value -= 5;
+    for (int i = 0; i < 3; i++) {
+      if (length > i) {
+        int value = int.parse(amountStr[length - (i + 1)]);
+        if (value > 4) {
+          arr[7 - i * 3] = 1;
+          value -= 5;
+        }
+        arr[8 - i * 3] = value ~/ 2;
+        arr[9 - i * 3] = (value % 2).toInt();
       }
-      arr[8] = value ~/ 2;
-      arr[9] = (value % 2).toInt();
-    }
-
-    if (length > 1) {
-      int value = int.parse(amountStr[length - 2]);
-      if (value > 4) {
-        arr[4] = 1;
-        value -= 5;
-      }
-      arr[5] = value ~/ 2;
-      arr[6] = (value % 2).toInt();
-    }
-    if (length > 2) {
-      int value = int.parse(amountStr[length - 3]);
-      if (value > 4) {
-        arr[1] = 1;
-        value -= 5;
-      }
-      arr[2] = value ~/ 2;
-      arr[3] = (value % 2).toInt();
     }
 
     if (length > 3) {
