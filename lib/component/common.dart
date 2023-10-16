@@ -26,7 +26,8 @@ TextFormField createTextFormField(
     bool enabled = true,
     Function? onChanged,
     Function? validator,
-    int maxLines = 1}) {
+    int maxLines = 1,
+    int borderType = 0}) {
   return TextFormField(
     controller: controller,
     maxLines: maxLines,
@@ -42,12 +43,17 @@ TextFormField createTextFormField(
       hintText: hintText,
       prefixIcon: icon,
       hintStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
-      border: outlineInputBorder,
-      focusedBorder: outlineInputBorder,
-      enabledBorder: outlineInputBorder,
-      disabledBorder: outlineInputBorder,
-      focusedErrorBorder: outlineInputBorder,
-      errorBorder: outlineInputBorder,
+      border: borderType == 0 ? outlineInputBorder : outlineRightInputBorder,
+      focusedBorder:
+          borderType == 0 ? outlineInputBorder : outlineRightInputBorder,
+      enabledBorder:
+          borderType == 0 ? outlineInputBorder : outlineRightInputBorder,
+      disabledBorder:
+          borderType == 0 ? outlineInputBorder : outlineRightInputBorder,
+      focusedErrorBorder:
+          borderType == 0 ? outlineInputBorder : outlineRightInputBorder,
+      errorBorder:
+          borderType == 0 ? outlineInputBorder : outlineRightInputBorder,
       contentPadding: EdgeInsets.only(
           left: (icon == null ? 10 : 0), right: 4, top: 1, bottom: 1),
     ),

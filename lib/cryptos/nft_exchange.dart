@@ -16,6 +16,8 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+List<String> cardTypeNames = ["Real Card", "Virtual Card"];
+
 class NftExchange extends StatefulWidget {
   final DollarFaceInfo faceInfo;
 
@@ -28,8 +30,12 @@ class NftExchange extends StatefulWidget {
 class _NftExchangeState extends State<NftExchange> {
   final TextEditingController _amountNftController = TextEditingController();
   final TextEditingController _amountDollarController = TextEditingController();
+  final TextEditingController _cardController = TextEditingController();
   late DollarFaceInfo currSelectedFace = widget.faceInfo;
   double currCurrencyRatio = 1;
+
+  bool isInputCard = false;
+  String targetName = "USD";
 
   var initTokenList = EthService.getInstance().getTokenList();
   List<TokenInfo> tokenList = [];
@@ -40,7 +46,14 @@ class _NftExchangeState extends State<NftExchange> {
     super.initState();
     tokenList.addAll(GlobalParams.currencyList);
     tokenList.addAll(initTokenList);
+    tokenList.add(TokenInfo(
+        name: cardTypeNames[0], iconUrl: "", iconData: Icons.credit_card));
+    if (CommonService.cardInfo.cardNo.isNotEmpty) {
+      tokenList.add(TokenInfo(
+          name: cardTypeNames[1], iconUrl: "", iconData: Icons.credit_card));
+    }
     currSelectedToken = tokenList[0];
+    targetName = currSelectedToken.name;
   }
 
   @override
@@ -70,13 +83,13 @@ class _NftExchangeState extends State<NftExchange> {
               buildDollarPart(),
               const SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left: 40),
+                padding: const EdgeInsets.only(left: 20),
                 child: Row(
                   children: [
                     Text(
                       _amountNftController.text.isEmpty
                           ? ""
-                          : 'Exchange ${_amountNftController.text} NFT to ${_amountDollarController.text} ${currSelectedToken.name}',
+                          : 'Exchange ${_amountNftController.text} NFT to ${_amountDollarController.text} $targetName',
                       style: const TextStyle(
                         color: Colors.blue,
                         fontSize: 14,
@@ -116,7 +129,7 @@ class _NftExchangeState extends State<NftExchange> {
 
   Widget buildNftPart(EnumDollarFace enumDollarFace) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -132,7 +145,7 @@ class _NftExchangeState extends State<NftExchange> {
           Row(
             children: [
               Expanded(
-                flex: 3,
+                flex: 5,
                 child: createTextField(_amountNftController,
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -158,7 +171,7 @@ class _NftExchangeState extends State<NftExchange> {
                 }),
               ),
               Expanded(
-                flex: 2,
+                flex: 4,
                 child: Container(
                   height: 48,
                   decoration: const ShapeDecoration(
@@ -263,16 +276,18 @@ class _NftExchangeState extends State<NftExchange> {
         child: Row(
           children: [
             const SizedBox(width: 7),
-            Image(
-              width: 20,
-              height: 20,
-              image: AssetImage(value.iconUrl),
-            ),
+            value.iconUrl.isNotEmpty
+                ? Image(
+                    width: 20,
+                    height: 20,
+                    image: AssetImage(value.iconUrl),
+                  )
+                : Icon(value.iconData,color: Colors.blue,),
             const SizedBox(width: 7),
             AutoSizeText(
               value.name,
               maxLines: 1,
-              minFontSize: 12,
+              minFontSize: 10,
               style: const TextStyle(
                 color: Color(0xFF333333),
                 fontSize: 16,
@@ -288,7 +303,7 @@ class _NftExchangeState extends State<NftExchange> {
 
   Widget buildDollarPart() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -302,18 +317,27 @@ class _NftExchangeState extends State<NftExchange> {
           ),
           const SizedBox(height: 6),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                flex: 3,
-                child: createTextField(
-                  _amountDollarController,
-                  keyboardType: TextInputType.number,
-                  enabled: false,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                ),
+                flex: 5,
+                child: isInputCard
+                    ? createTextFormField(
+                        _cardController, "Please input the card number",
+                        enabled: currSelectedToken.name == cardTypeNames[0],
+                        maxLength: 16,
+                        borderType: 1)
+                    : createTextField(
+                        _amountDollarController,
+                        keyboardType: TextInputType.number,
+                        enabled: false,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                      ),
               ),
               Expanded(
-                flex: 2,
+                flex: 4,
                 child: Container(
                   height: 48,
                   decoration: const ShapeDecoration(
@@ -339,6 +363,13 @@ class _NftExchangeState extends State<NftExchange> {
                           getCoinPrice(value.name);
                           setState(() {
                             currSelectedToken = value;
+                            if (value.name == cardTypeNames[0]) {
+                              _cardController.text = "";
+                            }
+                            if (value.name == cardTypeNames[1]) {
+                              _cardController.text =
+                                  CommonService.cardInfo.cardNo;
+                            }
                           });
                         }
                       },
@@ -354,16 +385,23 @@ class _NftExchangeState extends State<NftExchange> {
   }
 
   void getCoinPrice(String name) {
-    if (name.toLowerCase() == "usd") {
+    if (name == cardTypeNames[0] || name == cardTypeNames[1]) {
+      isInputCard = true;
+    } else {
+      isInputCard = false;
+    }
+
+    if (name.toLowerCase() == "usd" || isInputCard) {
       currCurrencyRatio = 1;
       setDollarAmount();
+      targetName = "USD";
     } else {
+      targetName = name;
       AccountService.getInstance()
           .getCoinPrice(context, name)
           .then((value) async {
         if (value.code == 1) {
           var resp = value.data as GetCoinPriceResponse;
-          log(resp.price.toString());
           if (mounted) {
             setState(() {
               currCurrencyRatio =
