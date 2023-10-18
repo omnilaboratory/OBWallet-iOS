@@ -16,12 +16,10 @@ class DollarFace extends StatelessWidget {
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-              color: Colors.blue[300], borderRadius: BorderRadius.circular(50)),
-          child: Center(
-              child: Text(
-            currFace.name,
-            style: const TextStyle(fontSize: 20),
-          )),
+              image: DecorationImage(
+                  image: AssetImage(
+                      "asset/images/image_nft_${currFace.value}.jpg")),
+              borderRadius: BorderRadius.circular(50)),
         ),
         const SizedBox(height: 6),
         Text("\$${currFace.value} x $amount"),
