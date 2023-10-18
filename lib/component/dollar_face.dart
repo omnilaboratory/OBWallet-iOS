@@ -15,11 +15,8 @@ class DollarFace extends StatelessWidget {
         Container(
           width: 100,
           height: 100,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                      "asset/images/image_nft_${currFace.value}.jpg")),
-              borderRadius: BorderRadius.circular(50)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
+          child: Image.network("http://43.138.107.248:19091/nft/${currFace.value}.jpg"),
         ),
         const SizedBox(height: 6),
         Text("\$${currFace.value} x $amount"),
