@@ -13,6 +13,37 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use buyNftForPayRequestDescriptor instead')
+const BuyNftForPayRequest$json = {
+  '1': 'BuyNftForPayRequest',
+  '2': [
+    {'1': 'mail', '3': 1, '4': 1, '5': 9, '10': 'mail'},
+    {'1': 'trade_no', '3': 2, '4': 1, '5': 9, '10': 'tradeNo'},
+    {'1': 'card_no', '3': 3, '4': 1, '5': 9, '10': 'cardNo'},
+    {'1': 'amt_usd', '3': 4, '4': 1, '5': 1, '10': 'amtUsd'},
+  ],
+};
+
+/// Descriptor for `BuyNftForPayRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List buyNftForPayRequestDescriptor = $convert.base64Decode(
+    'ChNCdXlOZnRGb3JQYXlSZXF1ZXN0EhIKBG1haWwYASABKAlSBG1haWwSGQoIdHJhZGVfbm8YAi'
+    'ABKAlSB3RyYWRlTm8SFwoHY2FyZF9ubxgDIAEoCVIGY2FyZE5vEhcKB2FtdF91c2QYBCABKAFS'
+    'BmFtdFVzZA==');
+
+@$core.Deprecated('Use buyNftForPayResponseDescriptor instead')
+const BuyNftForPayResponse$json = {
+  '1': 'BuyNftForPayResponse',
+  '2': [
+    {'1': 'nft_orderid', '3': 1, '4': 1, '5': 9, '10': 'nftOrderid'},
+    {'1': 'user_id', '3': 2, '4': 1, '5': 3, '10': 'userId'},
+  ],
+};
+
+/// Descriptor for `BuyNftForPayResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List buyNftForPayResponseDescriptor = $convert.base64Decode(
+    'ChRCdXlOZnRGb3JQYXlSZXNwb25zZRIfCgtuZnRfb3JkZXJpZBgBIAEoCVIKbmZ0T3JkZXJpZB'
+    'IXCgd1c2VyX2lkGAIgASgDUgZ1c2VySWQ=');
+
 @$core.Deprecated('Use cardInfoDescriptor instead')
 const CardInfo$json = {
   '1': 'CardInfo',

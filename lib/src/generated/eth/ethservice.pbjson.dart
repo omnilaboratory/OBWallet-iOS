@@ -84,6 +84,53 @@ const EthGetBalalanceResponse$json = {
 final $typed_data.Uint8List ethGetBalalanceResponseDescriptor = $convert.base64Decode(
     'ChdFdGhHZXRCYWxhbGFuY2VSZXNwb25zZRIYCgdiYWxhbmNlGAEgASgBUgdiYWxhbmNl');
 
+@$core.Deprecated('Use eTHGetAppConfRequestDescriptor instead')
+const ETHGetAppConfRequest$json = {
+  '1': 'ETHGetAppConfRequest',
+};
+
+/// Descriptor for `ETHGetAppConfRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List eTHGetAppConfRequestDescriptor = $convert.base64Decode(
+    'ChRFVEhHZXRBcHBDb25mUmVxdWVzdA==');
+
+@$core.Deprecated('Use eTHGetAppConfResponseDescriptor instead')
+const ETHGetAppConfResponse$json = {
+  '1': 'ETHGetAppConfResponse',
+  '2': [
+    {'1': 'server_address', '3': 1, '4': 1, '5': 9, '10': 'serverAddress'},
+    {'1': 'nft_address', '3': 2, '4': 1, '5': 9, '10': 'nftAddress'},
+    {'1': 'swap_discount', '3': 3, '4': 1, '5': 1, '10': 'swapDiscount'},
+  ],
+};
+
+/// Descriptor for `ETHGetAppConfResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List eTHGetAppConfResponseDescriptor = $convert.base64Decode(
+    'ChVFVEhHZXRBcHBDb25mUmVzcG9uc2USJQoOc2VydmVyX2FkZHJlc3MYASABKAlSDXNlcnZlck'
+    'FkZHJlc3MSHwoLbmZ0X2FkZHJlc3MYAiABKAlSCm5mdEFkZHJlc3MSIwoNc3dhcF9kaXNjb3Vu'
+    'dBgDIAEoAVIMc3dhcERpc2NvdW50');
+
+@$core.Deprecated('Use updateSwapDiscountRequestDescriptor instead')
+const UpdateSwapDiscountRequest$json = {
+  '1': 'UpdateSwapDiscountRequest',
+  '2': [
+    {'1': 'swap_discount', '3': 1, '4': 1, '5': 1, '10': 'swapDiscount'},
+  ],
+};
+
+/// Descriptor for `UpdateSwapDiscountRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateSwapDiscountRequestDescriptor = $convert.base64Decode(
+    'ChlVcGRhdGVTd2FwRGlzY291bnRSZXF1ZXN0EiMKDXN3YXBfZGlzY291bnQYASABKAFSDHN3YX'
+    'BEaXNjb3VudA==');
+
+@$core.Deprecated('Use updateSwapDiscountResponseDescriptor instead')
+const UpdateSwapDiscountResponse$json = {
+  '1': 'UpdateSwapDiscountResponse',
+};
+
+/// Descriptor for `UpdateSwapDiscountResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateSwapDiscountResponseDescriptor = $convert.base64Decode(
+    'ChpVcGRhdGVTd2FwRGlzY291bnRSZXNwb25zZQ==');
+
 @$core.Deprecated('Use eTHGetAddressRequestDescriptor instead')
 const ETHGetAddressRequest$json = {
   '1': 'ETHGetAddressRequest',

@@ -9,7 +9,7 @@ service account{
   rpc GetAccountHistory(GetAccountHistoryRequest) returns (GetAccountHistoryResponse) {}
   rpc SellCoin(SellCoinRequest) returns (SellCoinResponse) {}
   rpc BuyCoin(BuyCoinRequest) returns (BuyCoinResponse) {}
-//  rpc SellNft(SellNftRequest) returns (SellNftResponse) {}
+  rpc SellNft(SellNftRequest) returns (SellNftResponse) {}
   // cardRecharge with big amt
 //  rpc BuyNft(BuyNftRequest) returns (BuyNftResponse) {}
 
@@ -94,6 +94,7 @@ message TrackedTx{
     ETH = 1;
     USDT = 2;
     USDC = 3;
+    NFT = 4;
   }
   enum Status {
     StatusUnknown = 0;
@@ -128,6 +129,10 @@ message SwapTx{
   TrackedTx.ContractSymbol target_symbol = 7;
   int64 created_at = 11;
   int64 updated_at = 12;
+  bool  is_sell_nft=20;
+  string nft_txid=21;
+  // only for nft sell and  traret is card_no
+  string card_no=22;
 
 
 }
@@ -152,12 +157,20 @@ message BuyCoinResponse {
 }
 
 message SellNftRequest {
-  repeated uint64 token_ids=1;
-  repeated uint64 amt=2;
+  //all nfts to usd_amt
+  double usd_amt =1;
+  //  nft is sell  for coin/usd/usd to card
+  TrackedTx.ContractSymbol coin=2;
+  //coin Price: get from GetCoinPrice; and usd's price is 1;
+  double rate=3;
+  double coin_amt =5;
+  string nft_txid=6;
+  //if coin field is usd, target output can by a card
+  string card_no=8;
 }
 message SellNftResponse {
-  string txid=1;
 }
+
 message BuyNftRequest {
   //An integer multiple of 100
   double usd_amt =1;

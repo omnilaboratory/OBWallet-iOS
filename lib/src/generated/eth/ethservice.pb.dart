@@ -256,6 +256,174 @@ class EthGetBalalanceResponse extends $pb.GeneratedMessage {
   void clearBalance() => clearField(1);
 }
 
+class ETHGetAppConfRequest extends $pb.GeneratedMessage {
+  factory ETHGetAppConfRequest() => create();
+  ETHGetAppConfRequest._() : super();
+  factory ETHGetAppConfRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ETHGetAppConfRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ETHGetAppConfRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'lnrpc'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ETHGetAppConfRequest clone() => ETHGetAppConfRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ETHGetAppConfRequest copyWith(void Function(ETHGetAppConfRequest) updates) => super.copyWith((message) => updates(message as ETHGetAppConfRequest)) as ETHGetAppConfRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ETHGetAppConfRequest create() => ETHGetAppConfRequest._();
+  ETHGetAppConfRequest createEmptyInstance() => create();
+  static $pb.PbList<ETHGetAppConfRequest> createRepeated() => $pb.PbList<ETHGetAppConfRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ETHGetAppConfRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ETHGetAppConfRequest>(create);
+  static ETHGetAppConfRequest? _defaultInstance;
+}
+
+class ETHGetAppConfResponse extends $pb.GeneratedMessage {
+  factory ETHGetAppConfResponse() => create();
+  ETHGetAppConfResponse._() : super();
+  factory ETHGetAppConfResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ETHGetAppConfResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ETHGetAppConfResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'lnrpc'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'serverAddress')
+    ..aOS(2, _omitFieldNames ? '' : 'nftAddress')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'swapDiscount', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ETHGetAppConfResponse clone() => ETHGetAppConfResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ETHGetAppConfResponse copyWith(void Function(ETHGetAppConfResponse) updates) => super.copyWith((message) => updates(message as ETHGetAppConfResponse)) as ETHGetAppConfResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ETHGetAppConfResponse create() => ETHGetAppConfResponse._();
+  ETHGetAppConfResponse createEmptyInstance() => create();
+  static $pb.PbList<ETHGetAppConfResponse> createRepeated() => $pb.PbList<ETHGetAppConfResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ETHGetAppConfResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ETHGetAppConfResponse>(create);
+  static ETHGetAppConfResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get serverAddress => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set serverAddress($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasServerAddress() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearServerAddress() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get nftAddress => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nftAddress($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNftAddress() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNftAddress() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get swapDiscount => $_getN(2);
+  @$pb.TagNumber(3)
+  set swapDiscount($core.double v) { $_setDouble(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSwapDiscount() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSwapDiscount() => clearField(3);
+}
+
+class UpdateSwapDiscountRequest extends $pb.GeneratedMessage {
+  factory UpdateSwapDiscountRequest() => create();
+  UpdateSwapDiscountRequest._() : super();
+  factory UpdateSwapDiscountRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSwapDiscountRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSwapDiscountRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'lnrpc'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'swapDiscount', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSwapDiscountRequest clone() => UpdateSwapDiscountRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSwapDiscountRequest copyWith(void Function(UpdateSwapDiscountRequest) updates) => super.copyWith((message) => updates(message as UpdateSwapDiscountRequest)) as UpdateSwapDiscountRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSwapDiscountRequest create() => UpdateSwapDiscountRequest._();
+  UpdateSwapDiscountRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateSwapDiscountRequest> createRepeated() => $pb.PbList<UpdateSwapDiscountRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSwapDiscountRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSwapDiscountRequest>(create);
+  static UpdateSwapDiscountRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.double get swapDiscount => $_getN(0);
+  @$pb.TagNumber(1)
+  set swapDiscount($core.double v) { $_setDouble(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSwapDiscount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSwapDiscount() => clearField(1);
+}
+
+class UpdateSwapDiscountResponse extends $pb.GeneratedMessage {
+  factory UpdateSwapDiscountResponse() => create();
+  UpdateSwapDiscountResponse._() : super();
+  factory UpdateSwapDiscountResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSwapDiscountResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSwapDiscountResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'lnrpc'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSwapDiscountResponse clone() => UpdateSwapDiscountResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSwapDiscountResponse copyWith(void Function(UpdateSwapDiscountResponse) updates) => super.copyWith((message) => updates(message as UpdateSwapDiscountResponse)) as UpdateSwapDiscountResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSwapDiscountResponse create() => UpdateSwapDiscountResponse._();
+  UpdateSwapDiscountResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateSwapDiscountResponse> createRepeated() => $pb.PbList<UpdateSwapDiscountResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSwapDiscountResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSwapDiscountResponse>(create);
+  static UpdateSwapDiscountResponse? _defaultInstance;
+}
+
 class ETHGetAddressRequest extends $pb.GeneratedMessage {
   factory ETHGetAddressRequest() => create();
   ETHGetAddressRequest._() : super();

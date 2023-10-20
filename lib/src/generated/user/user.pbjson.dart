@@ -70,6 +70,7 @@ const UserInfo$json = {
     {'1': 'kyc_status', '3': 22, '4': 1, '5': 9, '10': 'kycStatus'},
     {'1': 'created_at', '3': 24, '4': 1, '5': 4, '10': 'createdAt'},
     {'1': 'card_count', '3': 27, '4': 1, '5': 4, '10': 'cardCount'},
+    {'1': 'is_proxyed', '3': 28, '4': 1, '5': 8, '10': 'isProxyed'},
   ],
 };
 
@@ -88,7 +89,8 @@ final $typed_data.Uint8List userInfoDescriptor = $convert.base64Decode(
     'GBEgASgJUgVzdGF0ZRIbCglwb3N0X2NvZGUYEiABKAlSCHBvc3RDb2RlEh0KCnVwZGF0ZWRfYX'
     'QYEyABKARSCXVwZGF0ZWRBdBIdCgpreWNpbmZvX29rGBQgASgIUglreWNpbmZvT2sSFwoHb3Bl'
     'bl9pZBgVIAEoCVIGb3BlbklkEh0KCmt5Y19zdGF0dXMYFiABKAlSCWt5Y1N0YXR1cxIdCgpjcm'
-    'VhdGVkX2F0GBggASgEUgljcmVhdGVkQXQSHQoKY2FyZF9jb3VudBgbIAEoBFIJY2FyZENvdW50');
+    'VhdGVkX2F0GBggASgEUgljcmVhdGVkQXQSHQoKY2FyZF9jb3VudBgbIAEoBFIJY2FyZENvdW50'
+    'Eh0KCmlzX3Byb3h5ZWQYHCABKAhSCWlzUHJveHllZA==');
 
 @$core.Deprecated('Use signUpRequestDescriptor instead')
 const SignUpRequest$json = {

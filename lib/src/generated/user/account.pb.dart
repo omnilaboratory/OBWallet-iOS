@@ -741,6 +741,9 @@ class SwapTx extends $pb.GeneratedMessage {
     ..aOS(17, _omitFieldNames ? '' : 'txErrMsg')
     ..aOB(18, _omitFieldNames ? '' : 'isBuyCoin')
     ..a<$core.double>(19, _omitFieldNames ? '' : 'settlePrice', $pb.PbFieldType.OD)
+    ..aOB(20, _omitFieldNames ? '' : 'isSellNft')
+    ..aOS(21, _omitFieldNames ? '' : 'nftTxid')
+    ..aOS(22, _omitFieldNames ? '' : 'cardNo')
     ..hasRequiredFields = false
   ;
 
@@ -908,6 +911,33 @@ class SwapTx extends $pb.GeneratedMessage {
   $core.bool hasSettlePrice() => $_has(15);
   @$pb.TagNumber(19)
   void clearSettlePrice() => clearField(19);
+
+  @$pb.TagNumber(20)
+  $core.bool get isSellNft => $_getBF(16);
+  @$pb.TagNumber(20)
+  set isSellNft($core.bool v) { $_setBool(16, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasIsSellNft() => $_has(16);
+  @$pb.TagNumber(20)
+  void clearIsSellNft() => clearField(20);
+
+  @$pb.TagNumber(21)
+  $core.String get nftTxid => $_getSZ(17);
+  @$pb.TagNumber(21)
+  set nftTxid($core.String v) { $_setString(17, v); }
+  @$pb.TagNumber(21)
+  $core.bool hasNftTxid() => $_has(17);
+  @$pb.TagNumber(21)
+  void clearNftTxid() => clearField(21);
+
+  @$pb.TagNumber(22)
+  $core.String get cardNo => $_getSZ(18);
+  @$pb.TagNumber(22)
+  set cardNo($core.String v) { $_setString(18, v); }
+  @$pb.TagNumber(22)
+  $core.bool hasCardNo() => $_has(18);
+  @$pb.TagNumber(22)
+  void clearCardNo() => clearField(22);
 }
 
 class SellCoinRequest extends $pb.GeneratedMessage {
@@ -1145,8 +1175,12 @@ class SellNftRequest extends $pb.GeneratedMessage {
   factory SellNftRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SellNftRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..p<$fixnum.Int64>(1, _omitFieldNames ? '' : 'tokenIds', $pb.PbFieldType.KU6)
-    ..p<$fixnum.Int64>(2, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.KU6)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'usdAmt', $pb.PbFieldType.OD)
+    ..e<TrackedTx_ContractSymbol>(2, _omitFieldNames ? '' : 'coin', $pb.PbFieldType.OE, defaultOrMaker: TrackedTx_ContractSymbol.USD, valueOf: TrackedTx_ContractSymbol.valueOf, enumValues: TrackedTx_ContractSymbol.values)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'rate', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'coinAmt', $pb.PbFieldType.OD)
+    ..aOS(6, _omitFieldNames ? '' : 'nftTxid')
+    ..aOS(8, _omitFieldNames ? '' : 'cardNo')
     ..hasRequiredFields = false
   ;
 
@@ -1172,10 +1206,58 @@ class SellNftRequest extends $pb.GeneratedMessage {
   static SellNftRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$fixnum.Int64> get tokenIds => $_getList(0);
+  $core.double get usdAmt => $_getN(0);
+  @$pb.TagNumber(1)
+  set usdAmt($core.double v) { $_setDouble(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUsdAmt() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUsdAmt() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.List<$fixnum.Int64> get amt => $_getList(1);
+  TrackedTx_ContractSymbol get coin => $_getN(1);
+  @$pb.TagNumber(2)
+  set coin(TrackedTx_ContractSymbol v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCoin() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCoin() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get rate => $_getN(2);
+  @$pb.TagNumber(3)
+  set rate($core.double v) { $_setDouble(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRate() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRate() => clearField(3);
+
+  @$pb.TagNumber(5)
+  $core.double get coinAmt => $_getN(3);
+  @$pb.TagNumber(5)
+  set coinAmt($core.double v) { $_setDouble(3, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasCoinAmt() => $_has(3);
+  @$pb.TagNumber(5)
+  void clearCoinAmt() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get nftTxid => $_getSZ(4);
+  @$pb.TagNumber(6)
+  set nftTxid($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasNftTxid() => $_has(4);
+  @$pb.TagNumber(6)
+  void clearNftTxid() => clearField(6);
+
+  @$pb.TagNumber(8)
+  $core.String get cardNo => $_getSZ(5);
+  @$pb.TagNumber(8)
+  set cardNo($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasCardNo() => $_has(5);
+  @$pb.TagNumber(8)
+  void clearCardNo() => clearField(8);
 }
 
 class SellNftResponse extends $pb.GeneratedMessage {
@@ -1185,7 +1267,6 @@ class SellNftResponse extends $pb.GeneratedMessage {
   factory SellNftResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SellNftResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'txid')
     ..hasRequiredFields = false
   ;
 
@@ -1209,15 +1290,6 @@ class SellNftResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SellNftResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SellNftResponse>(create);
   static SellNftResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get txid => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set txid($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasTxid() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearTxid() => clearField(1);
 }
 
 class BuyNftRequest extends $pb.GeneratedMessage {

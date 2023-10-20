@@ -49,6 +49,10 @@ class CardServiceClient extends $grpc.Client {
       '/user.CardService/CardRecharge',
       ($1.CardRechargeRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.CardRechargeResponse.fromBuffer(value));
+  static final _$buyNftForPay = $grpc.ClientMethod<$1.BuyNftForPayRequest, $1.BuyNftForPayResponse>(
+      '/user.CardService/BuyNftForPay',
+      ($1.BuyNftForPayRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.BuyNftForPayResponse.fromBuffer(value));
 
   CardServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -82,6 +86,10 @@ class CardServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$1.CardRechargeResponse> cardRecharge($1.CardRechargeRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$cardRecharge, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.BuyNftForPayResponse> buyNftForPay($1.BuyNftForPayRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$buyNftForPay, request, options: options);
   }
 }
 
@@ -139,6 +147,13 @@ abstract class CardServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.CardRechargeRequest.fromBuffer(value),
         ($1.CardRechargeResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.BuyNftForPayRequest, $1.BuyNftForPayResponse>(
+        'BuyNftForPay',
+        buyNftForPay_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.BuyNftForPayRequest.fromBuffer(value),
+        ($1.BuyNftForPayResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.ApplyCardResponse> applyCard_Pre($grpc.ServiceCall call, $async.Future<$1.ApplyCardRequest> request) async {
@@ -169,6 +184,10 @@ abstract class CardServiceBase extends $grpc.Service {
     return cardRecharge(call, await request);
   }
 
+  $async.Future<$1.BuyNftForPayResponse> buyNftForPay_Pre($grpc.ServiceCall call, $async.Future<$1.BuyNftForPayRequest> request) async {
+    return buyNftForPay(call, await request);
+  }
+
   $async.Future<$1.ApplyCardResponse> applyCard($grpc.ServiceCall call, $1.ApplyCardRequest request);
   $async.Future<$1.CardHistoryResponse> cardHistory($grpc.ServiceCall call, $1.CardHistoryRequest request);
   $async.Future<$1.CardExchangeInfoListResponse> cardExchangeInfoList($grpc.ServiceCall call, $1.CardExchangeInfoListRequest request);
@@ -176,4 +195,5 @@ abstract class CardServiceBase extends $grpc.Service {
   $async.Future<$1.CardListResponse> cardList($grpc.ServiceCall call, $1.CardListRequest request);
   $async.Future<$1.CardWithdrawResponse> cardWithdraw($grpc.ServiceCall call, $1.CardWithdrawRequest request);
   $async.Future<$1.CardRechargeResponse> cardRecharge($grpc.ServiceCall call, $1.CardRechargeRequest request);
+  $async.Future<$1.BuyNftForPayResponse> buyNftForPay($grpc.ServiceCall call, $1.BuyNftForPayRequest request);
 }

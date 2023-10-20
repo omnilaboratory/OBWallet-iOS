@@ -37,6 +37,10 @@ class accountClient extends $grpc.Client {
       '/user.account/BuyCoin',
       ($0.BuyCoinRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.BuyCoinResponse.fromBuffer(value));
+  static final _$sellNft = $grpc.ClientMethod<$0.SellNftRequest, $0.SellNftResponse>(
+      '/user.account/SellNft',
+      ($0.SellNftRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.SellNftResponse.fromBuffer(value));
   static final _$getNftBlance = $grpc.ClientMethod<$0.GetNftBlanceRequest, $0.GetNftBlanceResponse>(
       '/user.account/GetNftBlance',
       ($0.GetNftBlanceRequest value) => value.writeToBuffer(),
@@ -78,6 +82,10 @@ class accountClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.BuyCoinResponse> buyCoin($0.BuyCoinRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$buyCoin, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.SellNftResponse> sellNft($0.SellNftRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$sellNft, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.GetNftBlanceResponse> getNftBlance($0.GetNftBlanceRequest request, {$grpc.CallOptions? options}) {
@@ -134,6 +142,13 @@ abstract class accountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.BuyCoinRequest.fromBuffer(value),
         ($0.BuyCoinResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SellNftRequest, $0.SellNftResponse>(
+        'SellNft',
+        sellNft_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SellNftRequest.fromBuffer(value),
+        ($0.SellNftResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetNftBlanceRequest, $0.GetNftBlanceResponse>(
         'GetNftBlance',
         getNftBlance_Pre,
@@ -187,6 +202,10 @@ abstract class accountServiceBase extends $grpc.Service {
     return buyCoin(call, await request);
   }
 
+  $async.Future<$0.SellNftResponse> sellNft_Pre($grpc.ServiceCall call, $async.Future<$0.SellNftRequest> request) async {
+    return sellNft(call, await request);
+  }
+
   $async.Future<$0.GetNftBlanceResponse> getNftBlance_Pre($grpc.ServiceCall call, $async.Future<$0.GetNftBlanceRequest> request) async {
     return getNftBlance(call, await request);
   }
@@ -211,6 +230,7 @@ abstract class accountServiceBase extends $grpc.Service {
   $async.Future<$0.GetAccountHistoryResponse> getAccountHistory($grpc.ServiceCall call, $0.GetAccountHistoryRequest request);
   $async.Future<$0.SellCoinResponse> sellCoin($grpc.ServiceCall call, $0.SellCoinRequest request);
   $async.Future<$0.BuyCoinResponse> buyCoin($grpc.ServiceCall call, $0.BuyCoinRequest request);
+  $async.Future<$0.SellNftResponse> sellNft($grpc.ServiceCall call, $0.SellNftRequest request);
   $async.Future<$0.GetNftBlanceResponse> getNftBlance($grpc.ServiceCall call, $0.GetNftBlanceRequest request);
   $async.Future<$0.GetDcPayUrlResponse> getDcPayUrl($grpc.ServiceCall call, $0.GetDcPayUrlRequest request);
   $async.Future<$0.GetSwapTxListResponse> getSwapTxList($grpc.ServiceCall call, $0.GetSwapTxListRequest request);

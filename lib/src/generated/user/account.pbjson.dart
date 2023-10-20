@@ -193,6 +193,7 @@ const TrackedTx_ContractSymbol$json = {
     {'1': 'ETH', '2': 1},
     {'1': 'USDT', '2': 2},
     {'1': 'USDC', '2': 3},
+    {'1': 'NFT', '2': 4},
   ],
 };
 
@@ -219,10 +220,10 @@ final $typed_data.Uint8List trackedTxDescriptor = $convert.base64Decode(
     'VyLlRyYWNrZWRUeC5Db250cmFjdFN5bWJvbFIGU3ltYm9sEhoKCGNvbmZpcm1zGAggASgDUghj'
     'b25maXJtcxIuCgZzdGF0dXMYCSABKA4yFi51c2VyLlRyYWNrZWRUeC5TdGF0dXNSBnN0YXR1cx'
     'IcCgp0eF9lcnJfbXNnGAogASgJUgh0eEVyck1zZxIdCgpjcmVhdGVkX2F0GAsgASgDUgljcmVh'
-    'dGVkQXQSHQoKdXBkYXRlZF9hdBgMIAEoA1IJdXBkYXRlZEF0IjYKDkNvbnRyYWN0U3ltYm9sEg'
-    'cKA1VTRBAAEgcKA0VUSBABEggKBFVTRFQQAhIICgRVU0RDEAMiaQoGU3RhdHVzEhEKDVN0YXR1'
-    'c1Vua25vd24QABIKCgZUeEluaXQQARIOCgpUeENvbW1pdGVkEAISEAoMVHhDb25maXJtaW5nEA'
-    'MSEAoMVHhDb21taXRGYWlsEAQSDAoIVHhGaW5pc2gQBQ==');
+    'dGVkQXQSHQoKdXBkYXRlZF9hdBgMIAEoA1IJdXBkYXRlZEF0Ij8KDkNvbnRyYWN0U3ltYm9sEg'
+    'cKA1VTRBAAEgcKA0VUSBABEggKBFVTRFQQAhIICgRVU0RDEAMSBwoDTkZUEAQiaQoGU3RhdHVz'
+    'EhEKDVN0YXR1c1Vua25vd24QABIKCgZUeEluaXQQARIOCgpUeENvbW1pdGVkEAISEAoMVHhDb2'
+    '5maXJtaW5nEAMSEAoMVHhDb21taXRGYWlsEAQSDAoIVHhGaW5pc2gQBQ==');
 
 @$core.Deprecated('Use swapTxDescriptor instead')
 const SwapTx$json = {
@@ -244,6 +245,9 @@ const SwapTx$json = {
     {'1': 'target_symbol', '3': 7, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'targetSymbol'},
     {'1': 'created_at', '3': 11, '4': 1, '5': 3, '10': 'createdAt'},
     {'1': 'updated_at', '3': 12, '4': 1, '5': 3, '10': 'updatedAt'},
+    {'1': 'is_sell_nft', '3': 20, '4': 1, '5': 8, '10': 'isSellNft'},
+    {'1': 'nft_txid', '3': 21, '4': 1, '5': 9, '10': 'nftTxid'},
+    {'1': 'card_no', '3': 22, '4': 1, '5': 9, '10': 'cardNo'},
   ],
 };
 
@@ -258,7 +262,9 @@ final $typed_data.Uint8List swapTxDescriptor = $convert.base64Decode(
     'Y2UYEyABKAFSC3NldHRsZVByaWNlEj8KC2Zyb21fc3ltYm9sGAYgASgOMh4udXNlci5UcmFja2'
     'VkVHguQ29udHJhY3RTeW1ib2xSCmZyb21TeW1ib2wSQwoNdGFyZ2V0X3N5bWJvbBgHIAEoDjIe'
     'LnVzZXIuVHJhY2tlZFR4LkNvbnRyYWN0U3ltYm9sUgx0YXJnZXRTeW1ib2wSHQoKY3JlYXRlZF'
-    '9hdBgLIAEoA1IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYDCABKANSCXVwZGF0ZWRBdA==');
+    '9hdBgLIAEoA1IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYDCABKANSCXVwZGF0ZWRBdBIeCgtp'
+    'c19zZWxsX25mdBgUIAEoCFIJaXNTZWxsTmZ0EhkKCG5mdF90eGlkGBUgASgJUgduZnRUeGlkEh'
+    'cKB2NhcmRfbm8YFiABKAlSBmNhcmRObw==');
 
 @$core.Deprecated('Use sellCoinRequestDescriptor instead')
 const SellCoinRequest$json = {
@@ -320,27 +326,30 @@ final $typed_data.Uint8List buyCoinResponseDescriptor = $convert.base64Decode(
 const SellNftRequest$json = {
   '1': 'SellNftRequest',
   '2': [
-    {'1': 'token_ids', '3': 1, '4': 3, '5': 4, '10': 'tokenIds'},
-    {'1': 'amt', '3': 2, '4': 3, '5': 4, '10': 'amt'},
+    {'1': 'usd_amt', '3': 1, '4': 1, '5': 1, '10': 'usdAmt'},
+    {'1': 'coin', '3': 2, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'coin'},
+    {'1': 'rate', '3': 3, '4': 1, '5': 1, '10': 'rate'},
+    {'1': 'coin_amt', '3': 5, '4': 1, '5': 1, '10': 'coinAmt'},
+    {'1': 'nft_txid', '3': 6, '4': 1, '5': 9, '10': 'nftTxid'},
+    {'1': 'card_no', '3': 8, '4': 1, '5': 9, '10': 'cardNo'},
   ],
 };
 
 /// Descriptor for `SellNftRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sellNftRequestDescriptor = $convert.base64Decode(
-    'Cg5TZWxsTmZ0UmVxdWVzdBIbCgl0b2tlbl9pZHMYASADKARSCHRva2VuSWRzEhAKA2FtdBgCIA'
-    'MoBFIDYW10');
+    'Cg5TZWxsTmZ0UmVxdWVzdBIXCgd1c2RfYW10GAEgASgBUgZ1c2RBbXQSMgoEY29pbhgCIAEoDj'
+    'IeLnVzZXIuVHJhY2tlZFR4LkNvbnRyYWN0U3ltYm9sUgRjb2luEhIKBHJhdGUYAyABKAFSBHJh'
+    'dGUSGQoIY29pbl9hbXQYBSABKAFSB2NvaW5BbXQSGQoIbmZ0X3R4aWQYBiABKAlSB25mdFR4aW'
+    'QSFwoHY2FyZF9ubxgIIAEoCVIGY2FyZE5v');
 
 @$core.Deprecated('Use sellNftResponseDescriptor instead')
 const SellNftResponse$json = {
   '1': 'SellNftResponse',
-  '2': [
-    {'1': 'txid', '3': 1, '4': 1, '5': 9, '10': 'txid'},
-  ],
 };
 
 /// Descriptor for `SellNftResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sellNftResponseDescriptor = $convert.base64Decode(
-    'Cg9TZWxsTmZ0UmVzcG9uc2USEgoEdHhpZBgBIAEoCVIEdHhpZA==');
+    'Cg9TZWxsTmZ0UmVzcG9uc2U=');
 
 @$core.Deprecated('Use buyNftRequestDescriptor instead')
 const BuyNftRequest$json = {

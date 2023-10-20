@@ -154,6 +154,7 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOS(25, _omitFieldNames ? '' : 'ethAddress')
     ..aOS(26, _omitFieldNames ? '' : 'btcAddress')
     ..a<$fixnum.Int64>(27, _omitFieldNames ? '' : 'cardCount', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOB(28, _omitFieldNames ? '' : 'isProxyed')
     ..hasRequiredFields = false
   ;
 
@@ -420,6 +421,15 @@ class UserInfo extends $pb.GeneratedMessage {
   $core.bool hasCardCount() => $_has(26);
   @$pb.TagNumber(27)
   void clearCardCount() => clearField(27);
+
+  @$pb.TagNumber(28)
+  $core.bool get isProxyed => $_getBF(27);
+  @$pb.TagNumber(28)
+  set isProxyed($core.bool v) { $_setBool(27, v); }
+  @$pb.TagNumber(28)
+  $core.bool hasIsProxyed() => $_has(27);
+  @$pb.TagNumber(28)
+  void clearIsProxyed() => clearField(28);
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {

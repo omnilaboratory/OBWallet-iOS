@@ -25,6 +25,14 @@ class ethClient extends $grpc.Client {
       '/lnrpc.eth/ETHGetAddress',
       ($0.ETHGetAddressRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.ETHGetAddressResponse.fromBuffer(value));
+  static final _$eTHGetAppConf = $grpc.ClientMethod<$0.ETHGetAppConfRequest, $0.ETHGetAppConfResponse>(
+      '/lnrpc.eth/ETHGetAppConf',
+      ($0.ETHGetAppConfRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.ETHGetAppConfResponse.fromBuffer(value));
+  static final _$updateSwapDiscount = $grpc.ClientMethod<$0.UpdateSwapDiscountRequest, $0.UpdateSwapDiscountResponse>(
+      '/lnrpc.eth/UpdateSwapDiscount',
+      ($0.UpdateSwapDiscountRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.UpdateSwapDiscountResponse.fromBuffer(value));
   static final _$ethGetTokenBalalance = $grpc.ClientMethod<$0.EthGetTokenBalalanceRequest, $0.EthGetTokenBalalanceResponse>(
       '/lnrpc.eth/EthGetTokenBalalance',
       ($0.EthGetTokenBalalanceRequest value) => value.writeToBuffer(),
@@ -62,6 +70,14 @@ class ethClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.ETHGetAddressResponse> eTHGetAddress($0.ETHGetAddressRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$eTHGetAddress, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.ETHGetAppConfResponse> eTHGetAppConf($0.ETHGetAppConfRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$eTHGetAppConf, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.UpdateSwapDiscountResponse> updateSwapDiscount($0.UpdateSwapDiscountRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateSwapDiscount, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.EthGetTokenBalalanceResponse> ethGetTokenBalalance($0.EthGetTokenBalalanceRequest request, {$grpc.CallOptions? options}) {
@@ -105,6 +121,20 @@ abstract class ethServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ETHGetAddressRequest.fromBuffer(value),
         ($0.ETHGetAddressResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ETHGetAppConfRequest, $0.ETHGetAppConfResponse>(
+        'ETHGetAppConf',
+        eTHGetAppConf_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ETHGetAppConfRequest.fromBuffer(value),
+        ($0.ETHGetAppConfResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateSwapDiscountRequest, $0.UpdateSwapDiscountResponse>(
+        'UpdateSwapDiscount',
+        updateSwapDiscount_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UpdateSwapDiscountRequest.fromBuffer(value),
+        ($0.UpdateSwapDiscountResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.EthGetTokenBalalanceRequest, $0.EthGetTokenBalalanceResponse>(
         'EthGetTokenBalalance',
         ethGetTokenBalalance_Pre,
@@ -160,6 +190,14 @@ abstract class ethServiceBase extends $grpc.Service {
     return eTHGetAddress(call, await request);
   }
 
+  $async.Future<$0.ETHGetAppConfResponse> eTHGetAppConf_Pre($grpc.ServiceCall call, $async.Future<$0.ETHGetAppConfRequest> request) async {
+    return eTHGetAppConf(call, await request);
+  }
+
+  $async.Future<$0.UpdateSwapDiscountResponse> updateSwapDiscount_Pre($grpc.ServiceCall call, $async.Future<$0.UpdateSwapDiscountRequest> request) async {
+    return updateSwapDiscount(call, await request);
+  }
+
   $async.Future<$0.EthGetTokenBalalanceResponse> ethGetTokenBalalance_Pre($grpc.ServiceCall call, $async.Future<$0.EthGetTokenBalalanceRequest> request) async {
     return ethGetTokenBalalance(call, await request);
   }
@@ -189,6 +227,8 @@ abstract class ethServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ETHGetAddressResponse> eTHGetAddress($grpc.ServiceCall call, $0.ETHGetAddressRequest request);
+  $async.Future<$0.ETHGetAppConfResponse> eTHGetAppConf($grpc.ServiceCall call, $0.ETHGetAppConfRequest request);
+  $async.Future<$0.UpdateSwapDiscountResponse> updateSwapDiscount($grpc.ServiceCall call, $0.UpdateSwapDiscountRequest request);
   $async.Future<$0.EthGetTokenBalalanceResponse> ethGetTokenBalalance($grpc.ServiceCall call, $0.EthGetTokenBalalanceRequest request);
   $async.Future<$0.EthGetBalalanceResponse> ethGetBalalance($grpc.ServiceCall call, $0.EthGetBalalanceRequest request);
   $async.Future<$0.EthToken> ethAddToken($grpc.ServiceCall call, $0.EthToken request);

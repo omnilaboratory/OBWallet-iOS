@@ -5,6 +5,8 @@ package lnrpc;
 
 service eth {
   rpc ETHGetAddress(ETHGetAddressRequest) returns (ETHGetAddressResponse);
+  rpc ETHGetAppConf(ETHGetAppConfRequest) returns (ETHGetAppConfResponse);
+  rpc UpdateSwapDiscount(UpdateSwapDiscountRequest) returns (UpdateSwapDiscountResponse);
 //  rpc ETHDumpKey(ETHDumpKeyRequest) returns (ETHDumpKeyResponse);
 //  rpc EthImportKey(EthImportKeyRequest) returns(EthImportKeyResponse);
   rpc EthGetTokenBalalance(EthGetTokenBalalanceRequest) returns(EthGetTokenBalalanceResponse);
@@ -37,6 +39,19 @@ message EthGetBalalanceResponse {
   double balance=1;
 }
 
+message ETHGetAppConfRequest {
+
+}
+message ETHGetAppConfResponse {
+  string server_address=1;
+  string nft_address=2;
+  double swap_discount=3;
+}
+message UpdateSwapDiscountRequest {
+  double swap_discount=1;
+}
+message UpdateSwapDiscountResponse {
+}
 message ETHGetAddressRequest {
 
 }

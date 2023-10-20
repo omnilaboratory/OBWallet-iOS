@@ -19,6 +19,130 @@ import 'country.pbenum.dart' as $3;
 
 export 'card.pbenum.dart';
 
+class BuyNftForPayRequest extends $pb.GeneratedMessage {
+  factory BuyNftForPayRequest() => create();
+  BuyNftForPayRequest._() : super();
+  factory BuyNftForPayRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory BuyNftForPayRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BuyNftForPayRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mail')
+    ..aOS(2, _omitFieldNames ? '' : 'tradeNo')
+    ..aOS(3, _omitFieldNames ? '' : 'cardNo')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'amtUsd', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  BuyNftForPayRequest clone() => BuyNftForPayRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  BuyNftForPayRequest copyWith(void Function(BuyNftForPayRequest) updates) => super.copyWith((message) => updates(message as BuyNftForPayRequest)) as BuyNftForPayRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BuyNftForPayRequest create() => BuyNftForPayRequest._();
+  BuyNftForPayRequest createEmptyInstance() => create();
+  static $pb.PbList<BuyNftForPayRequest> createRepeated() => $pb.PbList<BuyNftForPayRequest>();
+  @$core.pragma('dart2js:noInline')
+  static BuyNftForPayRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BuyNftForPayRequest>(create);
+  static BuyNftForPayRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get mail => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mail($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMail() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMail() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get tradeNo => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set tradeNo($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTradeNo() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTradeNo() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get cardNo => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set cardNo($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCardNo() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCardNo() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get amtUsd => $_getN(3);
+  @$pb.TagNumber(4)
+  set amtUsd($core.double v) { $_setDouble(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasAmtUsd() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAmtUsd() => clearField(4);
+}
+
+class BuyNftForPayResponse extends $pb.GeneratedMessage {
+  factory BuyNftForPayResponse() => create();
+  BuyNftForPayResponse._() : super();
+  factory BuyNftForPayResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory BuyNftForPayResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BuyNftForPayResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'nftOrderid')
+    ..aInt64(2, _omitFieldNames ? '' : 'userId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  BuyNftForPayResponse clone() => BuyNftForPayResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  BuyNftForPayResponse copyWith(void Function(BuyNftForPayResponse) updates) => super.copyWith((message) => updates(message as BuyNftForPayResponse)) as BuyNftForPayResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BuyNftForPayResponse create() => BuyNftForPayResponse._();
+  BuyNftForPayResponse createEmptyInstance() => create();
+  static $pb.PbList<BuyNftForPayResponse> createRepeated() => $pb.PbList<BuyNftForPayResponse>();
+  @$core.pragma('dart2js:noInline')
+  static BuyNftForPayResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BuyNftForPayResponse>(create);
+  static BuyNftForPayResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get nftOrderid => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set nftOrderid($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasNftOrderid() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNftOrderid() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get userId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set userId($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserId() => clearField(2);
+}
+
 class CardInfo extends $pb.GeneratedMessage {
   factory CardInfo() => create();
   CardInfo._() : super();

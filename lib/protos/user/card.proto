@@ -12,7 +12,19 @@ service CardService{
   rpc CardList(CardListRequest) returns (CardListResponse) {}
   rpc CardWithdraw(CardWithdrawRequest) returns (CardWithdrawResponse) {}
   rpc CardRecharge(CardRechargeRequest) returns (CardRechargeResponse) {}
+  rpc BuyNftForPay(BuyNftForPayRequest) returns (BuyNftForPayResponse) {}
 }
+message BuyNftForPayRequest {
+  string mail=1;
+  string trade_no=2;
+  string card_no=3;
+  double amt_usd=4;
+}
+message BuyNftForPayResponse {
+  string nft_orderid=1;
+  int64 user_id=2;
+}
+
 message CardInfo {
   int64 id = 1;
   string card_no =2;
@@ -103,9 +115,9 @@ message CardWithdrawRequest {
   string cardNo = 1;
   double amt = 2;
 }
-
 message CardWithdrawResponse {
 }
+
 message CardRechargeRequest {
 //    卡号	16
   string cardNo = 1;

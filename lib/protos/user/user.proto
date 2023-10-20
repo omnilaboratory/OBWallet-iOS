@@ -74,6 +74,8 @@ message UserInfo {
   string kyc_status=22;
   uint64 created_at = 24;
   uint64 card_count = 27;
+  //this type user's eth wallet is managed by our server
+  bool is_proxyed=28;
 }
 
 message SignUpRequest {
