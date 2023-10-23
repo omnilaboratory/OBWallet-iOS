@@ -33,6 +33,7 @@ class _NftExchangeState extends State<NftExchange> {
   final TextEditingController _cardController = TextEditingController();
   late DollarFaceInfo currSelectedFace = widget.faceInfo;
   double currCurrencyRatio = 1;
+  double currTargetTokenPrice = 1;
 
   bool isInputCard = false;
   String targetName = "USD";
@@ -116,6 +117,7 @@ class _NftExchangeState extends State<NftExchange> {
                     text: 'DONE',
                     onPressed: () {
                       FocusScope.of(context).unfocus();
+                      onClickDone();
                     },
                   ),
                 ],
@@ -282,7 +284,10 @@ class _NftExchangeState extends State<NftExchange> {
                     height: 20,
                     image: AssetImage(value.iconUrl),
                   )
-                : Icon(value.iconData,color: Colors.blue,),
+                : Icon(
+                    value.iconData,
+                    color: Colors.blue,
+                  ),
             const SizedBox(width: 7),
             AutoSizeText(
               value.name,
@@ -390,9 +395,10 @@ class _NftExchangeState extends State<NftExchange> {
     } else {
       isInputCard = false;
     }
-
+    _cardController.text = "";
     if (name.toLowerCase() == "usd" || isInputCard) {
       currCurrencyRatio = 1;
+      currTargetTokenPrice = 1;
       setDollarAmount();
       targetName = "USD";
     } else {
@@ -402,6 +408,7 @@ class _NftExchangeState extends State<NftExchange> {
           .then((value) async {
         if (value.code == 1) {
           var resp = value.data as GetCoinPriceResponse;
+          currTargetTokenPrice = resp.price;
           if (mounted) {
             setState(() {
               currCurrencyRatio =
@@ -424,5 +431,46 @@ class _NftExchangeState extends State<NftExchange> {
     } else {
       _amountDollarController.text = "";
     }
+  }
+
+  void onClickDone() {
+    SellNftRequest request = SellNftRequest();
+
+    int? amount = int.tryParse(_amountNftController.text);
+    if (amount != null) {
+      var dollars = amount *
+          double.parse(EnumDollarFace.values[currSelectedFace.faceType].value);
+      request.usdAmt = dollars;
+    } else {
+      return;
+    }
+
+    request.coin = TrackedTx_ContractSymbol.USD;
+    if (currSelectedToken.name == "ETH") {
+      request.coin = TrackedTx_ContractSymbol.ETH;
+    }
+    if (currSelectedToken.name == "USDT") {
+      request.coin = TrackedTx_ContractSymbol.USDT;
+    }
+    if (currSelectedToken.name == "USDC") {
+      request.coin = TrackedTx_ContractSymbol.USDC;
+    }
+
+    request.rate = currTargetTokenPrice;
+    request.coinAmt = double.parse(_amountDollarController.text);
+
+    // TODO get the txid from local func
+    request.nftTxid = "";
+
+    if (_cardController.text.isNotEmpty) {
+      request.cardNo = _cardController.text.trim();
+    }
+    AccountService.getInstance().sellNft(context, request).then((resp) {
+      if (resp.code == 1) {
+        alert("success", context, () {});
+      } else {
+        alert(resp.msg, context, () {});
+      }
+    });
   }
 }
