@@ -1,6 +1,7 @@
 
 import 'dart:math' as math;
 import 'dart:developer';
+import 'dart:typed_data';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
@@ -10,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart';
 import 'bean/enum_eth_key.dart';
+import 'contract_abis/TestNftContract.g.dart';
 import 'contract_abis/USDT.g.dart';
 
 class Eth {
@@ -26,6 +28,11 @@ class Eth {
   static initWeb3Client() {
     ethClient = Web3Client(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.apiUrl]!, Client());
     log('ethClient -> $ethClient');
+
+    // FOR TEST
+    // testNftContract('0x51e3dd6e48f59338583b21df9b211b090af5409b', 1);
+    // testNftContract('0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347');
+    sendNftToPlatform(20, 1);
   }
 
   static getCredentials() {
@@ -252,5 +259,72 @@ class Eth {
       log('Invalid address');
     }
     return false;
+  }
+
+  /// talk to contract
+  // static Future<String> testNftContract(String toAddress, double amount) async {
+  // static Future<EthereumAddress> testNftContract(String toAddress, double amount) async {
+  static testNftContract(String toAddress) async {
+    try {
+
+      var nftClient = Web3Client('https://polygon-mumbai.g.alchemy.com/v2/OSPAbgSUF8eiA1H8inPswHD-3XkJbiTb', Client());
+      log('nftClient -> $nftClient');
+
+      EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.nft]!);
+      EthereumAddress ethAddr  = EthereumAddress.fromHex(toAddress);
+
+      // The USDC contract has 6 decimals, so has to process for BigInt with the code.
+      // String toAmount  = amount.toStringAsFixed(6);
+      // Decimal baseVal  = Decimal.parse(toAmount);
+      // Decimal decimals = Decimal.parse('1000000'); // 6 decimals
+      // BigInt value     = (baseVal * decimals).toBigInt();
+
+      // NFT token ID
+      BigInt id = BigInt.from(20);
+
+      var nft      = TestNftContract(address: contract, client: nftClient);
+      var response = await nft.balanceOf(ethAddr, id);
+      // var response = await nft.safeTransferFrom(ethAddr, value, credentials: getCredentials());
+
+      log('response -> $response');
+
+      return response;
+    } catch (e) {
+      log('testNftContract -> error: $e');
+      return BigInt.from(-1);
+    }
+  }
+
+  /// sendNftTo
+  static Future<String> sendNftToPlatform(int tokenId, int amount) async {
+    try {
+      var nftClient = Web3Client('https://polygon-mumbai.g.alchemy.com/v2/OSPAbgSUF8eiA1H8inPswHD-3XkJbiTb', Client());
+      log('nftClient -> $nftClient');
+
+      EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.nft]!);
+      // String? str = LocalStorage.getEthAddress();
+      String str = LocalStorage.getEthPrivateKey();
+      log('-------> str -> $str');
+
+      // EthereumAddress from  = EthereumAddress.fromHex(LocalStorage.getEthAddress()!);
+      // log('from -> $from');
+
+      // EthereumAddress to  = EthereumAddress.fromHex('0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347'); // Platform address
+
+      // BigInt id = BigInt.from(tokenId);
+      // BigInt value = BigInt.from(amount);
+      // Uint8List data = Uint8List(0);
+
+      // var nft      = TestNftContract(address: contract, client: nftClient);
+      // var response = await nft.safeTransferFrom(from, to, id, value, data, credentials: getCredentials());
+
+      // log('response -> $response');
+
+      // return response;
+      return 'response';
+    } catch (e) {
+      log('sendNftToPlatform -> error: $e');
+      return '';
+    }
   }
 }
