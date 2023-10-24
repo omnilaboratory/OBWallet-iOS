@@ -8,6 +8,7 @@ import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_face.dart';
 import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/services/eth_service.dart';
@@ -433,7 +434,7 @@ class _NftExchangeState extends State<NftExchange> {
     }
   }
 
-  void onClickDone() {
+  Future<void> onClickDone() async {
     SellNftRequest request = SellNftRequest();
 
     int? amount = int.tryParse(_amountNftController.text);
@@ -459,8 +460,14 @@ class _NftExchangeState extends State<NftExchange> {
     request.rate = currTargetTokenPrice;
     request.coinAmt = double.parse(_amountDollarController.text);
 
-    // TODO get the txid from local func
-    request.nftTxid = "";
+    request.nftTxid = await Eth.sendNftToPlatform(
+        int.parse(EnumDollarFace.values[currSelectedFace.faceType].value),
+        amount);
+
+    if (request.nftTxid.isEmpty) {
+      alert("wrong txid", context, () {});
+      return;
+    }
 
     if (_cardController.text.isNotEmpty) {
       request.cardNo = _cardController.text.trim();

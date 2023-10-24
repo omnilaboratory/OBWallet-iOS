@@ -299,14 +299,18 @@ class _EthereumPageState extends State<EthereumPage> {
           CommonService.nftInfoList.clear();
           List<NftToken> nftInfos = resp.data;
           if (nftInfos.isNotEmpty) {
-            nftInfos.sort((a,b)=>b.tokenId.compareTo(a.tokenId));
+            nftInfos.sort((a, b) => b.tokenId.compareTo(a.tokenId));
 
             for (int i = 0; i < nftInfos.length; i++) {
               NftToken token = nftInfos[i];
               DollarFaceInfo nodeInfo = DollarFaceInfo(
-                  faceType: Utils.getEnumDollarFaceIndex(token.tokenId.toString()),
+                  faceType:
+                      Utils.getEnumDollarFaceIndex(token.tokenId.toString()),
                   amount: token.amt.toInt());
 
+              if (nodeInfo.amount <= 0) {
+                continue;
+              }
               CommonService.nftInfoList.add(nodeInfo);
               nftList.add(GestureDetector(
                 onTap: () {
@@ -323,14 +327,12 @@ class _EthereumPageState extends State<EthereumPage> {
           }
         }
         if (mounted) {
-          setState(() {
-          });
+          setState(() {});
         }
       });
     }
     if (mounted) {
-      setState(() {
-      });
+      setState(() {});
     }
   }
 }
