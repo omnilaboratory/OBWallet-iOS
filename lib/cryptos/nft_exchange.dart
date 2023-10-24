@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/dollar_face_info.dart';
@@ -14,6 +15,7 @@ import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -461,6 +463,7 @@ class _NftExchangeState extends State<NftExchange> {
       request.coin = TrackedTx_ContractSymbol.USDC;
     }
 
+
     request.rate = currTargetTokenPrice;
     request.coinAmt = double.parse(_amountDollarController.text);
 
@@ -474,6 +477,9 @@ class _NftExchangeState extends State<NftExchange> {
       alert("wrong txid", context, () {});
       return;
     }
+
+    request.tokenIds.add(Int64.parseInt(EnumDollarFace.values[currSelectedFace.faceType].value));
+    request.values.add(Int64.parseInt(_amountNftController.text));
 
     if (_cardController.text.isNotEmpty) {
       request.cardNo = _cardController.text.trim();
