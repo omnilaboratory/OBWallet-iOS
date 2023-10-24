@@ -15,18 +15,20 @@ class GlobalParams {
 
   static Map<EnumNetworkType, dynamic> dataInNetwork = Map.from({
     EnumNetworkType.mainnet: Map.from({
-      EnumEthKey.apiUrl:
-          "https://eth-mainnet.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch",
+      EnumEthKey.apiUrl: "https://eth-mainnet.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch",
       EnumEthKey.usdt: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
       EnumEthKey.usdc: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      EnumEthKey.nftApiUrl: "",
       EnumEthKey.nft: "",
+      EnumEthKey.nftToPlatform: "",
     }),
     EnumNetworkType.goerli: Map.from({
-      EnumEthKey.apiUrl:
-          "https://eth-goerli.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch",
+      EnumEthKey.apiUrl: "https://eth-goerli.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch",
       EnumEthKey.usdt: "0xC2C527C0CACF457746Bd31B2a698Fe89de2b6d49",
       EnumEthKey.usdc: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      EnumEthKey.nftApiUrl: "https://polygon-mumbai.g.alchemy.com/v2/OSPAbgSUF8eiA1H8inPswHD-3XkJbiTb",
       EnumEthKey.nft: "0x9db105d4427baa36895332d550ae00085a1cfcbc",
+      EnumEthKey.nftToPlatform: "0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347",
     }),
   });
 
