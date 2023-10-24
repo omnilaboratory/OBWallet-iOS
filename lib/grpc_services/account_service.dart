@@ -141,6 +141,7 @@ class AccountService {
   Future<GrpcResponse> getNftBalance(BuildContext context) async {
     var request = GetNftBlanceRequest();
     var ret = GrpcResponse();
+    log("getNftBalance");
     try {
       var resp = await accountServiceClient?.getNftBlance(request);
       ret.code = 1;
