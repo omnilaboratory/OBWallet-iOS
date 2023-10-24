@@ -3,24 +3,30 @@ package user;
 
 import "user/country.proto";
 service UserService {
-  //user regist
+  //用户注册 user regist
   rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
-  //verify code
+  //验证码 verify code
   rpc VerifyCode(VerifyCodeRequest) returns (VerifyCodeResponse) {}
+  //验证码图片
   rpc VerifyImage(VerifyImageRequest) returns (VerifyImageResponse) {}
-  //user login
+  //登陆user login
   rpc SignIn(SignInRequest) returns (SignInResponse) {}
+  //修改密码
   rpc UpdatePwd(UpdatePwdRequest) returns (UpdatePwdResponse) {}
 
-  //same as SignIn, but willn't gen token ,  if pwd  ok,the return SignInResponse is emputy;  if pwd err, thrown an error
+  //验证密码 same as SignIn, but willn't gen token ,  if pwd  ok,the return SignInResponse is emputy;  if pwd err, thrown an error
   rpc VerifyPwd(SignInRequest) returns (SignInResponse) {}
+  //忘记密码
   rpc ForgetPwd(ForgetPwdRequest) returns (ForgetPwdResponse) {}
   //same as UpdateUser-rpc ,but with kyc commit.
   rpc Kyc(UserInfo) returns (UserInfo) {}
+  //修改用户信息
   // input parameter UserInfo-Obj must first get from GetUserInfo-rpc,
   // then update the UserInfo-obj,last call UpdateUser with UserInfo-obj
   rpc UpdateUser(UserInfo) returns (UserInfo) {}
+  //ignored
   rpc Upload(UploadRequest) returns (UploadResponse) {}
+  //获取用户信息
   rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
 }
 
@@ -74,8 +80,9 @@ message UserInfo {
   string kyc_status=22;
   uint64 created_at = 24;
   uint64 card_count = 27;
-  //this type user's eth wallet is managed by our server
-  bool is_proxyed=28;
+  //user with user_type>0 ,this type user's eth wallet is managed by our server
+  //1  proxyed user;  2 proxyed MERNO
+  int64 user_type=28;
 }
 
 message SignUpRequest {

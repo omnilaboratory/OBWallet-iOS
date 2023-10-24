@@ -332,6 +332,8 @@ const SellNftRequest$json = {
     {'1': 'coin_amt', '3': 5, '4': 1, '5': 1, '10': 'coinAmt'},
     {'1': 'nft_txid', '3': 6, '4': 1, '5': 9, '10': 'nftTxid'},
     {'1': 'card_no', '3': 8, '4': 1, '5': 9, '10': 'cardNo'},
+    {'1': 'token_ids', '3': 9, '4': 3, '5': 3, '10': 'tokenIds'},
+    {'1': 'values', '3': 10, '4': 3, '5': 3, '10': 'values'},
   ],
 };
 
@@ -340,7 +342,8 @@ final $typed_data.Uint8List sellNftRequestDescriptor = $convert.base64Decode(
     'Cg5TZWxsTmZ0UmVxdWVzdBIXCgd1c2RfYW10GAEgASgBUgZ1c2RBbXQSMgoEY29pbhgCIAEoDj'
     'IeLnVzZXIuVHJhY2tlZFR4LkNvbnRyYWN0U3ltYm9sUgRjb2luEhIKBHJhdGUYAyABKAFSBHJh'
     'dGUSGQoIY29pbl9hbXQYBSABKAFSB2NvaW5BbXQSGQoIbmZ0X3R4aWQYBiABKAlSB25mdFR4aW'
-    'QSFwoHY2FyZF9ubxgIIAEoCVIGY2FyZE5v');
+    'QSFwoHY2FyZF9ubxgIIAEoCVIGY2FyZE5vEhsKCXRva2VuX2lkcxgJIAMoA1IIdG9rZW5JZHMS'
+    'FgoGdmFsdWVzGAogAygDUgZ2YWx1ZXM=');
 
 @$core.Deprecated('Use sellNftResponseDescriptor instead')
 const SellNftResponse$json = {

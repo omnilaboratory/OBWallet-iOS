@@ -28,8 +28,13 @@ class BuyNftForPayRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BuyNftForPayRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'mail')
     ..aOS(2, _omitFieldNames ? '' : 'tradeNo')
-    ..aOS(3, _omitFieldNames ? '' : 'cardNo')
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'amtUsd', $pb.PbFieldType.OD)
+    ..aOS(3, _omitFieldNames ? '' : 'bankcardNo')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.OD)
+    ..aOS(5, _omitFieldNames ? '' : 'currency')
+    ..aInt64(6, _omitFieldNames ? '' : 'orderTime')
+    ..aInt64(7, _omitFieldNames ? '' : 'paymentTime')
+    ..aOS(8, _omitFieldNames ? '' : 'orderId')
+    ..aOS(9, _omitFieldNames ? '' : 'merNo')
     ..hasRequiredFields = false
   ;
 
@@ -73,22 +78,67 @@ class BuyNftForPayRequest extends $pb.GeneratedMessage {
   void clearTradeNo() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get cardNo => $_getSZ(2);
+  $core.String get bankcardNo => $_getSZ(2);
   @$pb.TagNumber(3)
-  set cardNo($core.String v) { $_setString(2, v); }
+  set bankcardNo($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasCardNo() => $_has(2);
+  $core.bool hasBankcardNo() => $_has(2);
   @$pb.TagNumber(3)
-  void clearCardNo() => clearField(3);
+  void clearBankcardNo() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.double get amtUsd => $_getN(3);
+  $core.double get amt => $_getN(3);
   @$pb.TagNumber(4)
-  set amtUsd($core.double v) { $_setDouble(3, v); }
+  set amt($core.double v) { $_setDouble(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasAmtUsd() => $_has(3);
+  $core.bool hasAmt() => $_has(3);
   @$pb.TagNumber(4)
-  void clearAmtUsd() => clearField(4);
+  void clearAmt() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get currency => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set currency($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasCurrency() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCurrency() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get orderTime => $_getI64(5);
+  @$pb.TagNumber(6)
+  set orderTime($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasOrderTime() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearOrderTime() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get paymentTime => $_getI64(6);
+  @$pb.TagNumber(7)
+  set paymentTime($fixnum.Int64 v) { $_setInt64(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasPaymentTime() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearPaymentTime() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get orderId => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set orderId($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasOrderId() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearOrderId() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get merNo => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set merNo($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasMerNo() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearMerNo() => clearField(9);
 }
 
 class BuyNftForPayResponse extends $pb.GeneratedMessage {
@@ -98,7 +148,7 @@ class BuyNftForPayResponse extends $pb.GeneratedMessage {
   factory BuyNftForPayResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BuyNftForPayResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'nftOrderid')
+    ..aOS(1, _omitFieldNames ? '' : 'orderid')
     ..aInt64(2, _omitFieldNames ? '' : 'userId')
     ..hasRequiredFields = false
   ;
@@ -125,13 +175,13 @@ class BuyNftForPayResponse extends $pb.GeneratedMessage {
   static BuyNftForPayResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get nftOrderid => $_getSZ(0);
+  $core.String get orderid => $_getSZ(0);
   @$pb.TagNumber(1)
-  set nftOrderid($core.String v) { $_setString(0, v); }
+  set orderid($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasNftOrderid() => $_has(0);
+  $core.bool hasOrderid() => $_has(0);
   @$pb.TagNumber(1)
-  void clearNftOrderid() => clearField(1);
+  void clearOrderid() => clearField(1);
 
   @$pb.TagNumber(2)
   $fixnum.Int64 get userId => $_getI64(1);

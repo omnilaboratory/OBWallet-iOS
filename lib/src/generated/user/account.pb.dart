@@ -1181,6 +1181,8 @@ class SellNftRequest extends $pb.GeneratedMessage {
     ..a<$core.double>(5, _omitFieldNames ? '' : 'coinAmt', $pb.PbFieldType.OD)
     ..aOS(6, _omitFieldNames ? '' : 'nftTxid')
     ..aOS(8, _omitFieldNames ? '' : 'cardNo')
+    ..p<$fixnum.Int64>(9, _omitFieldNames ? '' : 'tokenIds', $pb.PbFieldType.K6)
+    ..p<$fixnum.Int64>(10, _omitFieldNames ? '' : 'values', $pb.PbFieldType.K6)
     ..hasRequiredFields = false
   ;
 
@@ -1258,6 +1260,12 @@ class SellNftRequest extends $pb.GeneratedMessage {
   $core.bool hasCardNo() => $_has(5);
   @$pb.TagNumber(8)
   void clearCardNo() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.List<$fixnum.Int64> get tokenIds => $_getList(6);
+
+  @$pb.TagNumber(10)
+  $core.List<$fixnum.Int64> get values => $_getList(7);
 }
 
 class SellNftResponse extends $pb.GeneratedMessage {

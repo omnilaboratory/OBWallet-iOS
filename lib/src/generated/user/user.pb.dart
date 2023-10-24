@@ -154,7 +154,7 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOS(25, _omitFieldNames ? '' : 'ethAddress')
     ..aOS(26, _omitFieldNames ? '' : 'btcAddress')
     ..a<$fixnum.Int64>(27, _omitFieldNames ? '' : 'cardCount', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOB(28, _omitFieldNames ? '' : 'isProxyed')
+    ..aInt64(28, _omitFieldNames ? '' : 'userType')
     ..hasRequiredFields = false
   ;
 
@@ -423,13 +423,13 @@ class UserInfo extends $pb.GeneratedMessage {
   void clearCardCount() => clearField(27);
 
   @$pb.TagNumber(28)
-  $core.bool get isProxyed => $_getBF(27);
+  $fixnum.Int64 get userType => $_getI64(27);
   @$pb.TagNumber(28)
-  set isProxyed($core.bool v) { $_setBool(27, v); }
+  set userType($fixnum.Int64 v) { $_setInt64(27, v); }
   @$pb.TagNumber(28)
-  $core.bool hasIsProxyed() => $_has(27);
+  $core.bool hasUserType() => $_has(27);
   @$pb.TagNumber(28)
-  void clearIsProxyed() => clearField(28);
+  void clearUserType() => clearField(28);
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {

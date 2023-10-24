@@ -4,19 +4,31 @@ package user;
 import "user/country.proto";
 
 service account{
+  // 获取账号信息
   rpc GetAccountInfo(GetAccountInfoRequest) returns (AccountInfo) {}
+
   //current only usd recharge/pay history
+
+  //用户账号usd变动历史
   rpc GetAccountHistory(GetAccountHistoryRequest) returns (GetAccountHistoryResponse) {}
+//    买币
   rpc SellCoin(SellCoinRequest) returns (SellCoinResponse) {}
+  //卖币
   rpc BuyCoin(BuyCoinRequest) returns (BuyCoinResponse) {}
+  //nft兑换币或usd,或usd并充值到卡
   rpc SellNft(SellNftRequest) returns (SellNftResponse) {}
   // cardRecharge with big amt
 //  rpc BuyNft(BuyNftRequest) returns (BuyNftResponse) {}
 
+  //获取nft余额
   rpc GetNftBlance(GetNftBlanceRequest) returns (GetNftBlanceResponse) {}
+  //大额transak充值时的回调地址
   rpc GetDcPayUrl(GetDcPayUrlRequest) returns (GetDcPayUrlResponse) {}
+  //数币兑换历史
   rpc GetSwapTxList(GetSwapTxListRequest) returns (GetSwapTxListResponse) {}
+  //eth usdt/usdc链上交易确认情况列表
   rpc GetTrackedTxList(GetSwapTxListRequest) returns (GetTrackedTxListResponse) {}
+  //获取币价
   rpc GetCoinPrice(GetCoinPriceRequest) returns (GetCoinPriceResponse) {}
 }
 message GetCoinPriceRequest {
@@ -131,7 +143,7 @@ message SwapTx{
   int64 updated_at = 12;
   bool  is_sell_nft=20;
   string nft_txid=21;
-  // only for nft sell and  traret is card_no
+  // only for nft sell and  traget is card_no
   string card_no=22;
 
 
@@ -157,16 +169,22 @@ message BuyCoinResponse {
 }
 
 message SellNftRequest {
-  //all nfts to usd_amt
+  //用户转移的nft-token的usd价值； all nfts to usd_amt
   double usd_amt =1;
-  //  nft is sell  for coin/usd/usd to card
+  //需要兑换的目标币种; nft is sell  for coin/usd/usd to card
   TrackedTx.ContractSymbol coin=2;
-  //coin Price: get from GetCoinPrice; and usd's price is 1;
+  //需要兑换的目标币种的价格，可以从GetCoinPricer接口获取币价，usd价格是1。
   double rate=3;
+  //相要兑换的目标币种的数量
   double coin_amt =5;
+  //链上转移nft-token时的，交易id
   string nft_txid=6;
-  //if coin field is usd, target output can by a card
+  //卡号，如果用户相要兑换usd,并充值到卡，需要提供卡号。
   string card_no=8;
+  //转账期间，需要提前锁nft-token
+  repeated int64 token_ids=9;
+  //转账期间，需要提前锁每个nft的数量
+  repeated int64 values=10;
 }
 message SellNftResponse {
 }
@@ -191,7 +209,7 @@ message NftToken{
   uint64 token_id=2;
 //  nft amount
   uint64 amt=3;
-//  nft usd_price  for each nft
+// nft-token美元价格。 nft usd_price  for each nft
   double item_price=4;
 }
 message AccountHistory{

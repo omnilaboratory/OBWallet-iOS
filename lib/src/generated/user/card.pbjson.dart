@@ -19,30 +19,37 @@ const BuyNftForPayRequest$json = {
   '2': [
     {'1': 'mail', '3': 1, '4': 1, '5': 9, '10': 'mail'},
     {'1': 'trade_no', '3': 2, '4': 1, '5': 9, '10': 'tradeNo'},
-    {'1': 'card_no', '3': 3, '4': 1, '5': 9, '10': 'cardNo'},
-    {'1': 'amt_usd', '3': 4, '4': 1, '5': 1, '10': 'amtUsd'},
+    {'1': 'bankcard_no', '3': 3, '4': 1, '5': 9, '10': 'bankcardNo'},
+    {'1': 'amt', '3': 4, '4': 1, '5': 1, '10': 'amt'},
+    {'1': 'currency', '3': 5, '4': 1, '5': 9, '10': 'currency'},
+    {'1': 'order_time', '3': 6, '4': 1, '5': 3, '10': 'orderTime'},
+    {'1': 'payment_time', '3': 7, '4': 1, '5': 3, '10': 'paymentTime'},
+    {'1': 'order_id', '3': 8, '4': 1, '5': 9, '10': 'orderId'},
+    {'1': 'mer_no', '3': 9, '4': 1, '5': 9, '10': 'merNo'},
   ],
 };
 
 /// Descriptor for `BuyNftForPayRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List buyNftForPayRequestDescriptor = $convert.base64Decode(
     'ChNCdXlOZnRGb3JQYXlSZXF1ZXN0EhIKBG1haWwYASABKAlSBG1haWwSGQoIdHJhZGVfbm8YAi'
-    'ABKAlSB3RyYWRlTm8SFwoHY2FyZF9ubxgDIAEoCVIGY2FyZE5vEhcKB2FtdF91c2QYBCABKAFS'
-    'BmFtdFVzZA==');
+    'ABKAlSB3RyYWRlTm8SHwoLYmFua2NhcmRfbm8YAyABKAlSCmJhbmtjYXJkTm8SEAoDYW10GAQg'
+    'ASgBUgNhbXQSGgoIY3VycmVuY3kYBSABKAlSCGN1cnJlbmN5Eh0KCm9yZGVyX3RpbWUYBiABKA'
+    'NSCW9yZGVyVGltZRIhCgxwYXltZW50X3RpbWUYByABKANSC3BheW1lbnRUaW1lEhkKCG9yZGVy'
+    'X2lkGAggASgJUgdvcmRlcklkEhUKBm1lcl9ubxgJIAEoCVIFbWVyTm8=');
 
 @$core.Deprecated('Use buyNftForPayResponseDescriptor instead')
 const BuyNftForPayResponse$json = {
   '1': 'BuyNftForPayResponse',
   '2': [
-    {'1': 'nft_orderid', '3': 1, '4': 1, '5': 9, '10': 'nftOrderid'},
+    {'1': 'orderid', '3': 1, '4': 1, '5': 9, '10': 'orderid'},
     {'1': 'user_id', '3': 2, '4': 1, '5': 3, '10': 'userId'},
   ],
 };
 
 /// Descriptor for `BuyNftForPayResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List buyNftForPayResponseDescriptor = $convert.base64Decode(
-    'ChRCdXlOZnRGb3JQYXlSZXNwb25zZRIfCgtuZnRfb3JkZXJpZBgBIAEoCVIKbmZ0T3JkZXJpZB'
-    'IXCgd1c2VyX2lkGAIgASgDUgZ1c2VySWQ=');
+    'ChRCdXlOZnRGb3JQYXlSZXNwb25zZRIYCgdvcmRlcmlkGAEgASgJUgdvcmRlcmlkEhcKB3VzZX'
+    'JfaWQYAiABKANSBnVzZXJJZA==');
 
 @$core.Deprecated('Use cardInfoDescriptor instead')
 const CardInfo$json = {

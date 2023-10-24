@@ -4,24 +4,43 @@ package user;
 import "user/country.proto";
 
 service CardService{
+  //申请卡
   rpc ApplyCard(ApplyCardRequest) returns (ApplyCardResponse) {}
-  //History of payment at other website
+  //卡消费历史 History of payment at other website
   rpc CardHistory(CardHistoryRequest) returns (CardHistoryResponse) {}
   rpc CardExchangeInfoList(CardExchangeInfoListRequest) returns (CardExchangeInfoListResponse) {}
+  //卡详情
   rpc CardDetail(CardDetailRequest) returns (CardDetailResponse) {}
   rpc CardList(CardListRequest) returns (CardListResponse) {}
+  //账号提现
   rpc CardWithdraw(CardWithdrawRequest) returns (CardWithdrawResponse) {}
+  //账号充值
   rpc CardRecharge(CardRechargeRequest) returns (CardRechargeResponse) {}
+  //从第三方商户购买nft
   rpc BuyNftForPay(BuyNftForPayRequest) returns (BuyNftForPayResponse) {}
 }
 message BuyNftForPayRequest {
+  //客户邮箱
   string mail=1;
+  //银行付款trade_no
   string trade_no=2;
-  string card_no=3;
-  double amt_usd=4;
+  //支付卡
+  string bankcard_no=3;
+  //    金额
+  double amt=4;
+  //币种
+  string currency=5;
+  //订单时间
+  int64 order_time=6;
+  //付款时间
+  int64 payment_time=7;
+  //预设nft订单, 同钱包库的卡交易的orderNo
+  string order_id=8;
+  //商户编号
+  string  mer_no =9;
 }
 message BuyNftForPayResponse {
-  string nft_orderid=1;
+  string orderid=1;
   int64 user_id=2;
 }
 
@@ -39,12 +58,10 @@ message CardInfo {
   uint64 updated_at = 7;
 }
 message ApplyCardRequest {
-//  string ic_no=1;  //set at kyc stage
-  //default USD
+// default USD
   CurrencyCode currency=2;
 }
 message ApplyCardResponse {
-//  CardInfo card=1;
 }
 
 message CardListRequest {

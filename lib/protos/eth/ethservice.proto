@@ -4,16 +4,28 @@ package lnrpc;
 
 
 service eth {
+  //获取server的eth地址
   rpc ETHGetAddress(ETHGetAddressRequest) returns (ETHGetAddressResponse);
+  //获应用配制
   rpc ETHGetAppConf(ETHGetAppConfRequest) returns (ETHGetAppConfResponse);
+  //修改手续费折扣
   rpc UpdateSwapDiscount(UpdateSwapDiscountRequest) returns (UpdateSwapDiscountResponse);
+
 //  rpc ETHDumpKey(ETHDumpKeyRequest) returns (ETHDumpKeyResponse);
 //  rpc EthImportKey(EthImportKeyRequest) returns(EthImportKeyResponse);
+
+  //获服务器usdt/usdc 余额
   rpc EthGetTokenBalalance(EthGetTokenBalalanceRequest) returns(EthGetTokenBalalanceResponse);
+  //获服务器eth 余额
   rpc EthGetBalalance(EthGetBalalanceRequest) returns(EthGetBalalanceResponse);
+
 //  rpc EthTransferEth (EthTransferEthRequest) returns (EthTransferEthResponse);
+
+  //添加代币
   rpc EthAddToken (EthToken) returns (EthToken);
+
 //  rpc EthTransferToken (EthTransferTokenRequest) returns (EthTransferTokenResponse);
+
   rpc EthListHistory (EthListHistoryRequest) returns (EthListHistoryResponse);
   rpc EthGetAllToken(EthGetAllTokenRequest) returns (EthGetAllTokenResponse);
   rpc StateTest(StateTestRequest) returns (StateTestResponse);

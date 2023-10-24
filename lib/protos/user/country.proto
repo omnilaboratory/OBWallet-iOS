@@ -5,7 +5,6 @@ package user;
 //data from https://www.countrycode.org/
 //https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 
-
 enum CurrencyCode {
   UNKNOWNCurrency = 0;
   CNY = 1;
