@@ -118,7 +118,11 @@ class _NftExchangeState extends State<NftExchange> {
                     text: 'DONE',
                     onPressed: () {
                       FocusScope.of(context).unfocus();
-                      onClickDone();
+                      alert(
+                          "${_amountNftController.text} NFT exchange to ${_amountDollarController.text} $targetName",
+                          context, () {
+                        onClickDone();
+                      });
                     },
                   ),
                 ],
@@ -460,10 +464,11 @@ class _NftExchangeState extends State<NftExchange> {
     request.rate = currTargetTokenPrice;
     request.coinAmt = double.parse(_amountDollarController.text);
 
+    var loading = showLoading(context);
     request.nftTxid = await Eth.sendNftToPlatform(
         int.parse(EnumDollarFace.values[currSelectedFace.faceType].value),
         amount);
-
+    loading.remove();
     if (request.nftTxid.isEmpty) {
       alert("wrong txid", context, () {});
       return;
@@ -474,7 +479,10 @@ class _NftExchangeState extends State<NftExchange> {
     }
     AccountService.getInstance().sellNft(context, request).then((resp) {
       if (resp.code == 1) {
-        alert("success", context, () {});
+        alert("success", context, () {
+          GlobalParams.eventBus.fire("nftChange");
+          Navigator.pop(context);
+        });
       } else {
         alert(resp.msg, context, () {});
       }

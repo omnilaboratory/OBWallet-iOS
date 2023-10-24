@@ -46,6 +46,15 @@ class _EthereumPageState extends State<EthereumPage> {
         _updateBalance();
       }
     });
+
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "nftChange") {
+        currTypeIndex = 0;
+        nftList.clear();
+        setState(() {});
+        onClickType(1);
+      }
+    });
     super.initState();
     _updateBalance();
   }
