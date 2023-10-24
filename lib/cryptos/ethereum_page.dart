@@ -49,10 +49,7 @@ class _EthereumPageState extends State<EthereumPage> {
 
     GlobalParams.eventBus.on().listen((event) {
       if (event == "nftChange") {
-        currTypeIndex = 0;
-        nftList.clear();
-        setState(() {});
-        onClickType(1);
+        updateNftList();
       }
     });
     super.initState();
@@ -301,47 +298,51 @@ class _EthereumPageState extends State<EthereumPage> {
     currTypeIndex = type;
     if (type == 0) {}
     if (type == 1) {
-      nftList.clear();
-      AccountService.getInstance().getNftBalance(context).then((resp) {
-        log("getNftBalance ${resp.code} ${resp.data}");
-        if (resp.code == 1) {
-          CommonService.nftInfoList.clear();
-          List<NftToken> nftInfos = resp.data;
-          if (nftInfos.isNotEmpty) {
-            nftInfos.sort((a, b) => b.tokenId.compareTo(a.tokenId));
-
-            for (int i = 0; i < nftInfos.length; i++) {
-              NftToken token = nftInfos[i];
-              DollarFaceInfo nodeInfo = DollarFaceInfo(
-                  faceType:
-                      Utils.getEnumDollarFaceIndex(token.tokenId.toString()),
-                  amount: token.amt.toInt());
-
-              if (nodeInfo.amount <= 0) {
-                continue;
-              }
-              CommonService.nftInfoList.add(nodeInfo);
-              nftList.add(GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              NftExchange(faceInfo: nodeInfo)));
-                },
-                child: DollarFace(
-                    faceType: nodeInfo.faceType, amount: nodeInfo.amount),
-              ));
-            }
-          }
-        }
-        if (mounted) {
-          setState(() {});
-        }
-      });
+      updateNftList();
     }
     if (mounted) {
       setState(() {});
     }
+  }
+
+  void updateNftList(){
+    nftList.clear();
+    AccountService.getInstance().getNftBalance(context).then((resp) {
+      log("getNftBalance ${resp.code} ${resp.data}");
+      if (resp.code == 1) {
+        CommonService.nftInfoList.clear();
+        List<NftToken> nftInfos = resp.data;
+        if (nftInfos.isNotEmpty) {
+          nftInfos.sort((a, b) => b.tokenId.compareTo(a.tokenId));
+
+          for (int i = 0; i < nftInfos.length; i++) {
+            NftToken token = nftInfos[i];
+            DollarFaceInfo nodeInfo = DollarFaceInfo(
+                faceType:
+                Utils.getEnumDollarFaceIndex(token.tokenId.toString()),
+                amount: token.amt.toInt());
+
+            if (nodeInfo.amount <= 0) {
+              continue;
+            }
+            CommonService.nftInfoList.add(nodeInfo);
+            nftList.add(GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            NftExchange(faceInfo: nodeInfo)));
+              },
+              child: DollarFace(
+                  faceType: nodeInfo.faceType, amount: nodeInfo.amount),
+            ));
+          }
+        }
+      }
+      if (mounted) {
+        setState(() {});
+      }
+    });
   }
 }

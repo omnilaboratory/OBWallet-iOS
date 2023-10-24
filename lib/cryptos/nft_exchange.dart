@@ -468,8 +468,9 @@ class _NftExchangeState extends State<NftExchange> {
     request.nftTxid = await Eth.sendNftToPlatform(
         int.parse(EnumDollarFace.values[currSelectedFace.faceType].value),
         amount);
-    loading.remove();
+
     if (request.nftTxid.isEmpty) {
+      loading.remove();
       alert("wrong txid", context, () {});
       return;
     }
@@ -478,10 +479,11 @@ class _NftExchangeState extends State<NftExchange> {
       request.cardNo = _cardController.text.trim();
     }
     AccountService.getInstance().sellNft(context, request).then((resp) {
+      loading.remove();
       if (resp.code == 1) {
         alert("success", context, () {
-          GlobalParams.eventBus.fire("nftChange");
           Navigator.pop(context);
+          GlobalParams.eventBus.fire("nftChange");
         });
       } else {
         alert(resp.msg, context, () {});
