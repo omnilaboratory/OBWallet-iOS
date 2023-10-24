@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awallet/bean/enum_eth_key.dart';
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
@@ -138,8 +139,13 @@ class AccountService {
     return ret;
   }
 
-  Future<GrpcResponse> getNftBalance(BuildContext context) async {
+  Future<GrpcResponse> getNftBalance(BuildContext context,
+      {bool isAll = false}) async {
     var request = GetNftBlanceRequest();
+    if (isAll) {
+      request.address = GlobalParams
+          .dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.nftToPlatform];
+    }
     var ret = GrpcResponse();
     log("getNftBalance");
     try {
@@ -152,7 +158,8 @@ class AccountService {
     return ret;
   }
 
-  Future<GrpcResponse> sellNft(BuildContext context ,SellNftRequest request) async {
+  Future<GrpcResponse> sellNft(
+      BuildContext context, SellNftRequest request) async {
     log("$request");
     var ret = GrpcResponse();
     try {

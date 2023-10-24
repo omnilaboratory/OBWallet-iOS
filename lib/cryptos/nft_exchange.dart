@@ -482,8 +482,8 @@ class _NftExchangeState extends State<NftExchange> {
       loading.remove();
       if (resp.code == 1) {
         alert("success", context, () {
-          Navigator.pop(context);
           GlobalParams.eventBus.fire("nftChange");
+          Navigator.pop(context);
         });
       } else {
         alert(resp.msg, context, () {});

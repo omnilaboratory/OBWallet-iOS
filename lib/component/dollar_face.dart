@@ -5,6 +5,8 @@ import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
+List<NftToken> nftInfoList = [];
+
 class DollarFace extends StatefulWidget {
   final int faceType;
   final int amount;
@@ -23,27 +25,40 @@ class _DollarFaceState extends State<DollarFace> {
     imageUrl =
         "http://43.138.107.248:19091/nft/${EnumDollarFace.values[widget.faceType].value}.jpg";
 
-    AccountService.getInstance().getNftBalance(context).then((resp) {
-      if (resp.code == 1) {
-        List<NftToken> nftInfoList = resp.data;
-        log("$nftInfoList");
-        if (nftInfoList.isNotEmpty) {
-          for (int i = 0; i < nftInfoList.length; i++) {
-            var nftInfo = nftInfoList[i];
-            if (nftInfo.tokenId == widget.amount) {
-              if (mounted) {
-                if (imageUrl != nftInfo.imageUrl) {
-                  setState(() {
-                    imageUrl = nftInfo.imageUrl;
-                  });
+    if (nftInfoList.isNotEmpty) {
+      for (int i = 0; i < nftInfoList.length; i++) {
+        var nftInfo = nftInfoList[i];
+        if (nftInfo.tokenId == EnumDollarFace.values[widget.faceType].value) {
+          log("$nftInfo");
+          imageUrl = nftInfo.imageUrl;
+          break;
+        }
+      }
+    } else {
+      AccountService.getInstance()
+          .getNftBalance(context, isAll: true)
+          .then((resp) {
+        if (resp.code == 1) {
+          List<NftToken> tempList = resp.data;
+          if (tempList.isNotEmpty) {
+            nftInfoList = tempList;
+            for (int i = 0; i < nftInfoList.length; i++) {
+              var nftInfo = nftInfoList[i];
+              if (nftInfo.tokenId == EnumDollarFace.values[widget.faceType].value) {
+                if (mounted) {
+                  if (imageUrl != nftInfo.imageUrl) {
+                    setState(() {
+                      imageUrl = nftInfo.imageUrl;
+                    });
+                  }
                 }
+                break;
               }
-              break;
             }
           }
         }
-      }
-    });
+      });
+    }
 
     super.initState();
   }

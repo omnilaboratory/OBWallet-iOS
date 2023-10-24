@@ -308,7 +308,6 @@ class _EthereumPageState extends State<EthereumPage> {
   void updateNftList(){
     nftList.clear();
     AccountService.getInstance().getNftBalance(context).then((resp) {
-      log("getNftBalance ${resp.code} ${resp.data}");
       if (resp.code == 1) {
         CommonService.nftInfoList.clear();
         List<NftToken> nftInfos = resp.data;
