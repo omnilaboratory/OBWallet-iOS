@@ -296,7 +296,6 @@ class _EthereumPageState extends State<EthereumPage> {
     if (_refreshListController.isRefresh || _refreshListController.isLoading) {
       return;
     }
-
     currTypeIndex = type;
     if (type == 0) {}
     if (type == 1) {
@@ -308,12 +307,12 @@ class _EthereumPageState extends State<EthereumPage> {
   }
 
   void updateNftList() {
+    nftList.clear();
     AccountService.getInstance().getNftBalance(context).then((resp) {
       if (resp.code == 1) {
         CommonService.nftInfoList.clear();
         List<NftToken> nftInfos = resp.data;
         if (nftInfos.isNotEmpty) {
-          nftList.clear();
           nftInfos.sort((a, b) => b.tokenId.compareTo(a.tokenId));
 
           for (int i = 0; i < nftInfos.length; i++) {

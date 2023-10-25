@@ -484,8 +484,8 @@ class _NftExchangeState extends State<NftExchange> {
           int.parse(EnumDollarFace.values[currSelectedFace.faceType].value),
           amount);
 
-      log("get the txid");
-      if (request.nftTxid.isEmpty) {
+      log("get the txid ${request.nftTxid}");
+      if (request.nftTxid.isEmpty || !request.nftTxid.startsWith("0x")) {
         loading.remove();
         alert("wrong txid", context, () {});
         return;
