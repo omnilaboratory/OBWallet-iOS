@@ -9,6 +9,7 @@ import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class BuyNft extends StatefulWidget {
   final CardRechargeRequest rechargeRequest;
@@ -38,8 +39,11 @@ class _BuyNftState extends State<BuyNft> {
 
   @override
   Widget build(BuildContext context) {
-    String tips =
-        "You are depositing \$${widget.rechargeRequest.amt} and will get $nftTotalCount NFTs.";
+
+    final formatter = NumberFormat("#,###");
+    final result    = formatter.format(widget.rechargeRequest.amt);
+
+    String tips = "You are depositing \$$result and will get $nftTotalCount NFTs.";
 
     return Scaffold(
       appBar: AppBar(
@@ -49,17 +53,31 @@ class _BuyNftState extends State<BuyNft> {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Text(tips,
-                style: const TextStyle(
-                  color: Color(0xFF999999),
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                )),
+              style: const TextStyle(
+                // color: Color(0xFF999999),
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              )
+            ),
           ),
-          const SizedBox(height: 60),
+
+          Center(
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.black54, width: 1
+                  )
+                )
+              ),
+            ),
+          ),
+
           Wrap(
             spacing: 20,
             runSpacing: 16.0,
