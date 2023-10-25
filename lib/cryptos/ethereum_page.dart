@@ -49,7 +49,9 @@ class _EthereumPageState extends State<EthereumPage> {
 
     GlobalParams.eventBus.on().listen((event) {
       if (event == "nftChange") {
-        updateNftList();
+        if(mounted){
+          updateNftList();
+        }
       }
     });
     super.initState();
@@ -305,20 +307,20 @@ class _EthereumPageState extends State<EthereumPage> {
     }
   }
 
-  void updateNftList(){
-    nftList.clear();
+  void updateNftList() {
     AccountService.getInstance().getNftBalance(context).then((resp) {
       if (resp.code == 1) {
         CommonService.nftInfoList.clear();
         List<NftToken> nftInfos = resp.data;
         if (nftInfos.isNotEmpty) {
+          nftList.clear();
           nftInfos.sort((a, b) => b.tokenId.compareTo(a.tokenId));
 
           for (int i = 0; i < nftInfos.length; i++) {
             NftToken token = nftInfos[i];
             DollarFaceInfo nodeInfo = DollarFaceInfo(
                 faceType:
-                Utils.getEnumDollarFaceIndex(token.tokenId.toString()),
+                    Utils.getEnumDollarFaceIndex(token.tokenId.toString()),
                 amount: token.amt.toInt());
 
             if (nodeInfo.amount <= 0) {
@@ -330,8 +332,7 @@ class _EthereumPageState extends State<EthereumPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            NftExchange(faceInfo: nodeInfo)));
+                        builder: (context) => NftExchange(faceInfo: nodeInfo)));
               },
               child: DollarFace(
                   faceType: nodeInfo.faceType, amount: nodeInfo.amount),

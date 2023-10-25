@@ -60,6 +60,11 @@ class _NftExchangeState extends State<NftExchange> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     log("build");
     return GestureDetector(
@@ -466,11 +471,20 @@ class _NftExchangeState extends State<NftExchange> {
     request.coinAmt = double.parse(_amountDollarController.text);
 
     var loading = showLoading(context);
+    Future.delayed(const Duration(seconds: 30), () {
+      if (mounted) {
+        if (loading.mounted) {
+          loading.remove();
+        }
+      }
+    });
+    log("go sendNftToPlatform");
     try {
       request.nftTxid = await Eth.sendNftToPlatform(
           int.parse(EnumDollarFace.values[currSelectedFace.faceType].value),
           amount);
 
+      log("get the txid");
       if (request.nftTxid.isEmpty) {
         loading.remove();
         alert("wrong txid", context, () {});
