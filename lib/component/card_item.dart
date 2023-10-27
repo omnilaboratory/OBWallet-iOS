@@ -1,8 +1,8 @@
 import 'package:awallet/bean/card_item_info.dart';
 import 'package:awallet/bean/tips.dart';
-import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 import 'common.dart';
 
@@ -21,7 +21,9 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatter = NumberFormat("#,###.00");
     var size = MediaQuery.of(context).size;
+    
     return Stack(
       alignment: AlignmentDirectional.bottomEnd,
       children: [
@@ -30,7 +32,7 @@ class CardItem extends StatelessWidget {
           children: [
             Container(
               width: size.width,
-              height: 160,
+              height: 200,
               decoration: ShapeDecoration(
                 color: selected
                     ? const Color(0xFFC1C1C1)
@@ -70,37 +72,38 @@ class CardItem extends StatelessWidget {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 114, right: 20),
+          padding: const EdgeInsets.only(bottom: 160, right: 20),
           child: Text(
             cardItemInfo.country,
             style: const TextStyle(
               color: Color(0xFF333333),
-              fontSize: 20,
-              fontWeight: FontWeight.w400,
+              fontSize: 18,
+              // fontWeight: FontWeight.w400,
+              fontStyle: FontStyle.italic
             ),
           ),
         ),
         buildCardNo(),
         Container(
-            padding: const EdgeInsets.only(bottom: 30),
+            padding: const EdgeInsets.only(bottom: 45),
             child: Row(
               children: [
                 const SizedBox(width: 20),
                 const Text(
                   '\$',
                   style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
+                    color: Color.fromARGB(255, 84, 81, 81),
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(width: 6),
+                const SizedBox(width: 3),
                 Text(
-                  StringTools.formatCurrencyNum(cardItemInfo.balance),
+                  formatter.format(cardItemInfo.balance),
                   style: const TextStyle(
                     color: Color(0xFF333333),
-                    fontSize: 32,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
@@ -141,7 +144,7 @@ class CardItem extends StatelessWidget {
   Container buildCardNo() {
     if (type == 1) {
       return Container(
-        padding: const EdgeInsets.only(bottom: 80),
+        padding: const EdgeInsets.only(bottom: 100),
         child: Row(
           children: [
             const SizedBox(width: 20),
@@ -159,7 +162,7 @@ class CardItem extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.only(bottom: 80),
+      padding: const EdgeInsets.only(bottom: 100),
       child: Row(
         children: [
           const SizedBox(width: 20),

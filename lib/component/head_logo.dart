@@ -12,16 +12,18 @@ class HeadLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Image(
-            width: 24,
-            height: 33,
-            image: AssetImage("asset/images/logo_head.png")),
+        // const Image(
+        //   width: 24,
+        //   height: 33,
+        //   image: AssetImage("asset/images/logo_head.png")
+        // ),
         Text(title,
-            style: const TextStyle(
-              color: Color(0xFF333333),
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-            )),
+          style: const TextStyle(
+            color: Color(0xFF333333),
+            fontSize: 24,
+            fontWeight: FontWeight.w600,
+          )
+        ),
       ],
     );
   }

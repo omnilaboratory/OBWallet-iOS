@@ -19,10 +19,10 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
-import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class Account extends StatefulWidget {
@@ -94,23 +94,34 @@ class _AccountState extends State<Account> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               InkWell(
-                  onTap: () {
-                    onClickType(0);
-                  },
-                  child: Text("Exchange",
-                      style: TextStyle(
-                          color: currTypeIndex == 0
-                              ? Colors.lightBlueAccent
-                              : Colors.black))),
+                onTap: () {
+                  onClickType(0);
+                },
+                child: Text(
+                  "Exchange",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: currTypeIndex == 0
+                      ? Colors.blue
+                      : Colors.grey
+                    )
+                  )
+              ),
+
               InkWell(
-                  onTap: () {
-                    onClickType(1);
-                  },
-                  child: Text("Account",
-                      style: TextStyle(
-                          color: currTypeIndex == 1
-                              ? Colors.lightBlueAccent
-                              : Colors.black)))
+                onTap: () {
+                  onClickType(1);
+                },
+                child: Text(
+                  "Account",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: currTypeIndex == 1
+                      ? Colors.blue
+                      : Colors.grey
+                    )
+                )
+              )
             ],
           ),
           const SizedBox(height: 10),
@@ -233,6 +244,8 @@ class _AccountState extends State<Account> {
   }
 
   Widget buildBalance() {
+    final formatter = NumberFormat("#,###.00");
+
     return Container(
       padding: const EdgeInsets.only(left: 30),
       width: double.infinity,
@@ -243,6 +256,7 @@ class _AccountState extends State<Account> {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
+      
       child: Align(
           alignment: Alignment.centerLeft,
           child: Text.rich(
@@ -252,16 +266,17 @@ class _AccountState extends State<Account> {
                   text: '\$ ',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 TextSpan(
-                  text: StringTools.formatCurrencyNum(totalBalanceUsd),
+                  // text: StringTools.formatCurrencyNum(totalBalanceUsd),
+                  text: formatter.format(totalBalanceUsd),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 32,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],

@@ -149,18 +149,20 @@ class _CardPartState extends State<CardPart> {
                   },
                   child: Text("Payment",
                       style: TextStyle(
-                          color: currTypeIndex == 0
-                              ? Colors.lightBlueAccent
-                              : Colors.black))),
+                        fontSize: 16,
+                        color: currTypeIndex == 0
+                            ? Colors.blue
+                            : Colors.grey))),
               InkWell(
                   onTap: () {
                     onClickType(1);
                   },
                   child: Text("Account",
                       style: TextStyle(
-                          color: currTypeIndex == 1
-                              ? Colors.lightBlueAccent
-                              : Colors.black))),
+                        fontSize: 16,
+                        color: currTypeIndex == 1
+                            ? Colors.blue
+                            : Colors.grey))),
             ],
           ),
           const SizedBox(height: 10),
