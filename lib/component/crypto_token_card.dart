@@ -36,18 +36,18 @@ class _CryptoTokenCardState extends State<CryptoTokenCard> {
                       "${StringTools.formatCryptoNum(widget.tokenInfo.balance)} ${widget.tokenInfo.name}",
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
+                        fontSize: 26,
+                        fontWeight: FontWeight.w600,
                       )),
                   const SizedBox(height: 10),
                   Row(
                     children: [
                       Text(
-                          "\$ ${StringTools.formatCurrencyNum(widget.tokenInfo.balanceOfDollar)}",
+                          "\$${StringTools.formatCurrencyNum(widget.tokenInfo.balanceOfDollar)}",
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
                           )),
                     ],
                   ),

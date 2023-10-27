@@ -130,18 +130,20 @@ class _EthereumPageState extends State<EthereumPage> {
                   },
                   child: Text("Tokens",
                       style: TextStyle(
-                          color: currTypeIndex == 0
-                              ? Colors.lightBlueAccent
-                              : Colors.black))),
+                        fontSize: 16,
+                        color: currTypeIndex == 0
+                            ? Colors.blue
+                            : Colors.grey))),
               InkWell(
                   onTap: () {
                     onClickType(1);
                   },
                   child: Text("NFTs",
                       style: TextStyle(
-                          color: currTypeIndex == 1
-                              ? Colors.lightBlueAccent
-                              : Colors.black)))
+                        fontSize: 16,
+                        color: currTypeIndex == 1
+                            ? Colors.blue
+                            : Colors.grey)))
             ],
           ),
           const SizedBox(height: 20),

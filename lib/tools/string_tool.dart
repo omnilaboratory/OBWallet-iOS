@@ -1,4 +1,5 @@
 import 'package:decimal/decimal.dart';
+import 'package:intl/intl.dart';
 
 class StringTools {
   static String starString(String? longText, {int maxLength = 16}) {
@@ -24,12 +25,18 @@ class StringTools {
 
   static String formatCryptoNum(double? num) {
     num ??= 0;
-    return Decimal.parse(num.toString()).floor(scale: 6).toString();
+    final formatter = NumberFormat("#,###.######");
+    final result    = formatter.format(num);
+    return num == 0 ? '0' : result;
+    // return Decimal.parse(num.toString()).floor(scale: 6).toString();
   }
 
   static String formatCurrencyNum(double? num) {
     num ??= 0;
-    return Decimal.parse(num.toString()).floor(scale: 2).toString();
+    final formatter = NumberFormat("#,###.00");
+    final result    = formatter.format(num);
+    return num == 0 ? '0' : result;
+    // return Decimal.parse(num.toString()).floor(scale: 2).toString();
   }
 
   static List<int> getNftCountByMoneyAmount(double amount) {
