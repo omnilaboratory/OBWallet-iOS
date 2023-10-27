@@ -157,8 +157,13 @@ alert(String msg, BuildContext context, Function? callback,
     context: context,
     type: AlertType.none,
     onWillPopActive: true,
+    title: 'Message',
     desc: msg,
     buttons: btns,
+    style: const AlertStyle(
+      descStyle: TextStyle(fontSize: 19),
+      isCloseButton: false
+    )
   ).show();
 }
 
