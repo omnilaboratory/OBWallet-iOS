@@ -154,17 +154,15 @@ alert(String msg, BuildContext context, Function? callback,
   ));
 
   Alert(
-    context: context,
-    type: AlertType.none,
-    onWillPopActive: true,
-    title: 'Message',
-    desc: msg,
-    buttons: btns,
-    style: const AlertStyle(
-      descStyle: TextStyle(fontSize: 19),
-      isCloseButton: false
-    )
-  ).show();
+          context: context,
+          type: AlertType.none,
+          onWillPopActive: true,
+          title: 'Message',
+          desc: msg,
+          buttons: btns,
+          style: const AlertStyle(
+              descStyle: TextStyle(fontSize: 19), isCloseButton: false))
+      .show();
 }
 
 OverlayEntry showLoading(BuildContext context) {
@@ -172,5 +170,10 @@ OverlayEntry showLoading(BuildContext context) {
     builder: (context) => const LoadingDialog(),
   );
   Overlay.of(context).insert(entry);
+  Future.delayed(const Duration(seconds: 40), () {
+    if (entry.mounted) {
+      entry.remove();
+    }
+  });
   return entry;
 }

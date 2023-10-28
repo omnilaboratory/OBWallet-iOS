@@ -30,7 +30,6 @@ class _DollarFaceState extends State<DollarFace> {
         if (resp.code == 1) {
           List<NftToken> tempList = resp.data;
           if (tempList.isNotEmpty) {
-            log("nftInfoList ${nftInfoList.length}");
             nftInfoList = tempList;
             for (int i = 0; i < nftInfoList.length; i++) {
               var nftInfo = nftInfoList[i];
