@@ -30,6 +30,7 @@ enum Tips {
   kycPassed(
       "KYC has been passed and please check the card page after a while."),
   kycRejected("KYC is rejected and please do it again."),
+  wrongDateFormat("Wrong Date of birth (DD-MM-YYYY)."),
 
   checkInputSocialId("Please input the social Id."),
   emptyCardNumber("The card number cannot be empty."),

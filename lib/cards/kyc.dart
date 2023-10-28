@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
@@ -9,7 +7,6 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
-import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +27,8 @@ showKycTips(BuildContext context) {
       showDialog(
           context: context,
           builder: (context) {
-        return const Kyc();
-      });
+            return const Kyc();
+          });
     });
     return;
   }
@@ -132,14 +129,12 @@ class _KycState extends State<Kyc> {
                                   children: [
                                     Expanded(
                                         child: createTextFormField(
-                                            _firstNameController,
-                                            "First Name",
+                                            _firstNameController, "First Name",
                                             maxLength: 20)),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
-                                            _lastNameController,
-                                            "Last Name",
+                                            _lastNameController, "Last Name",
                                             maxLength: 20)),
                                   ],
                                 ),
@@ -196,7 +191,19 @@ class _KycState extends State<Kyc> {
                                 createTextFormField(_dateOfBirthController,
                                     "Date of birth (DD-MM-YYYY)",
                                     maxLength: 10,
-                                    icon: const Icon(Icons.date_range)),
+                                    icon: const Icon(Icons.date_range),
+                                    validator: (v) {
+                                  if (v == null || v.trim().isEmpty) {
+                                    return Tips.wrongDateFormat.value;
+                                  }
+
+                                  final regex = RegExp(r'^\d{2}-\d{2}-\d{4}$');
+                                  if (!regex.hasMatch(v.trim())) {
+                                    return Tips.wrongDateFormat.value;
+                                  }
+
+                                  return null;
+                                }),
                                 const SizedBox(height: 16),
                                 createTextFormField(
                                     _address1Controller, "Address Line"),
@@ -209,8 +216,7 @@ class _KycState extends State<Kyc> {
                                   children: [
                                     Expanded(
                                         child: createTextFormField(
-                                            _stateController,
-                                            "State/Region")),
+                                            _stateController, "State/Region")),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
@@ -279,7 +285,6 @@ class _KycState extends State<Kyc> {
                             onPressed: () {
                               if ((_formKey.currentState as FormState)
                                   .validate()) {
-
                                 onKyc();
                               }
                             },
@@ -328,9 +333,13 @@ class _KycState extends State<Kyc> {
         info.postCode = _postalController.value.text.trim();
         info.countryCode =
             Utils.getCountryCodeByCode(selectedCountry!.countryCode);
-        showDialog(context: context,  builder: (context) {
-          return SelectCardType(userInfo: info,);
-        });
+        showDialog(
+            context: context,
+            builder: (context) {
+              return SelectCardType(
+                userInfo: info,
+              );
+            });
       }
     });
   }
