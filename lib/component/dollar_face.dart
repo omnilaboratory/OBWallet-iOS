@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:fixnum/src/int64.dart';
 import 'package:awallet/bean/enum_dollar_face.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
@@ -22,29 +22,19 @@ class _DollarFaceState extends State<DollarFace> {
 
   @override
   void initState() {
-    imageUrl =
-        "http://43.138.107.248:19091/nft/${EnumDollarFace.values[widget.faceType].value}.jpg";
-
-    if (nftInfoList.isNotEmpty) {
-      for (int i = 0; i < nftInfoList.length; i++) {
-        var nftInfo = nftInfoList[i];
-        if (nftInfo.tokenId == EnumDollarFace.values[widget.faceType].value) {
-          log("$nftInfo");
-          imageUrl = nftInfo.imageUrl;
-          break;
-        }
-      }
-    } else {
+    if (nftInfoList.isEmpty) {
+      log("initState get nft images ${widget.faceType}");
       AccountService.getInstance()
           .getNftBalance(context, isAll: true)
           .then((resp) {
         if (resp.code == 1) {
           List<NftToken> tempList = resp.data;
           if (tempList.isNotEmpty) {
+            log("nftInfoList ${nftInfoList.length}");
             nftInfoList = tempList;
             for (int i = 0; i < nftInfoList.length; i++) {
               var nftInfo = nftInfoList[i];
-              if (nftInfo.tokenId == EnumDollarFace.values[widget.faceType].value) {
+              if (nftInfo.tokenId ==Int64.parseInt( EnumDollarFace.values[widget.faceType].value)) {
                 if (mounted) {
                   if (imageUrl != nftInfo.imageUrl) {
                     setState(() {
@@ -59,12 +49,23 @@ class _DollarFaceState extends State<DollarFace> {
         }
       });
     }
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    imageUrl =
+    "http://43.138.107.248:19091/nft/${EnumDollarFace.values[widget.faceType].value}.jpg";
+
+    if (nftInfoList.isNotEmpty) {
+      for (int i = 0; i < nftInfoList.length; i++) {
+        var nftInfo = nftInfoList[i];
+        if (nftInfo.tokenId == Int64.parseInt(EnumDollarFace.values[widget.faceType].value)) {
+          imageUrl = nftInfo.imageUrl;
+          break;
+        }
+      }
+    }
     return Column(
       children: [
         Stack(
