@@ -96,6 +96,15 @@ class _CardHomeState extends State<CardHome>
                       imageClr: kycClr[currKycClrIndex],
                       imageUrl: "asset/images/icon_kyc.png",
                       onTap: () {
+
+                        // showDialog(
+                        //     context: context,
+                        //     builder: (context) {
+                        //       return const Kyc();
+                        //     });
+                        //
+                        // return;
+
                         if (CommonService.userInfo!.kycStatus ==
                             EnumKycStatus.none.value) {
                           showDialog(

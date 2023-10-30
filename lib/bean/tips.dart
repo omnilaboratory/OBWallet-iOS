@@ -23,6 +23,7 @@ enum Tips {
   wrongPass("Please enter the correct password."),
   wrongPassMatch("Wrong password and confirmation password."),
   updatedPassword("Password updated."),
+  selectDateOfBirth("Please select the date of birth."),
   selectCountry("Please select the country."),
 
   kycNeed("You need KYC first."),

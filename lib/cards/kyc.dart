@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
@@ -8,6 +10,7 @@ import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:awallet/utils.dart';
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +51,6 @@ class _KycState extends State<Kyc> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _mobileNumberController = TextEditingController();
-  final TextEditingController _dateOfBirthController = TextEditingController();
   final TextEditingController _address1Controller = TextEditingController();
   final TextEditingController _address2Controller = TextEditingController();
   final TextEditingController _stateController = TextEditingController();
@@ -56,6 +58,9 @@ class _KycState extends State<Kyc> {
   final TextEditingController _postalController = TextEditingController();
   Country? selectedCountry = CountryService().findByCode("SG");
   Country? selectedPhoneCountry = CountryService().findByCode("SG");
+
+  final List<DateTime?> _dates = [];
+  var dateOfBirthTips = "Date of birth";
 
   @override
   void initState() {
@@ -188,22 +193,38 @@ class _KycState extends State<Kyc> {
                                   ],
                                 ),
                                 const SizedBox(height: 16),
-                                createTextFormField(_dateOfBirthController,
-                                    "Date of birth (DD-MM-YYYY)",
-                                    maxLength: 10,
-                                    icon: const Icon(Icons.date_range),
-                                    validator: (v) {
-                                  if (v == null || v.trim().isEmpty) {
-                                    return Tips.wrongDateFormat.value;
-                                  }
+                                Container(
+                                  height: 48,
+                                  padding: const EdgeInsets.only(left: 6),
+                                  decoration: ShapeDecoration(
+                                    shape: outlineInputBorder,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      const Icon(Icons.date_range),
+                                      const SizedBox(width: 10),
+                                      GestureDetector(
+                                          onTap: () async {
+                                            var results = await showCalendarDatePicker2Dialog(
+                                              context: context,
+                                              config: CalendarDatePicker2WithActionButtonsConfig(),
+                                              dialogSize: const Size(325, 400),
+                                              value: _dates,
+                                              borderRadius: BorderRadius.circular(15),
+                                            );
+                                            log("$results");
 
-                                  final regex = RegExp(r'^\d{2}-\d{2}-\d{4}$');
-                                  if (!regex.hasMatch(v.trim())) {
-                                    return Tips.wrongDateFormat.value;
-                                  }
-
-                                  return null;
-                                }),
+                                            if(results!=null){
+                                              var dateStr = "${results[0]!.day}-${results[0]!.month}-${results[0]!.year}";
+                                              dateOfBirthTips = dateStr;
+                                              setState(() {
+                                              });
+                                            }
+                                          },
+                                          child: Text(dateOfBirthTips)),
+                                    ],
+                                  ),
+                                ),
                                 const SizedBox(height: 16),
                                 createTextFormField(
                                     _address1Controller, "Address Line"),
@@ -313,6 +334,12 @@ class _KycState extends State<Kyc> {
       showToast(Tips.selectCountry.value);
       return;
     }
+
+    if (dateOfBirthTips == "Date of birth") {
+      showToast(Tips.selectDateOfBirth.value);
+      return;
+    }
+
     FocusScope.of(context).requestFocus(FocusNode());
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
@@ -325,7 +352,7 @@ class _KycState extends State<Kyc> {
         info.lastName = _lastNameController.value.text.trim();
         info.mobile = selectedPhoneCountry!.phoneCode +
             _mobileNumberController.value.text.trim();
-        info.dob = _dateOfBirthController.value.text.trim();
+        info.dob = dateOfBirthTips;
         info.address1 = _address1Controller.value.text.trim();
         info.address2 = _address2Controller.value.text.trim();
         info.state = _stateController.value.text.trim();
