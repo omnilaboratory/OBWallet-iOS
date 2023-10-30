@@ -53,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             prefixIcon: Icon(Icons.person)),
                         // 校验用户名
                         validator: (v) {
-                          return v!.trim().isNotEmpty ? null : "wrong username";
+                          return v!.trim().isNotEmpty ? null : "Wrong username";
                         },
                       ),
                       const SizedBox(height: 20),

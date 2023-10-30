@@ -123,10 +123,10 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     return AppBar(
         automaticallyImplyLeading: false,
         title: const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Image(
-              width: 24,
-              height: 33,
-              image: AssetImage("asset/images/logo_head.png")),
+          // Image(
+          //     width: 24,
+          //     height: 33,
+          //     image: AssetImage("asset/images/logo_head.png")),
           Text('Sign Up',
               style: TextStyle(
                 color: Color(0xFF333333),
@@ -264,7 +264,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                         updatePswStrength(_pswController.text);
                       },
                       validator: (v) {
-                        return v!.trim().isNotEmpty ? null : "wrong Password";
+                        return v!.trim().isNotEmpty ? null : "Wrong Password";
                       },
                     ),
                   ),

@@ -487,7 +487,7 @@ class _NftExchangeState extends State<NftExchange> {
       log("get the txid ${request.nftTxid}");
       if (request.nftTxid.isEmpty || !request.nftTxid.startsWith("0x")) {
         loading.remove();
-        alert("wrong txid", context, () {});
+        alert("Wrong txid", context, () {});
         return;
       }
 

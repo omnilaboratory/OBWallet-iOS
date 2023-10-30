@@ -122,10 +122,10 @@ class _ForgetPswState extends State<ForgetPsw> {
     return AppBar(
         automaticallyImplyLeading: false,
         title: const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Image(
-              width: 24,
-              height: 33,
-              image: AssetImage("asset/images/logo_head.png")),
+          // Image(
+          //     width: 24,
+          //     height: 33,
+          //     image: AssetImage("asset/images/logo_head.png")),
           Text('Forget Password',
               style: TextStyle(
                 color: Color(0xFF333333),
@@ -257,7 +257,7 @@ class _ForgetPswState extends State<ForgetPsw> {
                         updatePswStrength(_pswController.text);
                       },
                       validator: (v) {
-                        return v!.trim().isNotEmpty ? null : "wrong New Password";
+                        return v!.trim().isNotEmpty ? null : "Wrong New Password";
                       },
                     ),
                   ),

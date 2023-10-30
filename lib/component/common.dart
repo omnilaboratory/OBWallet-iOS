@@ -65,7 +65,7 @@ TextFormField createTextFormField(
       if (validator != null) {
         return validator(v);
       }
-      return v!.trim().isNotEmpty ? null : "wrong $hintText";
+      return v!.trim().isNotEmpty ? null : "Wrong $hintText";
     },
   );
 }

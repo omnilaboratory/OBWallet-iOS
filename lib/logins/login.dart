@@ -132,7 +132,7 @@ class _LoginState extends State<Login> {
                             'Sign Up',
                             style: TextStyle(
                               color: Color(0xFF06D78F),
-                              fontSize: 15,
+                              fontSize: 20,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -152,7 +152,7 @@ class _LoginState extends State<Login> {
                                 style: TextStyle(
                                   color: Color(0xFF666666),
                                   fontSize: 15,
-                                  fontWeight: FontWeight.w500,
+                                  decoration: TextDecoration.underline
                                 ),
                               ),
                             )),

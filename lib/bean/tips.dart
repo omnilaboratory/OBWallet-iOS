@@ -16,7 +16,7 @@ enum Tips {
   cardNoIsOnClipboard("Card NO is on your clipboard."),
   wifIsOnClipboard("WIF is on your clipboard."),
   emptyWif("Empty WIF."),
-  wrongEmail("Wrong email."),
+  wrongEmail("Wrong email"),
   emptyPassword("The password cannot be empty."),
   waiting("Please wait."),
   getVerifyCode("Please get verification code first."),

@@ -146,7 +146,7 @@ class _UpdatePswState extends State<UpdatePsw> {
                       updatePswStrength(_pswController.text);
                     },
                     validator: (v) {
-                      return v!.trim().isNotEmpty ? null : "wrong New Password";
+                      return v!.trim().isNotEmpty ? null : "Wrong New Password";
                     },
                   ),
                 ),
