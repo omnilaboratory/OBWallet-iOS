@@ -143,7 +143,7 @@ class _CardRechargeState extends State<CardRecharge> {
                       },
                       cardHolderDecoration: InputDecoration(
                         prefixIcon: const Icon(Icons.attach_money),
-                        hintText: 'Amount',
+                        hintText: 'Amount(Max: \$99)',
                         hintStyle: const TextStyle(color: Colors.grey),
                         border: _outlineInputBorder,
                         focusedBorder: _outlineInputBorder,
