@@ -72,7 +72,7 @@ class _CardRechargeState extends State<CardRecharge> {
   updateKycState() {
     if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value ||
         CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
-      if (cardHolderName != null && cardHolderName.isNotEmpty) {
+      if (cardHolderName.isNotEmpty) {
         getDcPayUrl(double.parse(cardHolderName));
       }
     }
@@ -129,6 +129,18 @@ class _CardRechargeState extends State<CardRecharge> {
                       expiryDate: expiryDate,
                       themeColor: Colors.blue,
                       textColor: Colors.black,
+                      cardHolderValidator: (String? value) {
+                        if (value!.isEmpty || double.parse(value) == 0) {
+                          return "Please input a valid amount";
+                        }
+
+                        if(widget.type == EnumChargeType.deposit){
+                          if(double.parse(value) >= 100){
+                            return "Please input a valid amount: Max: 99";
+                          }
+                        }
+                        return null;
+                      },
                       cardHolderDecoration: InputDecoration(
                         prefixIcon: const Icon(Icons.attach_money),
                         hintText: 'Amount',
@@ -239,8 +251,9 @@ class _CardRechargeState extends State<CardRecharge> {
               const SizedBox(width: 6),
               Text(
                 widget.type == EnumChargeType.deposit
-                  ? StringTools.formatCurrencyNum(totalBalanceUsd)
-                  : StringTools.formatCurrencyNum(CommonService.cardInfo.balance),
+                    ? StringTools.formatCurrencyNum(totalBalanceUsd)
+                    : StringTools.formatCurrencyNum(
+                        CommonService.cardInfo.balance),
                 style: const TextStyle(
                   color: Color(0xFF333333),
                   fontSize: 32,
