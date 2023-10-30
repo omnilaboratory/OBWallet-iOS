@@ -62,18 +62,33 @@ class _ProfileHomeState extends State<ProfileHome> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text("Email: ${CommonService.userInfo!.email}",
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              )),
-          Text("Username: ${CommonService.userInfo!.userName}",
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              )),
+          Row(
+            children: [
+              const Icon(Icons.person, color: Colors.white, size: 30),
+              const SizedBox(width: 10),
+              Text(
+                CommonService.userInfo!.userName,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                )
+              ),
+            ],
+          ),
+          
+          Row(
+            children: [
+              const Icon(Icons.email, color: Colors.white, size: 30),
+              const SizedBox(width: 10),
+              Text(
+                CommonService.userInfo!.email,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                )
+              ),
+            ],
+          ),
         ],
       ),
     );
