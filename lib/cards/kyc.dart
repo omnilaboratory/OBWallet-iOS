@@ -13,6 +13,7 @@ import 'package:awallet/utils.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../component/bottom_button.dart';
 
@@ -205,20 +206,22 @@ class _KycState extends State<Kyc> {
                                       const SizedBox(width: 10),
                                       GestureDetector(
                                           onTap: () async {
-                                            var results = await showCalendarDatePicker2Dialog(
+                                            var results =
+                                                await showCalendarDatePicker2Dialog(
                                               context: context,
-                                              config: CalendarDatePicker2WithActionButtonsConfig(),
+                                              config:
+                                                  CalendarDatePicker2WithActionButtonsConfig(),
                                               dialogSize: const Size(325, 400),
                                               value: _dates,
-                                              borderRadius: BorderRadius.circular(15),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
                                             );
-                                            log("$results");
-
-                                            if(results!=null){
-                                              var dateStr = "${results[0]!.day}-${results[0]!.month}-${results[0]!.year}";
-                                              dateOfBirthTips = dateStr;
-                                              setState(() {
-                                              });
+                                            if (results != null &&
+                                                results.isNotEmpty) {
+                                              dateOfBirthTips =
+                                                  DateFormat("dd-MM-yyyy")
+                                                      .format(results[0]!);
+                                              setState(() {});
                                             }
                                           },
                                           child: Text(dateOfBirthTips)),
