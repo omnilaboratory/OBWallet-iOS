@@ -4,7 +4,6 @@ import 'package:awallet/bean/tips.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 
 import 'common.dart';
 
@@ -21,8 +20,6 @@ class _CryptoWalletCardState extends State<CryptoWalletCard> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
-    final formatter = NumberFormat("#,###.00");
-    final balance   = formatter.format(widget.walletInfo.balance);
 
     return Container(
       width: size.width * 0.9,
@@ -38,13 +35,15 @@ class _CryptoWalletCardState extends State<CryptoWalletCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          AutoSizeText("\$ $balance",
-              maxLines: 1,
-              maxFontSize: 32,
-              minFontSize: 28,
-              style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white)),
+          AutoSizeText("\$ ${StringTools.formatCurrencyNum(widget.walletInfo.balance)}",
+            maxLines: 1,
+            maxFontSize: 32,
+            minFontSize: 28,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Colors.white
+            )
+          ),
           const SizedBox(height: 10),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,

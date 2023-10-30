@@ -10,7 +10,7 @@ class CryptoTokenItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    // var size = MediaQuery.of(context).size;
     return Container(
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 10),

@@ -19,10 +19,10 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class Account extends StatefulWidget {
@@ -244,8 +244,6 @@ class _AccountState extends State<Account> {
   }
 
   Widget buildBalance() {
-    final formatter = NumberFormat("#,###.00");
-
     return Container(
       padding: const EdgeInsets.only(left: 30),
       width: double.infinity,
@@ -271,8 +269,7 @@ class _AccountState extends State<Account> {
                   ),
                 ),
                 TextSpan(
-                  // text: StringTools.formatCurrencyNum(totalBalanceUsd),
-                  text: formatter.format(totalBalanceUsd),
+                  text: StringTools.formatCurrencyNum(totalBalanceUsd),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 32,

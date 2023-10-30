@@ -6,6 +6,7 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -166,13 +167,13 @@ class _SendState extends State<Send> {
                 '\$',
                 style: TextStyle(
                   color: Color(0xFF333333),
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 25,
+                  // fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(width: 6),
               Text(
-                '$totalBalanceUsd',
+                StringTools.formatCurrencyNum(totalBalanceUsd),
                 style: const TextStyle(
                   color: Color(0xFF333333),
                   fontSize: 32,

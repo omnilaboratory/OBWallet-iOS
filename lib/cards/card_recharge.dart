@@ -15,6 +15,7 @@ import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -231,15 +232,15 @@ class _CardRechargeState extends State<CardRecharge> {
                 '\$',
                 style: TextStyle(
                   color: Color(0xFF333333),
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 25,
+                  // fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(width: 6),
               Text(
                 widget.type == EnumChargeType.deposit
-                    ? '$totalBalanceUsd'
-                    : CommonService.cardInfo.balance.toString(),
+                  ? StringTools.formatCurrencyNum(totalBalanceUsd)
+                  : StringTools.formatCurrencyNum(CommonService.cardInfo.balance),
                 style: const TextStyle(
                   color: Color(0xFF333333),
                   fontSize: 32,

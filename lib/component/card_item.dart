@@ -1,8 +1,8 @@
 import 'package:awallet/bean/card_item_info.dart';
 import 'package:awallet/bean/tips.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 
 import 'common.dart';
 
@@ -21,7 +21,6 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = NumberFormat("#,###.00");
     var size = MediaQuery.of(context).size;
     
     return Stack(
@@ -77,9 +76,8 @@ class CardItem extends StatelessWidget {
             cardItemInfo.country,
             style: const TextStyle(
               color: Color(0xFF333333),
-              fontSize: 18,
-              // fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.italic
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -99,7 +97,7 @@ class CardItem extends StatelessWidget {
                 ),
                 const SizedBox(width: 3),
                 Text(
-                  formatter.format(cardItemInfo.balance),
+                  StringTools.formatCurrencyNum(cardItemInfo.balance),
                   style: const TextStyle(
                     color: Color(0xFF333333),
                     fontSize: 30,
