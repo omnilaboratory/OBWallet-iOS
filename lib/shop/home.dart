@@ -54,7 +54,9 @@ class _ShopHomeState extends State<ShopHome> {
       if (event == "buyNftFinish") {
         nftTotalCount = 0;
         nftTotalValue = 0;
-        setState(() {});
+        if(mounted){
+          setState(() {});
+        }
       }
     });
     for (int i = 0; i < EnumDollarFace.values.length; i++) {
@@ -113,7 +115,7 @@ class _ShopHomeState extends State<ShopHome> {
                         showToast(Tips.emptyAmount.value);
                         return;
                       }
-                      if (LocalStorage.getEthAddress() == null &&
+                      if (LocalStorage.getEthAddress() == null ||
                           LocalStorage.getEthAddress()!.isEmpty) {
                         alert(Tips.createWallet.value, context, () {});
                         return;
@@ -122,6 +124,7 @@ class _ShopHomeState extends State<ShopHome> {
                           context: context,
                           builder: (context) {
                             return CardDeposit(
+                                nftAmt: nftTotalCount,
                                 amt: nftTotalValue.toString(),
                                 cardNo: "",
                                 date: "",

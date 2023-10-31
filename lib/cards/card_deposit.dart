@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 
 class CardDeposit extends StatefulWidget {
+  int nftAmt;
   String amt;
   String cardNo;
   String date;
@@ -23,6 +24,7 @@ class CardDeposit extends StatefulWidget {
 
   CardDeposit(
       {super.key,
+      required this.nftAmt,
       required this.amt,
       required this.cardNo,
       required this.date,
@@ -165,9 +167,9 @@ class _CardDepositState extends State<CardDeposit> {
   onPay() {
     FocusScope.of(context).unfocus();
     if (formKey.currentState!.validate()) {
-      onClickDone();
-    } else {
-      log('invalid!');
+      alert("You are depositing \$${widget.amt} and will get ${widget.nftAmt} NFTs.", context, () {
+        onClickDone();
+      }, showCancel: true);
     }
   }
 

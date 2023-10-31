@@ -147,7 +147,6 @@ class AccountService {
           .dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.nftToPlatform];
     }
     var ret = GrpcResponse();
-    log("getNftBalance");
     try {
       var resp = await accountServiceClient?.getNftBlance(request);
       ret.code = 1;
