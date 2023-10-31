@@ -8,6 +8,7 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_nft_item.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
@@ -110,6 +111,11 @@ class _ShopHomeState extends State<ShopHome> {
                     onPressed: () {
                       if (nftTotalValue < 1) {
                         showToast(Tips.emptyAmount.value);
+                        return;
+                      }
+                      if (LocalStorage.getEthAddress() == null &&
+                          LocalStorage.getEthAddress()!.isEmpty) {
+                        alert(Tips.createWallet.value, context, () {});
                         return;
                       }
                       showDialog(

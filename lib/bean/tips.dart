@@ -42,6 +42,7 @@ enum Tips {
   successDeposit("Deposit successful."),
   failDeposit("Deposit failed, please try again later."),
   buyNftSuccess("Buy NFT Successfully."),
+  createWallet("Please create a eth wallet first."),
   ;
 
   final String value;
