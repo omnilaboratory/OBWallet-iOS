@@ -99,7 +99,7 @@ class _ShopHomeState extends State<ShopHome> {
                 child: SingleChildScrollView(
                   child: Wrap(
                     spacing: 16,
-                    runSpacing: 4.0,
+                    runSpacing: 12.0,
                     children: faceList,
                   ),
                 ),

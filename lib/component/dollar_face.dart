@@ -101,6 +101,7 @@ class _DollarFaceState extends State<DollarFace> {
             )
           ],
         ),
+        Text("\$${EnumDollarFace.values[widget.faceType].value}"),
       ],
     );
   }

@@ -62,7 +62,6 @@ class _DollarNftItemState extends State<DollarNftItem> {
     GlobalParams.eventBus.on().listen((event) {
       if (event == "buyNftFinish") {
         if(mounted){
-          log("buyNftFinish2");
           amount = 0;
           widget.textController.text = amount.toString();
           setState(() {});
@@ -102,6 +101,7 @@ class _DollarNftItemState extends State<DollarNftItem> {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
             child: Image.network(imageUrl),
           ),
+          Text("\$${EnumDollarFace.values[widget.faceType].value}"),
           SizedBox(
             width: 110,
             child: Row(
@@ -123,7 +123,7 @@ class _DollarNftItemState extends State<DollarNftItem> {
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: SizedBox(
                       width: 50,
-                      height: 40,
+                      height: 30,
                       child: createTextField2(widget.textController,
                           keyboardType: TextInputType.number, onChanged: (v) {
                         amount = int.parse(v);

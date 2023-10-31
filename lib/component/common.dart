@@ -124,7 +124,7 @@ TextField createTextField2(TextEditingController controller,
     cursorColor: const Color(0xFF4A92FF),
     style: const TextStyle(
       color: Color(0xFF333333),
-      fontSize: 16,
+      fontSize: 14,
       fontWeight: FontWeight.w400,
     ),
     decoration: InputDecoration(
