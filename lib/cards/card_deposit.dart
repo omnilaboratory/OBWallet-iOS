@@ -167,7 +167,7 @@ class _CardDepositState extends State<CardDeposit> {
   onPay() {
     FocusScope.of(context).unfocus();
     if (formKey.currentState!.validate()) {
-      alert("You are depositing \$${widget.amt} and will get ${widget.nftAmt} NFTs.", context, () {
+      alert("You are costing \$${widget.amt} and will get ${widget.nftAmt} NFTs.", context, () {
         onClickDone();
       }, showCancel: true);
     }

@@ -77,7 +77,7 @@ class _DollarFaceState extends State<DollarFace> {
             ),
 
             Positioned(
-              top: 5,
+              top: 0,
               right: 0,
               child: Container(
                 width: 24,
@@ -101,7 +101,7 @@ class _DollarFaceState extends State<DollarFace> {
             )
           ],
         ),
-        Text("\$${EnumDollarFace.values[widget.faceType].value}"),
+        const SizedBox(height: 15)
       ],
     );
   }

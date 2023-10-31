@@ -9,8 +9,8 @@ import 'package:awallet/component/dollar_nft_item.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dash/flutter_dash.dart';
 
 class ShopHome extends StatefulWidget {
   const ShopHome({super.key});
@@ -69,13 +69,15 @@ class _ShopHomeState extends State<ShopHome> {
 
   @override
   Widget build(BuildContext context) {
+    var value = StringTools.formatCurrencyNum(nftTotalValue);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const HeadLogo(title: "Buy NFT"),
+          title: const HeadLogo(title: "Shop"),
         ),
         body: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -83,18 +85,27 @@ class _ShopHomeState extends State<ShopHome> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                  "You have selected $nftTotalCount NFTs and value is \$$nftTotalValue",
+                  "You have selected $nftTotalCount NFTs and value is \$$value",
                   style: const TextStyle(
                     color: Color(0xFF666666),
                     fontSize: 20,
                     fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w400,
                   )),
-              const SizedBox(height: 20),
-              Dash(
-                dashColor: const Color(0xFFCFCFCF),
-                length: MediaQuery.of(context).size.width - 100,
+
+              Center(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 5),
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.black54, width: 1
+                      )
+                    )
+                  ),
+                ),
               ),
+
               Expanded(
                 child: SingleChildScrollView(
                   child: Wrap(
@@ -104,6 +115,7 @@ class _ShopHomeState extends State<ShopHome> {
                   ),
                 ),
               ),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -125,7 +137,7 @@ class _ShopHomeState extends State<ShopHome> {
                           builder: (context) {
                             return CardDeposit(
                                 nftAmt: nftTotalCount,
-                                amt: nftTotalValue.toString(),
+                                amt: value,
                                 cardNo: "",
                                 date: "",
                                 cvc: "");
