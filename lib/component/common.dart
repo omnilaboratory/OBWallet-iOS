@@ -1,9 +1,12 @@
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'loading_dialog.dart';
+
+List<NftToken> nftInfoList = [];
 
 final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderSide: const BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
@@ -100,6 +103,38 @@ TextField createTextField(TextEditingController controller,
       disabledBorder: outlineRightInputBorder,
       focusedErrorBorder: outlineRightInputBorder,
       errorBorder: outlineRightInputBorder,
+    ),
+  );
+}
+TextField createTextField2(TextEditingController controller,
+    {TextInputType? keyboardType = TextInputType.text,
+    List<TextInputFormatter>? inputFormatters,
+    Function? onChanged}) {
+  return TextField(
+    textAlign: TextAlign.center,
+    controller: controller,
+    maxLines: 1,
+    inputFormatters: inputFormatters,
+    keyboardType: keyboardType,
+    onChanged: (text) {
+      if (onChanged != null) {
+        onChanged(text);
+      }
+    },
+    cursorColor: const Color(0xFF4A92FF),
+    style: const TextStyle(
+      color: Color(0xFF333333),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+    decoration: InputDecoration(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+      border: outlineInputBorder,
+      focusedBorder: outlineInputBorder,
+      enabledBorder: outlineInputBorder,
+      disabledBorder: outlineInputBorder,
+      focusedErrorBorder: outlineInputBorder,
+      errorBorder: outlineInputBorder,
     ),
   );
 }

@@ -1,4 +1,5 @@
 import 'package:awallet/profile/home.dart';
+import 'package:awallet/shop/home.dart';
 import 'package:flutter/material.dart';
 
 import 'cards/home.dart';
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   static final List<Widget> _pages = <Widget>[
+    const ShopHome(),
     const CardHome(),
     const CryptoHome(),
     const ProfileHome()
@@ -41,10 +43,15 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedPage,
           onTap: _onItemTapped,
+          type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(
+              icon: Icon(Icons.shop),
+              label: 'Shop',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.credit_card),
-              label: 'Home',
+              label: 'Card',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.currency_bitcoin_sharp),

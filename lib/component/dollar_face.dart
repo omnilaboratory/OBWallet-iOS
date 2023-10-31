@@ -5,7 +5,7 @@ import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
-List<NftToken> nftInfoList = [];
+import 'common.dart';
 
 class DollarFace extends StatefulWidget {
   final int faceType;
