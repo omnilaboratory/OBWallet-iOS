@@ -1,7 +1,10 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/enum_dollar_face.dart';
+import 'package:awallet/bean/tips.dart';
+import 'package:awallet/cards/card_deposit.dart';
 import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_nft_item.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -28,7 +31,7 @@ class _ShopHomeState extends State<ShopHome> {
       if (event == "nftAmountChange") {
         log("nftAmountChange");
         nftTotalCount = 0;
-        nftTotalValue= 0;
+        nftTotalValue = 0;
         for (int i = 0; i < EnumDollarFace.values.length; i++) {
           var dollarFace = EnumDollarFace.values[i];
           var controller = controllers[i];
@@ -43,6 +46,14 @@ class _ShopHomeState extends State<ShopHome> {
         if (mounted) {
           setState(() {});
         }
+      }
+    });
+
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "buyNftFinish") {
+        nftTotalCount = 0;
+        nftTotalValue = 0;
+        setState(() {});
       }
     });
     for (int i = 0; i < EnumDollarFace.values.length; i++) {
@@ -96,7 +107,21 @@ class _ShopHomeState extends State<ShopHome> {
                   BottomButton(
                     icon: 'asset/images/icon_confirm_green.png',
                     text: 'Buy NFT',
-                    onPressed: () {},
+                    onPressed: () {
+                      if (nftTotalValue < 1) {
+                        showToast(Tips.emptyAmount.value);
+                        return;
+                      }
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CardDeposit(
+                                amt: nftTotalValue.toString(),
+                                cardNo: "",
+                                date: "",
+                                cvc: "");
+                          });
+                    },
                   ),
                 ],
               ),

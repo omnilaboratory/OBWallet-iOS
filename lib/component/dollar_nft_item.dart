@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/enum_dollar_face.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
-import 'package:event_bus/event_bus.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,11 @@ class DollarNftItem extends StatefulWidget {
   final int amount;
   final TextEditingController textController;
 
-
   const DollarNftItem(
-      {super.key, required this.faceType, required this.amount, required this.textController});
+      {super.key,
+      required this.faceType,
+      required this.amount,
+      required this.textController});
 
   @override
   State<DollarNftItem> createState() => _DollarNftItemState();
@@ -55,7 +58,20 @@ class _DollarNftItemState extends State<DollarNftItem> {
         }
       });
     }
+
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "buyNftFinish") {
+        if(mounted){
+          log("buyNftFinish2");
+          amount = 0;
+          widget.textController.text = amount.toString();
+          setState(() {});
+        }
+      }
+    });
+
     widget.textController.text = amount.toString();
+
     super.initState();
   }
 
@@ -93,7 +109,7 @@ class _DollarNftItemState extends State<DollarNftItem> {
               children: [
                 InkWell(
                     onTap: () {
-                      if(amount>0){
+                      if (amount > 0) {
                         amount--;
                         amount = amount < 0 ? 0 : amount;
                         setState(() {
@@ -109,11 +125,11 @@ class _DollarNftItemState extends State<DollarNftItem> {
                       width: 50,
                       height: 40,
                       child: createTextField2(widget.textController,
-                          keyboardType: TextInputType.number,onChanged: (v){
-                            amount = int.parse(v);
-                            widget.textController.text = amount.toString();
-                            GlobalParams.eventBus.fire("nftAmountChange");
-                          })),
+                          keyboardType: TextInputType.number, onChanged: (v) {
+                        amount = int.parse(v);
+                        widget.textController.text = amount.toString();
+                        GlobalParams.eventBus.fire("nftAmountChange");
+                      })),
                 ),
                 InkWell(
                     onTap: () {
