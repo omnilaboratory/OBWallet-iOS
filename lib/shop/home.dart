@@ -69,8 +69,8 @@ class _ShopHomeState extends State<ShopHome> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                  "You have selected $nftTotalCount NFTs and value is \$ $nftTotalValue",
-                  style: TextStyle(
+                  "You have selected $nftTotalCount NFTs and value is \$$nftTotalValue",
+                  style: const TextStyle(
                     color: Color(0xFF666666),
                     fontSize: 20,
                     fontFamily: 'Montserrat',
