@@ -134,8 +134,8 @@ class _CardRechargeState extends State<CardRecharge> {
                           return "Please input a valid amount";
                         }
 
-                        if(widget.type == EnumChargeType.deposit){
-                          if(double.parse(value) >= 100){
+                        if (widget.type == EnumChargeType.deposit) {
+                          if (double.parse(value) >= 100) {
                             return "Please input a valid amount: Max: 99";
                           }
                         }
@@ -143,7 +143,9 @@ class _CardRechargeState extends State<CardRecharge> {
                       },
                       cardHolderDecoration: InputDecoration(
                         prefixIcon: const Icon(Icons.attach_money),
-                        hintText: 'Amount(Max: \$99)',
+                        hintText: widget.type == EnumChargeType.deposit
+                            ? 'Amount(Max: \$99)'
+                            : 'Amount',
                         hintStyle: const TextStyle(color: Colors.grey),
                         border: _outlineInputBorder,
                         focusedBorder: _outlineInputBorder,
