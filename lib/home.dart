@@ -1,5 +1,6 @@
 import 'package:awallet/profile/home.dart';
 import 'package:awallet/shop/home.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 
 import 'cards/home.dart';
@@ -17,6 +18,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "goToCrypto") {
+        _onItemTapped(2);
+      }
+    });
+
     super.initState();
     _selectedPage = 0;
   }
@@ -37,9 +44,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Center(child: _pages.elementAt(_selectedPage)),
-
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedPage,
           onTap: _onItemTapped,

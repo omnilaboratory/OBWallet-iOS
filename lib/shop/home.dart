@@ -129,7 +129,9 @@ class _ShopHomeState extends State<ShopHome> {
                       }
                       if (LocalStorage.getEthAddress() == null ||
                           LocalStorage.getEthAddress()!.isEmpty) {
-                        alert(Tips.createWallet.value, context, () {});
+                        alert(Tips.createWallet.value, context, () {
+                          GlobalParams.eventBus.fire("goToCrypto");
+                        });
                         return;
                       }
                       showDialog(
