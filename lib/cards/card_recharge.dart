@@ -107,8 +107,8 @@ class _CardRechargeState extends State<CardRecharge> {
                   children: [
                     const SizedBox(height: 30),
                     createDialogTitle(widget.type == EnumChargeType.deposit
-                        ? 'Deposit'
-                        : 'Withdraw'),
+                        ? 'Deposit to Account'
+                        : 'Withdraw to Account'),
                     const SizedBox(height: 10),
                     buildBalance(),
                     const SizedBox(height: 10),
