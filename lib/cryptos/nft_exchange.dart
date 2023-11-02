@@ -503,6 +503,7 @@ class _NftExchangeState extends State<NftExchange> {
         if (resp.code == 1) {
           alert("success", context, () {
             GlobalParams.eventBus.fire("nftChange");
+            GlobalParams.eventBus.fire("exchange_showTips");
             Navigator.pop(context);
           });
         } else {

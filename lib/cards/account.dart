@@ -45,8 +45,8 @@ class _AccountState extends State<Account> {
       RefreshController(initialRefresh: false);
 
   double totalBalanceUsd = 0;
-  bool hasCard = CommonService.userInfo != null &&
-      CommonService.userInfo!.cardCount > 0;
+  bool hasCard =
+      CommonService.userInfo != null && CommonService.userInfo!.cardCount > 0;
 
   @override
   void initState() {
@@ -57,6 +57,15 @@ class _AccountState extends State<Account> {
     _onBalanceRefresh();
     _onListRefresh();
     getCardBalanceFromServer();
+
+    GlobalParams.eventBus.on().listen((event) {
+      if (mounted) {
+        if (event == "exchange_showTips") {
+          _onBalanceRefresh();
+        }
+      }
+    });
+
     super.initState();
   }
 
@@ -94,34 +103,23 @@ class _AccountState extends State<Account> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               InkWell(
-                onTap: () {
-                  onClickType(0);
-                },
-                child: Text(
-                  "Exchange",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: currTypeIndex == 0
-                      ? Colors.blue
-                      : Colors.grey
-                    )
-                  )
-              ),
-
+                  onTap: () {
+                    onClickType(0);
+                  },
+                  child: Text("Exchange",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              currTypeIndex == 0 ? Colors.blue : Colors.grey))),
               InkWell(
-                onTap: () {
-                  onClickType(1);
-                },
-                child: Text(
-                  "Account",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: currTypeIndex == 1
-                      ? Colors.blue
-                      : Colors.grey
-                    )
-                )
-              )
+                  onTap: () {
+                    onClickType(1);
+                  },
+                  child: Text("Account",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              currTypeIndex == 1 ? Colors.blue : Colors.grey)))
             ],
           ),
           const SizedBox(height: 10),
@@ -254,7 +252,6 @@ class _AccountState extends State<Account> {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      
       child: Align(
           alignment: Alignment.centerLeft,
           child: Text.rich(

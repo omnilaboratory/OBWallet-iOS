@@ -358,6 +358,7 @@ class _CardRechargeState extends State<CardRecharge> {
         .then((value) async {
       if (value.code == 1) {
         GlobalParams.eventBus.fire("topup");
+        GlobalParams.eventBus.fire("exchange_showTips");
         Navigator.pop(context, true);
         if (widget.type == EnumChargeType.withdraw) {
           showToast(Tips.successWithdraw.value);
