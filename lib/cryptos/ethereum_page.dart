@@ -42,18 +42,16 @@ class _EthereumPageState extends State<EthereumPage> {
   @override
   void initState() {
     GlobalParams.eventBus.on().listen((event) {
-      if (event == "MoreMenu_setNetwork") {
+      if (event == "MoreMenu_setNetwork" || event == "exchange_showTips") {
         _updateBalance();
       }
-    });
-
-    GlobalParams.eventBus.on().listen((event) {
       if (event == "nftChange") {
-        if(mounted){
+        if (mounted) {
           updateNftList();
         }
       }
     });
+
     super.initState();
     _updateBalance();
   }
@@ -130,20 +128,18 @@ class _EthereumPageState extends State<EthereumPage> {
                   },
                   child: Text("Tokens",
                       style: TextStyle(
-                        fontSize: 16,
-                        color: currTypeIndex == 0
-                            ? Colors.blue
-                            : Colors.grey))),
+                          fontSize: 16,
+                          color:
+                              currTypeIndex == 0 ? Colors.blue : Colors.grey))),
               InkWell(
                   onTap: () {
                     onClickType(1);
                   },
                   child: Text("NFTs",
                       style: TextStyle(
-                        fontSize: 16,
-                        color: currTypeIndex == 1
-                            ? Colors.blue
-                            : Colors.grey)))
+                          fontSize: 16,
+                          color:
+                              currTypeIndex == 1 ? Colors.blue : Colors.grey)))
             ],
           ),
           const SizedBox(height: 20),
