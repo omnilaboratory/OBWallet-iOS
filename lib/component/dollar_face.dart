@@ -98,10 +98,19 @@ class _DollarFaceState extends State<DollarFace> {
                   ),
                 ),
               )
-            )
+            ),
           ],
         ),
-        const SizedBox(height: 15)
+        const SizedBox(height: 6),
+        Text(
+          "\$${EnumDollarFace.values[widget.faceType].value}",
+          textAlign: TextAlign.left,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600
+          ),
+        ),
+        const SizedBox(height: 15),
       ],
     );
   }

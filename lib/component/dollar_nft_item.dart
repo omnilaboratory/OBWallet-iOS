@@ -97,10 +97,20 @@ class _DollarNftItemState extends State<DollarNftItem> {
             width: 110,
             height: 100,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
-            child: Image.network(imageUrl),
+            child: Image.network(imageUrl, fit: BoxFit.cover),
           ),
-          // Text("\$${EnumDollarFace.values[widget.faceType].value}"),
-          const SizedBox(height: 10),
+
+          const SizedBox(height: 6),
+          Text(
+            "\$${EnumDollarFace.values[widget.faceType].value}",
+            textAlign: TextAlign.left,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600
+            ),
+          ),
+          
+          const SizedBox(height: 6),
           SizedBox(
             width: 110,
             child: Row(
