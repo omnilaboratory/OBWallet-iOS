@@ -69,6 +69,11 @@ class _CardHomeState extends State<CardHome>
         _tabController.animateTo(1);
       }
     });
+
+    if (CommonService.firstEnterApp && CommonService.userInfo?.cardCount == 0) {
+      CommonService.firstEnterApp = false;
+      _tabController.animateTo(1);
+    }
   }
 
   updateKycState() {

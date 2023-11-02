@@ -18,6 +18,7 @@ mixin CommonService {
   static List<DollarFaceInfo> nftInfoList = [];
   static CardInfo cardInfo = CardInfo();
   static String userId = "1";
+  static bool firstEnterApp = true;
 
   static ClientChannel? getGrpcChannel() {
     if (channel == null) {
@@ -42,4 +43,5 @@ resetServices() {
   AccountService.accountServiceClient = null;
   CardService.cardServiceClient = null;
   EthGrpcService.ethServiceClient = null;
+  CommonService.firstEnterApp = true;
 }
