@@ -129,7 +129,7 @@ class _ApplyCardStepOneState extends State<ApplyCardStepOne> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
+                    MaterialPageRoute(builder: (context) => const HomePage(goToPage: 1)),
                   );
                 },
               ),

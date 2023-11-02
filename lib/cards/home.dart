@@ -57,6 +57,7 @@ class _CardHomeState extends State<CardHome>
     _tabController =
         TabController(length: tabNames.length, vsync: this, initialIndex: 0);
     updateKycState();
+
     GlobalParams.eventBus.on().listen((event) {
       if (event == "kyc_state") {
         updateKycState();
@@ -64,8 +65,6 @@ class _CardHomeState extends State<CardHome>
           setState(() {});
         }
       }
-    });
-    GlobalParams.eventBus.on().listen((event) {
       if (event == "changeTab") {
         _tabController.animateTo(1);
       }
@@ -96,7 +95,6 @@ class _CardHomeState extends State<CardHome>
                       imageClr: kycClr[currKycClrIndex],
                       imageUrl: "asset/images/icon_kyc.png",
                       onTap: () {
-
                         // showDialog(
                         //     context: context,
                         //     builder: (context) {

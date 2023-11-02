@@ -7,7 +7,9 @@ import 'cards/home.dart';
 import 'cryptos/home.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final int goToPage;
+
+  const HomePage({super.key, required this.goToPage});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     });
 
     super.initState();
-    _selectedPage = 0;
+    _selectedPage = widget.goToPage;
   }
 
   static final List<Widget> _pages = <Widget>[

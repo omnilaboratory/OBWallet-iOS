@@ -7,6 +7,7 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/home.dart';
 import 'package:awallet/logins/sign_up_step1.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -150,10 +151,9 @@ class _LoginState extends State<Login> {
                               child: const Text(
                                 'Forgot Password?',
                                 style: TextStyle(
-                                  color: Color(0xFF666666),
-                                  fontSize: 15,
-                                  decoration: TextDecoration.underline
-                                ),
+                                    color: Color(0xFF666666),
+                                    fontSize: 15,
+                                    decoration: TextDecoration.underline),
                               ),
                             )),
                       ],
@@ -232,13 +232,11 @@ class _LoginState extends State<Login> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            createTextFormField(
-                _unameController,
-                "Username",
+            createTextFormField(_unameController, "Username",
                 icon: const Icon(Icons.person)),
             const SizedBox(height: 20),
-            createTextFormField(
-                _pswController, "Password", icon: const Icon(Icons.lock), obscureText: true),
+            createTextFormField(_pswController, "Password",
+                icon: const Icon(Icons.lock), obscureText: true),
           ],
         ),
       ),
@@ -277,7 +275,9 @@ class _LoginState extends State<Login> {
       if (userInfoResp.code == 1) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(
+              builder: (context) => HomePage(
+                  goToPage: CommonService.userInfo!.cardCount == 0 ? 1 : 0)),
         );
       }
     });
