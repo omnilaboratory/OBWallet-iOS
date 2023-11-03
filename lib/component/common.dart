@@ -6,7 +6,6 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'loading_dialog.dart';
 
-List<NftToken> nftInfoList = [];
 
 final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderSide: const BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),

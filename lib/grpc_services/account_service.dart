@@ -10,6 +10,9 @@ import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
+
+List<NftToken> nftInfoListFromServer = [];
+
 class AccountService {
   static final AccountService _instance = AccountService._internal();
 
@@ -150,7 +153,13 @@ class AccountService {
     try {
       var resp = await accountServiceClient?.getNftBlance(request);
       ret.code = 1;
-      ret.data = resp?.items;
+      var list = resp?.items;
+
+      if(list!=null && isAll){
+        list.sort((a, b) => b.tokenId.compareTo(a.tokenId));
+        nftInfoListFromServer = list;
+      }
+      ret.data = list;
     } catch (e) {
       UserService.getInstance().setError(context, "getNftBalance", e, ret);
     }

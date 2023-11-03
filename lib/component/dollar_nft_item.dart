@@ -1,7 +1,8 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/enum_dollar_face.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/account_service.dart';
-import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 
@@ -10,13 +11,15 @@ import '../tools/global_params.dart';
 class DollarNftItem extends StatefulWidget {
   final int faceType;
   final int amount;
+  final Function onClick;
   final TextEditingController textController;
 
   const DollarNftItem(
       {super.key,
       required this.faceType,
       required this.amount,
-      required this.textController});
+      required this.textController,
+      required this.onClick});
 
   @override
   State<DollarNftItem> createState() => _DollarNftItemState();
@@ -29,16 +32,14 @@ class _DollarNftItemState extends State<DollarNftItem> {
 
   @override
   void initState() {
-    if (nftInfoList.isEmpty) {
+    if (nftInfoListFromServer.isEmpty) {
       AccountService.getInstance()
           .getNftBalance(context, isAll: true)
           .then((resp) {
         if (resp.code == 1) {
-          List<NftToken> tempList = resp.data;
-          if (tempList.isNotEmpty) {
-            nftInfoList = tempList;
-            for (int i = 0; i < nftInfoList.length; i++) {
-              var nftInfo = nftInfoList[i];
+          if (nftInfoListFromServer.isNotEmpty) {
+            for (int i = 0; i < nftInfoListFromServer.length; i++) {
+              var nftInfo = nftInfoListFromServer[i];
               if (nftInfo.tokenId ==
                   Int64.parseInt(
                       EnumDollarFace.values[widget.faceType].value)) {
@@ -59,7 +60,7 @@ class _DollarNftItemState extends State<DollarNftItem> {
 
     GlobalParams.eventBus.on().listen((event) {
       if (event == "buyNftFinish") {
-        if(mounted){
+        if (mounted) {
           amount = 0;
           widget.textController.text = amount.toString();
           setState(() {});
@@ -77,9 +78,9 @@ class _DollarNftItemState extends State<DollarNftItem> {
     imageUrl =
         "http://43.138.107.248:19091/nft/${EnumDollarFace.values[widget.faceType].value}.jpg";
 
-    if (nftInfoList.isNotEmpty) {
-      for (int i = 0; i < nftInfoList.length; i++) {
-        var nftInfo = nftInfoList[i];
+    if (nftInfoListFromServer.isNotEmpty) {
+      for (int i = 0; i < nftInfoListFromServer.length; i++) {
+        var nftInfo = nftInfoListFromServer[i];
         if (nftInfo.tokenId ==
             Int64.parseInt(EnumDollarFace.values[widget.faceType].value)) {
           imageUrl = nftInfo.imageUrl;
@@ -89,7 +90,9 @@ class _DollarNftItemState extends State<DollarNftItem> {
     }
     return GestureDetector(
       onTap: () {
+        log("aaaa");
         FocusScope.of(context).requestFocus(FocusNode());
+        widget.onClick();
       },
       child: Column(
         children: [
@@ -99,17 +102,12 @@ class _DollarNftItemState extends State<DollarNftItem> {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
             child: Image.network(imageUrl, fit: BoxFit.cover),
           ),
-
           const SizedBox(height: 6),
           Text(
             "\$${EnumDollarFace.values[widget.faceType].value}",
             textAlign: TextAlign.left,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600
-            ),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),
-          
           const SizedBox(height: 6),
           SizedBox(
             width: 110,
@@ -133,10 +131,8 @@ class _DollarNftItemState extends State<DollarNftItem> {
                   child: SizedBox(
                       width: 50,
                       height: 30,
-                      child: createTextField2(
-                        widget.textController,
-                        keyboardType: TextInputType.number, 
-                        onChanged: (v) {
+                      child: createTextField2(widget.textController,
+                          keyboardType: TextInputType.number, onChanged: (v) {
                         amount = int.parse(v);
                         widget.textController.text = amount.toString();
                         GlobalParams.eventBus.fire("nftAmountChange");

@@ -1,16 +1,19 @@
-import 'dart:developer';
-
 import 'package:awallet/bean/enum_dollar_face.dart';
+import 'package:awallet/bean/nft_detail_info.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_deposit.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_nft_item.dart';
 import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/grpc_services/account_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
+
+import 'nft_detail.dart';
 
 class ShopHome extends StatefulWidget {
   const ShopHome({super.key});
@@ -20,22 +23,39 @@ class ShopHome extends StatefulWidget {
 }
 
 class _ShopHomeState extends State<ShopHome> {
-  List<DollarNftItem> faceList = [];
-  List<TextEditingController> controllers = [];
+  List<Widget> faceList = [];
+  List<NftDetailInfo> nftDetailInfoList = [];
   int nftTotalCount = 0;
   double nftTotalValue = 0;
 
   @override
   void initState() {
     super.initState();
+    eventListen();
+    if (nftInfoListFromServer.isEmpty) {
+      AccountService.getInstance()
+          .getNftBalance(context, isAll: true)
+          .then((resp) {
+        if (resp.code == 1) {
+          if (nftInfoListFromServer.isNotEmpty) {
+            buildData(true);
+          }
+        }
+      });
+    } else {
+      buildData(false);
+    }
+
+  }
+
+  void eventListen() {
     GlobalParams.eventBus.on().listen((event) {
       if (event == "nftAmountChange") {
-        log("nftAmountChange");
         nftTotalCount = 0;
         nftTotalValue = 0;
         for (int i = 0; i < EnumDollarFace.values.length; i++) {
           var dollarFace = EnumDollarFace.values[i];
-          var controller = controllers[i];
+          var controller = nftDetailInfoList[i].textController;
           if (controller.text.isNotEmpty) {
             int amount = int.parse(controller.text);
             if (amount > 0) {
@@ -48,22 +68,46 @@ class _ShopHomeState extends State<ShopHome> {
           setState(() {});
         }
       }
-    });
 
-    GlobalParams.eventBus.on().listen((event) {
       if (event == "buyNftFinish") {
         nftTotalCount = 0;
         nftTotalValue = 0;
-        if(mounted){
+        if (mounted) {
           setState(() {});
         }
       }
     });
-    for (int i = 0; i < EnumDollarFace.values.length; i++) {
+  }
+
+  void buildData(bool needFresh) {
+    for (int i = 0; i < nftInfoListFromServer.length; i++) {
+      var nftInfo = nftInfoListFromServer[i];
       var controller = TextEditingController();
-      faceList.add(
-          DollarNftItem(faceType: i, amount: 0, textController: controller));
-      controllers.add(controller);
+      nftDetailInfoList.add(NftDetailInfo(
+          "ContractAddress",
+          nftInfo.tokenId.toString(),
+          nftInfo.itemPrice,
+          nftInfo.tokenId.toString(),
+          nftInfo.imageUrl,
+          "${nftInfo.tokenId} description",
+          controller));
+
+      faceList.add(DollarNftItem(
+        faceType: i,
+        amount: 0,
+        textController: controller,
+        onClick: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => NftDetail(
+                        detailInfo: nftDetailInfoList[i],
+                      )));
+        },
+      ));
+    }
+    if (needFresh && mounted) {
+      setState(() {});
     }
   }
 
@@ -92,20 +136,15 @@ class _ShopHomeState extends State<ShopHome> {
                     fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w400,
                   )),
-
               Center(
                 child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 5),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 25, horizontal: 5),
                   decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black54, width: 1
-                      )
-                    )
-                  ),
+                      border: Border(
+                          bottom: BorderSide(color: Colors.black54, width: 1))),
                 ),
               ),
-
               Expanded(
                 child: SingleChildScrollView(
                   child: Wrap(

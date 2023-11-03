@@ -22,17 +22,14 @@ class _DollarFaceState extends State<DollarFace> {
 
   @override
   void initState() {
-    if (nftInfoList.isEmpty) {
-      log("initState get nft images ${widget.faceType}");
+    if (nftInfoListFromServer.isEmpty) {
       AccountService.getInstance()
           .getNftBalance(context, isAll: true)
           .then((resp) {
         if (resp.code == 1) {
-          List<NftToken> tempList = resp.data;
-          if (tempList.isNotEmpty) {
-            nftInfoList = tempList;
-            for (int i = 0; i < nftInfoList.length; i++) {
-              var nftInfo = nftInfoList[i];
+          if (nftInfoListFromServer.isNotEmpty) {
+            for (int i = 0; i < nftInfoListFromServer.length; i++) {
+              var nftInfo = nftInfoListFromServer[i];
               if (nftInfo.tokenId ==Int64.parseInt( EnumDollarFace.values[widget.faceType].value)) {
                 if (mounted) {
                   if (imageUrl != nftInfo.imageUrl) {
@@ -56,9 +53,9 @@ class _DollarFaceState extends State<DollarFace> {
     imageUrl =
     "http://43.138.107.248:19091/nft/${EnumDollarFace.values[widget.faceType].value}.jpg";
 
-    if (nftInfoList.isNotEmpty) {
-      for (int i = 0; i < nftInfoList.length; i++) {
-        var nftInfo = nftInfoList[i];
+    if (nftInfoListFromServer.isNotEmpty) {
+      for (int i = 0; i < nftInfoListFromServer.length; i++) {
+        var nftInfo = nftInfoListFromServer[i];
         if (nftInfo.tokenId == Int64.parseInt(EnumDollarFace.values[widget.faceType].value)) {
           imageUrl = nftInfo.imageUrl;
           break;
