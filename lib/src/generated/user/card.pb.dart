@@ -1180,6 +1180,8 @@ class CardRechargeRequest extends $pb.GeneratedMessage {
     ..a<$core.double>(5, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.OD)
     ..aOB(6, _omitFieldNames ? '' : 'chargeForNft', protoName: 'chargeForNft')
     ..aOB(7, _omitFieldNames ? '' : 'withDynamicNft')
+    ..p<$fixnum.Int64>(8, _omitFieldNames ? '' : 'tokenIds', $pb.PbFieldType.K6)
+    ..p<$fixnum.Int64>(9, _omitFieldNames ? '' : 'values', $pb.PbFieldType.K6)
     ..hasRequiredFields = false
   ;
 
@@ -1266,6 +1268,12 @@ class CardRechargeRequest extends $pb.GeneratedMessage {
   $core.bool hasWithDynamicNft() => $_has(6);
   @$pb.TagNumber(7)
   void clearWithDynamicNft() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.List<$fixnum.Int64> get tokenIds => $_getList(7);
+
+  @$pb.TagNumber(9)
+  $core.List<$fixnum.Int64> get values => $_getList(8);
 }
 
 class CardRechargeResponse extends $pb.GeneratedMessage {

@@ -472,18 +472,18 @@ final $typed_data.Uint8List nftTokenEventDescriptor = $convert.base64Decode(
     'cgASgJUghpbWFnZVVybBISCgRuYW1lGAkgASgJUgRuYW1lEh0KCmNyZWF0ZWRfYXQYCCABKANS'
     'CWNyZWF0ZWRBdA==');
 
-@$core.Deprecated('Use timestampDescriptor instead')
-const Timestamp$json = {
-  '1': 'Timestamp',
+@$core.Deprecated('Use dbTimestampDescriptor instead')
+const DbTimestamp$json = {
+  '1': 'DbTimestamp',
   '2': [
     {'1': 'timestamp', '3': 1, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
   ],
 };
 
-/// Descriptor for `Timestamp`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List timestampDescriptor = $convert.base64Decode(
-    'CglUaW1lc3RhbXASOAoJdGltZXN0YW1wGAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdG'
-    'FtcFIJdGltZXN0YW1w');
+/// Descriptor for `DbTimestamp`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List dbTimestampDescriptor = $convert.base64Decode(
+    'CgtEYlRpbWVzdGFtcBI4Cgl0aW1lc3RhbXAYASABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZX'
+    'N0YW1wUgl0aW1lc3RhbXA=');
 
 @$core.Deprecated('Use nftTokenDescriptor instead')
 const NftToken$json = {
@@ -497,7 +497,7 @@ const NftToken$json = {
     {'1': 'des', '3': 5, '4': 1, '5': 9, '10': 'des'},
     {'1': 'id', '3': 6, '4': 1, '5': 3, '10': 'id'},
     {'1': 'dynamic_index', '3': 7, '4': 1, '5': 3, '10': 'dynamicIndex'},
-    {'1': 'created_at', '3': 8, '4': 1, '5': 11, '6': '.user.Timestamp', '10': 'createdAt'},
+    {'1': 'created_at', '3': 8, '4': 1, '5': 11, '6': '.user.DbTimestamp', '10': 'createdAt'},
   ],
 };
 
@@ -506,8 +506,8 @@ final $typed_data.Uint8List nftTokenDescriptor = $convert.base64Decode(
     'CghOZnRUb2tlbhISCgRuYW1lGAkgASgJUgRuYW1lEhsKCWltYWdlX3VybBgBIAEoCVIIaW1hZ2'
     'VVcmwSGQoIdG9rZW5faWQYAiABKANSB3Rva2VuSWQSEAoDYW10GAMgASgDUgNhbXQSHQoKaXRl'
     'bV9wcmljZRgEIAEoAVIJaXRlbVByaWNlEhAKA2RlcxgFIAEoCVIDZGVzEg4KAmlkGAYgASgDUg'
-    'JpZBIjCg1keW5hbWljX2luZGV4GAcgASgDUgxkeW5hbWljSW5kZXgSLgoKY3JlYXRlZF9hdBgI'
-    'IAEoCzIPLnVzZXIuVGltZXN0YW1wUgljcmVhdGVkQXQ=');
+    'JpZBIjCg1keW5hbWljX2luZGV4GAcgASgDUgxkeW5hbWljSW5kZXgSMAoKY3JlYXRlZF9hdBgI'
+    'IAEoCzIRLnVzZXIuRGJUaW1lc3RhbXBSCWNyZWF0ZWRBdA==');
 
 @$core.Deprecated('Use nftTokenLogDescriptor instead')
 const NftTokenLog$json = {
@@ -521,7 +521,7 @@ const NftTokenLog$json = {
     {'1': 'value', '3': 6, '4': 1, '5': 3, '10': 'value'},
     {'1': 'usd_amt', '3': 7, '4': 1, '5': 1, '10': 'usdAmt'},
     {'1': 'NftToken', '3': 8, '4': 3, '5': 11, '6': '.user.NftToken', '10': 'NftToken'},
-    {'1': 'created_at', '3': 9, '4': 1, '5': 11, '6': '.user.Timestamp', '10': 'createdAt'},
+    {'1': 'created_at', '3': 9, '4': 1, '5': 11, '6': '.user.DbTimestamp', '10': 'createdAt'},
   ],
 };
 
@@ -530,8 +530,8 @@ final $typed_data.Uint8List nftTokenLogDescriptor = $convert.base64Decode(
     'CgtOZnRUb2tlbkxvZxIOCgJpZBgBIAEoA1ICaWQSEwoFdHhfaWQYAiABKAlSBHR4SWQSEgoEZn'
     'JvbRgDIAEoCVIEZnJvbRIOCgJ0bxgEIAEoCVICdG8SGQoIdG9rZW5faWQYBSABKANSB3Rva2Vu'
     'SWQSFAoFdmFsdWUYBiABKANSBXZhbHVlEhcKB3VzZF9hbXQYByABKAFSBnVzZEFtdBIqCghOZn'
-    'RUb2tlbhgIIAMoCzIOLnVzZXIuTmZ0VG9rZW5SCE5mdFRva2VuEi4KCmNyZWF0ZWRfYXQYCSAB'
-    'KAsyDy51c2VyLlRpbWVzdGFtcFIJY3JlYXRlZEF0');
+    'RUb2tlbhgIIAMoCzIOLnVzZXIuTmZ0VG9rZW5SCE5mdFRva2VuEjAKCmNyZWF0ZWRfYXQYCSAB'
+    'KAsyES51c2VyLkRiVGltZXN0YW1wUgljcmVhdGVkQXQ=');
 
 @$core.Deprecated('Use accountHistoryDescriptor instead')
 const AccountHistory$json = {

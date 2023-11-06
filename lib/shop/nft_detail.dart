@@ -56,7 +56,7 @@ class _NftDetailState extends State<NftDetail> {
                             Text("NFT Name #${widget.detailInfo.tokenName}",
                                 style: const TextStyle(
                                   color: Color(0xFF333333),
-                                  fontSize: 28,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                 )),
                             const SizedBox(height: 12),
@@ -109,9 +109,9 @@ class _NftDetailState extends State<NftDetail> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   buildDetailLine("Contract Address",
-                                      widget.detailInfo.description),
+                                      StringTools.starString2(widget.detailInfo.contractAddress)),
                                   buildDetailLine(
-                                      "Token ID", widget.detailInfo.tokenId),
+                                      "Token ID", widget.detailInfo.tokenId.toString()),
                                   buildDetailLine("Token Standard", "ERC-1155"),
                                   buildDetailLine("Chain", "Polygon"),
                                 ],

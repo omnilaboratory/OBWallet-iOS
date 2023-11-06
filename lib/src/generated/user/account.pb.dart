@@ -14,8 +14,8 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../google/protobuf/timestamp.pb.dart' as $3;
 import 'account.pbenum.dart';
+import 'timestamp.pb.dart' as $3;
 
 export 'account.pbenum.dart';
 
@@ -1755,13 +1755,13 @@ class NftTokenEvent extends $pb.GeneratedMessage {
   void clearName() => clearField(9);
 }
 
-class Timestamp extends $pb.GeneratedMessage {
-  factory Timestamp() => create();
-  Timestamp._() : super();
-  factory Timestamp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Timestamp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+class DbTimestamp extends $pb.GeneratedMessage {
+  factory DbTimestamp() => create();
+  DbTimestamp._() : super();
+  factory DbTimestamp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DbTimestamp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Timestamp', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DbTimestamp', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aOM<$3.Timestamp>(1, _omitFieldNames ? '' : 'timestamp', subBuilder: $3.Timestamp.create)
     ..hasRequiredFields = false
   ;
@@ -1770,22 +1770,22 @@ class Timestamp extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  Timestamp clone() => Timestamp()..mergeFromMessage(this);
+  DbTimestamp clone() => DbTimestamp()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Timestamp copyWith(void Function(Timestamp) updates) => super.copyWith((message) => updates(message as Timestamp)) as Timestamp;
+  DbTimestamp copyWith(void Function(DbTimestamp) updates) => super.copyWith((message) => updates(message as DbTimestamp)) as DbTimestamp;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static Timestamp create() => Timestamp._();
-  Timestamp createEmptyInstance() => create();
-  static $pb.PbList<Timestamp> createRepeated() => $pb.PbList<Timestamp>();
+  static DbTimestamp create() => DbTimestamp._();
+  DbTimestamp createEmptyInstance() => create();
+  static $pb.PbList<DbTimestamp> createRepeated() => $pb.PbList<DbTimestamp>();
   @$core.pragma('dart2js:noInline')
-  static Timestamp getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Timestamp>(create);
-  static Timestamp? _defaultInstance;
+  static DbTimestamp getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DbTimestamp>(create);
+  static DbTimestamp? _defaultInstance;
 
   @$pb.TagNumber(1)
   $3.Timestamp get timestamp => $_getN(0);
@@ -1813,7 +1813,7 @@ class NftToken extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'des')
     ..aInt64(6, _omitFieldNames ? '' : 'id')
     ..aInt64(7, _omitFieldNames ? '' : 'dynamicIndex')
-    ..aOM<Timestamp>(8, _omitFieldNames ? '' : 'createdAt', subBuilder: Timestamp.create)
+    ..aOM<DbTimestamp>(8, _omitFieldNames ? '' : 'createdAt', subBuilder: DbTimestamp.create)
     ..aOS(9, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false
   ;
@@ -1903,15 +1903,15 @@ class NftToken extends $pb.GeneratedMessage {
   void clearDynamicIndex() => clearField(7);
 
   @$pb.TagNumber(8)
-  Timestamp get createdAt => $_getN(7);
+  DbTimestamp get createdAt => $_getN(7);
   @$pb.TagNumber(8)
-  set createdAt(Timestamp v) { setField(8, v); }
+  set createdAt(DbTimestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasCreatedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearCreatedAt() => clearField(8);
   @$pb.TagNumber(8)
-  Timestamp ensureCreatedAt() => $_ensure(7);
+  DbTimestamp ensureCreatedAt() => $_ensure(7);
 
   @$pb.TagNumber(9)
   $core.String get name => $_getSZ(8);
@@ -1938,7 +1938,7 @@ class NftTokenLog extends $pb.GeneratedMessage {
     ..aInt64(6, _omitFieldNames ? '' : 'value')
     ..a<$core.double>(7, _omitFieldNames ? '' : 'usdAmt', $pb.PbFieldType.OD)
     ..pc<NftToken>(8, _omitFieldNames ? '' : 'NftToken', $pb.PbFieldType.PM, protoName: 'NftToken', subBuilder: NftToken.create)
-    ..aOM<Timestamp>(9, _omitFieldNames ? '' : 'createdAt', subBuilder: Timestamp.create)
+    ..aOM<DbTimestamp>(9, _omitFieldNames ? '' : 'createdAt', subBuilder: DbTimestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -2030,15 +2030,15 @@ class NftTokenLog extends $pb.GeneratedMessage {
   $core.List<NftToken> get nftToken => $_getList(7);
 
   @$pb.TagNumber(9)
-  Timestamp get createdAt => $_getN(8);
+  DbTimestamp get createdAt => $_getN(8);
   @$pb.TagNumber(9)
-  set createdAt(Timestamp v) { setField(9, v); }
+  set createdAt(DbTimestamp v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasCreatedAt() => $_has(8);
   @$pb.TagNumber(9)
   void clearCreatedAt() => clearField(9);
   @$pb.TagNumber(9)
-  Timestamp ensureCreatedAt() => $_ensure(8);
+  DbTimestamp ensureCreatedAt() => $_ensure(8);
 }
 
 class AccountHistory extends $pb.GeneratedMessage {

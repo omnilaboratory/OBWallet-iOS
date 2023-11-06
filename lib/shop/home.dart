@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/enum_dollar_face.dart';
+import 'package:awallet/bean/enum_eth_key.dart';
 import 'package:awallet/bean/nft_detail_info.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_deposit.dart';
@@ -45,7 +48,6 @@ class _ShopHomeState extends State<ShopHome> {
     } else {
       buildData(false);
     }
-
   }
 
   void eventListen() {
@@ -82,14 +84,15 @@ class _ShopHomeState extends State<ShopHome> {
   void buildData(bool needFresh) {
     for (int i = 0; i < nftInfoListFromServer.length; i++) {
       var nftInfo = nftInfoListFromServer[i];
+      log("$nftInfo");
       var controller = TextEditingController();
       nftDetailInfoList.add(NftDetailInfo(
-          "ContractAddress",
-          nftInfo.tokenId.toString(),
+          GlobalParams.dataInNetwork[GlobalParams.currNetwork][EnumEthKey.nft],
+          nftInfo.tokenId,
           nftInfo.itemPrice,
-          nftInfo.tokenId.toString(),
+          nftInfo.name,
           nftInfo.imageUrl,
-          "${nftInfo.tokenId} description",
+          nftInfo.des,
           controller));
 
       faceList.add(DollarNftItem(
@@ -97,12 +100,23 @@ class _ShopHomeState extends State<ShopHome> {
         amount: 0,
         textController: controller,
         onClick: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => NftDetail(
-                        detailInfo: nftDetailInfoList[i],
-                      )));
+          var nftInfo = nftDetailInfoList[i];
+          AccountService.getInstance()
+              .getNftToken(context, nftInfo.tokenId)
+              .then((resp) {
+            if (resp.code == 1) {
+              log("${resp.data}");
+              var nftInfoFromServer = resp.data as NftToken;
+              nftInfo.tokenName = nftInfoFromServer.name;
+              nftInfo.description = nftInfoFromServer.des;
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NftDetail(
+                            detailInfo: nftInfo,
+                          )));
+            }
+          });
         },
       ));
     }
