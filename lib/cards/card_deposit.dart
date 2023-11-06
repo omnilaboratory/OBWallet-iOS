@@ -14,6 +14,7 @@ import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
+import 'package:fixnum/src/int64.dart';
 
 class CardDeposit extends StatefulWidget {
   int nftAmt;
@@ -21,6 +22,8 @@ class CardDeposit extends StatefulWidget {
   String cardNo;
   String date;
   String cvc;
+  List<Int64> tokenIds = [];
+  List<Int64> tokenIdValues = [];
 
   CardDeposit(
       {super.key,
@@ -28,7 +31,10 @@ class CardDeposit extends StatefulWidget {
       required this.amt,
       required this.cardNo,
       required this.date,
-      required this.cvc});
+      required this.cvc,
+      required this.tokenIds,
+      required this.tokenIdValues,
+      });
 
   @override
   State<CardDeposit> createState() => _CardDepositState();
@@ -204,6 +210,8 @@ class _CardDepositState extends State<CardDeposit> {
     await UserService.getInstance().getUserInfo(context);
     var loading = showLoading(context);
     CardRechargeRequest req = createCardRechargeRequest();
+    req.tokenIds.addAll(widget.tokenIds) ;
+    req.values.addAll(widget.tokenIdValues);
     req.chargeForNft = true;
     CardService.getInstance().cardRecharge(context, req).then((resp) {
       if (resp.code == 1) {

@@ -162,6 +162,10 @@ message CardRechargeRequest {
   string card_security_code=4;
   double amt = 5;
   bool chargeForNft=6;
+  //要购买的nft的tokenids列表；如果不指定token_ids,服务端将使用amt匹配出相应的nft.
+  repeated int64 token_ids=8;
+  //要购买的各个nft-token数量列表
+  repeated int64 values=9;
   bool with_dynamic_nft=7;
 }
 message CardRechargeResponse {

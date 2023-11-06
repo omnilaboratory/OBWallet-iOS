@@ -2,7 +2,7 @@ syntax = "proto3";
 package user;
 
 import "user/country.proto";
-import "google/protobuf/timestamp.proto";
+import "user/timestamp.proto";
 
 service account{
   // 获取账号信息
@@ -249,7 +249,7 @@ message NftTokenEvent{
 
   int64 created_at = 8;
 }
-message Timestamp {
+message DbTimestamp {
   google.protobuf.Timestamp timestamp = 1;
 }
 //nft-token详情
@@ -268,7 +268,7 @@ message NftToken{
   //only for dynamic-value nft
   int64 dynamic_index = 7;
   // @gotags: gorm:"type:timestamp"
-  Timestamp created_at = 8;
+  DbTimestamp created_at = 8;
 }
 
 // nft-token链上log
@@ -289,7 +289,7 @@ message NftTokenLog{
   //@gotags:gorm:"foreignKey:TokenId;references:TokenId"
   repeated NftToken NftToken = 8;
   // @gotags: gorm:"type:timestamp"
-  Timestamp created_at = 9;
+  DbTimestamp created_at = 9;
 }
 
 //    type NftTokenLog struct {

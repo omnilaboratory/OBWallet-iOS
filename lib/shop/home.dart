@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:awallet/bean/enum_dollar_face.dart';
 import 'package:awallet/bean/enum_eth_key.dart';
 import 'package:awallet/bean/nft_detail_info.dart';
 import 'package:awallet/bean/tips.dart';
@@ -14,6 +13,7 @@ import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
+import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 
 import 'nft_detail.dart';
@@ -28,8 +28,10 @@ class ShopHome extends StatefulWidget {
 class _ShopHomeState extends State<ShopHome> {
   List<Widget> faceList = [];
   List<NftDetailInfo> nftDetailInfoList = [];
-  int nftTotalCount = 0;
   double nftTotalValue = 0;
+  int nftTotalCount = 0;
+  List<Int64> tokenIds = [];
+  List<Int64> tokenIdValues = [];
 
   @override
   void initState() {
@@ -55,14 +57,18 @@ class _ShopHomeState extends State<ShopHome> {
       if (event == "nftAmountChange") {
         nftTotalCount = 0;
         nftTotalValue = 0;
-        for (int i = 0; i < EnumDollarFace.values.length; i++) {
-          var dollarFace = EnumDollarFace.values[i];
-          var controller = nftDetailInfoList[i].textController;
+        tokenIds = [];
+        tokenIdValues = [];
+        for (int i = 0; i < nftDetailInfoList.length; i++) {
+          var nftInfo = nftDetailInfoList[i];
+          var controller = nftInfo.textController;
           if (controller.text.isNotEmpty) {
             int amount = int.parse(controller.text);
             if (amount > 0) {
+              tokenIds.add(nftInfo.tokenId);
+              tokenIdValues.add(Int64.parseInt(amount.toString()));
               nftTotalCount += amount;
-              nftTotalValue += amount * double.parse(dollarFace.value);
+              nftTotalValue += amount * nftInfo.price;
             }
           }
         }
@@ -74,6 +80,8 @@ class _ShopHomeState extends State<ShopHome> {
       if (event == "buyNftFinish") {
         nftTotalCount = 0;
         nftTotalValue = 0;
+        tokenIds = [];
+        tokenIdValues = [];
         if (mounted) {
           setState(() {});
         }
@@ -191,11 +199,14 @@ class _ShopHomeState extends State<ShopHome> {
                           context: context,
                           builder: (context) {
                             return CardDeposit(
-                                nftAmt: nftTotalCount,
-                                amt: value,
-                                cardNo: "",
-                                date: "",
-                                cvc: "");
+                              nftAmt: nftTotalCount,
+                              amt: value,
+                              cardNo: "",
+                              date: "",
+                              cvc: "",
+                              tokenIds: tokenIds,
+                              tokenIdValues: tokenIdValues,
+                            );
                           });
                     },
                   ),

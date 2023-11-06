@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:awallet/bean/nft_detail_info.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_deposit.dart';
@@ -8,6 +10,7 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
+import 'package:fixnum/src/int64.dart';
 
 class NftDetail extends StatefulWidget {
   final NftDetailInfo detailInfo;
@@ -197,7 +200,10 @@ class _NftDetailState extends State<NftDetail> {
                                         .toStringAsFixed(0),
                                     cardNo: "",
                                     date: "",
-                                    cvc: "");
+                                    cvc: "",
+                                  tokenIds: [widget.detailInfo.tokenId],
+                                  tokenIdValues: [Int64.parseInt(amount.toString())],
+                                );
                               });
                         },
                       ),
