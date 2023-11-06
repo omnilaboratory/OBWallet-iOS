@@ -33,6 +33,10 @@ class CardServiceClient extends $grpc.Client {
       '/user.CardService/CardExchangeInfoList',
       ($1.CardExchangeInfoListRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.CardExchangeInfoListResponse.fromBuffer(value));
+  static final _$cardExchangeInfoWithNftList = $grpc.ClientMethod<$1.CardExchangeInfoWithNftListRequest, $1.CardExchangeInfoWithNftListResponse>(
+      '/user.CardService/CardExchangeInfoWithNftList',
+      ($1.CardExchangeInfoWithNftListRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.CardExchangeInfoWithNftListResponse.fromBuffer(value));
   static final _$cardDetail = $grpc.ClientMethod<$1.CardDetailRequest, $1.CardDetailResponse>(
       '/user.CardService/CardDetail',
       ($1.CardDetailRequest value) => value.writeToBuffer(),
@@ -70,6 +74,10 @@ class CardServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$1.CardExchangeInfoListResponse> cardExchangeInfoList($1.CardExchangeInfoListRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$cardExchangeInfoList, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.CardExchangeInfoWithNftListResponse> cardExchangeInfoWithNftList($1.CardExchangeInfoWithNftListRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$cardExchangeInfoWithNftList, request, options: options);
   }
 
   $grpc.ResponseFuture<$1.CardDetailResponse> cardDetail($1.CardDetailRequest request, {$grpc.CallOptions? options}) {
@@ -119,6 +127,13 @@ abstract class CardServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.CardExchangeInfoListRequest.fromBuffer(value),
         ($1.CardExchangeInfoListResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.CardExchangeInfoWithNftListRequest, $1.CardExchangeInfoWithNftListResponse>(
+        'CardExchangeInfoWithNftList',
+        cardExchangeInfoWithNftList_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.CardExchangeInfoWithNftListRequest.fromBuffer(value),
+        ($1.CardExchangeInfoWithNftListResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.CardDetailRequest, $1.CardDetailResponse>(
         'CardDetail',
         cardDetail_Pre,
@@ -168,6 +183,10 @@ abstract class CardServiceBase extends $grpc.Service {
     return cardExchangeInfoList(call, await request);
   }
 
+  $async.Future<$1.CardExchangeInfoWithNftListResponse> cardExchangeInfoWithNftList_Pre($grpc.ServiceCall call, $async.Future<$1.CardExchangeInfoWithNftListRequest> request) async {
+    return cardExchangeInfoWithNftList(call, await request);
+  }
+
   $async.Future<$1.CardDetailResponse> cardDetail_Pre($grpc.ServiceCall call, $async.Future<$1.CardDetailRequest> request) async {
     return cardDetail(call, await request);
   }
@@ -191,6 +210,7 @@ abstract class CardServiceBase extends $grpc.Service {
   $async.Future<$1.ApplyCardResponse> applyCard($grpc.ServiceCall call, $1.ApplyCardRequest request);
   $async.Future<$1.CardHistoryResponse> cardHistory($grpc.ServiceCall call, $1.CardHistoryRequest request);
   $async.Future<$1.CardExchangeInfoListResponse> cardExchangeInfoList($grpc.ServiceCall call, $1.CardExchangeInfoListRequest request);
+  $async.Future<$1.CardExchangeInfoWithNftListResponse> cardExchangeInfoWithNftList($grpc.ServiceCall call, $1.CardExchangeInfoWithNftListRequest request);
   $async.Future<$1.CardDetailResponse> cardDetail($grpc.ServiceCall call, $1.CardDetailRequest request);
   $async.Future<$1.CardListResponse> cardList($grpc.ServiceCall call, $1.CardListRequest request);
   $async.Future<$1.CardWithdrawResponse> cardWithdraw($grpc.ServiceCall call, $1.CardWithdrawRequest request);

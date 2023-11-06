@@ -14,6 +14,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import '../google/protobuf/timestamp.pb.dart' as $3;
 import 'account.pbenum.dart';
 
 export 'account.pbenum.dart';
@@ -112,6 +113,7 @@ class GetSwapTxListRequest extends $pb.GeneratedMessage {
     ..aInt64(1, _omitFieldNames ? '' : 'start')
     ..aInt64(2, _omitFieldNames ? '' : 'limit')
     ..e<TrackedTx_ContractSymbol>(3, _omitFieldNames ? '' : 'Symbol', $pb.PbFieldType.OE, protoName: 'Symbol', defaultOrMaker: TrackedTx_ContractSymbol.USD, valueOf: TrackedTx_ContractSymbol.valueOf, enumValues: TrackedTx_ContractSymbol.values)
+    ..aOB(4, _omitFieldNames ? '' : 'loadNftTokenLog')
     ..hasRequiredFields = false
   ;
 
@@ -162,6 +164,15 @@ class GetSwapTxListRequest extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(2);
   @$pb.TagNumber(3)
   void clearSymbol() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.bool get loadNftTokenLog => $_getBF(3);
+  @$pb.TagNumber(4)
+  set loadNftTokenLog($core.bool v) { $_setBool(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasLoadNftTokenLog() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearLoadNftTokenLog() => clearField(4);
 }
 
 class GetSwapTxListResponse extends $pb.GeneratedMessage {
@@ -198,6 +209,146 @@ class GetSwapTxListResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<SwapTx> get items => $_getList(0);
+}
+
+class ListNftTokenEventsRequest extends $pb.GeneratedMessage {
+  factory ListNftTokenEventsRequest() => create();
+  ListNftTokenEventsRequest._() : super();
+  factory ListNftTokenEventsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListNftTokenEventsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListNftTokenEventsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'start')
+    ..aInt64(2, _omitFieldNames ? '' : 'limit')
+    ..aOS(3, _omitFieldNames ? '' : 'address')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListNftTokenEventsRequest clone() => ListNftTokenEventsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListNftTokenEventsRequest copyWith(void Function(ListNftTokenEventsRequest) updates) => super.copyWith((message) => updates(message as ListNftTokenEventsRequest)) as ListNftTokenEventsRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListNftTokenEventsRequest create() => ListNftTokenEventsRequest._();
+  ListNftTokenEventsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListNftTokenEventsRequest> createRepeated() => $pb.PbList<ListNftTokenEventsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListNftTokenEventsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListNftTokenEventsRequest>(create);
+  static ListNftTokenEventsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get start => $_getI64(0);
+  @$pb.TagNumber(1)
+  set start($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStart() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStart() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get limit => $_getI64(1);
+  @$pb.TagNumber(2)
+  set limit($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasLimit() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLimit() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get address => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set address($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAddress() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAddress() => clearField(3);
+}
+
+class ListNftTokenEventsResponse extends $pb.GeneratedMessage {
+  factory ListNftTokenEventsResponse() => create();
+  ListNftTokenEventsResponse._() : super();
+  factory ListNftTokenEventsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListNftTokenEventsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListNftTokenEventsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..pc<NftTokenEvent>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: NftTokenEvent.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListNftTokenEventsResponse clone() => ListNftTokenEventsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListNftTokenEventsResponse copyWith(void Function(ListNftTokenEventsResponse) updates) => super.copyWith((message) => updates(message as ListNftTokenEventsResponse)) as ListNftTokenEventsResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListNftTokenEventsResponse create() => ListNftTokenEventsResponse._();
+  ListNftTokenEventsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListNftTokenEventsResponse> createRepeated() => $pb.PbList<ListNftTokenEventsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListNftTokenEventsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListNftTokenEventsResponse>(create);
+  static ListNftTokenEventsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<NftTokenEvent> get items => $_getList(0);
+}
+
+class GetNftTokenRequest extends $pb.GeneratedMessage {
+  factory GetNftTokenRequest() => create();
+  GetNftTokenRequest._() : super();
+  factory GetNftTokenRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetNftTokenRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetNftTokenRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'tokenId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetNftTokenRequest clone() => GetNftTokenRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetNftTokenRequest copyWith(void Function(GetNftTokenRequest) updates) => super.copyWith((message) => updates(message as GetNftTokenRequest)) as GetNftTokenRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetNftTokenRequest create() => GetNftTokenRequest._();
+  GetNftTokenRequest createEmptyInstance() => create();
+  static $pb.PbList<GetNftTokenRequest> createRepeated() => $pb.PbList<GetNftTokenRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetNftTokenRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetNftTokenRequest>(create);
+  static GetNftTokenRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get tokenId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set tokenId($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTokenId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTokenId() => clearField(1);
 }
 
 class GetNftBlanceRequest extends $pb.GeneratedMessage {
@@ -744,6 +895,7 @@ class SwapTx extends $pb.GeneratedMessage {
     ..aOB(20, _omitFieldNames ? '' : 'isSellNft')
     ..aOS(21, _omitFieldNames ? '' : 'nftTxid')
     ..aOS(22, _omitFieldNames ? '' : 'cardNo')
+    ..pc<NftTokenLog>(23, _omitFieldNames ? '' : 'nftTokenLogs', $pb.PbFieldType.PM, protoName: 'nftTokenLogs', subBuilder: NftTokenLog.create)
     ..hasRequiredFields = false
   ;
 
@@ -938,6 +1090,9 @@ class SwapTx extends $pb.GeneratedMessage {
   $core.bool hasCardNo() => $_has(18);
   @$pb.TagNumber(22)
   void clearCardNo() => clearField(22);
+
+  @$pb.TagNumber(23)
+  $core.List<NftTokenLog> get nftTokenLogs => $_getList(19);
 }
 
 class SellCoinRequest extends $pb.GeneratedMessage {
@@ -1478,6 +1633,172 @@ class GetDcPayUrlResponse extends $pb.GeneratedMessage {
   void clearUrlPath() => clearField(1);
 }
 
+class NftTokenEvent extends $pb.GeneratedMessage {
+  factory NftTokenEvent() => create();
+  NftTokenEvent._() : super();
+  factory NftTokenEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory NftTokenEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'NftTokenEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'txId')
+    ..aOS(2, _omitFieldNames ? '' : 'from')
+    ..aOS(3, _omitFieldNames ? '' : 'to')
+    ..aInt64(4, _omitFieldNames ? '' : 'tokenId')
+    ..aInt64(5, _omitFieldNames ? '' : 'value')
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'itemPrice', $pb.PbFieldType.OD)
+    ..aOS(7, _omitFieldNames ? '' : 'imageUrl')
+    ..aInt64(8, _omitFieldNames ? '' : 'createdAt')
+    ..aOS(9, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  NftTokenEvent clone() => NftTokenEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  NftTokenEvent copyWith(void Function(NftTokenEvent) updates) => super.copyWith((message) => updates(message as NftTokenEvent)) as NftTokenEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NftTokenEvent create() => NftTokenEvent._();
+  NftTokenEvent createEmptyInstance() => create();
+  static $pb.PbList<NftTokenEvent> createRepeated() => $pb.PbList<NftTokenEvent>();
+  @$core.pragma('dart2js:noInline')
+  static NftTokenEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<NftTokenEvent>(create);
+  static NftTokenEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get txId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set txId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTxId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTxId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get from => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set from($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFrom() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFrom() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get to => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set to($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasTo() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTo() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get tokenId => $_getI64(3);
+  @$pb.TagNumber(4)
+  set tokenId($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasTokenId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTokenId() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get value => $_getI64(4);
+  @$pb.TagNumber(5)
+  set value($fixnum.Int64 v) { $_setInt64(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasValue() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearValue() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.double get itemPrice => $_getN(5);
+  @$pb.TagNumber(6)
+  set itemPrice($core.double v) { $_setDouble(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasItemPrice() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearItemPrice() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get imageUrl => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set imageUrl($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasImageUrl() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearImageUrl() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get createdAt => $_getI64(7);
+  @$pb.TagNumber(8)
+  set createdAt($fixnum.Int64 v) { $_setInt64(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasCreatedAt() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCreatedAt() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get name => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set name($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasName() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearName() => clearField(9);
+}
+
+class Timestamp extends $pb.GeneratedMessage {
+  factory Timestamp() => create();
+  Timestamp._() : super();
+  factory Timestamp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Timestamp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Timestamp', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOM<$3.Timestamp>(1, _omitFieldNames ? '' : 'timestamp', subBuilder: $3.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Timestamp clone() => Timestamp()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Timestamp copyWith(void Function(Timestamp) updates) => super.copyWith((message) => updates(message as Timestamp)) as Timestamp;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Timestamp create() => Timestamp._();
+  Timestamp createEmptyInstance() => create();
+  static $pb.PbList<Timestamp> createRepeated() => $pb.PbList<Timestamp>();
+  @$core.pragma('dart2js:noInline')
+  static Timestamp getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Timestamp>(create);
+  static Timestamp? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $3.Timestamp get timestamp => $_getN(0);
+  @$pb.TagNumber(1)
+  set timestamp($3.Timestamp v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTimestamp() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTimestamp() => clearField(1);
+  @$pb.TagNumber(1)
+  $3.Timestamp ensureTimestamp() => $_ensure(0);
+}
+
 class NftToken extends $pb.GeneratedMessage {
   factory NftToken() => create();
   NftToken._() : super();
@@ -1486,9 +1807,14 @@ class NftToken extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'NftToken', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'imageUrl')
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'tokenId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(2, _omitFieldNames ? '' : 'tokenId')
+    ..aInt64(3, _omitFieldNames ? '' : 'amt')
     ..a<$core.double>(4, _omitFieldNames ? '' : 'itemPrice', $pb.PbFieldType.OD)
+    ..aOS(5, _omitFieldNames ? '' : 'des')
+    ..aInt64(6, _omitFieldNames ? '' : 'id')
+    ..aInt64(7, _omitFieldNames ? '' : 'dynamicIndex')
+    ..aOM<Timestamp>(8, _omitFieldNames ? '' : 'createdAt', subBuilder: Timestamp.create)
+    ..aOS(9, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false
   ;
 
@@ -1548,6 +1874,171 @@ class NftToken extends $pb.GeneratedMessage {
   $core.bool hasItemPrice() => $_has(3);
   @$pb.TagNumber(4)
   void clearItemPrice() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get des => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set des($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasDes() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDes() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get id => $_getI64(5);
+  @$pb.TagNumber(6)
+  set id($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasId() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearId() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get dynamicIndex => $_getI64(6);
+  @$pb.TagNumber(7)
+  set dynamicIndex($fixnum.Int64 v) { $_setInt64(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasDynamicIndex() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearDynamicIndex() => clearField(7);
+
+  @$pb.TagNumber(8)
+  Timestamp get createdAt => $_getN(7);
+  @$pb.TagNumber(8)
+  set createdAt(Timestamp v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasCreatedAt() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCreatedAt() => clearField(8);
+  @$pb.TagNumber(8)
+  Timestamp ensureCreatedAt() => $_ensure(7);
+
+  @$pb.TagNumber(9)
+  $core.String get name => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set name($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasName() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearName() => clearField(9);
+}
+
+class NftTokenLog extends $pb.GeneratedMessage {
+  factory NftTokenLog() => create();
+  NftTokenLog._() : super();
+  factory NftTokenLog.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory NftTokenLog.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'NftTokenLog', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'txId')
+    ..aOS(3, _omitFieldNames ? '' : 'from')
+    ..aOS(4, _omitFieldNames ? '' : 'to')
+    ..aInt64(5, _omitFieldNames ? '' : 'tokenId')
+    ..aInt64(6, _omitFieldNames ? '' : 'value')
+    ..a<$core.double>(7, _omitFieldNames ? '' : 'usdAmt', $pb.PbFieldType.OD)
+    ..pc<NftToken>(8, _omitFieldNames ? '' : 'NftToken', $pb.PbFieldType.PM, protoName: 'NftToken', subBuilder: NftToken.create)
+    ..aOM<Timestamp>(9, _omitFieldNames ? '' : 'createdAt', subBuilder: Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  NftTokenLog clone() => NftTokenLog()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  NftTokenLog copyWith(void Function(NftTokenLog) updates) => super.copyWith((message) => updates(message as NftTokenLog)) as NftTokenLog;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NftTokenLog create() => NftTokenLog._();
+  NftTokenLog createEmptyInstance() => create();
+  static $pb.PbList<NftTokenLog> createRepeated() => $pb.PbList<NftTokenLog>();
+  @$core.pragma('dart2js:noInline')
+  static NftTokenLog getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<NftTokenLog>(create);
+  static NftTokenLog? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get txId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set txId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTxId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTxId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get from => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set from($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasFrom() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFrom() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get to => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set to($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasTo() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTo() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get tokenId => $_getI64(4);
+  @$pb.TagNumber(5)
+  set tokenId($fixnum.Int64 v) { $_setInt64(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasTokenId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTokenId() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get value => $_getI64(5);
+  @$pb.TagNumber(6)
+  set value($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasValue() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearValue() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.double get usdAmt => $_getN(6);
+  @$pb.TagNumber(7)
+  set usdAmt($core.double v) { $_setDouble(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasUsdAmt() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearUsdAmt() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.List<NftToken> get nftToken => $_getList(7);
+
+  @$pb.TagNumber(9)
+  Timestamp get createdAt => $_getN(8);
+  @$pb.TagNumber(9)
+  set createdAt(Timestamp v) { setField(9, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasCreatedAt() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearCreatedAt() => clearField(9);
+  @$pb.TagNumber(9)
+  Timestamp ensureCreatedAt() => $_ensure(8);
 }
 
 class AccountHistory extends $pb.GeneratedMessage {

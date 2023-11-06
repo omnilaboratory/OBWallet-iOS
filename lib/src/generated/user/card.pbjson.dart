@@ -149,6 +149,35 @@ final $typed_data.Uint8List cardExchangeInfoListResponseDescriptor = $convert.ba
     'ChxDYXJkRXhjaGFuZ2VJbmZvTGlzdFJlc3BvbnNlEiwKBWl0ZW1zGAEgAygLMhYudXNlci5DYX'
     'JkRXhjaGFuZ2VJbmZvUgVpdGVtcw==');
 
+@$core.Deprecated('Use cardExchangeInfoWithNftListRequestDescriptor instead')
+const CardExchangeInfoWithNftListRequest$json = {
+  '1': 'CardExchangeInfoWithNftListRequest',
+  '2': [
+    {'1': 'start', '3': 2, '4': 1, '5': 3, '10': 'start'},
+    {'1': 'limit', '3': 3, '4': 1, '5': 3, '10': 'limit'},
+  ],
+};
+
+/// Descriptor for `CardExchangeInfoWithNftListRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cardExchangeInfoWithNftListRequestDescriptor = $convert.base64Decode(
+    'CiJDYXJkRXhjaGFuZ2VJbmZvV2l0aE5mdExpc3RSZXF1ZXN0EhQKBXN0YXJ0GAIgASgDUgVzdG'
+    'FydBIUCgVsaW1pdBgDIAEoA1IFbGltaXQ=');
+
+@$core.Deprecated('Use cardExchangeInfoWithNftListResponseDescriptor instead')
+const CardExchangeInfoWithNftListResponse$json = {
+  '1': 'CardExchangeInfoWithNftListResponse',
+  '2': [
+    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.user.CardExchangeInfo', '10': 'items'},
+    {'1': 'nfts', '3': 2, '4': 3, '5': 11, '6': '.user.NftTokenEvent', '10': 'nfts'},
+  ],
+};
+
+/// Descriptor for `CardExchangeInfoWithNftListResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cardExchangeInfoWithNftListResponseDescriptor = $convert.base64Decode(
+    'CiNDYXJkRXhjaGFuZ2VJbmZvV2l0aE5mdExpc3RSZXNwb25zZRIsCgVpdGVtcxgBIAMoCzIWLn'
+    'VzZXIuQ2FyZEV4Y2hhbmdlSW5mb1IFaXRlbXMSJwoEbmZ0cxgCIAMoCzITLnVzZXIuTmZ0VG9r'
+    'ZW5FdmVudFIEbmZ0cw==');
+
 @$core.Deprecated('Use cardHistoryRequestDescriptor instead')
 const CardHistoryRequest$json = {
   '1': 'CardHistoryRequest',
@@ -318,6 +347,7 @@ const CardExchangeInfo$json = {
     {'1': 'err_msg', '3': 11, '4': 1, '5': 9, '10': 'errMsg'},
     {'1': 'created_at', '3': 6, '4': 1, '5': 4, '10': 'createdAt'},
     {'1': 'updated_at', '3': 7, '4': 1, '5': 4, '10': 'updatedAt'},
+    {'1': 'yz_status', '3': 14, '4': 1, '5': 3, '10': 'yzStatus'},
   ],
   '4': [CardExchangeInfo_Status$json],
 };
@@ -329,6 +359,7 @@ const CardExchangeInfo_Status$json = {
     {'1': 'Unknow', '2': 0},
     {'1': 'success', '2': 1},
     {'1': 'fail', '2': 2},
+    {'1': 'pay_ok', '2': 3},
   ],
 };
 
@@ -341,6 +372,6 @@ final $typed_data.Uint8List cardExchangeInfoDescriptor = $convert.base64Decode(
     'GAQgASgJUg5jb3VudGVyUGFydHlObxIQCgNhbXQYBSABKAFSA2FtdBI1CgZzdGF0dXMYCiABKA'
     '4yHS51c2VyLkNhcmRFeGNoYW5nZUluZm8uU3RhdHVzUgZzdGF0dXMSFwoHZXJyX21zZxgLIAEo'
     'CVIGZXJyTXNnEh0KCmNyZWF0ZWRfYXQYBiABKARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GA'
-    'cgASgEUgl1cGRhdGVkQXQiKwoGU3RhdHVzEgoKBlVua25vdxAAEgsKB3N1Y2Nlc3MQARIICgRm'
-    'YWlsEAI=');
+    'cgASgEUgl1cGRhdGVkQXQSGwoJeXpfc3RhdHVzGA4gASgDUgh5elN0YXR1cyI3CgZTdGF0dXMS'
+    'CgoGVW5rbm93EAASCwoHc3VjY2VzcxABEggKBGZhaWwQAhIKCgZwYXlfb2sQAw==');
 

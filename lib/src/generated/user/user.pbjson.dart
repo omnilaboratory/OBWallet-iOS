@@ -71,6 +71,7 @@ const UserInfo$json = {
     {'1': 'created_at', '3': 24, '4': 1, '5': 4, '10': 'createdAt'},
     {'1': 'card_count', '3': 27, '4': 1, '5': 4, '10': 'cardCount'},
     {'1': 'user_type', '3': 28, '4': 1, '5': 3, '10': 'userType'},
+    {'1': 'muser_id', '3': 29, '4': 1, '5': 3, '10': 'muserId'},
   ],
 };
 
@@ -90,7 +91,8 @@ final $typed_data.Uint8List userInfoDescriptor = $convert.base64Decode(
     'QYEyABKARSCXVwZGF0ZWRBdBIdCgpreWNpbmZvX29rGBQgASgIUglreWNpbmZvT2sSFwoHb3Bl'
     'bl9pZBgVIAEoCVIGb3BlbklkEh0KCmt5Y19zdGF0dXMYFiABKAlSCWt5Y1N0YXR1cxIdCgpjcm'
     'VhdGVkX2F0GBggASgEUgljcmVhdGVkQXQSHQoKY2FyZF9jb3VudBgbIAEoBFIJY2FyZENvdW50'
-    'EhsKCXVzZXJfdHlwZRgcIAEoA1IIdXNlclR5cGU=');
+    'EhsKCXVzZXJfdHlwZRgcIAEoA1IIdXNlclR5cGUSGQoIbXVzZXJfaWQYHSABKANSB211c2VySW'
+    'Q=');
 
 @$core.Deprecated('Use signUpRequestDescriptor instead')
 const SignUpRequest$json = {
@@ -324,28 +326,4 @@ const GetUserInfoResponse$json = {
 final $typed_data.Uint8List getUserInfoResponseDescriptor = $convert.base64Decode(
     'ChNHZXRVc2VySW5mb1Jlc3BvbnNlEiIKBHVzZXIYASABKAsyDi51c2VyLlVzZXJJbmZvUgR1c2'
     'Vy');
-
-@$core.Deprecated('Use sayRequestDescriptor instead')
-const SayRequest$json = {
-  '1': 'SayRequest',
-  '2': [
-    {'1': 'sentence', '3': 1, '4': 1, '5': 9, '10': 'sentence'},
-  ],
-};
-
-/// Descriptor for `SayRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sayRequestDescriptor = $convert.base64Decode(
-    'CgpTYXlSZXF1ZXN0EhoKCHNlbnRlbmNlGAEgASgJUghzZW50ZW5jZQ==');
-
-@$core.Deprecated('Use sayResponseDescriptor instead')
-const SayResponse$json = {
-  '1': 'SayResponse',
-  '2': [
-    {'1': 'sentence', '3': 1, '4': 1, '5': 9, '10': 'sentence'},
-  ],
-};
-
-/// Descriptor for `SayResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sayResponseDescriptor = $convert.base64Decode(
-    'CgtTYXlSZXNwb25zZRIaCghzZW50ZW5jZRgBIAEoCVIIc2VudGVuY2U=');
 

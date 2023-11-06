@@ -2,6 +2,7 @@ syntax = "proto3";
 package user;
 
 import "user/country.proto";
+import "google/protobuf/timestamp.proto";
 
 service account{
   // 获取账号信息
@@ -22,6 +23,13 @@ service account{
 
   //获取nft余额
   rpc GetNftBlance(GetNftBlanceRequest) returns (GetNftBlanceResponse) {}
+  //获取nft详情
+  rpc GetNftToken(GetNftTokenRequest) returns (NftToken) {}
+
+
+  //获取链上nft-token事件表列。每个token一行记录。
+  rpc ListNftTokenEvents(ListNftTokenEventsRequest) returns (ListNftTokenEventsResponse) {}
+
   //大额transak充值时的回调地址
   rpc GetDcPayUrl(GetDcPayUrlRequest) returns (GetDcPayUrlResponse) {}
   //数币兑换历史
@@ -44,9 +52,28 @@ message GetSwapTxListRequest{
   int64 limit =2;
   //coin Symbol: eth/usdc/usdt ;  if usd used, will return all record
   TrackedTx.ContractSymbol Symbol = 3;
+  //值为true时，并且Symbol参数是ContractSymbol-NFT,会加载当前订单的nft-token日志。
+  bool load_nft_token_log=4;
 }
 message GetSwapTxListResponse{
    repeated SwapTx items =1;
+}
+
+message ListNftTokenEventsRequest{
+  //same as mysql's offsset; default(0)
+  int64 start =1;
+  //same as mysql's limit; default(20)
+  int64 limit =2;
+  //default is user.EthAddress
+  string address=3;
+}
+message ListNftTokenEventsResponse{
+   repeated NftTokenEvent items =1;
+}
+
+message GetNftTokenRequest{
+  //default is user.EthAddress
+  int64 token_id=1;
 }
 
 message GetNftBlanceRequest{
@@ -145,8 +172,9 @@ message SwapTx{
   string nft_txid=21;
   // only for nft sell and  traget is card_no
   string card_no=22;
-
-
+  //当交易的Symbol是ContractSymbol-NFT,该字段可用于加载nft订单的nft-token日志。
+  //@gotags:gorm:"foreignKey:TxId;references:NftTxid"
+  repeated NftTokenLog nftTokenLogs=23;
 }
 
 message SellCoinRequest {
@@ -204,14 +232,90 @@ message GetDcPayUrlRequest {
 message GetDcPayUrlResponse {
   string url_path=1;
 }
-message NftToken{
-  string image_url=1;
-  uint64 token_id=2;
-//  nft amount
-  uint64 amt=3;
-// nft-token美元价格。 nft usd_price  for each nft
-  double item_price=4;
+message NftTokenEvent{
+  string tx_id = 1;
+  //发送地址：nft event TransferSingle.from
+  string from = 2;
+  //接收地址：  nft event TransferSingle.to
+  string to = 3;
+  //tokenid: nft event TransferSingle.id
+  int64 token_id = 4;
+  //token数量: nft event TransferSingle.value
+  int64 value = 5;
+  // nft-token美元价格。
+  double item_price = 6;
+  string image_url = 7;
+  string name = 9;
+
+  int64 created_at = 8;
 }
+message Timestamp {
+  google.protobuf.Timestamp timestamp = 1;
+}
+//nft-token详情
+message NftToken{
+  string name = 9;
+  string image_url = 1;
+  // @gotags: gorm:"index"
+  int64 token_id = 2;
+  //  nft amount
+  int64 amt = 3;
+  // nft-token美元价格。 nft usd_price  for each nft
+  double item_price = 4;
+  //nft简介
+  string des = 5;
+  int64 id = 6;
+  //only for dynamic-value nft
+  int64 dynamic_index = 7;
+  // @gotags: gorm:"type:timestamp"
+  Timestamp created_at = 8;
+}
+
+// nft-token链上log
+message NftTokenLog{
+  int64 id = 1;
+  string tx_id = 2;
+  //发送地址
+  string  from = 3;
+  //接收地址
+  string to = 4;
+  //@gotags:gorm:"index"
+  //nft evnent TransferBatch.ids
+  int64  token_id = 5;
+  //nft evnent TransferBatch.values
+  int64 value = 6;
+  //how many dollar for these tokens
+  double  usd_amt = 7;
+  //@gotags:gorm:"foreignKey:TokenId;references:TokenId"
+  repeated NftToken NftToken = 8;
+  // @gotags: gorm:"type:timestamp"
+  Timestamp created_at = 9;
+}
+
+//    type NftTokenLog struct {
+//ID        uint `gorm:"primarykey"`
+//    CreatedAt time.Time
+//    TxId      string
+//    From      string
+//    To        string
+////nft evnent TransferBatch.ids
+//    TokenId int64 `gorm:"index"`
+////nft evnent TransferBatch.values
+//    Value int64
+////how many dollar for these tokens
+//    UsdAmt   float64
+//    NftToken user.NftToken `gorm:"foreignKey:TokenId;references:TokenId"`
+//    }
+
+//type NftTokenPrice struct {
+//ID        uint `gorm:"primarykey"`
+//    CreatedAt time.Time
+//    TokenId   int64
+//    ItemPrice float64
+////only for dynamic-value nft
+//    DynamicIndex int64
+//    }
+
 message AccountHistory{
   int64 id=1;
   int64 account_id =8;

@@ -14,8 +14,9 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'account.pb.dart' as $0;
 import 'card.pbenum.dart';
-import 'country.pbenum.dart' as $3;
+import 'country.pbenum.dart' as $4;
 
 export 'card.pbenum.dart';
 
@@ -202,7 +203,7 @@ class CardInfo extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'cardNo')
-    ..e<$3.CurrencyCode>(3, _omitFieldNames ? '' : 'symbol', $pb.PbFieldType.OE, defaultOrMaker: $3.CurrencyCode.UNKNOWNCurrency, valueOf: $3.CurrencyCode.valueOf, enumValues: $3.CurrencyCode.values)
+    ..e<$4.CurrencyCode>(3, _omitFieldNames ? '' : 'symbol', $pb.PbFieldType.OE, defaultOrMaker: $4.CurrencyCode.UNKNOWNCurrency, valueOf: $4.CurrencyCode.valueOf, enumValues: $4.CurrencyCode.values)
     ..aInt64(4, _omitFieldNames ? '' : 'userId')
     ..a<$core.double>(5, _omitFieldNames ? '' : 'balance', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'createdAt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
@@ -253,9 +254,9 @@ class CardInfo extends $pb.GeneratedMessage {
   void clearCardNo() => clearField(2);
 
   @$pb.TagNumber(3)
-  $3.CurrencyCode get symbol => $_getN(2);
+  $4.CurrencyCode get symbol => $_getN(2);
   @$pb.TagNumber(3)
-  set symbol($3.CurrencyCode v) { setField(3, v); }
+  set symbol($4.CurrencyCode v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSymbol() => $_has(2);
   @$pb.TagNumber(3)
@@ -332,7 +333,7 @@ class ApplyCardRequest extends $pb.GeneratedMessage {
   factory ApplyCardRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ApplyCardRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..e<$3.CurrencyCode>(2, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $3.CurrencyCode.UNKNOWNCurrency, valueOf: $3.CurrencyCode.valueOf, enumValues: $3.CurrencyCode.values)
+    ..e<$4.CurrencyCode>(2, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $4.CurrencyCode.UNKNOWNCurrency, valueOf: $4.CurrencyCode.valueOf, enumValues: $4.CurrencyCode.values)
     ..hasRequiredFields = false
   ;
 
@@ -358,9 +359,9 @@ class ApplyCardRequest extends $pb.GeneratedMessage {
   static ApplyCardRequest? _defaultInstance;
 
   @$pb.TagNumber(2)
-  $3.CurrencyCode get currency => $_getN(0);
+  $4.CurrencyCode get currency => $_getN(0);
   @$pb.TagNumber(2)
-  set currency($3.CurrencyCode v) { setField(2, v); }
+  set currency($4.CurrencyCode v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCurrency() => $_has(0);
   @$pb.TagNumber(2)
@@ -563,6 +564,98 @@ class CardExchangeInfoListResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<CardExchangeInfo> get items => $_getList(0);
+}
+
+class CardExchangeInfoWithNftListRequest extends $pb.GeneratedMessage {
+  factory CardExchangeInfoWithNftListRequest() => create();
+  CardExchangeInfoWithNftListRequest._() : super();
+  factory CardExchangeInfoWithNftListRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardExchangeInfoWithNftListRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardExchangeInfoWithNftListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(2, _omitFieldNames ? '' : 'start')
+    ..aInt64(3, _omitFieldNames ? '' : 'limit')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CardExchangeInfoWithNftListRequest clone() => CardExchangeInfoWithNftListRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CardExchangeInfoWithNftListRequest copyWith(void Function(CardExchangeInfoWithNftListRequest) updates) => super.copyWith((message) => updates(message as CardExchangeInfoWithNftListRequest)) as CardExchangeInfoWithNftListRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CardExchangeInfoWithNftListRequest create() => CardExchangeInfoWithNftListRequest._();
+  CardExchangeInfoWithNftListRequest createEmptyInstance() => create();
+  static $pb.PbList<CardExchangeInfoWithNftListRequest> createRepeated() => $pb.PbList<CardExchangeInfoWithNftListRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CardExchangeInfoWithNftListRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardExchangeInfoWithNftListRequest>(create);
+  static CardExchangeInfoWithNftListRequest? _defaultInstance;
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get start => $_getI64(0);
+  @$pb.TagNumber(2)
+  set start($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasStart() => $_has(0);
+  @$pb.TagNumber(2)
+  void clearStart() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get limit => $_getI64(1);
+  @$pb.TagNumber(3)
+  set limit($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasLimit() => $_has(1);
+  @$pb.TagNumber(3)
+  void clearLimit() => clearField(3);
+}
+
+class CardExchangeInfoWithNftListResponse extends $pb.GeneratedMessage {
+  factory CardExchangeInfoWithNftListResponse() => create();
+  CardExchangeInfoWithNftListResponse._() : super();
+  factory CardExchangeInfoWithNftListResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardExchangeInfoWithNftListResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardExchangeInfoWithNftListResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..pc<CardExchangeInfo>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: CardExchangeInfo.create)
+    ..pc<$0.NftTokenEvent>(2, _omitFieldNames ? '' : 'nfts', $pb.PbFieldType.PM, subBuilder: $0.NftTokenEvent.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CardExchangeInfoWithNftListResponse clone() => CardExchangeInfoWithNftListResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CardExchangeInfoWithNftListResponse copyWith(void Function(CardExchangeInfoWithNftListResponse) updates) => super.copyWith((message) => updates(message as CardExchangeInfoWithNftListResponse)) as CardExchangeInfoWithNftListResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CardExchangeInfoWithNftListResponse create() => CardExchangeInfoWithNftListResponse._();
+  CardExchangeInfoWithNftListResponse createEmptyInstance() => create();
+  static $pb.PbList<CardExchangeInfoWithNftListResponse> createRepeated() => $pb.PbList<CardExchangeInfoWithNftListResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CardExchangeInfoWithNftListResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardExchangeInfoWithNftListResponse>(create);
+  static CardExchangeInfoWithNftListResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<CardExchangeInfo> get items => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.List<$0.NftTokenEvent> get nfts => $_getList(1);
 }
 
 class CardHistoryRequest extends $pb.GeneratedMessage {
@@ -1237,6 +1330,7 @@ class CardExchangeInfo extends $pb.GeneratedMessage {
     ..aOS(11, _omitFieldNames ? '' : 'errMsg')
     ..aInt64(12, _omitFieldNames ? '' : 'userId')
     ..aOS(13, _omitFieldNames ? '' : 'nftTxid')
+    ..aInt64(14, _omitFieldNames ? '' : 'yzStatus')
     ..hasRequiredFields = false
   ;
 
@@ -1377,6 +1471,15 @@ class CardExchangeInfo extends $pb.GeneratedMessage {
   $core.bool hasNftTxid() => $_has(12);
   @$pb.TagNumber(13)
   void clearNftTxid() => clearField(13);
+
+  @$pb.TagNumber(14)
+  $fixnum.Int64 get yzStatus => $_getI64(13);
+  @$pb.TagNumber(14)
+  set yzStatus($fixnum.Int64 v) { $_setInt64(13, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasYzStatus() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearYzStatus() => clearField(14);
 }
 
 

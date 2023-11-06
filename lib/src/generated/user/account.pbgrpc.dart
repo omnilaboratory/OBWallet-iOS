@@ -45,6 +45,14 @@ class accountClient extends $grpc.Client {
       '/user.account/GetNftBlance',
       ($0.GetNftBlanceRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.GetNftBlanceResponse.fromBuffer(value));
+  static final _$getNftToken = $grpc.ClientMethod<$0.GetNftTokenRequest, $0.NftToken>(
+      '/user.account/GetNftToken',
+      ($0.GetNftTokenRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.NftToken.fromBuffer(value));
+  static final _$listNftTokenEvents = $grpc.ClientMethod<$0.ListNftTokenEventsRequest, $0.ListNftTokenEventsResponse>(
+      '/user.account/ListNftTokenEvents',
+      ($0.ListNftTokenEventsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.ListNftTokenEventsResponse.fromBuffer(value));
   static final _$getDcPayUrl = $grpc.ClientMethod<$0.GetDcPayUrlRequest, $0.GetDcPayUrlResponse>(
       '/user.account/GetDcPayUrl',
       ($0.GetDcPayUrlRequest value) => value.writeToBuffer(),
@@ -90,6 +98,14 @@ class accountClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.GetNftBlanceResponse> getNftBlance($0.GetNftBlanceRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getNftBlance, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.NftToken> getNftToken($0.GetNftTokenRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getNftToken, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.ListNftTokenEventsResponse> listNftTokenEvents($0.ListNftTokenEventsRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$listNftTokenEvents, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.GetDcPayUrlResponse> getDcPayUrl($0.GetDcPayUrlRequest request, {$grpc.CallOptions? options}) {
@@ -156,6 +172,20 @@ abstract class accountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetNftBlanceRequest.fromBuffer(value),
         ($0.GetNftBlanceResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetNftTokenRequest, $0.NftToken>(
+        'GetNftToken',
+        getNftToken_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetNftTokenRequest.fromBuffer(value),
+        ($0.NftToken value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListNftTokenEventsRequest, $0.ListNftTokenEventsResponse>(
+        'ListNftTokenEvents',
+        listNftTokenEvents_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListNftTokenEventsRequest.fromBuffer(value),
+        ($0.ListNftTokenEventsResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetDcPayUrlRequest, $0.GetDcPayUrlResponse>(
         'GetDcPayUrl',
         getDcPayUrl_Pre,
@@ -210,6 +240,14 @@ abstract class accountServiceBase extends $grpc.Service {
     return getNftBlance(call, await request);
   }
 
+  $async.Future<$0.NftToken> getNftToken_Pre($grpc.ServiceCall call, $async.Future<$0.GetNftTokenRequest> request) async {
+    return getNftToken(call, await request);
+  }
+
+  $async.Future<$0.ListNftTokenEventsResponse> listNftTokenEvents_Pre($grpc.ServiceCall call, $async.Future<$0.ListNftTokenEventsRequest> request) async {
+    return listNftTokenEvents(call, await request);
+  }
+
   $async.Future<$0.GetDcPayUrlResponse> getDcPayUrl_Pre($grpc.ServiceCall call, $async.Future<$0.GetDcPayUrlRequest> request) async {
     return getDcPayUrl(call, await request);
   }
@@ -232,6 +270,8 @@ abstract class accountServiceBase extends $grpc.Service {
   $async.Future<$0.BuyCoinResponse> buyCoin($grpc.ServiceCall call, $0.BuyCoinRequest request);
   $async.Future<$0.SellNftResponse> sellNft($grpc.ServiceCall call, $0.SellNftRequest request);
   $async.Future<$0.GetNftBlanceResponse> getNftBlance($grpc.ServiceCall call, $0.GetNftBlanceRequest request);
+  $async.Future<$0.NftToken> getNftToken($grpc.ServiceCall call, $0.GetNftTokenRequest request);
+  $async.Future<$0.ListNftTokenEventsResponse> listNftTokenEvents($grpc.ServiceCall call, $0.ListNftTokenEventsRequest request);
   $async.Future<$0.GetDcPayUrlResponse> getDcPayUrl($grpc.ServiceCall call, $0.GetDcPayUrlRequest request);
   $async.Future<$0.GetSwapTxListResponse> getSwapTxList($grpc.ServiceCall call, $0.GetSwapTxListRequest request);
   $async.Future<$0.GetTrackedTxListResponse> getTrackedTxList($grpc.ServiceCall call, $0.GetSwapTxListRequest request);

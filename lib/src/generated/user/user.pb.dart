@@ -14,7 +14,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'country.pbenum.dart' as $3;
+import 'country.pbenum.dart' as $4;
 
 class ForgetPwdRequest extends $pb.GeneratedMessage {
   factory ForgetPwdRequest() => create();
@@ -131,7 +131,7 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'userName')
     ..aOS(3, _omitFieldNames ? '' : 'passwordHash')
     ..aOS(4, _omitFieldNames ? '' : 'email')
-    ..e<$3.CountryCode>(5, _omitFieldNames ? '' : 'countryCode', $pb.PbFieldType.OE, defaultOrMaker: $3.CountryCode.UNKNOWNISO, valueOf: $3.CountryCode.valueOf, enumValues: $3.CountryCode.values)
+    ..e<$4.CountryCode>(5, _omitFieldNames ? '' : 'countryCode', $pb.PbFieldType.OE, defaultOrMaker: $4.CountryCode.UNKNOWNISO, valueOf: $4.CountryCode.valueOf, enumValues: $4.CountryCode.values)
     ..aOS(6, _omitFieldNames ? '' : 'id1')
     ..aOS(7, _omitFieldNames ? '' : 'id2')
     ..aOS(8, _omitFieldNames ? '' : 'idNum')
@@ -149,12 +149,13 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOB(20, _omitFieldNames ? '' : 'kycinfoOk')
     ..aOS(21, _omitFieldNames ? '' : 'openId')
     ..aOS(22, _omitFieldNames ? '' : 'kycStatus')
-    ..e<$3.CurrencyCode>(23, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $3.CurrencyCode.UNKNOWNCurrency, valueOf: $3.CurrencyCode.valueOf, enumValues: $3.CurrencyCode.values)
+    ..e<$4.CurrencyCode>(23, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $4.CurrencyCode.UNKNOWNCurrency, valueOf: $4.CurrencyCode.valueOf, enumValues: $4.CurrencyCode.values)
     ..a<$fixnum.Int64>(24, _omitFieldNames ? '' : 'createdAt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(25, _omitFieldNames ? '' : 'ethAddress')
     ..aOS(26, _omitFieldNames ? '' : 'btcAddress')
     ..a<$fixnum.Int64>(27, _omitFieldNames ? '' : 'cardCount', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aInt64(28, _omitFieldNames ? '' : 'userType')
+    ..aInt64(29, _omitFieldNames ? '' : 'muserId')
     ..hasRequiredFields = false
   ;
 
@@ -216,9 +217,9 @@ class UserInfo extends $pb.GeneratedMessage {
   void clearEmail() => clearField(4);
 
   @$pb.TagNumber(5)
-  $3.CountryCode get countryCode => $_getN(4);
+  $4.CountryCode get countryCode => $_getN(4);
   @$pb.TagNumber(5)
-  set countryCode($3.CountryCode v) { setField(5, v); }
+  set countryCode($4.CountryCode v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCountryCode() => $_has(4);
   @$pb.TagNumber(5)
@@ -378,9 +379,9 @@ class UserInfo extends $pb.GeneratedMessage {
   void clearKycStatus() => clearField(22);
 
   @$pb.TagNumber(23)
-  $3.CurrencyCode get currency => $_getN(22);
+  $4.CurrencyCode get currency => $_getN(22);
   @$pb.TagNumber(23)
-  set currency($3.CurrencyCode v) { setField(23, v); }
+  set currency($4.CurrencyCode v) { setField(23, v); }
   @$pb.TagNumber(23)
   $core.bool hasCurrency() => $_has(22);
   @$pb.TagNumber(23)
@@ -430,6 +431,15 @@ class UserInfo extends $pb.GeneratedMessage {
   $core.bool hasUserType() => $_has(27);
   @$pb.TagNumber(28)
   void clearUserType() => clearField(28);
+
+  @$pb.TagNumber(29)
+  $fixnum.Int64 get muserId => $_getI64(28);
+  @$pb.TagNumber(29)
+  set muserId($fixnum.Int64 v) { $_setInt64(28, v); }
+  @$pb.TagNumber(29)
+  $core.bool hasMuserId() => $_has(28);
+  @$pb.TagNumber(29)
+  void clearMuserId() => clearField(29);
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {
@@ -1009,8 +1019,8 @@ class KycRequest extends $pb.GeneratedMessage {
   factory KycRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'KycRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..e<$3.CountryCode>(1, _omitFieldNames ? '' : 'countryCode', $pb.PbFieldType.OE, defaultOrMaker: $3.CountryCode.UNKNOWNISO, valueOf: $3.CountryCode.valueOf, enumValues: $3.CountryCode.values)
-    ..e<$3.CurrencyCode>(2, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $3.CurrencyCode.UNKNOWNCurrency, valueOf: $3.CurrencyCode.valueOf, enumValues: $3.CurrencyCode.values)
+    ..e<$4.CountryCode>(1, _omitFieldNames ? '' : 'countryCode', $pb.PbFieldType.OE, defaultOrMaker: $4.CountryCode.UNKNOWNISO, valueOf: $4.CountryCode.valueOf, enumValues: $4.CountryCode.values)
+    ..e<$4.CurrencyCode>(2, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $4.CurrencyCode.UNKNOWNCurrency, valueOf: $4.CurrencyCode.valueOf, enumValues: $4.CurrencyCode.values)
     ..aOS(3, _omitFieldNames ? '' : 'id1')
     ..aOS(4, _omitFieldNames ? '' : 'id2')
     ..aOS(5, _omitFieldNames ? '' : 'idNum')
@@ -1049,18 +1059,18 @@ class KycRequest extends $pb.GeneratedMessage {
   static KycRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $3.CountryCode get countryCode => $_getN(0);
+  $4.CountryCode get countryCode => $_getN(0);
   @$pb.TagNumber(1)
-  set countryCode($3.CountryCode v) { setField(1, v); }
+  set countryCode($4.CountryCode v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCountryCode() => $_has(0);
   @$pb.TagNumber(1)
   void clearCountryCode() => clearField(1);
 
   @$pb.TagNumber(2)
-  $3.CurrencyCode get currency => $_getN(1);
+  $4.CurrencyCode get currency => $_getN(1);
   @$pb.TagNumber(2)
-  set currency($3.CurrencyCode v) { setField(2, v); }
+  set currency($4.CurrencyCode v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCurrency() => $_has(1);
   @$pb.TagNumber(2)
@@ -1394,90 +1404,6 @@ class GetUserInfoResponse extends $pb.GeneratedMessage {
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
   UserInfo ensureUser() => $_ensure(0);
-}
-
-class SayRequest extends $pb.GeneratedMessage {
-  factory SayRequest() => create();
-  SayRequest._() : super();
-  factory SayRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SayRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SayRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'sentence')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  SayRequest clone() => SayRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  SayRequest copyWith(void Function(SayRequest) updates) => super.copyWith((message) => updates(message as SayRequest)) as SayRequest;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static SayRequest create() => SayRequest._();
-  SayRequest createEmptyInstance() => create();
-  static $pb.PbList<SayRequest> createRepeated() => $pb.PbList<SayRequest>();
-  @$core.pragma('dart2js:noInline')
-  static SayRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SayRequest>(create);
-  static SayRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get sentence => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set sentence($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSentence() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSentence() => clearField(1);
-}
-
-class SayResponse extends $pb.GeneratedMessage {
-  factory SayResponse() => create();
-  SayResponse._() : super();
-  factory SayResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SayResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SayResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'sentence')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  SayResponse clone() => SayResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  SayResponse copyWith(void Function(SayResponse) updates) => super.copyWith((message) => updates(message as SayResponse)) as SayResponse;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static SayResponse create() => SayResponse._();
-  SayResponse createEmptyInstance() => create();
-  static $pb.PbList<SayResponse> createRepeated() => $pb.PbList<SayResponse>();
-  @$core.pragma('dart2js:noInline')
-  static SayResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SayResponse>(create);
-  static SayResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get sentence => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set sentence($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSentence() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSentence() => clearField(1);
 }
 
 

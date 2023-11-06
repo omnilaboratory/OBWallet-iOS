@@ -2,15 +2,20 @@ syntax = "proto3";
 package user;
 
 import "user/country.proto";
+import "user/account.proto";
 
 service CardService{
   //申请卡
   rpc ApplyCard(ApplyCardRequest) returns (ApplyCardResponse) {}
   //卡消费历史 History of payment at other website
   rpc CardHistory(CardHistoryRequest) returns (CardHistoryResponse) {}
+  //卡充值提现明细
   rpc CardExchangeInfoList(CardExchangeInfoListRequest) returns (CardExchangeInfoListResponse) {}
+  //暂示用以，忽略。关于nft购买的，卡充充值明细
+  rpc CardExchangeInfoWithNftList(CardExchangeInfoWithNftListRequest) returns (CardExchangeInfoWithNftListResponse) {}
   //卡详情
   rpc CardDetail(CardDetailRequest) returns (CardDetailResponse) {}
+  //卡列表
   rpc CardList(CardListRequest) returns (CardListResponse) {}
   //账号提现
   rpc CardWithdraw(CardWithdrawRequest) returns (CardWithdrawResponse) {}
@@ -79,6 +84,17 @@ message CardExchangeInfoListRequest {
 }
 message CardExchangeInfoListResponse {
   repeated CardExchangeInfo items=1;
+}
+
+message CardExchangeInfoWithNftListRequest {
+  //same as mysql's offsset; default(0)
+  int64 start =2;
+  //same as mysql's limit; default(20)
+  int64 limit =3;
+}
+message CardExchangeInfoWithNftListResponse {
+  repeated CardExchangeInfo items=1;
+  repeated  NftTokenEvent nfts =2;
 }
 
 message CardHistoryRequest {
@@ -156,24 +172,31 @@ message CardRechargeResponse {
 //after recharge/withdraw , this record will insert
 message CardExchangeInfo {
   int64 id = 1;
-  int64 user_id =12;
-  string card_no=2;
-  string order_no=8;
-  string trade_no=9;
+  int64 user_id = 12;
+  string card_no = 2;
+  string order_no = 8;
+  string trade_no = 9;
   //only for buy nft
-  string nft_txid=13;
-  string counter_party=3;
+  string nft_txid = 13;
+  string counter_party = 3;
   // counter_party card number
-  string counter_party_no=4;
+  string counter_party_no = 4;
   //imcome positive, outcome negative
-  double amt=5;
-  Status status =10;
+  double amt = 5;
+  Status status = 10;
   enum Status{
+    //未知或初始状态
     Unknow = 0;
+    //成功: 用户账号已经充钱，或是nft发送(only for buy nft)。
     success = 1;
+    //失败
     fail = 2;
+    //卡里的钱扣了
+    pay_ok=3;
   }
-  string err_msg =11;
+  string err_msg = 11;
   uint64 created_at = 6;
   uint64 updated_at = 7;
+  //这个字段仅yz柚子平台用户购买的nft使用。1 柚子平台用户购买成功 ；2 已经转移到商户
+  int64 yz_status = 14;
 }

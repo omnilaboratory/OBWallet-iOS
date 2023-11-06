@@ -45,6 +45,7 @@ const GetSwapTxListRequest$json = {
     {'1': 'start', '3': 1, '4': 1, '5': 3, '10': 'start'},
     {'1': 'limit', '3': 2, '4': 1, '5': 3, '10': 'limit'},
     {'1': 'Symbol', '3': 3, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'Symbol'},
+    {'1': 'load_nft_token_log', '3': 4, '4': 1, '5': 8, '10': 'loadNftTokenLog'},
   ],
 };
 
@@ -52,7 +53,8 @@ const GetSwapTxListRequest$json = {
 final $typed_data.Uint8List getSwapTxListRequestDescriptor = $convert.base64Decode(
     'ChRHZXRTd2FwVHhMaXN0UmVxdWVzdBIUCgVzdGFydBgBIAEoA1IFc3RhcnQSFAoFbGltaXQYAi'
     'ABKANSBWxpbWl0EjYKBlN5bWJvbBgDIAEoDjIeLnVzZXIuVHJhY2tlZFR4LkNvbnRyYWN0U3lt'
-    'Ym9sUgZTeW1ib2w=');
+    'Ym9sUgZTeW1ib2wSKwoSbG9hZF9uZnRfdG9rZW5fbG9nGAQgASgIUg9sb2FkTmZ0VG9rZW5Mb2'
+    'c=');
 
 @$core.Deprecated('Use getSwapTxListResponseDescriptor instead')
 const GetSwapTxListResponse$json = {
@@ -66,6 +68,46 @@ const GetSwapTxListResponse$json = {
 final $typed_data.Uint8List getSwapTxListResponseDescriptor = $convert.base64Decode(
     'ChVHZXRTd2FwVHhMaXN0UmVzcG9uc2USIgoFaXRlbXMYASADKAsyDC51c2VyLlN3YXBUeFIFaX'
     'RlbXM=');
+
+@$core.Deprecated('Use listNftTokenEventsRequestDescriptor instead')
+const ListNftTokenEventsRequest$json = {
+  '1': 'ListNftTokenEventsRequest',
+  '2': [
+    {'1': 'start', '3': 1, '4': 1, '5': 3, '10': 'start'},
+    {'1': 'limit', '3': 2, '4': 1, '5': 3, '10': 'limit'},
+    {'1': 'address', '3': 3, '4': 1, '5': 9, '10': 'address'},
+  ],
+};
+
+/// Descriptor for `ListNftTokenEventsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listNftTokenEventsRequestDescriptor = $convert.base64Decode(
+    'ChlMaXN0TmZ0VG9rZW5FdmVudHNSZXF1ZXN0EhQKBXN0YXJ0GAEgASgDUgVzdGFydBIUCgVsaW'
+    '1pdBgCIAEoA1IFbGltaXQSGAoHYWRkcmVzcxgDIAEoCVIHYWRkcmVzcw==');
+
+@$core.Deprecated('Use listNftTokenEventsResponseDescriptor instead')
+const ListNftTokenEventsResponse$json = {
+  '1': 'ListNftTokenEventsResponse',
+  '2': [
+    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.user.NftTokenEvent', '10': 'items'},
+  ],
+};
+
+/// Descriptor for `ListNftTokenEventsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listNftTokenEventsResponseDescriptor = $convert.base64Decode(
+    'ChpMaXN0TmZ0VG9rZW5FdmVudHNSZXNwb25zZRIpCgVpdGVtcxgBIAMoCzITLnVzZXIuTmZ0VG'
+    '9rZW5FdmVudFIFaXRlbXM=');
+
+@$core.Deprecated('Use getNftTokenRequestDescriptor instead')
+const GetNftTokenRequest$json = {
+  '1': 'GetNftTokenRequest',
+  '2': [
+    {'1': 'token_id', '3': 1, '4': 1, '5': 3, '10': 'tokenId'},
+  ],
+};
+
+/// Descriptor for `GetNftTokenRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getNftTokenRequestDescriptor = $convert.base64Decode(
+    'ChJHZXROZnRUb2tlblJlcXVlc3QSGQoIdG9rZW5faWQYASABKANSB3Rva2VuSWQ=');
 
 @$core.Deprecated('Use getNftBlanceRequestDescriptor instead')
 const GetNftBlanceRequest$json = {
@@ -248,6 +290,7 @@ const SwapTx$json = {
     {'1': 'is_sell_nft', '3': 20, '4': 1, '5': 8, '10': 'isSellNft'},
     {'1': 'nft_txid', '3': 21, '4': 1, '5': 9, '10': 'nftTxid'},
     {'1': 'card_no', '3': 22, '4': 1, '5': 9, '10': 'cardNo'},
+    {'1': 'nftTokenLogs', '3': 23, '4': 3, '5': 11, '6': '.user.NftTokenLog', '10': 'nftTokenLogs'},
   ],
 };
 
@@ -264,7 +307,8 @@ final $typed_data.Uint8List swapTxDescriptor = $convert.base64Decode(
     'LnVzZXIuVHJhY2tlZFR4LkNvbnRyYWN0U3ltYm9sUgx0YXJnZXRTeW1ib2wSHQoKY3JlYXRlZF'
     '9hdBgLIAEoA1IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYDCABKANSCXVwZGF0ZWRBdBIeCgtp'
     'c19zZWxsX25mdBgUIAEoCFIJaXNTZWxsTmZ0EhkKCG5mdF90eGlkGBUgASgJUgduZnRUeGlkEh'
-    'cKB2NhcmRfbm8YFiABKAlSBmNhcmRObw==');
+    'cKB2NhcmRfbm8YFiABKAlSBmNhcmRObxI1CgxuZnRUb2tlbkxvZ3MYFyADKAsyES51c2VyLk5m'
+    'dFRva2VuTG9nUgxuZnRUb2tlbkxvZ3M=');
 
 @$core.Deprecated('Use sellCoinRequestDescriptor instead')
 const SellCoinRequest$json = {
@@ -404,22 +448,90 @@ const GetDcPayUrlResponse$json = {
 final $typed_data.Uint8List getDcPayUrlResponseDescriptor = $convert.base64Decode(
     'ChNHZXREY1BheVVybFJlc3BvbnNlEhkKCHVybF9wYXRoGAEgASgJUgd1cmxQYXRo');
 
+@$core.Deprecated('Use nftTokenEventDescriptor instead')
+const NftTokenEvent$json = {
+  '1': 'NftTokenEvent',
+  '2': [
+    {'1': 'tx_id', '3': 1, '4': 1, '5': 9, '10': 'txId'},
+    {'1': 'from', '3': 2, '4': 1, '5': 9, '10': 'from'},
+    {'1': 'to', '3': 3, '4': 1, '5': 9, '10': 'to'},
+    {'1': 'token_id', '3': 4, '4': 1, '5': 3, '10': 'tokenId'},
+    {'1': 'value', '3': 5, '4': 1, '5': 3, '10': 'value'},
+    {'1': 'item_price', '3': 6, '4': 1, '5': 1, '10': 'itemPrice'},
+    {'1': 'image_url', '3': 7, '4': 1, '5': 9, '10': 'imageUrl'},
+    {'1': 'name', '3': 9, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'created_at', '3': 8, '4': 1, '5': 3, '10': 'createdAt'},
+  ],
+};
+
+/// Descriptor for `NftTokenEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List nftTokenEventDescriptor = $convert.base64Decode(
+    'Cg1OZnRUb2tlbkV2ZW50EhMKBXR4X2lkGAEgASgJUgR0eElkEhIKBGZyb20YAiABKAlSBGZyb2'
+    '0SDgoCdG8YAyABKAlSAnRvEhkKCHRva2VuX2lkGAQgASgDUgd0b2tlbklkEhQKBXZhbHVlGAUg'
+    'ASgDUgV2YWx1ZRIdCgppdGVtX3ByaWNlGAYgASgBUglpdGVtUHJpY2USGwoJaW1hZ2VfdXJsGA'
+    'cgASgJUghpbWFnZVVybBISCgRuYW1lGAkgASgJUgRuYW1lEh0KCmNyZWF0ZWRfYXQYCCABKANS'
+    'CWNyZWF0ZWRBdA==');
+
+@$core.Deprecated('Use timestampDescriptor instead')
+const Timestamp$json = {
+  '1': 'Timestamp',
+  '2': [
+    {'1': 'timestamp', '3': 1, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
+  ],
+};
+
+/// Descriptor for `Timestamp`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List timestampDescriptor = $convert.base64Decode(
+    'CglUaW1lc3RhbXASOAoJdGltZXN0YW1wGAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdG'
+    'FtcFIJdGltZXN0YW1w');
+
 @$core.Deprecated('Use nftTokenDescriptor instead')
 const NftToken$json = {
   '1': 'NftToken',
   '2': [
+    {'1': 'name', '3': 9, '4': 1, '5': 9, '10': 'name'},
     {'1': 'image_url', '3': 1, '4': 1, '5': 9, '10': 'imageUrl'},
-    {'1': 'token_id', '3': 2, '4': 1, '5': 4, '10': 'tokenId'},
-    {'1': 'amt', '3': 3, '4': 1, '5': 4, '10': 'amt'},
+    {'1': 'token_id', '3': 2, '4': 1, '5': 3, '10': 'tokenId'},
+    {'1': 'amt', '3': 3, '4': 1, '5': 3, '10': 'amt'},
     {'1': 'item_price', '3': 4, '4': 1, '5': 1, '10': 'itemPrice'},
+    {'1': 'des', '3': 5, '4': 1, '5': 9, '10': 'des'},
+    {'1': 'id', '3': 6, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'dynamic_index', '3': 7, '4': 1, '5': 3, '10': 'dynamicIndex'},
+    {'1': 'created_at', '3': 8, '4': 1, '5': 11, '6': '.user.Timestamp', '10': 'createdAt'},
   ],
 };
 
 /// Descriptor for `NftToken`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List nftTokenDescriptor = $convert.base64Decode(
-    'CghOZnRUb2tlbhIbCglpbWFnZV91cmwYASABKAlSCGltYWdlVXJsEhkKCHRva2VuX2lkGAIgAS'
-    'gEUgd0b2tlbklkEhAKA2FtdBgDIAEoBFIDYW10Eh0KCml0ZW1fcHJpY2UYBCABKAFSCWl0ZW1Q'
-    'cmljZQ==');
+    'CghOZnRUb2tlbhISCgRuYW1lGAkgASgJUgRuYW1lEhsKCWltYWdlX3VybBgBIAEoCVIIaW1hZ2'
+    'VVcmwSGQoIdG9rZW5faWQYAiABKANSB3Rva2VuSWQSEAoDYW10GAMgASgDUgNhbXQSHQoKaXRl'
+    'bV9wcmljZRgEIAEoAVIJaXRlbVByaWNlEhAKA2RlcxgFIAEoCVIDZGVzEg4KAmlkGAYgASgDUg'
+    'JpZBIjCg1keW5hbWljX2luZGV4GAcgASgDUgxkeW5hbWljSW5kZXgSLgoKY3JlYXRlZF9hdBgI'
+    'IAEoCzIPLnVzZXIuVGltZXN0YW1wUgljcmVhdGVkQXQ=');
+
+@$core.Deprecated('Use nftTokenLogDescriptor instead')
+const NftTokenLog$json = {
+  '1': 'NftTokenLog',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'tx_id', '3': 2, '4': 1, '5': 9, '10': 'txId'},
+    {'1': 'from', '3': 3, '4': 1, '5': 9, '10': 'from'},
+    {'1': 'to', '3': 4, '4': 1, '5': 9, '10': 'to'},
+    {'1': 'token_id', '3': 5, '4': 1, '5': 3, '10': 'tokenId'},
+    {'1': 'value', '3': 6, '4': 1, '5': 3, '10': 'value'},
+    {'1': 'usd_amt', '3': 7, '4': 1, '5': 1, '10': 'usdAmt'},
+    {'1': 'NftToken', '3': 8, '4': 3, '5': 11, '6': '.user.NftToken', '10': 'NftToken'},
+    {'1': 'created_at', '3': 9, '4': 1, '5': 11, '6': '.user.Timestamp', '10': 'createdAt'},
+  ],
+};
+
+/// Descriptor for `NftTokenLog`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List nftTokenLogDescriptor = $convert.base64Decode(
+    'CgtOZnRUb2tlbkxvZxIOCgJpZBgBIAEoA1ICaWQSEwoFdHhfaWQYAiABKAlSBHR4SWQSEgoEZn'
+    'JvbRgDIAEoCVIEZnJvbRIOCgJ0bxgEIAEoCVICdG8SGQoIdG9rZW5faWQYBSABKANSB3Rva2Vu'
+    'SWQSFAoFdmFsdWUYBiABKANSBXZhbHVlEhcKB3VzZF9hbXQYByABKAFSBnVzZEFtdBIqCghOZn'
+    'RUb2tlbhgIIAMoCzIOLnVzZXIuTmZ0VG9rZW5SCE5mdFRva2VuEi4KCmNyZWF0ZWRfYXQYCSAB'
+    'KAsyDy51c2VyLlRpbWVzdGFtcFIJY3JlYXRlZEF0');
 
 @$core.Deprecated('Use accountHistoryDescriptor instead')
 const AccountHistory$json = {

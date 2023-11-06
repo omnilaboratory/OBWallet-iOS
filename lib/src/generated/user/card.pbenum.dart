@@ -17,11 +17,13 @@ class CardExchangeInfo_Status extends $pb.ProtobufEnum {
   static const CardExchangeInfo_Status Unknow = CardExchangeInfo_Status._(0, _omitEnumNames ? '' : 'Unknow');
   static const CardExchangeInfo_Status success = CardExchangeInfo_Status._(1, _omitEnumNames ? '' : 'success');
   static const CardExchangeInfo_Status fail = CardExchangeInfo_Status._(2, _omitEnumNames ? '' : 'fail');
+  static const CardExchangeInfo_Status pay_ok = CardExchangeInfo_Status._(3, _omitEnumNames ? '' : 'pay_ok');
 
   static const $core.List<CardExchangeInfo_Status> values = <CardExchangeInfo_Status> [
     Unknow,
     success,
     fail,
+    pay_ok,
   ];
 
   static final $core.Map<$core.int, CardExchangeInfo_Status> _byValue = $pb.ProtobufEnum.initByValue(values);
