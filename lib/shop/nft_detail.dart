@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:awallet/bean/nft_detail_info.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_deposit.dart';
@@ -9,8 +7,8 @@ import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
-import 'package:flutter/material.dart';
 import 'package:fixnum/src/int64.dart';
+import 'package:flutter/material.dart';
 
 class NftDetail extends StatefulWidget {
   final NftDetailInfo detailInfo;
@@ -111,10 +109,12 @@ class _NftDetailState extends State<NftDetail> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  buildDetailLine("Contract Address",
-                                      StringTools.starString2(widget.detailInfo.contractAddress)),
                                   buildDetailLine(
-                                      "Token ID", widget.detailInfo.tokenId.toString()),
+                                      "Contract Address",
+                                      StringTools.starString2(
+                                          widget.detailInfo.contractAddress)),
+                                  buildDetailLine("Token ID",
+                                      widget.detailInfo.tokenId.toString()),
                                   buildDetailLine("Token Standard", "ERC-1155"),
                                   buildDetailLine("Chain", "Polygon"),
                                 ],
@@ -195,14 +195,12 @@ class _NftDetailState extends State<NftDetail> {
                               context: context,
                               builder: (context) {
                                 return CardDeposit(
-                                    nftAmt: amount,
-                                    amt: (amount * widget.detailInfo.price)
-                                        .toStringAsFixed(0),
-                                    cardNo: "",
-                                    date: "",
-                                    cvc: "",
+                                  nftAmt: amount,
+                                  amt: (amount * widget.detailInfo.price),
                                   tokenIds: [widget.detailInfo.tokenId],
-                                  tokenIdValues: [Int64.parseInt(amount.toString())],
+                                  tokenIdValues: [
+                                    Int64.parseInt(amount.toString())
+                                  ],
                                 );
                               });
                         },

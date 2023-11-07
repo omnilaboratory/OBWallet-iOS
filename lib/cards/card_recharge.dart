@@ -309,14 +309,15 @@ class _CardRechargeState extends State<CardRecharge> {
             if (kycStatus.isNotEmpty) {
               if (kycStatus == "passed") {
                 GlobalParams.eventBus.fire("topup");
+                // card recharge can not more than 100
                 // Navigator.pop(context);
                 // getDcPayUrl(double.parse(cardHolderName));
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          BuyNft(rechargeRequest: createCardRechargeRequest())),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) =>
+                //           BuyNft(rechargeRequest: createCardRechargeRequest())),
+                // );
               }
             } else {
               showDialog(

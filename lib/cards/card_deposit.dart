@@ -12,13 +12,14 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:fixnum/src/int64.dart';
 
 class CardDeposit extends StatefulWidget {
   int nftAmt;
-  String amt;
+  double amt;
   String cardNo;
   String date;
   String cvc;
@@ -29,9 +30,9 @@ class CardDeposit extends StatefulWidget {
       {super.key,
       required this.nftAmt,
       required this.amt,
-      required this.cardNo,
-      required this.date,
-      required this.cvc,
+      this.cardNo="",
+      this.date="",
+      this.cvc="",
       required this.tokenIds,
       required this.tokenIdValues,
       });
@@ -53,7 +54,7 @@ class _CardDepositState extends State<CardDeposit> {
     super.initState();
     if (mounted) {
       setState(() {
-        cardHolderName = widget.amt;
+        cardHolderName = widget.amt.toString();
         cardNumber = widget.cardNo;
         expiryDate = widget.date;
         cvcCode = widget.cvc;
@@ -173,7 +174,7 @@ class _CardDepositState extends State<CardDeposit> {
   onPay() {
     FocusScope.of(context).unfocus();
     if (formKey.currentState!.validate()) {
-      alert("You are costing \$${widget.amt} and will get ${widget.nftAmt} NFTs.", context, () {
+      alert("You are costing \$${StringTools.formatCurrencyNum(widget.amt)} and will get ${widget.nftAmt} NFTs.", context, () {
         onClickDone();
       }, showCancel: true);
     }

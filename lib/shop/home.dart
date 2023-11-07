@@ -135,8 +135,6 @@ class _ShopHomeState extends State<ShopHome> {
 
   @override
   Widget build(BuildContext context) {
-    var value = StringTools.formatCurrencyNum(nftTotalValue);
-
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
@@ -151,7 +149,7 @@ class _ShopHomeState extends State<ShopHome> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                  "You have selected $nftTotalCount NFTs and value is \$$value",
+                  "You have selected $nftTotalCount NFTs and value is \$${StringTools.formatCurrencyNum(nftTotalValue)}",
                   style: const TextStyle(
                     color: Color(0xFF666666),
                     fontSize: 20,
@@ -200,10 +198,7 @@ class _ShopHomeState extends State<ShopHome> {
                           builder: (context) {
                             return CardDeposit(
                               nftAmt: nftTotalCount,
-                              amt: value,
-                              cardNo: "",
-                              date: "",
-                              cvc: "",
+                              amt: nftTotalValue,
                               tokenIds: tokenIds,
                               tokenIdValues: tokenIdValues,
                             );
