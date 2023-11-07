@@ -19,81 +19,113 @@ class NftTxItem extends StatelessWidget {
     List<Widget> nftTxList = [];
     if (txInfo.nftTxLogs.isNotEmpty) {
       for (var log in txInfo.nftTxLogs) {
-        var row = Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        var item = Column(
           children: [
-            Text("#${log.tokenId}"),
-            Text("${log.value}"),
-            Text("\$${log.usdAmt}"),
+            const SizedBox(height: 5),
+            Row(
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.token, size: 18),
+                    const SizedBox(width: 2),
+                    Text("#${log.tokenId}"),
+                    const SizedBox(width: 15),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    const Icon(Icons.assessment, size: 18),
+                    const SizedBox(width: 2),
+                    Text("${log.value}"),
+                    const SizedBox(width: 15),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    const Icon(Icons.monetization_on, size: 18),
+                    const SizedBox(width: 2),
+                    Text(StringTools.formatCurrencyNum(log.usdAmt)),
+                  ],
+                ),
+              ],
+            )
           ],
         );
-        nftTxList.add(row);
+
+        nftTxList.add(item);
       }
     }
 
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
-      // height: 40,
-      child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Container(
-          width: 12,
-          height: 12,
-          decoration: BoxDecoration(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 12,
+            height: 12,
+            margin: const EdgeInsets.only(top: 13),
+            decoration: BoxDecoration(
               color: circleClrs[txInfo.status],
-              borderRadius: BorderRadius.circular(6)),
-        ),
-        Expanded(
-          flex: 3,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10),
+              borderRadius: BorderRadius.circular(6)
+            ),
+          ),
+        
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    txInfo.title,
+                    style: const TextStyle(
+                      color: Color(0xFF333333),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    DateFormat("yyyy.MM.dd hh:mm a").format(txInfo.txTime),
+                    style: const TextStyle(
+                      color: Color(0xFF999999),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          Expanded(
+            flex: 3,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  txInfo.title,
-                  style: const TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+                buildAmount(txInfo.fromSymbol, txInfo.amount),
                 const SizedBox(height: 4),
-                Text(
-                  DateFormat("yyyy.MM.dd hh:mm a").format(txInfo.txTime),
-                  style: const TextStyle(
-                    color: Color(0xFF999999),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildAmount(txInfo.fromSymbol, txInfo.amount),
-              const SizedBox(height: 4),
-              txInfo.amountOfDollar != null
+                txInfo.amountOfDollar != null
                   ? buildAmount(txInfo.targetSymbol, txInfo.amountOfDollar!)
                   : const SizedBox(
                       width: 0,
                       height: 0,
                     ),
-            ],
+                  
+                const SizedBox(height: 5),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: nftTxList,
+                ),
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          flex: 3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: nftTxList,
-          ),
-        ),
-      ]),
+        ]
+      ),
     );
   }
 

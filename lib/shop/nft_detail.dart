@@ -53,31 +53,31 @@ class _NftDetailState extends State<NftDetail> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 12),
-                            Text("NFT Name #${widget.detailInfo.tokenName}",
+                            const SizedBox(height: 20),
+                            Text("${widget.detailInfo.tokenName} #${widget.detailInfo.tokenId}",
                                 style: const TextStyle(
                                   color: Color(0xFF333333),
-                                  fontSize: 20,
+                                  fontSize: 23,
                                   fontWeight: FontWeight.w700,
                                 )),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 20),
                             const Text("Current price",
                                 style: TextStyle(
-                                  color: Color(0xFF000000),
-                                  fontSize: 20,
+                                  color: Color.fromARGB(255, 103, 88, 88),
+                                  fontSize: 16,
                                 )),
                             Text(
                                 "\$${StringTools.formatCurrencyNum(widget.detailInfo.price)}",
                                 style: const TextStyle(
                                   color: Color(0xFF000000),
                                   fontSize: 20,
-                                  fontWeight: FontWeight.w700,
+                                  fontWeight: FontWeight.w600,
                                 )),
                             const SizedBox(height: 16),
                             const Text("Description",
                                 style: TextStyle(
-                                  color: Color(0xFF000000),
-                                  fontSize: 18,
+                                  color: Color.fromARGB(255, 103, 88, 88),
+                                  fontSize: 16,
                                 )),
                             const SizedBox(height: 4),
                             Text(widget.detailInfo.description,
@@ -121,7 +121,7 @@ class _NftDetailState extends State<NftDetail> {
                               ),
                             ),
                           ])),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 50),
                   SizedBox(
                     width: 110,
                     child: Row(
@@ -170,7 +170,7 @@ class _NftDetailState extends State<NftDetail> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 40),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -220,12 +220,14 @@ class _NftDetailState extends State<NftDetail> {
             child: Text(title,
                 style: const TextStyle(
                   fontSize: 14,
+                  color: Color.fromARGB(255, 103, 88, 88),
                 ))),
         Expanded(
             flex: 1,
             child: Text(content,
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500
                 ))),
       ],
     );
