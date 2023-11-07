@@ -5,6 +5,7 @@ import 'package:awallet/bean/nft_detail_info.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_deposit.dart';
 import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/component/button_for_app_bar.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_nft_item.dart';
 import 'package:awallet/component/head_logo.dart';
@@ -17,6 +18,7 @@ import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 
 import 'nft_detail.dart';
+import 'nft_tx_history.dart';
 
 class ShopHome extends StatefulWidget {
   const ShopHome({super.key});
@@ -142,6 +144,23 @@ class _ShopHomeState extends State<ShopHome> {
       child: Scaffold(
         appBar: AppBar(
           title: const HeadLogo(title: "Shop"),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: Row(
+                children: [
+                  ButtonForAppBarAction(
+                      imageUrl: "asset/images/icon_tx_history.png",
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const NftTxHistory()));
+                      }),
+                ],
+              ),
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, top: 20),

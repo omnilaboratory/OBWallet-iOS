@@ -91,13 +91,14 @@ class AccountService {
   }
 
   Future<GrpcResponse> getSwapTxList(BuildContext context, int start, int limit,
-      TrackedTx_ContractSymbol? symbol) async {
+      TrackedTx_ContractSymbol? symbol,{bool loadNftTokenLog = false}) async {
     var request = GetSwapTxListRequest();
     request.start = Int64.parseInt(start.toString());
     request.limit = Int64.parseInt(limit.toString());
     if (symbol != null) {
       request.symbol = symbol;
     }
+    request.loadNftTokenLog = loadNftTokenLog;
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.getSwapTxList(request);

@@ -82,8 +82,6 @@ class _EthereumPageState extends State<EthereumPage> {
     var walletInfo = EthService.getInstance().getWalletInfo();
     var tokenList = EthService.getInstance().getTokenList();
 
-    log("build currTypeIndex $currTypeIndex");
-
     Widget buildTokenAndNftList() {
       return currTypeIndex == 0
           ? ListView.builder(

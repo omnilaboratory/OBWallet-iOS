@@ -7,7 +7,7 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_token_card.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/square_button.dart';
-import 'package:awallet/component/tx_item.dart';
+import 'package:awallet/component/crypto_tx_item.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/grpc_services/account_service.dart';

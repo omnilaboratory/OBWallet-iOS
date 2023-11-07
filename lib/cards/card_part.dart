@@ -9,7 +9,7 @@ import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/card_item.dart';
 import 'package:awallet/component/common.dart';
-import 'package:awallet/component/tx_item.dart';
+import 'package:awallet/component/crypto_tx_item.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
