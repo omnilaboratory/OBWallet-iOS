@@ -1,3 +1,5 @@
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+
 class CryptoTxInfo {
   late final String title;
   late final DateTime txTime;
@@ -6,7 +8,6 @@ class CryptoTxInfo {
   late final String targetSymbol;
   late final double? amountOfDollar;
   late final int status;
-
   CryptoTxInfo(
       {required this.title,
       required this.txTime,
@@ -14,5 +15,6 @@ class CryptoTxInfo {
       required this.fromSymbol,
       this.targetSymbol = "USD",
       this.amountOfDollar = 0,
-      this.status = 0});
+      this.status = 0,
+      });
 }

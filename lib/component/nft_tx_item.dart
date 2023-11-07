@@ -1,21 +1,39 @@
+import 'dart:developer';
+
+import 'package:awallet/bean/nft_tx_info.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../bean/crypto_tx_info.dart';
-
 var circleClrs = [Colors.grey, Colors.yellow, Colors.red, Colors.green];
 
 class NftTxItem extends StatelessWidget {
-  final CryptoTxInfo txInfo;
+  final NftTxInfo txInfo;
 
   const NftTxItem({super.key, required this.txInfo});
 
   @override
   Widget build(BuildContext context) {
+    log("${txInfo.nftTxLogs}");
+
+    List<Widget> nftTxList = [];
+    if (txInfo.nftTxLogs.isNotEmpty) {
+      for (var log in txInfo.nftTxLogs) {
+        var row = Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text("#${log.tokenId}"),
+            Text("${log.value}"),
+            Text("\$${log.usdAmt}"),
+          ],
+        );
+        nftTxList.add(row);
+      }
+    }
+
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
-      height: 40,
+      // height: 40,
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Container(
           width: 12,
@@ -59,8 +77,20 @@ class NftTxItem extends StatelessWidget {
             children: [
               buildAmount(txInfo.fromSymbol, txInfo.amount),
               const SizedBox(height: 4),
-              txInfo.amountOfDollar!=null?buildAmount(txInfo.targetSymbol, txInfo.amountOfDollar!):const SizedBox(width: 0,height: 0,),
+              txInfo.amountOfDollar != null
+                  ? buildAmount(txInfo.targetSymbol, txInfo.amountOfDollar!)
+                  : const SizedBox(
+                      width: 0,
+                      height: 0,
+                    ),
             ],
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: nftTxList,
           ),
         ),
       ]),

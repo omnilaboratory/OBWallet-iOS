@@ -1,8 +1,5 @@
-import 'dart:developer';
-
-import 'package:awallet/bean/crypto_tx_info.dart';
+import 'package:awallet/bean/nft_tx_info.dart';
 import 'package:awallet/component/head_logo.dart';
-import 'package:awallet/component/crypto_tx_item.dart';
 import 'package:awallet/component/nft_tx_item.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
@@ -23,7 +20,7 @@ class _NftTxHistoryState extends State<NftTxHistory> {
   final RefreshController _refreshListController =
       RefreshController(initialRefresh: false);
 
-  List<CryptoTxInfo> txHistoryList = [];
+  List<NftTxInfo> txHistoryList = [];
 
   @override
   void initState() {
@@ -101,25 +98,29 @@ class _NftTxHistoryState extends State<NftTxHistory> {
 
   void getSwapTxList() {
     AccountService.getInstance()
-        .getSwapTxList(context, dataStartIndex, localPageSize, TrackedTx_ContractSymbol.NFT,loadNftTokenLog: true)
+        .getSwapTxList(context, dataStartIndex, localPageSize,
+            TrackedTx_ContractSymbol.NFT,
+            loadNftTokenLog: true)
         .then((result) {
       if (result.code == 1) {
         var resp = result.data as GetSwapTxListResponse;
         var items = resp.items;
         if (items.isNotEmpty) {
-          log("$items");
           for (var element in items) {
-            txHistoryList.add(CryptoTxInfo(
-                title:
-                    "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
-                txTime: DateTime.fromMillisecondsSinceEpoch(
-                    (element.createdAt * 1000).toInt()),
-                fromSymbol: element.fromSymbol.name,
-                targetSymbol: element.targetSymbol.name,
-                amount: element.amt,
-                amountOfDollar: element.settleAmt,
-                status:
-                    element.status.value > 2 ? element.status.value - 2 : 0));
+            txHistoryList.add(
+              NftTxInfo(
+                  title:
+                      "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
+                  txTime: DateTime.fromMillisecondsSinceEpoch(
+                      (element.createdAt * 1000).toInt()),
+                  fromSymbol: element.fromSymbol.name,
+                  targetSymbol: element.targetSymbol.name,
+                  amount: element.amt,
+                  amountOfDollar: element.settleAmt,
+                  status:
+                      element.status.value > 2 ? element.status.value - 2 : 0,
+                  nftTxLogs: element.nftTokenLogs),
+            );
           }
         }
         if (mounted) {
