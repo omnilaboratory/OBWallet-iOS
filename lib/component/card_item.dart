@@ -97,7 +97,8 @@ class CardItem extends StatelessWidget {
                 ),
                 const SizedBox(width: 3),
                 Text(
-                  StringTools.formatCurrencyNum(cardItemInfo.balance),
+                  // StringTools.formatCurrencyNum(cardItemInfo.balance),
+                  '${cardItemInfo.balance}',
                   style: const TextStyle(
                     color: Color(0xFF333333),
                     fontSize: 30,

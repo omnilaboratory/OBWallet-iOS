@@ -15,6 +15,7 @@ import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -62,11 +63,14 @@ class _CardPartState extends State<CardPart> {
           children: [
             const SizedBox(height: 20),
             CardItem(
-                cardItemInfo: CardItemInfo(
-                    cardNo: CommonService.cardInfo.cardNo,
-                    balance: CommonService.cardInfo.balance,
-                    exp: CommonService.cardInfo.expiryDate,
-                    cvv: CommonService.cardInfo.cvv)),
+              cardItemInfo: CardItemInfo(
+                cardNo: CommonService.cardInfo.cardNo,
+                balance: CommonService.cardInfo.balance,
+                exp: CommonService.cardInfo.expiryDate,
+                cvv: CommonService.cardInfo.cvv
+              )
+            ),
+
             const SizedBox(height: 15),
             hasCard ? buildCardDetail(context) : buildApplyCardPart(),
           ],

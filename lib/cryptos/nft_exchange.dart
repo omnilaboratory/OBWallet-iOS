@@ -125,7 +125,7 @@ class _NftExchangeState extends State<NftExchange> {
                     onPressed: () {
                       FocusScope.of(context).unfocus();
                       alert(
-                          "${_amountNftController.text} NFT exchange to ${_amountDollarController.text} $targetName",
+                          "${_amountNftController.text} NFT will exchange to ${_amountDollarController.text} $targetName",
                           context, () {
                         onClickDone();
                       });

@@ -9,7 +9,7 @@ class GlobalParams {
 
   static EventBus eventBus = EventBus();
 
-  static EnumNetworkType currNetwork = EnumNetworkType.goerli;
+  static EnumNetworkType currNetwork = EnumNetworkType.mainnet;
 
   static int grpcTimeout = 30;
 
@@ -18,9 +18,9 @@ class GlobalParams {
       EnumEthKey.apiUrl: "https://eth-mainnet.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch",
       EnumEthKey.usdt: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
       EnumEthKey.usdc: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-      EnumEthKey.nftApiUrl: "",
-      EnumEthKey.nft: "",
-      EnumEthKey.nftToPlatform: "",
+      EnumEthKey.nftApiUrl: "https://polygon-mainnet.g.alchemy.com/v2/e-YCgix2E25YXN4csUv5G9P6Vxu8vDvD",
+      EnumEthKey.nft: "0x60CCa21714d3DFa2448ab4A62832F9F85D276f13",
+      EnumEthKey.nftToPlatform: "0x22e5a8f66246B987Ef05E180eC555C93bBCdAF2a",
     }),
     EnumNetworkType.goerli: Map.from({
       EnumEthKey.apiUrl: "https://eth-goerli.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch",
