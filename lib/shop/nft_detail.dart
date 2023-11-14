@@ -54,7 +54,8 @@ class _NftDetailState extends State<NftDetail> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 20),
-                            Text("${widget.detailInfo.tokenName} #${widget.detailInfo.tokenId}",
+                            Text(
+                                "${widget.detailInfo.tokenName} #${widget.detailInfo.tokenId}",
                                 style: const TextStyle(
                                   color: Color(0xFF333333),
                                   fontSize: 23,
@@ -111,7 +112,10 @@ class _NftDetailState extends State<NftDetail> {
                                 children: [
                                   buildDetailLine(
                                       "Contract Address",
-                                      StringTools.starString2(widget.detailInfo.contractAddress, begin: 6, end: 4)),
+                                      StringTools.starString2(
+                                          widget.detailInfo.contractAddress,
+                                          begin: 6,
+                                          end: 4)),
                                   buildDetailLine("Token ID",
                                       widget.detailInfo.tokenId.toString()),
                                   buildDetailLine("Token Standard", "ERC-1155"),
@@ -225,9 +229,7 @@ class _NftDetailState extends State<NftDetail> {
             flex: 1,
             child: Text(content,
                 style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500
-                ))),
+                    fontSize: 16, fontWeight: FontWeight.w500))),
       ],
     );
   }

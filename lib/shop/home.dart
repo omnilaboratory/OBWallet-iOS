@@ -15,7 +15,9 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:fixnum/src/int64.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'nft_detail.dart';
 import 'nft_tx_history.dart';
@@ -35,22 +37,17 @@ class _ShopHomeState extends State<ShopHome> {
   List<Int64> tokenIds = [];
   List<Int64> tokenIdValues = [];
 
+  final RefreshController _refreshListController =
+      RefreshController(initialRefresh: false);
+
   @override
   void initState() {
     super.initState();
     eventListen();
-    if (nftInfoListFromServer.isEmpty) {
-      AccountService.getInstance()
-          .getNftBalance(context, isAll: true)
-          .then((resp) {
-        if (resp.code == 1) {
-          if (nftInfoListFromServer.isNotEmpty) {
-            buildData(true);
-          }
-        }
-      });
-    } else {
+    if (nftInfoListFromServer.isNotEmpty) {
       buildData(false);
+    } else {
+      _onListRefresh();
     }
   }
 
@@ -94,7 +91,6 @@ class _ShopHomeState extends State<ShopHome> {
   void buildData(bool needFresh) {
     for (int i = 0; i < nftInfoListFromServer.length; i++) {
       var nftInfo = nftInfoListFromServer[i];
-      log("$nftInfo");
       var controller = TextEditingController();
       nftDetailInfoList.add(NftDetailInfo(
           GlobalParams.dataInNetwork[GlobalParams.currNetwork][EnumEthKey.nft],
@@ -133,6 +129,27 @@ class _ShopHomeState extends State<ShopHome> {
     if (needFresh && mounted) {
       setState(() {});
     }
+  }
+
+  void _onListRefresh() async {
+    nftDetailInfoList.clear();
+    faceList.clear();
+    setState(() {});
+    AccountService.getInstance()
+        .getNftBalance(context, isAll: true)
+        .then((resp) {
+      if (resp.code == 1) {
+        if (nftInfoListFromServer.isNotEmpty) {
+          buildData(true);
+        }
+      }
+      if (_refreshListController.isRefresh) {
+        _refreshListController.refreshCompleted();
+      }
+      if (_refreshListController.isLoading) {
+        _refreshListController.loadComplete();
+      }
+    });
   }
 
   @override
@@ -185,7 +202,31 @@ class _ShopHomeState extends State<ShopHome> {
                 ),
               ),
               Expanded(
-                child: SingleChildScrollView(
+                child: SmartRefresher(
+                  controller: _refreshListController,
+                  enablePullDown: true,
+                  header: const WaterDropHeader(),
+                  footer: CustomFooter(
+                    builder: (BuildContext context, LoadStatus? mode) {
+                      Widget body;
+                      if (mode == LoadStatus.idle) {
+                        body = const Text("No more Data");
+                      } else if (mode == LoadStatus.loading) {
+                        body = const CupertinoActivityIndicator();
+                      } else if (mode == LoadStatus.failed) {
+                        body = const Text("Load Failed!Click retry!");
+                      } else if (mode == LoadStatus.canLoading) {
+                        body = const Text("release to load more");
+                      } else {
+                        body = const Text("No more Data");
+                      }
+                      return SizedBox(
+                        height: 55.0,
+                        child: Center(child: body),
+                      );
+                    },
+                  ),
+                  onRefresh: _onListRefresh,
                   child: Wrap(
                     spacing: 16,
                     runSpacing: 12.0,
