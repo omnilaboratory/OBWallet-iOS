@@ -15,7 +15,6 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:fixnum/src/int64.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -134,6 +133,8 @@ class _ShopHomeState extends State<ShopHome> {
   void _onListRefresh() async {
     nftDetailInfoList.clear();
     faceList.clear();
+    nftTotalValue = 0;
+    nftTotalCount = 0;
     setState(() {});
     AccountService.getInstance()
         .getNftBalance(context, isAll: true)
@@ -202,37 +203,15 @@ class _ShopHomeState extends State<ShopHome> {
                 ),
               ),
               Expanded(
-                child: SmartRefresher(
-                  controller: _refreshListController,
-                  enablePullDown: true,
-                  header: const WaterDropHeader(),
-                  footer: CustomFooter(
-                    builder: (BuildContext context, LoadStatus? mode) {
-                      Widget body;
-                      if (mode == LoadStatus.idle) {
-                        body = const Text("No more Data");
-                      } else if (mode == LoadStatus.loading) {
-                        body = const CupertinoActivityIndicator();
-                      } else if (mode == LoadStatus.failed) {
-                        body = const Text("Load Failed!Click retry!");
-                      } else if (mode == LoadStatus.canLoading) {
-                        body = const Text("release to load more");
-                      } else {
-                        body = const Text("No more Data");
-                      }
-                      return SizedBox(
-                        height: 55.0,
-                        child: Center(child: body),
-                      );
-                    },
-                  ),
-                  onRefresh: _onListRefresh,
-                  child: Wrap(
-                    spacing: 16,
-                    runSpacing: 12.0,
-                    children: faceList,
-                  ),
-                ),
+                child: buildNewSmartRefresher(
+                    _refreshListController,
+                    Wrap(
+                      spacing: 16,
+                      runSpacing: 12.0,
+                      children: faceList,
+                    ),
+                    onRefresh: _onListRefresh,
+                    enablePullUp: false),
               ),
               const SizedBox(height: 30),
               Row(

@@ -1,9 +1,9 @@
 import 'package:awallet/bean/nft_tx_info.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/nft_tx_item.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -40,46 +40,23 @@ class _NftTxHistoryState extends State<NftTxHistory> {
         children: [
           const SizedBox(height: 10),
           Expanded(
-            child: SmartRefresher(
-                controller: _refreshListController,
-                enablePullDown: true,
-                enablePullUp: true,
-                header: const WaterDropHeader(),
-                footer: CustomFooter(
-                  builder: (BuildContext context, LoadStatus? mode) {
-                    Widget body;
-                    if (mode == LoadStatus.idle) {
-                      body = const Text("No more Data");
-                    } else if (mode == LoadStatus.loading) {
-                      body = const CupertinoActivityIndicator();
-                    } else if (mode == LoadStatus.failed) {
-                      body = const Text("Load Failed!Click retry!");
-                    } else if (mode == LoadStatus.canLoading) {
-                      body = const Text("release to load more");
-                    } else {
-                      body = const Text("No more Data");
-                    }
-                    return SizedBox(
-                      height: 55.0,
-                      child: Center(child: body),
-                    );
-                  },
-                ),
-                onRefresh: _onListRefresh,
-                onLoading: _onListLoading,
-                child: txHistoryList.isEmpty
-                    ? const Center(child: Text("No Data"))
-                    : ListView.builder(
-                        padding:
-                            const EdgeInsets.only(left: 20, right: 20, top: 10),
-                        itemCount: txHistoryList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (index < txHistoryList.length) {
-                            return NftTxItem(txInfo: txHistoryList[index]);
-                          }
-                          return null;
-                        })),
-          )
+              child: buildNewSmartRefresher(
+            _refreshListController,
+            txHistoryList.isEmpty
+                ? const Center(child: Text("No Data"))
+                : ListView.builder(
+                    padding:
+                        const EdgeInsets.only(left: 20, right: 20, top: 10),
+                    itemCount: txHistoryList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index < txHistoryList.length) {
+                        return NftTxItem(txInfo: txHistoryList[index]);
+                      }
+                      return null;
+                    }),
+            onRefresh: _onListRefresh,
+            onLoading: _onListLoading,
+          ))
         ],
       ),
     );

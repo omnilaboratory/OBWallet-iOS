@@ -1,11 +1,11 @@
-import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'loading_dialog.dart';
-
 
 final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderSide: const BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
@@ -105,6 +105,7 @@ TextField createTextField(TextEditingController controller,
     ),
   );
 }
+
 TextField createTextField2(TextEditingController controller,
     {TextInputType? keyboardType = TextInputType.text,
     List<TextInputFormatter>? inputFormatters,
@@ -210,4 +211,39 @@ OverlayEntry showLoading(BuildContext context) {
     }
   });
   return entry;
+}
+
+SmartRefresher buildNewSmartRefresher(RefreshController controller, Widget body,
+    {VoidCallback? onRefresh,
+    VoidCallback? onLoading,
+    bool enablePullDown = true,
+    bool enablePullUp = true}) {
+  return SmartRefresher(
+      controller: controller,
+      enablePullDown: enablePullDown,
+      enablePullUp: enablePullUp,
+      header: const WaterDropHeader(),
+      footer: CustomFooter(
+        builder: (BuildContext context, LoadStatus? mode) {
+          Widget body;
+          if (mode == LoadStatus.idle) {
+            body = const Text("No more Data");
+          } else if (mode == LoadStatus.loading) {
+            body = const CupertinoActivityIndicator();
+          } else if (mode == LoadStatus.failed) {
+            body = const Text("Load Failed! Click retry!");
+          } else if (mode == LoadStatus.canLoading) {
+            body = const Text("release to load more");
+          } else {
+            body = const Text("No more Data");
+          }
+          return SizedBox(
+            height: 55.0,
+            child: Center(child: body),
+          );
+        },
+      ),
+      onRefresh: onRefresh,
+      onLoading: onLoading,
+      child: body);
 }

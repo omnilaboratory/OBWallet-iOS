@@ -15,9 +15,7 @@ import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
-import 'package:awallet/tools/string_tool.dart';
 import 'package:fixnum/src/int64.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -63,14 +61,11 @@ class _CardPartState extends State<CardPart> {
           children: [
             const SizedBox(height: 20),
             CardItem(
-              cardItemInfo: CardItemInfo(
-                cardNo: CommonService.cardInfo.cardNo,
-                balance: CommonService.cardInfo.balance,
-                exp: CommonService.cardInfo.expiryDate,
-                cvv: CommonService.cardInfo.cvv
-              )
-            ),
-
+                cardItemInfo: CardItemInfo(
+                    cardNo: CommonService.cardInfo.cardNo,
+                    balance: CommonService.cardInfo.balance,
+                    exp: CommonService.cardInfo.expiryDate,
+                    cvv: CommonService.cardInfo.cvv)),
             const SizedBox(height: 15),
             hasCard ? buildCardDetail(context) : buildApplyCardPart(),
           ],
@@ -153,52 +148,27 @@ class _CardPartState extends State<CardPart> {
                   },
                   child: Text("Payment",
                       style: TextStyle(
-                        fontSize: 16,
-                        color: currTypeIndex == 0
-                            ? Colors.blue
-                            : Colors.grey))),
+                          fontSize: 16,
+                          color:
+                              currTypeIndex == 0 ? Colors.blue : Colors.grey))),
               InkWell(
                   onTap: () {
                     onClickType(1);
                   },
                   child: Text("Account",
                       style: TextStyle(
-                        fontSize: 16,
-                        color: currTypeIndex == 1
-                            ? Colors.blue
-                            : Colors.grey))),
+                          fontSize: 16,
+                          color:
+                              currTypeIndex == 1 ? Colors.blue : Colors.grey))),
             ],
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: SmartRefresher(
-              controller: _refreshListController,
-              enablePullDown: true,
-              enablePullUp: true,
-              header: const WaterDropHeader(),
-              footer: CustomFooter(
-                builder: (BuildContext context, LoadStatus? mode) {
-                  Widget body;
-                  if (mode == LoadStatus.idle) {
-                    body = const Text("No more Data");
-                  } else if (mode == LoadStatus.loading) {
-                    body = const CupertinoActivityIndicator();
-                  } else if (mode == LoadStatus.failed) {
-                    body = const Text("Load Failed!Click retry!");
-                  } else if (mode == LoadStatus.canLoading) {
-                    body = const Text("release to load more");
-                  } else {
-                    body = const Text("No more Data");
-                  }
-                  return SizedBox(
-                    height: 55.0,
-                    child: Center(child: body),
-                  );
-                },
-              ),
+            child: buildNewSmartRefresher(
+              _refreshListController,
               onRefresh: _onListRefresh,
               onLoading: _onListLoading,
-              child: txs.isEmpty
+              txs.isEmpty
                   ? const Center(child: Text("No Data"))
                   : ListView.builder(
                       padding: const EdgeInsets.only(top: 20),
@@ -352,8 +322,15 @@ class _CardPartState extends State<CardPart> {
 
   getOnlineCardExchangeInfoList() {
     if (CommonService.cardInfo.cardNo.isEmpty) {
+      if (_refreshListController.isRefresh) {
+        _refreshListController.refreshCompleted();
+      }
+      if (_refreshListController.isLoading) {
+        _refreshListController.loadComplete();
+      }
       return;
     }
+
     CardService.getInstance()
         .cardExchangeInfoList(
             context,
@@ -398,6 +375,12 @@ class _CardPartState extends State<CardPart> {
 
   getOfflineCardHistoryListFromServer() {
     if (CommonService.cardInfo.cardNo.isEmpty) {
+      if (_refreshListController.isRefresh) {
+        _refreshListController.refreshCompleted();
+      }
+      if (_refreshListController.isLoading) {
+        _refreshListController.loadComplete();
+      }
       return;
     }
     CardService.getInstance()
