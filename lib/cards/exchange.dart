@@ -507,11 +507,18 @@ class _ExchangeState extends State<Exchange> {
                       ),
                     ],
                   ),
+
+                  const SizedBox(height: 15),
+                  const Text(
+                    'There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.',
+                    style: TextStyle(color: Colors.black45, fontSize: 12),
+                  ),
                 ],
               ),
             ),
           ),
         ),
+
         Expanded(
           flex: 2,
           child: BottomButton(
