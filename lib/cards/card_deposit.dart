@@ -13,29 +13,34 @@ import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/string_tool.dart';
+import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
-import 'package:fixnum/src/int64.dart';
 
 class CardDeposit extends StatefulWidget {
-  int nftAmt;
+  String type;
+  String title;
   double amt;
   String cardNo;
   String date;
   String cvc;
+  int nftAmt;
   List<Int64> tokenIds = [];
   List<Int64> tokenIdValues = [];
 
-  CardDeposit(
-      {super.key,
-      required this.nftAmt,
-      required this.amt,
-      this.cardNo="",
-      this.date="",
-      this.cvc="",
-      required this.tokenIds,
-      required this.tokenIdValues,
-      });
+
+  CardDeposit({
+    super.key,
+    required this.amt,
+    this.type = "",
+    this.title = "Pay For NFT",
+    this.cardNo = "",
+    this.date = "",
+    this.cvc = "",
+    this.nftAmt = 0,
+    required this.tokenIds,
+    required this.tokenIdValues,
+  });
 
   @override
   State<CardDeposit> createState() => _CardDepositState();
@@ -92,7 +97,7 @@ class _CardDepositState extends State<CardDeposit> {
                     child: Column(
                       children: [
                         const SizedBox(height: 30),
-                        createDialogTitle('Pay For NFT'),
+                        createDialogTitle(widget.title),
                         const SizedBox(height: 30),
                         CreditCardForm(
                           formKey: formKey,
@@ -174,9 +179,15 @@ class _CardDepositState extends State<CardDeposit> {
   onPay() {
     FocusScope.of(context).unfocus();
     if (formKey.currentState!.validate()) {
-      alert("You are costing \$${StringTools.formatCurrencyNum(widget.amt)} and will get ${widget.nftAmt} NFTs.", context, () {
+      if (widget.nftAmt > 0) {
+        alert(
+            "You are costing \$${StringTools.formatCurrencyNum(widget.amt)} and will get ${widget.nftAmt} NFTs.",
+            context, () {
+          onClickDone();
+        }, showCancel: true);
+      } else {
         onClickDone();
-      }, showCancel: true);
+      }
     }
   }
 
@@ -211,15 +222,32 @@ class _CardDepositState extends State<CardDeposit> {
     await UserService.getInstance().getUserInfo(context);
     var loading = showLoading(context);
     CardRechargeRequest req = createCardRechargeRequest();
-    req.tokenIds.addAll(widget.tokenIds) ;
-    req.values.addAll(widget.tokenIdValues);
-    req.chargeForNft = true;
+    if (widget.nftAmt > 0) {
+      req.tokenIds.addAll(widget.tokenIds);
+      req.values.addAll(widget.tokenIdValues);
+      req.chargeForNft = true;
+    }
+
     CardService.getInstance().cardRecharge(context, req).then((resp) {
       if (resp.code == 1) {
-        GlobalParams.eventBus.fire("buyNftFinish");
-        alert(Tips.buyNftSuccess.value, context, () {
-          Navigator.pop(context);
-        });
+        if (widget.nftAmt > 0) {
+          GlobalParams.eventBus.fire("buyNftFinish");
+          alert(Tips.buyNftSuccess.value, context, () {
+            Navigator.pop(context);
+          });
+        } else {
+          if(widget.type=="applyCard"){
+            CardService.getInstance().applyCard(context, "USD").then((value) =>
+            {
+              GlobalParams.eventBus.fire("applyCard")
+            });
+          }
+
+          alert(Tips.successDeposit.value, context, () {
+            Navigator.pop(context);
+            GlobalParams.eventBus.fire("closeKycPage");
+          });
+        }
       } else {
         alert(resp.msg, context, () {});
       }

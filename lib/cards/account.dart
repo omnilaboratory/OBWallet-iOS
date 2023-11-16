@@ -164,7 +164,7 @@ class _AccountState extends State<Account> {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return const Kyc();
+                        return Kyc();
                       });
                 });
               } else {

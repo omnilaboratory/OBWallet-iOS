@@ -113,7 +113,7 @@ class _CardHomeState extends State<CardHome>
                           showDialog(
                               context: context,
                               builder: (context) {
-                                return const Kyc();
+                                return Kyc();
                               });
                         } else {
                           showKycTips(context);

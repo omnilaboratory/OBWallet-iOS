@@ -74,7 +74,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
           text: 'FINISH',
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => const Kyc()));
+                context, MaterialPageRoute(builder: (context) => Kyc()));
           },
         ),
       ],
@@ -196,6 +196,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
   XFile? cardImage0;
   XFile? cardImage1;
   var req = UploadRequest();
+
   getImage(int type) {
     picker.pickImage(source: ImageSource.gallery).then((image) async {
       req.name = image!.name;

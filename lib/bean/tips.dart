@@ -36,13 +36,15 @@ enum Tips {
   checkInputSocialId("Please input the social Id."),
   emptyCardNumber("The card number cannot be empty."),
   applyCardFirst("Please apply for a new card first."),
-  waitForReview("Please wait for manual review and you will get a new card."),
+  waitForReview("Please wait for manual review."),
+  waitForReview2("Please wait for manual review and you will get a new card."),
   successWithdraw("Withdraw successful."),
   failWithdraw("Withdraw failed, please try again later."),
   successDeposit("Deposit successful."),
   failDeposit("Deposit failed, please try again later."),
   buyNftSuccess("Buy NFT Successfully."),
   createWallet("Please create a crypto wallet first."),
+  needFiveDollarFee("Please Deposit."),
   ;
 
   final String value;

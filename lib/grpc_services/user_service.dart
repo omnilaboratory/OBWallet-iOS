@@ -177,7 +177,6 @@ class UserService {
   }
 
   Future<GrpcResponse> kyc(BuildContext context, UserInfo req) async {
-    log("$req");
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.kyc(req);

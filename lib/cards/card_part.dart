@@ -10,9 +10,11 @@ import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/card_item.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_tx_item.dart';
+import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:fixnum/src/int64.dart';
@@ -22,6 +24,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../component/bottom_button.dart';
 import '../component/square_button.dart';
+import 'card_deposit.dart';
 import 'kyc.dart';
 
 class CardPart extends StatefulWidget {
@@ -48,6 +51,14 @@ class _CardPartState extends State<CardPart> {
     super.initState();
     _onBalanceRefresh();
     _onListRefresh();
+
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "applyCard") {
+        if (mounted) {
+          _onBalanceRefresh();
+        }
+      }
+    });
   }
 
   @override
@@ -188,7 +199,6 @@ class _CardPartState extends State<CardPart> {
 
   void _onBalanceRefresh() async {
     CardService.getInstance().cardInfo(context).then((resp) {
-      log("cardInfo ${CommonService.cardInfo}");
       if (resp.code == 1) {
         hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
         if (mounted) {
@@ -280,7 +290,42 @@ class _CardPartState extends State<CardPart> {
     }
   }
 
-  onClickApplyCard() {
+  onClickApplyCard() async {
+    if (CommonService.userInfo!.cardCount > 0) {
+      showToast("You have a card already");
+      return;
+    }
+
+    if (CommonService.userInfo!.kycStatus != EnumKycStatus.none.value) {
+      AccountService.getInstance().getAccountInfo(context).then((info) {
+        if (info.code == 1) {
+          var accountInfo = info.data as AccountInfo;
+          if (accountInfo.balanceUsd < 5) {
+            alert(Tips.needFiveDollarFee.value, context, () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return CardDeposit(
+                      type: "applyCard",
+                      title: "Deposit",
+                      amt: 5,
+                      tokenIds: const [],
+                      tokenIdValues: const [],
+                    );
+                  });
+            });
+          } else {
+            CardService.getInstance().applyCard(context, "USD").then((resp) {
+              if (resp.code == 1) {
+                _onBalanceRefresh();
+              }
+            });
+          }
+        }
+      });
+      return;
+    }
+
     if (CommonService.userInfo!.kycStatus == EnumKycStatus.none.value) {
       UserService.getInstance().getUserInfo(context).then((resp) async {
         if (resp.code == 1 && resp.data != null) {
@@ -288,7 +333,7 @@ class _CardPartState extends State<CardPart> {
             var flag = await showDialog(
                 context: context,
                 builder: (context) {
-                  return const Kyc();
+                  return Kyc(type: "applyCard");
                 });
             if (flag != null && flag) {
               _onBalanceRefresh();

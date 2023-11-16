@@ -3,12 +3,12 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
-import 'package:awallet/cards/select_card_type.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/user.pbgrpc.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:country_picker/country_picker.dart';
@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../component/bottom_button.dart';
+import 'card_deposit.dart';
 
 showKycTips(BuildContext context) {
   if (CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
@@ -31,7 +32,7 @@ showKycTips(BuildContext context) {
       showDialog(
           context: context,
           builder: (context) {
-            return const Kyc();
+            return Kyc();
           });
     });
     return;
@@ -39,7 +40,9 @@ showKycTips(BuildContext context) {
 }
 
 class Kyc extends StatefulWidget {
-  const Kyc({super.key});
+  String type;
+
+  Kyc({super.key, this.type = ""});
 
   @override
   State<Kyc> createState() => _KycState();
@@ -66,6 +69,14 @@ class _KycState extends State<Kyc> {
   @override
   void initState() {
     super.initState();
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "closeKycPage") {
+        log("kyc listen closeKycPage");
+        if (mounted) {
+          Navigator.pop(context);
+        }
+      }
+    });
   }
 
   @override
@@ -304,8 +315,8 @@ class _KycState extends State<Kyc> {
                           ),
                           const SizedBox(height: 20),
                           BottomButton(
-                            icon: 'asset/images/icon_arrow_right_green.png',
-                            text: 'NEXT',
+                            icon: 'asset/images/icon_confirm_green.png',
+                            text: 'DONE',
                             onPressed: () {
                               if ((_formKey.currentState as FormState)
                                   .validate()) {
@@ -363,13 +374,34 @@ class _KycState extends State<Kyc> {
         info.postCode = _postalController.value.text.trim();
         info.countryCode =
             Utils.getCountryCodeByCode(selectedCountry!.countryCode);
-        showDialog(
-            context: context,
-            builder: (context) {
-              return SelectCardType(
-                userInfo: info,
-              );
-            });
+
+        OverlayEntry entry = showLoading(context);
+        UserService.getInstance().kyc(context, info).then((value) async {
+          log("${widget.type} ${value.code}");
+          if (value.code == 1) {
+            var resp = value.data as UserInfo;
+            CommonService.userInfo = resp;
+            GlobalParams.eventBus.fire("kyc_state");
+            if (widget.type == "applyCard") {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return CardDeposit(
+                      type: "applyCard",
+                      title: "Deposit",
+                      amt: 5,
+                      tokenIds: const [],
+                      tokenIdValues: const [],
+                    );
+                  });
+            } else {
+              alert(Tips.waitForReview.value, context, () {
+                Navigator.pop(context, true);
+              });
+            }
+          }
+          entry.remove();
+        });
       }
     });
   }

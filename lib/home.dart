@@ -38,9 +38,11 @@ class _HomePageState extends State<HomePage> {
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedPage = index;
-    });
+    if (mounted) {
+      setState(() {
+        _selectedPage = index;
+      });
+    }
   }
 
   @override
