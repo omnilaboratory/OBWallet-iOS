@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     GlobalParams.eventBus.on().listen((event) {
       if (event == "goToCrypto") {
-        _onItemTapped(2);
+        _onItemTapped(1);
       }
     });
 
@@ -31,9 +31,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   static final List<Widget> _pages = <Widget>[
-    const ShopHome(),
     const CardHome(),
     const CryptoHome(),
+    const ShopHome(),
     const ProfileHome()
   ];
 
@@ -55,16 +55,16 @@ class _HomePageState extends State<HomePage> {
           type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.shop),
-              label: 'Shop',
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.credit_card),
               label: 'Card',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.currency_bitcoin_sharp),
               label: 'Crypto',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shop),
+              label: 'Shop',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),

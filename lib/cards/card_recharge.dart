@@ -44,7 +44,7 @@ class CardRecharge extends StatefulWidget {
 class _CardRechargeState extends State<CardRecharge> {
   String cardNumber = '';
   String expiryDate = '';
-  String cardHolderName = '';
+  String cardInputAmount = '';
   String cvcCode = '';
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   double totalBalanceUsd = 0;
@@ -54,7 +54,7 @@ class _CardRechargeState extends State<CardRecharge> {
     super.initState();
     if (mounted) {
       setState(() {
-        cardHolderName = widget.amt;
+        cardInputAmount = widget.amt;
         cardNumber = widget.cardNo;
         expiryDate = widget.date;
         cvcCode = widget.cvc;
@@ -72,8 +72,8 @@ class _CardRechargeState extends State<CardRecharge> {
   updateKycState() {
     if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value ||
         CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
-      if (cardHolderName.isNotEmpty) {
-        getDcPayUrl(double.parse(cardHolderName));
+      if (cardInputAmount.isNotEmpty) {
+        getDcPayUrl(double.parse(cardInputAmount));
       }
     }
   }
@@ -125,7 +125,7 @@ class _CardRechargeState extends State<CardRecharge> {
                           widget.type == EnumChargeType.deposit ? true : false,
                       enableCvv:
                           widget.type == EnumChargeType.deposit ? true : false,
-                      cardHolderName: cardHolderName,
+                      cardHolderName: cardInputAmount,
                       expiryDate: expiryDate,
                       themeColor: Colors.blue,
                       textColor: Colors.black,
@@ -134,18 +134,16 @@ class _CardRechargeState extends State<CardRecharge> {
                           return "Please input a valid amount";
                         }
 
-                        if (widget.type == EnumChargeType.deposit) {
-                          if (double.parse(value) >= 100) {
-                            return "Please input a valid amount: Max: 99";
-                          }
-                        }
+                        // if (widget.type == EnumChargeType.deposit) {
+                        //   if (double.parse(value) >= 100) {
+                        //     return "Please input a valid amount: Max: 99";
+                        //   }
+                        // }
                         return null;
                       },
                       cardHolderDecoration: InputDecoration(
                         prefixIcon: const Icon(Icons.attach_money),
-                        hintText: widget.type == EnumChargeType.deposit
-                            ? 'Amount(Max: \$99)'
-                            : 'Amount',
+                        hintText: 'Amount',
                         hintStyle: const TextStyle(color: Colors.grey),
                         border: _outlineInputBorder,
                         focusedBorder: _outlineInputBorder,
@@ -290,7 +288,7 @@ class _CardRechargeState extends State<CardRecharge> {
     setState(() {
       cardNumber = creditCardModel!.cardNumber;
       expiryDate = creditCardModel.expiryDate;
-      cardHolderName = creditCardModel.cardHolderName;
+      cardInputAmount = creditCardModel.cardHolderName;
       cvcCode = creditCardModel.cvvCode;
     });
   }
@@ -302,16 +300,16 @@ class _CardRechargeState extends State<CardRecharge> {
         if (cardNumber.replaceAll(' ', '') == CommonService.cardInfo.cardNo) {
           virtualCardPay();
         } else {
-          if (double.parse(cardHolderName) < 100) {
+          if (double.parse(cardInputAmount) < 100) {
             cardRecharge();
           } else {
             var kycStatus = CommonService.userInfo!.kycStatus;
             if (kycStatus.isNotEmpty) {
               if (kycStatus == "passed") {
                 GlobalParams.eventBus.fire("topup");
-                // card recharge can not more than 100
-                // Navigator.pop(context);
-                // getDcPayUrl(double.parse(cardHolderName));
+                getDcPayUrl(double.parse(cardInputAmount));
+
+                // buy nft
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(
@@ -337,7 +335,7 @@ class _CardRechargeState extends State<CardRecharge> {
   }
 
   void virtualCardPay() {
-    if (double.parse(cardHolderName) > CommonService.cardInfo.balance) {
+    if (double.parse(cardInputAmount) > CommonService.cardInfo.balance) {
       showToast(Tips.maxAmount.value, toastLength: Toast.LENGTH_SHORT);
       return;
     } else {
@@ -347,12 +345,6 @@ class _CardRechargeState extends State<CardRecharge> {
 
   void cardRecharge() {
     var loading = showLoading(context);
-    log(cardHolderName);
-    log(cardNumber);
-    log(cardNumber.length.toString());
-    log(expiryDate);
-    log(cvcCode);
-    log('valid!');
     CardRechargeRequest request = createCardRechargeRequest();
     CardService.getInstance()
         .cardRecharge(context, request)
@@ -380,7 +372,7 @@ class _CardRechargeState extends State<CardRecharge> {
 
   CardRechargeRequest createCardRechargeRequest() {
     CardRechargeRequest request = CardRechargeRequest();
-    request.amt = double.parse(cardHolderName);
+    request.amt = double.parse(cardInputAmount);
     request.cardNo = cardNumber.replaceAll(' ', '');
     request.cardSecurityCode = cvcCode;
     request.cardExpireMonth = expiryDate.substring(0, expiryDate.indexOf('/'));
@@ -391,6 +383,7 @@ class _CardRechargeState extends State<CardRecharge> {
 
   void getDcPayUrl(double amt) {
     AccountService.getInstance().getDcPayUrl(context, amt).then((value) async {
+      Navigator.pop(context);
       if (value.code == 1) {
         var resp = value.data as GetDcPayUrlResponse;
         log(resp.urlPath.toString());
@@ -409,7 +402,6 @@ class _CardRechargeState extends State<CardRecharge> {
     AccountService.getInstance().getAccountInfo(context).then((info) {
       if (info.code == 1) {
         var accountInfo = info.data as AccountInfo;
-        log("$accountInfo");
         totalBalanceUsd = accountInfo.balanceUsd;
         if (mounted) {
           setState(() {});
