@@ -61,7 +61,6 @@ class UserService {
       resetServices();
       CommonService.token = resp!.token;
       LocalStorage.save("userToken", resp.token);
-
     } catch (e) {
       setError(context, "signIn", e, ret);
     }
@@ -114,7 +113,8 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> forgetPwd(BuildContext context, ForgetPwdRequest req) async {
+  Future<GrpcResponse> forgetPwd(
+      BuildContext context, ForgetPwdRequest req) async {
     req.password = Utils.generateMd5(req.password);
     var ret = GrpcResponse();
     try {
@@ -127,7 +127,9 @@ class UserService {
     }
     return ret;
   }
-  Future<GrpcResponse> updatePwd(BuildContext context, UpdatePwdRequest req) async {
+
+  Future<GrpcResponse> updatePwd(
+      BuildContext context, UpdatePwdRequest req) async {
     req.oldPassword = Utils.generateMd5(req.oldPassword);
     req.newPassword = Utils.generateMd5(req.newPassword);
     log("$req");
@@ -211,16 +213,18 @@ class UserService {
       return;
     }
     log("$funcName $e");
-    GrpcError error = e as GrpcError;
-    ret.msg = error.message.toString();
-    showToast(ret.msg);
-    if (e.code == 16) {
-      LocalStorage.remove(LocalStorage.userToken);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const Login()),
-      );
-    }
+    try {
+      GrpcError error = e as GrpcError;
+      ret.msg = error.message.toString();
+      showToast(ret.msg);
+      if (e.code == 16) {
+        LocalStorage.remove(LocalStorage.userToken);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const Login()),
+        );
+      }
+    } catch (e) {}
   }
 
   Future<GrpcResponse> updateUser(BuildContext context, String address) async {

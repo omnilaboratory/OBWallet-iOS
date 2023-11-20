@@ -230,7 +230,7 @@ class _KycState extends State<Kyc> {
                                             if (results != null &&
                                                 results.isNotEmpty) {
                                               dateOfBirthTips =
-                                                  DateFormat("dd-MM-yyyy")
+                                                  DateFormat("yyyy-MM-dd")
                                                       .format(results[0]!);
                                               setState(() {});
                                             }

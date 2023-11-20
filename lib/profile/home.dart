@@ -18,6 +18,7 @@ class _ProfileHomeState extends State<ProfileHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const HeadLogo(title: "Profile"),
       ),
       body: Center(

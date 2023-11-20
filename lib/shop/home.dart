@@ -161,6 +161,7 @@ class _ShopHomeState extends State<ShopHome> {
       },
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const HeadLogo(title: "Shop"),
           actions: <Widget>[
             Padding(

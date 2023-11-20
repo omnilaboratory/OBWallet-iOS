@@ -88,6 +88,7 @@ class _CardHomeState extends State<CardHome>
       length: tabNames.length,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const HeadLogo(title: "Home"),
           actions: <Widget>[
             Padding(
