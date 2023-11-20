@@ -4,14 +4,16 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
+import 'package:awallet/bean/enum_kyc_status.dart';
+import 'package:awallet/bean/tips.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/review_exchange.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/grpc_services/account_service.dart';
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -22,6 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
 import '../component/number_controller_widget.dart';
+import 'kyc.dart';
 
 class Exchange extends StatefulWidget {
   EnumExchangeType type;
@@ -56,7 +59,7 @@ class _ExchangeState extends State<Exchange> {
 
     //init data
     tokenList.addAll(initTokenList);
-    for(int i = 0; i < tokenList.length; i++){
+    for (int i = 0; i < tokenList.length; i++) {
       TokenInfo tokenInfo = tokenList[i];
       if (tokenInfo.name == widget.name) {
         int index = tokenList.indexOf(tokenInfo);
@@ -507,7 +510,6 @@ class _ExchangeState extends State<Exchange> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 15),
                   const Text(
                     'There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.',
@@ -518,7 +520,6 @@ class _ExchangeState extends State<Exchange> {
             ),
           ),
         ),
-
         Expanded(
           flex: 2,
           child: BottomButton(
@@ -660,28 +661,34 @@ class _ExchangeState extends State<Exchange> {
                   Positioned(
                       right: 0,
                       child: GestureDetector(
-                        onTap: canCurrencyClick ? () {
-                          setState(() {
-                            _amountToController.text =
-                                StringTools.formatCurrencyNum(
-                                    currSelectedCurrency.balance);
-                            if (currSelectedToken.name == 'ETH') {
-                              _amountFromController.text =
-                                  StringTools.formatCryptoNum(
-                                      double.parse(_amountToController.text) /
-                                          coinPrice);
-                            } else {
-                              _amountFromController.text =
-                                  StringTools.formatCurrencyNum(
-                                      double.parse(_amountToController.text) /
-                                          coinPrice);
-                            }
-                          });
-                        } : null,
+                        onTap: canCurrencyClick
+                            ? () {
+                                setState(() {
+                                  _amountToController.text =
+                                      StringTools.formatCurrencyNum(
+                                          currSelectedCurrency.balance);
+                                  if (currSelectedToken.name == 'ETH') {
+                                    _amountFromController.text =
+                                        StringTools.formatCryptoNum(
+                                            double.parse(
+                                                    _amountToController.text) /
+                                                coinPrice);
+                                  } else {
+                                    _amountFromController.text =
+                                        StringTools.formatCurrencyNum(
+                                            double.parse(
+                                                    _amountToController.text) /
+                                                coinPrice);
+                                  }
+                                });
+                              }
+                            : null,
                         child: Text(
                           "MAX",
                           style: TextStyle(
-                            color: canCurrencyClick ? const Color(0xFF4A92FF) : const Color(0xFF999999),
+                            color: canCurrencyClick
+                                ? const Color(0xFF4A92FF)
+                                : const Color(0xFF999999),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             height: 1.29,
@@ -714,12 +721,27 @@ class _ExchangeState extends State<Exchange> {
                     GestureDetector(
                       onTap: () {
                         FocusScope.of(context).unfocus();
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return CardRecharge(
-                                  amt: _amountToController.text, type: EnumChargeType.deposit, cardNo: '', date: '', cvc: '');
-                            });
+                        if (CommonService.userInfo == null ||
+                            CommonService.userInfo!.kycStatus ==
+                                EnumKycStatus.none.value ||
+                            CommonService.userInfo!.kycStatus ==
+                                EnumKycStatus.rejected.value) {
+                          alert(Tips.kycNeed.value, context, () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Kyc();
+                                });
+                          });
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return CardRecharge(
+                                    amt: _amountToController.text,
+                                    type: EnumChargeType.deposit);
+                              });
+                        }
                       },
                       child: const Text(
                         "Deposit",
@@ -881,25 +903,30 @@ class _ExchangeState extends State<Exchange> {
                   Positioned(
                       right: 0,
                       child: GestureDetector(
-                        onTap: canTokenClick ? () {
-                          setState(() {
-                            currSelectedToken.name == 'ETH'
-                                ? _amountFromController.text =
-                                    StringTools.formatCryptoNum(
-                                        currSelectedToken.balance)
-                                : _amountFromController.text =
-                                    StringTools.formatCurrencyNum(
-                                        currSelectedToken.balance);
-                            _amountToController.text =
-                                StringTools.formatCurrencyNum(
-                                    double.parse(_amountFromController.text) *
-                                        coinPrice);
-                          });
-                        } : null,
+                        onTap: canTokenClick
+                            ? () {
+                                setState(() {
+                                  currSelectedToken.name == 'ETH'
+                                      ? _amountFromController.text =
+                                          StringTools.formatCryptoNum(
+                                              currSelectedToken.balance)
+                                      : _amountFromController.text =
+                                          StringTools.formatCurrencyNum(
+                                              currSelectedToken.balance);
+                                  _amountToController.text =
+                                      StringTools.formatCurrencyNum(
+                                          double.parse(
+                                                  _amountFromController.text) *
+                                              coinPrice);
+                                });
+                              }
+                            : null,
                         child: Text(
                           "MAX",
                           style: TextStyle(
-                            color: canTokenClick ? const Color(0xFF4A92FF) : const Color(0xFF999999),
+                            color: canTokenClick
+                                ? const Color(0xFF4A92FF)
+                                : const Color(0xFF999999),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             height: 1.29,
@@ -1064,17 +1091,13 @@ class _ExchangeState extends State<Exchange> {
         if (mounted) {
           setState(() {
             coinPrice = resp.price;
-            if(_amountToController.text.isNotEmpty){
+            if (_amountToController.text.isNotEmpty) {
               if (currSelectedToken.name == 'ETH') {
-                _amountFromController.text =
-                    StringTools.formatCryptoNum(
-                        double.parse(_amountToController.text) /
-                            coinPrice);
+                _amountFromController.text = StringTools.formatCryptoNum(
+                    double.parse(_amountToController.text) / coinPrice);
               } else {
-                _amountFromController.text =
-                    StringTools.formatCurrencyNum(
-                        double.parse(_amountToController.text) /
-                            coinPrice);
+                _amountFromController.text = StringTools.formatCurrencyNum(
+                    double.parse(_amountToController.text) / coinPrice);
               }
             }
           });

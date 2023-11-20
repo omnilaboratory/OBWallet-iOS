@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
-import 'package:awallet/cards/buy_nft.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
@@ -33,9 +32,9 @@ class CardRecharge extends StatefulWidget {
       {super.key,
       required this.amt,
       this.type = EnumChargeType.deposit,
-      required this.cardNo,
-      required this.date,
-      required this.cvc});
+      this.cardNo = '',
+      this.date = '',
+      this.cvc = ''});
 
   @override
   State<CardRecharge> createState() => _CardRechargeState();
@@ -61,7 +60,7 @@ class _CardRechargeState extends State<CardRecharge> {
       });
     }
     getAccountBalance();
-    updateKycState();
+    // updateKycState();
     GlobalParams.eventBus.on().listen((event) {
       if (event == "kyc_state") {
         updateKycState();
@@ -70,9 +69,10 @@ class _CardRechargeState extends State<CardRecharge> {
   }
 
   updateKycState() {
+    return;
     if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value ||
         CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
-      if (cardInputAmount.isNotEmpty) {
+      if (cardInputAmount.isNotEmpty && double.parse(cardInputAmount) >= 100) {
         getDcPayUrl(double.parse(cardInputAmount));
       }
     }
@@ -85,6 +85,7 @@ class _CardRechargeState extends State<CardRecharge> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    log("card recharge  build");
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
