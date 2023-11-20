@@ -361,6 +361,7 @@ class _CardRechargeState extends State<CardRecharge> {
         }
       } else {
         log(value.msg);
+        alert(value.msg, context, () {});
         if (widget.type == EnumChargeType.withdraw) {
           showToast(Tips.failWithdraw.value);
         } else if (widget.type == EnumChargeType.deposit) {
