@@ -56,7 +56,6 @@ class _ExchangeState extends State<Exchange> {
   @override
   void initState() {
     super.initState();
-    canCurrencyClick = false;
     //init data
     tokenList.addAll(initTokenList);
     for (int i = 0; i < tokenList.length; i++) {
@@ -67,12 +66,14 @@ class _ExchangeState extends State<Exchange> {
       }
     }
     currSelectedCurrency = currencyList[0];
-    currSelectedToken = tokenList[0];
+
     if (currSelectedCurrency.balance == 0) {
       canCurrencyClick = false;
     } else {
       canCurrencyClick = true;
     }
+
+    currSelectedToken = tokenList[0];
     if (currSelectedToken.balance == 0) {
       canTokenClick = false;
     } else {
@@ -87,7 +88,13 @@ class _ExchangeState extends State<Exchange> {
     if (address != null) {
       EthService.getInstance().updateTokenBalances(context).then((value) {
         if (mounted) {
-          setState(() {});
+          setState(() {
+            if (currSelectedToken.balance == 0) {
+              canTokenClick = false;
+            } else {
+              canTokenClick = true;
+            }
+          });
         }
       });
     }
@@ -98,7 +105,13 @@ class _ExchangeState extends State<Exchange> {
         var resp = value.data as AccountInfo;
         log(resp.toString());
         currSelectedCurrency.balance = resp.balanceUsd;
-        setState(() {});
+        setState(() {
+          if (currSelectedCurrency.balance == 0) {
+            canCurrencyClick = false;
+          } else {
+            canCurrencyClick = true;
+          }
+        });
       } else {
         log(value.msg);
       }
