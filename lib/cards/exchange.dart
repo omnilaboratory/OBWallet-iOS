@@ -41,7 +41,7 @@ class _ExchangeState extends State<Exchange> {
   final TextEditingController _amountToController = TextEditingController();
 
   double totalBalanceUsd = 0;
-  double coinPrice = 1;
+  double coinPrice = -1;
 
   var initTokenList = EthService.getInstance().getTokenList();
   List<TokenInfo> tokenList = [];
@@ -56,7 +56,7 @@ class _ExchangeState extends State<Exchange> {
   @override
   void initState() {
     super.initState();
-
+    canCurrencyClick = false;
     //init data
     tokenList.addAll(initTokenList);
     for (int i = 0; i < tokenList.length; i++) {
@@ -347,87 +347,104 @@ class _ExchangeState extends State<Exchange> {
                       ? buildCurrency()
                       : buildToken(),
                   const SizedBox(height: 5),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text(
-                        '1',
-                        style: TextStyle(
-                          color: Color(0xFF666666),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          height: 1.29,
+                  coinPrice == -1
+                      ? const Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "The rate got an error, try again later.",
+                              style: TextStyle(
+                                color: Color(0xFF666666),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                height: 1.29,
+                              ),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              '1',
+                              style: TextStyle(
+                                color: Color(0xFF666666),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                height: 1.29,
+                              ),
+                            ),
+                            const SizedBox(width: 2),
+                            Text(
+                              widget.type == EnumExchangeType.sell
+                                  ? currSelectedToken.name
+                                  : currSelectedCurrency.name,
+                              style: const TextStyle(
+                                color: Color(0xFF666666),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                height: 1.29,
+                              ),
+                            ),
+                            const SizedBox(width: 2),
+                            const Text(
+                              '=',
+                              style: TextStyle(
+                                color: Color(0xFF666666),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                height: 1.29,
+                              ),
+                            ),
+                            const SizedBox(width: 2),
+                            Text(
+                              widget.type == EnumExchangeType.sell
+                                  ? StringTools.formatCurrencyNum(coinPrice)
+                                  : currSelectedToken.name == 'ETH'
+                                      ? StringTools.formatCryptoNum(
+                                          1 / coinPrice)
+                                      : StringTools.formatCurrencyNum(
+                                          1 / coinPrice),
+                              style: const TextStyle(
+                                color: Color(0xFF666666),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                height: 1.29,
+                              ),
+                            ),
+                            const SizedBox(width: 2),
+                            Text(
+                              widget.type == EnumExchangeType.sell
+                                  ? currSelectedCurrency.name
+                                  : currSelectedToken.name,
+                              style: const TextStyle(
+                                color: Color(0xFF666666),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                height: 1.29,
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            const SizedBox(
+                              height: 10,
+                              width: 10,
+                              child: CircularProgressIndicator(
+                                color: Color(0xFF666666),
+                                strokeWidth: 2,
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            Text(
+                              '$_countdownTime' 's',
+                              style: const TextStyle(
+                                color: Color(0xFF666666),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                height: 1.29,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(width: 2),
-                      Text(
-                        widget.type == EnumExchangeType.sell
-                            ? currSelectedToken.name
-                            : currSelectedCurrency.name,
-                        style: const TextStyle(
-                          color: Color(0xFF666666),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          height: 1.29,
-                        ),
-                      ),
-                      const SizedBox(width: 2),
-                      const Text(
-                        '=',
-                        style: TextStyle(
-                          color: Color(0xFF666666),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          height: 1.29,
-                        ),
-                      ),
-                      const SizedBox(width: 2),
-                      Text(
-                        widget.type == EnumExchangeType.sell
-                            ? StringTools.formatCurrencyNum(coinPrice)
-                            : currSelectedToken.name == 'ETH'
-                                ? StringTools.formatCryptoNum(1 / coinPrice)
-                                : StringTools.formatCurrencyNum(1 / coinPrice),
-                        style: const TextStyle(
-                          color: Color(0xFF666666),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          height: 1.29,
-                        ),
-                      ),
-                      const SizedBox(width: 2),
-                      Text(
-                        widget.type == EnumExchangeType.sell
-                            ? currSelectedCurrency.name
-                            : currSelectedToken.name,
-                        style: const TextStyle(
-                          color: Color(0xFF666666),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          height: 1.29,
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      const SizedBox(
-                        height: 10,
-                        width: 10,
-                        child: CircularProgressIndicator(
-                          color: Color(0xFF666666),
-                          strokeWidth: 2,
-                        ),
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        '$_countdownTime' 's',
-                        style: const TextStyle(
-                          color: Color(0xFF666666),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          height: 1.29,
-                        ),
-                      ),
-                    ],
-                  ),
                   SizedBox(
                     width: size.width * 0.8,
                     child: const Padding(
@@ -525,7 +542,11 @@ class _ExchangeState extends State<Exchange> {
           child: BottomButton(
             icon: 'asset/images/icon_arrow_right_green.png',
             text: 'NEXT',
-            onPressed: onNext,
+            onPressed: coinPrice > 0
+                ? onNext
+                : () {
+                    showToast("wrong rate");
+                  },
           ),
         ),
       ]),
@@ -549,7 +570,7 @@ class _ExchangeState extends State<Exchange> {
                   onChanged: (text) {
                     setState(() {
                       if (currSelectedToken.name == 'ETH') {
-                        if (text.isEmpty) {
+                        if (text.isEmpty|| coinPrice <= 0) {
                           _amountFromController.text = '';
                         } else {
                           _amountFromController.text =
@@ -557,7 +578,7 @@ class _ExchangeState extends State<Exchange> {
                                   double.parse(text) / coinPrice);
                         }
                       } else {
-                        if (text.isEmpty) {
+                        if (text.isEmpty || coinPrice <= 0) {
                           _amountFromController.text = '';
                         } else {
                           _amountFromController.text =
@@ -788,7 +809,7 @@ class _ExchangeState extends State<Exchange> {
                   inputFormatters: [PrecisionLimitFormatter(num)],
                   onChanged: (text) {
                     setState(() {
-                      if (text.isEmpty) {
+                      if (text.isEmpty || coinPrice <= 0) {
                         _amountToController.text = '';
                       } else {
                         _amountToController.text =
@@ -1092,18 +1113,22 @@ class _ExchangeState extends State<Exchange> {
           setState(() {
             coinPrice = resp.price;
             if (_amountToController.text.isNotEmpty) {
-              if (currSelectedToken.name == 'ETH') {
-                _amountFromController.text = StringTools.formatCryptoNum(
-                    double.parse(_amountToController.text) / coinPrice);
-              } else {
-                _amountFromController.text = StringTools.formatCurrencyNum(
-                    double.parse(_amountToController.text) / coinPrice);
+              if (double.tryParse(_amountToController.text) != null) {
+                if (currSelectedToken.name == 'ETH') {
+                  _amountFromController.text = StringTools.formatCryptoNum(
+                      double.parse(_amountToController.text) / coinPrice);
+                } else {
+                  _amountFromController.text = StringTools.formatCurrencyNum(
+                      double.parse(_amountToController.text) / coinPrice);
+                }
               }
             }
           });
         }
       } else {
-        log(value.msg);
+        coinPrice = -1;
+        // _amountFromController.text = "The rate got an error, try again later.";
+        log("-----------" + value.msg);
       }
     });
   }
