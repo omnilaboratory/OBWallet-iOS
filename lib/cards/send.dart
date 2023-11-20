@@ -124,6 +124,13 @@ class _SendState extends State<Send> {
                                 setState(() {});
                               }
                             }),
+
+                            const SizedBox(height: 20),
+                            const Text(
+                              '*** The virtual card withdrawal limit is \$50,000 per month.',
+                              style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic),
+                            ),
+
                             const Spacer(),
                             BottomButton(
                               icon: 'asset/images/icon_confirm_green.png',

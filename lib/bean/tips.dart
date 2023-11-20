@@ -44,7 +44,7 @@ enum Tips {
   failDeposit("Deposit failed, please try again later."),
   buyNftSuccess("Buy NFT Successfully."),
   createWallet("Please create a crypto wallet first."),
-  needFiveDollarFee("Please Deposit."),
+  needFiveDollarFee("There is a fee of \$5.00 to apply for a virtual card."),
   ;
 
   final String value;

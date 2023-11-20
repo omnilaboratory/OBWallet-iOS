@@ -111,6 +111,13 @@ class _CardPartState extends State<CardPart> {
               ),
             ),
           ),
+
+          const SizedBox(height: 20),
+          const Text(
+            '*** There is a fee of \$5.00 to apply for a virtual card.',
+            style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic),
+          ),
+
           const Spacer(),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             BottomButton(
