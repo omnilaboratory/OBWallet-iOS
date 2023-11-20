@@ -208,7 +208,8 @@ class UserService {
   }
 
   void setError(BuildContext context, String funcName, Object? e,
-      GrpcResponse<dynamic> ret) {
+      GrpcResponse<dynamic> ret,
+      {bool isShowToast = true}) {
     if (e == null) {
       return;
     }
@@ -216,7 +217,9 @@ class UserService {
     try {
       GrpcError error = e as GrpcError;
       ret.msg = error.message.toString();
-      showToast(ret.msg);
+      if (isShowToast) {
+        showToast(ret.msg);
+      }
       if (e.code == 16) {
         LocalStorage.remove(LocalStorage.userToken);
         Navigator.pushReplacement(

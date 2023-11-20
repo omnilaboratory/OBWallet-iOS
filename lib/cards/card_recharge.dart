@@ -348,7 +348,7 @@ class _CardRechargeState extends State<CardRecharge> {
     var loading = showLoading(context);
     CardRechargeRequest request = createCardRechargeRequest();
     CardService.getInstance()
-        .cardRecharge(context, request)
+        .cardRecharge(context, request, isShowToast: false)
         .then((value) async {
       if (value.code == 1) {
         GlobalParams.eventBus.fire("topup");

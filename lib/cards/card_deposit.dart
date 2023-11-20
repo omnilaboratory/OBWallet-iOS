@@ -28,7 +28,6 @@ class CardDeposit extends StatefulWidget {
   List<Int64> tokenIds = [];
   List<Int64> tokenIdValues = [];
 
-
   CardDeposit({
     super.key,
     required this.amt,
@@ -228,7 +227,9 @@ class _CardDepositState extends State<CardDeposit> {
       req.chargeForNft = true;
     }
 
-    CardService.getInstance().cardRecharge(context, req).then((resp) {
+    CardService.getInstance()
+        .cardRecharge(context, req, isShowToast: false)
+        .then((resp) {
       if (resp.code == 1) {
         if (widget.nftAmt > 0) {
           GlobalParams.eventBus.fire("buyNftFinish");
@@ -236,11 +237,10 @@ class _CardDepositState extends State<CardDeposit> {
             Navigator.pop(context);
           });
         } else {
-          if(widget.type=="applyCard"){
-            CardService.getInstance().applyCard(context, "USD").then((value) =>
-            {
-              GlobalParams.eventBus.fire("applyCard")
-            });
+          if (widget.type == "applyCard") {
+            CardService.getInstance()
+                .applyCard(context, "USD")
+                .then((value) => {GlobalParams.eventBus.fire("applyCard")});
           }
 
           alert(Tips.successDeposit.value, context, () {

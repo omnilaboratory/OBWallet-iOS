@@ -82,7 +82,7 @@ class CardService {
   }
 
   Future<GrpcResponse> cardExchangeInfoList(
-      BuildContext context, String cardNo, Int64 start,Int64 limit) async {
+      BuildContext context, String cardNo, Int64 start, Int64 limit) async {
     var request = CardExchangeInfoListRequest();
     request.cardNo = cardNo;
     request.start = start;
@@ -101,7 +101,8 @@ class CardService {
   }
 
   Future<GrpcResponse> cardRecharge(
-      BuildContext context, CardRechargeRequest req) async {
+      BuildContext context, CardRechargeRequest req,
+      {bool isShowToast = true}) async {
     log("$req");
     var ret = GrpcResponse();
     try {
@@ -109,7 +110,8 @@ class CardService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, "cardRecharge", e, ret);
+      UserService.getInstance()
+          .setError(context, "cardRecharge", e, ret, isShowToast: isShowToast);
     }
     return ret;
   }
