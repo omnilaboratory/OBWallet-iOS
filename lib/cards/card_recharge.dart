@@ -305,8 +305,10 @@ class _CardRechargeState extends State<CardRecharge> {
             cardRecharge();
           } else {
             var kycStatus = CommonService.userInfo!.kycStatus;
+            log("$kycStatus");
             if (kycStatus.isNotEmpty) {
-              if (kycStatus == "passed") {
+              if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value ||
+                  CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
                 GlobalParams.eventBus.fire("topup");
                 getDcPayUrl(double.parse(cardInputAmount));
 
