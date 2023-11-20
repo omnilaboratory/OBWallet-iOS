@@ -9,7 +9,7 @@ class GlobalParams {
 
   static EventBus eventBus = EventBus();
 
-  static EnumNetworkType currNetwork = EnumNetworkType.goerli;
+  static EnumNetworkType currNetwork = EnumNetworkType.mainnet;
 
   static int grpcTimeout = 30;
 
