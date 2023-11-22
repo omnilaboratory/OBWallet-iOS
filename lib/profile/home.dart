@@ -5,6 +5,7 @@ import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
 import '../logins/login.dart';
+import 'my_invitation_code.dart';
 
 class ProfileHome extends StatefulWidget {
   const ProfileHome({super.key});
@@ -33,6 +34,19 @@ class _ProfileHomeState extends State<ProfileHome> {
               showDialog(context: context,  builder: (context) {
                 return const UpdatePsw();
               });
+            }),
+            const SizedBox(height: 20),
+            btnBtnItem(Icons.insert_invitation_sharp, "My Invitation Code", () {
+              showDialog(context: context,  builder: (context) {
+                return const MyInvitationCode();
+              });
+            }),
+            const SizedBox(height: 20),
+            btnBtnItem(Icons.people_alt_rounded, "My Users", () {
+
+            }),
+            const SizedBox(height: 20),
+            btnBtnItem(Icons.monetization_on_outlined, "My Reward", () {
             }),
             const SizedBox(height: 20),
             btnBtnItem(Icons.logout_outlined, "Logout", () {
