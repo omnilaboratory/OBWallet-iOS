@@ -1,27 +1,28 @@
+import 'package:awallet/bean/my_reward_info.dart';
 import 'package:awallet/bean/my_user_info.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
-import 'package:awallet/component/my_user_item.dart';
+import 'package:awallet/component/my_reward_item.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class MyUsers extends StatefulWidget {
-  const MyUsers({super.key});
+class MyReward extends StatefulWidget {
+  const MyReward({super.key});
 
   @override
-  State<MyUsers> createState() => _MyUsersState();
+  State<MyReward> createState() => _MyRewardState();
 }
 
-class _MyUsersState extends State<MyUsers> {
+class _MyRewardState extends State<MyReward> {
   int rowIndex = 1;
   int dataStartIndex = 0;
   int localPageSize = 20;
   final RefreshController _refreshListController =
       RefreshController(initialRefresh: false);
 
-  List<MyUserInfo> dataList = [];
+  List<MyRewardInfo> dataList = [];
 
   @override
   void initState() {
@@ -35,7 +36,7 @@ class _MyUsersState extends State<MyUsers> {
       appBar: AppBar(
         leadingWidth: 42,
         titleSpacing: 0,
-        title: const HeadLogo(title: "My Users"),
+        title: const HeadLogo(title: "My Reward"),
       ),
       body: Column(
         children: [
@@ -44,7 +45,7 @@ class _MyUsersState extends State<MyUsers> {
             padding: EdgeInsets.only(left: 20,bottom: 20),
             child: Row(
               children: [
-                Text("Total Users: XXX",
+                Text("Total Reward: XXX",
                     style: TextStyle(
                       fontSize: 20,
                     )),
@@ -62,7 +63,7 @@ class _MyUsersState extends State<MyUsers> {
                     itemCount: dataList.length,
                     itemBuilder: (BuildContext context, int index) {
                       if (index < dataList.length) {
-                        return MyUserItem(info: dataList[index]);
+                        return MyRewardItem(info: dataList[index]);
                       }
                       return null;
                     }),
@@ -97,10 +98,9 @@ class _MyUsersState extends State<MyUsers> {
         var items = resp.items;
         if (items.isNotEmpty) {
           for (var element in items) {
-            dataList.add(MyUserInfo(
+            dataList.add(MyRewardInfo(
               index: rowIndex++,
-              username:
-                  "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
+              amount:element.amt,
               createTime: DateTime.fromMillisecondsSinceEpoch(
                   (element.createdAt * 1000).toInt()),
             ));

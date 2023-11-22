@@ -1,8 +1,8 @@
-class MyUserIfo {
+class MyUserInfo {
   int index;
   String username;
   DateTime createTime;
 
-  MyUserIfo(
+  MyUserInfo(
       {required this.index, required this.username, required this.createTime});
 }

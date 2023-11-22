@@ -1,11 +1,12 @@
+import 'package:awallet/bean/my_reward_info.dart';
 import 'package:awallet/bean/my_user_info.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class MyUserItem extends StatelessWidget {
-  final MyUserInfo info;
+class MyRewardItem extends StatelessWidget {
+  final MyRewardInfo info;
 
-  const MyUserItem({super.key, required this.info});
+  const MyRewardItem({super.key, required this.info});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class MyUserItem extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 14,
                 )),
-            Text(info.username.toString(),
+            Text(info.amount.toString(),
                 style: const TextStyle(
                   fontSize: 14,
                 )),

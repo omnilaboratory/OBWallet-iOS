@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../logins/login.dart';
 import 'my_invitation_code.dart';
+import 'my_reward.dart';
 
 class ProfileHome extends StatefulWidget {
   const ProfileHome({super.key});
@@ -32,25 +33,29 @@ class _ProfileHomeState extends State<ProfileHome> {
             buildUserInfo(),
             const SizedBox(height: 40),
             btnBtnItem(Icons.verified_user_outlined, "Update Password", () {
-              showDialog(context: context,  builder: (context) {
-                return const UpdatePsw();
-              });
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const UpdatePsw();
+                  });
             }),
             const SizedBox(height: 20),
             btnBtnItem(Icons.insert_invitation_sharp, "My Invitation Code", () {
-              showDialog(context: context,  builder: (context) {
-                return const MyInvitationCode();
-              });
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const MyInvitationCode();
+                  });
             }),
             const SizedBox(height: 20),
             btnBtnItem(Icons.people_alt_rounded, "My Users", () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const MyUsers()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const MyUsers()));
             }),
             const SizedBox(height: 20),
             btnBtnItem(Icons.monetization_on_outlined, "My Reward", () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const MyReward()));
             }),
             const SizedBox(height: 20),
             btnBtnItem(Icons.logout_outlined, "Logout", () {
@@ -85,27 +90,22 @@ class _ProfileHomeState extends State<ProfileHome> {
             children: [
               const Icon(Icons.person, color: Colors.white, size: 30),
               const SizedBox(width: 10),
-              Text(
-                CommonService.userInfo!.userName,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                )
-              ),
+              Text(CommonService.userInfo!.userName,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  )),
             ],
           ),
-          
           Row(
             children: [
               const Icon(Icons.email, color: Colors.white, size: 30),
               const SizedBox(width: 10),
-              Text(
-                CommonService.userInfo!.email,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                )
-              ),
+              Text(CommonService.userInfo!.email,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  )),
             ],
           ),
         ],
