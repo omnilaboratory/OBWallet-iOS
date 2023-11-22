@@ -1,5 +1,6 @@
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/grpc_services/common_service.dart';
+import 'package:awallet/profile/my_users.dart';
 import 'package:awallet/profile/update_psw.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,10 @@ class _ProfileHomeState extends State<ProfileHome> {
             }),
             const SizedBox(height: 20),
             btnBtnItem(Icons.people_alt_rounded, "My Users", () {
-
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MyUsers()));
             }),
             const SizedBox(height: 20),
             btnBtnItem(Icons.monetization_on_outlined, "My Reward", () {
