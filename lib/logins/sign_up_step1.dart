@@ -26,6 +26,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _pswController = TextEditingController();
   final TextEditingController _psw2Controller = TextEditingController();
+  final TextEditingController _inviteCodeController = TextEditingController();
 
   String passwordTitle = "Weak";
 
@@ -163,7 +164,6 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   Container buildInputField() {
     return Container(
       width: 320,
-      height: 480,
       padding: const EdgeInsets.only(left: 20, right: 20),
       decoration: ShapeDecoration(
         color: Colors.white,
@@ -283,6 +283,13 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                 icon: const Icon(Icons.password),
                 obscureText: true,
                 maxLength: 16),
+            const SizedBox(height: 15),
+            createTextFormField(
+                _inviteCodeController,
+                "Invitation Code",
+                icon: const Icon(Icons.insert_invitation_sharp),
+                maxLength: 16),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -394,6 +401,8 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     }
     signUpRequest.userName = _unameController.value.text.trim();
     signUpRequest.verifyCodeId = verifyCodeResponse!.verifyCodeId;
+    String inviteCode =  _inviteCodeController.value.text.trim();
+    //TODO set Value
     UserService.getInstance()
         .signUp(context, signUpRequest)
         .then((value) async {
