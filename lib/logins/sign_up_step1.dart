@@ -288,7 +288,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                 _inviteCodeController,
                 "Invitation Code",
                 icon: const Icon(Icons.insert_invitation_sharp),
-                maxLength: 16),
+                maxLength: 4),
             const SizedBox(height: 20),
           ],
         ),
