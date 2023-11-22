@@ -28,6 +28,10 @@ service UserService {
   rpc Upload(UploadRequest) returns (UploadResponse) {}
   //获取用户信息
   rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
+  //返回被当前用户邀请的所有人.
+  rpc ListInvitedUser(ListInvitedUserRequest) returns (ListInvitedUserResponse) {}
+  //当前用户的返佣
+  rpc ListReward(ListRewardRequest) returns (ListRewardResponse) {}
 }
 
 message ForgetPwdRequest {
@@ -86,6 +90,13 @@ message UserInfo {
   int64 user_type=28;
   //当user_type=1时，这个字段表示用户所属的商户id。其它情况为0，无用途
   int64 muser_id=29;
+  //用户生成的邀请码
+  string invitation_code=30;
+  //用户注册时输入的邀请码
+  string regist_code=31;
+
+  //注册后,系统填充的邀请人id
+  int64 invitation_userid=32;
 }
 
 message SignUpRequest {
@@ -97,6 +108,9 @@ message SignUpRequest {
   string vcode = 5;
   //got from VerifyCodeRPC
   string verify_code_id = 6;
+
+  //用户注册时输入的邀请码
+  string regist_code=10;
 
   //[option]
   string device_id=7;
@@ -191,4 +205,39 @@ message GetUserInfoRequest {
 }
 message GetUserInfoResponse {
   UserInfo user = 1;
+}
+
+message ListInvitedUserRequest {
+  //same as mysql's offsset; default(0)
+  int64 start =2;
+  //same as mysql's limit; default(20)
+  int64 limit =3;
+}
+
+message ListInvitedUserResponse {
+  repeated InvitedUser list = 1;
+  int64 count =2;
+}
+message InvitedUser {
+  string user_name = 3;
+  string email = 4;
+  string firstName =1;
+  string lastName =2;
+  uint64 created_at=5;
+}
+
+message ListRewardRequest {
+  //same as mysql's offsset; default(0)
+  int64 start =2;
+  //same as mysql's limit; default(20)
+  int64 limit =3;
+}
+message ListRewardResponse {
+  repeated UserReward list = 1;
+  double total_amt=2;
+}
+message UserReward {
+  uint64 created_at=1;
+  //usd_amt
+  double amt=2;
 }

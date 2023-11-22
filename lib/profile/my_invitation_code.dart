@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,10 +15,15 @@ class MyInvitationCode extends StatefulWidget {
 }
 
 class _MyInvitationCodeState extends State<MyInvitationCode> {
-  String invitationCode = "abds";
+  String? invitationCode = CommonService.userInfo?.invitationCode;
 
   @override
   Widget build(BuildContext context) {
+    log("${CommonService.userInfo}");
+    if (invitationCode == null || invitationCode!.isEmpty) {
+      invitationCode = "no code";
+    }
+
     var size = MediaQuery.of(context).size;
     return GestureDetector(
         behavior: HitTestBehavior.translucent,
@@ -50,10 +58,10 @@ class _MyInvitationCodeState extends State<MyInvitationCode> {
                           child: GestureDetector(
                         onTap: () {
                           Clipboard.setData(
-                              ClipboardData(text: invitationCode));
+                              ClipboardData(text: invitationCode!));
                           showToast(Tips.codeIsOnClipboard.value);
                         },
-                        child: Text(invitationCode,
+                        child: Text(invitationCode!,
                             style: const TextStyle(
                               color: Colors.blue,
                               fontSize: 40,

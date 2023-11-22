@@ -156,6 +156,9 @@ class UserInfo extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(27, _omitFieldNames ? '' : 'cardCount', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aInt64(28, _omitFieldNames ? '' : 'userType')
     ..aInt64(29, _omitFieldNames ? '' : 'muserId')
+    ..aOS(30, _omitFieldNames ? '' : 'invitationCode')
+    ..aOS(31, _omitFieldNames ? '' : 'registCode')
+    ..aInt64(32, _omitFieldNames ? '' : 'invitationUserid')
     ..hasRequiredFields = false
   ;
 
@@ -440,6 +443,33 @@ class UserInfo extends $pb.GeneratedMessage {
   $core.bool hasMuserId() => $_has(28);
   @$pb.TagNumber(29)
   void clearMuserId() => clearField(29);
+
+  @$pb.TagNumber(30)
+  $core.String get invitationCode => $_getSZ(29);
+  @$pb.TagNumber(30)
+  set invitationCode($core.String v) { $_setString(29, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasInvitationCode() => $_has(29);
+  @$pb.TagNumber(30)
+  void clearInvitationCode() => clearField(30);
+
+  @$pb.TagNumber(31)
+  $core.String get registCode => $_getSZ(30);
+  @$pb.TagNumber(31)
+  set registCode($core.String v) { $_setString(30, v); }
+  @$pb.TagNumber(31)
+  $core.bool hasRegistCode() => $_has(30);
+  @$pb.TagNumber(31)
+  void clearRegistCode() => clearField(31);
+
+  @$pb.TagNumber(32)
+  $fixnum.Int64 get invitationUserid => $_getI64(31);
+  @$pb.TagNumber(32)
+  set invitationUserid($fixnum.Int64 v) { $_setInt64(31, v); }
+  @$pb.TagNumber(32)
+  $core.bool hasInvitationUserid() => $_has(31);
+  @$pb.TagNumber(32)
+  void clearInvitationUserid() => clearField(32);
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {
@@ -458,6 +488,7 @@ class SignUpRequest extends $pb.GeneratedMessage {
     ..aOS(7, _omitFieldNames ? '' : 'deviceId')
     ..aOS(8, _omitFieldNames ? '' : 'os')
     ..aOS(9, _omitFieldNames ? '' : 'osVersion', protoName: 'osVersion')
+    ..aOS(10, _omitFieldNames ? '' : 'registCode')
     ..hasRequiredFields = false
   ;
 
@@ -562,6 +593,15 @@ class SignUpRequest extends $pb.GeneratedMessage {
   $core.bool hasOsVersion() => $_has(8);
   @$pb.TagNumber(9)
   void clearOsVersion() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.String get registCode => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set registCode($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasRegistCode() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearRegistCode() => clearField(10);
 }
 
 class SignUpResponse extends $pb.GeneratedMessage {
@@ -1404,6 +1444,336 @@ class GetUserInfoResponse extends $pb.GeneratedMessage {
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
   UserInfo ensureUser() => $_ensure(0);
+}
+
+class ListInvitedUserRequest extends $pb.GeneratedMessage {
+  factory ListInvitedUserRequest() => create();
+  ListInvitedUserRequest._() : super();
+  factory ListInvitedUserRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListInvitedUserRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListInvitedUserRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(2, _omitFieldNames ? '' : 'start')
+    ..aInt64(3, _omitFieldNames ? '' : 'limit')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListInvitedUserRequest clone() => ListInvitedUserRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListInvitedUserRequest copyWith(void Function(ListInvitedUserRequest) updates) => super.copyWith((message) => updates(message as ListInvitedUserRequest)) as ListInvitedUserRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListInvitedUserRequest create() => ListInvitedUserRequest._();
+  ListInvitedUserRequest createEmptyInstance() => create();
+  static $pb.PbList<ListInvitedUserRequest> createRepeated() => $pb.PbList<ListInvitedUserRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListInvitedUserRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListInvitedUserRequest>(create);
+  static ListInvitedUserRequest? _defaultInstance;
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get start => $_getI64(0);
+  @$pb.TagNumber(2)
+  set start($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasStart() => $_has(0);
+  @$pb.TagNumber(2)
+  void clearStart() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get limit => $_getI64(1);
+  @$pb.TagNumber(3)
+  set limit($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasLimit() => $_has(1);
+  @$pb.TagNumber(3)
+  void clearLimit() => clearField(3);
+}
+
+class ListInvitedUserResponse extends $pb.GeneratedMessage {
+  factory ListInvitedUserResponse() => create();
+  ListInvitedUserResponse._() : super();
+  factory ListInvitedUserResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListInvitedUserResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListInvitedUserResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..pc<InvitedUser>(1, _omitFieldNames ? '' : 'list', $pb.PbFieldType.PM, subBuilder: InvitedUser.create)
+    ..aInt64(2, _omitFieldNames ? '' : 'count')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListInvitedUserResponse clone() => ListInvitedUserResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListInvitedUserResponse copyWith(void Function(ListInvitedUserResponse) updates) => super.copyWith((message) => updates(message as ListInvitedUserResponse)) as ListInvitedUserResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListInvitedUserResponse create() => ListInvitedUserResponse._();
+  ListInvitedUserResponse createEmptyInstance() => create();
+  static $pb.PbList<ListInvitedUserResponse> createRepeated() => $pb.PbList<ListInvitedUserResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListInvitedUserResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListInvitedUserResponse>(create);
+  static ListInvitedUserResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<InvitedUser> get list => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get count => $_getI64(1);
+  @$pb.TagNumber(2)
+  set count($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCount() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCount() => clearField(2);
+}
+
+class InvitedUser extends $pb.GeneratedMessage {
+  factory InvitedUser() => create();
+  InvitedUser._() : super();
+  factory InvitedUser.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory InvitedUser.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'InvitedUser', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'firstName', protoName: 'firstName')
+    ..aOS(2, _omitFieldNames ? '' : 'lastName', protoName: 'lastName')
+    ..aOS(3, _omitFieldNames ? '' : 'userName')
+    ..aOS(4, _omitFieldNames ? '' : 'email')
+    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'createdAt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  InvitedUser clone() => InvitedUser()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  InvitedUser copyWith(void Function(InvitedUser) updates) => super.copyWith((message) => updates(message as InvitedUser)) as InvitedUser;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static InvitedUser create() => InvitedUser._();
+  InvitedUser createEmptyInstance() => create();
+  static $pb.PbList<InvitedUser> createRepeated() => $pb.PbList<InvitedUser>();
+  @$core.pragma('dart2js:noInline')
+  static InvitedUser getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<InvitedUser>(create);
+  static InvitedUser? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get firstName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set firstName($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFirstName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFirstName() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get lastName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set lastName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasLastName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLastName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get userName => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set userName($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUserName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUserName() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get email => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set email($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasEmail() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEmail() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get createdAt => $_getI64(4);
+  @$pb.TagNumber(5)
+  set createdAt($fixnum.Int64 v) { $_setInt64(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasCreatedAt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCreatedAt() => clearField(5);
+}
+
+class ListRewardRequest extends $pb.GeneratedMessage {
+  factory ListRewardRequest() => create();
+  ListRewardRequest._() : super();
+  factory ListRewardRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListRewardRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRewardRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(2, _omitFieldNames ? '' : 'start')
+    ..aInt64(3, _omitFieldNames ? '' : 'limit')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListRewardRequest clone() => ListRewardRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListRewardRequest copyWith(void Function(ListRewardRequest) updates) => super.copyWith((message) => updates(message as ListRewardRequest)) as ListRewardRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListRewardRequest create() => ListRewardRequest._();
+  ListRewardRequest createEmptyInstance() => create();
+  static $pb.PbList<ListRewardRequest> createRepeated() => $pb.PbList<ListRewardRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListRewardRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListRewardRequest>(create);
+  static ListRewardRequest? _defaultInstance;
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get start => $_getI64(0);
+  @$pb.TagNumber(2)
+  set start($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasStart() => $_has(0);
+  @$pb.TagNumber(2)
+  void clearStart() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get limit => $_getI64(1);
+  @$pb.TagNumber(3)
+  set limit($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasLimit() => $_has(1);
+  @$pb.TagNumber(3)
+  void clearLimit() => clearField(3);
+}
+
+class ListRewardResponse extends $pb.GeneratedMessage {
+  factory ListRewardResponse() => create();
+  ListRewardResponse._() : super();
+  factory ListRewardResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListRewardResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRewardResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..pc<UserReward>(1, _omitFieldNames ? '' : 'list', $pb.PbFieldType.PM, subBuilder: UserReward.create)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'totalAmt', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListRewardResponse clone() => ListRewardResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListRewardResponse copyWith(void Function(ListRewardResponse) updates) => super.copyWith((message) => updates(message as ListRewardResponse)) as ListRewardResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListRewardResponse create() => ListRewardResponse._();
+  ListRewardResponse createEmptyInstance() => create();
+  static $pb.PbList<ListRewardResponse> createRepeated() => $pb.PbList<ListRewardResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListRewardResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListRewardResponse>(create);
+  static ListRewardResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<UserReward> get list => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.double get totalAmt => $_getN(1);
+  @$pb.TagNumber(2)
+  set totalAmt($core.double v) { $_setDouble(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTotalAmt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTotalAmt() => clearField(2);
+}
+
+class UserReward extends $pb.GeneratedMessage {
+  factory UserReward() => create();
+  UserReward._() : super();
+  factory UserReward.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserReward.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserReward', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'createdAt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UserReward clone() => UserReward()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UserReward copyWith(void Function(UserReward) updates) => super.copyWith((message) => updates(message as UserReward)) as UserReward;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UserReward create() => UserReward._();
+  UserReward createEmptyInstance() => create();
+  static $pb.PbList<UserReward> createRepeated() => $pb.PbList<UserReward>();
+  @$core.pragma('dart2js:noInline')
+  static UserReward getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserReward>(create);
+  static UserReward? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get createdAt => $_getI64(0);
+  @$pb.TagNumber(1)
+  set createdAt($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCreatedAt() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCreatedAt() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get amt => $_getN(1);
+  @$pb.TagNumber(2)
+  set amt($core.double v) { $_setDouble(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAmt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAmt() => clearField(2);
 }
 
 

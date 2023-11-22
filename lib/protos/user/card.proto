@@ -152,21 +152,29 @@ message CardWithdrawResponse {
 }
 
 message CardRechargeRequest {
-//    卡号	16
+  //    卡号	16
   string cardNo = 1;
-//    	卡有效期(月)	2
-  string card_expire_month =2;
-//    卡有效期(年)	4
-  string card_expire_year =3;
-//  cardSecurityCode CVV2/CSC
-  string card_security_code=4;
+  //    	卡有效期(月)	2
+  string card_expire_month = 2;
+  //    卡有效期(年)	4
+  string card_expire_year = 3;
+  //  cardSecurityCode CVV2/CSC
+  string card_security_code = 4;
+  //金额
   double amt = 5;
-  bool chargeForNft=6;
+  //设为true时,购买nft
+  bool chargeForNft = 6;
+  //设为true时,创建虚似卡 费用5$；创建虚似卡时,前端只提供信用卡信息即可,可以不提供amt金额,使用服务端配制的5$.
+  bool chargeForCreateVirtualCard = 11;
+  //设为true时,创建实体卡 费用50$； 暂无实体卡功能
+  bool chargeForCreatePhysicalCard = 12;
+
   //要购买的nft的tokenids列表；如果不指定token_ids,服务端将使用amt匹配出相应的nft.
-  repeated int64 token_ids=8;
+  repeated int64 token_ids = 8;
   //要购买的各个nft-token数量列表
-  repeated int64 values=9;
-  bool with_dynamic_nft=7;
+  repeated int64 values = 9;
+  //购买动态金额的nft时使用.
+  bool with_dynamic_nft = 7;
 }
 message CardRechargeResponse {
   //only for buy nft

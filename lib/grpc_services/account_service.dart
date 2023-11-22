@@ -126,6 +126,7 @@ class AccountService {
     return ret;
   }
 
+
   Future<GrpcResponse> getTrackedTxList(
       BuildContext context, int start, int limit) async {
     var request = GetSwapTxListRequest();

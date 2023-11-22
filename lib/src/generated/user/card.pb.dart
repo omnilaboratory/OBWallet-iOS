@@ -1182,6 +1182,8 @@ class CardRechargeRequest extends $pb.GeneratedMessage {
     ..aOB(7, _omitFieldNames ? '' : 'withDynamicNft')
     ..p<$fixnum.Int64>(8, _omitFieldNames ? '' : 'tokenIds', $pb.PbFieldType.K6)
     ..p<$fixnum.Int64>(9, _omitFieldNames ? '' : 'values', $pb.PbFieldType.K6)
+    ..aOB(11, _omitFieldNames ? '' : 'chargeForCreateVirtualCard', protoName: 'chargeForCreateVirtualCard')
+    ..aOB(12, _omitFieldNames ? '' : 'chargeForCreatePhysicalCard', protoName: 'chargeForCreatePhysicalCard')
     ..hasRequiredFields = false
   ;
 
@@ -1274,6 +1276,24 @@ class CardRechargeRequest extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(9)
   $core.List<$fixnum.Int64> get values => $_getList(8);
+
+  @$pb.TagNumber(11)
+  $core.bool get chargeForCreateVirtualCard => $_getBF(9);
+  @$pb.TagNumber(11)
+  set chargeForCreateVirtualCard($core.bool v) { $_setBool(9, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasChargeForCreateVirtualCard() => $_has(9);
+  @$pb.TagNumber(11)
+  void clearChargeForCreateVirtualCard() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.bool get chargeForCreatePhysicalCard => $_getBF(10);
+  @$pb.TagNumber(12)
+  set chargeForCreatePhysicalCard($core.bool v) { $_setBool(10, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasChargeForCreatePhysicalCard() => $_has(10);
+  @$pb.TagNumber(12)
+  void clearChargeForCreatePhysicalCard() => clearField(12);
 }
 
 class CardRechargeResponse extends $pb.GeneratedMessage {

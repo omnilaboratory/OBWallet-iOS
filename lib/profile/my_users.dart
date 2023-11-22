@@ -2,10 +2,11 @@ import 'package:awallet/bean/my_user_info.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/my_user_item.dart';
-import 'package:awallet/grpc_services/account_service.dart';
-import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/src/generated/user/user.pbgrpc.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:fixnum/src/int64.dart';
 
 class MyUsers extends StatefulWidget {
   const MyUsers({super.key});
@@ -22,6 +23,7 @@ class _MyUsersState extends State<MyUsers> {
       RefreshController(initialRefresh: false);
 
   List<MyUserInfo> dataList = [];
+  Int64 totalUser = Int64(0);
 
   @override
   void initState() {
@@ -40,12 +42,12 @@ class _MyUsersState extends State<MyUsers> {
       body: Column(
         children: [
           const SizedBox(height: 10),
-          const Padding(
-            padding: EdgeInsets.only(left: 20,bottom: 20),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, bottom: 20),
             child: Row(
               children: [
-                Text("Total Users: XXX",
-                    style: TextStyle(
+                Text("Total Users: ${totalUser.toString()}",
+                    style: const TextStyle(
                       fontSize: 20,
                     )),
               ],
@@ -87,20 +89,19 @@ class _MyUsersState extends State<MyUsers> {
   }
 
   void getDataFromServer() {
-    AccountService.getInstance()
-        .getSwapTxList(context, dataStartIndex, localPageSize,
-            TrackedTx_ContractSymbol.NFT,
-            loadNftTokenLog: true)
+    UserService.getInstance()
+        .listInvitedUser(context, dataStartIndex, localPageSize)
         .then((result) {
       if (result.code == 1) {
-        var resp = result.data as GetSwapTxListResponse;
-        var items = resp.items;
+        var resp = result.data as ListInvitedUserResponse;
+        totalUser = resp.count;
+
+        var items = resp.list;
         if (items.isNotEmpty) {
           for (var element in items) {
             dataList.add(MyUserInfo(
               index: rowIndex++,
-              username:
-                  "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
+              username: element.userName,
               createTime: DateTime.fromMillisecondsSinceEpoch(
                   (element.createdAt * 1000).toInt()),
             ));

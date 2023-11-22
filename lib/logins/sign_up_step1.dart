@@ -401,8 +401,8 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     }
     signUpRequest.userName = _unameController.value.text.trim();
     signUpRequest.verifyCodeId = verifyCodeResponse!.verifyCodeId;
-    String inviteCode =  _inviteCodeController.value.text.trim();
-    //TODO set Value
+    signUpRequest.registCode =  _inviteCodeController.value.text.trim();
+
     UserService.getInstance()
         .signUp(context, signUpRequest)
         .then((value) async {

@@ -298,6 +298,7 @@ class ETHGetAppConfResponse extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'serverAddress')
     ..aOS(2, _omitFieldNames ? '' : 'nftAddress')
     ..a<$core.double>(3, _omitFieldNames ? '' : 'swapDiscount', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'createCardFee', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -348,6 +349,15 @@ class ETHGetAppConfResponse extends $pb.GeneratedMessage {
   $core.bool hasSwapDiscount() => $_has(2);
   @$pb.TagNumber(3)
   void clearSwapDiscount() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get createCardFee => $_getN(3);
+  @$pb.TagNumber(4)
+  set createCardFee($core.double v) { $_setDouble(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasCreateCardFee() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCreateCardFee() => clearField(4);
 }
 
 class UpdateSwapDiscountRequest extends $pb.GeneratedMessage {
@@ -358,6 +368,7 @@ class UpdateSwapDiscountRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSwapDiscountRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'lnrpc'), createEmptyInstance: create)
     ..a<$core.double>(1, _omitFieldNames ? '' : 'swapDiscount', $pb.PbFieldType.OD)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'createCardFee', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -390,6 +401,15 @@ class UpdateSwapDiscountRequest extends $pb.GeneratedMessage {
   $core.bool hasSwapDiscount() => $_has(0);
   @$pb.TagNumber(1)
   void clearSwapDiscount() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get createCardFee => $_getN(1);
+  @$pb.TagNumber(2)
+  set createCardFee($core.double v) { $_setDouble(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCreateCardFee() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreateCardFee() => clearField(2);
 }
 
 class UpdateSwapDiscountResponse extends $pb.GeneratedMessage {

@@ -100,6 +100,7 @@ const ETHGetAppConfResponse$json = {
     {'1': 'server_address', '3': 1, '4': 1, '5': 9, '10': 'serverAddress'},
     {'1': 'nft_address', '3': 2, '4': 1, '5': 9, '10': 'nftAddress'},
     {'1': 'swap_discount', '3': 3, '4': 1, '5': 1, '10': 'swapDiscount'},
+    {'1': 'create_card_fee', '3': 4, '4': 1, '5': 1, '10': 'createCardFee'},
   ],
 };
 
@@ -107,20 +108,22 @@ const ETHGetAppConfResponse$json = {
 final $typed_data.Uint8List eTHGetAppConfResponseDescriptor = $convert.base64Decode(
     'ChVFVEhHZXRBcHBDb25mUmVzcG9uc2USJQoOc2VydmVyX2FkZHJlc3MYASABKAlSDXNlcnZlck'
     'FkZHJlc3MSHwoLbmZ0X2FkZHJlc3MYAiABKAlSCm5mdEFkZHJlc3MSIwoNc3dhcF9kaXNjb3Vu'
-    'dBgDIAEoAVIMc3dhcERpc2NvdW50');
+    'dBgDIAEoAVIMc3dhcERpc2NvdW50EiYKD2NyZWF0ZV9jYXJkX2ZlZRgEIAEoAVINY3JlYXRlQ2'
+    'FyZEZlZQ==');
 
 @$core.Deprecated('Use updateSwapDiscountRequestDescriptor instead')
 const UpdateSwapDiscountRequest$json = {
   '1': 'UpdateSwapDiscountRequest',
   '2': [
     {'1': 'swap_discount', '3': 1, '4': 1, '5': 1, '10': 'swapDiscount'},
+    {'1': 'create_card_fee', '3': 2, '4': 1, '5': 1, '10': 'createCardFee'},
   ],
 };
 
 /// Descriptor for `UpdateSwapDiscountRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSwapDiscountRequestDescriptor = $convert.base64Decode(
     'ChlVcGRhdGVTd2FwRGlzY291bnRSZXF1ZXN0EiMKDXN3YXBfZGlzY291bnQYASABKAFSDHN3YX'
-    'BEaXNjb3VudA==');
+    'BEaXNjb3VudBImCg9jcmVhdGVfY2FyZF9mZWUYAiABKAFSDWNyZWF0ZUNhcmRGZWU=');
 
 @$core.Deprecated('Use updateSwapDiscountResponseDescriptor instead')
 const UpdateSwapDiscountResponse$json = {

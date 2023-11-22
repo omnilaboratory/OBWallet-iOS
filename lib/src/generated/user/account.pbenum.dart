@@ -62,12 +62,14 @@ class AccountHistory_SourceType extends $pb.ProtobufEnum {
   static const AccountHistory_SourceType Recharge = AccountHistory_SourceType._(1, _omitEnumNames ? '' : 'Recharge');
   static const AccountHistory_SourceType Withdraw = AccountHistory_SourceType._(2, _omitEnumNames ? '' : 'Withdraw');
   static const AccountHistory_SourceType Swap = AccountHistory_SourceType._(3, _omitEnumNames ? '' : 'Swap');
+  static const AccountHistory_SourceType CreateCard = AccountHistory_SourceType._(4, _omitEnumNames ? '' : 'CreateCard');
 
   static const $core.List<AccountHistory_SourceType> values = <AccountHistory_SourceType> [
     UnKnow,
     Recharge,
     Withdraw,
     Swap,
+    CreateCard,
   ];
 
   static final $core.Map<$core.int, AccountHistory_SourceType> _byValue = $pb.ProtobufEnum.initByValue(values);

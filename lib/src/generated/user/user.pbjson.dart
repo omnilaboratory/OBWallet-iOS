@@ -72,6 +72,9 @@ const UserInfo$json = {
     {'1': 'card_count', '3': 27, '4': 1, '5': 4, '10': 'cardCount'},
     {'1': 'user_type', '3': 28, '4': 1, '5': 3, '10': 'userType'},
     {'1': 'muser_id', '3': 29, '4': 1, '5': 3, '10': 'muserId'},
+    {'1': 'invitation_code', '3': 30, '4': 1, '5': 9, '10': 'invitationCode'},
+    {'1': 'regist_code', '3': 31, '4': 1, '5': 9, '10': 'registCode'},
+    {'1': 'invitation_userid', '3': 32, '4': 1, '5': 3, '10': 'invitationUserid'},
   ],
 };
 
@@ -92,7 +95,9 @@ final $typed_data.Uint8List userInfoDescriptor = $convert.base64Decode(
     'bl9pZBgVIAEoCVIGb3BlbklkEh0KCmt5Y19zdGF0dXMYFiABKAlSCWt5Y1N0YXR1cxIdCgpjcm'
     'VhdGVkX2F0GBggASgEUgljcmVhdGVkQXQSHQoKY2FyZF9jb3VudBgbIAEoBFIJY2FyZENvdW50'
     'EhsKCXVzZXJfdHlwZRgcIAEoA1IIdXNlclR5cGUSGQoIbXVzZXJfaWQYHSABKANSB211c2VySW'
-    'Q=');
+    'QSJwoPaW52aXRhdGlvbl9jb2RlGB4gASgJUg5pbnZpdGF0aW9uQ29kZRIfCgtyZWdpc3RfY29k'
+    'ZRgfIAEoCVIKcmVnaXN0Q29kZRIrChFpbnZpdGF0aW9uX3VzZXJpZBggIAEoA1IQaW52aXRhdG'
+    'lvblVzZXJpZA==');
 
 @$core.Deprecated('Use signUpRequestDescriptor instead')
 const SignUpRequest$json = {
@@ -104,6 +109,7 @@ const SignUpRequest$json = {
     {'1': 'email', '3': 4, '4': 1, '5': 9, '10': 'email'},
     {'1': 'vcode', '3': 5, '4': 1, '5': 9, '10': 'vcode'},
     {'1': 'verify_code_id', '3': 6, '4': 1, '5': 9, '10': 'verifyCodeId'},
+    {'1': 'regist_code', '3': 10, '4': 1, '5': 9, '10': 'registCode'},
     {'1': 'device_id', '3': 7, '4': 1, '5': 9, '10': 'deviceId'},
     {'1': 'os', '3': 8, '4': 1, '5': 9, '10': 'os'},
     {'1': 'osVersion', '3': 9, '4': 1, '5': 9, '10': 'osVersion'},
@@ -115,8 +121,9 @@ final $typed_data.Uint8List signUpRequestDescriptor = $convert.base64Decode(
     'Cg1TaWduVXBSZXF1ZXN0EhsKCXVzZXJfbmFtZRgBIAEoCVIIdXNlck5hbWUSGgoIcGFzc3dvcm'
     'QYAiABKAlSCHBhc3N3b3JkEikKEGNvbmZpcm1fcGFzc3dvcmQYAyABKAlSD2NvbmZpcm1QYXNz'
     'd29yZBIUCgVlbWFpbBgEIAEoCVIFZW1haWwSFAoFdmNvZGUYBSABKAlSBXZjb2RlEiQKDnZlcm'
-    'lmeV9jb2RlX2lkGAYgASgJUgx2ZXJpZnlDb2RlSWQSGwoJZGV2aWNlX2lkGAcgASgJUghkZXZp'
-    'Y2VJZBIOCgJvcxgIIAEoCVICb3MSHAoJb3NWZXJzaW9uGAkgASgJUglvc1ZlcnNpb24=');
+    'lmeV9jb2RlX2lkGAYgASgJUgx2ZXJpZnlDb2RlSWQSHwoLcmVnaXN0X2NvZGUYCiABKAlSCnJl'
+    'Z2lzdENvZGUSGwoJZGV2aWNlX2lkGAcgASgJUghkZXZpY2VJZBIOCgJvcxgIIAEoCVICb3MSHA'
+    'oJb3NWZXJzaW9uGAkgASgJUglvc1ZlcnNpb24=');
 
 @$core.Deprecated('Use signUpResponseDescriptor instead')
 const SignUpResponse$json = {
@@ -326,4 +333,92 @@ const GetUserInfoResponse$json = {
 final $typed_data.Uint8List getUserInfoResponseDescriptor = $convert.base64Decode(
     'ChNHZXRVc2VySW5mb1Jlc3BvbnNlEiIKBHVzZXIYASABKAsyDi51c2VyLlVzZXJJbmZvUgR1c2'
     'Vy');
+
+@$core.Deprecated('Use listInvitedUserRequestDescriptor instead')
+const ListInvitedUserRequest$json = {
+  '1': 'ListInvitedUserRequest',
+  '2': [
+    {'1': 'start', '3': 2, '4': 1, '5': 3, '10': 'start'},
+    {'1': 'limit', '3': 3, '4': 1, '5': 3, '10': 'limit'},
+  ],
+};
+
+/// Descriptor for `ListInvitedUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listInvitedUserRequestDescriptor = $convert.base64Decode(
+    'ChZMaXN0SW52aXRlZFVzZXJSZXF1ZXN0EhQKBXN0YXJ0GAIgASgDUgVzdGFydBIUCgVsaW1pdB'
+    'gDIAEoA1IFbGltaXQ=');
+
+@$core.Deprecated('Use listInvitedUserResponseDescriptor instead')
+const ListInvitedUserResponse$json = {
+  '1': 'ListInvitedUserResponse',
+  '2': [
+    {'1': 'list', '3': 1, '4': 3, '5': 11, '6': '.user.InvitedUser', '10': 'list'},
+    {'1': 'count', '3': 2, '4': 1, '5': 3, '10': 'count'},
+  ],
+};
+
+/// Descriptor for `ListInvitedUserResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listInvitedUserResponseDescriptor = $convert.base64Decode(
+    'ChdMaXN0SW52aXRlZFVzZXJSZXNwb25zZRIlCgRsaXN0GAEgAygLMhEudXNlci5JbnZpdGVkVX'
+    'NlclIEbGlzdBIUCgVjb3VudBgCIAEoA1IFY291bnQ=');
+
+@$core.Deprecated('Use invitedUserDescriptor instead')
+const InvitedUser$json = {
+  '1': 'InvitedUser',
+  '2': [
+    {'1': 'user_name', '3': 3, '4': 1, '5': 9, '10': 'userName'},
+    {'1': 'email', '3': 4, '4': 1, '5': 9, '10': 'email'},
+    {'1': 'firstName', '3': 1, '4': 1, '5': 9, '10': 'firstName'},
+    {'1': 'lastName', '3': 2, '4': 1, '5': 9, '10': 'lastName'},
+    {'1': 'created_at', '3': 5, '4': 1, '5': 4, '10': 'createdAt'},
+  ],
+};
+
+/// Descriptor for `InvitedUser`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List invitedUserDescriptor = $convert.base64Decode(
+    'CgtJbnZpdGVkVXNlchIbCgl1c2VyX25hbWUYAyABKAlSCHVzZXJOYW1lEhQKBWVtYWlsGAQgAS'
+    'gJUgVlbWFpbBIcCglmaXJzdE5hbWUYASABKAlSCWZpcnN0TmFtZRIaCghsYXN0TmFtZRgCIAEo'
+    'CVIIbGFzdE5hbWUSHQoKY3JlYXRlZF9hdBgFIAEoBFIJY3JlYXRlZEF0');
+
+@$core.Deprecated('Use listRewardRequestDescriptor instead')
+const ListRewardRequest$json = {
+  '1': 'ListRewardRequest',
+  '2': [
+    {'1': 'start', '3': 2, '4': 1, '5': 3, '10': 'start'},
+    {'1': 'limit', '3': 3, '4': 1, '5': 3, '10': 'limit'},
+  ],
+};
+
+/// Descriptor for `ListRewardRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRewardRequestDescriptor = $convert.base64Decode(
+    'ChFMaXN0UmV3YXJkUmVxdWVzdBIUCgVzdGFydBgCIAEoA1IFc3RhcnQSFAoFbGltaXQYAyABKA'
+    'NSBWxpbWl0');
+
+@$core.Deprecated('Use listRewardResponseDescriptor instead')
+const ListRewardResponse$json = {
+  '1': 'ListRewardResponse',
+  '2': [
+    {'1': 'list', '3': 1, '4': 3, '5': 11, '6': '.user.UserReward', '10': 'list'},
+    {'1': 'total_amt', '3': 2, '4': 1, '5': 1, '10': 'totalAmt'},
+  ],
+};
+
+/// Descriptor for `ListRewardResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRewardResponseDescriptor = $convert.base64Decode(
+    'ChJMaXN0UmV3YXJkUmVzcG9uc2USJAoEbGlzdBgBIAMoCzIQLnVzZXIuVXNlclJld2FyZFIEbG'
+    'lzdBIbCgl0b3RhbF9hbXQYAiABKAFSCHRvdGFsQW10');
+
+@$core.Deprecated('Use userRewardDescriptor instead')
+const UserReward$json = {
+  '1': 'UserReward',
+  '2': [
+    {'1': 'created_at', '3': 1, '4': 1, '5': 4, '10': 'createdAt'},
+    {'1': 'amt', '3': 2, '4': 1, '5': 1, '10': 'amt'},
+  ],
+};
+
+/// Descriptor for `UserReward`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userRewardDescriptor = $convert.base64Decode(
+    'CgpVc2VyUmV3YXJkEh0KCmNyZWF0ZWRfYXQYASABKARSCWNyZWF0ZWRBdBIQCgNhbXQYAiABKA'
+    'FSA2FtdA==');
 

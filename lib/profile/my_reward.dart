@@ -1,10 +1,10 @@
 import 'package:awallet/bean/my_reward_info.dart';
-import 'package:awallet/bean/my_user_info.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/my_reward_item.dart';
-import 'package:awallet/grpc_services/account_service.dart';
-import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/src/generated/user/user.pbgrpc.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -23,6 +23,7 @@ class _MyRewardState extends State<MyReward> {
       RefreshController(initialRefresh: false);
 
   List<MyRewardInfo> dataList = [];
+  double totalReward = 0;
 
   @override
   void initState() {
@@ -41,12 +42,13 @@ class _MyRewardState extends State<MyReward> {
       body: Column(
         children: [
           const SizedBox(height: 10),
-          const Padding(
-            padding: EdgeInsets.only(left: 20,bottom: 20),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, bottom: 20),
             child: Row(
               children: [
-                Text("Total Reward: XXX",
-                    style: TextStyle(
+                Text(
+                    "Total Reward: ${StringTools.formatCurrencyNum(totalReward)}",
+                    style: const TextStyle(
                       fontSize: 20,
                     )),
               ],
@@ -88,19 +90,18 @@ class _MyRewardState extends State<MyReward> {
   }
 
   void getDataFromServer() {
-    AccountService.getInstance()
-        .getSwapTxList(context, dataStartIndex, localPageSize,
-            TrackedTx_ContractSymbol.NFT,
-            loadNftTokenLog: true)
+    UserService.getInstance()
+        .listReward(context, dataStartIndex, localPageSize)
         .then((result) {
       if (result.code == 1) {
-        var resp = result.data as GetSwapTxListResponse;
-        var items = resp.items;
+        var resp = result.data as ListRewardResponse;
+        totalReward = resp.totalAmt;
+        var items = resp.list;
         if (items.isNotEmpty) {
           for (var element in items) {
             dataList.add(MyRewardInfo(
               index: rowIndex++,
-              amount:element.amt,
+              amount: element.amt,
               createTime: DateTime.fromMillisecondsSinceEpoch(
                   (element.createdAt * 1000).toInt()),
             ));

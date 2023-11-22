@@ -10,6 +10,7 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
@@ -239,6 +240,38 @@ class UserService {
       ret.data = resp;
     } catch (e) {
       setError(context, "updateUser", e, ret);
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> listInvitedUser(
+      BuildContext context, int start, int limit) async {
+    var req = ListInvitedUserRequest();
+    req.start = Int64.parseInt(start.toString());
+    req.limit = Int64.parseInt(limit.toString());
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.listInvitedUser(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      setError(context, "listInvitedUser", e, ret);
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> listReward(
+      BuildContext context, int start, int limit) async {
+    var req = ListRewardRequest();
+    req.start = Int64.parseInt(start.toString());
+    req.limit = Int64.parseInt(limit.toString());
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.listReward(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      setError(context, "listReward", e, ret);
     }
     return ret;
   }

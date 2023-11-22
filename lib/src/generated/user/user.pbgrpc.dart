@@ -65,6 +65,14 @@ class UserServiceClient extends $grpc.Client {
       '/user.UserService/GetUserInfo',
       ($2.GetUserInfoRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.GetUserInfoResponse.fromBuffer(value));
+  static final _$listInvitedUser = $grpc.ClientMethod<$2.ListInvitedUserRequest, $2.ListInvitedUserResponse>(
+      '/user.UserService/ListInvitedUser',
+      ($2.ListInvitedUserRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.ListInvitedUserResponse.fromBuffer(value));
+  static final _$listReward = $grpc.ClientMethod<$2.ListRewardRequest, $2.ListRewardResponse>(
+      '/user.UserService/ListReward',
+      ($2.ListRewardRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.ListRewardResponse.fromBuffer(value));
 
   UserServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -114,6 +122,14 @@ class UserServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$2.GetUserInfoResponse> getUserInfo($2.GetUserInfoRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getUserInfo, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$2.ListInvitedUserResponse> listInvitedUser($2.ListInvitedUserRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$listInvitedUser, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$2.ListRewardResponse> listReward($2.ListRewardRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$listReward, request, options: options);
   }
 }
 
@@ -199,6 +215,20 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $2.GetUserInfoRequest.fromBuffer(value),
         ($2.GetUserInfoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ListInvitedUserRequest, $2.ListInvitedUserResponse>(
+        'ListInvitedUser',
+        listInvitedUser_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.ListInvitedUserRequest.fromBuffer(value),
+        ($2.ListInvitedUserResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ListRewardRequest, $2.ListRewardResponse>(
+        'ListReward',
+        listReward_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.ListRewardRequest.fromBuffer(value),
+        ($2.ListRewardResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$2.SignUpResponse> signUp_Pre($grpc.ServiceCall call, $async.Future<$2.SignUpRequest> request) async {
@@ -245,6 +275,14 @@ abstract class UserServiceBase extends $grpc.Service {
     return getUserInfo(call, await request);
   }
 
+  $async.Future<$2.ListInvitedUserResponse> listInvitedUser_Pre($grpc.ServiceCall call, $async.Future<$2.ListInvitedUserRequest> request) async {
+    return listInvitedUser(call, await request);
+  }
+
+  $async.Future<$2.ListRewardResponse> listReward_Pre($grpc.ServiceCall call, $async.Future<$2.ListRewardRequest> request) async {
+    return listReward(call, await request);
+  }
+
   $async.Future<$2.SignUpResponse> signUp($grpc.ServiceCall call, $2.SignUpRequest request);
   $async.Future<$2.VerifyCodeResponse> verifyCode($grpc.ServiceCall call, $2.VerifyCodeRequest request);
   $async.Future<$2.VerifyImageResponse> verifyImage($grpc.ServiceCall call, $2.VerifyImageRequest request);
@@ -256,4 +294,6 @@ abstract class UserServiceBase extends $grpc.Service {
   $async.Future<$2.UserInfo> updateUser($grpc.ServiceCall call, $2.UserInfo request);
   $async.Future<$2.UploadResponse> upload($grpc.ServiceCall call, $2.UploadRequest request);
   $async.Future<$2.GetUserInfoResponse> getUserInfo($grpc.ServiceCall call, $2.GetUserInfoRequest request);
+  $async.Future<$2.ListInvitedUserResponse> listInvitedUser($grpc.ServiceCall call, $2.ListInvitedUserRequest request);
+  $async.Future<$2.ListRewardResponse> listReward($grpc.ServiceCall call, $2.ListRewardRequest request);
 }

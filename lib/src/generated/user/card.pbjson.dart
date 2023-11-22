@@ -306,6 +306,8 @@ const CardRechargeRequest$json = {
     {'1': 'card_security_code', '3': 4, '4': 1, '5': 9, '10': 'cardSecurityCode'},
     {'1': 'amt', '3': 5, '4': 1, '5': 1, '10': 'amt'},
     {'1': 'chargeForNft', '3': 6, '4': 1, '5': 8, '10': 'chargeForNft'},
+    {'1': 'chargeForCreateVirtualCard', '3': 11, '4': 1, '5': 8, '10': 'chargeForCreateVirtualCard'},
+    {'1': 'chargeForCreatePhysicalCard', '3': 12, '4': 1, '5': 8, '10': 'chargeForCreatePhysicalCard'},
     {'1': 'token_ids', '3': 8, '4': 3, '5': 3, '10': 'tokenIds'},
     {'1': 'values', '3': 9, '4': 3, '5': 3, '10': 'values'},
     {'1': 'with_dynamic_nft', '3': 7, '4': 1, '5': 8, '10': 'withDynamicNft'},
@@ -318,8 +320,11 @@ final $typed_data.Uint8List cardRechargeRequestDescriptor = $convert.base64Decod
     'hwaXJlX21vbnRoGAIgASgJUg9jYXJkRXhwaXJlTW9udGgSKAoQY2FyZF9leHBpcmVfeWVhchgD'
     'IAEoCVIOY2FyZEV4cGlyZVllYXISLAoSY2FyZF9zZWN1cml0eV9jb2RlGAQgASgJUhBjYXJkU2'
     'VjdXJpdHlDb2RlEhAKA2FtdBgFIAEoAVIDYW10EiIKDGNoYXJnZUZvck5mdBgGIAEoCFIMY2hh'
-    'cmdlRm9yTmZ0EhsKCXRva2VuX2lkcxgIIAMoA1IIdG9rZW5JZHMSFgoGdmFsdWVzGAkgAygDUg'
-    'Z2YWx1ZXMSKAoQd2l0aF9keW5hbWljX25mdBgHIAEoCFIOd2l0aER5bmFtaWNOZnQ=');
+    'cmdlRm9yTmZ0Ej4KGmNoYXJnZUZvckNyZWF0ZVZpcnR1YWxDYXJkGAsgASgIUhpjaGFyZ2VGb3'
+    'JDcmVhdGVWaXJ0dWFsQ2FyZBJAChtjaGFyZ2VGb3JDcmVhdGVQaHlzaWNhbENhcmQYDCABKAhS'
+    'G2NoYXJnZUZvckNyZWF0ZVBoeXNpY2FsQ2FyZBIbCgl0b2tlbl9pZHMYCCADKANSCHRva2VuSW'
+    'RzEhYKBnZhbHVlcxgJIAMoA1IGdmFsdWVzEigKEHdpdGhfZHluYW1pY19uZnQYByABKAhSDndp'
+    'dGhEeW5hbWljTmZ0');
 
 @$core.Deprecated('Use cardRechargeResponseDescriptor instead')
 const CardRechargeResponse$json = {

@@ -58,9 +58,13 @@ message ETHGetAppConfResponse {
   string server_address=1;
   string nft_address=2;
   double swap_discount=3;
+  double create_card_fee=4;
 }
 message UpdateSwapDiscountRequest {
+  //数币/usd兑换费
   double swap_discount=1;
+  //创建虚拟卡的费用
+  double create_card_fee=2;
 }
 message UpdateSwapDiscountResponse {
 }
