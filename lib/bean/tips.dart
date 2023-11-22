@@ -45,7 +45,7 @@ enum Tips {
   buyNftSuccess("Buy NFT Successfully."),
   createWallet("Please create a crypto wallet first."),
   needFiveDollarFee("There is a fee of \$5.00 to apply for a virtual card."),
-  codeIsOnClipboard("Invitaion Code is on your clipboard."),
+  codeIsOnClipboard("Invitation Code is on your clipboard."),
   ;
 
   final String value;
