@@ -19,6 +19,47 @@ class ProfileHome extends StatefulWidget {
 class _ProfileHomeState extends State<ProfileHome> {
   @override
   Widget build(BuildContext context) {
+    List<Widget> list = [];
+    list.add(buildUserInfo());
+    list.add(const SizedBox(height: 40));
+    list.add(btnBtnItem(Icons.verified_user_outlined, "Update Password", () {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const UpdatePsw();
+          });
+    }));
+    list.add(const SizedBox(height: 20));
+    list.add(
+        btnBtnItem(Icons.insert_invitation_sharp, "My Invitation Code", () {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const MyInvitationCode();
+          });
+    }));
+    list.add(const SizedBox(height: 20));
+    list.add(btnBtnItem(Icons.people_alt_rounded, "My Users", () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const MyUsers()));
+    }));
+
+    if (CommonService.userInfo?.userType == 3) {
+      list.add(const SizedBox(height: 20));
+      list.add(btnBtnItem(Icons.monetization_on_outlined, "My Reward", () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const MyReward()));
+      }));
+    }
+    list.add(const SizedBox(height: 20));
+    list.add(btnBtnItem(Icons.logout_outlined, "Logout", () {
+      LocalStorage.remove(LocalStorage.userToken);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Login()),
+      );
+    }));
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -29,43 +70,7 @@ class _ProfileHomeState extends State<ProfileHome> {
         padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildUserInfo(),
-            const SizedBox(height: 40),
-            btnBtnItem(Icons.verified_user_outlined, "Update Password", () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const UpdatePsw();
-                  });
-            }),
-            const SizedBox(height: 20),
-            btnBtnItem(Icons.insert_invitation_sharp, "My Invitation Code", () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const MyInvitationCode();
-                  });
-            }),
-            const SizedBox(height: 20),
-            btnBtnItem(Icons.people_alt_rounded, "My Users", () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const MyUsers()));
-            }),
-            const SizedBox(height: 20),
-            btnBtnItem(Icons.monetization_on_outlined, "My Reward", () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const MyReward()));
-            }),
-            const SizedBox(height: 20),
-            btnBtnItem(Icons.logout_outlined, "Logout", () {
-              LocalStorage.remove(LocalStorage.userToken);
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const Login()),
-              );
-            }),
-          ],
+          children: list,
         ),
       )),
     );
