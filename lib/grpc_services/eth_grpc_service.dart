@@ -39,4 +39,16 @@ class EthGrpcService {
     }
     return ret;
   }
+  Future<GrpcResponse> ethGetAppConf(BuildContext context) async {
+    var request = ETHGetAppConfRequest();
+    var ret = GrpcResponse();
+    try {
+      var resp = await ethServiceClient?.eTHGetAppConf(request);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context,"ethTrackTx",e, ret);
+    }
+    return ret;
+  }
 }

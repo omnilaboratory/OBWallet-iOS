@@ -44,7 +44,8 @@ class CardService {
     return ret;
   }
 
-  Future<GrpcResponse> applyCard(BuildContext context, String icNo) async {
+  Future<GrpcResponse> applyCard(BuildContext context, String icNo,
+      {bool isShowToast = true}) async {
     var request = ApplyCardRequest();
     request.currency = CurrencyCode.USD;
     log("$request");
@@ -54,7 +55,8 @@ class CardService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, "applyCard", e, ret);
+      UserService.getInstance()
+          .setError(context, "applyCard", e, ret, isShowToast: isShowToast);
     }
     return ret;
   }

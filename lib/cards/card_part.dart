@@ -13,10 +13,12 @@ import 'package:awallet/component/crypto_tx_item.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
+import 'package:awallet/grpc_services/eth_grpc_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/src/generated/user/account.pbgrpc.dart';
 import 'package:awallet/src/generated/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
@@ -38,6 +40,7 @@ class _CardPartState extends State<CardPart> {
   var txs = [];
   int currTypeIndex = 0;
   int dataStartIndex = 0;
+  double createCardFee = 5.0;
   bool hasCard = CommonService.userInfo!.cardCount > 0;
 
   final RefreshController _refreshListController =
@@ -51,6 +54,14 @@ class _CardPartState extends State<CardPart> {
     super.initState();
     _onBalanceRefresh();
     _onListRefresh();
+
+    EthGrpcService.getInstance().ethGetAppConf(context).then((resp) {
+      if (resp.data == 1) {
+        var createCardConfInfo = resp.data as AppConfig;
+        createCardFee = createCardConfInfo.createCardFee;
+        setState(() {});
+      }
+    });
 
     GlobalParams.eventBus.on().listen((event) {
       if (event == "applyCard") {
@@ -113,9 +124,10 @@ class _CardPartState extends State<CardPart> {
           ),
 
           const SizedBox(height: 20),
-          const Text(
-            '*** There is a fee of \$5.00 to apply for a virtual card.',
-            style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic),
+          Text(
+            '*** There is a fee of \$${StringTools.formatCurrencyNum(createCardFee)} to apply for a virtual card.',
+            style: const TextStyle(
+                color: Colors.black54, fontStyle: FontStyle.italic),
           ),
 
           const Spacer(),
@@ -307,7 +319,7 @@ class _CardPartState extends State<CardPart> {
       AccountService.getInstance().getAccountInfo(context).then((info) {
         if (info.code == 1) {
           var accountInfo = info.data as AccountInfo;
-          if (accountInfo.balanceUsd < 5) {
+          if (accountInfo.balanceUsd < createCardFee) {
             alert(Tips.needFiveDollarFee.value, context, () {
               showDialog(
                   context: context,
@@ -315,16 +327,20 @@ class _CardPartState extends State<CardPart> {
                     return CardDeposit(
                       type: "applyCard",
                       title: "Deposit",
-                      amt: 5,
+                      amt: createCardFee,
                       tokenIds: const [],
                       tokenIdValues: const [],
                     );
                   });
             });
           } else {
-            CardService.getInstance().applyCard(context, "USD").then((resp) {
+            CardService.getInstance()
+                .applyCard(context, "USD", isShowToast: false)
+                .then((resp) {
               if (resp.code == 1) {
                 _onBalanceRefresh();
+              } else {
+                alert(resp.msg, context, () {});
               }
             });
           }
