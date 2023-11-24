@@ -316,6 +316,49 @@ message NftTokenLog{
 //    DynamicIndex int64
 //    }
 
+
+
+
+message AppConfig{
+  int64 id = 1;
+  //数币兑换费用. 比如兑换获得100usd , SwapDiscount是0.02, 用户最终将获得98
+  double swap_discount = 2;
+  //创建卡费用 exapmle 5$
+  double create_card_fee = 3;
+  //开卡佣金比 exapmle 0.02
+  double reward_card_create = 4;
+  //数币兑换佣金比 exapmle 0.01
+  double reward_usd_swap = 5;
+  //transak买币佣金比 exapmle 0.01
+  double reward_transak = 6;
+  //usd兑换数币以太坊gas费 example 5$
+  double gas_fee_eth = 7;
+  //polygon网主usdt转账gas费 example 0.005$
+  double gas_fee_matic = 8;
+
+  // @gotags: gorm:"type:timestamp"
+  Timestamp created_at = 9;
+  // @gotags: gorm:"type:timestamp"
+  Timestamp updated_at = 10;
+  //服务器钱包地址
+  string server_address=11;
+  //nft合约地址
+  string nft_address=12;
+}
+
+//    type AppConfig struct {
+//ID        uint `gorm:"primarykey"`
+//    CreatedAt time.Time
+//    UpdatedAt time.Time
+////数币兑换费用
+//    SwapDiscount float64
+////创建卡费用
+//    CreateCardFee float64
+////创建佣金
+//    CardCreateReward float64
+//    }
+
+
 message AccountHistory{
   int64 id=1;
   int64 account_id =8;

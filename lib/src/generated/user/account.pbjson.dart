@@ -533,6 +533,37 @@ final $typed_data.Uint8List nftTokenLogDescriptor = $convert.base64Decode(
     'RUb2tlbhgIIAMoCzIOLnVzZXIuTmZ0VG9rZW5SCE5mdFRva2VuEi4KCmNyZWF0ZWRfYXQYCSAB'
     'KAsyDy51c2VyLlRpbWVzdGFtcFIJY3JlYXRlZEF0');
 
+@$core.Deprecated('Use appConfigDescriptor instead')
+const AppConfig$json = {
+  '1': 'AppConfig',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'swap_discount', '3': 2, '4': 1, '5': 1, '10': 'swapDiscount'},
+    {'1': 'create_card_fee', '3': 3, '4': 1, '5': 1, '10': 'createCardFee'},
+    {'1': 'reward_card_create', '3': 4, '4': 1, '5': 1, '10': 'rewardCardCreate'},
+    {'1': 'reward_usd_swap', '3': 5, '4': 1, '5': 1, '10': 'rewardUsdSwap'},
+    {'1': 'reward_transak', '3': 6, '4': 1, '5': 1, '10': 'rewardTransak'},
+    {'1': 'gas_fee_eth', '3': 7, '4': 1, '5': 1, '10': 'gasFeeEth'},
+    {'1': 'gas_fee_matic', '3': 8, '4': 1, '5': 1, '10': 'gasFeeMatic'},
+    {'1': 'created_at', '3': 9, '4': 1, '5': 11, '6': '.user.Timestamp', '10': 'createdAt'},
+    {'1': 'updated_at', '3': 10, '4': 1, '5': 11, '6': '.user.Timestamp', '10': 'updatedAt'},
+    {'1': 'server_address', '3': 11, '4': 1, '5': 9, '10': 'serverAddress'},
+    {'1': 'nft_address', '3': 12, '4': 1, '5': 9, '10': 'nftAddress'},
+  ],
+};
+
+/// Descriptor for `AppConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List appConfigDescriptor = $convert.base64Decode(
+    'CglBcHBDb25maWcSDgoCaWQYASABKANSAmlkEiMKDXN3YXBfZGlzY291bnQYAiABKAFSDHN3YX'
+    'BEaXNjb3VudBImCg9jcmVhdGVfY2FyZF9mZWUYAyABKAFSDWNyZWF0ZUNhcmRGZWUSLAoScmV3'
+    'YXJkX2NhcmRfY3JlYXRlGAQgASgBUhByZXdhcmRDYXJkQ3JlYXRlEiYKD3Jld2FyZF91c2Rfc3'
+    'dhcBgFIAEoAVINcmV3YXJkVXNkU3dhcBIlCg5yZXdhcmRfdHJhbnNhaxgGIAEoAVINcmV3YXJk'
+    'VHJhbnNhaxIeCgtnYXNfZmVlX2V0aBgHIAEoAVIJZ2FzRmVlRXRoEiIKDWdhc19mZWVfbWF0aW'
+    'MYCCABKAFSC2dhc0ZlZU1hdGljEi4KCmNyZWF0ZWRfYXQYCSABKAsyDy51c2VyLlRpbWVzdGFt'
+    'cFIJY3JlYXRlZEF0Ei4KCnVwZGF0ZWRfYXQYCiABKAsyDy51c2VyLlRpbWVzdGFtcFIJdXBkYX'
+    'RlZEF0EiUKDnNlcnZlcl9hZGRyZXNzGAsgASgJUg1zZXJ2ZXJBZGRyZXNzEh8KC25mdF9hZGRy'
+    'ZXNzGAwgASgJUgpuZnRBZGRyZXNz');
+
 @$core.Deprecated('Use accountHistoryDescriptor instead')
 const AccountHistory$json = {
   '1': 'AccountHistory',

@@ -84,10 +84,12 @@ message UserInfo {
   string kyc_status=22;
   uint64 created_at = 24;
   uint64 card_count = 27;
-  //type=0 为app注册用户；type=1 为商户端自动注册用户；type=2 商户；type=1/2的用户，钱包key由服务器管理
+  //type=0 为app注册用户；type=1 为商户端自动注册用户；type=2 商户；type=3代理商用户,此类型用户在app端注册后,需要后台手动标记为代理商;  type=1/2的用户，钱包key由服务器管理
   //user with user_type>0 ,this type user's eth wallet is managed by our server
-  //0 app user; 1  proxyed user;  2 proxyed MERNO
+  //0 app user; 1  proxyed user;  2 proxyed MERNO;  3 代理商用户
   int64 user_type=28;
+  //true是表示用户是代理商邀请来的,这种用户开卡或数币交易方面,会要多付出些佣金.
+  bool is_agent_channel=33;
   //当user_type=1时，这个字段表示用户所属的商户id。其它情况为0，无用途
   int64 muser_id=29;
   //用户生成的邀请码

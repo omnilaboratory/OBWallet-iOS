@@ -2,14 +2,15 @@ syntax = "proto3";
 
 package lnrpc;
 
+import 'user/account.proto';
 
 service eth {
   //获取server的eth地址
   rpc ETHGetAddress(ETHGetAddressRequest) returns (ETHGetAddressResponse);
   //获应用配制
-  rpc ETHGetAppConf(ETHGetAppConfRequest) returns (ETHGetAppConfResponse);
+  rpc ETHGetAppConf(ETHGetAppConfRequest) returns (user.AppConfig);
   //修改手续费折扣
-  rpc UpdateSwapDiscount(UpdateSwapDiscountRequest) returns (UpdateSwapDiscountResponse);
+  rpc UpdateSwapDiscount(user.AppConfig) returns (UpdateSwapDiscountResponse);
 
 //  rpc ETHDumpKey(ETHDumpKeyRequest) returns (ETHDumpKeyResponse);
 //  rpc EthImportKey(EthImportKeyRequest) returns(EthImportKeyResponse);

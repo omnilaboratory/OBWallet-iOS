@@ -71,6 +71,7 @@ const UserInfo$json = {
     {'1': 'created_at', '3': 24, '4': 1, '5': 4, '10': 'createdAt'},
     {'1': 'card_count', '3': 27, '4': 1, '5': 4, '10': 'cardCount'},
     {'1': 'user_type', '3': 28, '4': 1, '5': 3, '10': 'userType'},
+    {'1': 'is_agent_channel', '3': 33, '4': 1, '5': 8, '10': 'isAgentChannel'},
     {'1': 'muser_id', '3': 29, '4': 1, '5': 3, '10': 'muserId'},
     {'1': 'invitation_code', '3': 30, '4': 1, '5': 9, '10': 'invitationCode'},
     {'1': 'regist_code', '3': 31, '4': 1, '5': 9, '10': 'registCode'},
@@ -94,10 +95,10 @@ final $typed_data.Uint8List userInfoDescriptor = $convert.base64Decode(
     'QYEyABKARSCXVwZGF0ZWRBdBIdCgpreWNpbmZvX29rGBQgASgIUglreWNpbmZvT2sSFwoHb3Bl'
     'bl9pZBgVIAEoCVIGb3BlbklkEh0KCmt5Y19zdGF0dXMYFiABKAlSCWt5Y1N0YXR1cxIdCgpjcm'
     'VhdGVkX2F0GBggASgEUgljcmVhdGVkQXQSHQoKY2FyZF9jb3VudBgbIAEoBFIJY2FyZENvdW50'
-    'EhsKCXVzZXJfdHlwZRgcIAEoA1IIdXNlclR5cGUSGQoIbXVzZXJfaWQYHSABKANSB211c2VySW'
-    'QSJwoPaW52aXRhdGlvbl9jb2RlGB4gASgJUg5pbnZpdGF0aW9uQ29kZRIfCgtyZWdpc3RfY29k'
-    'ZRgfIAEoCVIKcmVnaXN0Q29kZRIrChFpbnZpdGF0aW9uX3VzZXJpZBggIAEoA1IQaW52aXRhdG'
-    'lvblVzZXJpZA==');
+    'EhsKCXVzZXJfdHlwZRgcIAEoA1IIdXNlclR5cGUSKAoQaXNfYWdlbnRfY2hhbm5lbBghIAEoCF'
+    'IOaXNBZ2VudENoYW5uZWwSGQoIbXVzZXJfaWQYHSABKANSB211c2VySWQSJwoPaW52aXRhdGlv'
+    'bl9jb2RlGB4gASgJUg5pbnZpdGF0aW9uQ29kZRIfCgtyZWdpc3RfY29kZRgfIAEoCVIKcmVnaX'
+    'N0Q29kZRIrChFpbnZpdGF0aW9uX3VzZXJpZBggIAEoA1IQaW52aXRhdGlvblVzZXJpZA==');
 
 @$core.Deprecated('Use signUpRequestDescriptor instead')
 const SignUpRequest$json = {
