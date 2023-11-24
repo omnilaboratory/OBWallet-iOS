@@ -301,7 +301,8 @@ class _CardRechargeState extends State<CardRecharge> {
         if (cardNumber.replaceAll(' ', '') == CommonService.cardInfo.cardNo) {
           virtualCardPay();
         } else {
-          if (double.parse(cardInputAmount) < 100) {
+          //TODO debug for all recharge 100
+          if (double.parse(cardInputAmount) < 0) {
             cardRecharge();
           } else {
             var kycStatus = CommonService.userInfo!.kycStatus;
