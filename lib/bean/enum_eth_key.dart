@@ -5,6 +5,7 @@ enum EnumEthKey {
   nftApiUrl("nftApiUrl"),
   nft("NFT"),
   nftToPlatform("nftToPlatform"),
+  polygonTokenList("polygonTokenList"),
   ;
 
   final String value;

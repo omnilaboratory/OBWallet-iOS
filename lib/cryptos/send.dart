@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:awallet/bean/enum_eth_key.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/bottom_button.dart';
@@ -15,8 +18,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class Send extends StatefulWidget {
   String name;
+  String netName;
 
-  Send({super.key, required this.name});
+  Send({super.key, required this.name, this.netName = ""});
 
   @override
   State<Send> createState() => _SendState();
@@ -34,15 +38,23 @@ class _SendState extends State<Send> {
 
   @override
   void initState() {
-    tokenList.addAll(initTokenList);
-    for(int i = 0; i < tokenList.length; i++){
-      TokenInfo tokenInfo = tokenList[i];
-      if (tokenInfo.name == widget.name) {
-        int index = tokenList.indexOf(tokenInfo);
-        tokenList.insert(0, tokenList.removeAt(index));
+    if (widget.netName.isEmpty) {
+      tokenList.addAll(initTokenList);
+      for (int i = 0; i < tokenList.length; i++) {
+        TokenInfo tokenInfo = tokenList[i];
+        if (tokenInfo.name == widget.name) {
+          int index = tokenList.indexOf(tokenInfo);
+          tokenList.insert(0, tokenList.removeAt(index));
+        }
       }
+    } else {
+      log("polygon");
+      tokenList.addAll(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![
+          EnumEthKey.polygonTokenList]!);
     }
+
     dropdownValue = tokenList[0];
+
     if (dropdownValue.balance == 0) {
       canClick = false;
     } else {
@@ -73,7 +85,7 @@ class _SendState extends State<Send> {
     }
 
     if (double.parse(_amountController.value.text.toString()) == 0) {
-      showToast(Tips.zeroAmount.value,toastLength:Toast.LENGTH_SHORT);
+      showToast(Tips.zeroAmount.value, toastLength: Toast.LENGTH_SHORT);
       return;
     }
 
@@ -144,10 +156,12 @@ class _SendState extends State<Send> {
                       )
                     ],
                   ),
-                  Padding(
-                      padding:
-                          const EdgeInsets.only(left: 25, right: 25, top: 20),
-                      child: buildChainButtons()),
+                  // Padding(
+                  //     padding:
+                  //         const EdgeInsets.only(left: 25, right: 25, top: 20),
+                  //     child: buildChainButtons()),
+
+                  const SizedBox(height: 20),
                   Visibility(
                     visible: false,
                     child: Padding(
@@ -359,26 +373,35 @@ class _SendState extends State<Send> {
                                         Positioned(
                                             right: 0,
                                             child: GestureDetector(
-                                              onTap: canClick ? () {
-                                                setState(() {
-                                                  dropdownValue.name == 'ETH'
-                                                      ? _amountController.text =
-                                                      StringTools.formatCryptoNum(
-                                                          dropdownValue.balance)
-                                                      : _amountController.text =
-                                                      StringTools.formatCurrencyNum(
-                                                          dropdownValue.balance);
-                                                  // _amountController.text =
-                                                  //     StringTools
-                                                  //         .formatCryptoNum(
-                                                  //             dropdownValue
-                                                  //                 .balance);
-                                                });
-                                              } : null,
+                                              onTap: canClick
+                                                  ? () {
+                                                      setState(() {
+                                                        dropdownValue.name ==
+                                                                'ETH'
+                                                            ? _amountController
+                                                                    .text =
+                                                                StringTools.formatCryptoNum(
+                                                                    dropdownValue
+                                                                        .balance)
+                                                            : _amountController
+                                                                    .text =
+                                                                StringTools.formatCurrencyNum(
+                                                                    dropdownValue
+                                                                        .balance);
+                                                        // _amountController.text =
+                                                        //     StringTools
+                                                        //         .formatCryptoNum(
+                                                        //             dropdownValue
+                                                        //                 .balance);
+                                                      });
+                                                    }
+                                                  : null,
                                               child: Text(
                                                 "MAX",
                                                 style: TextStyle(
-                                                  color: canClick ? const Color(0xFF4A92FF) : const Color(0xFF999999),
+                                                  color: canClick
+                                                      ? const Color(0xFF4A92FF)
+                                                      : const Color(0xFF999999),
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w400,
                                                   height: 1.29,

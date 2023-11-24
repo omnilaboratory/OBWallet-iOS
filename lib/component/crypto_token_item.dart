@@ -1,4 +1,5 @@
 import 'package:awallet/bean/token_info.dart';
+import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/cryptos/token_activity.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
@@ -10,28 +11,49 @@ class CryptoTokenItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var size = MediaQuery.of(context).size;
+    List<Widget> nameAndNet = [];
+    nameAndNet.add(Text(
+      tokenInfo.name,
+      style: const TextStyle(
+        color: Color(0xFF666666),
+        fontSize: 18,
+        // fontWeight: FontWeight.w600,
+      ),
+    ));
+    if (tokenInfo.netName.isNotEmpty) {
+      nameAndNet.add(Text(
+        tokenInfo.netName,
+        style: const TextStyle(
+          color: Color(0xFF666666),
+          fontSize: 14,
+          // fontWeight: FontWeight.w600,
+        ),
+      ));
+    }
+
     return Container(
         margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 10),
+        padding:
+            const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(6),
-          
-          // boxShadow: const [
-          //   BoxShadow(
-          //     color: Color(0x7AABAADD),
-          //     blurRadius: 5.0,
-          //     offset: Offset(2.0, 2.0),
-          //   ),
-          // ],
         ),
         child: InkWell(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => TokenActivity(tokenInfo: tokenInfo)));
+            if (tokenInfo.netName.isEmpty) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          TokenActivity(tokenInfo: tokenInfo)));
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return Send(name: 'USDT',netName: "Polygon");
+                  });
+            }
           },
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,13 +67,9 @@ class CryptoTokenItem extends StatelessWidget {
                         height: 30,
                         image: AssetImage(tokenInfo.iconUrl)),
                     const SizedBox(width: 10),
-                    Text(
-                      tokenInfo.name,
-                      style: const TextStyle(
-                        color: Color(0xFF666666),
-                        fontSize: 18,
-                        // fontWeight: FontWeight.w600,
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: nameAndNet,
                     ),
                   ],
                 ),
@@ -62,15 +80,12 @@ class CryptoTokenItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   SizedBox(
-                    // width: size.width - 180,
-                    child: Text(
-                        StringTools.formatCryptoNum(tokenInfo.balance),
+                    child: Text(StringTools.formatCryptoNum(tokenInfo.balance),
                         maxLines: 1,
                         textAlign: TextAlign.right,
                         style: const TextStyle(
                           color: Color(0xFF333333),
                           fontSize: 19,
-                          // fontWeight: FontWeight.w600,
                         )),
                   ),
                   SizedBox(

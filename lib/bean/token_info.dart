@@ -6,11 +6,13 @@ class TokenInfo {
   IconData? iconData;
   double? balance;
   double? balanceOfDollar;
+  String netName;
 
   TokenInfo(
       {required this.name,
       required this.iconUrl,
       this.iconData,
       this.balance = 0.0,
-      this.balanceOfDollar = 0.0});
+      this.balanceOfDollar = 0.0,
+      this.netName = ""});
 }
