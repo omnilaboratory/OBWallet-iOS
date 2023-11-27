@@ -2,6 +2,7 @@ enum EnumEthKey {
   apiUrl("apiUrl"),
   usdt("USDT"),
   usdc("USDC"),
+  polygonUSDT("PolygonUSDT"),
   nftApiUrl("nftApiUrl"),
   nft("NFT"),
   nftToPlatform("nftToPlatform"),

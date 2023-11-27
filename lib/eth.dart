@@ -144,6 +144,24 @@ class Eth {
     }
   }
 
+  /// Get Polygon USDT balance
+  static Future<double> getBalanceOfPolygonUSDT(String address) async {
+    try {
+      EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.polygonUSDT]!);
+      EthereumAddress ethAddr  = EthereumAddress.fromHex(address);
+
+      var usdt    = USDT(address: contract, client: ethClient!);
+      var balance = await usdt.balanceOf(ethAddr);
+
+      // The USDT contract has 6 decimals, so has to process for BigInt with the code.
+      double result = balance / BigInt.from(10).pow(6);
+      return result;
+    } catch (e) {
+      log('getBalanceOfPolygonUSDT -> error: $e');
+      return 0;
+    }
+  }
+
   /// Sending ETH to an address
   static Future<String> sendEthTo(String toAddress, double amount) async {
     try {
@@ -207,6 +225,27 @@ class Eth {
       return response;
     } catch (e) {
       log('sendUsdcTo -> error: $e');
+      return '';
+    }
+  }
+
+  /// Sending Polygon USDT to an address
+  static Future<String> sendPolygonUsdtTo(String toAddress, double amount) async {
+    try {
+      EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.polygonUSDT]!);
+      EthereumAddress ethAddr  = EthereumAddress.fromHex(toAddress);
+
+      // The USDT contract has 6 decimals, so has to process for BigInt with the code.
+      String toAmount  = amount.toStringAsFixed(6);
+      Decimal baseVal  = Decimal.parse(toAmount);
+      Decimal decimals = Decimal.parse('1000000'); // 6 decimals
+      BigInt value     = (baseVal * decimals).toBigInt();
+
+      var usdt     = USDT(address: contract, client: ethClient!);
+      var response = await usdt.transfer(ethAddr, value, credentials: getCredentials());
+      return response;
+    } catch (e) {
+      log('sendPolygonUsdtTo -> error: $e');
       return '';
     }
   }
