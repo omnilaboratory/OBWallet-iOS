@@ -308,6 +308,7 @@ class _ExchangeState extends State<Exchange> {
                   widget.type == EnumExchangeType.sell
                       ? buildToken()
                       : buildCurrency(),
+
                   const SizedBox(height: 25),
                   InkWell(
                     onTap: () {
@@ -353,13 +354,8 @@ class _ExchangeState extends State<Exchange> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Please input the From Amount.",
-                        style: TextStyle(
-                          color: Color(0xFF666666),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          height: 1.29,
-                        ),
+                        "Wait a while...",
+                        style: TextStyle(color: Colors.black45, fontSize: 12),
                       ),
                     ],
                   )
@@ -515,7 +511,7 @@ class _ExchangeState extends State<Exchange> {
                   ),
                   const SizedBox(height: 15),
                   const Text(
-                    'There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.',
+                    'Just need to input in From, minimum \$10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.',
                     style: TextStyle(color: Colors.black45, fontSize: 12),
                   ),
                 ],
