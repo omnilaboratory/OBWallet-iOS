@@ -401,13 +401,14 @@ const ListRewardResponse$json = {
   '2': [
     {'1': 'list', '3': 1, '4': 3, '5': 11, '6': '.user.UserReward', '10': 'list'},
     {'1': 'total_amt', '3': 2, '4': 1, '5': 1, '10': 'totalAmt'},
+    {'1': 'status', '3': 3, '4': 1, '5': 3, '10': 'status'},
   ],
 };
 
 /// Descriptor for `ListRewardResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listRewardResponseDescriptor = $convert.base64Decode(
     'ChJMaXN0UmV3YXJkUmVzcG9uc2USJAoEbGlzdBgBIAMoCzIQLnVzZXIuVXNlclJld2FyZFIEbG'
-    'lzdBIbCgl0b3RhbF9hbXQYAiABKAFSCHRvdGFsQW10');
+    'lzdBIbCgl0b3RhbF9hbXQYAiABKAFSCHRvdGFsQW10EhYKBnN0YXR1cxgDIAEoA1IGc3RhdHVz');
 
 @$core.Deprecated('Use userRewardDescriptor instead')
 const UserReward$json = {

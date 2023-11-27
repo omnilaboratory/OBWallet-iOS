@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:fixnum/src/int64.dart';
 import 'package:awallet/bean/enum_dollar_face.dart';
 import 'package:awallet/grpc_services/account_service.dart';
-import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
 import 'common.dart';

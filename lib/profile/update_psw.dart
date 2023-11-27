@@ -4,7 +4,7 @@ import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/logins/login.dart';
-import 'package:awallet/src/generated/user/user.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';

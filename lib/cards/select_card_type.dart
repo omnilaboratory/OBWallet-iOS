@@ -11,7 +11,7 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 
-import '../src/generated/user/user.pbgrpc.dart';
+import '../protos/gen-dart/user/user.pbgrpc.dart';
 
 List<CardItemInfo> cardItemInfoArr = [
   CardItemInfo(

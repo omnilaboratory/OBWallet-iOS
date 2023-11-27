@@ -237,6 +237,8 @@ message ListRewardRequest {
 message ListRewardResponse {
   repeated UserReward list = 1;
   double total_amt=2;
+  //未结算0, 已经结算1
+  int64 status =3;
 }
 message UserReward {
   uint64 created_at=1;

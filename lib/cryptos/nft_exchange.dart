@@ -12,7 +12,7 @@ import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/services/eth_service.dart';
-import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';

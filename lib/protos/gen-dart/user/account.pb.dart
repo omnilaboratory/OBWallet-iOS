@@ -1323,6 +1323,130 @@ class BuyCoinResponse extends $pb.GeneratedMessage {
   void clearTxid() => clearField(6);
 }
 
+class GetUserSwapPriceRequest extends $pb.GeneratedMessage {
+  factory GetUserSwapPriceRequest() => create();
+  GetUserSwapPriceRequest._() : super();
+  factory GetUserSwapPriceRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetUserSwapPriceRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserSwapPriceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..e<TrackedTx_ContractSymbol>(1, _omitFieldNames ? '' : 'fromSymbol', $pb.PbFieldType.OE, defaultOrMaker: TrackedTx_ContractSymbol.USD, valueOf: TrackedTx_ContractSymbol.valueOf, enumValues: TrackedTx_ContractSymbol.values)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'fromAmt', $pb.PbFieldType.OD)
+    ..e<TrackedTx_ContractSymbol>(3, _omitFieldNames ? '' : 'targetSymbol', $pb.PbFieldType.OE, defaultOrMaker: TrackedTx_ContractSymbol.USD, valueOf: TrackedTx_ContractSymbol.valueOf, enumValues: TrackedTx_ContractSymbol.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetUserSwapPriceRequest clone() => GetUserSwapPriceRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetUserSwapPriceRequest copyWith(void Function(GetUserSwapPriceRequest) updates) => super.copyWith((message) => updates(message as GetUserSwapPriceRequest)) as GetUserSwapPriceRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetUserSwapPriceRequest create() => GetUserSwapPriceRequest._();
+  GetUserSwapPriceRequest createEmptyInstance() => create();
+  static $pb.PbList<GetUserSwapPriceRequest> createRepeated() => $pb.PbList<GetUserSwapPriceRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetUserSwapPriceRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserSwapPriceRequest>(create);
+  static GetUserSwapPriceRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  TrackedTx_ContractSymbol get fromSymbol => $_getN(0);
+  @$pb.TagNumber(1)
+  set fromSymbol(TrackedTx_ContractSymbol v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFromSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFromSymbol() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get fromAmt => $_getN(1);
+  @$pb.TagNumber(2)
+  set fromAmt($core.double v) { $_setDouble(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFromAmt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFromAmt() => clearField(2);
+
+  @$pb.TagNumber(3)
+  TrackedTx_ContractSymbol get targetSymbol => $_getN(2);
+  @$pb.TagNumber(3)
+  set targetSymbol(TrackedTx_ContractSymbol v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasTargetSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTargetSymbol() => clearField(3);
+}
+
+class GetUserSwapPriceResponse extends $pb.GeneratedMessage {
+  factory GetUserSwapPriceResponse() => create();
+  GetUserSwapPriceResponse._() : super();
+  factory GetUserSwapPriceResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetUserSwapPriceResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserSwapPriceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'targetAmt', $pb.PbFieldType.OD)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'settlePrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'rawPrice', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetUserSwapPriceResponse clone() => GetUserSwapPriceResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetUserSwapPriceResponse copyWith(void Function(GetUserSwapPriceResponse) updates) => super.copyWith((message) => updates(message as GetUserSwapPriceResponse)) as GetUserSwapPriceResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetUserSwapPriceResponse create() => GetUserSwapPriceResponse._();
+  GetUserSwapPriceResponse createEmptyInstance() => create();
+  static $pb.PbList<GetUserSwapPriceResponse> createRepeated() => $pb.PbList<GetUserSwapPriceResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetUserSwapPriceResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserSwapPriceResponse>(create);
+  static GetUserSwapPriceResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.double get targetAmt => $_getN(0);
+  @$pb.TagNumber(1)
+  set targetAmt($core.double v) { $_setDouble(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTargetAmt() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTargetAmt() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get settlePrice => $_getN(1);
+  @$pb.TagNumber(2)
+  set settlePrice($core.double v) { $_setDouble(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasSettlePrice() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSettlePrice() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get rawPrice => $_getN(2);
+  @$pb.TagNumber(3)
+  set rawPrice($core.double v) { $_setDouble(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRawPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRawPrice() => clearField(3);
+}
+
 class SellNftRequest extends $pb.GeneratedMessage {
   factory SellNftRequest() => create();
   SellNftRequest._() : super();

@@ -10,7 +10,7 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_nft_item.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/grpc_services/account_service.dart';
-import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';

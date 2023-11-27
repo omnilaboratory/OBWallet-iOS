@@ -1,4 +1,4 @@
-import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 
 class CryptoTxInfo {
   late final String title;

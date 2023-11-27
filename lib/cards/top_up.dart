@@ -4,7 +4,7 @@ import 'package:awallet/bean/bank_card_info.dart';
 import 'package:awallet/component/bank_card_item.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/grpc_services/card_service.dart';
-import 'package:awallet/src/generated/user/card.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
 class TopUp extends StatefulWidget {

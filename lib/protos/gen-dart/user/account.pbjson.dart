@@ -366,6 +366,39 @@ const BuyCoinResponse$json = {
 final $typed_data.Uint8List buyCoinResponseDescriptor = $convert.base64Decode(
     'Cg9CdXlDb2luUmVzcG9uc2USEgoEdHhpZBgGIAEoCVIEdHhpZA==');
 
+@$core.Deprecated('Use getUserSwapPriceRequestDescriptor instead')
+const GetUserSwapPriceRequest$json = {
+  '1': 'GetUserSwapPriceRequest',
+  '2': [
+    {'1': 'from_symbol', '3': 1, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'fromSymbol'},
+    {'1': 'from_amt', '3': 2, '4': 1, '5': 1, '10': 'fromAmt'},
+    {'1': 'target_symbol', '3': 3, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'targetSymbol'},
+  ],
+};
+
+/// Descriptor for `GetUserSwapPriceRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUserSwapPriceRequestDescriptor = $convert.base64Decode(
+    'ChdHZXRVc2VyU3dhcFByaWNlUmVxdWVzdBI/Cgtmcm9tX3N5bWJvbBgBIAEoDjIeLnVzZXIuVH'
+    'JhY2tlZFR4LkNvbnRyYWN0U3ltYm9sUgpmcm9tU3ltYm9sEhkKCGZyb21fYW10GAIgASgBUgdm'
+    'cm9tQW10EkMKDXRhcmdldF9zeW1ib2wYAyABKA4yHi51c2VyLlRyYWNrZWRUeC5Db250cmFjdF'
+    'N5bWJvbFIMdGFyZ2V0U3ltYm9s');
+
+@$core.Deprecated('Use getUserSwapPriceResponseDescriptor instead')
+const GetUserSwapPriceResponse$json = {
+  '1': 'GetUserSwapPriceResponse',
+  '2': [
+    {'1': 'target_amt', '3': 1, '4': 1, '5': 1, '10': 'targetAmt'},
+    {'1': 'settle_price', '3': 2, '4': 1, '5': 1, '10': 'settlePrice'},
+    {'1': 'raw_price', '3': 3, '4': 1, '5': 1, '10': 'rawPrice'},
+  ],
+};
+
+/// Descriptor for `GetUserSwapPriceResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUserSwapPriceResponseDescriptor = $convert.base64Decode(
+    'ChhHZXRVc2VyU3dhcFByaWNlUmVzcG9uc2USHQoKdGFyZ2V0X2FtdBgBIAEoAVIJdGFyZ2V0QW'
+    '10EiEKDHNldHRsZV9wcmljZRgCIAEoAVILc2V0dGxlUHJpY2USGwoJcmF3X3ByaWNlGAMgASgB'
+    'UghyYXdQcmljZQ==');
+
 @$core.Deprecated('Use sellNftRequestDescriptor instead')
 const SellNftRequest$json = {
   '1': 'SellNftRequest',

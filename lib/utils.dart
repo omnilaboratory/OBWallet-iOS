@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:awallet/bean/enum_dollar_face.dart';
-import 'package:awallet/src/generated/user/account.pb.dart';
-import 'package:awallet/src/generated/user/country.pbenum.dart';
+import 'package:awallet/protos/gen-dart/user/account.pb.dart';
+import 'package:awallet/protos/gen-dart/user/country.pbenum.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:path/path.dart' as path;

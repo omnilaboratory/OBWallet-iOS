@@ -3,7 +3,7 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/my_user_item.dart';
 import 'package:awallet/grpc_services/user_service.dart';
-import 'package:awallet/src/generated/user/user.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:fixnum/src/int64.dart';

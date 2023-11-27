@@ -1,5 +1,5 @@
 import 'package:awallet/bean/crypto_tx_info.dart';
-import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 
 class NftTxInfo extends CryptoTxInfo {
   late final List<NftTokenLog> nftTxLogs;

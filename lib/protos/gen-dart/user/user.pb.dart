@@ -1697,6 +1697,7 @@ class ListRewardResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRewardResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..pc<UserReward>(1, _omitFieldNames ? '' : 'list', $pb.PbFieldType.PM, subBuilder: UserReward.create)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'totalAmt', $pb.PbFieldType.OD)
+    ..aInt64(3, _omitFieldNames ? '' : 'status')
     ..hasRequiredFields = false
   ;
 
@@ -1732,6 +1733,15 @@ class ListRewardResponse extends $pb.GeneratedMessage {
   $core.bool hasTotalAmt() => $_has(1);
   @$pb.TagNumber(2)
   void clearTotalAmt() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get status => $_getI64(2);
+  @$pb.TagNumber(3)
+  set status($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasStatus() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStatus() => clearField(3);
 }
 
 class UserReward extends $pb.GeneratedMessage {

@@ -1,7 +1,7 @@
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
-import 'package:awallet/src/generated/eth/ethservice.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/eth/ethservice.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:grpc/grpc.dart';

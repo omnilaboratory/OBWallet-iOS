@@ -5,7 +5,7 @@ import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
-import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

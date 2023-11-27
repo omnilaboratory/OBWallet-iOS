@@ -29,6 +29,10 @@ class accountClient extends $grpc.Client {
       '/user.account/GetAccountHistory',
       ($0.GetAccountHistoryRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.GetAccountHistoryResponse.fromBuffer(value));
+  static final _$getUserSwapPrice = $grpc.ClientMethod<$0.GetUserSwapPriceRequest, $0.GetUserSwapPriceResponse>(
+      '/user.account/GetUserSwapPrice',
+      ($0.GetUserSwapPriceRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.GetUserSwapPriceResponse.fromBuffer(value));
   static final _$sellCoin = $grpc.ClientMethod<$0.SellCoinRequest, $0.SellCoinResponse>(
       '/user.account/SellCoin',
       ($0.SellCoinRequest value) => value.writeToBuffer(),
@@ -82,6 +86,10 @@ class accountClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.GetAccountHistoryResponse> getAccountHistory($0.GetAccountHistoryRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getAccountHistory, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.GetUserSwapPriceResponse> getUserSwapPrice($0.GetUserSwapPriceRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getUserSwapPrice, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.SellCoinResponse> sellCoin($0.SellCoinRequest request, {$grpc.CallOptions? options}) {
@@ -144,6 +152,13 @@ abstract class accountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetAccountHistoryRequest.fromBuffer(value),
         ($0.GetAccountHistoryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetUserSwapPriceRequest, $0.GetUserSwapPriceResponse>(
+        'GetUserSwapPrice',
+        getUserSwapPrice_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetUserSwapPriceRequest.fromBuffer(value),
+        ($0.GetUserSwapPriceResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.SellCoinRequest, $0.SellCoinResponse>(
         'SellCoin',
         sellCoin_Pre,
@@ -224,6 +239,10 @@ abstract class accountServiceBase extends $grpc.Service {
     return getAccountHistory(call, await request);
   }
 
+  $async.Future<$0.GetUserSwapPriceResponse> getUserSwapPrice_Pre($grpc.ServiceCall call, $async.Future<$0.GetUserSwapPriceRequest> request) async {
+    return getUserSwapPrice(call, await request);
+  }
+
   $async.Future<$0.SellCoinResponse> sellCoin_Pre($grpc.ServiceCall call, $async.Future<$0.SellCoinRequest> request) async {
     return sellCoin(call, await request);
   }
@@ -266,6 +285,7 @@ abstract class accountServiceBase extends $grpc.Service {
 
   $async.Future<$0.AccountInfo> getAccountInfo($grpc.ServiceCall call, $0.GetAccountInfoRequest request);
   $async.Future<$0.GetAccountHistoryResponse> getAccountHistory($grpc.ServiceCall call, $0.GetAccountHistoryRequest request);
+  $async.Future<$0.GetUserSwapPriceResponse> getUserSwapPrice($grpc.ServiceCall call, $0.GetUserSwapPriceRequest request);
   $async.Future<$0.SellCoinResponse> sellCoin($grpc.ServiceCall call, $0.SellCoinRequest request);
   $async.Future<$0.BuyCoinResponse> buyCoin($grpc.ServiceCall call, $0.BuyCoinRequest request);
   $async.Future<$0.SellNftResponse> sellNft($grpc.ServiceCall call, $0.SellNftRequest request);

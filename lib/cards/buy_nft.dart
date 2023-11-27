@@ -6,7 +6,7 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_face.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/grpc_services/card_service.dart';
-import 'package:awallet/src/generated/user/card.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

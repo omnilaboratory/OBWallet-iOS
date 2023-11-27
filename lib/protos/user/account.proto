@@ -12,6 +12,8 @@ service account{
 
   //用户账号usd变动历史
   rpc GetAccountHistory(GetAccountHistoryRequest) returns (GetAccountHistoryResponse) {}
+  //数币兑换计算
+  rpc GetUserSwapPrice(GetUserSwapPriceRequest) returns (GetUserSwapPriceResponse) {}
 //    买币
   rpc SellCoin(SellCoinRequest) returns (SellCoinResponse) {}
   //卖币
@@ -192,8 +194,26 @@ message BuyCoinRequest {
   double usd_amt =4;
   double rate=5;
 }
+
 message BuyCoinResponse {
   string txid=6;
+}
+
+message GetUserSwapPriceRequest {
+  //需要兑换的币种
+  TrackedTx.ContractSymbol from_symbol = 1;
+  // 需要兑换的币种数量
+  double from_amt = 2;
+  //兑换目标币种
+  TrackedTx.ContractSymbol target_symbol = 3;
+}
+message GetUserSwapPriceResponse {
+//    兑换目标币种数量
+  double target_amt =1;
+  //折算后的价格, 折算项有佣金1%/gas费5$/平台利润2% /划点0.5%/ 后的价格
+  double settle_price=2;
+//    币种官方报价
+  double raw_price=3;
 }
 
 message SellNftRequest {

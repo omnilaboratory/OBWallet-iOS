@@ -4,7 +4,7 @@ import 'package:awallet/bean/enum_eth_key.dart';
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
-import 'package:awallet/src/generated/user/account.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
