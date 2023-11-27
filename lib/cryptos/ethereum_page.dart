@@ -1,9 +1,8 @@
 import 'dart:async';
+
 import 'package:awallet/bean/dollar_face_info.dart';
-import 'package:awallet/bean/enum_eth_key.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/tips.dart';
-import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_token_item.dart';
@@ -80,16 +79,10 @@ class _EthereumPageState extends State<EthereumPage> {
       return createOrRecoverWallet();
     }
     var walletInfo = EthService.getInstance().getWalletInfo();
-    var tokenList = EthService.getInstance().getTokenList();
 
     var localList = [];
-    localList.addAll(tokenList);
-
-
-    TokenInfo usdtPolygon = GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.polygonTokenList]![0];
-    usdtPolygon.balance = 0;
-
-    localList.add(usdtPolygon);
+    localList.addAll(EthService.getInstance().getTokenList());
+    localList.addAll(EthService.getInstance().getTokenListPolygon());
 
     Widget buildTokenAndNftList() {
       return currTypeIndex == 0

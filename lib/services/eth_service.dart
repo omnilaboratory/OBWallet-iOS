@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/crypto_wallet_info.dart';
+import 'package:awallet/bean/enum_eth_key.dart';
 import 'package:awallet/bean/enum_network_type.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/eth.dart';
@@ -54,13 +55,20 @@ class EthService {
 
   List<TokenInfo> getTokenList() {
     if (_tokenList.isEmpty) {
-      if (GlobalParams.currNetwork == EnumNetworkType.goerli) {
-        _tokenList = GlobalParams.ethGoerliTokenList;
-      } else {
-        _tokenList = GlobalParams.ethMainnetTokenList;
-      }
+      _tokenList = GlobalParams.dataInNetwork[GlobalParams.currNetwork]
+          [EnumEthKey.tokenList];
     }
     return _tokenList;
+  }
+
+  List<TokenInfo> _tokenListPolygon = [];
+
+  List<TokenInfo> getTokenListPolygon() {
+    if (_tokenListPolygon.isEmpty) {
+      _tokenListPolygon = GlobalParams.dataInNetwork[GlobalParams.currNetwork]
+          [EnumEthKey.polygonTokenList];
+    }
+    return _tokenListPolygon;
   }
 
   updateTokenBalances(BuildContext context) async {
@@ -82,6 +90,11 @@ class EthService {
           context, getTokenList()[2], balance, totalBalance);
     }
 
+    // Polygon usdt
+    balance = await Eth.getBalanceOfPolygonUSDT(address);
+    totalBalance = await setTokenUsdValue(
+        context, getTokenListPolygon()[0], balance, totalBalance);
+
     _walletInfo = getWalletInfo();
     _walletInfo?.balance = totalBalance;
   }
@@ -99,18 +112,19 @@ class EthService {
     return totalBalance;
   }
 
-  Future<TokenInfo> getTokenBalance(BuildContext context,TokenInfo tokenInfo) async {
+  Future<TokenInfo> getTokenBalance(
+      BuildContext context, TokenInfo tokenInfo) async {
     String address = LocalStorage.getEthAddress()!;
     double balance = 0;
-    if(tokenInfo.name=="ETH"){
+    if (tokenInfo.name == "ETH") {
       balance = await Eth.getBalanceOfETH(address);
       log("getTokenBalance $balance");
     }
-    if(tokenInfo.name=="USDT"){
+    if (tokenInfo.name == "USDT") {
       balance = await Eth.getBalanceOfUSDT(address);
     }
     if (GlobalParams.currNetwork == EnumNetworkType.mainnet) {
-      if(tokenInfo.name=="USDC"){
+      if (tokenInfo.name == "USDC") {
         balance = await Eth.getBalanceOfUSDC(address);
       }
     }

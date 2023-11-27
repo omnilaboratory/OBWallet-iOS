@@ -99,9 +99,11 @@ class _SendState extends State<Send> {
         context: context,
         builder: (context) {
           return SendConfirm(
-              name: dropdownValue.name,
-              address: _addressController.value.text.toString(),
-              amount: _amountController.value.text.toString());
+            name: dropdownValue.name,
+            address: _addressController.value.text.toString(),
+            amount: _amountController.value.text.toString(),
+            netName: widget.netName,
+          );
         });
   }
 
@@ -156,11 +158,6 @@ class _SendState extends State<Send> {
                       )
                     ],
                   ),
-                  // Padding(
-                  //     padding:
-                  //         const EdgeInsets.only(left: 25, right: 25, top: 20),
-                  //     child: buildChainButtons()),
-
                   const SizedBox(height: 20),
                   Visibility(
                     visible: false,
@@ -190,10 +187,6 @@ class _SendState extends State<Send> {
                               ),
                             ),
                           ),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(left: 25, right: 25),
-                          //   child: createTextFormField(_addressController,"address",false,icon: const Icon(Icons.person)),
-                          // ),
                           Padding(
                               padding: const EdgeInsets.only(
                                   left: 25, right: 25, top: 2),
@@ -765,11 +758,5 @@ class _SendState extends State<Send> {
     borderSide: BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
     borderRadius: BorderRadius.only(
         topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
-  );
-
-  final OutlineInputBorder _outlineLeftInputBorder = const OutlineInputBorder(
-    borderSide: BorderSide(width: 0.50, color: Color(0xFFE6E6E6)),
-    borderRadius: BorderRadius.only(
-        topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
   );
 }

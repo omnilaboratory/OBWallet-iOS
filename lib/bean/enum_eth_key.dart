@@ -6,6 +6,7 @@ enum EnumEthKey {
   nftApiUrl("nftApiUrl"),
   nft("NFT"),
   nftToPlatform("nftToPlatform"),
+  tokenList("tokenList"),
   polygonTokenList("polygonTokenList"),
   ;
 

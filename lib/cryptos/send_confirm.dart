@@ -17,12 +17,15 @@ class SendConfirm extends StatefulWidget {
   final String address;
   final String amount;
   final String name;
+  final String netName;
 
-  const SendConfirm(
-      {super.key,
-      required this.address,
-      required this.amount,
-      required this.name});
+  const SendConfirm({
+    super.key,
+    required this.address,
+    required this.amount,
+    required this.name,
+    required this.netName,
+  });
 
   @override
   State<SendConfirm> createState() => _SendConfirmState();
@@ -54,23 +57,47 @@ class _SendConfirmState extends State<SendConfirm> {
         }
       });
     } else if (widget.name == 'USDT') {
-      Eth.sendUsdtTo(widget.address, double.parse(widget.amount)).then((value) {
-        try {
-          if (value.isNotEmpty) {
+      if (widget.netName.isEmpty) {
+        Eth.sendUsdtTo(widget.address, double.parse(widget.amount))
+            .then((value) {
+          try {
+            if (value.isNotEmpty) {
+              setState(() {
+                loadingVisible = false;
+              });
+              log('txId: $value');
+              EthGrpcService.getInstance().ethTrackTx(context, value);
+              GlobalParams.eventBus.fire("SendConfirm_Close");
+              Navigator.pop(context);
+            }
+          } catch (e) {
             setState(() {
               loadingVisible = false;
             });
-            log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(context, value);
-            GlobalParams.eventBus.fire("SendConfirm_Close");
-            Navigator.pop(context);
           }
-        } catch (e) {
-          setState(() {
-            loadingVisible = false;
-          });
-        }
-      });
+        });
+      }
+
+      if (widget.netName == "polygon") {
+        Eth.sendPolygonUsdtTo(widget.address, double.parse(widget.amount))
+            .then((value) {
+          try {
+            if (value.isNotEmpty) {
+              setState(() {
+                loadingVisible = false;
+              });
+              log('txId: $value');
+              EthGrpcService.getInstance().ethTrackTx(context, value);
+              GlobalParams.eventBus.fire("SendConfirm_Close");
+              Navigator.pop(context);
+            }
+          } catch (e) {
+            setState(() {
+              loadingVisible = false;
+            });
+          }
+        });
+      }
     } else if (widget.name == 'USDC') {
       Eth.sendUsdcTo(widget.address, double.parse(widget.amount)).then((value) {
         try {
@@ -92,7 +119,7 @@ class _SendConfirmState extends State<SendConfirm> {
     }
   }
 
-  onBack(){
+  onBack() {
     Navigator.pop(context);
   }
 
@@ -178,7 +205,7 @@ class _SendConfirmState extends State<SendConfirm> {
                                 visible: true,
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 15, top: 10,right: 10),
+                                        left: 15, top: 10, right: 10),
                                     child: Row(children: [
                                       const Text('To: ',
                                           style: TextStyle(
@@ -187,7 +214,8 @@ class _SendConfirmState extends State<SendConfirm> {
                                             fontWeight: FontWeight.w400,
                                           )),
                                       AutoSizeText(
-                                          StringTools.starString2(widget.address),
+                                          StringTools.starString2(
+                                              widget.address),
                                           maxLines: 1,
                                           maxFontSize: 12,
                                           minFontSize: 10,
@@ -200,7 +228,10 @@ class _SendConfirmState extends State<SendConfirm> {
                                 visible: true,
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 15, top: 10, bottom: 15,right: 15),
+                                        left: 15,
+                                        top: 10,
+                                        bottom: 15,
+                                        right: 15),
                                     child: Row(children: [
                                       const Text('From: ',
                                           style: TextStyle(
