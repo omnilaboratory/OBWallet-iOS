@@ -208,4 +208,17 @@ class AccountService {
     }
     return ret;
   }
+  
+  Future<GrpcResponse> getUserSwapPrice(BuildContext context, GetUserSwapPriceRequest request) async {
+    log("$request");
+    var ret = GrpcResponse();
+    try {
+      var resp = await accountServiceClient?.getUserSwapPrice(request);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context, "getUserSwapPrice", e, ret);
+    }
+    return ret;
+  }
 }

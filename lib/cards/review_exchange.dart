@@ -12,6 +12,7 @@ import 'package:awallet/grpc_services/eth_grpc_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/string_tool.dart';
+import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
@@ -21,6 +22,7 @@ class ReviewExchange extends StatefulWidget {
   String fromCoin;
   String toCoin;
   EnumExchangeType type;
+  GetUserSwapPriceResponse priceInfo;
 
   ReviewExchange({
     super.key,
@@ -29,6 +31,7 @@ class ReviewExchange extends StatefulWidget {
     required this.fromCoin,
     required this.toCoin,
     required this.type,
+    required this.priceInfo,
   });
 
   @override
@@ -37,13 +40,10 @@ class ReviewExchange extends StatefulWidget {
 
 class _ReviewExchangeState extends State<ReviewExchange> {
   double coinPrice = 1;
-  bool loadingVisible = false;
 
   onConfirm() {
-    setState(() {
-      loadingVisible = true;
-    });
     if (widget.type == EnumExchangeType.sell) {
+      var loading = showLoading(context);
       if (widget.fromCoin == 'ETH') {
         Eth.sendEthTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
             .then((value) {
@@ -54,10 +54,8 @@ class _ReviewExchangeState extends State<ReviewExchange> {
               sellCoin(value);
             }
           } catch (e) {
-            setState(() {
-              loadingVisible = false;
-            });
           }
+          loading.remove();
         });
       } else if (widget.fromCoin == 'USDT') {
         Eth.sendUsdtTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
@@ -69,10 +67,8 @@ class _ReviewExchangeState extends State<ReviewExchange> {
               sellCoin(value);
             }
           } catch (e) {
-            setState(() {
-              loadingVisible = false;
-            });
           }
+          loading.remove();
         });
       } else if (widget.fromCoin == 'USDC') {
         Eth.sendUsdcTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
@@ -84,10 +80,8 @@ class _ReviewExchangeState extends State<ReviewExchange> {
               sellCoin(value);
             }
           } catch (e) {
-            setState(() {
-              loadingVisible = false;
-            });
           }
+          loading.remove();
         });
       }
     } else if (widget.type == EnumExchangeType.buy) {
@@ -103,7 +97,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
   @override
   void initState() {
     super.initState();
-    getCoinPrice(widget.fromCoin);
+    coinPrice = widget.priceInfo.rawPrice;
     GlobalParams.eventBus.on().listen((event) {
       if (event == "exchange_showTips") {
         if (mounted) {
@@ -116,269 +110,256 @@ class _ReviewExchangeState extends State<ReviewExchange> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        Scaffold(
-            resizeToAvoidBottomInset: false,
-            backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
-            body: Center(
-              child: Column(
-                children: [
-                  const SizedBox(height: 80),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20.0),
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
+        body: Center(
+          child: Column(
+            children: [
+              const SizedBox(height: 80),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                width: size.width * 0.8,
+                height: size.height * 0.65,
+                child: Column(children: [
+                  const SizedBox(height: 25),
+                  createDialogTitle('Review Exchange'),
+                  const SizedBox(height: 25),
+                  buildTitle(),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 27),
+                    child: Text(
+                      'You will swap',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF666666),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                    width: size.width * 0.8,
-                    height: size.height * 0.65,
-                    child: Column(children: [
-                      const SizedBox(height: 25),
-                      createDialogTitle('Review Exchange'),
-                      const SizedBox(height: 25),
-                      buildTitle(),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 27),
-                        child: Text(
-                          'You will swap',
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 23),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.type == EnumExchangeType.sell
+                              ? widget.fromCoin == 'ETH'
+                                  ? StringTools.formatCryptoNum(
+                                      widget.fromAmt)
+                                  : StringTools.formatCurrencyNum(
+                                      widget.fromAmt)
+                              : StringTools.formatCurrencyNum(widget.toAmt),
+                          style: const TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: 26,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(width: 5),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Text(
+                            widget.type == EnumExchangeType.sell
+                                ? widget.fromCoin
+                                : widget.toCoin,
+                            style: const TextStyle(
+                              color: Color(0xFF333333),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  const Image(
+                    width: 22,
+                    height: 22,
+                    image:
+                        AssetImage("asset/images/icon_arrow_down_gray.png"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.type == EnumExchangeType.sell
+                              ? StringTools.formatCurrencyNum(widget.toAmt)
+                              : widget.fromCoin == 'ETH'
+                                  ? StringTools.formatCryptoNum(
+                                      widget.fromAmt)
+                                  : StringTools.formatCurrencyNum(
+                                      widget.fromAmt),
+                          style: const TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: 26,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(width: 5),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Text(
+                            widget.type == EnumExchangeType.sell
+                                ? widget.toCoin
+                                : widget.fromCoin,
+                            style: const TextStyle(
+                              color: Color(0xFF333333),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 35),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text(
+                          '1',
+                          style: TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            height: 1.29,
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        Text(
+                          widget.type == EnumExchangeType.sell
+                              ? widget.fromCoin
+                              : widget.toCoin,
+                          style: const TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            height: 1.29,
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        const Text(
+                          '=',
+                          style: TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            height: 1.29,
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        Text(
+                          widget.type == EnumExchangeType.sell
+                              ? StringTools.formatCurrencyNum(coinPrice)
+                              : widget.fromCoin == 'ETH'
+                                  ? StringTools.formatCryptoNum(
+                                      1 / coinPrice)
+                                  : StringTools.formatCurrencyNum(
+                                      1 / coinPrice),
+                          style: const TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            height: 1.29,
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        Text(
+                          widget.type == EnumExchangeType.sell
+                              ? widget.toCoin
+                              : widget.fromCoin,
+                          style: const TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            height: 1.29,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 7),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Slippage',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color(0xFF666666),
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: FontWeight.w400,
+                            height: 1.29,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 23),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              widget.type == EnumExchangeType.sell
-                                  ? widget.fromCoin == 'ETH'
-                                      ? StringTools.formatCryptoNum(
-                                          widget.fromAmt)
-                                      : StringTools.formatCurrencyNum(
-                                          widget.fromAmt)
-                                  : StringTools.formatCurrencyNum(widget.toAmt),
-                              style: const TextStyle(
-                                color: Color(0xFF333333),
-                                fontSize: 26,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(width: 5),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Text(
-                                widget.type == EnumExchangeType.sell
-                                    ? widget.fromCoin
-                                    : widget.toCoin,
-                                style: const TextStyle(
-                                  color: Color(0xFF333333),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
+                        SizedBox(width: 2),
+                        Text(
+                          '0.5',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            height: 1.29,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 15),
-                      const Image(
-                        width: 22,
-                        height: 22,
-                        image:
-                            AssetImage("asset/images/icon_arrow_down_gray.png"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              widget.type == EnumExchangeType.sell
-                                  ? StringTools.formatCurrencyNum(widget.toAmt)
-                                  : widget.fromCoin == 'ETH'
-                                      ? StringTools.formatCryptoNum(
-                                          widget.fromAmt)
-                                      : StringTools.formatCurrencyNum(
-                                          widget.fromAmt),
-                              style: const TextStyle(
-                                color: Color(0xFF333333),
-                                fontSize: 26,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(width: 5),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Text(
-                                widget.type == EnumExchangeType.sell
-                                    ? widget.toCoin
-                                    : widget.fromCoin,
-                                style: const TextStyle(
-                                  color: Color(0xFF333333),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
+                        SizedBox(width: 2),
+                        Text(
+                          '%',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            height: 1.29,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 35),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text(
-                              '1',
-                              style: TextStyle(
-                                color: Color(0xFF666666),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                height: 1.29,
-                              ),
-                            ),
-                            const SizedBox(width: 2),
-                            Text(
-                              widget.type == EnumExchangeType.sell
-                                  ? widget.fromCoin
-                                  : widget.toCoin,
-                              style: const TextStyle(
-                                color: Color(0xFF666666),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                height: 1.29,
-                              ),
-                            ),
-                            const SizedBox(width: 2),
-                            const Text(
-                              '=',
-                              style: TextStyle(
-                                color: Color(0xFF666666),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                height: 1.29,
-                              ),
-                            ),
-                            const SizedBox(width: 2),
-                            Text(
-                              widget.type == EnumExchangeType.sell
-                                  ? StringTools.formatCurrencyNum(coinPrice)
-                                  : widget.fromCoin == 'ETH'
-                                      ? StringTools.formatCryptoNum(
-                                          1 / coinPrice)
-                                      : StringTools.formatCurrencyNum(
-                                          1 / coinPrice),
-                              style: const TextStyle(
-                                color: Color(0xFF666666),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                height: 1.29,
-                              ),
-                            ),
-                            const SizedBox(width: 2),
-                            Text(
-                              widget.type == EnumExchangeType.sell
-                                  ? widget.toCoin
-                                  : widget.fromCoin,
-                              style: const TextStyle(
-                                color: Color(0xFF666666),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                height: 1.29,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 7),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Slippage',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0xFF666666),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                height: 1.29,
-                              ),
-                            ),
-                            SizedBox(width: 2),
-                            Text(
-                              '0.5',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0xFF666666),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                height: 1.29,
-                              ),
-                            ),
-                            SizedBox(width: 2),
-                            Text(
-                              '%',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0xFF666666),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                height: 1.29,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Spacer(
-                        flex: 1,
-                      ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            BottomButton(
-                              icon: 'asset/images/icon_arrow_left_green.png',
-                              text: 'BACK',
-                              onPressed: () {
-                                Navigator.pop(context);
-                                // showDialog(
-                                //     context: context,
-                                //     builder: (context) {
-                                //       return Exchange(type: widget.type);
-                                //     });
-                              },
-                            ),
-                            BottomButton(
-                              icon: 'asset/images/icon_confirm_green.png',
-                              text: 'CONFIRM',
-                              onPressed: onConfirm,
-                            )
-                          ]),
-                      const SizedBox(height: 30),
-                    ]),
+                      ],
+                    ),
                   ),
+                  const Spacer(
+                    flex: 1,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        BottomButton(
+                          icon: 'asset/images/icon_arrow_left_green.png',
+                          text: 'BACK',
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        BottomButton(
+                          icon: 'asset/images/icon_confirm_green.png',
+                          text: 'CONFIRM',
+                          onPressed: onConfirm,
+                        )
+                      ]),
                   const SizedBox(height: 30),
-                  BottomWhiteButton(
-                    icon: 'asset/images/icon_close_white.png',
-                    text: 'CANCEL',
-                    onPressed: onClose,
-                  )
-                ],
+                ]),
               ),
-            )),
-        Offstage(
-          offstage: !loadingVisible,
-          child: const LoadingDialog(),
-        )
-      ],
-    );
+              const SizedBox(height: 30),
+              BottomWhiteButton(
+                icon: 'asset/images/icon_close_white.png',
+                text: 'CANCEL',
+                onPressed: onClose,
+              )
+            ],
+          ),
+        ));
   }
 
   Widget buildTitle() {
@@ -451,78 +432,42 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     );
   }
 
-  void getCoinPrice(name) {
-    AccountService.getInstance()
-        .getCoinPrice(context, name)
-        .then((value) async {
-      if (value.code == 1) {
-        var resp = value.data as GetCoinPriceResponse;
-        log(resp.price.toString());
-        setState(() {
-          coinPrice = resp.price;
-        });
-      } else {
-        log(value.msg);
-      }
-    });
-  }
-
   void sellCoin(String value) {
+    var loading  = showLoading(context);
     SellCoinRequest request = SellCoinRequest();
     request.txid = value;
-    if (widget.fromCoin == 'ETH') {
-      request.coin = TrackedTx_ContractSymbol.ETH;
-    } else if (widget.fromCoin == 'USDT') {
-      request.coin = TrackedTx_ContractSymbol.USDT;
-    } else if (widget.fromCoin == 'USDC') {
-      request.coin = TrackedTx_ContractSymbol.USDC;
-    }
+    request.coin = Utils.getContractSymbol(widget.fromCoin)!;
     request.coinAmt = widget.fromAmt;
     request.usdAmt = widget.toAmt;
     request.rate = coinPrice;
     AccountService.getInstance().sellCoin(context, request).then((value) async {
       if (value.code == 1) {
-        setState(() {
-          loadingVisible = false;
-        });
         var resp = value.data as SellCoinResponse;
         log(resp.toString());
         GlobalParams.eventBus.fire("exchange_showTips");
       } else {
-        setState(() {
-          loadingVisible = false;
-        });
         showToast(value.msg);
       }
+      loading.remove();
     });
   }
 
   void buyCoin() {
+    var loading = showLoading(context);
     BuyCoinRequest request = BuyCoinRequest();
-    if (widget.fromCoin == 'ETH') {
-      request.coin = TrackedTx_ContractSymbol.ETH;
-    } else if (widget.fromCoin == 'USDT') {
-      request.coin = TrackedTx_ContractSymbol.USDT;
-    } else if (widget.fromCoin == 'USDC') {
-      request.coin = TrackedTx_ContractSymbol.USDC;
-    }
+    request.coin = Utils.getContractSymbol(widget.fromCoin)!;
     request.coinAmt = widget.fromAmt;
     request.usdAmt = widget.toAmt;
     request.rate = coinPrice;
     AccountService.getInstance().buyCoin(context, request).then((value) async {
       if (value.code == 1) {
-        setState(() {
-          loadingVisible = false;
-        });
         var resp = value.data as BuyCoinResponse;
         log(resp.toString());
         GlobalParams.eventBus.fire("exchange_showTips");
       } else {
-        setState(() {
-          loadingVisible = false;
-        });
         showToast(value.msg);
       }
+      loading.remove();
     });
   }
 }

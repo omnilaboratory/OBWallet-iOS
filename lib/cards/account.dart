@@ -155,32 +155,15 @@ class _AccountState extends State<Account> {
             text: 'Deposit',
             iconWidth: iconWidth,
             onPressed: () async {
-              if (CommonService.userInfo == null ||
-                  CommonService.userInfo!.kycStatus ==
-                      EnumKycStatus.none.value ||
-                  CommonService.userInfo!.kycStatus ==
-                      EnumKycStatus.rejected.value) {
-                alert(Tips.kycNeed.value, context, () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return Kyc();
-                      });
-                });
-              } else {
-                var flag = await showDialog(
-                    context: context,
-                    builder: (context) {
-                      return CardRecharge(
-                          amt: '',
-                          type: EnumChargeType.deposit,
-                          cardNo: '',
-                          date: '',
-                          cvc: '');
-                    });
-                if (flag != null && flag) {
-                  _onBalanceRefresh();
-                }
+              var flag = await showDialog(
+                  context: context,
+                  builder: (context) {
+                    return CardRecharge(
+                        amt: '',
+                        type: EnumChargeType.deposit);
+                  });
+              if (flag != null && flag) {
+                _onBalanceRefresh();
               }
             }),
         SquareButton(

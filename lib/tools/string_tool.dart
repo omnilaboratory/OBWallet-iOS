@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:intl/intl.dart';
 
 class StringTools {
@@ -29,6 +30,10 @@ class StringTools {
     return num == 0 ? '0' : result;
     // return Decimal.parse(num.toString()).floor(scale: 6).toString();
   }
+  static String formatCryptoNumForInput(double? num) {
+    num ??= 0;
+    return Decimal.parse(num.toString()).floor(scale: 6).toString();
+  }
 
   static String formatCurrencyNum(double? num) {
     num ??= 0;
@@ -36,6 +41,10 @@ class StringTools {
     final result    = formatter.format(num);
     return num == 0 ? '0' : result;
     // return Decimal.parse(num.toString()).floor(scale: 2).toString();
+  }
+  static String formatCurrencyNumForInput(double? num) {
+    num ??= 0;
+    return Decimal.parse(num.toString()).floor(scale: 2).toString();
   }
 
   static List<int> getNftCountByMoneyAmount(double amount) {

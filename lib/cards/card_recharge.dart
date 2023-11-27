@@ -305,29 +305,8 @@ class _CardRechargeState extends State<CardRecharge> {
           if (double.parse(cardInputAmount) < 0) {
             cardRecharge();
           } else {
-            var kycStatus = CommonService.userInfo!.kycStatus;
-            log("$kycStatus");
-            if (kycStatus.isNotEmpty) {
-              if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value ||
-                  CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
-                GlobalParams.eventBus.fire("topup");
-                getDcPayUrl(double.parse(cardInputAmount));
-
-                // buy nft
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) =>
-                //           BuyNft(rechargeRequest: createCardRechargeRequest())),
-                // );
-              }
-            } else {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return Kyc();
-                  });
-            }
+            GlobalParams.eventBus.fire("topup");
+            getDcPayUrl(double.parse(cardInputAmount));
           }
         }
       } else {
