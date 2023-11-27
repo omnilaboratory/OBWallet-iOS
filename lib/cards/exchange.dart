@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
-import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/card_recharge.dart';
@@ -13,7 +12,6 @@ import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/number_controller_widget.dart';
 import 'package:awallet/grpc_services/account_service.dart';
-import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -23,8 +21,6 @@ import 'package:awallet/tools/string_tool.dart';
 import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-
-import 'kyc.dart';
 
 class Exchange extends StatefulWidget {
   EnumExchangeType type;
@@ -43,7 +39,7 @@ class _ExchangeState extends State<Exchange> {
   double totalBalanceUsd = 0;
   double coinPrice = -1;
 
-  late GetUserSwapPriceResponse currPriceInfo ;
+  late GetUserSwapPriceResponse currPriceInfo;
 
   var initTokenList = EthService.getInstance().getTokenList();
   List<TokenInfo> tokenList = [];
@@ -117,7 +113,7 @@ class _ExchangeState extends State<Exchange> {
     });
 
     GlobalParams.eventBus.on().listen((event) {
-      if (event == "exchange"||event == "topup") {
+      if (event == "exchange" || event == "topup") {
         if (mounted) {
           setState(() {
             Navigator.pop(context);
@@ -125,7 +121,6 @@ class _ExchangeState extends State<Exchange> {
         }
       }
     });
-
   }
 
   @override
@@ -171,7 +166,6 @@ class _ExchangeState extends State<Exchange> {
         showToast(Tips.maxAmount1.value);
         return;
       }
-
     } else if (widget.type == EnumExchangeType.buy) {
       if (_amountCurrencyController.value.text
           .toString()
@@ -222,14 +216,14 @@ class _ExchangeState extends State<Exchange> {
         context: context,
         builder: (context) {
           return ReviewExchange(
-            fromAmt: double.parse(
-                _amountTokenController.text.replaceAll(",", "")),
-            toAmt: double.parse(
-                _amountCurrencyController.text.replaceAll(",", "")),
-            fromCoin: currSelectedToken.name,
-            toCoin: currSelectedCurrency.name,
-            type: widget.type,
-              priceInfo:currPriceInfo
+              fromAmt: double.parse(
+                  _amountTokenController.text.replaceAll(",", "")),
+              toAmt: double.parse(
+                  _amountCurrencyController.text.replaceAll(",", "")),
+              fromCoin: currSelectedToken.name,
+              toCoin: currSelectedCurrency.name,
+              type: widget.type,
+              priceInfo: currPriceInfo
           );
         });
   }
@@ -318,8 +312,8 @@ class _ExchangeState extends State<Exchange> {
                       } else {
                         widget.type = EnumExchangeType.sell;
                       }
-                      _amountCurrencyController.text ="";
-                      _amountTokenController.text ="";
+                      _amountCurrencyController.text = "";
+                      _amountTokenController.text = "";
                       coinPrice = -1;
                       setState(() {});
                     },
@@ -654,27 +648,12 @@ class _ExchangeState extends State<Exchange> {
                   Positioned(
                       right: 0,
                       child: GestureDetector(
-                        onTap: canCurrencyClick
-                            ? () {
+                        onTap: widget.type == EnumExchangeType.buy ? () {
                           setState(() {
                             _amountCurrencyController.text =
                                 StringTools.formatCurrencyNum(
                                     currSelectedCurrency.balance);
-                            if (currSelectedToken.name == 'ETH') {
-                              _amountTokenController.text =
-                                  StringTools.formatCryptoNum(
-                                      double.parse(
-                                          _amountCurrencyController.text
-                                              .replaceAll(",", "")) /
-                                          coinPrice);
-                            } else {
-                              _amountTokenController.text =
-                                  StringTools.formatCurrencyNum(
-                                      double.parse(
-                                          _amountCurrencyController.text
-                                              .replaceAll(",", "")) /
-                                          coinPrice);
-                            }
+                            getUserSwapPrice(currSelectedCurrency.balance!);
                           });
                         }
                             : null,
@@ -884,8 +863,8 @@ class _ExchangeState extends State<Exchange> {
                   Positioned(
                       right: 0,
                       child: GestureDetector(
-                        onTap: canTokenClick
-                            ? () {
+
+                        onTap: widget.type == EnumExchangeType.sell ? () {
                           setState(() {
                             currSelectedToken.name == 'ETH'
                                 ? _amountTokenController.text =
@@ -894,15 +873,10 @@ class _ExchangeState extends State<Exchange> {
                                 : _amountTokenController.text =
                                 StringTools.formatCurrencyNum(
                                     currSelectedToken.balance);
-                            _amountCurrencyController.text =
-                                StringTools.formatCurrencyNum(
-                                    double.parse(
-                                        _amountTokenController.text.replaceAll(
-                                            ",", "")) *
-                                        coinPrice);
+
+                            getUserSwapPrice(currSelectedToken.balance!);
                           });
-                        }
-                            : null,
+                        } : null,
                         child: Text(
                           "MAX",
                           style: TextStyle(
@@ -1069,7 +1043,7 @@ class _ExchangeState extends State<Exchange> {
     if (widget.type == EnumExchangeType.buy) {
       if (fromAmount < 10) {
         coinPrice = -1;
-        log("wrong amount");
+        _amountTokenController.text = "";
         return;
       }
       request.fromSymbol = Utils.getContractSymbol(currSelectedCurrency.name)!;
@@ -1083,16 +1057,18 @@ class _ExchangeState extends State<Exchange> {
       if (request.fromSymbol == TrackedTx_ContractSymbol.ETH) {
         if (fromAmount < 0.01) {
           coinPrice = -1;
+          _amountCurrencyController.text = "";
           return;
         }
       } else {
         if (fromAmount < 10) {
           coinPrice = -1;
+          _amountCurrencyController.text = "";
           return;
         }
       }
     }
-
+    log("getUserSwapPrice  request\n$request");
     AccountService.getInstance().getUserSwapPrice(context, request).then((
         resp) {
       if (resp.code == 1) {
@@ -1105,7 +1081,7 @@ class _ExchangeState extends State<Exchange> {
         if (widget.type == EnumExchangeType.sell) {
           _amountCurrencyController.text = currPriceInfo.targetAmt.toString();
         }
-        if(mounted){
+        if (mounted) {
           setState(() {});
         }
       }
