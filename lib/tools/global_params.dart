@@ -22,7 +22,8 @@ class GlobalParams {
           "https://polygon-mainnet.g.alchemy.com/v2/e-YCgix2E25YXN4csUv5G9P6Vxu8vDvD",
       EnumEthKey.nft: "0x60CCa21714d3DFa2448ab4A62832F9F85D276f13",
       EnumEthKey.nftToPlatform: "0x22e5a8f66246B987Ef05E180eC555C93bBCdAF2a",
-      EnumEthKey.polygonUSDT: "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+      // EnumEthKey.polygonUSDT: "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+      EnumEthKey.polygonUSDT: "0x7FFB3d637014488b63fb9858E279385685AFc1e2",
       EnumEthKey.tokenList:[
         TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
         TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
@@ -44,7 +45,8 @@ class GlobalParams {
           "https://polygon-mumbai.g.alchemy.com/v2/OSPAbgSUF8eiA1H8inPswHD-3XkJbiTb",
       EnumEthKey.nft: "0x9db105d4427baa36895332d550ae00085a1cfcbc",
       EnumEthKey.nftToPlatform: "0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347",
-      EnumEthKey.polygonUSDT: "0x0fa8781a83e46826621b3bc094ea2a0212e71b23",
+      // EnumEthKey.polygonUSDT: "0x0fa8781a83e46826621b3bc094ea2a0212e71b23",
+      EnumEthKey.polygonUSDT: "0x38EB8B22Df3Ae7fb21e92881151B365Df14ba967",
       EnumEthKey.tokenList:[
         TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
         TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),

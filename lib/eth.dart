@@ -2,6 +2,7 @@
 import 'dart:math' as math;
 import 'dart:developer';
 import 'dart:typed_data';
+import 'package:awallet/contract_abis/PolygonUSDT.g.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
@@ -150,7 +151,7 @@ class Eth {
       EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.polygonUSDT]!);
       EthereumAddress ethAddr  = EthereumAddress.fromHex(address);
 
-      var usdt    = USDT(address: contract, client: ethClient!);
+      var usdt    = PolygonUSDT(address: contract, client: ethClient!);
       var balance = await usdt.balanceOf(ethAddr);
 
       // The USDT contract has 6 decimals, so has to process for BigInt with the code.
