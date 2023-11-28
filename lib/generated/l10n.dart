@@ -59,6 +59,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Forgot Password?`
+  String get login_ForgetPsw {
+    return Intl.message(
+      'Forgot Password?',
+      name: 'login_ForgetPsw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get login_signUp {
+    return Intl.message(
+      'Sign Up',
+      name: 'login_signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get profile_username {
+    return Intl.message(
+      '',
+      name: 'profile_username',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,3 +1,10 @@
 {
-  "login_signIn": "Sign In"
+  "login_signIn": "Sign In",
+  "login_ForgetPsw": "Forgot Password?",
+  "login_signUp": "Sign Up",
+
+  "profile_username": ""
+
+
+
 }

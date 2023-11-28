@@ -8,6 +8,7 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/home.dart';
 import 'package:awallet/logins/sign_up_step1.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -129,9 +130,9 @@ class _LoginState extends State<Login> {
                                     builder: (context) =>
                                         const SignUpStepOne()));
                           },
-                          child: const Text(
-                            'Sign Up',
-                            style: TextStyle(
+                          child: Text(
+                            S.of(context).login_signUp,
+                            style: const TextStyle(
                               color: Color(0xFF06D78F),
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
@@ -148,9 +149,9 @@ class _LoginState extends State<Login> {
                                         builder: (context) =>
                                             const ForgetPsw()));
                               },
-                              child: const Text(
-                                'Forgot Password?',
-                                style: TextStyle(
+                              child: Text(
+                                S.of(context).login_ForgetPsw,
+                                style: const TextStyle(
                                     color: Color(0xFF666666),
                                     fontSize: 15,
                                     decoration: TextDecoration.underline),
@@ -200,7 +201,7 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                S.current.login_signIn,
+                S.of(context).login_signIn,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.white,

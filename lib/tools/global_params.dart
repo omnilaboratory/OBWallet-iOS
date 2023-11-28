@@ -7,6 +7,7 @@ int pageSize = 10;
 
 class GlobalParams {
   static EventBus eventBus = EventBus();
+  static String currLangName = "en";
 
   static EnumNetworkType currNetwork = EnumNetworkType.goerli;
 
