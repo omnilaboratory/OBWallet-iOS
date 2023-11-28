@@ -65,6 +65,8 @@ dependencies:
   country_picker: ^2.0.21
   pull_to_refresh: ^2.0.0
   calendar_date_picker2: ^0.5.3
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -122,3 +124,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true

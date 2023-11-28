@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:awallet/component/common.dart';
 import 'package:awallet/eth.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/home.dart';
@@ -195,19 +196,19 @@ class _LoginState extends State<Login> {
             )
           ],
         ),
-        child: const Column(
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Sign In',
+                S.current.login_signIn,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Image(
+              const Image(
                 image: AssetImage("asset/images/btn_arrow-right.png"),
                 width: 36,
                 height: 36,
