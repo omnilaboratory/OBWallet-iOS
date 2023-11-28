@@ -401,14 +401,13 @@ const ListRewardResponse$json = {
   '2': [
     {'1': 'list', '3': 1, '4': 3, '5': 11, '6': '.user.UserReward', '10': 'list'},
     {'1': 'total_amt', '3': 2, '4': 1, '5': 1, '10': 'totalAmt'},
-    {'1': 'status', '3': 3, '4': 1, '5': 3, '10': 'status'},
   ],
 };
 
 /// Descriptor for `ListRewardResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listRewardResponseDescriptor = $convert.base64Decode(
     'ChJMaXN0UmV3YXJkUmVzcG9uc2USJAoEbGlzdBgBIAMoCzIQLnVzZXIuVXNlclJld2FyZFIEbG'
-    'lzdBIbCgl0b3RhbF9hbXQYAiABKAFSCHRvdGFsQW10EhYKBnN0YXR1cxgDIAEoA1IGc3RhdHVz');
+    'lzdBIbCgl0b3RhbF9hbXQYAiABKAFSCHRvdGFsQW10');
 
 @$core.Deprecated('Use userRewardDescriptor instead')
 const UserReward$json = {
@@ -416,11 +415,12 @@ const UserReward$json = {
   '2': [
     {'1': 'created_at', '3': 1, '4': 1, '5': 4, '10': 'createdAt'},
     {'1': 'amt', '3': 2, '4': 1, '5': 1, '10': 'amt'},
+    {'1': 'status', '3': 3, '4': 1, '5': 3, '10': 'status'},
   ],
 };
 
 /// Descriptor for `UserReward`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userRewardDescriptor = $convert.base64Decode(
     'CgpVc2VyUmV3YXJkEh0KCmNyZWF0ZWRfYXQYASABKARSCWNyZWF0ZWRBdBIQCgNhbXQYAiABKA'
-    'FSA2FtdA==');
+    'FSA2FtdBIWCgZzdGF0dXMYAyABKANSBnN0YXR1cw==');
 

@@ -1,7 +1,8 @@
 import 'package:awallet/bean/my_reward_info.dart';
-import 'package:awallet/bean/my_user_info.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+var rewardItemCircleClrs = [Colors.grey, Colors.green];
 
 class MyRewardItem extends StatelessWidget {
   final MyRewardInfo info;
@@ -16,6 +17,14 @@ class MyRewardItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Container(
+              width: 12,
+              height: 12,
+              margin: const EdgeInsets.only(top: 13),
+              decoration: BoxDecoration(
+                  color: rewardItemCircleClrs[info.status],
+                  borderRadius: BorderRadius.circular(6)),
+            ),
             Text(info.index.toString(),
                 style: const TextStyle(
                   fontSize: 14,

@@ -102,6 +102,7 @@ class _MyRewardState extends State<MyReward> {
             dataList.add(MyRewardInfo(
               index: rowIndex++,
               amount: element.amt,
+              status: element.status.toInt(),
               createTime: DateTime.fromMillisecondsSinceEpoch(
                   (element.createdAt * 1000).toInt()),
             ));

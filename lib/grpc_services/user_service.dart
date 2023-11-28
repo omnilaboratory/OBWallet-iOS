@@ -265,11 +265,13 @@ class UserService {
     var req = ListRewardRequest();
     req.start = Int64.parseInt(start.toString());
     req.limit = Int64.parseInt(limit.toString());
+    log("$req");
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.listReward(req);
       ret.code = 1;
       ret.data = resp;
+      log("$resp");
     } catch (e) {
       setError(context, "listReward", e, ret);
     }
