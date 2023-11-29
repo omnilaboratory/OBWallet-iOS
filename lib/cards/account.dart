@@ -3,15 +3,13 @@ import 'dart:developer';
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
-import 'package:awallet/bean/enum_kyc_status.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/exchange.dart';
-import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
@@ -172,7 +170,7 @@ class _AccountState extends State<Account> {
             iconWidth: iconWidth,
             onPressed: () async {
               if (hasCard == false) {
-                alert(Tips.applyCardFirst.value, context, onJump);
+                alert(S.of(context).tips_applyCardFirst, context, onJump);
               } else {
                 var flag = await showDialog(
                     context: context,

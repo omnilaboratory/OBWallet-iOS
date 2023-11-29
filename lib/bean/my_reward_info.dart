@@ -1,5 +1,3 @@
-import 'package:fixnum/src/int64.dart';
-
 class MyRewardInfo {
   int index;
   double amount;

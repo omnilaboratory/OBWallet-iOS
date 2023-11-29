@@ -5,13 +5,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/review_exchange.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/services/eth_service.dart';
@@ -168,22 +168,22 @@ class _ExchangeBakState extends State<ExchangeBak> {
   onNext() {
     if (widget.type == EnumExchangeType.sell) {
       if (_amountFromController.value.text.toString().isEmpty) {
-        showToast(Tips.emptyAmount1.value);
+        showToast(S.of(context).tips_emptyAmount1);
         return;
       }
 
       if (_amountToController.value.text.toString().isEmpty) {
-        showToast(Tips.emptyAmount2.value);
+        showToast(S.of(context).tips_emptyAmount2);
         return;
       }
 
       if (double.parse(_amountFromController.value.text.toString()) == 0) {
-        showToast(Tips.zeroAmount1.value);
+        showToast(S.of(context).tips_zeroAmount1);
         return;
       }
 
       if (double.parse(_amountToController.value.text.toString()) == 0) {
-        showToast(Tips.zeroAmount2.value);
+        showToast(S.of(context).tips_zeroAmount2);
         return;
       }
 
@@ -191,48 +191,48 @@ class _ExchangeBakState extends State<ExchangeBak> {
         if (double.parse(_amountFromController.value.text.toString()) >
             double.parse(
                 StringTools.formatCryptoNum(currSelectedToken.balance))) {
-          showToast(Tips.maxAmount1.value);
+          showToast(S.of(context).tips_maxAmount1);
           return;
         }
       } else {
         if (double.parse(_amountFromController.value.text.toString()) >
             double.parse(
                 StringTools.formatCurrencyNum(currSelectedToken.balance))) {
-          showToast(Tips.maxAmount1.value);
+          showToast(S.of(context).tips_maxAmount1);
           return;
         }
       }
     } else if (widget.type == EnumExchangeType.buy) {
       if (_amountToController.value.text.toString().isEmpty) {
-        showToast(Tips.emptyAmount1.value);
+        showToast(S.of(context).tips_emptyAmount1);
         return;
       }
 
       if (_amountFromController.value.text.toString().isEmpty) {
-        showToast(Tips.emptyAmount2.value);
+        showToast(S.of(context).tips_emptyAmount2);
         return;
       }
 
       if (double.parse(_amountToController.value.text.toString()) == 0) {
-        showToast(Tips.zeroAmount1.value);
+        showToast(S.of(context).tips_zeroAmount1);
         return;
       }
 
       if (double.parse(_amountFromController.value.text.toString()) == 0) {
-        showToast(Tips.zeroAmount2.value);
+        showToast(S.of(context).tips_zeroAmount2);
         return;
       }
 
       if (double.parse(_amountToController.value.text.toString()) >
           double.parse(
               StringTools.formatCurrencyNum(currSelectedCurrency.balance))) {
-        showToast(Tips.maxAmount1.value);
+        showToast(S.of(context).tips_maxAmount1);
         return;
       }
     }
 
     if (LocalStorage.getEthAddress() == null) {
-      showToast(Tips.createEthAddress.value);
+      showToast(S.of(context).tips_createEthAddress);
       return;
     }
 
@@ -761,7 +761,7 @@ class _ExchangeBakState extends State<ExchangeBak> {
                                 EnumKycStatus.none.value ||
                             CommonService.userInfo!.kycStatus ==
                                 EnumKycStatus.rejected.value) {
-                          alert(Tips.kycNeed.value, context, () {
+                          alert(S.of(context).tips_kycNeed, context, () {
                             showDialog(
                                 context: context,
                                 builder: (context) {

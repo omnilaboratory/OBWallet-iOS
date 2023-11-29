@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cryptos/export_wif_step_two.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
@@ -21,12 +21,12 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
 
   onNext() {
     if (_pswController.value.text.toString().isEmpty) {
-      showToast(Tips.emptyPassword.value);
+      showToast(S.of(context).tips_emptyPassword);
       return;
     }
 
     if (_pswController.value.text.toString() != LocalStorage.get("password")) {
-      showToast(Tips.wrongPass.value);
+      showToast(S.of(context).tips_wrongPass);
       return;
     }
 

@@ -1,5 +1,5 @@
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -18,11 +18,11 @@ class CryptoReceiveCenter extends StatelessWidget {
       this.qrSize = 110});
 
   onShare(BuildContext context) {
-    showToast(Tips.comeSoon.value);
+    showToast(S.of(context).tips_comeSoon);
   }
 
   onCopy(BuildContext context) {
-    showToast(Tips.addressIsOnClipboard.value);
+    showToast(S.of(context).tips_addressIsOnClipboard);
     Clipboard.setData(ClipboardData(text: address));
   }
 

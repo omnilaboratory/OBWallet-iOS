@@ -1,6 +1,5 @@
 import 'package:awallet/bean/card_item_info.dart';
-import 'package:awallet/bean/tips.dart';
-import 'package:awallet/tools/string_tool.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -168,7 +167,7 @@ class CardItem extends StatelessWidget {
           GestureDetector(
             onTap: () {
               if (cardItemInfo.cardNo.isNotEmpty) {
-                showToast(Tips.cardNoIsOnClipboard.value);
+                showToast(S.current.tips_cardNoIsOnClipboard);
                 Clipboard.setData(ClipboardData(text: cardItemInfo.cardNo));
               }
             },

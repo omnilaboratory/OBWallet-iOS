@@ -4,12 +4,12 @@ import 'package:awallet/bean/card_item_info.dart';
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/card_item.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_tx_item.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
@@ -249,7 +249,7 @@ class _CardPartState extends State<CardPart> {
             iconWidth: iconWidth,
             text: 'Pay',
             onPressed: () {
-              showToast(Tips.comeSoon.value);
+              showToast(S.of(context).tips_comeSoon);
             }),
         SquareButton(
             icon: 'asset/images/icon_deposit.png',
@@ -320,7 +320,7 @@ class _CardPartState extends State<CardPart> {
         if (info.code == 1) {
           var accountInfo = info.data as AccountInfo;
           if (accountInfo.balanceUsd < createCardFee) {
-            alert(Tips.needFiveDollarFee.value, context, () {
+            alert(S.of(context).tips_needFiveDollarFee, context, () {
               showDialog(
                   context: context,
                   builder: (context) {

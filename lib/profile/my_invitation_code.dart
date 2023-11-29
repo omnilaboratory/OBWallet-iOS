@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -59,7 +59,7 @@ class _MyInvitationCodeState extends State<MyInvitationCode> {
                         onTap: () {
                           Clipboard.setData(
                               ClipboardData(text: invitationCode!));
-                          showToast(Tips.codeIsOnClipboard.value);
+                          showToast(S.of(context).tips_codeIsOnClipboard);
                         },
                         child: Text(invitationCode!,
                             style: const TextStyle(

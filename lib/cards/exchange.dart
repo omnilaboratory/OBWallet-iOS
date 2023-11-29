@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/review_exchange.dart';
@@ -11,6 +10,7 @@ import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/number_controller_widget.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/services/eth_service.dart';
@@ -133,28 +133,28 @@ class _ExchangeState extends State<Exchange> {
       if (_amountTokenController.value.text
           .toString()
           .isEmpty) {
-        showToast(Tips.emptyAmount1.value);
+        showToast(S.of(context).tips_emptyAmount1);
         return;
       }
 
       if (_amountCurrencyController.value.text
           .toString()
           .isEmpty) {
-        showToast(Tips.emptyAmount2.value);
+        showToast(S.of(context).tips_emptyAmount2);
         return;
       }
 
       if (double.parse(
           _amountTokenController.value.text.toString().replaceAll(",", "")) ==
           0) {
-        showToast(Tips.zeroAmount1.value);
+        showToast(S.of(context).tips_zeroAmount1);
         return;
       }
 
       if (double.parse(
           _amountCurrencyController.value.text.toString().replaceAll(
               ",", "")) == 0) {
-        showToast(Tips.zeroAmount2.value);
+        showToast(S.of(context).tips_zeroAmount2);
         return;
       }
 
@@ -163,35 +163,35 @@ class _ExchangeState extends State<Exchange> {
           double.parse(
               StringTools.formatCurrencyNum(currSelectedToken.balance)
                   .replaceAll(",", ""))) {
-        showToast(Tips.maxAmount1.value);
+        showToast(S.of(context).tips_maxAmount1);
         return;
       }
     } else if (widget.type == EnumExchangeType.buy) {
       if (_amountCurrencyController.value.text
           .toString()
           .isEmpty) {
-        showToast(Tips.emptyAmount1.value);
+        showToast(S.of(context).tips_emptyAmount1);
         return;
       }
 
       if (_amountTokenController.value.text
           .toString()
           .isEmpty) {
-        showToast(Tips.emptyAmount2.value);
+        showToast(S.of(context).tips_emptyAmount2);
         return;
       }
 
       if (double.parse(
           _amountCurrencyController.value.text.toString().replaceAll(
               ",", "")) == 0) {
-        showToast(Tips.zeroAmount1.value);
+        showToast(S.of(context).tips_zeroAmount1);
         return;
       }
 
       if (double.parse(
           _amountTokenController.value.text.toString().replaceAll(",", "")) ==
           0) {
-        showToast(Tips.zeroAmount2.value);
+        showToast(S.of(context).tips_zeroAmount2);
         return;
       }
 
@@ -200,13 +200,13 @@ class _ExchangeState extends State<Exchange> {
           double.parse(
               StringTools.formatCurrencyNum(currSelectedCurrency.balance)
                   .replaceAll(",", ""))) {
-        showToast(Tips.maxAmount1.value);
+        showToast(S.of(context).tips_maxAmount1);
         return;
       }
     }
 
     if (LocalStorage.getEthAddress() == null) {
-      showToast(Tips.createEthAddress.value);
+      showToast(S.of(context).tips_createEthAddress);
       return;
     }
 

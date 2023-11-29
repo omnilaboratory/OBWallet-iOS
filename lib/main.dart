@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awallet/logins/login.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';

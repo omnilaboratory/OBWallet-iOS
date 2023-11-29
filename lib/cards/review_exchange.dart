@@ -1,12 +1,11 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/enum_exchange_type.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
-import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/eth.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/eth_grpc_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
@@ -101,7 +100,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     GlobalParams.eventBus.on().listen((event) {
       if (event == "exchange_showTips") {
         if (mounted) {
-          alert(Tips.waitingBalance.value, context, onClose);
+          alert(S.of(context).tips_waitingBalance, context, onClose);
         }
       }
     });

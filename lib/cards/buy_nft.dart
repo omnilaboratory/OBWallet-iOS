@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_face.dart';
 import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/tools/string_tool.dart';
@@ -119,7 +119,7 @@ class _BuyNftState extends State<BuyNft> {
         .then((resp) {
       if (resp.code == 1) {
         log("${resp.data}");
-        alert(Tips.buyNftSuccess.value, context, () {
+        alert(S.of(context).tips_buyNftSuccess, context, () {
           Navigator.pop(context);
           Navigator.pop(context);
         });

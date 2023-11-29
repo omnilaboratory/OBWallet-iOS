@@ -1,7 +1,7 @@
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/logins/login.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
@@ -87,14 +87,14 @@ class _UpdatePswState extends State<UpdatePsw> {
     request.newPassword = _pswController.value.text.trim();
     var confirmPassword = _psw2Controller.value.text.trim();
     if (request.newPassword != confirmPassword) {
-      showToast(Tips.wrongPassMatch.value);
+      showToast(S.of(context).tips_wrongPassMatch);
       return;
     }
     UserService.getInstance().updatePwd(context, request).then((value) async {
       if (value.code == 1) {
         LocalStorage.remove(LocalStorage.userToken);
         LocalStorage.remove(LocalStorage.password);
-        showToast(Tips.updatedPassword.value);
+        showToast(S.of(context).tips_updatedPassword);
         Navigator.pop(context);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const Login()));

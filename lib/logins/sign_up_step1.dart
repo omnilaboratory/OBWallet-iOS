@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
-import 'package:awallet/bean/tips.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/utils.dart';
@@ -77,13 +77,13 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   getVerifyCode() async {
     var email = _emailController.value.text.trim();
     if (email.isEmpty || !EmailValidator.validate(email)) {
-      showToast(Tips.wrongEmail.value);
+      showToast(S.of(context).tips_WrongEmail);
       return;
     }
 
     if (codeTimer != null) {
       if (codeTimer!.isActive) {
-        showToast(Tips.waiting.value);
+        showToast(S.of(context).tips_waiting);
         return;
       }
     }
@@ -384,11 +384,11 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     SignUpRequest signUpRequest = SignUpRequest();
     signUpRequest.email = _emailController.value.text.trim();
     if (!EmailValidator.validate(signUpRequest.email)) {
-      showToast( Tips.wrongEmail.value);
+      showToast(S.of(context).tips_WrongEmail);
       return;
     }
     if (verifyCodeResponse == null) {
-      showToast(Tips.getVerifyCode.value);
+      showToast(S.of(context).tips_getVerifyCode);
       return;
     }
 
@@ -396,7 +396,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     signUpRequest.password = _pswController.value.text.trim();
     signUpRequest.confirmPassword = _psw2Controller.value.text.trim();
     if (signUpRequest.password != signUpRequest.confirmPassword) {
-      showToast( Tips.wrongPassMatch.value);
+      showToast(S.of(context).tips_wrongPassMatch);
       return;
     }
     signUpRequest.userName = _unameController.value.text.trim();

@@ -1,9 +1,9 @@
 import 'package:awallet/bean/nft_detail_info.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_deposit.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
@@ -182,12 +182,12 @@ class _NftDetailState extends State<NftDetail> {
                         text: 'Buy NFT',
                         onPressed: () {
                           if (amount < 1) {
-                            showToast(Tips.emptyAmount.value);
+                            showToast(S.of(context).tips_emptyAmount);
                             return;
                           }
                           if (LocalStorage.getEthAddress() == null ||
                               LocalStorage.getEthAddress()!.isEmpty) {
-                            alert(Tips.createWallet.value, context, () {
+                            alert(S.of(context).tips_createWallet, context, () {
                               GlobalParams.eventBus.fire("goToCrypto");
                               Navigator.pop(context);
                             });

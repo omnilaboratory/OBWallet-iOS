@@ -46,6 +46,85 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_SignIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "login_SignUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "login_Welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
-        "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("Wrong email")
+        "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("Wrong email"),
+        "tips_addressIsOnClipboard": MessageLookupByLibrary.simpleMessage(
+            "Address is on your clipboard."),
+        "tips_applyCardFirst": MessageLookupByLibrary.simpleMessage(
+            "Please apply for a new card first."),
+        "tips_buyNftSuccess":
+            MessageLookupByLibrary.simpleMessage("Buy NFT Successfully."),
+        "tips_cardNoIsOnClipboard": MessageLookupByLibrary.simpleMessage(
+            "Card NO is on your clipboard."),
+        "tips_checkInputSocialId":
+            MessageLookupByLibrary.simpleMessage("Please input the social Id."),
+        "tips_codeIsOnClipboard": MessageLookupByLibrary.simpleMessage(
+            "Invitation Code is on your clipboard."),
+        "tips_comeSoon": MessageLookupByLibrary.simpleMessage("Coming Soon..."),
+        "tips_createEthAddress": MessageLookupByLibrary.simpleMessage(
+            "Please create an ethereum address."),
+        "tips_createWallet": MessageLookupByLibrary.simpleMessage(
+            "Please create a crypto wallet first."),
+        "tips_emptyAddress": MessageLookupByLibrary.simpleMessage(
+            "The address cannot be empty."),
+        "tips_emptyAmount":
+            MessageLookupByLibrary.simpleMessage("The amount cannot be empty."),
+        "tips_emptyAmount1": MessageLookupByLibrary.simpleMessage(
+            "The from amount cannot be empty."),
+        "tips_emptyAmount2": MessageLookupByLibrary.simpleMessage(
+            "The to amount cannot be empty."),
+        "tips_emptyCardNumber": MessageLookupByLibrary.simpleMessage(
+            "The card number cannot be empty."),
+        "tips_emptyPassword": MessageLookupByLibrary.simpleMessage(
+            "The password cannot be empty."),
+        "tips_emptyWif": MessageLookupByLibrary.simpleMessage("Empty WIF."),
+        "tips_failDeposit": MessageLookupByLibrary.simpleMessage(
+            "Deposit failed, please try again later."),
+        "tips_failWithdraw": MessageLookupByLibrary.simpleMessage(
+            "Withdraw failed, please try again later."),
+        "tips_getVerifyCode": MessageLookupByLibrary.simpleMessage(
+            "Please get verification code first."),
+        "tips_invalidAddress":
+            MessageLookupByLibrary.simpleMessage("Invalid address."),
+        "tips_kycNeed":
+            MessageLookupByLibrary.simpleMessage("You need KYC first."),
+        "tips_kycPassed": MessageLookupByLibrary.simpleMessage(
+            "KYC has been passed and please check the card page after a while."),
+        "tips_kycPending":
+            MessageLookupByLibrary.simpleMessage("KYC is pending."),
+        "tips_kycRejected": MessageLookupByLibrary.simpleMessage(
+            "KYC is rejected and please do it again."),
+        "tips_maxAmount": MessageLookupByLibrary.simpleMessage(
+            "The amount cannot exceed the maximum."),
+        "tips_maxAmount1": MessageLookupByLibrary.simpleMessage(
+            "The from amount cannot exceed the maximum."),
+        "tips_needFiveDollarFee": MessageLookupByLibrary.simpleMessage(
+            "There is a fee of \$5.00 to apply for a virtual card."),
+        "tips_selectCountry":
+            MessageLookupByLibrary.simpleMessage("Please select the country."),
+        "tips_selectDateOfBirth": MessageLookupByLibrary.simpleMessage(
+            "Please select the date of birth."),
+        "tips_successDeposit":
+            MessageLookupByLibrary.simpleMessage("Deposit successful."),
+        "tips_successWithdraw":
+            MessageLookupByLibrary.simpleMessage("Withdraw successful."),
+        "tips_updatedPassword":
+            MessageLookupByLibrary.simpleMessage("Password updated."),
+        "tips_waitForReview": MessageLookupByLibrary.simpleMessage(
+            "Please wait for manual review."),
+        "tips_waiting": MessageLookupByLibrary.simpleMessage("Please wait."),
+        "tips_waitingBalance": MessageLookupByLibrary.simpleMessage(
+            "Please wait for a while to see the balance."),
+        "tips_wifIsOnClipboard":
+            MessageLookupByLibrary.simpleMessage("WIF is on your clipboard."),
+        "tips_wrongPass": MessageLookupByLibrary.simpleMessage(
+            "Please enter the correct password."),
+        "tips_wrongPassMatch": MessageLookupByLibrary.simpleMessage(
+            "Wrong password and confirmation password."),
+        "tips_zeroAmount": MessageLookupByLibrary.simpleMessage(
+            "The amount must be greater than 0."),
+        "tips_zeroAmount1": MessageLookupByLibrary.simpleMessage(
+            "The from amount must be greater than 0."),
+        "tips_zeroAmount2": MessageLookupByLibrary.simpleMessage(
+            "The to amount must be greater than 0.")
       };
 }

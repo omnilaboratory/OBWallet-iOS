@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/credit_card_form.dart';
 import 'package:awallet/component/web_view.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
@@ -18,8 +18,6 @@ import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-import 'kyc.dart';
 
 class CardRecharge extends StatefulWidget {
   String amt;
@@ -319,7 +317,7 @@ class _CardRechargeState extends State<CardRecharge> {
 
   void virtualCardPay() {
     if (double.parse(cardInputAmount) > CommonService.cardInfo.balance) {
-      showToast(Tips.maxAmount.value, toastLength: Toast.LENGTH_SHORT);
+      showToast(S.of(context).tips_maxAmount, toastLength: Toast.LENGTH_SHORT);
       return;
     } else {
       cardRecharge();
@@ -337,9 +335,9 @@ class _CardRechargeState extends State<CardRecharge> {
         GlobalParams.eventBus.fire("exchange_showTips");
         Navigator.pop(context, true);
         if (widget.type == EnumChargeType.withdraw) {
-          showToast(Tips.successWithdraw.value);
+          showToast(S.of(context).tips_successWithdraw);
         } else if (widget.type == EnumChargeType.deposit) {
-          showToast(Tips.successDeposit.value);
+          showToast(S.of(context).tips_successDeposit);
         }
       } else {
         log(value.msg);

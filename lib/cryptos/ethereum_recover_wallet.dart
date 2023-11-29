@@ -1,7 +1,7 @@
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
-import 'package:awallet/bean/tips.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -18,12 +18,12 @@ class _EthereumRecoverWalletState extends State<EthereumRecoverWallet> {
   onConfirm(BuildContext context) {
     String wif = _wifController.value.text;
     if (wif.isEmpty) {
-      showToast(Tips.emptyWif.value);
+      showToast(S.of(context).tips_emptyWif);
       return;
     }
     bool right = EthService.getInstance().recoverWallet(context, wif);
     if (!right) {
-      showToast(Tips.emptyWif.value);
+      showToast(S.of(context).tips_emptyWif);
       return;
     }
     Navigator.pop(context, true);

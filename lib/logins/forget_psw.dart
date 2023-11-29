@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/generated/l10n.dart';
@@ -82,7 +81,7 @@ class _ForgetPswState extends State<ForgetPsw> {
 
     if (codeTimer != null) {
       if (codeTimer!.isActive) {
-        showToast(Tips.waiting.value);
+        showToast(S.of(context).tips_waiting);
         return;
       }
     }
@@ -295,11 +294,11 @@ class _ForgetPswState extends State<ForgetPsw> {
     ForgetPwdRequest request = ForgetPwdRequest();
     request.email = _emailController.value.text.trim();
     if (!EmailValidator.validate(request.email)) {
-      showToast(Tips.wrongEmail.value);
+      showToast(S.of(context).tips_WrongEmail);
       return;
     }
     if (verifyCodeResponse == null) {
-      showToast(Tips.getVerifyCode.value);
+      showToast(S.of(context).tips_getVerifyCode);
       return;
     }
 
@@ -307,7 +306,7 @@ class _ForgetPswState extends State<ForgetPsw> {
     request.password = _pswController.value.text.trim();
     var confirmPassword = _psw2Controller.value.text.trim();
     if (request.password != confirmPassword) {
-      showToast(Tips.wrongPassMatch.value);
+      showToast(S.of(context).tips_wrongPassMatch);
       return;
     }
     request.verifyCodeId = verifyCodeResponse!.verifyCodeId;
@@ -315,7 +314,7 @@ class _ForgetPswState extends State<ForgetPsw> {
       if (value.code == 1) {
         LocalStorage.remove(LocalStorage.userToken);
         LocalStorage.remove(LocalStorage.password);
-        showToast(Tips.updatedPassword.value);
+        showToast(S.of(context).tips_updatedPassword);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const Login()));
       }

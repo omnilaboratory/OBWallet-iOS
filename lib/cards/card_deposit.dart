@@ -1,11 +1,11 @@
 import 'dart:developer';
 
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/credit_card_form.dart';
 import 'package:awallet/component/web_view.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
@@ -233,7 +233,7 @@ class _CardDepositState extends State<CardDeposit> {
       if (resp.code == 1) {
         if (widget.nftAmt > 0) {
           GlobalParams.eventBus.fire("buyNftFinish");
-          alert(Tips.buyNftSuccess.value, context, () {
+          alert(S.of(context).tips_buyNftSuccess, context, () {
             Navigator.pop(context);
           });
         } else {
@@ -243,7 +243,7 @@ class _CardDepositState extends State<CardDeposit> {
                 .then((value) => {GlobalParams.eventBus.fire("applyCard")});
           }
 
-          alert(Tips.successDeposit.value, context, () {
+          alert(S.of(context).tips_successDeposit, context, () {
             Navigator.pop(context);
             GlobalParams.eventBus.fire("closeKycPage");
           });

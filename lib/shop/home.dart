@@ -2,13 +2,13 @@ import 'dart:developer';
 
 import 'package:awallet/bean/enum_eth_key.dart';
 import 'package:awallet/bean/nft_detail_info.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/cards/card_deposit.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/button_for_app_bar.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_nft_item.dart';
 import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -223,12 +223,12 @@ class _ShopHomeState extends State<ShopHome> {
                     text: 'Buy NFT',
                     onPressed: () {
                       if (nftTotalValue < 1) {
-                        showToast(Tips.emptyAmount.value);
+                        showToast(S.of(context).tips_emptyAmount);
                         return;
                       }
                       if (LocalStorage.getEthAddress() == null ||
                           LocalStorage.getEthAddress()!.isEmpty) {
-                        alert(Tips.createWallet.value, context, () {
+                        alert(S.of(context).tips_createWallet, context, () {
                           GlobalParams.eventBus.fire("goToCrypto");
                         });
                         return;

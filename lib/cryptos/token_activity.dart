@@ -1,6 +1,5 @@
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/common.dart';
@@ -10,6 +9,7 @@ import 'package:awallet/component/square_button.dart';
 import 'package:awallet/component/crypto_tx_item.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
@@ -145,7 +145,7 @@ class _TokenActivityState extends State<TokenActivity> {
             text: 'Pay',
             iconWidth: iconWidth,
             onPressed: () {
-              showToast(Tips.comeSoon.value);
+              showToast(S.of(context).tips_comeSoon);
             }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',

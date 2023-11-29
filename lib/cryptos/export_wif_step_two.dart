@@ -1,8 +1,8 @@
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/cryptos/export_wif_step_one.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
   }
 
   onCopy() {
-    showToast(Tips.wifIsOnClipboard.value,toastLength: Toast.LENGTH_SHORT);
+    showToast(S.of(context).tips_wifIsOnClipboard,toastLength: Toast.LENGTH_SHORT);
     Clipboard.setData(
         ClipboardData(text: LocalStorage.getEthPrivateKey()));
   }
@@ -79,7 +79,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
                     onTap: () {
                       Clipboard.setData(ClipboardData(
                           text: LocalStorage.getEthPrivateKey()));
-                      showToast(Tips.wifIsOnClipboard.value,
+                      showToast(S.of(context).tips_wifIsOnClipboard,
                           toastLength: Toast.LENGTH_SHORT);
                     },
                     child: Text(

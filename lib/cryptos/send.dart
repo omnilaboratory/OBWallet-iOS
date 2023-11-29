@@ -1,13 +1,13 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/enum_eth_key.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/cryptos/send_confirm.dart';
 import 'package:awallet/eth.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/precision_limit_formatter.dart';
@@ -70,27 +70,27 @@ class _SendState extends State<Send> {
 
   onNext() {
     if (_addressController.value.text.toString().trim().isEmpty) {
-      showToast(Tips.emptyAddress.value);
+      showToast(S.of(context).tips_emptyAddress);
       return;
     }
 
     if (!Eth.validateAddress(_addressController.value.text.trim())) {
-      showToast(Tips.invalidAddress.value);
+      showToast(S.of(context).tips_invalidAddress);
       return;
     }
 
     if (_amountController.value.text.toString().isEmpty) {
-      showToast(Tips.emptyAmount.value);
+      showToast(S.of(context).tips_emptyAmount);
       return;
     }
 
     if (double.parse(_amountController.value.text.toString()) == 0) {
-      showToast(Tips.zeroAmount.value, toastLength: Toast.LENGTH_SHORT);
+      showToast(S.of(context).tips_zeroAmount, toastLength: Toast.LENGTH_SHORT);
       return;
     }
 
     if (double.parse(_amountController.value.text) > dropdownValue.balance!) {
-      showToast(Tips.maxAmount.value);
+      showToast(S.of(context).tips_maxAmount);
       return;
     }
 

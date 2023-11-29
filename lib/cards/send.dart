@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/enum_charge_type.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
@@ -105,15 +105,15 @@ class _SendState extends State<Send> {
                                 keyboardType: TextInputType.number,
                                 validator: (v) {
                               if (v == null || v.trim().isEmpty) {
-                                return Tips.emptyAmount.value;
+                                return S.of(context).tips_emptyAmount;
                               }
 
                               double currentValue = double.tryParse(v) ?? 0;
                               if (currentValue > totalBalanceUsd) {
-                                return Tips.maxAmount.value;
+                                return S.of(context).tips_maxAmount;
                               }
                               if (currentValue <= 0) {
-                                return Tips.zeroAmount.value;
+                                return S.of(context).tips_zeroAmount;
                               }
                               return null;
                             }, onChanged: (value) {
@@ -206,23 +206,23 @@ class _SendState extends State<Send> {
 
   void withDraw() {
     if (_cardNumberController.value.text.toString().isEmpty) {
-      showToast(Tips.emptyCardNumber.value);
+      showToast(S.of(context).tips_emptyCardNumber);
       return;
     }
 
     if (_amountController.value.text.toString().isEmpty) {
-      showToast(Tips.emptyAmount.value);
+      showToast(S.of(context).tips_emptyAmount);
       return;
     }
 
     if (double.parse(_amountController.value.text.toString()) == 0) {
-      showToast(Tips.zeroAmount.value, toastLength: Toast.LENGTH_SHORT);
+      showToast(S.of(context).tips_zeroAmount, toastLength: Toast.LENGTH_SHORT);
       return;
     }
 
     if (double.parse(_amountController.value.text.toString()) >
         totalBalanceUsd) {
-      showToast(Tips.maxAmount.value, toastLength: Toast.LENGTH_SHORT);
+      showToast(S.of(context).tips_maxAmount, toastLength: Toast.LENGTH_SHORT);
       return;
     }
 
@@ -234,16 +234,16 @@ class _SendState extends State<Send> {
         .then((resp) async {
       if (resp.code == 1) {
         if (widget.type == EnumChargeType.withdraw) {
-          showToast(Tips.successWithdraw.value);
+          showToast(S.of(context).tips_successWithdraw);
         } else if (widget.type == EnumChargeType.deposit){
-          showToast(Tips.successDeposit.value);
+          showToast(S.of(context).tips_successDeposit);
         }
         Navigator.pop(context, true);
       } else {
         if (widget.type == EnumChargeType.withdraw) {
-          showToast(Tips.failWithdraw.value);
+          showToast(S.of(context).tips_failWithdraw);
         } else if (widget.type == EnumChargeType.deposit) {
-          showToast(Tips.failDeposit.value);
+          showToast(S.of(context).tips_failDeposit);
         }
       }
       loading.remove();

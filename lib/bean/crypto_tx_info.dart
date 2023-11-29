@@ -1,5 +1,3 @@
-import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
-
 class CryptoTxInfo {
   late final String title;
   late final DateTime txTime;

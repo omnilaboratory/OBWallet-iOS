@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
@@ -20,15 +20,15 @@ import 'card_deposit.dart';
 
 showKycTips(BuildContext context) {
   if (CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
-    alert(Tips.kycPassed.value, context, () {});
+    alert(S.of(context).tips_kycPassed, context, () {});
     return;
   }
   if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value) {
-    alert(Tips.kycPending.value, context, () {});
+    alert(S.of(context).tips_kycPending, context, () {});
     return;
   }
   if (CommonService.userInfo!.kycStatus == EnumKycStatus.rejected.value) {
-    alert(Tips.kycRejected.value, context, () {
+    alert(S.of(context).tips_kycRejected, context, () {
       showDialog(
           context: context,
           builder: (context) {
@@ -345,12 +345,12 @@ class _KycState extends State<Kyc> {
 
   void onKyc() {
     if (selectedCountry == null) {
-      showToast(Tips.selectCountry.value);
+      showToast(S.of(context).tips_selectCountry);
       return;
     }
 
     if (dateOfBirthTips == "Date of birth") {
-      showToast(Tips.selectDateOfBirth.value);
+      showToast(S.of(context).tips_selectDateOfBirth);
       return;
     }
 
@@ -395,7 +395,7 @@ class _KycState extends State<Kyc> {
                     );
                   });
             } else {
-              alert(Tips.waitForReview.value, context, () {
+              alert(S.of(context).tips_waitForReview, context, () {
                 Navigator.pop(context, true);
               });
             }

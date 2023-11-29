@@ -1,11 +1,11 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/card_item_info.dart';
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/card_item.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -43,7 +43,7 @@ class _SelectCardTypeState extends State<SelectCardType> {
         var resp = value.data as UserInfo;
         CommonService.userInfo = resp;
         GlobalParams.eventBus.fire("kyc_state");
-        alert(Tips.waitForReview.value, context, () {
+        alert(S.of(context).tips_waitForReview, context, () {
           Navigator.pop(context, true);
           Navigator.pop(context, true);
         });

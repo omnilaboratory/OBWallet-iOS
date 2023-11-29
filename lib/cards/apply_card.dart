@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class _ApplyCardState extends State<ApplyCard> {
   onClickApply() {
     var input = _socialIdController.value.text.trim();
     if (input.isEmpty) {
-      showToast(Tips.checkInputSocialId.value);
+      showToast(S.of(context).tips_checkInputSocialId);
       return;
     }
     FocusScope.of(context).requestFocus(FocusNode());
@@ -28,7 +28,7 @@ class _ApplyCardState extends State<ApplyCard> {
 
     CardService.getInstance().applyCard(context, input).then((value) {
       if (value.code == 1) {
-        alert(Tips.waitForReview.value, context, (){
+        alert(S.of(context).tips_waitForReview, context, (){
           Navigator.pop(context, true);
         });
       } else {

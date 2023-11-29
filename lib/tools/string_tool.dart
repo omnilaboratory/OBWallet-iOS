@@ -1,4 +1,3 @@
-import 'package:decimal/decimal.dart';
 import 'package:intl/intl.dart';
 
 class StringTools {
