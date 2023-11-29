@@ -50,41 +50,71 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Password`
+  String get common_Password {
+    return Intl.message(
+      'Password',
+      name: 'common_Password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username`
+  String get common_Username {
+    return Intl.message(
+      'Username',
+      name: 'common_Username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome`
+  String get login_Welcome {
+    return Intl.message(
+      'Welcome',
+      name: 'login_Welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wallet Description`
+  String get login_Desc {
+    return Intl.message(
+      'Wallet Description',
+      name: 'login_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign In`
-  String get login_signIn {
+  String get login_SignIn {
     return Intl.message(
       'Sign In',
-      name: 'login_signIn',
+      name: 'login_SignIn',
       desc: '',
       args: [],
     );
   }
 
   /// `Forgot Password?`
-  String get login_ForgetPsw {
+  String get login_ForgotPsw {
     return Intl.message(
       'Forgot Password?',
-      name: 'login_ForgetPsw',
+      name: 'login_ForgotPsw',
       desc: '',
       args: [],
     );
   }
 
   /// `Sign Up`
-  String get login_signUp {
+  String get login_SignUp {
     return Intl.message(
       'Sign Up',
-      name: 'login_signUp',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// ``
-  String get profile_username {
-    return Intl.message(
-      '',
-      name: 'profile_username',
+      name: 'login_SignUp',
       desc: '',
       args: [],
     );

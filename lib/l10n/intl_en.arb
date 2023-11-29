@@ -1,10 +1,12 @@
 {
-  "login_signIn": "Sign In",
-  "login_ForgetPsw": "Forgot Password?",
-  "login_signUp": "Sign Up",
 
-  "profile_username": ""
+  "common_Password": "Password",
+  "common_Username": "Username",
 
-
+  "login_Welcome": "Welcome",
+  "login_Desc": "Wallet Description",
+  "login_SignIn": "Sign In",
+  "login_ForgotPsw": "Forgot Password?",
+  "login_SignUp": "Sign Up"
 
 }

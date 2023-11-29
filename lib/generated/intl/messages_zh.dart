@@ -22,8 +22,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "login_ForgetPsw": MessageLookupByLibrary.simpleMessage("忘记密码?"),
-        "login_signIn": MessageLookupByLibrary.simpleMessage("登录"),
-        "login_signUp": MessageLookupByLibrary.simpleMessage("注册")
+        "common_Password": MessageLookupByLibrary.simpleMessage("密码"),
+        "common_Username": MessageLookupByLibrary.simpleMessage("用户名"),
+        "login_Desc": MessageLookupByLibrary.simpleMessage("Wallet 描述"),
+        "login_ForgotPsw": MessageLookupByLibrary.simpleMessage("忘记密码?"),
+        "login_SignIn": MessageLookupByLibrary.simpleMessage("登录"),
+        "login_SignUp": MessageLookupByLibrary.simpleMessage("注册"),
+        "login_Welcome": MessageLookupByLibrary.simpleMessage("欢迎")
       };
 }

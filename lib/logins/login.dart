@@ -8,7 +8,6 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/home.dart';
 import 'package:awallet/logins/sign_up_step1.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
-import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -54,10 +53,10 @@ class _LoginState extends State<Login> {
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 80, right: 20),
           child: Column(children: [
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image(
+                const Image(
                   image: AssetImage("asset/images/image_logo.png"),
                   width: 72,
                   height: 72,
@@ -66,10 +65,10 @@ class _LoginState extends State<Login> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 4),
+                      padding: const EdgeInsets.only(bottom: 4),
                       child: Text(
-                        'Welcome',
-                        style: TextStyle(
+                        S.of(context).login_Welcome,
+                        style: const TextStyle(
                           color: Color(0xFF333333),
                           fontSize: 48,
                           fontWeight: FontWeight.w700,
@@ -77,8 +76,8 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     Text(
-                      'Wallet Description',
-                      style: TextStyle(
+                      S.of(context).login_Desc,
+                      style: const TextStyle(
                         color: Color(0xFF999999),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -131,7 +130,7 @@ class _LoginState extends State<Login> {
                                         const SignUpStepOne()));
                           },
                           child: Text(
-                            S.of(context).login_signUp,
+                            S.of(context).login_SignUp,
                             style: const TextStyle(
                               color: Color(0xFF06D78F),
                               fontSize: 20,
@@ -150,7 +149,7 @@ class _LoginState extends State<Login> {
                                             const ForgetPsw()));
                               },
                               child: Text(
-                                S.of(context).login_ForgetPsw,
+                                S.of(context).login_ForgotPsw,
                                 style: const TextStyle(
                                     color: Color(0xFF666666),
                                     fontSize: 15,
@@ -197,24 +196,22 @@ class _LoginState extends State<Login> {
             )
           ],
         ),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                S.of(context).login_signIn,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const Image(
-                image: AssetImage("asset/images/btn_arrow-right.png"),
-                width: 36,
-                height: 36,
-              )
-            ]),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Text(
+            S.of(context).login_SignIn,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const Image(
+            image: AssetImage("asset/images/btn_arrow-right.png"),
+            width: 36,
+            height: 36,
+          )
+        ]),
       ),
     );
   }
@@ -233,10 +230,10 @@ class _LoginState extends State<Login> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            createTextFormField(_unameController, "Username",
+            createTextFormField(_unameController, S.of(context).common_Username,
                 icon: const Icon(Icons.person)),
             const SizedBox(height: 20),
-            createTextFormField(_pswController, "Password",
+            createTextFormField(_pswController, S.of(context).common_Password,
                 icon: const Icon(Icons.lock), obscureText: true),
           ],
         ),
