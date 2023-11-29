@@ -22,14 +22,30 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "common_Back": MessageLookupByLibrary.simpleMessage("Back"),
+        "common_CodeLeve1": MessageLookupByLibrary.simpleMessage("Weak"),
+        "common_CodeLeve2": MessageLookupByLibrary.simpleMessage("Normal"),
+        "common_CodeLeve3": MessageLookupByLibrary.simpleMessage("Strong"),
+        "common_ConfirmNewPsw":
+            MessageLookupByLibrary.simpleMessage("Confirm New Password"),
+        "common_Done": MessageLookupByLibrary.simpleMessage("Done"),
+        "common_Email": MessageLookupByLibrary.simpleMessage("Email"),
+        "common_GetCode": MessageLookupByLibrary.simpleMessage("Get Code"),
+        "common_NewPsw": MessageLookupByLibrary.simpleMessage("New Password"),
         "common_Password": MessageLookupByLibrary.simpleMessage("Password"),
         "common_Username": MessageLookupByLibrary.simpleMessage("Username"),
+        "common_VerifyCode":
+            MessageLookupByLibrary.simpleMessage("Verify Code"),
+        "common_Wrong": MessageLookupByLibrary.simpleMessage("Wrong "),
+        "forgetPsw_Title":
+            MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "login_Desc":
             MessageLookupByLibrary.simpleMessage("Wallet Description"),
         "login_ForgotPsw":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "login_SignIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "login_SignUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
-        "login_Welcome": MessageLookupByLibrary.simpleMessage("Welcome")
+        "login_Welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("Wrong email")
       };
 }

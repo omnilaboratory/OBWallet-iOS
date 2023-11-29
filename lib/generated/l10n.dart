@@ -70,6 +70,116 @@ class S {
     );
   }
 
+  /// `Email`
+  String get common_Email {
+    return Intl.message(
+      'Email',
+      name: 'common_Email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify Code`
+  String get common_VerifyCode {
+    return Intl.message(
+      'Verify Code',
+      name: 'common_VerifyCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weak`
+  String get common_CodeLeve1 {
+    return Intl.message(
+      'Weak',
+      name: 'common_CodeLeve1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal`
+  String get common_CodeLeve2 {
+    return Intl.message(
+      'Normal',
+      name: 'common_CodeLeve2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Strong`
+  String get common_CodeLeve3 {
+    return Intl.message(
+      'Strong',
+      name: 'common_CodeLeve3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get Code`
+  String get common_GetCode {
+    return Intl.message(
+      'Get Code',
+      name: 'common_GetCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get common_NewPsw {
+    return Intl.message(
+      'New Password',
+      name: 'common_NewPsw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm New Password`
+  String get common_ConfirmNewPsw {
+    return Intl.message(
+      'Confirm New Password',
+      name: 'common_ConfirmNewPsw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back`
+  String get common_Back {
+    return Intl.message(
+      'Back',
+      name: 'common_Back',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get common_Done {
+    return Intl.message(
+      'Done',
+      name: 'common_Done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wrong `
+  String get common_Wrong {
+    return Intl.message(
+      'Wrong ',
+      name: 'common_Wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Welcome`
   String get login_Welcome {
     return Intl.message(
@@ -115,6 +225,26 @@ class S {
     return Intl.message(
       'Sign Up',
       name: 'login_SignUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot Password`
+  String get forgetPsw_Title {
+    return Intl.message(
+      'Forgot Password',
+      name: 'forgetPsw_Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wrong email`
+  String get tips_WrongEmail {
+    return Intl.message(
+      'Wrong email',
+      name: 'tips_WrongEmail',
       desc: '',
       args: [],
     );

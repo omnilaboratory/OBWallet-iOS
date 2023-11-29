@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/tips.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/logins/login.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
@@ -26,11 +27,11 @@ class _ForgetPswState extends State<ForgetPsw> {
   final TextEditingController _pswController = TextEditingController();
   final TextEditingController _psw2Controller = TextEditingController();
 
-  String passwordTitle = "Weak";
+  String passwordTitle = S.current.common_CodeLeve1;
 
   VerifyCodeResponse? verifyCodeResponse;
 
-  String getCodeTitle = "Get code";
+  String getCodeTitle = S.current.common_GetCode;
   bool getCodeTitleEnable = true;
   Timer? codeTimer;
 
@@ -40,7 +41,7 @@ class _ForgetPswState extends State<ForgetPsw> {
         var currTick = 60 - timer.tick;
         if (currTick > 0) {
           getCodeTitleEnable = false;
-          getCodeTitle = "Get code(${currTick}s)";
+          getCodeTitle = "${S.of(context).common_GetCode}(${currTick}s)";
           setState(() {});
         } else {
           resetCode();
@@ -58,7 +59,7 @@ class _ForgetPswState extends State<ForgetPsw> {
     if (codeTimer != null && codeTimer!.isActive) {
       getCodeTitleEnable = true;
       codeTimer!.cancel();
-      getCodeTitle = "Get code";
+      getCodeTitle = S.of(context).common_GetCode;
       codeTimer = null;
     }
     setState(() {});
@@ -75,7 +76,7 @@ class _ForgetPswState extends State<ForgetPsw> {
   getVerifyCode() async {
     var email = _emailController.value.text.trim();
     if (email.isEmpty || !EmailValidator.validate(email)) {
-      showToast(Tips.wrongEmail.value);
+      showToast(S.of(context).tips_WrongEmail);
       return;
     }
 
@@ -121,13 +122,9 @@ class _ForgetPswState extends State<ForgetPsw> {
   AppBar buildAppBar() {
     return AppBar(
         automaticallyImplyLeading: false,
-        title: const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          // Image(
-          //     width: 24,
-          //     height: 33,
-          //     image: AssetImage("asset/images/logo_head.png")),
-          Text('Forget Password',
-              style: TextStyle(
+        title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Text(S.of(context).forgetPsw_Title,
+              style: const TextStyle(
                 color: Color(0xFF333333),
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
@@ -141,14 +138,14 @@ class _ForgetPswState extends State<ForgetPsw> {
       children: [
         BottomButton(
           icon: 'asset/images/icon_arrow_left_green.png',
-          text: 'BACK',
+          text: S.of(context).common_Back,
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         BottomButton(
           icon: 'asset/images/icon_confirm_green.png',
-          text: 'DONE',
+          text: S.of(context).common_Done,
           onPressed: () {
             if ((_formKey.currentState as FormState).validate()) {
               onClickDone();
@@ -184,9 +181,7 @@ class _ForgetPswState extends State<ForgetPsw> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            createTextFormField(
-                _emailController,
-                "Email",
+            createTextFormField(_emailController, S.of(context).common_Email,
                 icon: const Icon(Icons.email),
                 maxLength: 50,
                 keyboardType: TextInputType.emailAddress),
@@ -199,8 +194,7 @@ class _ForgetPswState extends State<ForgetPsw> {
                   child: SizedBox(
                     width: 180,
                     child: createTextFormField(
-                        _codeController,
-                        "Verify Code",
+                        _codeController, S.of(context).common_VerifyCode,
                         icon: const Icon(Icons.verified_user_outlined),
                         maxLength: 6,
                         keyboardType: TextInputType.number),
@@ -239,7 +233,7 @@ class _ForgetPswState extends State<ForgetPsw> {
                       maxLines: 1,
                       maxLength: 16,
                       decoration: InputDecoration(
-                        hintText: "New Password",
+                        hintText: S.of(context).common_NewPsw,
                         hintStyle: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w400),
                         prefixIcon: const Icon(Icons.password),
@@ -257,7 +251,9 @@ class _ForgetPswState extends State<ForgetPsw> {
                         updatePswStrength(_pswController.text);
                       },
                       validator: (v) {
-                        return v!.trim().isNotEmpty ? null : "Wrong New Password";
+                        return v!.trim().isNotEmpty
+                            ? null
+                            : "${S.of(context).common_Wrong}${S.of(context).common_NewPsw}";
                       },
                     ),
                   ),
@@ -271,8 +267,7 @@ class _ForgetPswState extends State<ForgetPsw> {
             ),
             const SizedBox(height: 15),
             createTextFormField(
-                _psw2Controller,
-                "Confirm New Password",
+                _psw2Controller, S.of(context).common_ConfirmNewPsw,
                 icon: const Icon(Icons.password),
                 obscureText: true,
                 maxLength: 16),
@@ -285,13 +280,13 @@ class _ForgetPswState extends State<ForgetPsw> {
   updatePswStrength(String psw) {
     int strength = Utils.getStrength(psw);
     if (strength < 1) {
-      passwordTitle = "Weak";
+      passwordTitle = S.of(context).common_CodeLeve1;
     }
     if (strength == 2) {
-      passwordTitle = "Normal";
+      passwordTitle = S.of(context).common_CodeLeve2;
     }
     if (strength > 2) {
-      passwordTitle = "Strong";
+      passwordTitle = S.of(context).common_CodeLeve3;
     }
     setState(() {});
   }
