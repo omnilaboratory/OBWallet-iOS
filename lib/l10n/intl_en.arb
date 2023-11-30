@@ -31,6 +31,11 @@
   "applyCard_Desc2": "- Pay conveniently for online transactions \n- Exchange Currencies & Crypto \n- Send & Receive",
   "applyCard_ApplyLater": "APPLY LATER",
 
+  "main_home_Card": "Card",
+  "main_home_Crypto": "Crypto",
+  "main_home_Shop": "Shop",
+  "main_home_Profile": "Profile",
+
   "tips_WrongEmail": "Wrong email",
   "tips_comeSoon": "Coming Soon...",
   "tips_emptyAddress": "The address cannot be empty.",

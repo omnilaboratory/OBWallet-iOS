@@ -56,6 +56,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_SignIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "login_SignUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "login_Welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "main_home_Card": MessageLookupByLibrary.simpleMessage("Card"),
+        "main_home_Crypto": MessageLookupByLibrary.simpleMessage("Crypto"),
+        "main_home_Profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "main_home_Shop": MessageLookupByLibrary.simpleMessage("Shop"),
         "signUp_InvitationCode":
             MessageLookupByLibrary.simpleMessage("Invitation Code"),
         "signUp_Nickname": MessageLookupByLibrary.simpleMessage("Nickname"),

@@ -330,6 +330,46 @@ class S {
     );
   }
 
+  /// `Card`
+  String get main_home_Card {
+    return Intl.message(
+      'Card',
+      name: 'main_home_Card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Crypto`
+  String get main_home_Crypto {
+    return Intl.message(
+      'Crypto',
+      name: 'main_home_Crypto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shop`
+  String get main_home_Shop {
+    return Intl.message(
+      'Shop',
+      name: 'main_home_Shop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get main_home_Profile {
+    return Intl.message(
+      'Profile',
+      name: 'main_home_Profile',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Wrong email`
   String get tips_WrongEmail {
     return Intl.message(

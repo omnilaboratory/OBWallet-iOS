@@ -1,3 +1,4 @@
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/profile/home.dart';
 import 'package:awallet/shop/home.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -53,22 +54,22 @@ class _HomePageState extends State<HomePage> {
           currentIndex: _selectedPage,
           onTap: _onItemTapped,
           type: BottomNavigationBarType.fixed,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.credit_card),
-              label: 'Card',
+              icon: const Icon(Icons.credit_card),
+              label: S.of(context).main_home_Card,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.currency_bitcoin_sharp),
-              label: 'Crypto',
+              icon: const Icon(Icons.currency_bitcoin_sharp),
+              label: S.of(context).main_home_Crypto,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shop),
-              label: 'Shop',
+              icon: const Icon(Icons.shop),
+              label: S.of(context).main_home_Shop,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
+              icon: const Icon(Icons.person),
+              label:S.of(context).main_home_Profile,
             ),
           ]),
     );
