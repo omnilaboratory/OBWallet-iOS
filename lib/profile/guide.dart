@@ -1,3 +1,4 @@
+import 'package:awallet/bean/guide_info.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/generated/l10n.dart';
@@ -12,16 +13,26 @@ class Guide extends StatefulWidget {
 }
 
 class _GuideState extends State<Guide> {
-  List<String> imageUrls = [
-    "asset/images/guide_1.png",
-    "asset/images/guide_2.png",
-    "asset/images/guide_3.png",
-    "asset/images/guide_4.png",
-    "asset/images/guide_5.png"
-  ];
-
   @override
   Widget build(BuildContext context) {
+    List<GuideInfo> imageUrls = [
+      GuideInfo(
+          url: "asset/images/guide_1.png",
+          desc: S.of(context).profile_guide_desc1),
+      GuideInfo(
+          url: "asset/images/guide_2.png",
+          desc: S.of(context).profile_guide_desc2),
+      GuideInfo(
+          url: "asset/images/guide_3.png",
+          desc: S.of(context).profile_guide_desc3),
+      GuideInfo(
+          url: "asset/images/guide_4.png",
+          desc: S.of(context).profile_guide_desc4),
+      GuideInfo(
+          url: "asset/images/guide_5.png",
+          desc: S.of(context).profile_guide_desc5),
+    ];
+
     var size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -41,17 +52,26 @@ class _GuideState extends State<Guide> {
                   children: [
                     const SizedBox(height: 30),
                     createDialogTitle('Guide'),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     SizedBox(
-                      height: 480,
+                      height: 520,
                       child: Swiper(
                         itemCount: imageUrls.length,
                         autoplay: true,
                         duration: 600,
                         itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 20),
-                            child: Image.asset(imageUrls[index]),
+                          return Column(
+                            children: [
+                              SizedBox(
+                                  height: 400,
+                                  child: Image.asset(imageUrls[index].url)),
+                              const SizedBox(height: 30),
+                              Text(
+                                imageUrls[index].desc,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            ],
                           );
                         },
                         pagination: const SwiperPagination(

@@ -89,6 +89,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "main_home_Crypto": MessageLookupByLibrary.simpleMessage("Crypto"),
         "main_home_Profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "main_home_Shop": MessageLookupByLibrary.simpleMessage("Shop"),
+        "profile_guide_desc1":
+            MessageLookupByLibrary.simpleMessage("profile_guide_desc1"),
+        "profile_guide_desc2":
+            MessageLookupByLibrary.simpleMessage("profile_guide_desc2"),
+        "profile_guide_desc3":
+            MessageLookupByLibrary.simpleMessage("profile_guide_desc3"),
+        "profile_guide_desc4":
+            MessageLookupByLibrary.simpleMessage("profile_guide_desc4"),
+        "profile_guide_desc5":
+            MessageLookupByLibrary.simpleMessage("profile_guide_desc5"),
         "profile_reward_subTitle1": m1,
         "profile_title_RewardFrom":
             MessageLookupByLibrary.simpleMessage("Reward From"),

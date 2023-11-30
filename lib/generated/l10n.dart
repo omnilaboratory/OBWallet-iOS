@@ -640,6 +640,56 @@ class S {
     );
   }
 
+  /// `profile_guide_desc1`
+  String get profile_guide_desc1 {
+    return Intl.message(
+      'profile_guide_desc1',
+      name: 'profile_guide_desc1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `profile_guide_desc2`
+  String get profile_guide_desc2 {
+    return Intl.message(
+      'profile_guide_desc2',
+      name: 'profile_guide_desc2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `profile_guide_desc3`
+  String get profile_guide_desc3 {
+    return Intl.message(
+      'profile_guide_desc3',
+      name: 'profile_guide_desc3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `profile_guide_desc4`
+  String get profile_guide_desc4 {
+    return Intl.message(
+      'profile_guide_desc4',
+      name: 'profile_guide_desc4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `profile_guide_desc5`
+  String get profile_guide_desc5 {
+    return Intl.message(
+      'profile_guide_desc5',
+      name: 'profile_guide_desc5',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Wrong email`
   String get tips_WrongEmail {
     return Intl.message(

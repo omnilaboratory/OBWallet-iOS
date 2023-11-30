@@ -68,6 +68,11 @@
 
   "profile_title_RewardFrom": "Reward From",
   "profile_reward_subTitle1": "Total Reward:{totalReward} from {totalUser} Users",
+  "profile_guide_desc1": "profile_guide_desc1",
+  "profile_guide_desc2": "profile_guide_desc2",
+  "profile_guide_desc3": "profile_guide_desc3",
+  "profile_guide_desc4": "profile_guide_desc4",
+  "profile_guide_desc5": "profile_guide_desc5",
 
   "tips_WrongEmail": "Wrong email",
   "tips_comeSoon": "Coming Soon...",
