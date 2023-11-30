@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/guide_info.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
@@ -65,11 +66,16 @@ class _GuideState extends State<Guide> {
                               SizedBox(
                                   height: 400,
                                   child: Image.asset(imageUrls[index].url)),
-                              const SizedBox(height: 30),
-                              Text(
+                              const SizedBox(height: 12),
+                              AutoSizeText(
                                 imageUrls[index].desc,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
+                                maxLines: 3,
+                                minFontSize: 14,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ],
                           );

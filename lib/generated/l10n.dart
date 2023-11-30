@@ -640,10 +640,10 @@ class S {
     );
   }
 
-  /// `profile_guide_desc1`
+  /// `profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1`
   String get profile_guide_desc1 {
     return Intl.message(
-      'profile_guide_desc1',
+      'profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1',
       name: 'profile_guide_desc1',
       desc: '',
       args: [],
