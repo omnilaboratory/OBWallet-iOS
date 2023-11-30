@@ -10,6 +10,7 @@
   "common_NewPsw": "New Password",
   "common_ConfirmNewPsw": "Confirm New Password",
   "common_Back": "Back",
+  "common_Next": "NEXT",
   "common_Done": "Done",
   "common_Wrong": "Wrong ",
 
@@ -19,6 +20,16 @@
   "login_ForgotPsw": "Forgot Password?",
   "login_SignUp": "Sign Up",
   "forgetPsw_Title": "Forgot Password",
+
+  "signUp_Title": "Sign Up",
+  "signUp_Nickname": "Nickname",
+  "signUp_InvitationCode": "Invitation Code",
+
+  "applyCard_Title": "Apply Card",
+  "applyCard_VirtualCard": "Virtual Card",
+  "applyCard_Desc1": "Our new virtual card allows you to：",
+  "applyCard_Desc2": "- Pay conveniently for online transactions \n- Exchange Currencies & Crypto \n- Send & Receive",
+  "applyCard_ApplyLater": "APPLY LATER",
 
   "tips_WrongEmail": "Wrong email",
   "tips_comeSoon": "Coming Soon...",

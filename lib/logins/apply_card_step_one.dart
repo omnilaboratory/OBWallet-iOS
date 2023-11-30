@@ -1,4 +1,5 @@
 import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/home.dart';
 import 'package:flutter/material.dart';
 
@@ -17,16 +18,16 @@ class _ApplyCardStepOneState extends State<ApplyCardStepOne> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
-          title: const Row(
+          title: Row(
             children: [
-              Image(
+              const Image(
                   width: 24,
                   height: 33,
                   image: AssetImage("asset/images/logo_head.png")),
-              SizedBox(width: 6),
+              const SizedBox(width: 6),
               Text(
-                'Apply Card',
-                style: TextStyle(
+                S.of(context).applyCard_Title,
+                style: const TextStyle(
                   color: Color(0xFF333333),
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
@@ -72,9 +73,9 @@ class _ApplyCardStepOneState extends State<ApplyCardStepOne> {
                                             'asset/images/image_virtual_card_bg.png'),
                                       ),
                                     ),
-                                    child: const Text(
-                                      'Virtual Card',
-                                      style: TextStyle(
+                                    child: Text(
+                                      S.of(context).applyCard_VirtualCard,
+                                      style: const TextStyle(
                                         color: Color(0xFF666666),
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
@@ -96,23 +97,23 @@ class _ApplyCardStepOneState extends State<ApplyCardStepOne> {
                       )
                     ],
                   )),
-              const Padding(
-                padding: EdgeInsets.only(left: 20, top: 25),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, top: 25),
                 child: Text(
-                  'Our new virtual card allows you to：',
+                  S.of(context).applyCard_Desc1,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xFF333333),
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 20, top: 17),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, top: 17),
                 child: Text(
-                  '- Pay conveniently for online transactions\n- Exchange Currencies & Crypto\n- Send & Receive',
-                  style: TextStyle(
+                  S.of(context).applyCard_Desc2,
+                  style: const TextStyle(
                     color: Color(0xFF666666),
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -125,7 +126,7 @@ class _ApplyCardStepOneState extends State<ApplyCardStepOne> {
               ),
               BottomButton(
                 icon: 'asset/images/icon_arrow_right_green.png',
-                text: 'APPLY LATER',
+                text: S.of(context).applyCard_ApplyLater,
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,

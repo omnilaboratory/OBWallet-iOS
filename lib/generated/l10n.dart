@@ -160,6 +160,16 @@ class S {
     );
   }
 
+  /// `NEXT`
+  String get common_Next {
+    return Intl.message(
+      'NEXT',
+      name: 'common_Next',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Done`
   String get common_Done {
     return Intl.message(
@@ -235,6 +245,86 @@ class S {
     return Intl.message(
       'Forgot Password',
       name: 'forgetPsw_Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get signUp_Title {
+    return Intl.message(
+      'Sign Up',
+      name: 'signUp_Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nickname`
+  String get signUp_Nickname {
+    return Intl.message(
+      'Nickname',
+      name: 'signUp_Nickname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invitation Code`
+  String get signUp_InvitationCode {
+    return Intl.message(
+      'Invitation Code',
+      name: 'signUp_InvitationCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply Card`
+  String get applyCard_Title {
+    return Intl.message(
+      'Apply Card',
+      name: 'applyCard_Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Virtual Card`
+  String get applyCard_VirtualCard {
+    return Intl.message(
+      'Virtual Card',
+      name: 'applyCard_VirtualCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our new virtual card allows you to：`
+  String get applyCard_Desc1 {
+    return Intl.message(
+      'Our new virtual card allows you to：',
+      name: 'applyCard_Desc1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `- Pay conveniently for online transactions \n- Exchange Currencies & Crypto \n- Send & Receive`
+  String get applyCard_Desc2 {
+    return Intl.message(
+      '- Pay conveniently for online transactions \n- Exchange Currencies & Crypto \n- Send & Receive',
+      name: 'applyCard_Desc2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `APPLY LATER`
+  String get applyCard_ApplyLater {
+    return Intl.message(
+      'APPLY LATER',
+      name: 'applyCard_ApplyLater',
       desc: '',
       args: [],
     );

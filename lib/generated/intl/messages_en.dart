@@ -22,6 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "applyCard_ApplyLater":
+            MessageLookupByLibrary.simpleMessage("APPLY LATER"),
+        "applyCard_Desc1": MessageLookupByLibrary.simpleMessage(
+            "Our new virtual card allows you to："),
+        "applyCard_Desc2": MessageLookupByLibrary.simpleMessage(
+            "- Pay conveniently for online transactions \n- Exchange Currencies & Crypto \n- Send & Receive"),
+        "applyCard_Title": MessageLookupByLibrary.simpleMessage("Apply Card"),
+        "applyCard_VirtualCard":
+            MessageLookupByLibrary.simpleMessage("Virtual Card"),
         "common_Back": MessageLookupByLibrary.simpleMessage("Back"),
         "common_CodeLeve1": MessageLookupByLibrary.simpleMessage("Weak"),
         "common_CodeLeve2": MessageLookupByLibrary.simpleMessage("Normal"),
@@ -32,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_Email": MessageLookupByLibrary.simpleMessage("Email"),
         "common_GetCode": MessageLookupByLibrary.simpleMessage("Get Code"),
         "common_NewPsw": MessageLookupByLibrary.simpleMessage("New Password"),
+        "common_Next": MessageLookupByLibrary.simpleMessage("NEXT"),
         "common_Password": MessageLookupByLibrary.simpleMessage("Password"),
         "common_Username": MessageLookupByLibrary.simpleMessage("Username"),
         "common_VerifyCode":
@@ -46,6 +56,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_SignIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "login_SignUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "login_Welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "signUp_InvitationCode":
+            MessageLookupByLibrary.simpleMessage("Invitation Code"),
+        "signUp_Nickname": MessageLookupByLibrary.simpleMessage("Nickname"),
+        "signUp_Title": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("Wrong email"),
         "tips_addressIsOnClipboard": MessageLookupByLibrary.simpleMessage(
             "Address is on your clipboard."),

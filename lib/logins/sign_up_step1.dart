@@ -8,7 +8,6 @@ import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/utils.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dash/flutter_dash.dart';
 
 import 'apply_card_step_one.dart';
 
@@ -28,11 +27,11 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   final TextEditingController _psw2Controller = TextEditingController();
   final TextEditingController _inviteCodeController = TextEditingController();
 
-  String passwordTitle = "Weak";
+  String passwordTitle = S.current.common_CodeLeve1;
 
   VerifyCodeResponse? verifyCodeResponse;
 
-  String getCodeTitle = "Get code";
+  String getCodeTitle = S.current.common_GetCode;
   bool getCodeTitleEnable = true;
   Timer? codeTimer;
 
@@ -42,7 +41,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
         var currTick = 60 - timer.tick;
         if (currTick > 0) {
           getCodeTitleEnable = false;
-          getCodeTitle = "Get code(${currTick}s)";
+          getCodeTitle = "${S.of(context).common_GetCode}(${currTick}s)";
           setState(() {});
         } else {
           resetCode();
@@ -60,7 +59,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
     if (codeTimer != null && codeTimer!.isActive) {
       getCodeTitleEnable = true;
       codeTimer!.cancel();
-      getCodeTitle = "Get code";
+      getCodeTitle = S.of(context).common_GetCode;
       codeTimer = null;
     }
     setState(() {});
@@ -123,13 +122,9 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   AppBar buildAppBar() {
     return AppBar(
         automaticallyImplyLeading: false,
-        title: const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          // Image(
-          //     width: 24,
-          //     height: 33,
-          //     image: AssetImage("asset/images/logo_head.png")),
-          Text('Sign Up',
-              style: TextStyle(
+        title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Text(S.of(context).signUp_Title,
+              style: const TextStyle(
                 color: Color(0xFF333333),
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
@@ -143,14 +138,14 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
       children: [
         BottomButton(
           icon: 'asset/images/icon_arrow_left_green.png',
-          text: 'BACK',
+          text: S.of(context).common_Back,
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         BottomButton(
           icon: 'asset/images/icon_arrow_right_green.png',
-          text: 'NEXT',
+          text: S.of(context).common_Next,
           onPressed: () {
             if ((_formKey.currentState as FormState).validate()) {
               signUp();
@@ -187,13 +182,13 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
             const SizedBox(height: 30),
             createTextFormField(
                 _unameController,
-                "Nickname",
+                S.of(context).signUp_Nickname,
                 icon: const Icon(Icons.person_pin),
                 maxLength: 30),
             const SizedBox(height: 15),
             createTextFormField(
                 _emailController,
-                "Email",
+                S.of(context).common_Email,
                 icon: const Icon(Icons.email),
                 maxLength: 50,
                 keyboardType: TextInputType.emailAddress),
@@ -207,7 +202,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                     width: 180,
                     child: createTextFormField(
                         _codeController,
-                        "Verify Code",
+                        S.of(context).common_VerifyCode,
                         icon: const Icon(Icons.verified_user_outlined),
                         maxLength: 6,
                         keyboardType: TextInputType.number),
@@ -246,7 +241,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                       maxLines: 1,
                       maxLength: 16,
                       decoration: InputDecoration(
-                        hintText: "Password",
+                        hintText: S.of(context).common_Password,
                         hintStyle: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w400),
                         prefixIcon: const Icon(Icons.password),
@@ -264,7 +259,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                         updatePswStrength(_pswController.text);
                       },
                       validator: (v) {
-                        return v!.trim().isNotEmpty ? null : "Wrong Password";
+                        return v!.trim().isNotEmpty ? null : "${S.of(context).common_Wrong}${S.of(context).common_NewPsw}";
                       },
                     ),
                   ),
@@ -279,14 +274,14 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
             const SizedBox(height: 15),
             createTextFormField(
                 _psw2Controller,
-                "Confirm Password",
+                S.of(context).common_ConfirmNewPsw,
                 icon: const Icon(Icons.password),
                 obscureText: true,
                 maxLength: 16),
             const SizedBox(height: 15),
             createTextFormField(
                 _inviteCodeController,
-                "Invitation Code",
+                S.of(context).signUp_InvitationCode ,
                 icon: const Icon(Icons.insert_invitation_sharp),
                 maxLength: 6),
             const SizedBox(height: 20),
@@ -299,85 +294,15 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
   updatePswStrength(String psw) {
     int strength = Utils.getStrength(psw);
     if (strength < 1) {
-      passwordTitle = "Weak";
+      passwordTitle = S.of(context).common_CodeLeve1;
     }
     if (strength == 2) {
-      passwordTitle = "Normal";
+      passwordTitle = S.of(context).common_CodeLeve2;
     }
     if (strength > 2) {
-      passwordTitle = "Strong";
+      passwordTitle = S.of(context).common_CodeLeve3;
     }
     setState(() {});
-  }
-
-  Widget buildTitle() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: 24,
-          height: 24,
-          decoration: const ShapeDecoration(
-            color: Color(0xFFEC9A1E),
-            shape: OvalBorder(),
-          ),
-          child: const Center(
-            child: Text(
-              '1',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 10),
-        const Text(
-          'Step 1',
-          style: TextStyle(
-            color: Color(0xD6EC9A1E),
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 16, right: 16),
-          child: Dash(
-              direction: Axis.horizontal,
-              dashLength: 4,
-              length: 45,
-              dashColor: Color(0xFF999999)),
-        ),
-        Container(
-          width: 24,
-          height: 24,
-          decoration: const ShapeDecoration(
-            color: Color(0xFF999999),
-            shape: OvalBorder(),
-          ),
-          child: const Center(
-            child: Text(
-              '2',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 10),
-        const Text(
-          'Step 2',
-          style: TextStyle(
-            color: Color(0xD6999999),
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
-        )
-      ],
-    );
   }
 
   void signUp() {

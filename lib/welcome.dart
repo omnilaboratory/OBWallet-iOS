@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:awallet/signups/signup.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'home.dart';
+import 'logins/login.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -57,7 +57,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const SignUpPage()),
+                    MaterialPageRoute(builder: (context) => const Login()),
                   );
                 },
               )
