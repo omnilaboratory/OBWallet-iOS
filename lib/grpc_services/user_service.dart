@@ -277,4 +277,21 @@ class UserService {
     }
     return ret;
   }
+  Future<GrpcResponse> listRewardWithUser(
+      BuildContext context, int start, int limit) async {
+    var req = ListRewardWithUserRequest();
+    req.start = Int64.parseInt(start.toString());
+    req.limit = Int64.parseInt(limit.toString());
+    log("$req");
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.listRewardWithUser(req);
+      ret.code = 1;
+      ret.data = resp;
+      log("$resp");
+    } catch (e) {
+      setError(context, "listReward", e, ret);
+    }
+    return ret;
+  }
 }

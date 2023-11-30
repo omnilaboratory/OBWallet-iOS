@@ -164,10 +164,13 @@ message SwapTx{
   double amt = 4;
 
   double target_amt = 5;
+//排除gas费/平台利润/佣金后,用户所得
   double settle_amt = 15;
   double settle_price = 19;
   TrackedTx.ContractSymbol from_symbol = 6;
   TrackedTx.ContractSymbol target_symbol = 7;
+  //排除gas费后的交易额;
+  double exchanged_usd_amt=24;
   int64 created_at = 11;
   int64 updated_at = 12;
   bool  is_sell_nft=20;

@@ -65,6 +65,10 @@
 
   "cardRecharge_title1": "Pay For NFT",
 
+
+  "profile_title_RewardFrom": "Reward From",
+  "profile_reward_subTitle1": "Total Reward:{totalReward} from {totalUser} Users",
+
   "tips_WrongEmail": "Wrong email",
   "tips_comeSoon": "Coming Soon...",
   "tips_emptyAddress": "The address cannot be empty.",

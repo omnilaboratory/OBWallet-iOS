@@ -896,6 +896,7 @@ class SwapTx extends $pb.GeneratedMessage {
     ..aOS(21, _omitFieldNames ? '' : 'nftTxid')
     ..aOS(22, _omitFieldNames ? '' : 'cardNo')
     ..pc<NftTokenLog>(23, _omitFieldNames ? '' : 'nftTokenLogs', $pb.PbFieldType.PM, protoName: 'nftTokenLogs', subBuilder: NftTokenLog.create)
+    ..a<$core.double>(24, _omitFieldNames ? '' : 'exchangedUsdAmt', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -1093,6 +1094,15 @@ class SwapTx extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(23)
   $core.List<NftTokenLog> get nftTokenLogs => $_getList(19);
+
+  @$pb.TagNumber(24)
+  $core.double get exchangedUsdAmt => $_getN(20);
+  @$pb.TagNumber(24)
+  set exchangedUsdAmt($core.double v) { $_setDouble(20, v); }
+  @$pb.TagNumber(24)
+  $core.bool hasExchangedUsdAmt() => $_has(20);
+  @$pb.TagNumber(24)
+  void clearExchangedUsdAmt() => clearField(24);
 }
 
 class SellCoinRequest extends $pb.GeneratedMessage {

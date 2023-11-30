@@ -285,6 +285,7 @@ const SwapTx$json = {
     {'1': 'settle_price', '3': 19, '4': 1, '5': 1, '10': 'settlePrice'},
     {'1': 'from_symbol', '3': 6, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'fromSymbol'},
     {'1': 'target_symbol', '3': 7, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'targetSymbol'},
+    {'1': 'exchanged_usd_amt', '3': 24, '4': 1, '5': 1, '10': 'exchangedUsdAmt'},
     {'1': 'created_at', '3': 11, '4': 1, '5': 3, '10': 'createdAt'},
     {'1': 'updated_at', '3': 12, '4': 1, '5': 3, '10': 'updatedAt'},
     {'1': 'is_sell_nft', '3': 20, '4': 1, '5': 8, '10': 'isSellNft'},
@@ -304,11 +305,12 @@ final $typed_data.Uint8List swapTxDescriptor = $convert.base64Decode(
     'IJdGFyZ2V0QW10Eh0KCnNldHRsZV9hbXQYDyABKAFSCXNldHRsZUFtdBIhCgxzZXR0bGVfcHJp'
     'Y2UYEyABKAFSC3NldHRsZVByaWNlEj8KC2Zyb21fc3ltYm9sGAYgASgOMh4udXNlci5UcmFja2'
     'VkVHguQ29udHJhY3RTeW1ib2xSCmZyb21TeW1ib2wSQwoNdGFyZ2V0X3N5bWJvbBgHIAEoDjIe'
-    'LnVzZXIuVHJhY2tlZFR4LkNvbnRyYWN0U3ltYm9sUgx0YXJnZXRTeW1ib2wSHQoKY3JlYXRlZF'
-    '9hdBgLIAEoA1IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYDCABKANSCXVwZGF0ZWRBdBIeCgtp'
-    'c19zZWxsX25mdBgUIAEoCFIJaXNTZWxsTmZ0EhkKCG5mdF90eGlkGBUgASgJUgduZnRUeGlkEh'
-    'cKB2NhcmRfbm8YFiABKAlSBmNhcmRObxI1CgxuZnRUb2tlbkxvZ3MYFyADKAsyES51c2VyLk5m'
-    'dFRva2VuTG9nUgxuZnRUb2tlbkxvZ3M=');
+    'LnVzZXIuVHJhY2tlZFR4LkNvbnRyYWN0U3ltYm9sUgx0YXJnZXRTeW1ib2wSKgoRZXhjaGFuZ2'
+    'VkX3VzZF9hbXQYGCABKAFSD2V4Y2hhbmdlZFVzZEFtdBIdCgpjcmVhdGVkX2F0GAsgASgDUglj'
+    'cmVhdGVkQXQSHQoKdXBkYXRlZF9hdBgMIAEoA1IJdXBkYXRlZEF0Eh4KC2lzX3NlbGxfbmZ0GB'
+    'QgASgIUglpc1NlbGxOZnQSGQoIbmZ0X3R4aWQYFSABKAlSB25mdFR4aWQSFwoHY2FyZF9ubxgW'
+    'IAEoCVIGY2FyZE5vEjUKDG5mdFRva2VuTG9ncxgXIAMoCzIRLnVzZXIuTmZ0VG9rZW5Mb2dSDG'
+    '5mdFRva2VuTG9ncw==');
 
 @$core.Deprecated('Use sellCoinRequestDescriptor instead')
 const SellCoinRequest$json = {

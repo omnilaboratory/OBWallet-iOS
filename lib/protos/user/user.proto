@@ -2,6 +2,8 @@ syntax = "proto3";
 package user;
 
 import "user/country.proto";
+import "user/account.proto";
+
 service UserService {
   //用户注册 user regist
   rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
@@ -30,8 +32,10 @@ service UserService {
   rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
   //返回被当前用户邀请的所有人.
   rpc ListInvitedUser(ListInvitedUserRequest) returns (ListInvitedUserResponse) {}
-  //当前用户的返佣
+  //当前代理商用户的返佣
   rpc ListReward(ListRewardRequest) returns (ListRewardResponse) {}
+  //当前代理商用户的返佣,返佣信息含用户信息
+  rpc ListRewardWithUser(ListRewardWithUserRequest) returns (ListRewardWithUserResponse) {}
 }
 
 message ForgetPwdRequest {
@@ -230,18 +234,51 @@ message InvitedUser {
 
 message ListRewardRequest {
   //same as mysql's offsset; default(0)
-  int64 start =2;
+  int64 start =1;
   //same as mysql's limit; default(20)
-  int64 limit =3;
+  int64 limit =2;
 }
 message ListRewardResponse {
   repeated UserReward list = 1;
   double total_amt=2;
 }
+message ListRewardWithUserRequest {
+  //same as mysql's offsset; default(0)
+  int64 start =1;
+  //same as mysql's limit; default(20)
+  int64 limit =2;
+  //日期,以unix秒为单位. 需要同ListReward返回记录的created_at一致; 0返回所有日期数据
+  uint64 date_sec=3;
+}
+message ListRewardWithUserResponse {
+  repeated UserRewardItem list = 1;
+}
+//以日期为单位,代理商应收佣金
 message UserReward {
+  //日期,以unix秒为单位
   uint64 created_at=1;
   //usd_amt
   double amt=2;
   //未结算0, 已经结算1
   int64 status =3;
+}
+//以日期为单位,相关的用户给代理商产生了多少佣金.
+message UserRewardItem {
+  int64 id = 9;
+  int64 reward_userid = 1;
+  //分佣日期,以秒为单位,
+  // @gotags: gorm:"uniqueIndex:idx_userid_date"
+  int64  date_sec = 2;
+  //分佣日期
+  string data_str = 3;
+  // @gotags: gorm:"uniqueIndex:idx_userid_date"
+  int64 user_id = 4;
+  double reward = 5;
+  // @gotags: gorm:"type:timestamp"
+  Timestamp created_at = 7;
+
+  // @gotags: gorm:"type:timestamp"
+  Timestamp updated_at = 8;
+  // @gotags: gorm:"<-:false"
+  string user_name =10;
 }

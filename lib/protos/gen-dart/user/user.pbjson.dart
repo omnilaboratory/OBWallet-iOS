@@ -385,14 +385,14 @@ final $typed_data.Uint8List invitedUserDescriptor = $convert.base64Decode(
 const ListRewardRequest$json = {
   '1': 'ListRewardRequest',
   '2': [
-    {'1': 'start', '3': 2, '4': 1, '5': 3, '10': 'start'},
-    {'1': 'limit', '3': 3, '4': 1, '5': 3, '10': 'limit'},
+    {'1': 'start', '3': 1, '4': 1, '5': 3, '10': 'start'},
+    {'1': 'limit', '3': 2, '4': 1, '5': 3, '10': 'limit'},
   ],
 };
 
 /// Descriptor for `ListRewardRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listRewardRequestDescriptor = $convert.base64Decode(
-    'ChFMaXN0UmV3YXJkUmVxdWVzdBIUCgVzdGFydBgCIAEoA1IFc3RhcnQSFAoFbGltaXQYAyABKA'
+    'ChFMaXN0UmV3YXJkUmVxdWVzdBIUCgVzdGFydBgBIAEoA1IFc3RhcnQSFAoFbGltaXQYAiABKA'
     'NSBWxpbWl0');
 
 @$core.Deprecated('Use listRewardResponseDescriptor instead')
@@ -409,6 +409,34 @@ final $typed_data.Uint8List listRewardResponseDescriptor = $convert.base64Decode
     'ChJMaXN0UmV3YXJkUmVzcG9uc2USJAoEbGlzdBgBIAMoCzIQLnVzZXIuVXNlclJld2FyZFIEbG'
     'lzdBIbCgl0b3RhbF9hbXQYAiABKAFSCHRvdGFsQW10');
 
+@$core.Deprecated('Use listRewardWithUserRequestDescriptor instead')
+const ListRewardWithUserRequest$json = {
+  '1': 'ListRewardWithUserRequest',
+  '2': [
+    {'1': 'start', '3': 1, '4': 1, '5': 3, '10': 'start'},
+    {'1': 'limit', '3': 2, '4': 1, '5': 3, '10': 'limit'},
+    {'1': 'date_sec', '3': 3, '4': 1, '5': 4, '10': 'dateSec'},
+  ],
+};
+
+/// Descriptor for `ListRewardWithUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRewardWithUserRequestDescriptor = $convert.base64Decode(
+    'ChlMaXN0UmV3YXJkV2l0aFVzZXJSZXF1ZXN0EhQKBXN0YXJ0GAEgASgDUgVzdGFydBIUCgVsaW'
+    '1pdBgCIAEoA1IFbGltaXQSGQoIZGF0ZV9zZWMYAyABKARSB2RhdGVTZWM=');
+
+@$core.Deprecated('Use listRewardWithUserResponseDescriptor instead')
+const ListRewardWithUserResponse$json = {
+  '1': 'ListRewardWithUserResponse',
+  '2': [
+    {'1': 'list', '3': 1, '4': 3, '5': 11, '6': '.user.UserRewardItem', '10': 'list'},
+  ],
+};
+
+/// Descriptor for `ListRewardWithUserResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRewardWithUserResponseDescriptor = $convert.base64Decode(
+    'ChpMaXN0UmV3YXJkV2l0aFVzZXJSZXNwb25zZRIoCgRsaXN0GAEgAygLMhQudXNlci5Vc2VyUm'
+    'V3YXJkSXRlbVIEbGlzdA==');
+
 @$core.Deprecated('Use userRewardDescriptor instead')
 const UserReward$json = {
   '1': 'UserReward',
@@ -423,4 +451,29 @@ const UserReward$json = {
 final $typed_data.Uint8List userRewardDescriptor = $convert.base64Decode(
     'CgpVc2VyUmV3YXJkEh0KCmNyZWF0ZWRfYXQYASABKARSCWNyZWF0ZWRBdBIQCgNhbXQYAiABKA'
     'FSA2FtdBIWCgZzdGF0dXMYAyABKANSBnN0YXR1cw==');
+
+@$core.Deprecated('Use userRewardItemDescriptor instead')
+const UserRewardItem$json = {
+  '1': 'UserRewardItem',
+  '2': [
+    {'1': 'id', '3': 9, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'reward_userid', '3': 1, '4': 1, '5': 3, '10': 'rewardUserid'},
+    {'1': 'date_sec', '3': 2, '4': 1, '5': 3, '10': 'dateSec'},
+    {'1': 'data_str', '3': 3, '4': 1, '5': 9, '10': 'dataStr'},
+    {'1': 'user_id', '3': 4, '4': 1, '5': 3, '10': 'userId'},
+    {'1': 'reward', '3': 5, '4': 1, '5': 1, '10': 'reward'},
+    {'1': 'created_at', '3': 7, '4': 1, '5': 11, '6': '.user.Timestamp', '10': 'createdAt'},
+    {'1': 'updated_at', '3': 8, '4': 1, '5': 11, '6': '.user.Timestamp', '10': 'updatedAt'},
+    {'1': 'user_name', '3': 10, '4': 1, '5': 9, '10': 'userName'},
+  ],
+};
+
+/// Descriptor for `UserRewardItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userRewardItemDescriptor = $convert.base64Decode(
+    'Cg5Vc2VyUmV3YXJkSXRlbRIOCgJpZBgJIAEoA1ICaWQSIwoNcmV3YXJkX3VzZXJpZBgBIAEoA1'
+    'IMcmV3YXJkVXNlcmlkEhkKCGRhdGVfc2VjGAIgASgDUgdkYXRlU2VjEhkKCGRhdGFfc3RyGAMg'
+    'ASgJUgdkYXRhU3RyEhcKB3VzZXJfaWQYBCABKANSBnVzZXJJZBIWCgZyZXdhcmQYBSABKAFSBn'
+    'Jld2FyZBIuCgpjcmVhdGVkX2F0GAcgASgLMg8udXNlci5UaW1lc3RhbXBSCWNyZWF0ZWRBdBIu'
+    'Cgp1cGRhdGVkX2F0GAggASgLMg8udXNlci5UaW1lc3RhbXBSCXVwZGF0ZWRBdBIbCgl1c2VyX2'
+    '5hbWUYCiABKAlSCHVzZXJOYW1l');
 

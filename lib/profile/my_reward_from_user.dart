@@ -1,30 +1,34 @@
-import 'package:awallet/bean/my_reward_info.dart';
+import 'package:awallet/bean/my_reward_from_user_info.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
-import 'package:awallet/component/my_reward_item.dart';
+import 'package:awallet/component/my_reward_from_user_item.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/user_service.dart';
-import 'package:awallet/profile/my_reward_from_user.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/string_tool.dart';
+import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class MyReward extends StatefulWidget {
-  const MyReward({super.key});
+class MyRewardFromUser extends StatefulWidget {
+  Int64 dateSec;
+
+  MyRewardFromUser({super.key, required this.dateSec});
 
   @override
-  State<MyReward> createState() => _MyRewardState();
+  State<MyRewardFromUser> createState() => _MyRewardFromUserState();
 }
 
-class _MyRewardState extends State<MyReward> {
+class _MyRewardFromUserState extends State<MyRewardFromUser> {
   int rowIndex = 1;
   int dataStartIndex = 0;
   int localPageSize = 20;
   final RefreshController _refreshListController =
       RefreshController(initialRefresh: false);
 
-  List<MyRewardInfo> dataList = [];
+  List<MyRewardFromUserInfo> dataList = [];
   double totalReward = 0;
+  int totalUser = 0;
 
   @override
   void initState() {
@@ -38,7 +42,7 @@ class _MyRewardState extends State<MyReward> {
       appBar: AppBar(
         leadingWidth: 42,
         titleSpacing: 0,
-        title: const HeadLogo(title: "My Reward"),
+        title: HeadLogo(title: S.of(context).profile_title_RewardFrom),
       ),
       body: Column(
         children: [
@@ -48,7 +52,8 @@ class _MyRewardState extends State<MyReward> {
             child: Row(
               children: [
                 Text(
-                    "Total Reward: ${StringTools.formatCurrencyNum(totalReward)}",
+                    S.of(context).profile_reward_subTitle1(
+                        StringTools.formatCurrencyNum(totalReward), totalUser),
                     style: const TextStyle(
                       fontSize: 20,
                     )),
@@ -59,22 +64,14 @@ class _MyRewardState extends State<MyReward> {
               child: buildNewSmartRefresher(
             _refreshListController,
             dataList.isEmpty
-                ? const Center(child: Text("No Data"))
+                ? Center(child: Text(S.of(context).common_NoData))
                 : ListView.builder(
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 10),
                     itemCount: dataList.length,
                     itemBuilder: (BuildContext context, int index) {
                       if (index < dataList.length) {
-                        return GestureDetector(
-                            onTap: (){
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          MyRewardFromUser(dateSec: dataList[index].dateSec,)));
-                            },
-                            child: MyRewardItem(info: dataList[index]));
+                        return MyRewardFromUserItem(info: dataList[index]);
                       }
                       return null;
                     }),
@@ -100,21 +97,19 @@ class _MyRewardState extends State<MyReward> {
 
   void getDataFromServer() {
     UserService.getInstance()
-        .listReward(context, dataStartIndex, localPageSize)
+        .listRewardWithUser(context, dataStartIndex, localPageSize)
         .then((result) {
       if (result.code == 1) {
-        var resp = result.data as ListRewardResponse;
-        totalReward = resp.totalAmt;
+        var resp = result.data as ListRewardWithUserResponse;
         var items = resp.list;
         if (items.isNotEmpty) {
           for (var element in items) {
-            dataList.add(MyRewardInfo(
+            dataList.add(MyRewardFromUserInfo(
               index: rowIndex++,
-              amount: element.amt,
-              dateSec: element.createdAt,
-              status: element.status.toInt(),
+              username: element.userName,
+              amount: element.reward,
               createTime: DateTime.fromMillisecondsSinceEpoch(
-                  (element.createdAt * 1000).toInt()),
+                  (element.dateSec * 1000).toInt()),
             ));
           }
         }

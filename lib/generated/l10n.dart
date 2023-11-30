@@ -620,6 +620,26 @@ class S {
     );
   }
 
+  /// `Reward From`
+  String get profile_title_RewardFrom {
+    return Intl.message(
+      'Reward From',
+      name: 'profile_title_RewardFrom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Reward:{totalReward} from {totalUser} Users`
+  String profile_reward_subTitle1(Object totalReward, Object totalUser) {
+    return Intl.message(
+      'Total Reward:$totalReward from $totalUser Users',
+      name: 'profile_reward_subTitle1',
+      desc: '',
+      args: [totalReward, totalUser],
+    );
+  }
+
   /// `Wrong email`
   String get tips_WrongEmail {
     return Intl.message(

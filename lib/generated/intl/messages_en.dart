@@ -23,6 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(createFee) =>
       "*** There is a fee of \$${createFee} to apply for a virtual card.";
 
+  static String m1(totalReward, totalUser) =>
+      "Total Reward:${totalReward} from ${totalUser} Users";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "applyCard_ApplyCard":
@@ -86,6 +89,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "main_home_Crypto": MessageLookupByLibrary.simpleMessage("Crypto"),
         "main_home_Profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "main_home_Shop": MessageLookupByLibrary.simpleMessage("Shop"),
+        "profile_reward_subTitle1": m1,
+        "profile_title_RewardFrom":
+            MessageLookupByLibrary.simpleMessage("Reward From"),
         "recharge_AccountBalance":
             MessageLookupByLibrary.simpleMessage("Account Balance"),
         "recharge_Amount": MessageLookupByLibrary.simpleMessage("Amount"),
