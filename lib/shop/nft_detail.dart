@@ -199,6 +199,7 @@ class _NftDetailState extends State<NftDetail> {
                               builder: (context) {
                                 return CardDeposit(
                                   nftAmt: amount,
+                                  title: S.of(context).cardRecharge_title1,
                                   amt: (amount * widget.detailInfo.price),
                                   tokenIds: [widget.detailInfo.tokenId],
                                   tokenIdValues: [

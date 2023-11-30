@@ -86,12 +86,11 @@ class _AccountState extends State<Account> {
               length: MediaQuery.of(context).size.width - 40,
             ),
           ),
-          const Text(
-            'Recent Transactions',
-            style: TextStyle(
+          Text(
+            S.of(context).card_RecentTransactions,
+            style: const TextStyle(
               color: Color(0xFF999999),
               fontSize: 15,
-              fontFamily: 'Montserrat',
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -103,7 +102,7 @@ class _AccountState extends State<Account> {
                   onTap: () {
                     onClickType(0);
                   },
-                  child: Text("Exchange",
+                  child: Text(S.of(context).card_account_Exchange,
                       style: TextStyle(
                           fontSize: 16,
                           color:
@@ -112,7 +111,7 @@ class _AccountState extends State<Account> {
                   onTap: () {
                     onClickType(1);
                   },
-                  child: Text("Account",
+                  child: Text(S.of(context).card_account_Account,
                       style: TextStyle(
                           fontSize: 16,
                           color:
@@ -124,7 +123,7 @@ class _AccountState extends State<Account> {
               child: buildNewSmartRefresher(
             _refreshListController,
             txs.isEmpty
-                ? const Center(child: Text("No Data"))
+                ? Center(child: Text(S.of(context).common_NoData))
                 : ListView.builder(
                     padding: const EdgeInsets.only(top: 20),
                     itemCount: txs.length,
@@ -150,7 +149,7 @@ class _AccountState extends State<Account> {
       children: [
         SquareButton(
             icon: 'asset/images/icon_deposit.png',
-            text: 'Deposit',
+            text: S.of(context).common_Deposit,
             iconWidth: iconWidth,
             onPressed: () async {
               var flag = await showDialog(
@@ -166,7 +165,7 @@ class _AccountState extends State<Account> {
             }),
         SquareButton(
             icon: 'asset/images/icon_withdraw.png',
-            text: 'Withdraw',
+            text: S.of(context).common_Withdraw,
             iconWidth: iconWidth,
             onPressed: () async {
               if (hasCard == false) {
@@ -186,7 +185,7 @@ class _AccountState extends State<Account> {
             }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',
-            text: 'Exchange',
+            text: S.of(context).common_Exchange,
             iconWidth: iconWidth,
             onPressed: () {
               showDialog(

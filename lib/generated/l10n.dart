@@ -170,6 +170,16 @@ class S {
     );
   }
 
+  /// `CANCEL`
+  String get common_Cancel {
+    return Intl.message(
+      'CANCEL',
+      name: 'common_Cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Done`
   String get common_Done {
     return Intl.message(
@@ -185,6 +195,46 @@ class S {
     return Intl.message(
       'Wrong ',
       name: 'common_Wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Data`
+  String get common_NoData {
+    return Intl.message(
+      'No Data',
+      name: 'common_NoData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit`
+  String get common_Deposit {
+    return Intl.message(
+      'Deposit',
+      name: 'common_Deposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdraw`
+  String get common_Withdraw {
+    return Intl.message(
+      'Withdraw',
+      name: 'common_Withdraw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exchange`
+  String get common_Exchange {
+    return Intl.message(
+      'Exchange',
+      name: 'common_Exchange',
       desc: '',
       args: [],
     );
@@ -320,11 +370,31 @@ class S {
     );
   }
 
+  /// `*** There is a fee of ${createFee} to apply for a virtual card.`
+  String applyCard_Desc3(Object createFee) {
+    return Intl.message(
+      '*** There is a fee of \$$createFee to apply for a virtual card.',
+      name: 'applyCard_Desc3',
+      desc: '',
+      args: [createFee],
+    );
+  }
+
   /// `APPLY LATER`
   String get applyCard_ApplyLater {
     return Intl.message(
       'APPLY LATER',
       name: 'applyCard_ApplyLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `APPLY Card`
+  String get applyCard_ApplyCard {
+    return Intl.message(
+      'APPLY Card',
+      name: 'applyCard_ApplyCard',
       desc: '',
       args: [],
     );
@@ -365,6 +435,186 @@ class S {
     return Intl.message(
       'Profile',
       name: 'main_home_Profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get card_home_title {
+    return Intl.message(
+      'Home',
+      name: 'card_home_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get card_home_Account {
+    return Intl.message(
+      'Account',
+      name: 'card_home_Account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card`
+  String get card_home_Card {
+    return Intl.message(
+      'Card',
+      name: 'card_home_Card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recent Transactions`
+  String get card_RecentTransactions {
+    return Intl.message(
+      'Recent Transactions',
+      name: 'card_RecentTransactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exchange`
+  String get card_account_Exchange {
+    return Intl.message(
+      'Exchange',
+      name: 'card_account_Exchange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get card_account_Account {
+    return Intl.message(
+      'Account',
+      name: 'card_account_Account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment`
+  String get card_card_Payment {
+    return Intl.message(
+      'Payment',
+      name: 'card_card_Payment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get card_card_Account {
+    return Intl.message(
+      'Account',
+      name: 'card_card_Account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay`
+  String get card_card_Pay {
+    return Intl.message(
+      'Pay',
+      name: 'card_card_Pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit`
+  String get card_card_Deposit {
+    return Intl.message(
+      'Deposit',
+      name: 'card_card_Deposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdraw`
+  String get card_card_Withdraw {
+    return Intl.message(
+      'Withdraw',
+      name: 'card_card_Withdraw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit to Account`
+  String get recharge_Title1 {
+    return Intl.message(
+      'Deposit to Account',
+      name: 'recharge_Title1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdraw to Account`
+  String get recharge_Title2 {
+    return Intl.message(
+      'Withdraw to Account',
+      name: 'recharge_Title2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount`
+  String get recharge_Amount {
+    return Intl.message(
+      'Amount',
+      name: 'recharge_Amount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card Number`
+  String get recharge_CardNumber {
+    return Intl.message(
+      'Card Number',
+      name: 'recharge_CardNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Balance`
+  String get recharge_AccountBalance {
+    return Intl.message(
+      'Account Balance',
+      name: 'recharge_AccountBalance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card Balance`
+  String get recharge_CardBalance {
+    return Intl.message(
+      'Card Balance',
+      name: 'recharge_CardBalance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay For NFT`
+  String get cardRecharge_title1 {
+    return Intl.message(
+      'Pay For NFT',
+      name: 'cardRecharge_title1',
       desc: '',
       args: [],
     );

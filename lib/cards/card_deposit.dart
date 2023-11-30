@@ -32,7 +32,7 @@ class CardDeposit extends StatefulWidget {
     super.key,
     required this.amt,
     this.type = "",
-    this.title = "Pay For NFT",
+    this.title ="Pay For NFT",
     this.cardNo = "",
     this.date = "",
     this.cvc = "",
@@ -113,9 +113,9 @@ class _CardDepositState extends State<CardDeposit> {
                           themeColor: Colors.blue,
                           textColor: Colors.black,
                           cardHolderDecoration: buildInputDecoration(
-                              "Amount", false, Icons.attach_money),
+                              S.of(context).recharge_Amount, false, Icons.attach_money),
                           cardNumberDecoration: buildInputDecoration(
-                              "Card Number", true, Icons.credit_card),
+                              S.of(context).recharge_CardNumber, true, Icons.credit_card),
                           expiryDateDecoration: buildInputDecoration(
                               "MM/YY", true, Icons.date_range),
                           cvvCodeDecoration: buildInputDecoration(
@@ -127,7 +127,7 @@ class _CardDepositState extends State<CardDeposit> {
                         ),
                         BottomButton(
                           icon: 'asset/images/icon_confirm_green.png',
-                          text: 'PAY',
+                          text: S.of(context).card_card_Pay.toUpperCase(),
                           onPressed: () {
                             onPay();
                           },
@@ -139,7 +139,7 @@ class _CardDepositState extends State<CardDeposit> {
                   const SizedBox(height: 30),
                   BottomWhiteButton(
                     icon: 'asset/images/icon_close_white.png',
-                    text: 'CANCEL',
+                    text: S.of(context).common_Cancel.toUpperCase(),
                     onPressed: onClose,
                   )
                 ],

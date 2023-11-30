@@ -238,6 +238,7 @@ class _ShopHomeState extends State<ShopHome> {
                           builder: (context) {
                             return CardDeposit(
                               nftAmt: nftTotalCount,
+                              title: S.of(context).cardRecharge_title1,
                               amt: nftTotalValue,
                               tokenIds: tokenIds,
                               tokenIdValues: tokenIdValues,

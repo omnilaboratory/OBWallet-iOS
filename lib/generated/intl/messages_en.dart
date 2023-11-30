@@ -20,32 +20,58 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(createFee) =>
+      "*** There is a fee of \$${createFee} to apply for a virtual card.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "applyCard_ApplyCard":
+            MessageLookupByLibrary.simpleMessage("APPLY Card"),
         "applyCard_ApplyLater":
             MessageLookupByLibrary.simpleMessage("APPLY LATER"),
         "applyCard_Desc1": MessageLookupByLibrary.simpleMessage(
             "Our new virtual card allows you to："),
         "applyCard_Desc2": MessageLookupByLibrary.simpleMessage(
             "- Pay conveniently for online transactions \n- Exchange Currencies & Crypto \n- Send & Receive"),
+        "applyCard_Desc3": m0,
         "applyCard_Title": MessageLookupByLibrary.simpleMessage("Apply Card"),
         "applyCard_VirtualCard":
             MessageLookupByLibrary.simpleMessage("Virtual Card"),
+        "cardRecharge_title1":
+            MessageLookupByLibrary.simpleMessage("Pay For NFT"),
+        "card_RecentTransactions":
+            MessageLookupByLibrary.simpleMessage("Recent Transactions"),
+        "card_account_Account": MessageLookupByLibrary.simpleMessage("Account"),
+        "card_account_Exchange":
+            MessageLookupByLibrary.simpleMessage("Exchange"),
+        "card_card_Account": MessageLookupByLibrary.simpleMessage("Account"),
+        "card_card_Deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
+        "card_card_Pay": MessageLookupByLibrary.simpleMessage("Pay"),
+        "card_card_Payment": MessageLookupByLibrary.simpleMessage("Payment"),
+        "card_card_Withdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
+        "card_home_Account": MessageLookupByLibrary.simpleMessage("Account"),
+        "card_home_Card": MessageLookupByLibrary.simpleMessage("Card"),
+        "card_home_title": MessageLookupByLibrary.simpleMessage("Home"),
         "common_Back": MessageLookupByLibrary.simpleMessage("Back"),
+        "common_Cancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "common_CodeLeve1": MessageLookupByLibrary.simpleMessage("Weak"),
         "common_CodeLeve2": MessageLookupByLibrary.simpleMessage("Normal"),
         "common_CodeLeve3": MessageLookupByLibrary.simpleMessage("Strong"),
         "common_ConfirmNewPsw":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
+        "common_Deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "common_Done": MessageLookupByLibrary.simpleMessage("Done"),
         "common_Email": MessageLookupByLibrary.simpleMessage("Email"),
+        "common_Exchange": MessageLookupByLibrary.simpleMessage("Exchange"),
         "common_GetCode": MessageLookupByLibrary.simpleMessage("Get Code"),
         "common_NewPsw": MessageLookupByLibrary.simpleMessage("New Password"),
         "common_Next": MessageLookupByLibrary.simpleMessage("NEXT"),
+        "common_NoData": MessageLookupByLibrary.simpleMessage("No Data"),
         "common_Password": MessageLookupByLibrary.simpleMessage("Password"),
         "common_Username": MessageLookupByLibrary.simpleMessage("Username"),
         "common_VerifyCode":
             MessageLookupByLibrary.simpleMessage("Verify Code"),
+        "common_Withdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
         "common_Wrong": MessageLookupByLibrary.simpleMessage("Wrong "),
         "forgetPsw_Title":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
@@ -60,6 +86,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "main_home_Crypto": MessageLookupByLibrary.simpleMessage("Crypto"),
         "main_home_Profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "main_home_Shop": MessageLookupByLibrary.simpleMessage("Shop"),
+        "recharge_AccountBalance":
+            MessageLookupByLibrary.simpleMessage("Account Balance"),
+        "recharge_Amount": MessageLookupByLibrary.simpleMessage("Amount"),
+        "recharge_CardBalance":
+            MessageLookupByLibrary.simpleMessage("Card Balance"),
+        "recharge_CardNumber":
+            MessageLookupByLibrary.simpleMessage("Card Number"),
+        "recharge_Title1":
+            MessageLookupByLibrary.simpleMessage("Deposit to Account"),
+        "recharge_Title2":
+            MessageLookupByLibrary.simpleMessage("Withdraw to Account"),
         "signUp_InvitationCode":
             MessageLookupByLibrary.simpleMessage("Invitation Code"),
         "signUp_Nickname": MessageLookupByLibrary.simpleMessage("Nickname"),

@@ -106,8 +106,8 @@ class _CardRechargeState extends State<CardRecharge> {
                   children: [
                     const SizedBox(height: 30),
                     createDialogTitle(widget.type == EnumChargeType.deposit
-                        ? 'Deposit to Account'
-                        : 'Withdraw to Account'),
+                        ? S.of(context).recharge_Title1
+                        : S.of(context).recharge_Title2),
                     const SizedBox(height: 10),
                     buildBalance(),
                     const SizedBox(height: 10),
@@ -142,7 +142,7 @@ class _CardRechargeState extends State<CardRecharge> {
                       },
                       cardHolderDecoration: InputDecoration(
                         prefixIcon: const Icon(Icons.attach_money),
-                        hintText: 'Amount',
+                        hintText: S.of(context).recharge_Amount,
                         hintStyle: const TextStyle(color: Colors.grey),
                         border: _outlineInputBorder,
                         focusedBorder: _outlineInputBorder,
@@ -158,7 +158,7 @@ class _CardRechargeState extends State<CardRecharge> {
                             ? true
                             : false,
                         prefixIcon: const Icon(Icons.credit_card),
-                        hintText: 'Card Number',
+                        hintText: S.of(context).recharge_CardNumber,
                         hintStyle: const TextStyle(color: Colors.grey),
                         border: _outlineInputBorder,
                         focusedBorder: _outlineInputBorder,
@@ -209,8 +209,8 @@ class _CardRechargeState extends State<CardRecharge> {
                     BottomButton(
                       icon: 'asset/images/icon_confirm_green.png',
                       text: widget.type == EnumChargeType.deposit
-                          ? 'DEPOSIT'
-                          : 'WITHDRAW',
+                          ? S.of(context).common_Deposit.toUpperCase()
+                          : S.of(context).common_Withdraw.toUpperCase(),
                       onPressed: () {
                         onPay();
                       },
@@ -222,7 +222,7 @@ class _CardRechargeState extends State<CardRecharge> {
               const SizedBox(height: 30),
               BottomWhiteButton(
                 icon: 'asset/images/icon_close_white.png',
-                text: 'CANCEL',
+                text: S.of(context).common_Cancel.toUpperCase(),
                 onPressed: onClose,
               )
             ],
@@ -256,7 +256,6 @@ class _CardRechargeState extends State<CardRecharge> {
                 style: const TextStyle(
                   color: Color(0xFF333333),
                   fontSize: 32,
-                  fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -264,8 +263,8 @@ class _CardRechargeState extends State<CardRecharge> {
           ),
           Text(
             widget.type == EnumChargeType.deposit
-                ? 'Account Balance'
-                : 'Card Balance',
+                ? S.of(context).recharge_AccountBalance
+                : S.of(context).recharge_CardBalance,
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Color(0xFF666666),

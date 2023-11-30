@@ -24,8 +24,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../component/bottom_button.dart';
-import '../component/square_button.dart';
+import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/component/square_button.dart';
 import 'card_deposit.dart';
 import 'kyc.dart';
 
@@ -101,20 +101,20 @@ class _CardPartState extends State<CardPart> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Our new virtual card allows you to：',
+          Text(
+            S.of(context).applyCard_Desc1,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF333333),
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 0, top: 17),
+          Padding(
+            padding: const EdgeInsets.only(left: 0, top: 17),
             child: Text(
-              '- Pay conveniently for online transactions\n- Exchange Currencies & Crypto\n- Send & Receive',
-              style: TextStyle(
+              S.of(context).applyCard_Desc2,
+              style: const TextStyle(
                 color: Color(0xFF666666),
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -125,7 +125,7 @@ class _CardPartState extends State<CardPart> {
 
           const SizedBox(height: 20),
           Text(
-            '*** There is a fee of \$${StringTools.formatCurrencyNum(createCardFee)} to apply for a virtual card.',
+            S.of(context).applyCard_Desc3(StringTools.formatCurrencyNum(createCardFee)),
             style: const TextStyle(
                 color: Colors.black54, fontStyle: FontStyle.italic),
           ),
@@ -134,7 +134,7 @@ class _CardPartState extends State<CardPart> {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             BottomButton(
               icon: 'asset/images/icon_arrow_right_green.png',
-              text: 'APPLY CARD',
+              text: S.of(context).applyCard_ApplyCard.toUpperCase(),
               onPressed: () {
                 onClickApplyCard();
               },
@@ -160,9 +160,9 @@ class _CardPartState extends State<CardPart> {
             length: MediaQuery.of(context).size.width - 40,
           ),
           const SizedBox(height: 15),
-          const Text(
-            'Recent Transactions',
-            style: TextStyle(
+          Text(
+            S.of(context).card_RecentTransactions,
+            style: const TextStyle(
               color: Color(0xFF999999),
               fontSize: 15,
               fontWeight: FontWeight.w400,
@@ -176,7 +176,7 @@ class _CardPartState extends State<CardPart> {
                   onTap: () {
                     onClickType(0);
                   },
-                  child: Text("Payment",
+                  child: Text(S.of(context).card_card_Payment,
                       style: TextStyle(
                           fontSize: 16,
                           color:
@@ -185,7 +185,7 @@ class _CardPartState extends State<CardPart> {
                   onTap: () {
                     onClickType(1);
                   },
-                  child: Text("Account",
+                  child: Text(S.of(context).card_card_Account,
                       style: TextStyle(
                           fontSize: 16,
                           color:
@@ -199,7 +199,7 @@ class _CardPartState extends State<CardPart> {
               onRefresh: _onListRefresh,
               onLoading: _onListLoading,
               txs.isEmpty
-                  ? const Center(child: Text("No Data"))
+                  ? Center(child: Text(S.of(context).common_NoData))
                   : ListView.builder(
                       padding: const EdgeInsets.only(top: 20),
                       itemCount: txs.length,
@@ -247,13 +247,13 @@ class _CardPartState extends State<CardPart> {
         SquareButton(
             icon: 'asset/images/icon_pay.png',
             iconWidth: iconWidth,
-            text: 'Pay',
+            text: S.of(context).card_card_Pay,
             onPressed: () {
               showToast(S.of(context).tips_comeSoon);
             }),
         SquareButton(
             icon: 'asset/images/icon_deposit.png',
-            text: 'Deposit',
+            text: S.of(context).card_card_Deposit,
             iconWidth: iconWidth,
             onPressed: () async {
               var flag = await showDialog(
@@ -270,7 +270,7 @@ class _CardPartState extends State<CardPart> {
             }),
         SquareButton(
             icon: 'asset/images/icon_withdraw.png',
-            text: 'Withdraw',
+            text: S.of(context).card_card_Withdraw,
             iconWidth: iconWidth,
             onPressed: () async {
               var flag = await showDialog(

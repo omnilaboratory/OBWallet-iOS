@@ -3,6 +3,7 @@ import 'package:awallet/cards/account.dart';
 import 'package:awallet/cards/card_part.dart';
 import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -20,7 +21,7 @@ class CardHome extends StatefulWidget {
 
 class _CardHomeState extends State<CardHome>
     with SingleTickerProviderStateMixin {
-  var tabNames = ['Account', 'Card'];
+  var tabNames = [S.current.card_home_Account, S.current.card_home_Card];
   var currKycClrIndex = 0;
 
   List<Widget> tabList = [];
@@ -89,7 +90,7 @@ class _CardHomeState extends State<CardHome>
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const HeadLogo(title: "Home"),
+          title: HeadLogo(title: S.of(context).card_home_title),
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 20.0),
