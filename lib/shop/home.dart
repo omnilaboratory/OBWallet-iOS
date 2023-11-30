@@ -29,7 +29,7 @@ class ShopHome extends StatefulWidget {
 }
 
 class _ShopHomeState extends State<ShopHome> {
-  List<Widget> faceList = [];
+  List<Widget> nftList = [];
   List<NftDetailInfo> nftDetailInfoList = [];
   double nftTotalValue = 0;
   int nftTotalCount = 0;
@@ -100,7 +100,7 @@ class _ShopHomeState extends State<ShopHome> {
           nftInfo.des,
           controller));
 
-      faceList.add(DollarNftItem(
+      nftList.add(DollarNftItem(
         faceType: i,
         amount: 0,
         textController: controller,
@@ -132,7 +132,7 @@ class _ShopHomeState extends State<ShopHome> {
 
   void _onListRefresh() async {
     nftDetailInfoList.clear();
-    faceList.clear();
+    nftList.clear();
     nftTotalValue = 0;
     nftTotalCount = 0;
     setState(() {});
@@ -191,7 +191,6 @@ class _ShopHomeState extends State<ShopHome> {
                   style: const TextStyle(
                     color: Color(0xFF666666),
                     fontSize: 20,
-                    fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w400,
                   )),
               Center(
@@ -209,7 +208,7 @@ class _ShopHomeState extends State<ShopHome> {
                     Wrap(
                       spacing: 16,
                       runSpacing: 12.0,
-                      children: faceList,
+                      children: nftList,
                     ),
                     onRefresh: _onListRefresh,
                     enablePullUp: false),

@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/utils.dart';
@@ -332,6 +333,7 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
         .signUp(context, signUpRequest)
         .then((value) async {
       if (value.code == 1) {
+        CommonService.isSignUp = true;
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const ApplyCardStepOne()));
       }

@@ -6,6 +6,7 @@ import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
 import '../logins/login.dart';
+import 'guide.dart';
 import 'my_invitation_code.dart';
 import 'my_reward.dart';
 
@@ -51,6 +52,14 @@ class _ProfileHomeState extends State<ProfileHome> {
             context, MaterialPageRoute(builder: (context) => const MyReward()));
       }));
     }
+    list.add(const SizedBox(height: 20));
+    list.add(btnBtnItem(Icons.token_outlined, "Guide", () {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const Guide();
+          });
+    }));
     list.add(const SizedBox(height: 20));
     list.add(btnBtnItem(Icons.logout_outlined, "Logout", () {
       LocalStorage.remove(LocalStorage.userToken);

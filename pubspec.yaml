@@ -65,6 +65,7 @@ dependencies:
   country_picker: ^2.0.21
   pull_to_refresh: ^2.0.0
   calendar_date_picker2: ^0.5.3
+  card_swiper: ^3.0.1
   flutter_localizations:
     sdk: flutter
 

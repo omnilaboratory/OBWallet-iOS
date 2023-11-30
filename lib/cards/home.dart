@@ -6,6 +6,7 @@ import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/profile/guide.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +75,18 @@ class _CardHomeState extends State<CardHome>
     if (CommonService.firstEnterApp && CommonService.userInfo?.cardCount == 0) {
       CommonService.firstEnterApp = false;
       _tabController.animateTo(1);
+    }
+
+    // if is signUp,show the guide page
+    if (CommonService.isSignUp) {
+      CommonService.isSignUp = false;
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const Guide();
+            });
+      });
     }
   }
 

@@ -19,6 +19,7 @@ mixin CommonService {
   static CardInfo cardInfo = CardInfo();
   static String userId = "1";
   static bool firstEnterApp = true;
+  static bool isSignUp = false;
 
   static ClientChannel? getGrpcChannel() {
     if (channel == null) {
