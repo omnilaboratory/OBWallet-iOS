@@ -99,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("profile_guide_desc4"),
         "profile_guide_desc5":
             MessageLookupByLibrary.simpleMessage("profile_guide_desc5"),
+        "profile_guide_title": MessageLookupByLibrary.simpleMessage("Guide"),
         "profile_reward_subTitle1": m1,
         "profile_title_RewardFrom":
             MessageLookupByLibrary.simpleMessage("Reward From"),

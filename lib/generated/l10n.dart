@@ -640,6 +640,16 @@ class S {
     );
   }
 
+  /// `Guide`
+  String get profile_guide_title {
+    return Intl.message(
+      'Guide',
+      name: 'profile_guide_title',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1`
   String get profile_guide_desc1 {
     return Intl.message(

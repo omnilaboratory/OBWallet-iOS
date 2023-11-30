@@ -52,7 +52,7 @@ class _GuideState extends State<Guide> {
                 child: Column(
                   children: [
                     const SizedBox(height: 30),
-                    createDialogTitle('Guide', clr: Colors.white),
+                    createDialogTitle(S.of(context).profile_guide_title, clr: Colors.white),
                     const SizedBox(height: 20),
                     SizedBox(
                       height: 520,
