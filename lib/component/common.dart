@@ -139,12 +139,12 @@ TextField createTextField2(TextEditingController controller,
   );
 }
 
-Text createDialogTitle(String text) {
+Text createDialogTitle(String text, {Color clr = Colors.black}) {
   return Text(
     text,
     textAlign: TextAlign.center,
-    style: const TextStyle(
-      color: Colors.black,
+    style: TextStyle(
+      color: clr,
       fontSize: 18,
       fontWeight: FontWeight.w500,
       letterSpacing: 4,
