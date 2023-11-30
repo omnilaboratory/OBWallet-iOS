@@ -278,8 +278,9 @@ class UserService {
     return ret;
   }
   Future<GrpcResponse> listRewardWithUser(
-      BuildContext context, int start, int limit) async {
+      BuildContext context,Int64 dateSec, int start, int limit) async {
     var req = ListRewardWithUserRequest();
+    req.dateSec = dateSec;
     req.start = Int64.parseInt(start.toString());
     req.limit = Int64.parseInt(limit.toString());
     log("$req");
