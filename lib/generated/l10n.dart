@@ -980,10 +980,10 @@ class S {
     );
   }
 
-  /// `You1 have selected {nftTotalCount} NFTs and value is ${nftTotalValue}`
+  /// `You have selected {nftTotalCount} NFTs and value is ${nftTotalValue}`
   String shop_tips(Object nftTotalCount, Object nftTotalValue) {
     return Intl.message(
-      'You1 have selected $nftTotalCount NFTs and value is \$$nftTotalValue',
+      'You have selected $nftTotalCount NFTs and value is \$$nftTotalValue',
       name: 'shop_tips',
       desc: '',
       args: [nftTotalCount, nftTotalValue],

@@ -106,7 +106,7 @@
   "cardRecharge_title": "Pay For NFT",
 
   "shop_title": "Shop",
-  "shop_tips": "You1 have selected {nftTotalCount} NFTs and value is ${nftTotalValue}",
+  "shop_tips": "You have selected {nftTotalCount} NFTs and value is ${nftTotalValue}",
   "shop_BuyNFT": "Buy NFT",
   "shop_nft_title": "NFT",
   "shop_nft_currPrice": "Current price",

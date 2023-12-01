@@ -29,7 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Total Reward:${totalReward} from ${totalUser} Users";
 
   static String m3(nftTotalCount, nftTotalValue) =>
-      "You1 have selected ${nftTotalCount} NFTs and value is \$${nftTotalValue}";
+      "You have selected ${nftTotalCount} NFTs and value is \$${nftTotalValue}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
