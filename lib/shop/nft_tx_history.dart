@@ -2,6 +2,7 @@ import 'package:awallet/bean/nft_tx_info.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/nft_tx_item.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _NftTxHistoryState extends State<NftTxHistory> {
       appBar: AppBar(
         leadingWidth: 42,
         titleSpacing: 0,
-        title: const HeadLogo(title: "NFT Tx History"),
+        title: HeadLogo(title: S.of(context).shop_nft_tx_history_title),
       ),
       body: Column(
         children: [
@@ -43,7 +44,7 @@ class _NftTxHistoryState extends State<NftTxHistory> {
               child: buildNewSmartRefresher(
             _refreshListController,
             txHistoryList.isEmpty
-                ? const Center(child: Text("No Data"))
+                ? Center(child: Text(S.of(context).common_NoData))
                 : ListView.builder(
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 10),

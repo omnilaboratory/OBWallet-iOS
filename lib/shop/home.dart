@@ -162,7 +162,7 @@ class _ShopHomeState extends State<ShopHome> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const HeadLogo(title: "Shop"),
+          title: HeadLogo(title: S.of(context).shop_title),
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 20.0),
@@ -187,7 +187,7 @@ class _ShopHomeState extends State<ShopHome> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                  "You have selected $nftTotalCount NFTs and value is \$${StringTools.formatCurrencyNum(nftTotalValue)}",
+                  S.of(context).shop_tips(nftTotalCount,StringTools.formatCurrencyNum(nftTotalValue)),
                   style: const TextStyle(
                     color: Color(0xFF666666),
                     fontSize: 20,
@@ -219,7 +219,7 @@ class _ShopHomeState extends State<ShopHome> {
                 children: [
                   BottomButton(
                     icon: 'asset/images/icon_confirm_green.png',
-                    text: 'Buy NFT',
+                    text: S.of(context).shop_BuyNFT,
                     onPressed: () {
                       if (nftTotalValue < 1) {
                         showToast(S.of(context).tips_emptyAmount);
@@ -237,7 +237,7 @@ class _ShopHomeState extends State<ShopHome> {
                           builder: (context) {
                             return CardDeposit(
                               nftAmt: nftTotalCount,
-                              title: S.of(context).cardRecharge_title1,
+                              title: S.of(context).cardRecharge_title,
                               amt: nftTotalValue,
                               tokenIds: tokenIds,
                               tokenIdValues: tokenIdValues,

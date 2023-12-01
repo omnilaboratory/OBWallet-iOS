@@ -39,7 +39,7 @@ class _NftDetailState extends State<NftDetail> {
             appBar: AppBar(
               leadingWidth: 42,
               titleSpacing: 0,
-              title: const HeadLogo(title: "NFT"),
+              title: HeadLogo(title: S.of(context).shop_nft_title),
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -62,8 +62,8 @@ class _NftDetailState extends State<NftDetail> {
                                   fontWeight: FontWeight.w700,
                                 )),
                             const SizedBox(height: 20),
-                            const Text("Current price",
-                                style: TextStyle(
+                            Text(S.of(context).shop_nft_currPrice,
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 103, 88, 88),
                                   fontSize: 16,
                                 )),
@@ -75,8 +75,8 @@ class _NftDetailState extends State<NftDetail> {
                                   fontWeight: FontWeight.w600,
                                 )),
                             const SizedBox(height: 16),
-                            const Text("Description",
-                                style: TextStyle(
+                            Text(S.of(context).shop_nft_Description,
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 103, 88, 88),
                                   fontSize: 16,
                                 )),
@@ -111,15 +111,15 @@ class _NftDetailState extends State<NftDetail> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   buildDetailLine(
-                                      "Contract Address",
+                                      S.of(context).shop_nft_ContractAddress,
                                       StringTools.starString2(
                                           widget.detailInfo.contractAddress,
                                           begin: 6,
                                           end: 4)),
-                                  buildDetailLine("Token ID",
+                                  buildDetailLine(S.of(context).shop_nft_TokenID,
                                       widget.detailInfo.tokenId.toString()),
-                                  buildDetailLine("Token Standard", "ERC-1155"),
-                                  buildDetailLine("Chain", "Polygon"),
+                                  buildDetailLine(S.of(context).shop_nft_TokenStandard, "ERC-1155"),
+                                  buildDetailLine(S.of(context).shop_nft_Chain, "Polygon"),
                                 ],
                               ),
                             ),
@@ -179,7 +179,7 @@ class _NftDetailState extends State<NftDetail> {
                     children: [
                       BottomButton(
                         icon: 'asset/images/icon_confirm_green.png',
-                        text: 'Buy NFT',
+                        text: S.of(context).shop_BuyNFT,
                         onPressed: () {
                           if (amount < 1) {
                             showToast(S.of(context).tips_emptyAmount);
@@ -199,7 +199,7 @@ class _NftDetailState extends State<NftDetail> {
                               builder: (context) {
                                 return CardDeposit(
                                   nftAmt: amount,
-                                  title: S.of(context).cardRecharge_title1,
+                                  title: S.of(context).cardRecharge_title,
                                   amt: (amount * widget.detailInfo.price),
                                   tokenIds: [widget.detailInfo.tokenId],
                                   tokenIdValues: [

@@ -28,6 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m2(totalReward, totalUser) =>
       "Total Reward:${totalReward} from ${totalUser} Users";
 
+  static String m3(nftTotalCount, nftTotalValue) =>
+      "You1 have selected ${nftTotalCount} NFTs and value is \$${nftTotalValue}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "applyCard_ApplyCard":
@@ -44,7 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Virtual Card"),
         "cardActivity_tile":
             MessageLookupByLibrary.simpleMessage("Card Activity"),
-        "cardRecharge_title1":
+        "cardRecharge_title":
             MessageLookupByLibrary.simpleMessage("Pay For NFT"),
         "card_RecentTransactions":
             MessageLookupByLibrary.simpleMessage("Recent Transactions"),
@@ -84,7 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "exchange_Balance": MessageLookupByLibrary.simpleMessage("Balance: "),
         "exchange_Deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "exchange_InputTips1": MessageLookupByLibrary.simpleMessage(
-            "Just need to input in From, minimum \\\$10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD."),
+            "Just need to input in From, minimum \$10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD."),
         "exchange_Max": MessageLookupByLibrary.simpleMessage("Max"),
         "exchange_ReceiveAtLeast":
             MessageLookupByLibrary.simpleMessage("Receive at least"),
@@ -163,9 +166,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_Deposit": MessageLookupByLibrary.simpleMessage("deposit"),
         "send_Withdraw": MessageLookupByLibrary.simpleMessage("withdraw"),
         "send_tips": MessageLookupByLibrary.simpleMessage(
-            "*** The virtual card withdrawal limit is \\\$50,000 per month."),
+            "*** The virtual card withdrawal limit is \$50,000 per month."),
         "send_title1": MessageLookupByLibrary.simpleMessage("Withdraw to Card"),
         "send_title2": MessageLookupByLibrary.simpleMessage("Deposit to Card"),
+        "shop_BuyNFT": MessageLookupByLibrary.simpleMessage("Buy NFT"),
+        "shop_nft_Chain": MessageLookupByLibrary.simpleMessage("Chain"),
+        "shop_nft_ContractAddress":
+            MessageLookupByLibrary.simpleMessage("Contract Address"),
+        "shop_nft_Description":
+            MessageLookupByLibrary.simpleMessage("Description"),
+        "shop_nft_TokenID": MessageLookupByLibrary.simpleMessage("Token ID"),
+        "shop_nft_TokenStandard":
+            MessageLookupByLibrary.simpleMessage("Token Standard"),
+        "shop_nft_currPrice":
+            MessageLookupByLibrary.simpleMessage("Current price"),
+        "shop_nft_title": MessageLookupByLibrary.simpleMessage("NFT"),
+        "shop_nft_tx_history_title":
+            MessageLookupByLibrary.simpleMessage("NFT Tx History"),
+        "shop_tips": m3,
+        "shop_title": MessageLookupByLibrary.simpleMessage("Shop"),
         "signUp_InvitationCode":
             MessageLookupByLibrary.simpleMessage("Invitation Code"),
         "signUp_Nickname": MessageLookupByLibrary.simpleMessage("Nickname"),

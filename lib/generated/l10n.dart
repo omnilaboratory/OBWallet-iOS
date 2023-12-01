@@ -460,10 +460,10 @@ class S {
     );
   }
 
-  /// `Just need to input in From, minimum \$10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.`
+  /// `Just need to input in From, minimum $10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.`
   String get exchange_InputTips1 {
     return Intl.message(
-      'Just need to input in From, minimum \\\$10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.',
+      'Just need to input in From, minimum \$10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.',
       name: 'exchange_InputTips1',
       desc: '',
       args: [],
@@ -720,10 +720,10 @@ class S {
     );
   }
 
-  /// `*** The virtual card withdrawal limit is \$50,000 per month.`
+  /// `*** The virtual card withdrawal limit is $50,000 per month.`
   String get send_tips {
     return Intl.message(
-      '*** The virtual card withdrawal limit is \\\$50,000 per month.',
+      '*** The virtual card withdrawal limit is \$50,000 per month.',
       name: 'send_tips',
       desc: '',
       args: [],
@@ -951,10 +951,120 @@ class S {
   }
 
   /// `Pay For NFT`
-  String get cardRecharge_title1 {
+  String get cardRecharge_title {
     return Intl.message(
       'Pay For NFT',
-      name: 'cardRecharge_title1',
+      name: 'cardRecharge_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shop`
+  String get shop_title {
+    return Intl.message(
+      'Shop',
+      name: 'shop_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You1 have selected {nftTotalCount} NFTs and value is ${nftTotalValue}`
+  String shop_tips(Object nftTotalCount, Object nftTotalValue) {
+    return Intl.message(
+      'You1 have selected $nftTotalCount NFTs and value is \$$nftTotalValue',
+      name: 'shop_tips',
+      desc: '',
+      args: [nftTotalCount, nftTotalValue],
+    );
+  }
+
+  /// `Buy NFT`
+  String get shop_BuyNFT {
+    return Intl.message(
+      'Buy NFT',
+      name: 'shop_BuyNFT',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NFT`
+  String get shop_nft_title {
+    return Intl.message(
+      'NFT',
+      name: 'shop_nft_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current price`
+  String get shop_nft_currPrice {
+    return Intl.message(
+      'Current price',
+      name: 'shop_nft_currPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get shop_nft_Description {
+    return Intl.message(
+      'Description',
+      name: 'shop_nft_Description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contract Address`
+  String get shop_nft_ContractAddress {
+    return Intl.message(
+      'Contract Address',
+      name: 'shop_nft_ContractAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Token ID`
+  String get shop_nft_TokenID {
+    return Intl.message(
+      'Token ID',
+      name: 'shop_nft_TokenID',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Token Standard`
+  String get shop_nft_TokenStandard {
+    return Intl.message(
+      'Token Standard',
+      name: 'shop_nft_TokenStandard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chain`
+  String get shop_nft_Chain {
+    return Intl.message(
+      'Chain',
+      name: 'shop_nft_Chain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NFT Tx History`
+  String get shop_nft_tx_history_title {
+    return Intl.message(
+      'NFT Tx History',
+      name: 'shop_nft_tx_history_title',
       desc: '',
       args: [],
     );

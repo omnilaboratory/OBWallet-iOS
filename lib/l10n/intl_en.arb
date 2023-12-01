@@ -45,7 +45,7 @@
   "exchange_To": "To",
   "exchange_wait": "Wait a while...",
   "exchange_ReceiveAtLeast": "Receive at least",
-  "exchange_InputTips1": "Just need to input in From, minimum \\$10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.",
+  "exchange_InputTips1": "Just need to input in From, minimum $10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.",
   "exchange_Balance": "Balance: ",
   "exchange_Max": "Max",
   "exchange_notEnoughBalance": "Your account balance is insufficient, please deposit.",
@@ -75,7 +75,7 @@
   "send_title2": "Deposit to Card",
   "send_Withdraw": "withdraw",
   "send_Deposit": "deposit",
-  "send_tips": "*** The virtual card withdrawal limit is \\$50,000 per month.",
+  "send_tips": "*** The virtual card withdrawal limit is $50,000 per month.",
   "send_AccountBalance": "Account Balance",
 
   "main_home_Card": "Card",
@@ -102,8 +102,19 @@
   "recharge_AccountBalance": "Account Balance",
   "recharge_CardBalance": "Card Balance",
 
-  "cardRecharge_title1": "Pay For NFT",
+  "cardRecharge_title": "Pay For NFT",
 
+  "shop_title": "Shop",
+  "shop_tips": "You1 have selected {nftTotalCount} NFTs and value is ${nftTotalValue}",
+  "shop_BuyNFT": "Buy NFT",
+  "shop_nft_title": "NFT",
+  "shop_nft_currPrice": "Current price",
+  "shop_nft_Description": "Description",
+  "shop_nft_ContractAddress": "Contract Address",
+  "shop_nft_TokenID": "Token ID",
+  "shop_nft_TokenStandard": "Token Standard",
+  "shop_nft_Chain": "Chain",
+  "shop_nft_tx_history_title": "NFT Tx History",
 
   "profile_title_RewardFrom": "Reward From",
   "profile_reward_subTitle1": "Total Reward:{totalReward} from {totalUser} Users",

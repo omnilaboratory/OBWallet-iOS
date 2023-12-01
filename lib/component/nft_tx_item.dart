@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/nft_tx_info.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,6 @@ class NftTxItem extends StatelessWidget {
                     const SizedBox(width: 15),
                   ],
                 ),
-
                 Row(
                   children: [
                     const Icon(Icons.assessment, size: 18),
@@ -41,12 +41,15 @@ class NftTxItem extends StatelessWidget {
                     const SizedBox(width: 15),
                   ],
                 ),
-
                 Row(
                   children: [
                     const Icon(Icons.monetization_on, size: 18),
                     const SizedBox(width: 2),
-                    Text(StringTools.formatCurrencyNum(log.usdAmt)),
+                    AutoSizeText(log.usdAmt.toString(),
+                        maxLines: 1,
+                        maxFontSize: 12,
+                        minFontSize: 8,
+                        overflow: TextOverflow.clip),
                   ],
                 ),
               ],
@@ -60,72 +63,65 @@ class NftTxItem extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 12,
-            height: 12,
-            margin: const EdgeInsets.only(top: 13),
-            decoration: BoxDecoration(
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Container(
+          width: 12,
+          height: 12,
+          margin: const EdgeInsets.only(top: 13),
+          decoration: BoxDecoration(
               color: circleClrs[txInfo.status],
-              borderRadius: BorderRadius.circular(6)
-            ),
-          ),
-        
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    txInfo.title,
-                    style: const TextStyle(
-                      color: Color(0xFF333333),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    DateFormat("yyyy.MM.dd hh:mm a").format(txInfo.txTime),
-                    style: const TextStyle(
-                      color: Color(0xFF999999),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          Expanded(
-            flex: 3,
+              borderRadius: BorderRadius.circular(6)),
+        ),
+        Expanded(
+          flex: 4,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildAmount(txInfo.fromSymbol, txInfo.amount),
+                Text(
+                  txInfo.title,
+                  style: const TextStyle(
+                    color: Color(0xFF333333),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                txInfo.amountOfDollar != null
+                Text(
+                  DateFormat("yyyy.MM.dd hh:mm a").format(txInfo.txTime),
+                  style: const TextStyle(
+                    color: Color(0xFF999999),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 5,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              buildAmount(txInfo.fromSymbol, txInfo.amount),
+              const SizedBox(height: 4),
+              txInfo.amountOfDollar != null
                   ? buildAmount(txInfo.targetSymbol, txInfo.amountOfDollar!)
                   : const SizedBox(
                       width: 0,
                       height: 0,
                     ),
-                  
-                const SizedBox(height: 5),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: nftTxList,
-                ),
-              ],
-            ),
+              const SizedBox(height: 5),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: nftTxList,
+              ),
+            ],
           ),
-        ]
-      ),
+        ),
+      ]),
     );
   }
 
