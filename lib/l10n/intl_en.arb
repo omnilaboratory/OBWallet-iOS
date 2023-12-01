@@ -37,7 +37,7 @@
   "applyCard_Desc2": "- Pay conveniently for online transactions \n- Exchange Currencies & Crypto \n- Send & Receive",
   "applyCard_Desc3": "*** There is a fee of ${createFee} to apply for a virtual card.",
   "applyCard_ApplyLater": "APPLY LATER",
-  "applyCard_ApplyCard": "APPLY Card",
+  "applyCard_ApplyCard": "Apply Card",
 
   "main_home_Card": "Card",
   "main_home_Crypto": "Crypto",

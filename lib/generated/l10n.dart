@@ -390,10 +390,10 @@ class S {
     );
   }
 
-  /// `APPLY Card`
+  /// `Apply Card`
   String get applyCard_ApplyCard {
     return Intl.message(
-      'APPLY Card',
+      'Apply Card',
       name: 'applyCard_ApplyCard',
       desc: '',
       args: [],
