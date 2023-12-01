@@ -1,4 +1,5 @@
 import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/profile/my_users.dart';
 import 'package:awallet/profile/update_psw.dart';
@@ -24,7 +25,7 @@ class _ProfileHomeState extends State<ProfileHome> {
     list.add(buildUserInfo());
     list.add(const SizedBox(height: 40));
     list.add(
-        btnBtnItem(Icons.insert_invitation_sharp, "My Invitation Code", () {
+        btnBtnItem(Icons.insert_invitation_sharp, S.of(context).profile_home_InvitationCode, () {
       showDialog(
           context: context,
           builder: (context) {
@@ -32,27 +33,28 @@ class _ProfileHomeState extends State<ProfileHome> {
           });
     }));
     list.add(const SizedBox(height: 20));
-    list.add(btnBtnItem(Icons.people_alt_rounded, "My Users", () {
+    list.add(btnBtnItem(Icons.people_alt_rounded, S.of(context).profile_home_MyUsers, () {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const MyUsers()));
     }));
 
     if (CommonService.userInfo?.userType == 3) {
       list.add(const SizedBox(height: 20));
-      list.add(btnBtnItem(Icons.monetization_on_outlined, "My Reward", () {
+      list.add(btnBtnItem(Icons.monetization_on_outlined,S.of(context).profile_home_MyReward, () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const MyReward()));
       }));
     }
     list.add(const SizedBox(height: 20));
-    list.add(btnBtnItem(Icons.token_outlined, "Guide", () {
+    list.add(btnBtnItem(Icons.token_outlined, S.of(context).profile_guide_title, () {
       showDialog(
           context: context,
           builder: (context) {
             return const Guide();
           });
     }));
-    list.add(btnBtnItem(Icons.verified_user_outlined, "Update Password", () {
+    list.add(const SizedBox(height: 20));
+    list.add(btnBtnItem(Icons.verified_user_outlined, S.of(context).profile_home_UpdatePassword, () {
       showDialog(
           context: context,
           builder: (context) {
@@ -60,7 +62,7 @@ class _ProfileHomeState extends State<ProfileHome> {
           });
     }));
     list.add(const SizedBox(height: 20));
-    list.add(btnBtnItem(Icons.logout_outlined, "Logout", () {
+    list.add(btnBtnItem(Icons.logout_outlined, S.of(context).profile_home_Logout, () {
       LocalStorage.remove(LocalStorage.userToken);
       Navigator.pushReplacement(
         context,
@@ -71,7 +73,7 @@ class _ProfileHomeState extends State<ProfileHome> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const HeadLogo(title: "Profile"),
+        title: HeadLogo(title: S.of(context).main_home_Profile),
       ),
       body: Center(
           child: Padding(

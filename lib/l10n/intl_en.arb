@@ -13,6 +13,7 @@
   "common_Next": "NEXT",
   "common_Cancel": "CANCEL",
   "common_Done": "Done",
+  "common_Ok": "Ok",
   "common_Confirm": "confirm",
   "common_Wrong": "Wrong ",
   "common_NoData": "No Data",
@@ -115,6 +116,17 @@
   "shop_nft_TokenStandard": "Token Standard",
   "shop_nft_Chain": "Chain",
   "shop_nft_tx_history_title": "NFT Tx History",
+
+
+  "profile_home_InvitationCode": "My Invitation Code",
+  "profile_home_MyUsers": "My Users",
+  "profile_home_MyReward": "My Reward",
+  "profile_home_UpdatePassword": "Update Password",
+  "profile_home_Logout": "Logout",
+  "profile_MyUsers_totalUsers": "Total Users: ",
+  "profile_UpdatePsw_totalUsers": "Total Users: ",
+  "profile_UpdatePassword_OldPassword": "Old Password",
+  "profile_MyReward_totalReward": "Total Reward: ",
 
   "profile_title_RewardFrom": "Reward From",
   "profile_reward_subTitle1": "Total Reward:{totalReward} from {totalUser} Users",

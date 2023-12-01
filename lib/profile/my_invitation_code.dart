@@ -48,7 +48,7 @@ class _MyInvitationCodeState extends State<MyInvitationCode> {
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.only(top: 28, bottom: 10),
-                          child: createDialogTitle('My Invitation Code'),
+                          child: createDialogTitle(S.of(context).profile_home_InvitationCode),
                         ),
                       ),
                       const SizedBox(
@@ -72,7 +72,7 @@ class _MyInvitationCodeState extends State<MyInvitationCode> {
                       ),
                       BottomButton(
                         icon: 'asset/images/icon_confirm_green.png',
-                        text: 'OK',
+                        text: S.of(context).common_Ok.toUpperCase(),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },

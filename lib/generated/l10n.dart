@@ -190,6 +190,16 @@ class S {
     );
   }
 
+  /// `Ok`
+  String get common_Ok {
+    return Intl.message(
+      'Ok',
+      name: 'common_Ok',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `confirm`
   String get common_Confirm {
     return Intl.message(
@@ -1065,6 +1075,96 @@ class S {
     return Intl.message(
       'NFT Tx History',
       name: 'shop_nft_tx_history_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Invitation Code`
+  String get profile_home_InvitationCode {
+    return Intl.message(
+      'My Invitation Code',
+      name: 'profile_home_InvitationCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Users`
+  String get profile_home_MyUsers {
+    return Intl.message(
+      'My Users',
+      name: 'profile_home_MyUsers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Reward`
+  String get profile_home_MyReward {
+    return Intl.message(
+      'My Reward',
+      name: 'profile_home_MyReward',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Password`
+  String get profile_home_UpdatePassword {
+    return Intl.message(
+      'Update Password',
+      name: 'profile_home_UpdatePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get profile_home_Logout {
+    return Intl.message(
+      'Logout',
+      name: 'profile_home_Logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Users: `
+  String get profile_MyUsers_totalUsers {
+    return Intl.message(
+      'Total Users: ',
+      name: 'profile_MyUsers_totalUsers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Users: `
+  String get profile_UpdatePsw_totalUsers {
+    return Intl.message(
+      'Total Users: ',
+      name: 'profile_UpdatePsw_totalUsers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Old Password`
+  String get profile_UpdatePassword_OldPassword {
+    return Intl.message(
+      'Old Password',
+      name: 'profile_UpdatePassword_OldPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Reward: `
+  String get profile_MyReward_totalReward {
+    return Intl.message(
+      'Total Reward: ',
+      name: 'profile_MyReward_totalReward',
       desc: '',
       args: [],
     );

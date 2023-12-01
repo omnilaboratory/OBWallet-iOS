@@ -21,7 +21,7 @@ class _UpdatePswState extends State<UpdatePsw> {
   final TextEditingController _oldPswController = TextEditingController();
   final TextEditingController _pswController = TextEditingController();
   final TextEditingController _psw2Controller = TextEditingController();
-  String passwordTitle = "Weak";
+  String passwordTitle = S.current.common_CodeLeve1;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _UpdatePswState extends State<UpdatePsw> {
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.only(top: 28, bottom: 10),
-                          child: createDialogTitle('Update Password'),
+                          child: createDialogTitle(S.of(context).profile_home_UpdatePassword),
                         ),
                       ),
                       buildInputField(),
@@ -58,7 +58,7 @@ class _UpdatePswState extends State<UpdatePsw> {
                       ),
                       BottomButton(
                         icon: 'asset/images/icon_confirm_green.png',
-                        text: 'DONE',
+                        text: S.of(context).common_Done.toUpperCase(),
                         onPressed: () {
                           FocusScope.of(context).requestFocus(FocusNode());
                           if ((_formKey.currentState as FormState).validate()) {
@@ -73,7 +73,7 @@ class _UpdatePswState extends State<UpdatePsw> {
               ),
               BottomWhiteButton(
                 icon: 'asset/images/icon_close_white.png',
-                text: 'CANCEL',
+                text:  S.of(context).common_Cancel.toUpperCase(),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -111,7 +111,7 @@ class _UpdatePswState extends State<UpdatePsw> {
           const SizedBox(height: 30),
           createTextFormField(
               _oldPswController,
-              "Old Password",
+              S.of(context).profile_UpdatePassword_OldPassword,
               icon: const Icon(Icons.password),
               obscureText: true,
               maxLength: 16),
@@ -128,7 +128,7 @@ class _UpdatePswState extends State<UpdatePsw> {
                     maxLines: 1,
                     maxLength: 16,
                     decoration: InputDecoration(
-                      hintText: "New Password",
+                      hintText:  S.of(context).common_NewPsw,
                       hintStyle: const TextStyle(
                           fontSize: 14, fontWeight: FontWeight.w400),
                       prefixIcon: const Icon(Icons.password),
@@ -146,7 +146,7 @@ class _UpdatePswState extends State<UpdatePsw> {
                       updatePswStrength(_pswController.text);
                     },
                     validator: (v) {
-                      return v!.trim().isNotEmpty ? null : "Wrong New Password";
+                      return v!.trim().isNotEmpty ? null : S.of(context).common_Wrong + S.of(context).common_NewPsw;
                     },
                   ),
                 ),
@@ -161,7 +161,7 @@ class _UpdatePswState extends State<UpdatePsw> {
           const SizedBox(height: 15),
           createTextFormField(
               _psw2Controller,
-              "Confirm New Password",
+              S.of(context).common_ConfirmNewPsw,
               icon: const Icon(Icons.password),
               obscureText: true,
               maxLength: 16),
@@ -173,13 +173,13 @@ class _UpdatePswState extends State<UpdatePsw> {
   updatePswStrength(String psw) {
     int strength = Utils.getStrength(psw);
     if (strength < 1) {
-      passwordTitle = "Weak";
+      passwordTitle = S.of(context).common_CodeLeve1;
     }
     if (strength == 2) {
-      passwordTitle = "Normal";
+      passwordTitle = S.of(context).common_CodeLeve2;
     }
     if (strength > 2) {
-      passwordTitle = "Strong";
+      passwordTitle = S.of(context).common_CodeLeve3;
     }
     setState(() {});
   }

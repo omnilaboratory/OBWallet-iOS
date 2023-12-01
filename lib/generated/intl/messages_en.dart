@@ -78,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_NewPsw": MessageLookupByLibrary.simpleMessage("New Password"),
         "common_Next": MessageLookupByLibrary.simpleMessage("NEXT"),
         "common_NoData": MessageLookupByLibrary.simpleMessage("No Data"),
+        "common_Ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "common_Password": MessageLookupByLibrary.simpleMessage("Password"),
         "common_Username": MessageLookupByLibrary.simpleMessage("Username"),
         "common_VerifyCode":
@@ -128,6 +129,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "main_home_Crypto": MessageLookupByLibrary.simpleMessage("Crypto"),
         "main_home_Profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "main_home_Shop": MessageLookupByLibrary.simpleMessage("Shop"),
+        "profile_MyReward_totalReward":
+            MessageLookupByLibrary.simpleMessage("Total Reward: "),
+        "profile_MyUsers_totalUsers":
+            MessageLookupByLibrary.simpleMessage("Total Users: "),
+        "profile_UpdatePassword_OldPassword":
+            MessageLookupByLibrary.simpleMessage("Old Password"),
+        "profile_UpdatePsw_totalUsers":
+            MessageLookupByLibrary.simpleMessage("Total Users: "),
         "profile_guide_desc1": MessageLookupByLibrary.simpleMessage(
             "profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1"),
         "profile_guide_desc2":
@@ -139,6 +148,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile_guide_desc5":
             MessageLookupByLibrary.simpleMessage("profile_guide_desc5"),
         "profile_guide_title": MessageLookupByLibrary.simpleMessage("Guide"),
+        "profile_home_InvitationCode":
+            MessageLookupByLibrary.simpleMessage("My Invitation Code"),
+        "profile_home_Logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "profile_home_MyReward":
+            MessageLookupByLibrary.simpleMessage("My Reward"),
+        "profile_home_MyUsers":
+            MessageLookupByLibrary.simpleMessage("My Users"),
+        "profile_home_UpdatePassword":
+            MessageLookupByLibrary.simpleMessage("Update Password"),
         "profile_reward_subTitle1": m2,
         "profile_title_RewardFrom":
             MessageLookupByLibrary.simpleMessage("Reward From"),

@@ -1,3 +1,4 @@
+import 'package:awallet/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -67,7 +68,7 @@ TextFormField createTextFormField(
       if (validator != null) {
         return validator(v);
       }
-      return v!.trim().isNotEmpty ? null : "Wrong $hintText";
+      return v!.trim().isNotEmpty ? null : "${S.current.common_Wrong}$hintText";
     },
   );
 }

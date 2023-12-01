@@ -2,6 +2,7 @@ import 'package:awallet/bean/my_reward_info.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/my_reward_item.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/profile/my_reward_from_user.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
@@ -38,7 +39,7 @@ class _MyRewardState extends State<MyReward> {
       appBar: AppBar(
         leadingWidth: 42,
         titleSpacing: 0,
-        title: const HeadLogo(title: "My Reward"),
+        title: HeadLogo(title: S.of(context).profile_home_MyReward),
       ),
       body: Column(
         children: [
@@ -48,7 +49,8 @@ class _MyRewardState extends State<MyReward> {
             child: Row(
               children: [
                 Text(
-                    "Total Reward: ${StringTools.formatCurrencyNum(totalReward)}",
+                    S.of(context).profile_MyReward_totalReward +
+                        StringTools.formatCurrencyNum(totalReward),
                     style: const TextStyle(
                       fontSize: 20,
                     )),
@@ -59,7 +61,7 @@ class _MyRewardState extends State<MyReward> {
               child: buildNewSmartRefresher(
             _refreshListController,
             dataList.isEmpty
-                ? const Center(child: Text("No Data"))
+                ? Center(child: Text(S.of(context).common_NoData))
                 : ListView.builder(
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 10),
@@ -67,12 +69,13 @@ class _MyRewardState extends State<MyReward> {
                     itemBuilder: (BuildContext context, int index) {
                       if (index < dataList.length) {
                         return GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          MyRewardFromUser(dateSec: dataList[index].dateSec,)));
+                                      builder: (context) => MyRewardFromUser(
+                                            dateSec: dataList[index].dateSec,
+                                          )));
                             },
                             child: MyRewardItem(info: dataList[index]));
                       }
