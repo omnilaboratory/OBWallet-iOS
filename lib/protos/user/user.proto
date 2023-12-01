@@ -251,6 +251,10 @@ message ListRewardWithUserRequest {
   uint64 date_sec=3;
 }
 message ListRewardWithUserResponse {
+//  总用户数
+  int64 user_count=2;
+//  总佣金
+  double rewards=3;
   repeated UserRewardItem list = 1;
 }
 //以日期为单位,代理商应收佣金

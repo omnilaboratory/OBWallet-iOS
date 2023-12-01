@@ -428,14 +428,17 @@ final $typed_data.Uint8List listRewardWithUserRequestDescriptor = $convert.base6
 const ListRewardWithUserResponse$json = {
   '1': 'ListRewardWithUserResponse',
   '2': [
+    {'1': 'user_count', '3': 2, '4': 1, '5': 3, '10': 'userCount'},
+    {'1': 'rewards', '3': 3, '4': 1, '5': 1, '10': 'rewards'},
     {'1': 'list', '3': 1, '4': 3, '5': 11, '6': '.user.UserRewardItem', '10': 'list'},
   ],
 };
 
 /// Descriptor for `ListRewardWithUserResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listRewardWithUserResponseDescriptor = $convert.base64Decode(
-    'ChpMaXN0UmV3YXJkV2l0aFVzZXJSZXNwb25zZRIoCgRsaXN0GAEgAygLMhQudXNlci5Vc2VyUm'
-    'V3YXJkSXRlbVIEbGlzdA==');
+    'ChpMaXN0UmV3YXJkV2l0aFVzZXJSZXNwb25zZRIdCgp1c2VyX2NvdW50GAIgASgDUgl1c2VyQ2'
+    '91bnQSGAoHcmV3YXJkcxgDIAEoAVIHcmV3YXJkcxIoCgRsaXN0GAEgAygLMhQudXNlci5Vc2Vy'
+    'UmV3YXJkSXRlbVIEbGlzdA==');
 
 @$core.Deprecated('Use userRewardDescriptor instead')
 const UserReward$json = {

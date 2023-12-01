@@ -97,10 +97,13 @@ class _MyRewardFromUserState extends State<MyRewardFromUser> {
 
   void getDataFromServer() {
     UserService.getInstance()
-        .listRewardWithUser(context,widget.dateSec, dataStartIndex, localPageSize)
+        .listRewardWithUser(
+            context, widget.dateSec, dataStartIndex, localPageSize)
         .then((result) {
       if (result.code == 1) {
         var resp = result.data as ListRewardWithUserResponse;
+        totalReward = resp.rewards;
+        totalUser = resp.userCount.toInt();
         var items = resp.list;
         if (items.isNotEmpty) {
           for (var element in items) {

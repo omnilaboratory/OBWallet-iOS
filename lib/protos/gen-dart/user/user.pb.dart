@@ -1805,6 +1805,8 @@ class ListRewardWithUserResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRewardWithUserResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..pc<UserRewardItem>(1, _omitFieldNames ? '' : 'list', $pb.PbFieldType.PM, subBuilder: UserRewardItem.create)
+    ..aInt64(2, _omitFieldNames ? '' : 'userCount')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'rewards', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -1831,6 +1833,24 @@ class ListRewardWithUserResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<UserRewardItem> get list => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get userCount => $_getI64(1);
+  @$pb.TagNumber(2)
+  set userCount($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserCount() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserCount() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get rewards => $_getN(2);
+  @$pb.TagNumber(3)
+  set rewards($core.double v) { $_setDouble(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRewards() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRewards() => clearField(3);
 }
 
 class UserReward extends $pb.GeneratedMessage {
