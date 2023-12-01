@@ -190,6 +190,16 @@ class S {
     );
   }
 
+  /// `confirm`
+  String get common_Confirm {
+    return Intl.message(
+      'confirm',
+      name: 'common_Confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Wrong `
   String get common_Wrong {
     return Intl.message(
@@ -395,6 +405,336 @@ class S {
     return Intl.message(
       'Apply Card',
       name: 'applyCard_ApplyCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card Activity`
+  String get cardActivity_tile {
+    return Intl.message(
+      'Card Activity',
+      name: 'cardActivity_tile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exchange`
+  String get exchange_tile {
+    return Intl.message(
+      'Exchange',
+      name: 'exchange_tile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To`
+  String get exchange_To {
+    return Intl.message(
+      'To',
+      name: 'exchange_To',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wait a while...`
+  String get exchange_wait {
+    return Intl.message(
+      'Wait a while...',
+      name: 'exchange_wait',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receive at least`
+  String get exchange_ReceiveAtLeast {
+    return Intl.message(
+      'Receive at least',
+      name: 'exchange_ReceiveAtLeast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Just need to input in From, minimum \$10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.`
+  String get exchange_InputTips1 {
+    return Intl.message(
+      'Just need to input in From, minimum \\\$10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.',
+      name: 'exchange_InputTips1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Balance: `
+  String get exchange_Balance {
+    return Intl.message(
+      'Balance: ',
+      name: 'exchange_Balance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Max`
+  String get exchange_Max {
+    return Intl.message(
+      'Max',
+      name: 'exchange_Max',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account balance is insufficient, please deposit.`
+  String get exchange_notEnoughBalance {
+    return Intl.message(
+      'Your account balance is insufficient, please deposit.',
+      name: 'exchange_notEnoughBalance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit`
+  String get exchange_Deposit {
+    return Intl.message(
+      'Deposit',
+      name: 'exchange_Deposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step {step}`
+  String exchange_Step(Object step) {
+    return Intl.message(
+      'Step $step',
+      name: 'exchange_Step',
+      desc: '',
+      args: [step],
+    );
+  }
+
+  /// `Review Exchange`
+  String get reReviewExchange_title {
+    return Intl.message(
+      'Review Exchange',
+      name: 'reReviewExchange_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You will swap`
+  String get reReviewExchange_YouWillSwap {
+    return Intl.message(
+      'You will swap',
+      name: 'reReviewExchange_YouWillSwap',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Slippage`
+  String get reReviewExchange_Slippage {
+    return Intl.message(
+      'Slippage',
+      name: 'reReviewExchange_Slippage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kyc`
+  String get kyc_title {
+    return Intl.message(
+      'Kyc',
+      name: 'kyc_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date of birth`
+  String get kyc_dateOfBirth {
+    return Intl.message(
+      'Date of birth',
+      name: 'kyc_dateOfBirth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please input English and Number.`
+  String get kyc_tips1 {
+    return Intl.message(
+      'Please input English and Number.',
+      name: 'kyc_tips1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identity Id`
+  String get kyc_IdentityId {
+    return Intl.message(
+      'Identity Id',
+      name: 'kyc_IdentityId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First Name`
+  String get kyc_FirstName {
+    return Intl.message(
+      'First Name',
+      name: 'kyc_FirstName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Name`
+  String get kyc_LastName {
+    return Intl.message(
+      'Last Name',
+      name: 'kyc_LastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mobile Number`
+  String get kyc_MobileNumber {
+    return Intl.message(
+      'Mobile Number',
+      name: 'kyc_MobileNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address Line`
+  String get kyc_AddressLine {
+    return Intl.message(
+      'Address Line',
+      name: 'kyc_AddressLine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address Line 2(Optional)`
+  String get kyc_AddressLine2 {
+    return Intl.message(
+      'Address Line 2(Optional)',
+      name: 'kyc_AddressLine2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `State/Region`
+  String get kyc_StateRegion {
+    return Intl.message(
+      'State/Region',
+      name: 'kyc_StateRegion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City`
+  String get kyc_City {
+    return Intl.message(
+      'City',
+      name: 'kyc_City',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Postal/Zip Code`
+  String get kyc_PostalZipCode {
+    return Intl.message(
+      'Postal/Zip Code',
+      name: 'kyc_PostalZipCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick up favorite card`
+  String get selectCard_title {
+    return Intl.message(
+      'Pick up favorite card',
+      name: 'selectCard_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdraw to Card`
+  String get send_title1 {
+    return Intl.message(
+      'Withdraw to Card',
+      name: 'send_title1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit to Card`
+  String get send_title2 {
+    return Intl.message(
+      'Deposit to Card',
+      name: 'send_title2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `withdraw`
+  String get send_Withdraw {
+    return Intl.message(
+      'withdraw',
+      name: 'send_Withdraw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `deposit`
+  String get send_Deposit {
+    return Intl.message(
+      'deposit',
+      name: 'send_Deposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `*** The virtual card withdrawal limit is \$50,000 per month.`
+  String get send_tips {
+    return Intl.message(
+      '*** The virtual card withdrawal limit is \\\$50,000 per month.',
+      name: 'send_tips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Balance`
+  String get send_AccountBalance {
+    return Intl.message(
+      'Account Balance',
+      name: 'send_AccountBalance',
       desc: '',
       args: [],
     );

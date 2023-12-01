@@ -125,15 +125,15 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                 height: size.height * 0.65,
                 child: Column(children: [
                   const SizedBox(height: 25),
-                  createDialogTitle('Review Exchange'),
+                  createDialogTitle(S.of(context).reReviewExchange_title),
                   const SizedBox(height: 25),
                   buildTitle(),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 27),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 27),
                     child: Text(
-                      'You will swap',
+                      S.of(context).reReviewExchange_YouWillSwap,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF666666),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -287,24 +287,24 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                       ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 7),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 7),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Slippage',
+                          S.of(context).reReviewExchange_Slippage,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             height: 1.29,
                           ),
                         ),
-                        SizedBox(width: 2),
-                        Text(
+                        const SizedBox(width: 2),
+                        const Text(
                           '0.5',
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -314,8 +314,8 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                             height: 1.29,
                           ),
                         ),
-                        SizedBox(width: 2),
-                        Text(
+                        const SizedBox(width: 2),
+                        const Text(
                           '%',
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -336,14 +336,14 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                       children: [
                         BottomButton(
                           icon: 'asset/images/icon_arrow_left_green.png',
-                          text: 'BACK',
+                          text: S.of(context).common_Back.toUpperCase(),
                           onPressed: () {
                             Navigator.pop(context);
                           },
                         ),
                         BottomButton(
                           icon: 'asset/images/icon_confirm_green.png',
-                          text: 'CONFIRM',
+                          text: S.of(context).common_Confirm,
                           onPressed: onConfirm,
                         )
                       ]),
@@ -353,7 +353,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
               const SizedBox(height: 30),
               BottomWhiteButton(
                 icon: 'asset/images/icon_close_white.png',
-                text: 'CANCEL',
+                text: S.of(context).common_Cancel.toUpperCase(),
                 onPressed: onClose,
               )
             ],
@@ -384,9 +384,9 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           ),
         ),
         const SizedBox(width: 7),
-        const Text(
-          'Step 1',
-          style: TextStyle(
+        Text(
+          S.of(context).exchange_Step(1),
+          style: const TextStyle(
             color: Color(0xFF06D78F),
             fontSize: 16,
             fontWeight: FontWeight.w400,
@@ -419,9 +419,9 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           ),
         ),
         const SizedBox(width: 7),
-        const Text(
-          'Step 2',
-          style: TextStyle(
+        Text(
+          S.of(context).exchange_Step(2),
+          style: const TextStyle(
             color: Color(0xFFEC9A1E),
             fontSize: 16,
             fontWeight: FontWeight.w400,

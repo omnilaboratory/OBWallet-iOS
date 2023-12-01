@@ -69,9 +69,9 @@ class _KycState extends State<Kyc> {
   @override
   void initState() {
     super.initState();
+    dateOfBirthTips = S.of(context).kyc_dateOfBirth;
     GlobalParams.eventBus.on().listen((event) {
       if (event == "closeKycPage") {
-        log("kyc listen closeKycPage");
         if (mounted) {
           Navigator.pop(context);
         }
@@ -108,27 +108,27 @@ class _KycState extends State<Kyc> {
                             child: Padding(
                               padding:
                                   const EdgeInsets.only(top: 28, bottom: 10),
-                              child: createDialogTitle('KYC'),
+                              child: createDialogTitle(S.of(context).kyc_title),
                             ),
                           ),
                           Form(
                             key: _formKey,
                             child: Column(
                               children: [
-                                const Row(
+                                Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Image(
+                                      const Image(
                                           width: 30,
                                           height: 30,
                                           image: AssetImage(
                                               "asset/images/icon_smile.png")),
-                                      SizedBox(width: 8),
+                                      const SizedBox(width: 8),
                                       SizedBox(
                                         child: Text(
-                                          'Please input English and Number.',
+                                          S.of(context).kyc_tips1,
                                           maxLines: 2,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Color(0xFF999999),
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500,
@@ -139,19 +139,19 @@ class _KycState extends State<Kyc> {
                                     ]),
                                 const SizedBox(height: 16),
                                 createTextFormField(
-                                    _socialIdController, "Identity Id",
+                                    _socialIdController, S.of(context).kyc_IdentityId,
                                     maxLength: 30,
                                     icon: const Icon(Icons.credit_card)),
                                 Row(
                                   children: [
                                     Expanded(
                                         child: createTextFormField(
-                                            _firstNameController, "First Name",
+                                            _firstNameController, S.of(context).kyc_FirstName,
                                             maxLength: 20)),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
-                                            _lastNameController, "Last Name",
+                                            _lastNameController, S.of(context).kyc_LastName,
                                             maxLength: 20)),
                                   ],
                                 ),
@@ -199,7 +199,7 @@ class _KycState extends State<Kyc> {
                                     Expanded(
                                       child: createTextFormField(
                                           _mobileNumberController,
-                                          "Mobile Number",
+                                          S.of(context).kyc_MobileNumber,
                                           keyboardType: TextInputType.phone),
                                     ),
                                   ],
@@ -241,21 +241,21 @@ class _KycState extends State<Kyc> {
                                 ),
                                 const SizedBox(height: 16),
                                 createTextFormField(
-                                    _address1Controller, "Address Line"),
+                                    _address1Controller, S.of(context).kyc_AddressLine),
                                 const SizedBox(height: 16),
                                 createTextFormField(_address2Controller,
-                                    "Address Line 2(Optional)",
+                                    S.of(context).kyc_AddressLine2,
                                     needCheck: false),
                                 const SizedBox(height: 16),
                                 Row(
                                   children: [
                                     Expanded(
                                         child: createTextFormField(
-                                            _stateController, "State/Region")),
+                                            _stateController, S.of(context).kyc_StateRegion)),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
-                                            _cityController, "City")),
+                                            _cityController, S.of(context).kyc_City)),
                                   ],
                                 ),
                                 const SizedBox(height: 16),
@@ -265,7 +265,7 @@ class _KycState extends State<Kyc> {
                                     Expanded(
                                         child: createTextFormField(
                                             _postalController,
-                                            "Postal/Zip Code",
+                                            S.of(context).kyc_PostalZipCode,
                                             maxLength: 6,
                                             keyboardType:
                                                 TextInputType.number)),
@@ -316,7 +316,7 @@ class _KycState extends State<Kyc> {
                           const SizedBox(height: 20),
                           BottomButton(
                             icon: 'asset/images/icon_confirm_green.png',
-                            text: 'DONE',
+                            text: S.of(context).common_Done.toUpperCase(),
                             onPressed: () {
                               if ((_formKey.currentState as FormState)
                                   .validate()) {
@@ -331,7 +331,7 @@ class _KycState extends State<Kyc> {
                   ),
                   BottomWhiteButton(
                     icon: 'asset/images/icon_close_white.png',
-                    text: 'CANCEL',
+                    text: S.of(context).common_Cancel.toUpperCase(),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -349,7 +349,7 @@ class _KycState extends State<Kyc> {
       return;
     }
 
-    if (dateOfBirthTips == "Date of birth") {
+    if (dateOfBirthTips == S.of(context).kyc_dateOfBirth) {
       showToast(S.of(context).tips_selectDateOfBirth);
       return;
     }

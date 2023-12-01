@@ -72,36 +72,37 @@ class _SendState extends State<Send> {
                                     const EdgeInsets.only(top: 28, bottom: 20),
                                 child: createDialogTitle(
                                     widget.type == EnumChargeType.withdraw
-                                        ? 'Withdraw to Card'
-                                        : 'Deposit to Card'),
+                                        ? S.of(context).send_title1
+                                        : S.of(context).send_title2),
                               ),
                             ),
                             buildBalance(),
                             const SizedBox(height: 20),
-                            const Text(
-                              'Card Number',
-                              style: TextStyle(
+                            Text(
+                              S.of(context).recharge_CardNumber,
+                              style: const TextStyle(
                                 color: Color(0xFF999999),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            createTextFormField(
-                                _cardNumberController, "Card Number",
+                            createTextFormField(_cardNumberController,
+                                S.of(context).recharge_CardNumber,
                                 enabled:
                                     widget.type == EnumChargeType.withdraw),
                             const SizedBox(height: 40),
-                            const Text(
-                              'Amount',
-                              style: TextStyle(
+                            Text(
+                              S.of(context).recharge_Amount,
+                              style: const TextStyle(
                                 color: Color(0xFF999999),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            createTextFormField(_amountController, "Amount",
+                            createTextFormField(_amountController,
+                                S.of(context).recharge_Amount,
                                 keyboardType: TextInputType.number,
                                 validator: (v) {
                               if (v == null || v.trim().isEmpty) {
@@ -124,19 +125,19 @@ class _SendState extends State<Send> {
                                 setState(() {});
                               }
                             }),
-
                             const SizedBox(height: 20),
-                            const Text(
-                              '*** The virtual card withdrawal limit is \$50,000 per month.',
-                              style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic),
+                            Text(
+                              S.of(context).send_tips,
+                              style: const TextStyle(
+                                  color: Colors.black54,
+                                  fontStyle: FontStyle.italic),
                             ),
-
                             const Spacer(),
                             BottomButton(
                               icon: 'asset/images/icon_confirm_green.png',
                               text: widget.type == EnumChargeType.withdraw
-                                  ? 'WITHDRAW'
-                                  : 'DEPOSIT',
+                                  ? S.of(context).send_Withdraw.toUpperCase()
+                                  : S.of(context).send_Deposit.toUpperCase(),
                               onPressed: () {
                                 if ((_formKey.currentState as FormState)
                                     .validate()) {
@@ -184,16 +185,15 @@ class _SendState extends State<Send> {
                 style: const TextStyle(
                   color: Color(0xFF333333),
                   fontSize: 32,
-                  fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ],
           ),
-          const Text(
-            'Account Balance',
+          Text(
+            S.of(context).send_AccountBalance,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF666666),
               fontSize: 16,
               fontWeight: FontWeight.w400,
@@ -235,7 +235,7 @@ class _SendState extends State<Send> {
       if (resp.code == 1) {
         if (widget.type == EnumChargeType.withdraw) {
           showToast(S.of(context).tips_successWithdraw);
-        } else if (widget.type == EnumChargeType.deposit){
+        } else if (widget.type == EnumChargeType.deposit) {
           showToast(S.of(context).tips_successDeposit);
         }
         Navigator.pop(context, true);

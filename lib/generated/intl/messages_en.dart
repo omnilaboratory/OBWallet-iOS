@@ -23,7 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(createFee) =>
       "*** There is a fee of \$${createFee} to apply for a virtual card.";
 
-  static String m1(totalReward, totalUser) =>
+  static String m1(step) => "Step ${step}";
+
+  static String m2(totalReward, totalUser) =>
       "Total Reward:${totalReward} from ${totalUser} Users";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -40,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "applyCard_Title": MessageLookupByLibrary.simpleMessage("Apply Card"),
         "applyCard_VirtualCard":
             MessageLookupByLibrary.simpleMessage("Virtual Card"),
+        "cardActivity_tile":
+            MessageLookupByLibrary.simpleMessage("Card Activity"),
         "cardRecharge_title1":
             MessageLookupByLibrary.simpleMessage("Pay For NFT"),
         "card_RecentTransactions":
@@ -60,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_CodeLeve1": MessageLookupByLibrary.simpleMessage("Weak"),
         "common_CodeLeve2": MessageLookupByLibrary.simpleMessage("Normal"),
         "common_CodeLeve3": MessageLookupByLibrary.simpleMessage("Strong"),
+        "common_Confirm": MessageLookupByLibrary.simpleMessage("confirm"),
         "common_ConfirmNewPsw":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
         "common_Deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
@@ -76,8 +81,39 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Verify Code"),
         "common_Withdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
         "common_Wrong": MessageLookupByLibrary.simpleMessage("Wrong "),
+        "exchange_Balance": MessageLookupByLibrary.simpleMessage("Balance: "),
+        "exchange_Deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
+        "exchange_InputTips1": MessageLookupByLibrary.simpleMessage(
+            "Just need to input in From, minimum \\\$10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD."),
+        "exchange_Max": MessageLookupByLibrary.simpleMessage("Max"),
+        "exchange_ReceiveAtLeast":
+            MessageLookupByLibrary.simpleMessage("Receive at least"),
+        "exchange_Step": m1,
+        "exchange_To": MessageLookupByLibrary.simpleMessage("To"),
+        "exchange_notEnoughBalance": MessageLookupByLibrary.simpleMessage(
+            "Your account balance is insufficient, please deposit."),
+        "exchange_tile": MessageLookupByLibrary.simpleMessage("Exchange"),
+        "exchange_wait":
+            MessageLookupByLibrary.simpleMessage("Wait a while..."),
         "forgetPsw_Title":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
+        "kyc_AddressLine": MessageLookupByLibrary.simpleMessage("Address Line"),
+        "kyc_AddressLine2":
+            MessageLookupByLibrary.simpleMessage("Address Line 2(Optional)"),
+        "kyc_City": MessageLookupByLibrary.simpleMessage("City"),
+        "kyc_FirstName": MessageLookupByLibrary.simpleMessage("First Name"),
+        "kyc_IdentityId": MessageLookupByLibrary.simpleMessage("Identity Id"),
+        "kyc_LastName": MessageLookupByLibrary.simpleMessage("Last Name"),
+        "kyc_MobileNumber":
+            MessageLookupByLibrary.simpleMessage("Mobile Number"),
+        "kyc_PostalZipCode":
+            MessageLookupByLibrary.simpleMessage("Postal/Zip Code"),
+        "kyc_StateRegion": MessageLookupByLibrary.simpleMessage("State/Region"),
+        "kyc_dateOfBirth":
+            MessageLookupByLibrary.simpleMessage("Date of birth"),
+        "kyc_tips1": MessageLookupByLibrary.simpleMessage(
+            "Please input English and Number."),
+        "kyc_title": MessageLookupByLibrary.simpleMessage("Kyc"),
         "login_Desc":
             MessageLookupByLibrary.simpleMessage("Wallet Description"),
         "login_ForgotPsw":
@@ -100,9 +136,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile_guide_desc5":
             MessageLookupByLibrary.simpleMessage("profile_guide_desc5"),
         "profile_guide_title": MessageLookupByLibrary.simpleMessage("Guide"),
-        "profile_reward_subTitle1": m1,
+        "profile_reward_subTitle1": m2,
         "profile_title_RewardFrom":
             MessageLookupByLibrary.simpleMessage("Reward From"),
+        "reReviewExchange_Slippage":
+            MessageLookupByLibrary.simpleMessage("Slippage"),
+        "reReviewExchange_YouWillSwap":
+            MessageLookupByLibrary.simpleMessage("You will swap"),
+        "reReviewExchange_title":
+            MessageLookupByLibrary.simpleMessage("Review Exchange"),
         "recharge_AccountBalance":
             MessageLookupByLibrary.simpleMessage("Account Balance"),
         "recharge_Amount": MessageLookupByLibrary.simpleMessage("Amount"),
@@ -114,6 +156,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Deposit to Account"),
         "recharge_Title2":
             MessageLookupByLibrary.simpleMessage("Withdraw to Account"),
+        "selectCard_title":
+            MessageLookupByLibrary.simpleMessage("Pick up favorite card"),
+        "send_AccountBalance":
+            MessageLookupByLibrary.simpleMessage("Account Balance"),
+        "send_Deposit": MessageLookupByLibrary.simpleMessage("deposit"),
+        "send_Withdraw": MessageLookupByLibrary.simpleMessage("withdraw"),
+        "send_tips": MessageLookupByLibrary.simpleMessage(
+            "*** The virtual card withdrawal limit is \\\$50,000 per month."),
+        "send_title1": MessageLookupByLibrary.simpleMessage("Withdraw to Card"),
+        "send_title2": MessageLookupByLibrary.simpleMessage("Deposit to Card"),
         "signUp_InvitationCode":
             MessageLookupByLibrary.simpleMessage("Invitation Code"),
         "signUp_Nickname": MessageLookupByLibrary.simpleMessage("Nickname"),

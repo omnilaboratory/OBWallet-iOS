@@ -82,7 +82,7 @@ class _SelectCardTypeState extends State<SelectCardType> {
                             child: Padding(
                               padding:
                                   const EdgeInsets.only(top: 28, bottom: 10),
-                              child: createDialogTitle('Pick up favorite card'),
+                              child: createDialogTitle(S.of(context).selectCard_title),
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -94,7 +94,6 @@ class _SelectCardTypeState extends State<SelectCardType> {
                                   return GestureDetector(
                                     onTap: () {
                                       currSelected = index;
-                                      log("currSelected $currSelected");
                                       setState(() {});
                                     },
                                     child: CardItem(
@@ -117,14 +116,14 @@ class _SelectCardTypeState extends State<SelectCardType> {
                             children: [
                               BottomButton(
                                 icon: 'asset/images/icon_arrow_left_green.png',
-                                text: 'BACK',
+                                text: S.of(context).common_Back.toUpperCase(),
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
                               ),
                               BottomButton(
                                 icon: 'asset/images/icon_confirm_green.png',
-                                text: 'DONE',
+                                text: S.of(context).common_Done.toUpperCase(),
                                 onPressed: () {
                                   onClickDone();
                                 },
@@ -138,7 +137,7 @@ class _SelectCardTypeState extends State<SelectCardType> {
                   ),
                   BottomWhiteButton(
                     icon: 'asset/images/icon_close_white.png',
-                    text: 'CANCEL',
+                    text: S.of(context).common_Cancel.toUpperCase(),
                     onPressed: () {
                       Navigator.pop(context);
                     },

@@ -23,14 +23,6 @@ class _ProfileHomeState extends State<ProfileHome> {
     List<Widget> list = [];
     list.add(buildUserInfo());
     list.add(const SizedBox(height: 40));
-    list.add(btnBtnItem(Icons.verified_user_outlined, "Update Password", () {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return const UpdatePsw();
-          });
-    }));
-    list.add(const SizedBox(height: 20));
     list.add(
         btnBtnItem(Icons.insert_invitation_sharp, "My Invitation Code", () {
       showDialog(
@@ -58,6 +50,13 @@ class _ProfileHomeState extends State<ProfileHome> {
           context: context,
           builder: (context) {
             return const Guide();
+          });
+    }));
+    list.add(btnBtnItem(Icons.verified_user_outlined, "Update Password", () {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const UpdatePsw();
           });
     }));
     list.add(const SizedBox(height: 20));

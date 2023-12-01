@@ -253,7 +253,7 @@ class _ExchangeState extends State<Exchange> {
                 const SizedBox(height: 20),
                 BottomWhiteButton(
                   icon: 'asset/images/icon_close_white.png',
-                  text: 'CANCEL',
+                  text: S.of(context).common_Cancel.toUpperCase(),
                   onPressed: onClose,
                 )
               ],
@@ -272,7 +272,7 @@ class _ExchangeState extends State<Exchange> {
       height: size.height * 0.72,
       child: Column(children: [
         const SizedBox(height: 25),
-        createDialogTitle('Exchange'),
+        createDialogTitle(S.of(context).exchange_tile),
         const SizedBox(height: 25),
         buildSubTitleForStep(),
         Expanded(
@@ -326,11 +326,11 @@ class _ExchangeState extends State<Exchange> {
                   ),
                   SizedBox(
                     width: size.width * 0.8,
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 0, top: 15),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 0, top: 15),
                       child: Text(
-                        'To',
-                        style: TextStyle(
+                        S.of(context).exchange_To,
+                        style: const TextStyle(
                           color: Color(0xFF999999),
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -344,12 +344,12 @@ class _ExchangeState extends State<Exchange> {
                       : buildToken(),
                   const SizedBox(height: 5),
                   coinPrice == -1
-                      ? const Row(
+                      ? Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Wait a while...",
-                        style: TextStyle(color: Colors.black45, fontSize: 12),
+                        S.of(context).exchange_wait,
+                        style: const TextStyle(color: Colors.black45, fontSize: 12),
                       ),
                     ],
                   )
@@ -451,9 +451,9 @@ class _ExchangeState extends State<Exchange> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Receive at least",
-                        style: TextStyle(
+                      Text(
+                        S.of(context).exchange_ReceiveAtLeast,
+                        style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -504,9 +504,9 @@ class _ExchangeState extends State<Exchange> {
                     ],
                   ),
                   const SizedBox(height: 15),
-                  const Text(
-                    'Just need to input in From, minimum \$10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.',
-                    style: TextStyle(color: Colors.black45, fontSize: 12),
+                  Text(
+                    S.of(context).exchange_InputTips1,
+                    style: const TextStyle(color: Colors.black45, fontSize: 12),
                   ),
                 ],
               ),
@@ -517,7 +517,7 @@ class _ExchangeState extends State<Exchange> {
           flex: 2,
           child: BottomButton(
             icon: 'asset/images/icon_arrow_right_green.png',
-            text: 'NEXT',
+            text: S.of(context).common_Next.toUpperCase(),
             onPressed: coinPrice > 0
                 ? onNext
                 : () {
@@ -623,9 +623,9 @@ class _ExchangeState extends State<Exchange> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text(
-                          "Balance: ",
-                          style: TextStyle(
+                        Text(
+                          S.of(context).exchange_Balance,
+                          style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -658,7 +658,7 @@ class _ExchangeState extends State<Exchange> {
                         }
                             : null,
                         child: Text(
-                          "MAX",
+                          S.of(context).exchange_Max.toUpperCase(),
                           style: TextStyle(
                             color: canCurrencyClick
                                 ? const Color(0xFF4A92FF)
@@ -681,10 +681,10 @@ class _ExchangeState extends State<Exchange> {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        "Your account balance is insufficient, please deposit.",
-                        style: TextStyle(
+                        S.of(context).exchange_notEnoughBalance,
+                        style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -703,9 +703,9 @@ class _ExchangeState extends State<Exchange> {
                                   type: EnumChargeType.deposit);
                             });
                       },
-                      child: const Text(
-                        "Deposit",
-                        style: TextStyle(
+                      child: Text(
+                        S.of(context).exchange_Deposit,
+                        style: const TextStyle(
                           color: Color(0xFF4A92FF),
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -835,9 +835,9 @@ class _ExchangeState extends State<Exchange> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text(
-                          "Balance: ",
-                          style: TextStyle(
+                        Text(
+                          S.of(context).exchange_Balance,
+                          style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -878,7 +878,7 @@ class _ExchangeState extends State<Exchange> {
                           });
                         } : null,
                         child: Text(
-                          "MAX",
+                          S.of(context).exchange_Max,
                           style: TextStyle(
                             color: canTokenClick
                                 ? const Color(0xFF4A92FF)
@@ -982,9 +982,9 @@ class _ExchangeState extends State<Exchange> {
           ),
         ),
         const SizedBox(width: 7),
-        const Text(
-          'Step 1',
-          style: TextStyle(
+        Text(
+          S.of(context).exchange_Step(1),
+          style: const TextStyle(
             color: Color(0xD6EC9A1E),
             fontSize: 16,
             fontWeight: FontWeight.w400,
@@ -1011,19 +1011,17 @@ class _ExchangeState extends State<Exchange> {
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
-                fontFamily: 'MS UI Gothic',
                 fontWeight: FontWeight.w400,
               ),
             ),
           ),
         ),
         const SizedBox(width: 7),
-        const Text(
-          'Step 2',
-          style: TextStyle(
+        Text(
+          S.of(context).exchange_Step(2),
+          style: const TextStyle(
             color: Color(0xD6999999),
             fontSize: 16,
-            fontFamily: 'Montserrat',
             fontWeight: FontWeight.w400,
           ),
         )

@@ -1,5 +1,6 @@
 import 'package:awallet/component/currency_tx_item.dart';
 import 'package:awallet/component/head_logo.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class TxHistory extends StatefulWidget {
@@ -11,18 +12,7 @@ class TxHistory extends StatefulWidget {
 
 class _TxHistoryState extends State<TxHistory> {
 
-  var txHistoryList = [
-    // CurrencyTxInfo(
-    //     name: "STARBUCKS FELIZ EN VIS, HO CHI STARBUCKS FELIZ EN VIS, HO CHI",
-    //     currencyName: "VND",
-    //     amount: 123456789987654320,
-    //     amountOfDollar: 160),
-    // CurrencyTxInfo(
-    //     name: "STARBUCKS FELIZ EN VIS, HO CHI",
-    //     currencyName: "VND",
-    //     amount: 20,
-    //     amountOfDollar: 160),
-  ];
+  var txHistoryList = [];
 
 
   @override
@@ -32,7 +22,7 @@ class _TxHistoryState extends State<TxHistory> {
         backgroundColor: Colors.transparent,
         leadingWidth: 42,
         titleSpacing: 0,
-        title: const HeadLogo(title: "Card Activity"),
+        title: HeadLogo(title: S.of(context).cardActivity_tile),
       ),
       body: ListView.builder(
           padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
