@@ -119,7 +119,7 @@ class _TokenActivityState extends State<TokenActivity> {
                 onRefresh: onFreshList,
                 onLoading: onLoadingList,
                 child: txHistoryList.isEmpty
-                    ? const Center(child: Text("No Data"))
+                    ? Center(child: Text(S.of(context).common_NoData))
                     : ListView.builder(
                         itemCount: txHistoryList.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -142,14 +142,14 @@ class _TokenActivityState extends State<TokenActivity> {
       children: [
         SquareButton(
             icon: 'asset/images/icon_pay.png',
-            text: 'Pay',
+            text: S.of(context).tokenActivity_Pay,
             iconWidth: iconWidth,
             onPressed: () {
               showToast(S.of(context).tips_comeSoon);
             }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',
-            text: 'Exchange',
+            text: S.of(context).tokenActivity_Exchange,
             iconWidth: iconWidth,
             onPressed: () {
               showDialog(
@@ -162,7 +162,7 @@ class _TokenActivityState extends State<TokenActivity> {
             }),
         SquareButton(
             icon: 'asset/images/icon_receive.png',
-            text: 'Receive',
+            text: S.of(context).tokenActivity_Receive,
             iconWidth: iconWidth,
             onPressed: () {
               showDialog(
@@ -173,7 +173,7 @@ class _TokenActivityState extends State<TokenActivity> {
             }),
         SquareButton(
             icon: 'asset/images/icon_send.png',
-            text: 'Send',
+            text: S.of(context).tokenActivity_Send,
             iconWidth: iconWidth,
             onPressed: () {
               showDialog(

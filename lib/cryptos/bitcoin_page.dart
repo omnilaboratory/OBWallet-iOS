@@ -28,12 +28,12 @@ class _BitcoinPageState extends State<BitcoinPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Coming Soon…',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500,color: Colors.black)),
+          Text(S.of(context).tips_comeSoon,
+              style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w500,color: Colors.black)),
           // CryptoWalletCard(walletInfo: CryptoWalletInfo(address: "******",balance: 0)),
           // const SizedBox(height: 20),
           // buildTxButtons(),

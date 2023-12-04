@@ -5,6 +5,7 @@ import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/eth.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/eth_grpc_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
@@ -117,7 +118,7 @@ class _SendConfirmState extends State<SendConfirm> {
                 height: size.height * 0.65,
                 child: Column(children: [
                   const SizedBox(height: 30),
-                  createDialogTitle('Send'),
+                  createDialogTitle(S.of(context).crypto_sendConfirm_title),
                   const SizedBox(height: 30),
                   Container(
                     width: 272,
@@ -133,9 +134,9 @@ class _SendConfirmState extends State<SendConfirm> {
                     child: Column(
                       children: [
                         const SizedBox(height: 14),
-                        const Text('Payment Details',
+                        Text(S.of(context).crypto_sendConfirm_PaymentDetails,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF999999),
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -176,8 +177,8 @@ class _SendConfirmState extends State<SendConfirm> {
                                 padding: const EdgeInsets.only(
                                     left: 15, top: 10, right: 10),
                                 child: Row(children: [
-                                  const Text('To: ',
-                                      style: TextStyle(
+                                  Text(S.of(context).crypto_sendConfirm_To,
+                                      style: const TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
@@ -198,8 +199,8 @@ class _SendConfirmState extends State<SendConfirm> {
                                 padding: const EdgeInsets.only(
                                     left: 15, top: 10, bottom: 15, right: 15),
                                 child: Row(children: [
-                                  const Text('From: ',
-                                      style: TextStyle(
+                                  Text(S.of(context).crypto_sendConfirm_From,
+                                      style: const TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
@@ -215,63 +216,63 @@ class _SendConfirmState extends State<SendConfirm> {
                                         fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
-                        const Visibility(
+                        Visibility(
                             visible: false,
                             child: Padding(
-                                padding: EdgeInsets.only(left: 15, top: 10),
+                                padding: const EdgeInsets.only(left: 15, top: 10),
                                 child: Row(children: [
-                                  Text('Memo: ',
-                                      style: TextStyle(
+                                  Text(S.of(context).crypto_sendConfirm_Memo,
+                                      style: const TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
                                       )),
-                                  Text('- -',
+                                  const Text('- -',
                                       style: TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
-                        const Visibility(
+                        Visibility(
                             visible: false,
                             child: Padding(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     left: 15, top: 10, bottom: 15),
                                 child: Row(children: [
-                                  Text('Miner Fee:',
+                                  Text(S.of(context).crypto_send_MinerFee,
+                                      style: const TextStyle(
+                                        color: Color(0xFF999999),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                      )),
+                                  const SizedBox(width: 6),
+                                  const Text('\$100.00',
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
                                       )),
-                                  SizedBox(width: 6),
-                                  Text('\$100.00',
-                                      style: TextStyle(
-                                        color: Color(0xFF999999),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w400,
-                                      )),
-                                  SizedBox(width: 6),
-                                  Text('0.0001234 BTC',
+                                  const SizedBox(width: 6),
+                                  const Text('0.0001234 BTC',
                                       style: TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
                                       ))
                                 ]))),
-                        const Visibility(
+                        Visibility(
                             visible: false,
                             child: Padding(
-                                padding: EdgeInsets.only(left: 15, top: 15),
+                                padding: const EdgeInsets.only(left: 15, top: 15),
                                 child: Row(children: [
-                                  Text('Expiration: ',
-                                      style: TextStyle(
+                                  Text(S.of(context).crypto_send_Expiration,
+                                      style: const TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
                                       )),
-                                  Text('24hours',
+                                  const Text('24hours',
                                       style: TextStyle(
                                         color: Color(0xFF333333),
                                         fontSize: 12,
@@ -310,12 +311,12 @@ class _SendConfirmState extends State<SendConfirm> {
                       children: [
                         BottomButton(
                           icon: 'asset/images/icon_arrow_left_green.png',
-                          text: 'BACK',
+                          text: S.of(context).common_Back.toUpperCase(),
                           onPressed: onBack,
                         ),
                         BottomButton(
                           icon: 'asset/images/icon_confirm_green.png',
-                          text: 'CONFIRM',
+                          text: S.of(context).common_Confirm.toUpperCase(),
                           onPressed: onConfirm,
                         ),
                       ],
@@ -327,7 +328,7 @@ class _SendConfirmState extends State<SendConfirm> {
               const SizedBox(height: 30),
               BottomWhiteButton(
                 icon: 'asset/images/icon_close_white.png',
-                text: 'CANCEL',
+                text: S.of(context).common_Cancel.toUpperCase(),
                 onPressed: onClose,
               )
             ],

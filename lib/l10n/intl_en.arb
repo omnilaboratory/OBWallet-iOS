@@ -57,6 +57,15 @@
   "reReviewExchange_YouWillSwap": "You will swap",
   "reReviewExchange_Slippage": "Slippage",
 
+  "tokenActivity_Pay": "Pay",
+  "tokenActivity_Exchange": "Exchange",
+  "tokenActivity_Receive": "Receive",
+  "tokenActivity_Send": "Send",
+
+  "txHistory_title": "Crypto",
+  "txHistory_Exchange": "Exchange",
+  "txHistory_Send": "Send",
+
   "kyc_title": "Kyc",
   "kyc_dateOfBirth": "Date of birth",
   "kyc_tips1": "Please input English and Number.",
@@ -104,6 +113,44 @@
   "recharge_CardBalance": "Card Balance",
 
   "cardRecharge_title": "Pay For NFT",
+  "ethereumPage_Tokens": "Tokens",
+  "ethereumPage_NFTs": "NFTs",
+  "ethereumPage_Pay": "Pay",
+  "ethereumPage_Exchange": "Exchange",
+  "ethereumPage_Receive": "Receive",
+  "ethereumPage_Send": "Send",
+  "ethereumPage_CreateNewWallet": "Create New Wallet",
+  "ethereumPage_RecoverWallet": "Recover Wallet",
+
+  "ethereumRecoverWallet_title": "Import WIF",
+  "ethereumRecoverWallet_WIF": "WIF",
+
+  "exportWif_title": "Export WIF",
+  "exportWif_Copy": "Copy",
+
+  "nftExchange_title": "NFT Exchange",
+  "nftExchange_From": "From",
+  "nftExchange_To": "To",
+  "nftExchange_nftBalance": "Balance: {amount} NFTs",
+
+  "receiveWallet_WalletAddress": "Wallet Address",
+  "receiveWallet_LightningInvoice": "Lightning Invoice",
+
+  "crypto_send_title": "Send",
+  "crypto_send_AssetAmount": "Asset & Amount",
+  "crypto_send_Balance": "Balance: ",
+  "crypto_send_Memo": "Memo",
+  "crypto_send_MinerFee": "Miner Fee: ",
+  "crypto_send_EstimatedRange": "Estimated range",
+  "crypto_send_RefreshIn5s": "Refresh in 5s",
+  "crypto_send_Standard": "Standard",
+  "crypto_send_Expiration": "Expiration: ",
+
+  "crypto_sendConfirm_title": "Standard",
+  "crypto_sendConfirm_PaymentDetails": "Payment Details",
+  "crypto_sendConfirm_Memo": "Memo: ",
+  "crypto_sendConfirm_From": "From: ",
+  "crypto_sendConfirm_To": "To: ",
 
   "shop_title": "Shop",
   "shop_tips": "You have selected {nftTotalCount} NFTs and value is ${nftTotalValue}",
@@ -116,7 +163,6 @@
   "shop_nft_TokenStandard": "Token Standard",
   "shop_nft_Chain": "Chain",
   "shop_nft_tx_history_title": "NFT Tx History",
-
 
   "profile_home_InvitationCode": "My Invitation Code",
   "profile_home_MyUsers": "My Users",
@@ -138,6 +184,8 @@
   "profile_guide_desc5": "profile_guide_desc5",
 
   "tips_WrongEmail": "Wrong email",
+  "tips_WrongTxid": "Wrong txid",
+  "tips_WrongTopUp": "Top up to wallet address",
   "tips_comeSoon": "Coming Soon...",
   "tips_emptyAddress": "The address cannot be empty.",
   "tips_invalidAddress": "Invalid address.",

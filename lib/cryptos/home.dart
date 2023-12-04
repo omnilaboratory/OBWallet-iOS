@@ -4,6 +4,7 @@ import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/cryptos/ethereum_page.dart';
 import 'package:awallet/cryptos/more_menu.dart';
 import 'package:awallet/cryptos/tx_history.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import 'bitcoin_page.dart';
@@ -18,7 +19,7 @@ class CryptoHome extends StatefulWidget {
 class _CryptoHomeState extends State<CryptoHome> {
   double balance = 0;
 
-  var tabNames = ['Ethereum','Bitcoin' ];
+  var tabNames = ['Ethereum','Bitcoin'];
 
   List<Widget> tabList = [];
   List<Widget> tabViewList = [
@@ -106,7 +107,7 @@ class _CryptoHomeState extends State<CryptoHome> {
     return AppBar(
       // backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
-      title: const HeadLogo(title: "Crypto"),
+      title: HeadLogo(title: S.of(context).main_home_Crypto),
       actions: <Widget>[
         Padding(
           padding: const EdgeInsets.only(right: 20.0),

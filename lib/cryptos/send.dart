@@ -48,7 +48,6 @@ class _SendState extends State<Send> {
         }
       }
     } else {
-      log("polygon");
       tokenList.addAll(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![
           EnumEthKey.polygonTokenList]!);
     }
@@ -142,7 +141,7 @@ class _SendState extends State<Send> {
                           alignment: AlignmentDirectional.centerEnd,
                           children: [
                             Center(
-                              child: createDialogTitle('Send'),
+                              child: createDialogTitle(S.of(context).crypto_send_title),
                             ),
                             const Positioned(
                               right: 24,
@@ -175,11 +174,11 @@ class _SendState extends State<Send> {
                         children: [
                           SizedBox(
                             width: size.width * 0.8,
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 25, top: 15),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 25, top: 15),
                               child: Text(
-                                'To',
-                                style: TextStyle(
+                                S.of(context).nftExchange_To,
+                                style: const TextStyle(
                                   color: Color(0xFF999999),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -222,11 +221,11 @@ class _SendState extends State<Send> {
                               )),
                           SizedBox(
                             width: size.width * 0.8,
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 25, top: 15),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 25, top: 15),
                               child: Text(
-                                'Asset & Amount',
-                                style: TextStyle(
+                                S.of(context).crypto_send_AssetAmount,
+                                style: const TextStyle(
                                   color: Color(0xFF999999),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -337,9 +336,9 @@ class _SendState extends State<Send> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            const Text(
-                                              "Balance: ",
-                                              style: TextStyle(
+                                            Text(
+                                              S.of(context).crypto_send_Balance,
+                                              style: const TextStyle(
                                                 color: Color(0xFF666666),
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400,
@@ -390,7 +389,7 @@ class _SendState extends State<Send> {
                                                     }
                                                   : null,
                                               child: Text(
-                                                "MAX",
+                                                S.of(context).exchange_Max,
                                                 style: TextStyle(
                                                   color: canClick
                                                       ? const Color(0xFF4A92FF)
@@ -410,11 +409,11 @@ class _SendState extends State<Send> {
                             visible: false,
                             child: SizedBox(
                               width: size.width * 0.8,
-                              child: const Padding(
-                                padding: EdgeInsets.only(left: 25, top: 15),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 25, top: 15),
                                 child: Text(
-                                  'Memo',
-                                  style: TextStyle(
+                                  S.of(context).crypto_send_Memo,
+                                  style: const TextStyle(
                                     color: Color(0xFF999999),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -458,11 +457,11 @@ class _SendState extends State<Send> {
                             visible: false,
                             child: SizedBox(
                               width: size.width * 0.8,
-                              child: const Padding(
-                                padding: EdgeInsets.only(left: 25, top: 15),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 25, top: 15),
                                 child: Text(
-                                  'Miner Fee',
-                                  style: TextStyle(
+                                  S.of(context).crypto_send_MinerFee,
+                                  style: const TextStyle(
                                     color: Color(0xFF999999),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -475,29 +474,29 @@ class _SendState extends State<Send> {
                             visible: false,
                             child: SizedBox(
                               width: size.width * 0.8,
-                              child: const Padding(
-                                  padding: EdgeInsets.only(left: 25, top: 0),
+                              child: Padding(
+                                  padding: const EdgeInsets.only(left: 25, top: 0),
                                   child: Row(
                                     children: [
                                       Text(
-                                        'Estimated range',
-                                        style: TextStyle(
+                                        S.of(context).crypto_send_EstimatedRange,
+                                        style: const TextStyle(
                                           color: Color(0xFF333333),
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                         ),
                                       ),
-                                      SizedBox(width: 10),
-                                      Image(
+                                      const SizedBox(width: 10),
+                                      const Image(
                                         width: 14,
                                         height: 14,
                                         image: AssetImage(
                                             "asset/images/icon_refresh_small_black.png"),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Text(
-                                        'Refresh in 5s',
-                                        style: TextStyle(
+                                        S.of(context).crypto_send_RefreshIn5s,
+                                        style: const TextStyle(
                                           color: Color(0xFF333333),
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
@@ -524,10 +523,10 @@ class _SendState extends State<Send> {
                               ),
                             ),
                           ),
-                          const Visibility(
+                          Visibility(
                             visible: false,
                             child: Padding(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     left: 25, right: 25, top: 0),
                                 child: Row(
                                   children: [
@@ -536,7 +535,7 @@ class _SendState extends State<Send> {
                                         alignment:
                                             AlignmentDirectional.centerStart,
                                         children: [
-                                          Positioned(
+                                          const Positioned(
                                             child: Text(
                                               "0.0001234 BTC",
                                               style: TextStyle(
@@ -552,16 +551,16 @@ class _SendState extends State<Send> {
                                             child: Row(
                                               children: [
                                                 Text(
-                                                  "Standard",
-                                                  style: TextStyle(
+                                                  S.of(context).crypto_send_Standard,
+                                                  style: const TextStyle(
                                                     color: Color(0xFF4A92FF),
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.w400,
                                                     height: 1.29,
                                                   ),
                                                 ),
-                                                SizedBox(width: 7),
-                                                Image(
+                                                const SizedBox(width: 7),
+                                                const Image(
                                                   width: 6,
                                                   height: 12,
                                                   image: AssetImage(
@@ -587,7 +586,7 @@ class _SendState extends State<Send> {
                       children: [
                         BottomButton(
                           icon: 'asset/images/icon_arrow_right_green.png',
-                          text: 'NEXT',
+                          text: S.of(context).common_Next.toUpperCase(),
                           onPressed: onNext,
                         ),
                       ],
@@ -599,7 +598,7 @@ class _SendState extends State<Send> {
             const SizedBox(height: 30),
             BottomWhiteButton(
               icon: 'asset/images/icon_close_white.png',
-              text: 'CANCEL',
+              text: S.of(context).common_Cancel.toUpperCase(),
               onPressed: onClose,
             )
           ],
@@ -714,7 +713,7 @@ class _SendState extends State<Send> {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child: const Text("Wallet Address", style: TextStyle(fontSize: 14)),
+            child: Text(S.of(context).receiveWallet_WalletAddress, style: TextStyle(fontSize: 14)),
             onPressed: () {
               if (currChainTypeBtnIndex != 0) {
                 currChainTypeBtnIndex = 0;
@@ -735,8 +734,8 @@ class _SendState extends State<Send> {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child: const Text("Lightning Invoice",
-                textAlign: TextAlign.center, style: TextStyle(fontSize: 14)),
+            child: Text(S.of(context).receiveWallet_LightningInvoice,
+                textAlign: TextAlign.center, style: const TextStyle(fontSize: 14)),
             onPressed: () {
               if (currChainTypeBtnIndex != 1) {
                 currChainTypeBtnIndex = 1;

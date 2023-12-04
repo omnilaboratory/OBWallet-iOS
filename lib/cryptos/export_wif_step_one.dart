@@ -79,14 +79,14 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    createDialogTitle('Export WIF'),
+                    createDialogTitle(S.of(context).exportWif_title),
                     const SizedBox(height: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Password',
-                          style: TextStyle(
+                        Text(
+                          S.of(context).common_Password,
+                          style: const TextStyle(
                             color: Color(0xFF999999),
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -123,7 +123,7 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
                       children: [
                         BottomButton(
                           icon: 'asset/images/icon_arrow_right_green.png',
-                          text: 'NEXT',
+                          text: S.of(context).common_Next.toUpperCase(),
                           onPressed: onNext,
                         ),
                       ],
@@ -134,7 +134,7 @@ class _ExportWifStepOneState extends State<ExportWifStepOne> {
               const SizedBox(height: 30),
               BottomWhiteButton(
                 icon: 'asset/images/icon_close_white.png',
-                text: 'CANCEL',
+                text: S.of(context).common_Cancel.toUpperCase(),
                 onPressed: onClose,
               )
             ]),

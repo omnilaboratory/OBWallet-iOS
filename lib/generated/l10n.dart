@@ -560,6 +560,76 @@ class S {
     );
   }
 
+  /// `Pay`
+  String get tokenActivity_Pay {
+    return Intl.message(
+      'Pay',
+      name: 'tokenActivity_Pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exchange`
+  String get tokenActivity_Exchange {
+    return Intl.message(
+      'Exchange',
+      name: 'tokenActivity_Exchange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receive`
+  String get tokenActivity_Receive {
+    return Intl.message(
+      'Receive',
+      name: 'tokenActivity_Receive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get tokenActivity_Send {
+    return Intl.message(
+      'Send',
+      name: 'tokenActivity_Send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Crypto`
+  String get txHistory_title {
+    return Intl.message(
+      'Crypto',
+      name: 'txHistory_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exchange`
+  String get txHistory_Exchange {
+    return Intl.message(
+      'Exchange',
+      name: 'txHistory_Exchange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get txHistory_Send {
+    return Intl.message(
+      'Send',
+      name: 'txHistory_Send',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Kyc`
   String get kyc_title {
     return Intl.message(
@@ -970,6 +1040,326 @@ class S {
     );
   }
 
+  /// `Tokens`
+  String get ethereumPage_Tokens {
+    return Intl.message(
+      'Tokens',
+      name: 'ethereumPage_Tokens',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NFTs`
+  String get ethereumPage_NFTs {
+    return Intl.message(
+      'NFTs',
+      name: 'ethereumPage_NFTs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay`
+  String get ethereumPage_Pay {
+    return Intl.message(
+      'Pay',
+      name: 'ethereumPage_Pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exchange`
+  String get ethereumPage_Exchange {
+    return Intl.message(
+      'Exchange',
+      name: 'ethereumPage_Exchange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receive`
+  String get ethereumPage_Receive {
+    return Intl.message(
+      'Receive',
+      name: 'ethereumPage_Receive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get ethereumPage_Send {
+    return Intl.message(
+      'Send',
+      name: 'ethereumPage_Send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create New Wallet`
+  String get ethereumPage_CreateNewWallet {
+    return Intl.message(
+      'Create New Wallet',
+      name: 'ethereumPage_CreateNewWallet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recover Wallet`
+  String get ethereumPage_RecoverWallet {
+    return Intl.message(
+      'Recover Wallet',
+      name: 'ethereumPage_RecoverWallet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import WIF`
+  String get ethereumRecoverWallet_title {
+    return Intl.message(
+      'Import WIF',
+      name: 'ethereumRecoverWallet_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `WIF`
+  String get ethereumRecoverWallet_WIF {
+    return Intl.message(
+      'WIF',
+      name: 'ethereumRecoverWallet_WIF',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Export WIF`
+  String get exportWif_title {
+    return Intl.message(
+      'Export WIF',
+      name: 'exportWif_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy`
+  String get exportWif_Copy {
+    return Intl.message(
+      'Copy',
+      name: 'exportWif_Copy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NFT Exchange`
+  String get nftExchange_title {
+    return Intl.message(
+      'NFT Exchange',
+      name: 'nftExchange_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From`
+  String get nftExchange_From {
+    return Intl.message(
+      'From',
+      name: 'nftExchange_From',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To`
+  String get nftExchange_To {
+    return Intl.message(
+      'To',
+      name: 'nftExchange_To',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Balance: {amount} NFTs`
+  String nftExchange_nftBalance(Object amount) {
+    return Intl.message(
+      'Balance: $amount NFTs',
+      name: 'nftExchange_nftBalance',
+      desc: '',
+      args: [amount],
+    );
+  }
+
+  /// `Wallet Address`
+  String get receiveWallet_WalletAddress {
+    return Intl.message(
+      'Wallet Address',
+      name: 'receiveWallet_WalletAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lightning Invoice`
+  String get receiveWallet_LightningInvoice {
+    return Intl.message(
+      'Lightning Invoice',
+      name: 'receiveWallet_LightningInvoice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get crypto_send_title {
+    return Intl.message(
+      'Send',
+      name: 'crypto_send_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asset & Amount`
+  String get crypto_send_AssetAmount {
+    return Intl.message(
+      'Asset & Amount',
+      name: 'crypto_send_AssetAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Balance: `
+  String get crypto_send_Balance {
+    return Intl.message(
+      'Balance: ',
+      name: 'crypto_send_Balance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Memo`
+  String get crypto_send_Memo {
+    return Intl.message(
+      'Memo',
+      name: 'crypto_send_Memo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Miner Fee: `
+  String get crypto_send_MinerFee {
+    return Intl.message(
+      'Miner Fee: ',
+      name: 'crypto_send_MinerFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Estimated range`
+  String get crypto_send_EstimatedRange {
+    return Intl.message(
+      'Estimated range',
+      name: 'crypto_send_EstimatedRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refresh in 5s`
+  String get crypto_send_RefreshIn5s {
+    return Intl.message(
+      'Refresh in 5s',
+      name: 'crypto_send_RefreshIn5s',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Standard`
+  String get crypto_send_Standard {
+    return Intl.message(
+      'Standard',
+      name: 'crypto_send_Standard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expiration: `
+  String get crypto_send_Expiration {
+    return Intl.message(
+      'Expiration: ',
+      name: 'crypto_send_Expiration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Standard`
+  String get crypto_sendConfirm_title {
+    return Intl.message(
+      'Standard',
+      name: 'crypto_sendConfirm_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment Details`
+  String get crypto_sendConfirm_PaymentDetails {
+    return Intl.message(
+      'Payment Details',
+      name: 'crypto_sendConfirm_PaymentDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Memo: `
+  String get crypto_sendConfirm_Memo {
+    return Intl.message(
+      'Memo: ',
+      name: 'crypto_sendConfirm_Memo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From: `
+  String get crypto_sendConfirm_From {
+    return Intl.message(
+      'From: ',
+      name: 'crypto_sendConfirm_From',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To: `
+  String get crypto_sendConfirm_To {
+    return Intl.message(
+      'To: ',
+      name: 'crypto_sendConfirm_To',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Shop`
   String get shop_title {
     return Intl.message(
@@ -1255,6 +1645,26 @@ class S {
     return Intl.message(
       'Wrong email',
       name: 'tips_WrongEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wrong txid`
+  String get tips_WrongTxid {
+    return Intl.message(
+      'Wrong txid',
+      name: 'tips_WrongTxid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top up to wallet address`
+  String get tips_WrongTopUp {
+    return Intl.message(
+      'Top up to wallet address',
+      name: 'tips_WrongTopUp',
       desc: '',
       args: [],
     );

@@ -9,6 +9,7 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/component/dollar_face.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/eth.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/services/eth_service.dart';
@@ -66,7 +67,6 @@ class _NftExchangeState extends State<NftExchange> {
 
   @override
   Widget build(BuildContext context) {
-    log("build");
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -76,7 +76,7 @@ class _NftExchangeState extends State<NftExchange> {
         appBar: AppBar(
           leadingWidth: 42,
           titleSpacing: 0,
-          title: const HeadLogo(title: "NFT Exchange"),
+          title: HeadLogo(title: S.of(context).nftExchange_title),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -113,7 +113,7 @@ class _NftExchangeState extends State<NftExchange> {
                 children: [
                   BottomButton(
                     icon: 'asset/images/icon_arrow_left_green.png',
-                    text: 'BACK',
+                    text: S.of(context).common_Back.toUpperCase(),
                     onPressed: () {
                       FocusScope.of(context).unfocus();
                       Navigator.pop(context);
@@ -121,7 +121,7 @@ class _NftExchangeState extends State<NftExchange> {
                   ),
                   BottomButton(
                     icon: 'asset/images/icon_confirm_green.png',
-                    text: 'DONE',
+                    text: S.of(context).common_Done.toUpperCase(),
                     onPressed: () {
                       FocusScope.of(context).unfocus();
                       alert(
@@ -146,9 +146,9 @@ class _NftExchangeState extends State<NftExchange> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'From',
-            style: TextStyle(
+          Text(
+            S.of(context).nftExchange_From,
+            style: const TextStyle(
               color: Color(0xFF999999),
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -222,7 +222,7 @@ class _NftExchangeState extends State<NftExchange> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                'Balance: ${currSelectedFace.amount} NFTs',
+                S.of(context).nftExchange_nftBalance(currSelectedFace.amount),
                 style: const TextStyle(
                   color: Color(0xFF999999),
                   fontSize: 14,
@@ -236,9 +236,9 @@ class _NftExchangeState extends State<NftExchange> {
                       currSelectedFace.amount.toString();
                   setDollarAmount();
                 },
-                child: const Text(
-                  'MAX',
-                  style: TextStyle(
+                child: Text(
+                  S.of(context).exchange_Max,
+                  style: const TextStyle(
                     color: Color(0xFF4A92FF),
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -323,9 +323,9 @@ class _NftExchangeState extends State<NftExchange> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'To',
-            style: TextStyle(
+          Text(
+            S.of(context).nftExchange_To,
+            style: const TextStyle(
               color: Color(0xFF999999),
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -478,16 +478,14 @@ class _NftExchangeState extends State<NftExchange> {
         }
       }
     });
-    log("go sendNftToPlatform");
     try {
       request.nftTxid = await Eth.sendNftToPlatform(
           int.parse(EnumDollarFace.values[currSelectedFace.faceType].value),
           amount);
 
-      log("get the txid ${request.nftTxid}");
       if (request.nftTxid.isEmpty || !request.nftTxid.startsWith("0x")) {
         loading.remove();
-        alert("Wrong txid", context, () {});
+        alert(S.of(context).tips_WrongTxid, context, () {});
         return;
       }
 

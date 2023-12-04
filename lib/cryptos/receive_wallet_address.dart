@@ -1,6 +1,7 @@
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_receive_center.dart';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                 height: 450,
                 child: Column(children: [
                   const SizedBox(height: 30),
-                  createDialogTitle('Receive'),
+                  createDialogTitle(S.of(context).ethereumPage_Receive),
                   Padding(
                       padding:
                           const EdgeInsets.only(left: 25, right: 25, top: 20),
@@ -48,12 +49,12 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                   const SizedBox(height: 10),
                   CryptoReceiveCenter(
                       address: LocalStorage.getEthAddress()!,
-                      tips: "Top up to wallet address"),
+                      tips: S.of(context).tips_WrongTopUp),
                 ])),
             const SizedBox(height: 30),
             BottomWhiteButton(
               icon: 'asset/images/icon_close_white.png',
-              text: 'CANCEL',
+              text: S.of(context).common_Cancel.toUpperCase(),
               onPressed: onClose,
             )
           ]),
@@ -140,7 +141,7 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child: const Text("Wallet Address", style: TextStyle(fontSize: 14)),
+            child: Text(S.of(context).receiveWallet_WalletAddress, style: TextStyle(fontSize: 14)),
             onPressed: () {
               if (currChainTypeBtnIndex != 0) {
                 currChainTypeBtnIndex = 0;
@@ -161,7 +162,7 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child: const Text("Lightning Invoice",
+            child: Text(S.of(context).receiveWallet_LightningInvoice,
                 textAlign: TextAlign.center, style: TextStyle(fontSize: 14)),
             onPressed: () {
               if (currChainTypeBtnIndex != 1) {

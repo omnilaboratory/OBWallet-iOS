@@ -55,19 +55,19 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
               child: Column(
                 children: [
                   const SizedBox(height: 30),
-                  createDialogTitle('Export WIF'),
+                  createDialogTitle(S.of(context).exportWif_title),
                   const SizedBox(height: 30),
                   QrImageView(
                     data: LocalStorage.getEthPrivateKey(),
                     version: QrVersions.auto,
                     size: 160,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 15),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
                     child: Text(
-                      'WIF',
+                      S.of(context).ethereumRecoverWallet_WIF,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF333333),
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
@@ -105,7 +105,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
                       children: [
                         BottomButton(
                           icon: 'asset/images/icon_arrow_left_green.png',
-                          text: 'BACK',
+                          text: S.of(context).common_Back.toUpperCase(),
                           onPressed: onBack,
                         ),
                         const Spacer(
@@ -113,7 +113,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
                         ),
                         BottomButton(
                           icon: 'asset/images/icon_copy_green.png',
-                          text: 'COPY',
+                          text: S.of(context).exportWif_Copy.toUpperCase(),
                           onPressed: onCopy,
                         ),
                       ],
@@ -125,7 +125,7 @@ class _ExportWifStepTwoState extends State<ExportWifStepTwo> {
             const SizedBox(height: 30),
             BottomWhiteButton(
               icon: 'asset/images/icon_close_white.png',
-              text: 'CANCEL',
+              text: S.of(context).common_Cancel.toUpperCase(),
               onPressed: onClose,
             )
           ]),

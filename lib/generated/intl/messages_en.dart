@@ -25,10 +25,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(step) => "Step ${step}";
 
-  static String m2(totalReward, totalUser) =>
+  static String m2(amount) => "Balance: ${amount} NFTs";
+
+  static String m3(totalReward, totalUser) =>
       "Total Reward:${totalReward} from ${totalUser} Users";
 
-  static String m3(nftTotalCount, nftTotalValue) =>
+  static String m4(nftTotalCount, nftTotalValue) =>
       "You have selected ${nftTotalCount} NFTs and value is \$${nftTotalValue}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -85,6 +87,46 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Verify Code"),
         "common_Withdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
         "common_Wrong": MessageLookupByLibrary.simpleMessage("Wrong "),
+        "crypto_sendConfirm_From":
+            MessageLookupByLibrary.simpleMessage("From: "),
+        "crypto_sendConfirm_Memo":
+            MessageLookupByLibrary.simpleMessage("Memo: "),
+        "crypto_sendConfirm_PaymentDetails":
+            MessageLookupByLibrary.simpleMessage("Payment Details"),
+        "crypto_sendConfirm_To": MessageLookupByLibrary.simpleMessage("To: "),
+        "crypto_sendConfirm_title":
+            MessageLookupByLibrary.simpleMessage("Standard"),
+        "crypto_send_AssetAmount":
+            MessageLookupByLibrary.simpleMessage("Asset & Amount"),
+        "crypto_send_Balance":
+            MessageLookupByLibrary.simpleMessage("Balance: "),
+        "crypto_send_EstimatedRange":
+            MessageLookupByLibrary.simpleMessage("Estimated range"),
+        "crypto_send_Expiration":
+            MessageLookupByLibrary.simpleMessage("Expiration: "),
+        "crypto_send_Memo": MessageLookupByLibrary.simpleMessage("Memo"),
+        "crypto_send_MinerFee":
+            MessageLookupByLibrary.simpleMessage("Miner Fee: "),
+        "crypto_send_RefreshIn5s":
+            MessageLookupByLibrary.simpleMessage("Refresh in 5s"),
+        "crypto_send_Standard":
+            MessageLookupByLibrary.simpleMessage("Standard"),
+        "crypto_send_title": MessageLookupByLibrary.simpleMessage("Send"),
+        "ethereumPage_CreateNewWallet":
+            MessageLookupByLibrary.simpleMessage("Create New Wallet"),
+        "ethereumPage_Exchange":
+            MessageLookupByLibrary.simpleMessage("Exchange"),
+        "ethereumPage_NFTs": MessageLookupByLibrary.simpleMessage("NFTs"),
+        "ethereumPage_Pay": MessageLookupByLibrary.simpleMessage("Pay"),
+        "ethereumPage_Receive": MessageLookupByLibrary.simpleMessage("Receive"),
+        "ethereumPage_RecoverWallet":
+            MessageLookupByLibrary.simpleMessage("Recover Wallet"),
+        "ethereumPage_Send": MessageLookupByLibrary.simpleMessage("Send"),
+        "ethereumPage_Tokens": MessageLookupByLibrary.simpleMessage("Tokens"),
+        "ethereumRecoverWallet_WIF":
+            MessageLookupByLibrary.simpleMessage("WIF"),
+        "ethereumRecoverWallet_title":
+            MessageLookupByLibrary.simpleMessage("Import WIF"),
         "exchange_Balance": MessageLookupByLibrary.simpleMessage("Balance: "),
         "exchange_Deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "exchange_InputTips1": MessageLookupByLibrary.simpleMessage(
@@ -99,6 +141,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "exchange_tile": MessageLookupByLibrary.simpleMessage("Exchange"),
         "exchange_wait":
             MessageLookupByLibrary.simpleMessage("Wait a while..."),
+        "exportWif_Copy": MessageLookupByLibrary.simpleMessage("Copy"),
+        "exportWif_title": MessageLookupByLibrary.simpleMessage("Export WIF"),
         "forgetPsw_Title":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "kyc_AddressLine": MessageLookupByLibrary.simpleMessage("Address Line"),
@@ -129,6 +173,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "main_home_Crypto": MessageLookupByLibrary.simpleMessage("Crypto"),
         "main_home_Profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "main_home_Shop": MessageLookupByLibrary.simpleMessage("Shop"),
+        "nftExchange_From": MessageLookupByLibrary.simpleMessage("From"),
+        "nftExchange_To": MessageLookupByLibrary.simpleMessage("To"),
+        "nftExchange_nftBalance": m2,
+        "nftExchange_title":
+            MessageLookupByLibrary.simpleMessage("NFT Exchange"),
         "profile_MyReward_totalReward":
             MessageLookupByLibrary.simpleMessage("Total Reward: "),
         "profile_MyUsers_totalUsers":
@@ -157,7 +206,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("My Users"),
         "profile_home_UpdatePassword":
             MessageLookupByLibrary.simpleMessage("Update Password"),
-        "profile_reward_subTitle1": m2,
+        "profile_reward_subTitle1": m3,
         "profile_title_RewardFrom":
             MessageLookupByLibrary.simpleMessage("Reward From"),
         "reReviewExchange_Slippage":
@@ -166,6 +215,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("You will swap"),
         "reReviewExchange_title":
             MessageLookupByLibrary.simpleMessage("Review Exchange"),
+        "receiveWallet_LightningInvoice":
+            MessageLookupByLibrary.simpleMessage("Lightning Invoice"),
+        "receiveWallet_WalletAddress":
+            MessageLookupByLibrary.simpleMessage("Wallet Address"),
         "recharge_AccountBalance":
             MessageLookupByLibrary.simpleMessage("Account Balance"),
         "recharge_Amount": MessageLookupByLibrary.simpleMessage("Amount"),
@@ -201,13 +254,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "shop_nft_title": MessageLookupByLibrary.simpleMessage("NFT"),
         "shop_nft_tx_history_title":
             MessageLookupByLibrary.simpleMessage("NFT Tx History"),
-        "shop_tips": m3,
+        "shop_tips": m4,
         "shop_title": MessageLookupByLibrary.simpleMessage("Shop"),
         "signUp_InvitationCode":
             MessageLookupByLibrary.simpleMessage("Invitation Code"),
         "signUp_Nickname": MessageLookupByLibrary.simpleMessage("Nickname"),
         "signUp_Title": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("Wrong email"),
+        "tips_WrongTopUp":
+            MessageLookupByLibrary.simpleMessage("Top up to wallet address"),
+        "tips_WrongTxid": MessageLookupByLibrary.simpleMessage("Wrong txid"),
         "tips_addressIsOnClipboard": MessageLookupByLibrary.simpleMessage(
             "Address is on your clipboard."),
         "tips_applyCardFirst": MessageLookupByLibrary.simpleMessage(
@@ -286,6 +342,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "tips_zeroAmount1": MessageLookupByLibrary.simpleMessage(
             "The from amount must be greater than 0."),
         "tips_zeroAmount2": MessageLookupByLibrary.simpleMessage(
-            "The to amount must be greater than 0.")
+            "The to amount must be greater than 0."),
+        "tokenActivity_Exchange":
+            MessageLookupByLibrary.simpleMessage("Exchange"),
+        "tokenActivity_Pay": MessageLookupByLibrary.simpleMessage("Pay"),
+        "tokenActivity_Receive":
+            MessageLookupByLibrary.simpleMessage("Receive"),
+        "tokenActivity_Send": MessageLookupByLibrary.simpleMessage("Send"),
+        "txHistory_Exchange": MessageLookupByLibrary.simpleMessage("Exchange"),
+        "txHistory_Send": MessageLookupByLibrary.simpleMessage("Send"),
+        "txHistory_title": MessageLookupByLibrary.simpleMessage("Crypto")
       };
 }

@@ -57,14 +57,14 @@ class _EthereumRecoverWalletState extends State<EthereumRecoverWallet> {
                 child: Column(
                   children: [
                     const SizedBox(height: 25),
-                    createDialogTitle('Import WIF'),
+                    createDialogTitle(S.of(context).ethereumRecoverWallet_title),
                     const SizedBox(height: 40),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'WIF',
-                          style: TextStyle(
+                        Text(
+                          S.of(context).ethereumRecoverWallet_WIF,
+                          style: const TextStyle(
                             color: Color(0xFF999999),
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -105,7 +105,7 @@ class _EthereumRecoverWalletState extends State<EthereumRecoverWallet> {
                         children: [
                           BottomButton(
                             icon: 'asset/images/icon_confirm_green.png',
-                            text: 'CONFIRM',
+                            text: S.of(context).common_Confirm.toUpperCase(),
                             onPressed: () {
                               onConfirm(context);
                             },
@@ -119,7 +119,7 @@ class _EthereumRecoverWalletState extends State<EthereumRecoverWallet> {
               const SizedBox(height: 30),
               BottomWhiteButton(
                 icon: 'asset/images/icon_close_white.png',
-                text: 'CANCEL',
+                text: S.of(context).common_Cancel.toUpperCase(),
                 onPressed: onClose,
               )
             ]),

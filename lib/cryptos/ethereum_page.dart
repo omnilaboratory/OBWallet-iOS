@@ -95,7 +95,7 @@ class _EthereumPageState extends State<EthereumPage> {
               padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
             )
           : nftList.isEmpty
-              ? const Text("No NFTs")
+              ? Text(S.of(context).common_NoData)
               : Wrap(
                   spacing: 20,
                   runSpacing: 16.0,
@@ -126,7 +126,7 @@ class _EthereumPageState extends State<EthereumPage> {
                   onTap: () {
                     onClickType(0);
                   },
-                  child: Text("Tokens",
+                  child: Text(S.of(context).ethereumPage_Tokens,
                       style: TextStyle(
                           fontSize: 16,
                           color:
@@ -135,7 +135,7 @@ class _EthereumPageState extends State<EthereumPage> {
                   onTap: () {
                     onClickType(1);
                   },
-                  child: Text("NFTs",
+                  child: Text(S.of(context).ethereumPage_NFTs,
                       style: TextStyle(
                           fontSize: 16,
                           color:
@@ -163,13 +163,13 @@ class _EthereumPageState extends State<EthereumPage> {
         SquareButton(
             icon: 'asset/images/icon_pay.png',
             iconWidth: iconWidth,
-            text: 'Pay',
+            text: S.of(context).ethereumPage_Pay,
             onPressed: () {
               showToast(S.of(context).tips_comeSoon);
             }),
         SquareButton(
             icon: 'asset/images/icon_exchange.png',
-            text: 'Exchange',
+            text: S.of(context).ethereumPage_Exchange,
             iconWidth: iconWidth,
             onPressed: () {
               showDialog(
@@ -180,7 +180,7 @@ class _EthereumPageState extends State<EthereumPage> {
             }),
         SquareButton(
             icon: 'asset/images/icon_receive.png',
-            text: 'Receive',
+            text: S.of(context).ethereumPage_Receive,
             iconWidth: iconWidth,
             onPressed: () {
               showDialog(
@@ -191,7 +191,7 @@ class _EthereumPageState extends State<EthereumPage> {
             }),
         SquareButton(
             icon: 'asset/images/icon_send.png',
-            text: 'Send',
+            text: S.of(context).ethereumPage_Send,
             iconWidth: iconWidth,
             onPressed: () {
               showDialog(
@@ -221,7 +221,7 @@ class _EthereumPageState extends State<EthereumPage> {
                     onTap: () {
                       createNewWallet();
                     },
-                    child: createBtn("icon_plus.png", "Create New Wallet")),
+                    child: createBtn("icon_plus.png", S.of(context).ethereumPage_CreateNewWallet)),
                 InkWell(
                     onTap: () async {
                       var flag = await showDialog(
@@ -235,7 +235,7 @@ class _EthereumPageState extends State<EthereumPage> {
                       }
                     },
                     child: createBtn(
-                        "image_recover_wallet.png", "Recover Wallet")),
+                        "image_recover_wallet.png", S.of(context).ethereumPage_RecoverWallet)),
               ]),
         ),
       ),
