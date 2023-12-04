@@ -57,6 +57,7 @@
   "reReviewExchange_YouWillSwap": "You will swap",
   "reReviewExchange_Slippage": "Slippage",
 
+  "tokenActivity_title": "{tokenName} Activity",
   "tokenActivity_Pay": "Pay",
   "tokenActivity_Exchange": "Exchange",
   "tokenActivity_Receive": "Receive",
@@ -177,7 +178,7 @@
   "profile_title_RewardFrom": "Reward From",
   "profile_reward_subTitle1": "Total Reward:{totalReward} from {totalUser} Users",
   "profile_guide_title": "Guide",
-  "profile_guide_desc1": "profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1",
+  "profile_guide_desc1": "profile_guide_desc1",
   "profile_guide_desc2": "profile_guide_desc2",
   "profile_guide_desc3": "profile_guide_desc3",
   "profile_guide_desc4": "profile_guide_desc4",

@@ -190,7 +190,7 @@ class _TokenActivityState extends State<TokenActivity> {
     return AppBar(
       leadingWidth: 42,
       titleSpacing: 0,
-      title: HeadLogo(title: "${widget.tokenInfo.name} Activity"),
+      title: HeadLogo(title: S.of(context).tokenActivity_title(widget.tokenInfo.name)),
     );
   }
 

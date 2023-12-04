@@ -33,6 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m4(nftTotalCount, nftTotalValue) =>
       "You have selected ${nftTotalCount} NFTs and value is \$${nftTotalValue}";
 
+  static String m5(tokenName) => "${tokenName} Activity";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "applyCard_ApplyCard":
@@ -186,8 +188,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Old Password"),
         "profile_UpdatePsw_totalUsers":
             MessageLookupByLibrary.simpleMessage("Total Users: "),
-        "profile_guide_desc1": MessageLookupByLibrary.simpleMessage(
-            "profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1"),
+        "profile_guide_desc1":
+            MessageLookupByLibrary.simpleMessage("profile_guide_desc1"),
         "profile_guide_desc2":
             MessageLookupByLibrary.simpleMessage("profile_guide_desc2"),
         "profile_guide_desc3":
@@ -349,6 +351,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tokenActivity_Receive":
             MessageLookupByLibrary.simpleMessage("Receive"),
         "tokenActivity_Send": MessageLookupByLibrary.simpleMessage("Send"),
+        "tokenActivity_title": m5,
         "txHistory_Exchange": MessageLookupByLibrary.simpleMessage("Exchange"),
         "txHistory_Send": MessageLookupByLibrary.simpleMessage("Send"),
         "txHistory_title": MessageLookupByLibrary.simpleMessage("Crypto")

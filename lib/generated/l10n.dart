@@ -560,6 +560,16 @@ class S {
     );
   }
 
+  /// `{tokenName} Activity`
+  String tokenActivity_title(Object tokenName) {
+    return Intl.message(
+      '$tokenName Activity',
+      name: 'tokenActivity_title',
+      desc: '',
+      args: [tokenName],
+    );
+  }
+
   /// `Pay`
   String get tokenActivity_Pay {
     return Intl.message(
@@ -1590,10 +1600,10 @@ class S {
     );
   }
 
-  /// `profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1`
+  /// `profile_guide_desc1`
   String get profile_guide_desc1 {
     return Intl.message(
-      'profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1profile_guide_desc1',
+      'profile_guide_desc1',
       name: 'profile_guide_desc1',
       desc: '',
       args: [],
