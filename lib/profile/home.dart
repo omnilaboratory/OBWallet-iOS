@@ -32,20 +32,20 @@ class _ProfileHomeState extends State<ProfileHome> {
             return const MyInvitationCode();
           });
     }));
-    list.add(const SizedBox(height: 20));
+    list.add(const SizedBox(height: 10));
     list.add(btnBtnItem(Icons.people_alt_rounded, S.of(context).profile_home_MyUsers, () {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const MyUsers()));
     }));
 
     if (CommonService.userInfo?.userType == 3) {
-      list.add(const SizedBox(height: 20));
+      list.add(const SizedBox(height: 10));
       list.add(btnBtnItem(Icons.monetization_on_outlined,S.of(context).profile_home_MyReward, () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const MyReward()));
       }));
     }
-    list.add(const SizedBox(height: 20));
+    list.add(const SizedBox(height: 10));
     list.add(btnBtnItem(Icons.token_outlined, S.of(context).profile_guide_title, () {
       showDialog(
           context: context,
@@ -53,7 +53,7 @@ class _ProfileHomeState extends State<ProfileHome> {
             return const Guide();
           });
     }));
-    list.add(const SizedBox(height: 20));
+    list.add(const SizedBox(height: 10));
     list.add(btnBtnItem(Icons.verified_user_outlined, S.of(context).profile_home_UpdatePassword, () {
       showDialog(
           context: context,
@@ -61,7 +61,7 @@ class _ProfileHomeState extends State<ProfileHome> {
             return const UpdatePsw();
           });
     }));
-    list.add(const SizedBox(height: 20));
+    list.add(const SizedBox(height: 10));
     list.add(btnBtnItem(Icons.logout_outlined, S.of(context).profile_home_Logout, () {
       LocalStorage.remove(LocalStorage.userToken);
       Navigator.pushReplacement(
