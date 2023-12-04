@@ -188,16 +188,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Old Password"),
         "profile_UpdatePsw_totalUsers":
             MessageLookupByLibrary.simpleMessage("Total Users: "),
-        "profile_guide_desc1":
-            MessageLookupByLibrary.simpleMessage("profile_guide_desc1"),
+        "profile_guide_desc1": MessageLookupByLibrary.simpleMessage(
+            "Deposit via credit card and get USDT."),
         "profile_guide_desc2":
-            MessageLookupByLibrary.simpleMessage("profile_guide_desc2"),
+            MessageLookupByLibrary.simpleMessage("Check the balance of USDT."),
         "profile_guide_desc3":
-            MessageLookupByLibrary.simpleMessage("profile_guide_desc3"),
-        "profile_guide_desc4":
-            MessageLookupByLibrary.simpleMessage("profile_guide_desc4"),
+            MessageLookupByLibrary.simpleMessage("Exchange USDT to USD."),
+        "profile_guide_desc4": MessageLookupByLibrary.simpleMessage(
+            "USD can withdraw to virtual card."),
         "profile_guide_desc5":
-            MessageLookupByLibrary.simpleMessage("profile_guide_desc5"),
+            MessageLookupByLibrary.simpleMessage("Check your virtual card."),
         "profile_guide_title": MessageLookupByLibrary.simpleMessage("Guide"),
         "profile_home_InvitationCode":
             MessageLookupByLibrary.simpleMessage("My Invitation Code"),

@@ -1600,50 +1600,50 @@ class S {
     );
   }
 
-  /// `profile_guide_desc1`
+  /// `Deposit via credit card and get USDT.`
   String get profile_guide_desc1 {
     return Intl.message(
-      'profile_guide_desc1',
+      'Deposit via credit card and get USDT.',
       name: 'profile_guide_desc1',
       desc: '',
       args: [],
     );
   }
 
-  /// `profile_guide_desc2`
+  /// `Check the balance of USDT.`
   String get profile_guide_desc2 {
     return Intl.message(
-      'profile_guide_desc2',
+      'Check the balance of USDT.',
       name: 'profile_guide_desc2',
       desc: '',
       args: [],
     );
   }
 
-  /// `profile_guide_desc3`
+  /// `Exchange USDT to USD.`
   String get profile_guide_desc3 {
     return Intl.message(
-      'profile_guide_desc3',
+      'Exchange USDT to USD.',
       name: 'profile_guide_desc3',
       desc: '',
       args: [],
     );
   }
 
-  /// `profile_guide_desc4`
+  /// `USD can withdraw to virtual card.`
   String get profile_guide_desc4 {
     return Intl.message(
-      'profile_guide_desc4',
+      'USD can withdraw to virtual card.',
       name: 'profile_guide_desc4',
       desc: '',
       args: [],
     );
   }
 
-  /// `profile_guide_desc5`
+  /// `Check your virtual card.`
   String get profile_guide_desc5 {
     return Intl.message(
-      'profile_guide_desc5',
+      'Check your virtual card.',
       name: 'profile_guide_desc5',
       desc: '',
       args: [],
