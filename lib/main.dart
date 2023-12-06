@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awallet/logins/login.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
@@ -29,6 +31,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    LocalStorage.initSP().then((value) {
+      setState(() {});
+    });
     GlobalParams.eventBus.on().listen((event) {
       if (event == "changeLang") {
         setState(() {});
