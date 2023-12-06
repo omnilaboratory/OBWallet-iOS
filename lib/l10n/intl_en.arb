@@ -175,6 +175,8 @@
   "profile_UpdatePassword_OldPassword": "Old Password",
   "profile_MyReward_totalReward": "Total Reward: ",
 
+  "profile_language_title": "Language",
+
   "profile_title_RewardFrom": "Reward From",
   "profile_reward_subTitle1": "Total Reward:{totalReward} from {totalUser} Users",
   "profile_guide_title": "Guide",

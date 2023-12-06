@@ -36,7 +36,6 @@ class _GuideState extends State<Guide> {
 
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       backgroundColor: const Color.fromRGBO(18, 58, 80, 0.8),
       body: Center(
         child: SingleChildScrollView(

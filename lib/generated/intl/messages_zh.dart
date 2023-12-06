@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_SignIn": MessageLookupByLibrary.simpleMessage("登录"),
         "login_SignUp": MessageLookupByLibrary.simpleMessage("注册"),
         "login_Welcome": MessageLookupByLibrary.simpleMessage("欢迎"),
+        "profile_language_title": MessageLookupByLibrary.simpleMessage("语言"),
         "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("邮箱有误")
       };
 }

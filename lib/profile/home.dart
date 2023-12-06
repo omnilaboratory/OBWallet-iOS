@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../logins/login.dart';
 import 'guide.dart';
+import 'language.dart';
 import 'my_invitation_code.dart';
 import 'my_reward.dart';
 
@@ -45,6 +46,11 @@ class _ProfileHomeState extends State<ProfileHome> {
             context, MaterialPageRoute(builder: (context) => const MyReward()));
       }));
     }
+    list.add(const SizedBox(height: 10));
+    list.add(btnBtnItem(Icons.token_outlined, S.of(context).profile_language_title, () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Language()));
+    }));
     list.add(const SizedBox(height: 10));
     list.add(btnBtnItem(Icons.token_outlined, S.of(context).profile_guide_title, () {
       showDialog(

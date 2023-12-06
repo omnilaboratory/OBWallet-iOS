@@ -1570,6 +1570,16 @@ class S {
     );
   }
 
+  /// `Language`
+  String get profile_language_title {
+    return Intl.message(
+      'Language',
+      name: 'profile_language_title',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Reward From`
   String get profile_title_RewardFrom {
     return Intl.message(

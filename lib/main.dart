@@ -1,9 +1,11 @@
 import 'package:awallet/logins/login.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'generated/l10n.dart';
 
 void main() {
@@ -24,8 +26,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-
   @override
   void initState() {
     super.initState();
@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      locale: Locale(GlobalParams.currLangName),
+      locale: Locale(LocalStorage.get("currLangName") ?? "en"),
       title: 'AWallet',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
