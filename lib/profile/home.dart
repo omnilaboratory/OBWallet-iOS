@@ -25,8 +25,8 @@ class _ProfileHomeState extends State<ProfileHome> {
     List<Widget> list = [];
     list.add(buildUserInfo());
     list.add(const SizedBox(height: 40));
-    list.add(
-        btnBtnItem(Icons.insert_invitation_sharp, S.of(context).profile_home_InvitationCode, () {
+    list.add(btnBtnItem(Icons.insert_invitation_sharp,
+        S.of(context).profile_home_InvitationCode, () {
       showDialog(
           context: context,
           builder: (context) {
@@ -34,25 +34,30 @@ class _ProfileHomeState extends State<ProfileHome> {
           });
     }));
     list.add(const SizedBox(height: 10));
-    list.add(btnBtnItem(Icons.people_alt_rounded, S.of(context).profile_home_MyUsers, () {
+    list.add(btnBtnItem(
+        Icons.people_alt_rounded, S.of(context).profile_home_MyUsers, () {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const MyUsers()));
     }));
 
     if (CommonService.userInfo?.userType == 3) {
       list.add(const SizedBox(height: 10));
-      list.add(btnBtnItem(Icons.monetization_on_outlined,S.of(context).profile_home_MyReward, () {
+      list.add(btnBtnItem(
+          Icons.monetization_on_outlined, S.of(context).profile_home_MyReward,
+          () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const MyReward()));
       }));
     }
     list.add(const SizedBox(height: 10));
-    list.add(btnBtnItem(Icons.token_outlined, S.of(context).profile_language_title, () {
+    list.add(btnBtnItem(
+        Icons.token_outlined, S.of(context).profile_language_title, () {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const Language()));
     }));
     list.add(const SizedBox(height: 10));
-    list.add(btnBtnItem(Icons.token_outlined, S.of(context).profile_guide_title, () {
+    list.add(
+        btnBtnItem(Icons.token_outlined, S.of(context).profile_guide_title, () {
       showDialog(
           context: context,
           builder: (context) {
@@ -60,7 +65,9 @@ class _ProfileHomeState extends State<ProfileHome> {
           });
     }));
     list.add(const SizedBox(height: 10));
-    list.add(btnBtnItem(Icons.verified_user_outlined, S.of(context).profile_home_UpdatePassword, () {
+    list.add(btnBtnItem(
+        Icons.verified_user_outlined, S.of(context).profile_home_UpdatePassword,
+        () {
       showDialog(
           context: context,
           builder: (context) {
@@ -68,7 +75,8 @@ class _ProfileHomeState extends State<ProfileHome> {
           });
     }));
     list.add(const SizedBox(height: 10));
-    list.add(btnBtnItem(Icons.logout_outlined, S.of(context).profile_home_Logout, () {
+    list.add(btnBtnItem(
+        Icons.logout_outlined, S.of(context).profile_home_Logout, () {
       LocalStorage.remove(LocalStorage.userToken);
       Navigator.pushReplacement(
         context,
@@ -81,14 +89,15 @@ class _ProfileHomeState extends State<ProfileHome> {
         automaticallyImplyLeading: false,
         title: HeadLogo(title: S.of(context).main_home_Profile),
       ),
-      body: Center(
-          child: Padding(
-        padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: list,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: list,
+          ),
         ),
-      )),
+      ),
     );
   }
 
