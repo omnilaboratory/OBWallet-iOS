@@ -2080,13 +2080,13 @@ class S {
     );
   }
 
-  /// `There is a fee of $5.00 to apply for a virtual card.`
-  String get tips_needFiveDollarFee {
+  /// `There is a fee of ${createCardFee} to apply for a virtual card.`
+  String tips_needFiveDollarFee(Object createCardFee) {
     return Intl.message(
-      'There is a fee of \$5.00 to apply for a virtual card.',
+      'There is a fee of \$$createCardFee to apply for a virtual card.',
       name: 'tips_needFiveDollarFee',
       desc: '',
-      args: [],
+      args: [createCardFee],
     );
   }
 

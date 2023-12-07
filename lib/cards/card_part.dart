@@ -320,7 +320,7 @@ class _CardPartState extends State<CardPart> {
         if (info.code == 1) {
           var accountInfo = info.data as AccountInfo;
           if (accountInfo.balanceUsd < createCardFee) {
-            alert(S.of(context).tips_needFiveDollarFee, context, () {
+            alert(S.of(context).tips_needFiveDollarFee(createCardFee), context, () {
               showDialog(
                   context: context,
                   builder: (context) {
