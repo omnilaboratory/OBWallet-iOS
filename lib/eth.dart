@@ -148,10 +148,13 @@ class Eth {
   /// Get Polygon USDT balance
   static Future<double> getBalanceOfPolygonUSDT(String address) async {
     try {
+      // Get the instance for Polygon USDT
+      var polygonClient = Web3Client(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.polygonApiUrl]!, Client());
+
       EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.polygonUSDT]!);
       EthereumAddress ethAddr  = EthereumAddress.fromHex(address);
 
-      var usdt    = PolygonUSDT(address: contract, client: ethClient!);
+      var usdt    = USDT(address: contract, client: polygonClient);
       var balance = await usdt.balanceOf(ethAddr);
 
       // The USDT contract has 6 decimals, so has to process for BigInt with the code.
@@ -299,7 +302,7 @@ class Eth {
   /// talk to contract
   static testNftContract(String address) async {
     try {
-      var nftClient = Web3Client(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.nftApiUrl]!, Client());
+      var nftClient = Web3Client(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.polygonApiUrl]!, Client());
       log('nftClient -> $nftClient');
 
       EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.nft]!);
@@ -322,7 +325,7 @@ class Eth {
   static Future<String> sendNftToPlatform(int tokenId, int amount) async {
     try {
       // Get the instance for NFT Client
-      var nftClient = Web3Client(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.nftApiUrl]!, Client());
+      var nftClient = Web3Client(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.polygonApiUrl]!, Client());
 
       EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.nft]!);
       EthereumAddress from     = EthereumAddress.fromHex(LocalStorage.getEthAddress()!);
