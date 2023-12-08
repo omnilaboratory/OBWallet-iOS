@@ -56,7 +56,7 @@ class _CardPartState extends State<CardPart> {
     _onListRefresh();
 
     EthGrpcService.getInstance().ethGetAppConf(context).then((resp) {
-      if (resp.data == 1) {
+      if (resp.code == 1) {
         var createCardConfInfo = resp.data as AppConfig;
         createCardFee = createCardConfInfo.createCardFee;
         setState(() {});
