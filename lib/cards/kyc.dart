@@ -69,7 +69,7 @@ class _KycState extends State<Kyc> {
   @override
   void initState() {
     super.initState();
-    dateOfBirthTips = S.of(context).kyc_dateOfBirth;
+    dateOfBirthTips = S.current.kyc_dateOfBirth;
     GlobalParams.eventBus.on().listen((event) {
       if (event == "closeKycPage") {
         if (mounted) {
