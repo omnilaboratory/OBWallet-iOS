@@ -69,7 +69,6 @@ class _KycState extends State<Kyc> {
   @override
   void initState() {
     super.initState();
-    dateOfBirthTips = S.current.kyc_dateOfBirth;
     GlobalParams.eventBus.on().listen((event) {
       if (event == "closeKycPage") {
         if (mounted) {
@@ -81,6 +80,7 @@ class _KycState extends State<Kyc> {
 
   @override
   Widget build(BuildContext context) {
+    dateOfBirthTips = S.of(context).kyc_dateOfBirth;
     var size = MediaQuery.of(context).size;
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
