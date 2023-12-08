@@ -6,9 +6,11 @@ import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/send.dart';
+import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/card_item.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_tx_item.dart';
+import 'package:awallet/component/square_button.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
@@ -24,8 +26,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'package:awallet/component/bottom_button.dart';
-import 'package:awallet/component/square_button.dart';
 import 'card_deposit.dart';
 import 'kyc.dart';
 
@@ -125,7 +125,9 @@ class _CardPartState extends State<CardPart> {
 
           const SizedBox(height: 20),
           Text(
-            S.of(context).applyCard_Desc3(StringTools.formatCurrencyNum(createCardFee)),
+            S
+                .of(context)
+                .applyCard_Desc3(StringTools.formatCurrencyNum(createCardFee)),
             style: const TextStyle(
                 color: Colors.black54, fontStyle: FontStyle.italic),
           ),
@@ -320,7 +322,8 @@ class _CardPartState extends State<CardPart> {
         if (info.code == 1) {
           var accountInfo = info.data as AccountInfo;
           if (accountInfo.balanceUsd < createCardFee) {
-            alert(S.of(context).tips_needFiveDollarFee(createCardFee), context, () {
+            alert(S.of(context).tips_needFiveDollarFee(createCardFee), context,
+                () {
               showDialog(
                   context: context,
                   builder: (context) {
@@ -334,6 +337,7 @@ class _CardPartState extends State<CardPart> {
                   });
             });
           } else {
+            var loading = showLoading(context);
             CardService.getInstance()
                 .applyCard(context, "USD", isShowToast: false)
                 .then((resp) {
@@ -342,6 +346,7 @@ class _CardPartState extends State<CardPart> {
               } else {
                 alert(resp.msg, context, () {});
               }
+              loading.remove();
             });
           }
         }
