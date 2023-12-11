@@ -64,7 +64,7 @@ class _KycState extends State<Kyc> {
   Country? selectedPhoneCountry = CountryService().findByCode("SG");
 
   final List<DateTime?> _dates = [];
-  var dateOfBirthTips = "Date of birth";
+  var dateOfBirthTips = "";
 
   @override
   void initState() {
@@ -80,7 +80,9 @@ class _KycState extends State<Kyc> {
 
   @override
   Widget build(BuildContext context) {
-    dateOfBirthTips = S.of(context).kyc_dateOfBirth;
+    if(dateOfBirthTips.isEmpty){
+      dateOfBirthTips = S.of(context).kyc_dateOfBirth;
+    }
     var size = MediaQuery.of(context).size;
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
