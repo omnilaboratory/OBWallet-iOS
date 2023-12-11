@@ -2,7 +2,6 @@
 import 'dart:math' as math;
 import 'dart:developer';
 import 'dart:typed_data';
-import 'package:awallet/contract_abis/PolygonUSDT.g.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';

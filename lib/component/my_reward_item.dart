@@ -20,7 +20,7 @@ class MyRewardItem extends StatelessWidget {
             Container(
               width: 12,
               height: 12,
-              margin: const EdgeInsets.only(top: 13),
+              margin: const EdgeInsets.only(top: 4),
               decoration: BoxDecoration(
                   color: rewardItemCircleClrs[info.status],
                   borderRadius: BorderRadius.circular(6)),
