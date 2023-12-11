@@ -119,30 +119,31 @@ class _EthereumPageState extends State<EthereumPage> {
             ),
           ),
           const SizedBox(height: 2),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                  onTap: () {
-                    onClickType(0);
-                  },
-                  child: Text(S.of(context).ethereumPage_Tokens,
-                      style: TextStyle(
-                          fontSize: 16,
-                          color:
-                              currTypeIndex == 0 ? Colors.blue : Colors.grey))),
-              InkWell(
-                  onTap: () {
-                    onClickType(1);
-                  },
-                  child: Text(S.of(context).ethereumPage_NFTs,
-                      style: TextStyle(
-                          fontSize: 16,
-                          color:
-                              currTypeIndex == 1 ? Colors.blue : Colors.grey)))
-            ],
-          ),
-          const SizedBox(height: 20),
+          // no nft  don't delete
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     InkWell(
+          //         onTap: () {
+          //           onClickType(0);
+          //         },
+          //         child: Text(S.of(context).ethereumPage_Tokens,
+          //             style: TextStyle(
+          //                 fontSize: 16,
+          //                 color:
+          //                     currTypeIndex == 0 ? Colors.blue : Colors.grey))),
+          //     InkWell(
+          //         onTap: () {
+          //           onClickType(1);
+          //         },
+          //         child: Text(S.of(context).ethereumPage_NFTs,
+          //             style: TextStyle(
+          //                 fontSize: 16,
+          //                 color:
+          //                     currTypeIndex == 1 ? Colors.blue : Colors.grey)))
+          //   ],
+          // ),
+          // const SizedBox(height: 20),
           Expanded(
             child: SingleChildScrollView(
                 child: Column(
