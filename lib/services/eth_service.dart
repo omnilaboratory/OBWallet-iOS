@@ -54,6 +54,12 @@ class EthService {
 
   List<TokenInfo> getTokenList() {
     if (CommonService.tokenList.isEmpty) {
+      if (GlobalParams.dataInNetwork[GlobalParams.currNetwork]
+              [EnumEthKey.tokenList] ==
+          null) {
+        GlobalParams.resetTokens();
+      }
+
       CommonService.tokenList = GlobalParams
           .dataInNetwork[GlobalParams.currNetwork][EnumEthKey.tokenList];
     }
@@ -62,6 +68,11 @@ class EthService {
 
   List<TokenInfo> getTokenListPolygon() {
     if (CommonService.tokenListPolygon.isEmpty) {
+      if (GlobalParams.dataInNetwork[GlobalParams.currNetwork]
+              [EnumEthKey.polygonTokenList] ==
+          null) {
+        GlobalParams.resetTokens();
+      }
       CommonService.tokenListPolygon = GlobalParams
           .dataInNetwork[GlobalParams.currNetwork][EnumEthKey.polygonTokenList];
     }
