@@ -51,7 +51,7 @@ class _ProfileHomeState extends State<ProfileHome> {
     }
     list.add(const SizedBox(height: 10));
     list.add(btnBtnItem(
-        Icons.token_outlined, S.of(context).profile_language_title, () {
+        Icons.language, S.of(context).profile_language_title, () {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const Language()));
     }));
