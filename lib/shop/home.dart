@@ -206,7 +206,8 @@ class _ShopHomeState extends State<ShopHome> {
                 child: buildNewSmartRefresher(
                     _refreshListController,
                     Wrap(
-                      spacing: 16,
+                      alignment: WrapAlignment.center,
+                      spacing: 12,
                       runSpacing: 12.0,
                       children: nftList,
                     ),
