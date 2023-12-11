@@ -28,7 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m2(amount) => "Balance: ${amount} NFTs";
 
   static String m3(totalReward, totalUser) =>
-      "Total Reward:${totalReward} from ${totalUser} Users";
+      "Total Reward: ${totalReward} from ${totalUser} Users";
 
   static String m4(nftTotalCount, nftTotalValue) =>
       "You have selected ${nftTotalCount} NFTs and value is \$${nftTotalValue}";

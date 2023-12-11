@@ -21,11 +21,11 @@ class EthService {
 
   factory EthService() => _instance;
 
-  CryptoWalletInfo? _walletInfo;
+  static CryptoWalletInfo? walletInfo;
 
   CryptoWalletInfo getWalletInfo() {
-    _walletInfo ??= CryptoWalletInfo(address: LocalStorage.getEthAddress()!);
-    return _walletInfo!;
+    walletInfo ??= CryptoWalletInfo(address: LocalStorage.getEthAddress()!);
+    return walletInfo!;
   }
 
   createWalletInfo(BuildContext context) async {
@@ -33,7 +33,7 @@ class EthService {
     if (address == null || address.isEmpty) {
       address = await Eth.genEthAddress(context);
     }
-    _walletInfo = CryptoWalletInfo(address: address, balance: 0);
+    walletInfo = CryptoWalletInfo(address: address, balance: 0);
   }
 
   bool recoverWallet(BuildContext context, String? wif) {
@@ -44,7 +44,7 @@ class EthService {
     if (address.isEmpty) {
       return false;
     }
-    _walletInfo = CryptoWalletInfo(address: address, balance: 0);
+    walletInfo = CryptoWalletInfo(address: address, balance: 0);
     LocalStorage.setEthAddress(address);
     LocalStorage.setEthPrivateKey(wif);
     UserService.getInstance().updateUser(context, address);
@@ -95,8 +95,8 @@ class EthService {
     totalBalance = await setTokenUsdValue(
         context, getTokenListPolygon()[0], balance, totalBalance);
 
-    _walletInfo = getWalletInfo();
-    _walletInfo?.balance = totalBalance;
+    walletInfo = getWalletInfo();
+    walletInfo?.balance = totalBalance;
   }
 
   Future<double> setTokenUsdValue(BuildContext context, tokenInfo,

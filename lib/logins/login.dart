@@ -241,12 +241,9 @@ class _LoginState extends State<Login> {
     );
   }
 
-  late UserInfo? oldUserInfo;
 
   void autoLogin(String localToken) {
     log("autoLogin start");
-
-    oldUserInfo = CommonService.userInfo;
     CommonService.token = localToken;
     UserService.userServiceClient = null;
     getUserInfoAndGoHome();
@@ -260,7 +257,6 @@ class _LoginState extends State<Login> {
     SignInRequest req = SignInRequest();
     req.userName = username;
     req.password = password;
-    oldUserInfo = CommonService.userInfo;
     UserService.getInstance().login(context, req).then((loginInfo) {
       if (loginInfo.code == 1) {
         LocalStorage.save(LocalStorage.password, password);
@@ -276,12 +272,6 @@ class _LoginState extends State<Login> {
     CardService.getInstance().cardInfo(context);
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
-        if (oldUserInfo != null) {
-          if (oldUserInfo?.id != CommonService.userInfo?.id) {
-            LocalStorage.removeEthAddress();
-          }
-        }
-
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomePage(goToPage: 0)),

@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:awallet/bean/dollar_face_info.dart';
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/protos/gen-dart/eth/ethservice.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
+import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:grpc/grpc.dart';
 
@@ -44,5 +46,6 @@ resetServices() {
   AccountService.accountServiceClient = null;
   CardService.cardServiceClient = null;
   EthGrpcService.ethServiceClient = null;
+  EthService.walletInfo = null;
   CommonService.firstEnterApp = true;
 }

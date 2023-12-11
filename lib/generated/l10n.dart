@@ -1590,10 +1590,10 @@ class S {
     );
   }
 
-  /// `Total Reward:{totalReward} from {totalUser} Users`
+  /// `Total Reward: {totalReward} from {totalUser} Users`
   String profile_reward_subTitle1(Object totalReward, Object totalUser) {
     return Intl.message(
-      'Total Reward:$totalReward from $totalUser Users',
+      'Total Reward: $totalReward from $totalUser Users',
       name: 'profile_reward_subTitle1',
       desc: '',
       args: [totalReward, totalUser],
