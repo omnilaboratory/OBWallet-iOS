@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   static final List<Widget> _pages = <Widget>[
     const CardHome(),
     const CryptoHome(),
-    const ShopHome(),
+    // const ShopHome(),
     const ProfileHome()
   ];
 
@@ -63,10 +63,10 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.currency_bitcoin_sharp),
               label: S.of(context).main_home_Crypto,
             ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.shop),
-              label: S.of(context).main_home_Shop,
-            ),
+            // BottomNavigationBarItem(
+            //   icon: const Icon(Icons.shop),
+            //   label: S.of(context).main_home_Shop,
+            // ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.person),
               label:S.of(context).main_home_Profile,
