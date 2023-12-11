@@ -12,6 +12,37 @@ class GlobalParams {
 
   static int grpcTimeout = 30;
 
+  static resetTokens(){
+
+    // mainnet
+    GlobalParams.dataInNetwork[EnumNetworkType.mainnet][EnumEthKey.tokenList]=[
+      TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
+      TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
+      TokenInfo(name: "USDC", iconUrl: 'asset/images/icon_usdc_logo.png'),
+    ];
+
+    GlobalParams.dataInNetwork[EnumNetworkType.mainnet][EnumEthKey.polygonTokenList]=[
+      TokenInfo(
+          name: "USDT",
+          iconUrl: 'asset/images/icon_tether.png',
+          netName: "Polygon")
+    ];
+
+    // goerli
+    GlobalParams.dataInNetwork[EnumNetworkType.goerli][EnumEthKey.tokenList]=[
+      TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
+      TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
+    ];
+
+    GlobalParams.dataInNetwork[EnumNetworkType.goerli][EnumEthKey.polygonTokenList]=[
+      TokenInfo(
+          name: "USDT",
+          iconUrl: 'asset/images/icon_tether.png',
+          netName: "Polygon")
+    ];
+  }
+
+
   static Map<EnumNetworkType, dynamic> dataInNetwork = Map.from({
     EnumNetworkType.mainnet: Map.from({
       EnumEthKey.apiUrl:
@@ -23,17 +54,6 @@ class GlobalParams {
       EnumEthKey.nft: "0x60CCa21714d3DFa2448ab4A62832F9F85D276f13",
       EnumEthKey.nftToPlatform: "0x22e5a8f66246B987Ef05E180eC555C93bBCdAF2a",
       EnumEthKey.polygonUSDT: "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
-      EnumEthKey.tokenList:[
-        TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
-        TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
-        TokenInfo(name: "USDC", iconUrl: 'asset/images/icon_usdc_logo.png'),
-      ],
-      EnumEthKey.polygonTokenList: [
-        TokenInfo(
-            name: "USDT",
-            iconUrl: 'asset/images/icon_tether.png',
-            netName: "Polygon")
-      ]
     }),
     EnumNetworkType.goerli: Map.from({
       EnumEthKey.apiUrl:
@@ -45,16 +65,6 @@ class GlobalParams {
       EnumEthKey.nft: "0x9db105d4427baa36895332d550ae00085a1cfcbc",
       EnumEthKey.nftToPlatform: "0xD271f9d231b8107cB03F69e3a7Ca6234CAf96347",
       EnumEthKey.polygonUSDT: "0x0fa8781a83e46826621b3bc094ea2a0212e71b23",
-      EnumEthKey.tokenList:[
-        TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
-        TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
-      ],
-      EnumEthKey.polygonTokenList: [
-        TokenInfo(
-            name: "USDT",
-            iconUrl: 'asset/images/icon_tether.png',
-            netName: "Polygon")
-      ]
     }),
   });
 

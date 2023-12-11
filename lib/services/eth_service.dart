@@ -6,6 +6,7 @@ import 'package:awallet/bean/enum_network_type.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/account_service.dart';
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -51,24 +52,20 @@ class EthService {
     return true;
   }
 
-  List<TokenInfo> _tokenList = [];
-
   List<TokenInfo> getTokenList() {
-    if (_tokenList.isEmpty) {
-      _tokenList = GlobalParams.dataInNetwork[GlobalParams.currNetwork]
-          [EnumEthKey.tokenList];
+    if (CommonService.tokenList.isEmpty) {
+      CommonService.tokenList = GlobalParams
+          .dataInNetwork[GlobalParams.currNetwork][EnumEthKey.tokenList];
     }
-    return _tokenList;
+    return CommonService.tokenList;
   }
 
-  List<TokenInfo> _tokenListPolygon = [];
-
   List<TokenInfo> getTokenListPolygon() {
-    if (_tokenListPolygon.isEmpty) {
-      _tokenListPolygon = GlobalParams.dataInNetwork[GlobalParams.currNetwork]
-          [EnumEthKey.polygonTokenList];
+    if (CommonService.tokenListPolygon.isEmpty) {
+      CommonService.tokenListPolygon = GlobalParams
+          .dataInNetwork[GlobalParams.currNetwork][EnumEthKey.polygonTokenList];
     }
-    return _tokenListPolygon;
+    return CommonService.tokenListPolygon;
   }
 
   updateTokenBalances(BuildContext context) async {

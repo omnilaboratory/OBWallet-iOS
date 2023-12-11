@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:awallet/bean/dollar_face_info.dart';
+import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/grpc_services/user_service.dart';
-import 'package:awallet/protos/gen-dart/eth/ethservice.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/services/eth_service.dart';
@@ -18,6 +18,8 @@ mixin CommonService {
   static String token = "";
   static UserInfo? userInfo;
   static List<DollarFaceInfo> nftInfoList = [];
+  static List<TokenInfo> tokenList = [];
+  static List<TokenInfo> tokenListPolygon = [];
   static CardInfo cardInfo = CardInfo();
   static String userId = "1";
   static bool firstEnterApp = true;
@@ -41,6 +43,9 @@ mixin CommonService {
 resetServices() {
   CommonService.token = "";
   CommonService.userInfo = null;
+  CommonService.tokenList = [];
+  CommonService.tokenListPolygon = [];
+  GlobalParams.resetTokens();
   CommonService.cardInfo = CardInfo();
   UserService.userServiceClient = null;
   AccountService.accountServiceClient = null;
