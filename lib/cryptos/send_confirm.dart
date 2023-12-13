@@ -93,6 +93,8 @@ class _SendConfirmState extends State<SendConfirm> {
         loading.remove();
       });
     }
+
+    loading.remove();
   }
 
   onBack() {
