@@ -246,7 +246,7 @@ class _SendState extends State<Send> {
           showToast(S.of(context).tips_failDeposit);
         }
       }
-      loading.remove();
+      removeLoading(loading);
     });
   }
 

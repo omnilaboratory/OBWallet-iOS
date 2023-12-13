@@ -251,7 +251,7 @@ class _CardDepositState extends State<CardDeposit> {
       } else {
         alert(resp.msg, context, () {});
       }
-      loading.remove();
+      removeLoading(loading);
     });
   }
 }

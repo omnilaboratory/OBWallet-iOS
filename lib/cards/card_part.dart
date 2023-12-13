@@ -346,7 +346,7 @@ class _CardPartState extends State<CardPart> {
               } else {
                 alert(resp.msg, context, () {});
               }
-              loading.remove();
+              removeLoading(loading);
             });
           }
         }

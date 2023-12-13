@@ -473,9 +473,7 @@ class _NftExchangeState extends State<NftExchange> {
     var loading = showLoading(context);
     Future.delayed(const Duration(seconds: 30), () {
       if (mounted) {
-        if (loading.mounted) {
-          loading.remove();
-        }
+        removeLoading(loading);
       }
     });
     try {
@@ -484,7 +482,7 @@ class _NftExchangeState extends State<NftExchange> {
           amount);
 
       if (request.nftTxid.isEmpty || !request.nftTxid.startsWith("0x")) {
-        loading.remove();
+        removeLoading(loading);
         alert(S.of(context).tips_WrongTxid, context, () {});
         return;
       }
@@ -497,7 +495,7 @@ class _NftExchangeState extends State<NftExchange> {
         request.cardNo = _cardController.text.trim();
       }
       AccountService.getInstance().sellNft(context, request).then((resp) {
-        loading.remove();
+        removeLoading(loading);
         if (resp.code == 1) {
           alert("success", context, () {
             GlobalParams.eventBus.fire("nftChange");
@@ -511,7 +509,7 @@ class _NftExchangeState extends State<NftExchange> {
     } catch (e, stack) {
       log("$e");
       log("$stack");
-      loading.remove();
+      removeLoading(loading);
     }
   }
 }

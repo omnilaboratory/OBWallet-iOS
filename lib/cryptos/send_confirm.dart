@@ -44,9 +44,7 @@ class _SendConfirmState extends State<SendConfirm> {
             Navigator.pop(context);
           }
         } catch (e) {}
-        if (loading.mounted) {
-          loading.remove();
-        }
+        removeLoading(loading);
       });
     } else if (widget.name == 'USDT') {
       if (widget.netName.isEmpty) {
@@ -60,9 +58,7 @@ class _SendConfirmState extends State<SendConfirm> {
               Navigator.pop(context);
             }
           } catch (e) {}
-          if (loading.mounted) {
-            loading.remove();
-          }
+          removeLoading(loading);
         });
       }
 
@@ -76,16 +72,12 @@ class _SendConfirmState extends State<SendConfirm> {
               GlobalParams.eventBus.fire("SendConfirm_Close");
               Navigator.pop(context);
             } else {
-              if (loading.mounted) {
-                loading.remove();
-              }
+              removeLoading(loading);
               alert(S.of(context).tips_sendTokenError, context, () {});
               return;
             }
           } catch (e) {}
-          if (loading.mounted) {
-            loading.remove();
-          }
+          removeLoading(loading);
         });
       }
     } else if (widget.name == 'USDC') {
@@ -98,15 +90,10 @@ class _SendConfirmState extends State<SendConfirm> {
             Navigator.pop(context);
           }
         } catch (e) {}
-        if (loading.mounted) {
-          loading.remove();
-        }
+        removeLoading(loading);
       });
     }
-
-    if (loading.mounted) {
-      loading.remove();
-    }
+    removeLoading(loading);
   }
 
   onBack() {

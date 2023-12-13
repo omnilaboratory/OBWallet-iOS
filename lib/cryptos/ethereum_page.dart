@@ -273,7 +273,7 @@ class _EthereumPageState extends State<EthereumPage> {
     var loading = showLoading(context);
     EthService.getInstance().createWalletInfo(context).then((value) async {
       await updateTokenBalances();
-      loading.remove();
+      removeLoading(loading);
     });
   }
 

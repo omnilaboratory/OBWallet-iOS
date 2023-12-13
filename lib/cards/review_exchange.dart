@@ -407,9 +407,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
       } else {
         showToast(value.msg);
       }
-      if (loading.mounted) {
-        loading.remove();
-      }
+      removeLoading(loading);
     });
   }
 
@@ -428,9 +426,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
       } else {
         showToast(value.msg);
       }
-      if (loading.mounted) {
-        loading.remove();
-      }
+      removeLoading(loading);
     });
   }
 
@@ -445,16 +441,12 @@ class _ReviewExchangeState extends State<ReviewExchange> {
             EthGrpcService.getInstance().ethTrackTx(context, value);
             sellCoin(value);
           } else {
-            if (loading.mounted) {
-              loading.remove();
-            }
+            removeLoading(loading);
             alert(S.of(context).tips_sendTokenError, context, () {});
             return;
           }
         } catch (e) {}
-        if (loading.mounted) {
-          loading.remove();
-        }
+        removeLoading(loading);
       });
     } else if (widget.fromCoin == 'USDT') {
       Eth.sendUsdtTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
@@ -466,15 +458,11 @@ class _ReviewExchangeState extends State<ReviewExchange> {
             sellCoin(value);
           }
         } catch (e) {
-          if (loading.mounted) {
-            loading.remove();
-          }
+          removeLoading(loading);
           alert(S.of(context).tips_sendTokenError, context, () {});
           return;
         }
-        if (loading.mounted) {
-          loading.remove();
-        }
+        removeLoading(loading);
       });
     } else if (widget.fromCoin == 'USDC') {
       Eth.sendUsdcTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
@@ -486,15 +474,11 @@ class _ReviewExchangeState extends State<ReviewExchange> {
             sellCoin(value);
           }
         } catch (e) {
-          if (loading.mounted) {
-            loading.remove();
-          }
+          removeLoading(loading);
           alert(S.of(context).tips_sendTokenError, context, () {});
           return;
         }
-        if (loading.mounted) {
-          loading.remove();
-        }
+        removeLoading(loading);
       });
     }
   }

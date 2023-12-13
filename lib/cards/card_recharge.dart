@@ -342,7 +342,7 @@ class _CardRechargeState extends State<CardRecharge> {
         log(value.msg);
         alert(value.msg, context, () {});
       }
-      loading.remove();
+      removeLoading(loading);
     });
   }
 

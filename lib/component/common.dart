@@ -207,12 +207,17 @@ OverlayEntry showLoading(BuildContext context) {
   );
   Overlay.of(context).insert(entry);
   Future.delayed(const Duration(seconds: 40), () {
-    if (entry.mounted) {
-      entry.remove();
-    }
+    removeLoading(entry);
   });
   return entry;
 }
+
+removeLoading(OverlayEntry loading){
+  if (loading.mounted) {
+    loading.remove();
+  }
+}
+
 
 SmartRefresher buildNewSmartRefresher(RefreshController controller, Widget body,
     {VoidCallback? onRefresh,
