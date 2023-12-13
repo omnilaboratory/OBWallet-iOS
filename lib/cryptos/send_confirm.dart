@@ -71,6 +71,10 @@ class _SendConfirmState extends State<SendConfirm> {
               EthGrpcService.getInstance().ethTrackTx(context, value);
               GlobalParams.eventBus.fire("SendConfirm_Close");
               Navigator.pop(context);
+            }else{
+              loading.remove();
+              alert(S.of(context).tips_sendTokenError, context, () {});
+              return;
             }
           } catch (e) {}
           loading.remove();
