@@ -324,17 +324,17 @@ class _CardPartState extends State<CardPart> {
           if (accountInfo.balanceUsd < createCardFee) {
             alert(S.of(context).tips_needFiveDollarFee(createCardFee), context,
                 () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return CardDeposit(
-                      type: "applyCard",
-                      title: "Deposit",
-                      amt: createCardFee,
-                      tokenIds: const [],
-                      tokenIdValues: const [],
-                    );
-                  });
+              // showDialog(
+              //     context: context,
+              //     builder: (context) {
+              //       return CardDeposit(
+              //         type: "applyCard",
+              //         title: "Deposit",
+              //         amt: createCardFee,
+              //         tokenIds: const [],
+              //         tokenIdValues: const [],
+              //       );
+              //     });
             });
           } else {
             var loading = showLoading(context);
