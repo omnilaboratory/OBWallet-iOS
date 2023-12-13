@@ -70,7 +70,6 @@ class _SendConfirmState extends State<SendConfirm> {
         Eth.sendPolygonUsdtTo(widget.address, double.parse(widget.amount))
             .then((value) {
           try {
-            value = "";
             if (value.isNotEmpty) {
               log('txId: $value');
               EthGrpcService.getInstance().ethTrackTx(context, value);
