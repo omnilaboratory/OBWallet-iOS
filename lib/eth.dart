@@ -235,6 +235,9 @@ class Eth {
   /// Sending Polygon USDT to an address
   static Future<String> sendPolygonUsdtTo(String toAddress, double amount) async {
     try {
+      // Get the instance for Polygon USDT
+      var polygonClient = Web3Client(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.polygonApiUrl]!, Client());
+
       EthereumAddress contract = EthereumAddress.fromHex(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![EnumEthKey.polygonUSDT]!);
       EthereumAddress ethAddr  = EthereumAddress.fromHex(toAddress);
 
@@ -244,7 +247,7 @@ class Eth {
       Decimal decimals = Decimal.parse('1000000'); // 6 decimals
       BigInt value     = (baseVal * decimals).toBigInt();
 
-      var usdt     = USDT(address: contract, client: ethClient!);
+      var usdt     = USDT(address: contract, client: polygonClient);
       var response = await usdt.transfer(ethAddr, value, credentials: getCredentials());
       return response;
     } catch (e) {
