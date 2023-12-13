@@ -34,7 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "You have selected ${nftTotalCount} NFTs and value is \$${nftTotalValue}";
 
   static String m5(createCardFee) =>
-      "There is a fee of \$${createCardFee} to apply for a virtual card.";
+      "There is a fee of \$${createCardFee} to apply for a virtual card. \n The USD is insufficient, please click Deposit on the Home page to purchase USDT and then exchange it for USD.";
 
   static String m6(tokenName) => "${tokenName} Activity";
 
