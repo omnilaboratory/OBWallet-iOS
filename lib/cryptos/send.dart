@@ -61,7 +61,9 @@ class _SendState extends State<Send> {
     }
     GlobalParams.eventBus.on().listen((event) {
       if (event == "SendConfirm_Close") {
-        onClose();
+        setState(() {
+          onClose();
+        });
       }
     });
     super.initState();
