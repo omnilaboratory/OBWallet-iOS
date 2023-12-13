@@ -5,8 +5,9 @@ class BottomButton extends StatelessWidget {
   final String text;
   Color? imageClr;
   final VoidCallback onPressed;
+  final double fontSize;
 
-  BottomButton({super.key, required this.icon, required this.text,this.imageClr ,required this.onPressed});
+  BottomButton({super.key, required this.icon, required this.text,this.imageClr ,required this.onPressed,this.fontSize = 16});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +27,9 @@ class BottomButton extends StatelessWidget {
                 Text(
                   text,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: fontSize,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 4,
                   ),
