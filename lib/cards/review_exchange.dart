@@ -407,7 +407,9 @@ class _ReviewExchangeState extends State<ReviewExchange> {
       } else {
         showToast(value.msg);
       }
-      loading.remove();
+      if (loading.mounted) {
+        loading.remove();
+      }
     });
   }
 
@@ -426,7 +428,9 @@ class _ReviewExchangeState extends State<ReviewExchange> {
       } else {
         showToast(value.msg);
       }
-      loading.remove();
+      if (loading.mounted) {
+        loading.remove();
+      }
     });
   }
 
@@ -441,12 +445,16 @@ class _ReviewExchangeState extends State<ReviewExchange> {
             EthGrpcService.getInstance().ethTrackTx(context, value);
             sellCoin(value);
           } else {
-            loading.remove();
+            if (loading.mounted) {
+              loading.remove();
+            }
             alert(S.of(context).tips_sendTokenError, context, () {});
             return;
           }
         } catch (e) {}
-        loading.remove();
+        if (loading.mounted) {
+          loading.remove();
+        }
       });
     } else if (widget.fromCoin == 'USDT') {
       Eth.sendUsdtTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
@@ -458,11 +466,15 @@ class _ReviewExchangeState extends State<ReviewExchange> {
             sellCoin(value);
           }
         } catch (e) {
-          loading.remove();
+          if (loading.mounted) {
+            loading.remove();
+          }
           alert(S.of(context).tips_sendTokenError, context, () {});
           return;
         }
-        loading.remove();
+        if (loading.mounted) {
+          loading.remove();
+        }
       });
     } else if (widget.fromCoin == 'USDC') {
       Eth.sendUsdcTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
@@ -474,11 +486,15 @@ class _ReviewExchangeState extends State<ReviewExchange> {
             sellCoin(value);
           }
         } catch (e) {
-          loading.remove();
+          if (loading.mounted) {
+            loading.remove();
+          }
           alert(S.of(context).tips_sendTokenError, context, () {});
           return;
         }
-        loading.remove();
+        if (loading.mounted) {
+          loading.remove();
+        }
       });
     }
   }

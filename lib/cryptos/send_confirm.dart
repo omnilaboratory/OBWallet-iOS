@@ -44,7 +44,9 @@ class _SendConfirmState extends State<SendConfirm> {
             Navigator.pop(context);
           }
         } catch (e) {}
-        loading.remove();
+        if (loading.mounted) {
+          loading.remove();
+        }
       });
     } else if (widget.name == 'USDT') {
       if (widget.netName.isEmpty) {
@@ -58,7 +60,9 @@ class _SendConfirmState extends State<SendConfirm> {
               Navigator.pop(context);
             }
           } catch (e) {}
-          loading.remove();
+          if (loading.mounted) {
+            loading.remove();
+          }
         });
       }
 
@@ -66,18 +70,23 @@ class _SendConfirmState extends State<SendConfirm> {
         Eth.sendPolygonUsdtTo(widget.address, double.parse(widget.amount))
             .then((value) {
           try {
+            value = "";
             if (value.isNotEmpty) {
               log('txId: $value');
               EthGrpcService.getInstance().ethTrackTx(context, value);
               GlobalParams.eventBus.fire("SendConfirm_Close");
               Navigator.pop(context);
-            }else{
-              loading.remove();
+            } else {
+              if (loading.mounted) {
+                loading.remove();
+              }
               alert(S.of(context).tips_sendTokenError, context, () {});
               return;
             }
           } catch (e) {}
-          loading.remove();
+          if (loading.mounted) {
+            loading.remove();
+          }
         });
       }
     } else if (widget.name == 'USDC') {
@@ -90,11 +99,15 @@ class _SendConfirmState extends State<SendConfirm> {
             Navigator.pop(context);
           }
         } catch (e) {}
-        loading.remove();
+        if (loading.mounted) {
+          loading.remove();
+        }
       });
     }
 
-    loading.remove();
+    if (loading.mounted) {
+      loading.remove();
+    }
   }
 
   onBack() {
@@ -225,7 +238,8 @@ class _SendConfirmState extends State<SendConfirm> {
                         Visibility(
                             visible: false,
                             child: Padding(
-                                padding: const EdgeInsets.only(left: 15, top: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 10),
                                 child: Row(children: [
                                   Text(S.of(context).crypto_sendConfirm_Memo,
                                       style: const TextStyle(
@@ -270,7 +284,8 @@ class _SendConfirmState extends State<SendConfirm> {
                         Visibility(
                             visible: false,
                             child: Padding(
-                                padding: const EdgeInsets.only(left: 15, top: 15),
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 15),
                                 child: Row(children: [
                                   Text(S.of(context).crypto_send_Expiration,
                                       style: const TextStyle(
