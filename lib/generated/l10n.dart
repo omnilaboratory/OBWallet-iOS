@@ -2080,10 +2080,10 @@ class S {
     );
   }
 
-  /// `There is a fee of ${createCardFee} to apply for a virtual card.`
+  /// `There is a fee of ${createCardFee} to apply for a virtual card. \n The USD is insufficient, please click Deposit on the Home page to purchase USDT and then exchange it for USD.`
   String tips_needFiveDollarFee(Object createCardFee) {
     return Intl.message(
-      'There is a fee of \$$createCardFee to apply for a virtual card.',
+      'There is a fee of \$$createCardFee to apply for a virtual card. \n The USD is insufficient, please click Deposit on the Home page to purchase USDT and then exchange it for USD.',
       name: 'tips_needFiveDollarFee',
       desc: '',
       args: [createCardFee],
