@@ -326,6 +326,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please select the country."),
         "tips_selectDateOfBirth": MessageLookupByLibrary.simpleMessage(
             "Please select the date of birth."),
+        "tips_sendTokenError": MessageLookupByLibrary.simpleMessage("错误的交易."),
         "tips_successDeposit":
             MessageLookupByLibrary.simpleMessage("Deposit successful."),
         "tips_successWithdraw":

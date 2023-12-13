@@ -36,6 +36,7 @@ class EthGrpcService {
       ret.data = resp;
     } catch (e) {
       UserService.getInstance().setError(context,"ethTrackTx",e, ret);
+      ret.msg = e.toString();
     }
     return ret;
   }

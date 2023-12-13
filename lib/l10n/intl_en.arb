@@ -229,5 +229,6 @@
   "tips_buyNftSuccess": "Buy NFT Successfully.",
   "tips_createWallet": "Please create a crypto wallet first.",
   "tips_needFiveDollarFee": "There is a fee of ${createCardFee} to apply for a virtual card. \n The USD is insufficient, please click Deposit on the Home page to purchase USDT and then exchange it for USD.",
-  "tips_codeIsOnClipboard": "Invitation Code is on your clipboard."
+  "tips_codeIsOnClipboard": "Invitation Code is on your clipboard.",
+  "tips_sendTokenError": "错误的交易."
 }

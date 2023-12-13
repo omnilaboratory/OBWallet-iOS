@@ -38,53 +38,14 @@ class ReviewExchange extends StatefulWidget {
 }
 
 class _ReviewExchangeState extends State<ReviewExchange> {
-  double coinPrice = 1;
+  double fromPrice = 1;
+  double toPrice = 1;
 
   onConfirm() {
     if (widget.type == EnumExchangeType.sell) {
-      var loading = showLoading(context);
-      if (widget.fromCoin == 'ETH') {
-        Eth.sendEthTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
-            .then((value) {
-          try {
-            if (value.isNotEmpty) {
-              log('txId: $value');
-              EthGrpcService.getInstance().ethTrackTx(context, value);
-              sellCoin(value);
-            }
-          } catch (e) {
-          }
-          loading.remove();
-        });
-      } else if (widget.fromCoin == 'USDT') {
-        Eth.sendUsdtTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
-            .then((value) {
-          try {
-            if (value.isNotEmpty) {
-              log('txId: $value');
-              EthGrpcService.getInstance().ethTrackTx(context, value);
-              sellCoin(value);
-            }
-          } catch (e) {
-          }
-          loading.remove();
-        });
-      } else if (widget.fromCoin == 'USDC') {
-        Eth.sendUsdcTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
-            .then((value) {
-          try {
-            if (value.isNotEmpty) {
-              log('txId: $value');
-              EthGrpcService.getInstance().ethTrackTx(context, value);
-              sellCoin(value);
-            }
-          } catch (e) {
-          }
-          loading.remove();
-        });
-      }
+      sellToken();
     } else if (widget.type == EnumExchangeType.buy) {
-      buyCoin();
+      buyToken();
     }
   }
 
@@ -96,7 +57,15 @@ class _ReviewExchangeState extends State<ReviewExchange> {
   @override
   void initState() {
     super.initState();
-    coinPrice = widget.priceInfo.rawPrice;
+
+    if (widget.type == EnumExchangeType.sell) {
+      fromPrice = 1;
+      toPrice = widget.priceInfo.settlePrice;
+    } else if (widget.type == EnumExchangeType.buy) {
+      fromPrice = widget.priceInfo.settlePrice;
+      toPrice = 1;
+    }
+
     GlobalParams.eventBus.on().listen((event) {
       if (event == "exchange_showTips") {
         if (mounted) {
@@ -148,8 +117,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                         Text(
                           widget.type == EnumExchangeType.sell
                               ? widget.fromCoin == 'ETH'
-                                  ? StringTools.formatCryptoNum(
-                                      widget.fromAmt)
+                                  ? StringTools.formatCryptoNum(widget.fromAmt)
                                   : StringTools.formatCurrencyNum(
                                       widget.fromAmt)
                               : StringTools.formatCurrencyNum(widget.toAmt),
@@ -180,8 +148,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                   const Image(
                     width: 22,
                     height: 22,
-                    image:
-                        AssetImage("asset/images/icon_arrow_down_gray.png"),
+                    image: AssetImage("asset/images/icon_arrow_down_gray.png"),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 12),
@@ -192,8 +159,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                           widget.type == EnumExchangeType.sell
                               ? StringTools.formatCurrencyNum(widget.toAmt)
                               : widget.fromCoin == 'ETH'
-                                  ? StringTools.formatCryptoNum(
-                                      widget.fromAmt)
+                                  ? StringTools.formatCryptoNum(widget.fromAmt)
                                   : StringTools.formatCurrencyNum(
                                       widget.fromAmt),
                           style: const TextStyle(
@@ -225,13 +191,12 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text(
-                          '1',
-                          style: TextStyle(
+                        Text(
+                          fromPrice.toString(),
+                          style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
-                            height: 1.29,
                           ),
                         ),
                         const SizedBox(width: 2),
@@ -243,7 +208,6 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                             color: Color(0xFF666666),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
-                            height: 1.29,
                           ),
                         ),
                         const SizedBox(width: 2),
@@ -259,12 +223,10 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                         const SizedBox(width: 2),
                         Text(
                           widget.type == EnumExchangeType.sell
-                              ? StringTools.formatCurrencyNum(coinPrice)
+                              ? StringTools.formatCurrencyNum(toPrice)
                               : widget.fromCoin == 'ETH'
-                                  ? StringTools.formatCryptoNum(
-                                      1 / coinPrice)
-                                  : StringTools.formatCurrencyNum(
-                                      1 / coinPrice),
+                                  ? StringTools.formatCryptoNum(toPrice)
+                                  : StringTools.formatCurrencyNum(toPrice),
                           style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
@@ -311,7 +273,6 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                             color: Color(0xFF666666),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
-                            height: 1.29,
                           ),
                         ),
                         const SizedBox(width: 2),
@@ -322,7 +283,6 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                             color: Color(0xFF666666),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
-                            height: 1.29,
                           ),
                         ),
                       ],
@@ -432,13 +392,13 @@ class _ReviewExchangeState extends State<ReviewExchange> {
   }
 
   void sellCoin(String value) {
-    var loading  = showLoading(context);
+    var loading = showLoading(context);
     SellCoinRequest request = SellCoinRequest();
     request.txid = value;
     request.coin = Utils.getContractSymbol(widget.fromCoin)!;
     request.coinAmt = widget.fromAmt;
     request.usdAmt = widget.toAmt;
-    request.rate = coinPrice;
+    request.rate = toPrice;
     AccountService.getInstance().sellCoin(context, request).then((value) async {
       if (value.code == 1) {
         var resp = value.data as SellCoinResponse;
@@ -451,13 +411,13 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     });
   }
 
-  void buyCoin() {
+  void buyToken() {
     var loading = showLoading(context);
     BuyCoinRequest request = BuyCoinRequest();
     request.coin = Utils.getContractSymbol(widget.fromCoin)!;
     request.coinAmt = widget.fromAmt;
     request.usdAmt = widget.toAmt;
-    request.rate = coinPrice;
+    request.rate = toPrice;
     AccountService.getInstance().buyCoin(context, request).then((value) async {
       if (value.code == 1) {
         var resp = value.data as BuyCoinResponse;
@@ -468,5 +428,58 @@ class _ReviewExchangeState extends State<ReviewExchange> {
       }
       loading.remove();
     });
+  }
+
+  void sellToken() {
+    var loading = showLoading(context);
+    if (widget.fromCoin == 'ETH') {
+      Eth.sendEthTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
+          .then((value) {
+        try {
+          if (value.isNotEmpty) {
+            log('txId: $value');
+            EthGrpcService.getInstance().ethTrackTx(context, value);
+            sellCoin(value);
+          } else {
+            loading.remove();
+            alert(S.of(context).tips_sendTokenError, context, () {});
+            return;
+          }
+        } catch (e) {}
+        loading.remove();
+      });
+    } else if (widget.fromCoin == 'USDT') {
+      Eth.sendUsdtTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
+          .then((value) {
+        try {
+          if (value.isNotEmpty) {
+            log('txId: $value');
+            EthGrpcService.getInstance().ethTrackTx(context, value);
+            sellCoin(value);
+          }
+        } catch (e) {
+          loading.remove();
+          alert(S.of(context).tips_sendTokenError, context, () {});
+          return;
+        }
+        loading.remove();
+      });
+    } else if (widget.fromCoin == 'USDC') {
+      Eth.sendUsdcTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
+          .then((value) {
+        try {
+          if (value.isNotEmpty) {
+            log('txId: $value');
+            EthGrpcService.getInstance().ethTrackTx(context, value);
+            sellCoin(value);
+          }
+        } catch (e) {
+          loading.remove();
+          alert(S.of(context).tips_sendTokenError, context, () {});
+          return;
+        }
+        loading.remove();
+      });
+    }
   }
 }

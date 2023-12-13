@@ -2099,6 +2099,16 @@ class S {
       args: [],
     );
   }
+
+  /// `错误的交易.`
+  String get tips_sendTokenError {
+    return Intl.message(
+      '错误的交易.',
+      name: 'tips_sendTokenError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
