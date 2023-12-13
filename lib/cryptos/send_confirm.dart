@@ -62,7 +62,7 @@ class _SendConfirmState extends State<SendConfirm> {
         });
       }
 
-      if (widget.netName == "polygon") {
+      if (widget.netName.toLowerCase() == "polygon") {
         Eth.sendPolygonUsdtTo(widget.address, double.parse(widget.amount))
             .then((value) {
           try {
