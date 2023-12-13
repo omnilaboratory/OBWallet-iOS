@@ -2100,10 +2100,10 @@ class S {
     );
   }
 
-  /// `错误的交易.`
+  /// `The gas fee is insufficient.`
   String get tips_sendTokenError {
     return Intl.message(
-      '错误的交易.',
+      'The gas fee is insufficient.',
       name: 'tips_sendTokenError',
       desc: '',
       args: [],
