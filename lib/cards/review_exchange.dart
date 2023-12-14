@@ -435,29 +435,25 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     if (widget.fromCoin == 'ETH') {
       Eth.sendEthTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
           .then((value) {
-        try {
-          if (value.isNotEmpty) {
-            log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(context, value);
-            sellCoin(value);
-          } else {
-            removeLoading(loading);
-            alert(S.of(context).tips_sendTokenError, context, () {});
-            return;
-          }
-        } catch (e) {}
+        if (value.isNotEmpty) {
+          log('txId: $value');
+          EthGrpcService.getInstance().ethTrackTx(context, value);
+          sellCoin(value);
+        } else {
+          removeLoading(loading);
+          alert(S.of(context).tips_sendTokenError, context, () {});
+          return;
+        }
         removeLoading(loading);
       });
     } else if (widget.fromCoin == 'USDT') {
       Eth.sendUsdtTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
           .then((value) {
-        try {
-          if (value.isNotEmpty) {
-            log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(context, value);
-            sellCoin(value);
-          }
-        } catch (e) {
+        if (value.isNotEmpty) {
+          log('txId: $value');
+          EthGrpcService.getInstance().ethTrackTx(context, value);
+          sellCoin(value);
+        } else {
           removeLoading(loading);
           alert(S.of(context).tips_sendTokenError, context, () {});
           return;
@@ -467,13 +463,11 @@ class _ReviewExchangeState extends State<ReviewExchange> {
     } else if (widget.fromCoin == 'USDC') {
       Eth.sendUsdcTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
           .then((value) {
-        try {
-          if (value.isNotEmpty) {
-            log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(context, value);
-            sellCoin(value);
-          }
-        } catch (e) {
+        if (value.isNotEmpty) {
+          log('txId: $value');
+          EthGrpcService.getInstance().ethTrackTx(context, value);
+          sellCoin(value);
+        } else {
           removeLoading(loading);
           alert(S.of(context).tips_sendTokenError, context, () {});
           return;

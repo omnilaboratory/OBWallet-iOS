@@ -133,28 +133,36 @@ class _ExchangeState extends State<Exchange> {
       if (_amountTokenController.value.text
           .toString()
           .isEmpty) {
-        showToast(S.of(context).tips_emptyAmount1);
+        showToast(S
+            .of(context)
+            .tips_emptyAmount1);
         return;
       }
 
       if (_amountCurrencyController.value.text
           .toString()
           .isEmpty) {
-        showToast(S.of(context).tips_emptyAmount2);
+        showToast(S
+            .of(context)
+            .tips_emptyAmount2);
         return;
       }
 
       if (double.parse(
           _amountTokenController.value.text.toString().replaceAll(",", "")) ==
           0) {
-        showToast(S.of(context).tips_zeroAmount1);
+        showToast(S
+            .of(context)
+            .tips_zeroAmount1);
         return;
       }
 
       if (double.parse(
           _amountCurrencyController.value.text.toString().replaceAll(
               ",", "")) == 0) {
-        showToast(S.of(context).tips_zeroAmount2);
+        showToast(S
+            .of(context)
+            .tips_zeroAmount2);
         return;
       }
 
@@ -163,35 +171,45 @@ class _ExchangeState extends State<Exchange> {
           double.parse(
               StringTools.formatCurrencyNum(currSelectedToken.balance)
                   .replaceAll(",", ""))) {
-        showToast(S.of(context).tips_maxAmount1);
+        showToast(S
+            .of(context)
+            .tips_maxAmount1);
         return;
       }
     } else if (widget.type == EnumExchangeType.buy) {
       if (_amountCurrencyController.value.text
           .toString()
           .isEmpty) {
-        showToast(S.of(context).tips_emptyAmount1);
+        showToast(S
+            .of(context)
+            .tips_emptyAmount1);
         return;
       }
 
       if (_amountTokenController.value.text
           .toString()
           .isEmpty) {
-        showToast(S.of(context).tips_emptyAmount2);
+        showToast(S
+            .of(context)
+            .tips_emptyAmount2);
         return;
       }
 
       if (double.parse(
           _amountCurrencyController.value.text.toString().replaceAll(
               ",", "")) == 0) {
-        showToast(S.of(context).tips_zeroAmount1);
+        showToast(S
+            .of(context)
+            .tips_zeroAmount1);
         return;
       }
 
       if (double.parse(
           _amountTokenController.value.text.toString().replaceAll(",", "")) ==
           0) {
-        showToast(S.of(context).tips_zeroAmount2);
+        showToast(S
+            .of(context)
+            .tips_zeroAmount2);
         return;
       }
 
@@ -200,13 +218,17 @@ class _ExchangeState extends State<Exchange> {
           double.parse(
               StringTools.formatCurrencyNum(currSelectedCurrency.balance)
                   .replaceAll(",", ""))) {
-        showToast(S.of(context).tips_maxAmount1);
+        showToast(S
+            .of(context)
+            .tips_maxAmount1);
         return;
       }
     }
 
     if (LocalStorage.getEthAddress() == null) {
-      showToast(S.of(context).tips_createEthAddress);
+      showToast(S
+          .of(context)
+          .tips_createEthAddress);
       return;
     }
 
@@ -253,7 +275,10 @@ class _ExchangeState extends State<Exchange> {
                 const SizedBox(height: 20),
                 BottomWhiteButton(
                   icon: 'asset/images/icon_close_white.png',
-                  text: S.of(context).common_Cancel.toUpperCase(),
+                  text: S
+                      .of(context)
+                      .common_Cancel
+                      .toUpperCase(),
                   onPressed: onClose,
                 )
               ],
@@ -272,7 +297,9 @@ class _ExchangeState extends State<Exchange> {
       height: size.height * 0.72,
       child: Column(children: [
         const SizedBox(height: 25),
-        createDialogTitle(S.of(context).exchange_tile),
+        createDialogTitle(S
+            .of(context)
+            .exchange_tile),
         const SizedBox(height: 25),
         buildSubTitleForStep(),
         Expanded(
@@ -329,7 +356,9 @@ class _ExchangeState extends State<Exchange> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 0, top: 15),
                       child: Text(
-                        S.of(context).exchange_To,
+                        S
+                            .of(context)
+                            .exchange_To,
                         style: const TextStyle(
                           color: Color(0xFF999999),
                           fontSize: 14,
@@ -348,8 +377,11 @@ class _ExchangeState extends State<Exchange> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        S.of(context).exchange_wait,
-                        style: const TextStyle(color: Colors.black45, fontSize: 12),
+                        S
+                            .of(context)
+                            .exchange_wait,
+                        style: const TextStyle(color: Colors.black45,
+                            fontSize: 12),
                       ),
                     ],
                   )
@@ -452,7 +484,9 @@ class _ExchangeState extends State<Exchange> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        S.of(context).exchange_ReceiveAtLeast,
+                        S
+                            .of(context)
+                            .exchange_ReceiveAtLeast,
                         style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
@@ -505,7 +539,9 @@ class _ExchangeState extends State<Exchange> {
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    S.of(context).exchange_InputTips1,
+                    S
+                        .of(context)
+                        .exchange_InputTips1,
                     style: const TextStyle(color: Colors.black45, fontSize: 12),
                   ),
                 ],
@@ -517,7 +553,10 @@ class _ExchangeState extends State<Exchange> {
           flex: 2,
           child: BottomButton(
             icon: 'asset/images/icon_arrow_right_green.png',
-            text: S.of(context).common_Next.toUpperCase(),
+            text: S
+                .of(context)
+                .common_Next
+                .toUpperCase(),
             onPressed: coinPrice > 0
                 ? onNext
                 : () {
@@ -624,7 +663,9 @@ class _ExchangeState extends State<Exchange> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          S.of(context).exchange_Balance,
+                          S
+                              .of(context)
+                              .exchange_Balance,
                           style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
@@ -658,7 +699,10 @@ class _ExchangeState extends State<Exchange> {
                         }
                             : null,
                         child: Text(
-                          S.of(context).exchange_Max.toUpperCase(),
+                          S
+                              .of(context)
+                              .exchange_Max
+                              .toUpperCase(),
                           style: TextStyle(
                             color: canCurrencyClick
                                 ? const Color(0xFF4A92FF)
@@ -683,7 +727,9 @@ class _ExchangeState extends State<Exchange> {
                   children: [
                     Expanded(
                       child: Text(
-                        S.of(context).exchange_notEnoughBalance,
+                        S
+                            .of(context)
+                            .exchange_notEnoughBalance,
                         style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 12,
@@ -704,7 +750,9 @@ class _ExchangeState extends State<Exchange> {
                             });
                       },
                       child: Text(
-                        S.of(context).exchange_Deposit,
+                        S
+                            .of(context)
+                            .exchange_Deposit,
                         style: const TextStyle(
                           color: Color(0xFF4A92FF),
                           fontSize: 12,
@@ -836,7 +884,9 @@ class _ExchangeState extends State<Exchange> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          S.of(context).exchange_Balance,
+                          S
+                              .of(context)
+                              .exchange_Balance,
                           style: const TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 12,
@@ -878,7 +928,9 @@ class _ExchangeState extends State<Exchange> {
                           });
                         } : null,
                         child: Text(
-                          S.of(context).exchange_Max,
+                          S
+                              .of(context)
+                              .exchange_Max,
                           style: TextStyle(
                             color: canTokenClick
                                 ? const Color(0xFF4A92FF)
@@ -1069,19 +1121,22 @@ class _ExchangeState extends State<Exchange> {
     log("getUserSwapPrice  request\n$request");
     AccountService.getInstance().getUserSwapPrice(context, request).then((
         resp) {
+      String targetAmt = "";
       if (resp.code == 1) {
         currPriceInfo = resp.data as GetUserSwapPriceResponse;
         log("getUserSwapPrice  priceInfo\n $currPriceInfo");
         coinPrice = currPriceInfo.settlePrice;
-        if (widget.type == EnumExchangeType.buy) {
-          _amountTokenController.text = currPriceInfo.targetAmt.toString();
-        }
-        if (widget.type == EnumExchangeType.sell) {
-          _amountCurrencyController.text = currPriceInfo.targetAmt.toString();
-        }
-        if (mounted) {
-          setState(() {});
-        }
+        targetAmt = currPriceInfo.targetAmt.toString();
+      }
+
+      if (widget.type == EnumExchangeType.buy) {
+        _amountTokenController.text = targetAmt;
+      }
+      if (widget.type == EnumExchangeType.sell) {
+        _amountCurrencyController.text = targetAmt;
+      }
+      if (mounted) {
+        setState(() {});
       }
     });
   }
