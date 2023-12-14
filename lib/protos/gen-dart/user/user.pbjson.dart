@@ -480,3 +480,48 @@ final $typed_data.Uint8List userRewardItemDescriptor = $convert.base64Decode(
     'Cgp1cGRhdGVkX2F0GAggASgLMg8udXNlci5UaW1lc3RhbXBSCXVwZGF0ZWRBdBIbCgl1c2VyX2'
     '5hbWUYCiABKAlSCHVzZXJOYW1l');
 
+@$core.Deprecated('Use userRewardDetailDescriptor instead')
+const UserRewardDetail$json = {
+  '1': 'UserRewardDetail',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'reward_userid', '3': 2, '4': 1, '5': 3, '10': 'rewardUserid'},
+    {'1': 'user_id', '3': 3, '4': 1, '5': 3, '10': 'userId'},
+    {'1': 'source_id', '3': 4, '4': 1, '5': 3, '10': 'sourceId'},
+    {'1': 'source_type', '3': 5, '4': 1, '5': 14, '6': '.user.UserRewardDetail.SourceType', '10': 'sourceType'},
+    {'1': 'reward', '3': 6, '4': 1, '5': 1, '10': 'reward'},
+    {'1': 'status', '3': 9, '4': 1, '5': 3, '10': 'status'},
+    {'1': 'tx_id', '3': 10, '4': 1, '5': 9, '10': 'txId'},
+    {'1': 'created_at', '3': 7, '4': 1, '5': 3, '10': 'createdAt'},
+    {'1': 'updated_at', '3': 8, '4': 1, '5': 3, '10': 'updatedAt'},
+  ],
+  '4': [UserRewardDetail_SourceType$json],
+};
+
+@$core.Deprecated('Use userRewardDetailDescriptor instead')
+const UserRewardDetail_SourceType$json = {
+  '1': 'SourceType',
+  '2': [
+    {'1': 'UnKnow', '2': 0},
+    {'1': 'BuyCoin', '2': 1},
+    {'1': 'SellCoin', '2': 2},
+    {'1': 'WithdrawTOVcard', '2': 3},
+    {'1': 'WithdrawTOPcard', '2': 4},
+    {'1': 'CreateVcard', '2': 5},
+    {'1': 'CreatePcard', '2': 6},
+    {'1': 'Transak', '2': 7},
+  ],
+};
+
+/// Descriptor for `UserRewardDetail`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userRewardDetailDescriptor = $convert.base64Decode(
+    'ChBVc2VyUmV3YXJkRGV0YWlsEg4KAmlkGAEgASgDUgJpZBIjCg1yZXdhcmRfdXNlcmlkGAIgAS'
+    'gDUgxyZXdhcmRVc2VyaWQSFwoHdXNlcl9pZBgDIAEoA1IGdXNlcklkEhsKCXNvdXJjZV9pZBgE'
+    'IAEoA1IIc291cmNlSWQSQgoLc291cmNlX3R5cGUYBSABKA4yIS51c2VyLlVzZXJSZXdhcmREZX'
+    'RhaWwuU291cmNlVHlwZVIKc291cmNlVHlwZRIWCgZyZXdhcmQYBiABKAFSBnJld2FyZBIWCgZz'
+    'dGF0dXMYCSABKANSBnN0YXR1cxITCgV0eF9pZBgKIAEoCVIEdHhJZBIdCgpjcmVhdGVkX2F0GA'
+    'cgASgDUgljcmVhdGVkQXQSHQoKdXBkYXRlZF9hdBgIIAEoA1IJdXBkYXRlZEF0IowBCgpTb3Vy'
+    'Y2VUeXBlEgoKBlVuS25vdxAAEgsKB0J1eUNvaW4QARIMCghTZWxsQ29pbhACEhMKD1dpdGhkcm'
+    'F3VE9WY2FyZBADEhMKD1dpdGhkcmF3VE9QY2FyZBAEEg8KC0NyZWF0ZVZjYXJkEAUSDwoLQ3Jl'
+    'YXRlUGNhcmQQBhILCgdUcmFuc2FrEAc=');
+

@@ -40,6 +40,11 @@ service account{
   rpc GetTrackedTxList(GetSwapTxListRequest) returns (GetTrackedTxListResponse) {}
   //获取币价
   rpc GetCoinPrice(GetCoinPriceRequest) returns (GetCoinPriceResponse) {}
+
+  //获取代理商佣金配制
+  rpc GetAgentConfig(GetAgentConfigRequest) returns(AgentConfig){}
+//  设置代理商佣金配制
+  rpc SetAgentConfig(AgentConfig) returns(AgentConfig){}
 }
 message GetCoinPriceRequest {
     TrackedTx.ContractSymbol symbol =1;
@@ -290,7 +295,7 @@ message NftToken{
   int64 id = 6;
   //only for dynamic-value nft
   int64 dynamic_index = 7;
-  // @gotags: gorm:"type:timestamp"
+  // @gotags: gorm:"type:timestamp;autoCreateTime"
   Timestamp created_at = 8;
 }
 
@@ -311,8 +316,7 @@ message NftTokenLog{
   double  usd_amt = 7;
   //@gotags:gorm:"foreignKey:TokenId;references:TokenId"
   repeated NftToken NftToken = 8;
-  // @gotags: gorm:"type:timestamp"
-  Timestamp created_at = 9;
+  int64 created_at = 9;
 }
 
 //    type NftTokenLog struct {
@@ -341,32 +345,75 @@ message NftTokenLog{
 
 
 
+message GetAgentConfigRequest{
+  //代理商的用户id
+  int64 agent_id=1;
+}
+//代理商佣金配制
+message AgentConfig{
+  //代理商的用户id
+  int64 id = 1;
 
+  //transak买币佣金比 exapmle 0.01
+  double reward_transak = 2;
+
+  //数币兑换usd 0.003
+  double reward_sell_coin = 3;
+  //usd兑换数币 0.000
+  double reward_buy_coin = 4;
+
+//  提现到虚拟卡 0.005
+  double reward_withdraw_to_vcard=5;
+//    提现到实体卡 0.005
+  double reward_withdraw_to_pcard=6;
+
+  //开虚拟卡佣金 exapmle 10$
+  double reward_vcard_create = 7;
+  //开实体卡佣金 exapmle 20$
+  double reward_pcard_create = 8;
+
+  int64 created_at = 9;
+  int64 updated_at = 10;
+}
 message AppConfig{
   int64 id = 1;
-  //数币兑换费用. 比如兑换获得100usd , SwapDiscount是0.02, 用户最终将获得98
-  double swap_discount = 2;
-  //创建卡费用 exapmle 5$
-  double create_card_fee = 3;
-  //开卡佣金比 exapmle 0.02
-  double reward_card_create = 4;
-  //数币兑换佣金比 exapmle 0.01
-  double reward_usd_swap = 5;
-  //transak买币佣金比 exapmle 0.01
-  double reward_transak = 6;
-  //usd兑换数币以太坊gas费 example 5$
-  double gas_fee_eth = 7;
-  //polygon网主usdt转账gas费 example 0.005$
-  double gas_fee_matic = 8;
 
-  // @gotags: gorm:"type:timestamp"
-  Timestamp created_at = 9;
-  // @gotags: gorm:"type:timestamp"
-  Timestamp updated_at = 10;
+//  //数币兑换费用. 比如兑换获得100usd , SwapDiscount是0.02, 用户最终将获得98
+//  double swap_discount = 2;
+
+  //创建虚拟卡费用 exapmle 5$
+  double create_card_fee = 3;
+  //创建实体卡费用 exapmle 10$
+  double create_pcard_fee = 4;
+
+  //usd兑换数币以太坊gas费 example 5$
+  double gas_fee_eth = 15;
+  //polygon网主usdt转账gas费 example 0.005$
+  double gas_fee_matic = 16;
+
+  int64 created_at = 9;
+  int64 updated_at = 10;
   //服务器钱包地址
   string server_address=11;
+  //服务器Tron地址
+  string server_taddress=17;
   //nft合约地址
   string nft_address=12;
+
+//    数币兑换usd利润 0.003
+  double profit_sell_coin=13;
+//    usd兑换数币利润 0.000
+  double profit_buy_coin=14;
+
+  //  提现到虚拟卡利润 0.015
+  double profit_withdraw_to_vcard=5;
+  //    提现到实体卡利润 0.015
+  double profit_withdraw_to_pcard=6;
+
+  //开虚拟卡利润 exapmle 5$
+  double profit_vcard_create = 7;
+  //开实体卡利润 exapmle 10$
+  double profit_pcard_create = 8;
 }
 
 //    type AppConfig struct {
@@ -401,8 +448,11 @@ message AccountHistory{
 
   enum SourceType {
     UnKnow = 0;
+    //卡充值到账号
     Recharge = 1;
+    //提现到卡
     Withdraw = 2;
+    //数币兑换
     Swap = 3;
     CreateCard=4;
     //    Order = 2;

@@ -278,11 +278,44 @@ message UserRewardItem {
   // @gotags: gorm:"uniqueIndex:idx_userid_date"
   int64 user_id = 4;
   double reward = 5;
-  // @gotags: gorm:"type:timestamp"
+  // @gotags: gorm:"type:timestamp;autoCreateTime"
   Timestamp created_at = 7;
 
-  // @gotags: gorm:"type:timestamp"
+  // @gotags: gorm:"type:timestamp;autoUpdateTime"
   Timestamp updated_at = 8;
   // @gotags: gorm:"<-:false"
   string user_name =10;
+}
+//佣金明细
+message UserRewardDetail {
+  int64 id = 1;
+  int64 reward_userid = 2;
+  int64 user_id = 3;
+  int64 source_id=4;
+  SourceType source_type=5;
+  enum SourceType{
+    UnKnow = 0;
+    //账号usd兑换数币
+    BuyCoin=1;
+    //数币兑换账号usd
+    SellCoin=2;
+    //提现到虚似卡
+    WithdrawTOVcard=3;
+    //提现到实体卡
+    WithdrawTOPcard=4;
+    //创建虚似卡
+    CreateVcard=5;
+    //创建实体卡
+    CreatePcard=6;
+    //Transak佣金
+    Transak = 7;
+  }
+  double reward = 6;
+  //未结算0, 已经结算1
+  int64 status =9;
+  string tx_id=10;
+
+  int64 created_at = 7;
+  // @gotags: gorm:"index;"
+  int64 updated_at = 8;
 }

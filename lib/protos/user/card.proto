@@ -19,6 +19,8 @@ service CardService{
   rpc CardList(CardListRequest) returns (CardListResponse) {}
   //账号提现
   rpc CardWithdraw(CardWithdrawRequest) returns (CardWithdrawResponse) {}
+  //获取卡提现应得金额
+  rpc GetWithdrawResAmt(GetWithdrawResAmtRequest) returns (GetWithdrawResAmtResponse) {}
   //账号充值
   rpc CardRecharge(CardRechargeRequest) returns (CardRechargeResponse) {}
   //从第三方商户购买nft
@@ -144,11 +146,22 @@ message CardDetailResponse {
     string settleCurrency=6;
     string amount=7;
 }
+
 message CardWithdrawRequest {
   string cardNo = 1;
   double amt = 2;
 }
 message CardWithdrawResponse {
+}
+message GetWithdrawResAmtRequest {
+  //需要提现金额
+  double amt = 2;
+}
+message GetWithdrawResAmtResponse {
+  //去除手续费后的金额
+  double amt = 2;
+  //手续费
+  double fee=1;
 }
 
 message CardRechargeRequest {

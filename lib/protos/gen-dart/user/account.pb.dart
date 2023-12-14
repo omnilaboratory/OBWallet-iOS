@@ -2072,7 +2072,7 @@ class NftTokenLog extends $pb.GeneratedMessage {
     ..aInt64(6, _omitFieldNames ? '' : 'value')
     ..a<$core.double>(7, _omitFieldNames ? '' : 'usdAmt', $pb.PbFieldType.OD)
     ..pc<NftToken>(8, _omitFieldNames ? '' : 'NftToken', $pb.PbFieldType.PM, protoName: 'NftToken', subBuilder: NftToken.create)
-    ..aOM<Timestamp>(9, _omitFieldNames ? '' : 'createdAt', subBuilder: Timestamp.create)
+    ..aInt64(9, _omitFieldNames ? '' : 'createdAt')
     ..hasRequiredFields = false
   ;
 
@@ -2164,15 +2164,187 @@ class NftTokenLog extends $pb.GeneratedMessage {
   $core.List<NftToken> get nftToken => $_getList(7);
 
   @$pb.TagNumber(9)
-  Timestamp get createdAt => $_getN(8);
+  $fixnum.Int64 get createdAt => $_getI64(8);
   @$pb.TagNumber(9)
-  set createdAt(Timestamp v) { setField(9, v); }
+  set createdAt($fixnum.Int64 v) { $_setInt64(8, v); }
   @$pb.TagNumber(9)
   $core.bool hasCreatedAt() => $_has(8);
   @$pb.TagNumber(9)
   void clearCreatedAt() => clearField(9);
+}
+
+class GetAgentConfigRequest extends $pb.GeneratedMessage {
+  factory GetAgentConfigRequest() => create();
+  GetAgentConfigRequest._() : super();
+  factory GetAgentConfigRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAgentConfigRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetAgentConfigRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'agentId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAgentConfigRequest clone() => GetAgentConfigRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAgentConfigRequest copyWith(void Function(GetAgentConfigRequest) updates) => super.copyWith((message) => updates(message as GetAgentConfigRequest)) as GetAgentConfigRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetAgentConfigRequest create() => GetAgentConfigRequest._();
+  GetAgentConfigRequest createEmptyInstance() => create();
+  static $pb.PbList<GetAgentConfigRequest> createRepeated() => $pb.PbList<GetAgentConfigRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetAgentConfigRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAgentConfigRequest>(create);
+  static GetAgentConfigRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get agentId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set agentId($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAgentId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAgentId() => clearField(1);
+}
+
+class AgentConfig extends $pb.GeneratedMessage {
+  factory AgentConfig() => create();
+  AgentConfig._() : super();
+  factory AgentConfig.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AgentConfig.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AgentConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'rewardTransak', $pb.PbFieldType.OD)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'rewardSellCoin', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'rewardBuyCoin', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'rewardWithdrawToVcard', $pb.PbFieldType.OD)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'rewardWithdrawToPcard', $pb.PbFieldType.OD)
+    ..a<$core.double>(7, _omitFieldNames ? '' : 'rewardVcardCreate', $pb.PbFieldType.OD)
+    ..a<$core.double>(8, _omitFieldNames ? '' : 'rewardPcardCreate', $pb.PbFieldType.OD)
+    ..aInt64(9, _omitFieldNames ? '' : 'createdAt')
+    ..aInt64(10, _omitFieldNames ? '' : 'updatedAt')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AgentConfig clone() => AgentConfig()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AgentConfig copyWith(void Function(AgentConfig) updates) => super.copyWith((message) => updates(message as AgentConfig)) as AgentConfig;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AgentConfig create() => AgentConfig._();
+  AgentConfig createEmptyInstance() => create();
+  static $pb.PbList<AgentConfig> createRepeated() => $pb.PbList<AgentConfig>();
+  @$core.pragma('dart2js:noInline')
+  static AgentConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AgentConfig>(create);
+  static AgentConfig? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get rewardTransak => $_getN(1);
+  @$pb.TagNumber(2)
+  set rewardTransak($core.double v) { $_setDouble(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRewardTransak() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRewardTransak() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get rewardSellCoin => $_getN(2);
+  @$pb.TagNumber(3)
+  set rewardSellCoin($core.double v) { $_setDouble(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRewardSellCoin() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRewardSellCoin() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get rewardBuyCoin => $_getN(3);
+  @$pb.TagNumber(4)
+  set rewardBuyCoin($core.double v) { $_setDouble(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasRewardBuyCoin() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRewardBuyCoin() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get rewardWithdrawToVcard => $_getN(4);
+  @$pb.TagNumber(5)
+  set rewardWithdrawToVcard($core.double v) { $_setDouble(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasRewardWithdrawToVcard() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearRewardWithdrawToVcard() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.double get rewardWithdrawToPcard => $_getN(5);
+  @$pb.TagNumber(6)
+  set rewardWithdrawToPcard($core.double v) { $_setDouble(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasRewardWithdrawToPcard() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearRewardWithdrawToPcard() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.double get rewardVcardCreate => $_getN(6);
+  @$pb.TagNumber(7)
+  set rewardVcardCreate($core.double v) { $_setDouble(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasRewardVcardCreate() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearRewardVcardCreate() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.double get rewardPcardCreate => $_getN(7);
+  @$pb.TagNumber(8)
+  set rewardPcardCreate($core.double v) { $_setDouble(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasRewardPcardCreate() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearRewardPcardCreate() => clearField(8);
+
   @$pb.TagNumber(9)
-  Timestamp ensureCreatedAt() => $_ensure(8);
+  $fixnum.Int64 get createdAt => $_getI64(8);
+  @$pb.TagNumber(9)
+  set createdAt($fixnum.Int64 v) { $_setInt64(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasCreatedAt() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearCreatedAt() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get updatedAt => $_getI64(9);
+  @$pb.TagNumber(10)
+  set updatedAt($fixnum.Int64 v) { $_setInt64(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasUpdatedAt() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearUpdatedAt() => clearField(10);
 }
 
 class AppConfig extends $pb.GeneratedMessage {
@@ -2183,17 +2355,21 @@ class AppConfig extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AppConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'id')
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'swapDiscount', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'createCardFee', $pb.PbFieldType.OD)
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'rewardCardCreate', $pb.PbFieldType.OD)
-    ..a<$core.double>(5, _omitFieldNames ? '' : 'rewardUsdSwap', $pb.PbFieldType.OD)
-    ..a<$core.double>(6, _omitFieldNames ? '' : 'rewardTransak', $pb.PbFieldType.OD)
-    ..a<$core.double>(7, _omitFieldNames ? '' : 'gasFeeEth', $pb.PbFieldType.OD)
-    ..a<$core.double>(8, _omitFieldNames ? '' : 'gasFeeMatic', $pb.PbFieldType.OD)
-    ..aOM<Timestamp>(9, _omitFieldNames ? '' : 'createdAt', subBuilder: Timestamp.create)
-    ..aOM<Timestamp>(10, _omitFieldNames ? '' : 'updatedAt', subBuilder: Timestamp.create)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'createPcardFee', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'profitWithdrawToVcard', $pb.PbFieldType.OD)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'profitWithdrawToPcard', $pb.PbFieldType.OD)
+    ..a<$core.double>(7, _omitFieldNames ? '' : 'profitVcardCreate', $pb.PbFieldType.OD)
+    ..a<$core.double>(8, _omitFieldNames ? '' : 'profitPcardCreate', $pb.PbFieldType.OD)
+    ..aInt64(9, _omitFieldNames ? '' : 'createdAt')
+    ..aInt64(10, _omitFieldNames ? '' : 'updatedAt')
     ..aOS(11, _omitFieldNames ? '' : 'serverAddress')
     ..aOS(12, _omitFieldNames ? '' : 'nftAddress')
+    ..a<$core.double>(13, _omitFieldNames ? '' : 'profitSellCoin', $pb.PbFieldType.OD)
+    ..a<$core.double>(14, _omitFieldNames ? '' : 'profitBuyCoin', $pb.PbFieldType.OD)
+    ..a<$core.double>(15, _omitFieldNames ? '' : 'gasFeeEth', $pb.PbFieldType.OD)
+    ..a<$core.double>(16, _omitFieldNames ? '' : 'gasFeeMatic', $pb.PbFieldType.OD)
+    ..aOS(17, _omitFieldNames ? '' : 'serverTaddress')
     ..hasRequiredFields = false
   ;
 
@@ -2227,108 +2403,140 @@ class AppConfig extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
 
-  @$pb.TagNumber(2)
-  $core.double get swapDiscount => $_getN(1);
-  @$pb.TagNumber(2)
-  set swapDiscount($core.double v) { $_setDouble(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasSwapDiscount() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSwapDiscount() => clearField(2);
-
   @$pb.TagNumber(3)
-  $core.double get createCardFee => $_getN(2);
+  $core.double get createCardFee => $_getN(1);
   @$pb.TagNumber(3)
-  set createCardFee($core.double v) { $_setDouble(2, v); }
+  set createCardFee($core.double v) { $_setDouble(1, v); }
   @$pb.TagNumber(3)
-  $core.bool hasCreateCardFee() => $_has(2);
+  $core.bool hasCreateCardFee() => $_has(1);
   @$pb.TagNumber(3)
   void clearCreateCardFee() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.double get rewardCardCreate => $_getN(3);
+  $core.double get createPcardFee => $_getN(2);
   @$pb.TagNumber(4)
-  set rewardCardCreate($core.double v) { $_setDouble(3, v); }
+  set createPcardFee($core.double v) { $_setDouble(2, v); }
   @$pb.TagNumber(4)
-  $core.bool hasRewardCardCreate() => $_has(3);
+  $core.bool hasCreatePcardFee() => $_has(2);
   @$pb.TagNumber(4)
-  void clearRewardCardCreate() => clearField(4);
+  void clearCreatePcardFee() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.double get rewardUsdSwap => $_getN(4);
+  $core.double get profitWithdrawToVcard => $_getN(3);
   @$pb.TagNumber(5)
-  set rewardUsdSwap($core.double v) { $_setDouble(4, v); }
+  set profitWithdrawToVcard($core.double v) { $_setDouble(3, v); }
   @$pb.TagNumber(5)
-  $core.bool hasRewardUsdSwap() => $_has(4);
+  $core.bool hasProfitWithdrawToVcard() => $_has(3);
   @$pb.TagNumber(5)
-  void clearRewardUsdSwap() => clearField(5);
+  void clearProfitWithdrawToVcard() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.double get rewardTransak => $_getN(5);
+  $core.double get profitWithdrawToPcard => $_getN(4);
   @$pb.TagNumber(6)
-  set rewardTransak($core.double v) { $_setDouble(5, v); }
+  set profitWithdrawToPcard($core.double v) { $_setDouble(4, v); }
   @$pb.TagNumber(6)
-  $core.bool hasRewardTransak() => $_has(5);
+  $core.bool hasProfitWithdrawToPcard() => $_has(4);
   @$pb.TagNumber(6)
-  void clearRewardTransak() => clearField(6);
+  void clearProfitWithdrawToPcard() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.double get gasFeeEth => $_getN(6);
+  $core.double get profitVcardCreate => $_getN(5);
   @$pb.TagNumber(7)
-  set gasFeeEth($core.double v) { $_setDouble(6, v); }
+  set profitVcardCreate($core.double v) { $_setDouble(5, v); }
   @$pb.TagNumber(7)
-  $core.bool hasGasFeeEth() => $_has(6);
+  $core.bool hasProfitVcardCreate() => $_has(5);
   @$pb.TagNumber(7)
-  void clearGasFeeEth() => clearField(7);
+  void clearProfitVcardCreate() => clearField(7);
 
   @$pb.TagNumber(8)
-  $core.double get gasFeeMatic => $_getN(7);
+  $core.double get profitPcardCreate => $_getN(6);
   @$pb.TagNumber(8)
-  set gasFeeMatic($core.double v) { $_setDouble(7, v); }
+  set profitPcardCreate($core.double v) { $_setDouble(6, v); }
   @$pb.TagNumber(8)
-  $core.bool hasGasFeeMatic() => $_has(7);
+  $core.bool hasProfitPcardCreate() => $_has(6);
   @$pb.TagNumber(8)
-  void clearGasFeeMatic() => clearField(8);
+  void clearProfitPcardCreate() => clearField(8);
 
   @$pb.TagNumber(9)
-  Timestamp get createdAt => $_getN(8);
+  $fixnum.Int64 get createdAt => $_getI64(7);
   @$pb.TagNumber(9)
-  set createdAt(Timestamp v) { setField(9, v); }
+  set createdAt($fixnum.Int64 v) { $_setInt64(7, v); }
   @$pb.TagNumber(9)
-  $core.bool hasCreatedAt() => $_has(8);
+  $core.bool hasCreatedAt() => $_has(7);
   @$pb.TagNumber(9)
   void clearCreatedAt() => clearField(9);
-  @$pb.TagNumber(9)
-  Timestamp ensureCreatedAt() => $_ensure(8);
 
   @$pb.TagNumber(10)
-  Timestamp get updatedAt => $_getN(9);
+  $fixnum.Int64 get updatedAt => $_getI64(8);
   @$pb.TagNumber(10)
-  set updatedAt(Timestamp v) { setField(10, v); }
+  set updatedAt($fixnum.Int64 v) { $_setInt64(8, v); }
   @$pb.TagNumber(10)
-  $core.bool hasUpdatedAt() => $_has(9);
+  $core.bool hasUpdatedAt() => $_has(8);
   @$pb.TagNumber(10)
   void clearUpdatedAt() => clearField(10);
-  @$pb.TagNumber(10)
-  Timestamp ensureUpdatedAt() => $_ensure(9);
 
   @$pb.TagNumber(11)
-  $core.String get serverAddress => $_getSZ(10);
+  $core.String get serverAddress => $_getSZ(9);
   @$pb.TagNumber(11)
-  set serverAddress($core.String v) { $_setString(10, v); }
+  set serverAddress($core.String v) { $_setString(9, v); }
   @$pb.TagNumber(11)
-  $core.bool hasServerAddress() => $_has(10);
+  $core.bool hasServerAddress() => $_has(9);
   @$pb.TagNumber(11)
   void clearServerAddress() => clearField(11);
 
   @$pb.TagNumber(12)
-  $core.String get nftAddress => $_getSZ(11);
+  $core.String get nftAddress => $_getSZ(10);
   @$pb.TagNumber(12)
-  set nftAddress($core.String v) { $_setString(11, v); }
+  set nftAddress($core.String v) { $_setString(10, v); }
   @$pb.TagNumber(12)
-  $core.bool hasNftAddress() => $_has(11);
+  $core.bool hasNftAddress() => $_has(10);
   @$pb.TagNumber(12)
   void clearNftAddress() => clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.double get profitSellCoin => $_getN(11);
+  @$pb.TagNumber(13)
+  set profitSellCoin($core.double v) { $_setDouble(11, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasProfitSellCoin() => $_has(11);
+  @$pb.TagNumber(13)
+  void clearProfitSellCoin() => clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.double get profitBuyCoin => $_getN(12);
+  @$pb.TagNumber(14)
+  set profitBuyCoin($core.double v) { $_setDouble(12, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasProfitBuyCoin() => $_has(12);
+  @$pb.TagNumber(14)
+  void clearProfitBuyCoin() => clearField(14);
+
+  @$pb.TagNumber(15)
+  $core.double get gasFeeEth => $_getN(13);
+  @$pb.TagNumber(15)
+  set gasFeeEth($core.double v) { $_setDouble(13, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasGasFeeEth() => $_has(13);
+  @$pb.TagNumber(15)
+  void clearGasFeeEth() => clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.double get gasFeeMatic => $_getN(14);
+  @$pb.TagNumber(16)
+  set gasFeeMatic($core.double v) { $_setDouble(14, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasGasFeeMatic() => $_has(14);
+  @$pb.TagNumber(16)
+  void clearGasFeeMatic() => clearField(16);
+
+  @$pb.TagNumber(17)
+  $core.String get serverTaddress => $_getSZ(15);
+  @$pb.TagNumber(17)
+  set serverTaddress($core.String v) { $_setString(15, v); }
+  @$pb.TagNumber(17)
+  $core.bool hasServerTaddress() => $_has(15);
+  @$pb.TagNumber(17)
+  void clearServerTaddress() => clearField(17);
 }
 
 class AccountHistory extends $pb.GeneratedMessage {

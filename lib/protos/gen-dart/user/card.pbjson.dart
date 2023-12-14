@@ -296,6 +296,32 @@ const CardWithdrawResponse$json = {
 final $typed_data.Uint8List cardWithdrawResponseDescriptor = $convert.base64Decode(
     'ChRDYXJkV2l0aGRyYXdSZXNwb25zZQ==');
 
+@$core.Deprecated('Use getWithdrawResAmtRequestDescriptor instead')
+const GetWithdrawResAmtRequest$json = {
+  '1': 'GetWithdrawResAmtRequest',
+  '2': [
+    {'1': 'amt', '3': 2, '4': 1, '5': 1, '10': 'amt'},
+  ],
+};
+
+/// Descriptor for `GetWithdrawResAmtRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getWithdrawResAmtRequestDescriptor = $convert.base64Decode(
+    'ChhHZXRXaXRoZHJhd1Jlc0FtdFJlcXVlc3QSEAoDYW10GAIgASgBUgNhbXQ=');
+
+@$core.Deprecated('Use getWithdrawResAmtResponseDescriptor instead')
+const GetWithdrawResAmtResponse$json = {
+  '1': 'GetWithdrawResAmtResponse',
+  '2': [
+    {'1': 'amt', '3': 2, '4': 1, '5': 1, '10': 'amt'},
+    {'1': 'fee', '3': 1, '4': 1, '5': 1, '10': 'fee'},
+  ],
+};
+
+/// Descriptor for `GetWithdrawResAmtResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getWithdrawResAmtResponseDescriptor = $convert.base64Decode(
+    'ChlHZXRXaXRoZHJhd1Jlc0FtdFJlc3BvbnNlEhAKA2FtdBgCIAEoAVIDYW10EhAKA2ZlZRgBIA'
+    'EoAVIDZmVl');
+
 @$core.Deprecated('Use cardRechargeRequestDescriptor instead')
 const CardRechargeRequest$json = {
   '1': 'CardRechargeRequest',

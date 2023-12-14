@@ -16,6 +16,9 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'account.pb.dart' as $0;
 import 'country.pbenum.dart' as $4;
+import 'user.pbenum.dart';
+
+export 'user.pbenum.dart';
 
 class ForgetPwdRequest extends $pb.GeneratedMessage {
   factory ForgetPwdRequest() => create();
@@ -2039,6 +2042,138 @@ class UserRewardItem extends $pb.GeneratedMessage {
   $core.bool hasUserName() => $_has(8);
   @$pb.TagNumber(10)
   void clearUserName() => clearField(10);
+}
+
+class UserRewardDetail extends $pb.GeneratedMessage {
+  factory UserRewardDetail() => create();
+  UserRewardDetail._() : super();
+  factory UserRewardDetail.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserRewardDetail.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserRewardDetail', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..aInt64(2, _omitFieldNames ? '' : 'rewardUserid')
+    ..aInt64(3, _omitFieldNames ? '' : 'userId')
+    ..aInt64(4, _omitFieldNames ? '' : 'sourceId')
+    ..e<UserRewardDetail_SourceType>(5, _omitFieldNames ? '' : 'sourceType', $pb.PbFieldType.OE, defaultOrMaker: UserRewardDetail_SourceType.UnKnow, valueOf: UserRewardDetail_SourceType.valueOf, enumValues: UserRewardDetail_SourceType.values)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'reward', $pb.PbFieldType.OD)
+    ..aInt64(7, _omitFieldNames ? '' : 'createdAt')
+    ..aInt64(8, _omitFieldNames ? '' : 'updatedAt')
+    ..aInt64(9, _omitFieldNames ? '' : 'status')
+    ..aOS(10, _omitFieldNames ? '' : 'txId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UserRewardDetail clone() => UserRewardDetail()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UserRewardDetail copyWith(void Function(UserRewardDetail) updates) => super.copyWith((message) => updates(message as UserRewardDetail)) as UserRewardDetail;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UserRewardDetail create() => UserRewardDetail._();
+  UserRewardDetail createEmptyInstance() => create();
+  static $pb.PbList<UserRewardDetail> createRepeated() => $pb.PbList<UserRewardDetail>();
+  @$core.pragma('dart2js:noInline')
+  static UserRewardDetail getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserRewardDetail>(create);
+  static UserRewardDetail? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get rewardUserid => $_getI64(1);
+  @$pb.TagNumber(2)
+  set rewardUserid($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRewardUserid() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRewardUserid() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get userId => $_getI64(2);
+  @$pb.TagNumber(3)
+  set userId($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUserId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUserId() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get sourceId => $_getI64(3);
+  @$pb.TagNumber(4)
+  set sourceId($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasSourceId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSourceId() => clearField(4);
+
+  @$pb.TagNumber(5)
+  UserRewardDetail_SourceType get sourceType => $_getN(4);
+  @$pb.TagNumber(5)
+  set sourceType(UserRewardDetail_SourceType v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasSourceType() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSourceType() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.double get reward => $_getN(5);
+  @$pb.TagNumber(6)
+  set reward($core.double v) { $_setDouble(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasReward() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearReward() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get createdAt => $_getI64(6);
+  @$pb.TagNumber(7)
+  set createdAt($fixnum.Int64 v) { $_setInt64(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasCreatedAt() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCreatedAt() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get updatedAt => $_getI64(7);
+  @$pb.TagNumber(8)
+  set updatedAt($fixnum.Int64 v) { $_setInt64(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasUpdatedAt() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearUpdatedAt() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get status => $_getI64(8);
+  @$pb.TagNumber(9)
+  set status($fixnum.Int64 v) { $_setInt64(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasStatus() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearStatus() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.String get txId => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set txId($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasTxId() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearTxId() => clearField(10);
 }
 
 

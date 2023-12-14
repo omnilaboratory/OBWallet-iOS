@@ -73,6 +73,14 @@ class accountClient extends $grpc.Client {
       '/user.account/GetCoinPrice',
       ($0.GetCoinPriceRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.GetCoinPriceResponse.fromBuffer(value));
+  static final _$getAgentConfig = $grpc.ClientMethod<$0.GetAgentConfigRequest, $0.AgentConfig>(
+      '/user.account/GetAgentConfig',
+      ($0.GetAgentConfigRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.AgentConfig.fromBuffer(value));
+  static final _$setAgentConfig = $grpc.ClientMethod<$0.AgentConfig, $0.AgentConfig>(
+      '/user.account/SetAgentConfig',
+      ($0.AgentConfig value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.AgentConfig.fromBuffer(value));
 
   accountClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -130,6 +138,14 @@ class accountClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.GetCoinPriceResponse> getCoinPrice($0.GetCoinPriceRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getCoinPrice, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.AgentConfig> getAgentConfig($0.GetAgentConfigRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getAgentConfig, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.AgentConfig> setAgentConfig($0.AgentConfig request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$setAgentConfig, request, options: options);
   }
 }
 
@@ -229,6 +245,20 @@ abstract class accountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetCoinPriceRequest.fromBuffer(value),
         ($0.GetCoinPriceResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetAgentConfigRequest, $0.AgentConfig>(
+        'GetAgentConfig',
+        getAgentConfig_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetAgentConfigRequest.fromBuffer(value),
+        ($0.AgentConfig value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AgentConfig, $0.AgentConfig>(
+        'SetAgentConfig',
+        setAgentConfig_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.AgentConfig.fromBuffer(value),
+        ($0.AgentConfig value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.AccountInfo> getAccountInfo_Pre($grpc.ServiceCall call, $async.Future<$0.GetAccountInfoRequest> request) async {
@@ -283,6 +313,14 @@ abstract class accountServiceBase extends $grpc.Service {
     return getCoinPrice(call, await request);
   }
 
+  $async.Future<$0.AgentConfig> getAgentConfig_Pre($grpc.ServiceCall call, $async.Future<$0.GetAgentConfigRequest> request) async {
+    return getAgentConfig(call, await request);
+  }
+
+  $async.Future<$0.AgentConfig> setAgentConfig_Pre($grpc.ServiceCall call, $async.Future<$0.AgentConfig> request) async {
+    return setAgentConfig(call, await request);
+  }
+
   $async.Future<$0.AccountInfo> getAccountInfo($grpc.ServiceCall call, $0.GetAccountInfoRequest request);
   $async.Future<$0.GetAccountHistoryResponse> getAccountHistory($grpc.ServiceCall call, $0.GetAccountHistoryRequest request);
   $async.Future<$0.GetUserSwapPriceResponse> getUserSwapPrice($grpc.ServiceCall call, $0.GetUserSwapPriceRequest request);
@@ -296,4 +334,6 @@ abstract class accountServiceBase extends $grpc.Service {
   $async.Future<$0.GetSwapTxListResponse> getSwapTxList($grpc.ServiceCall call, $0.GetSwapTxListRequest request);
   $async.Future<$0.GetTrackedTxListResponse> getTrackedTxList($grpc.ServiceCall call, $0.GetSwapTxListRequest request);
   $async.Future<$0.GetCoinPriceResponse> getCoinPrice($grpc.ServiceCall call, $0.GetCoinPriceRequest request);
+  $async.Future<$0.AgentConfig> getAgentConfig($grpc.ServiceCall call, $0.GetAgentConfigRequest request);
+  $async.Future<$0.AgentConfig> setAgentConfig($grpc.ServiceCall call, $0.AgentConfig request);
 }

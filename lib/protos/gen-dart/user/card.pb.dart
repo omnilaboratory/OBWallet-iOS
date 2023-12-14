@@ -1166,6 +1166,100 @@ class CardWithdrawResponse extends $pb.GeneratedMessage {
   static CardWithdrawResponse? _defaultInstance;
 }
 
+class GetWithdrawResAmtRequest extends $pb.GeneratedMessage {
+  factory GetWithdrawResAmtRequest() => create();
+  GetWithdrawResAmtRequest._() : super();
+  factory GetWithdrawResAmtRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetWithdrawResAmtRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetWithdrawResAmtRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetWithdrawResAmtRequest clone() => GetWithdrawResAmtRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetWithdrawResAmtRequest copyWith(void Function(GetWithdrawResAmtRequest) updates) => super.copyWith((message) => updates(message as GetWithdrawResAmtRequest)) as GetWithdrawResAmtRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetWithdrawResAmtRequest create() => GetWithdrawResAmtRequest._();
+  GetWithdrawResAmtRequest createEmptyInstance() => create();
+  static $pb.PbList<GetWithdrawResAmtRequest> createRepeated() => $pb.PbList<GetWithdrawResAmtRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetWithdrawResAmtRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetWithdrawResAmtRequest>(create);
+  static GetWithdrawResAmtRequest? _defaultInstance;
+
+  @$pb.TagNumber(2)
+  $core.double get amt => $_getN(0);
+  @$pb.TagNumber(2)
+  set amt($core.double v) { $_setDouble(0, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAmt() => $_has(0);
+  @$pb.TagNumber(2)
+  void clearAmt() => clearField(2);
+}
+
+class GetWithdrawResAmtResponse extends $pb.GeneratedMessage {
+  factory GetWithdrawResAmtResponse() => create();
+  GetWithdrawResAmtResponse._() : super();
+  factory GetWithdrawResAmtResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetWithdrawResAmtResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetWithdrawResAmtResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'fee', $pb.PbFieldType.OD)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetWithdrawResAmtResponse clone() => GetWithdrawResAmtResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetWithdrawResAmtResponse copyWith(void Function(GetWithdrawResAmtResponse) updates) => super.copyWith((message) => updates(message as GetWithdrawResAmtResponse)) as GetWithdrawResAmtResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetWithdrawResAmtResponse create() => GetWithdrawResAmtResponse._();
+  GetWithdrawResAmtResponse createEmptyInstance() => create();
+  static $pb.PbList<GetWithdrawResAmtResponse> createRepeated() => $pb.PbList<GetWithdrawResAmtResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetWithdrawResAmtResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetWithdrawResAmtResponse>(create);
+  static GetWithdrawResAmtResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.double get fee => $_getN(0);
+  @$pb.TagNumber(1)
+  set fee($core.double v) { $_setDouble(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFee() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFee() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get amt => $_getN(1);
+  @$pb.TagNumber(2)
+  set amt($core.double v) { $_setDouble(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAmt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAmt() => clearField(2);
+}
+
 class CardRechargeRequest extends $pb.GeneratedMessage {
   factory CardRechargeRequest() => create();
   CardRechargeRequest._() : super();

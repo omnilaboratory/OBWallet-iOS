@@ -49,6 +49,10 @@ class CardServiceClient extends $grpc.Client {
       '/user.CardService/CardWithdraw',
       ($1.CardWithdrawRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.CardWithdrawResponse.fromBuffer(value));
+  static final _$getWithdrawResAmt = $grpc.ClientMethod<$1.GetWithdrawResAmtRequest, $1.GetWithdrawResAmtResponse>(
+      '/user.CardService/GetWithdrawResAmt',
+      ($1.GetWithdrawResAmtRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.GetWithdrawResAmtResponse.fromBuffer(value));
   static final _$cardRecharge = $grpc.ClientMethod<$1.CardRechargeRequest, $1.CardRechargeResponse>(
       '/user.CardService/CardRecharge',
       ($1.CardRechargeRequest value) => value.writeToBuffer(),
@@ -90,6 +94,10 @@ class CardServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$1.CardWithdrawResponse> cardWithdraw($1.CardWithdrawRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$cardWithdraw, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.GetWithdrawResAmtResponse> getWithdrawResAmt($1.GetWithdrawResAmtRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getWithdrawResAmt, request, options: options);
   }
 
   $grpc.ResponseFuture<$1.CardRechargeResponse> cardRecharge($1.CardRechargeRequest request, {$grpc.CallOptions? options}) {
@@ -155,6 +163,13 @@ abstract class CardServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.CardWithdrawRequest.fromBuffer(value),
         ($1.CardWithdrawResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.GetWithdrawResAmtRequest, $1.GetWithdrawResAmtResponse>(
+        'GetWithdrawResAmt',
+        getWithdrawResAmt_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.GetWithdrawResAmtRequest.fromBuffer(value),
+        ($1.GetWithdrawResAmtResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.CardRechargeRequest, $1.CardRechargeResponse>(
         'CardRecharge',
         cardRecharge_Pre,
@@ -199,6 +214,10 @@ abstract class CardServiceBase extends $grpc.Service {
     return cardWithdraw(call, await request);
   }
 
+  $async.Future<$1.GetWithdrawResAmtResponse> getWithdrawResAmt_Pre($grpc.ServiceCall call, $async.Future<$1.GetWithdrawResAmtRequest> request) async {
+    return getWithdrawResAmt(call, await request);
+  }
+
   $async.Future<$1.CardRechargeResponse> cardRecharge_Pre($grpc.ServiceCall call, $async.Future<$1.CardRechargeRequest> request) async {
     return cardRecharge(call, await request);
   }
@@ -214,6 +233,7 @@ abstract class CardServiceBase extends $grpc.Service {
   $async.Future<$1.CardDetailResponse> cardDetail($grpc.ServiceCall call, $1.CardDetailRequest request);
   $async.Future<$1.CardListResponse> cardList($grpc.ServiceCall call, $1.CardListRequest request);
   $async.Future<$1.CardWithdrawResponse> cardWithdraw($grpc.ServiceCall call, $1.CardWithdrawRequest request);
+  $async.Future<$1.GetWithdrawResAmtResponse> getWithdrawResAmt($grpc.ServiceCall call, $1.GetWithdrawResAmtRequest request);
   $async.Future<$1.CardRechargeResponse> cardRecharge($grpc.ServiceCall call, $1.CardRechargeRequest request);
   $async.Future<$1.BuyNftForPayResponse> buyNftForPay($grpc.ServiceCall call, $1.BuyNftForPayRequest request);
 }

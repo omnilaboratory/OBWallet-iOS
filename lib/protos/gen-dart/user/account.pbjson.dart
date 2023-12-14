@@ -556,7 +556,7 @@ const NftTokenLog$json = {
     {'1': 'value', '3': 6, '4': 1, '5': 3, '10': 'value'},
     {'1': 'usd_amt', '3': 7, '4': 1, '5': 1, '10': 'usdAmt'},
     {'1': 'NftToken', '3': 8, '4': 3, '5': 11, '6': '.user.NftToken', '10': 'NftToken'},
-    {'1': 'created_at', '3': 9, '4': 1, '5': 11, '6': '.user.Timestamp', '10': 'createdAt'},
+    {'1': 'created_at', '3': 9, '4': 1, '5': 3, '10': 'createdAt'},
   ],
 };
 
@@ -565,39 +565,86 @@ final $typed_data.Uint8List nftTokenLogDescriptor = $convert.base64Decode(
     'CgtOZnRUb2tlbkxvZxIOCgJpZBgBIAEoA1ICaWQSEwoFdHhfaWQYAiABKAlSBHR4SWQSEgoEZn'
     'JvbRgDIAEoCVIEZnJvbRIOCgJ0bxgEIAEoCVICdG8SGQoIdG9rZW5faWQYBSABKANSB3Rva2Vu'
     'SWQSFAoFdmFsdWUYBiABKANSBXZhbHVlEhcKB3VzZF9hbXQYByABKAFSBnVzZEFtdBIqCghOZn'
-    'RUb2tlbhgIIAMoCzIOLnVzZXIuTmZ0VG9rZW5SCE5mdFRva2VuEi4KCmNyZWF0ZWRfYXQYCSAB'
-    'KAsyDy51c2VyLlRpbWVzdGFtcFIJY3JlYXRlZEF0');
+    'RUb2tlbhgIIAMoCzIOLnVzZXIuTmZ0VG9rZW5SCE5mdFRva2VuEh0KCmNyZWF0ZWRfYXQYCSAB'
+    'KANSCWNyZWF0ZWRBdA==');
+
+@$core.Deprecated('Use getAgentConfigRequestDescriptor instead')
+const GetAgentConfigRequest$json = {
+  '1': 'GetAgentConfigRequest',
+  '2': [
+    {'1': 'agent_id', '3': 1, '4': 1, '5': 3, '10': 'agentId'},
+  ],
+};
+
+/// Descriptor for `GetAgentConfigRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAgentConfigRequestDescriptor = $convert.base64Decode(
+    'ChVHZXRBZ2VudENvbmZpZ1JlcXVlc3QSGQoIYWdlbnRfaWQYASABKANSB2FnZW50SWQ=');
+
+@$core.Deprecated('Use agentConfigDescriptor instead')
+const AgentConfig$json = {
+  '1': 'AgentConfig',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'reward_transak', '3': 2, '4': 1, '5': 1, '10': 'rewardTransak'},
+    {'1': 'reward_sell_coin', '3': 3, '4': 1, '5': 1, '10': 'rewardSellCoin'},
+    {'1': 'reward_buy_coin', '3': 4, '4': 1, '5': 1, '10': 'rewardBuyCoin'},
+    {'1': 'reward_withdraw_to_vcard', '3': 5, '4': 1, '5': 1, '10': 'rewardWithdrawToVcard'},
+    {'1': 'reward_withdraw_to_pcard', '3': 6, '4': 1, '5': 1, '10': 'rewardWithdrawToPcard'},
+    {'1': 'reward_vcard_create', '3': 7, '4': 1, '5': 1, '10': 'rewardVcardCreate'},
+    {'1': 'reward_pcard_create', '3': 8, '4': 1, '5': 1, '10': 'rewardPcardCreate'},
+    {'1': 'created_at', '3': 9, '4': 1, '5': 3, '10': 'createdAt'},
+    {'1': 'updated_at', '3': 10, '4': 1, '5': 3, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `AgentConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List agentConfigDescriptor = $convert.base64Decode(
+    'CgtBZ2VudENvbmZpZxIOCgJpZBgBIAEoA1ICaWQSJQoOcmV3YXJkX3RyYW5zYWsYAiABKAFSDX'
+    'Jld2FyZFRyYW5zYWsSKAoQcmV3YXJkX3NlbGxfY29pbhgDIAEoAVIOcmV3YXJkU2VsbENvaW4S'
+    'JgoPcmV3YXJkX2J1eV9jb2luGAQgASgBUg1yZXdhcmRCdXlDb2luEjcKGHJld2FyZF93aXRoZH'
+    'Jhd190b192Y2FyZBgFIAEoAVIVcmV3YXJkV2l0aGRyYXdUb1ZjYXJkEjcKGHJld2FyZF93aXRo'
+    'ZHJhd190b19wY2FyZBgGIAEoAVIVcmV3YXJkV2l0aGRyYXdUb1BjYXJkEi4KE3Jld2FyZF92Y2'
+    'FyZF9jcmVhdGUYByABKAFSEXJld2FyZFZjYXJkQ3JlYXRlEi4KE3Jld2FyZF9wY2FyZF9jcmVh'
+    'dGUYCCABKAFSEXJld2FyZFBjYXJkQ3JlYXRlEh0KCmNyZWF0ZWRfYXQYCSABKANSCWNyZWF0ZW'
+    'RBdBIdCgp1cGRhdGVkX2F0GAogASgDUgl1cGRhdGVkQXQ=');
 
 @$core.Deprecated('Use appConfigDescriptor instead')
 const AppConfig$json = {
   '1': 'AppConfig',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
-    {'1': 'swap_discount', '3': 2, '4': 1, '5': 1, '10': 'swapDiscount'},
     {'1': 'create_card_fee', '3': 3, '4': 1, '5': 1, '10': 'createCardFee'},
-    {'1': 'reward_card_create', '3': 4, '4': 1, '5': 1, '10': 'rewardCardCreate'},
-    {'1': 'reward_usd_swap', '3': 5, '4': 1, '5': 1, '10': 'rewardUsdSwap'},
-    {'1': 'reward_transak', '3': 6, '4': 1, '5': 1, '10': 'rewardTransak'},
-    {'1': 'gas_fee_eth', '3': 7, '4': 1, '5': 1, '10': 'gasFeeEth'},
-    {'1': 'gas_fee_matic', '3': 8, '4': 1, '5': 1, '10': 'gasFeeMatic'},
-    {'1': 'created_at', '3': 9, '4': 1, '5': 11, '6': '.user.Timestamp', '10': 'createdAt'},
-    {'1': 'updated_at', '3': 10, '4': 1, '5': 11, '6': '.user.Timestamp', '10': 'updatedAt'},
+    {'1': 'create_pcard_fee', '3': 4, '4': 1, '5': 1, '10': 'createPcardFee'},
+    {'1': 'gas_fee_eth', '3': 15, '4': 1, '5': 1, '10': 'gasFeeEth'},
+    {'1': 'gas_fee_matic', '3': 16, '4': 1, '5': 1, '10': 'gasFeeMatic'},
+    {'1': 'created_at', '3': 9, '4': 1, '5': 3, '10': 'createdAt'},
+    {'1': 'updated_at', '3': 10, '4': 1, '5': 3, '10': 'updatedAt'},
     {'1': 'server_address', '3': 11, '4': 1, '5': 9, '10': 'serverAddress'},
+    {'1': 'server_taddress', '3': 17, '4': 1, '5': 9, '10': 'serverTaddress'},
     {'1': 'nft_address', '3': 12, '4': 1, '5': 9, '10': 'nftAddress'},
+    {'1': 'profit_sell_coin', '3': 13, '4': 1, '5': 1, '10': 'profitSellCoin'},
+    {'1': 'profit_buy_coin', '3': 14, '4': 1, '5': 1, '10': 'profitBuyCoin'},
+    {'1': 'profit_withdraw_to_vcard', '3': 5, '4': 1, '5': 1, '10': 'profitWithdrawToVcard'},
+    {'1': 'profit_withdraw_to_pcard', '3': 6, '4': 1, '5': 1, '10': 'profitWithdrawToPcard'},
+    {'1': 'profit_vcard_create', '3': 7, '4': 1, '5': 1, '10': 'profitVcardCreate'},
+    {'1': 'profit_pcard_create', '3': 8, '4': 1, '5': 1, '10': 'profitPcardCreate'},
   ],
 };
 
 /// Descriptor for `AppConfig`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List appConfigDescriptor = $convert.base64Decode(
-    'CglBcHBDb25maWcSDgoCaWQYASABKANSAmlkEiMKDXN3YXBfZGlzY291bnQYAiABKAFSDHN3YX'
-    'BEaXNjb3VudBImCg9jcmVhdGVfY2FyZF9mZWUYAyABKAFSDWNyZWF0ZUNhcmRGZWUSLAoScmV3'
-    'YXJkX2NhcmRfY3JlYXRlGAQgASgBUhByZXdhcmRDYXJkQ3JlYXRlEiYKD3Jld2FyZF91c2Rfc3'
-    'dhcBgFIAEoAVINcmV3YXJkVXNkU3dhcBIlCg5yZXdhcmRfdHJhbnNhaxgGIAEoAVINcmV3YXJk'
-    'VHJhbnNhaxIeCgtnYXNfZmVlX2V0aBgHIAEoAVIJZ2FzRmVlRXRoEiIKDWdhc19mZWVfbWF0aW'
-    'MYCCABKAFSC2dhc0ZlZU1hdGljEi4KCmNyZWF0ZWRfYXQYCSABKAsyDy51c2VyLlRpbWVzdGFt'
-    'cFIJY3JlYXRlZEF0Ei4KCnVwZGF0ZWRfYXQYCiABKAsyDy51c2VyLlRpbWVzdGFtcFIJdXBkYX'
-    'RlZEF0EiUKDnNlcnZlcl9hZGRyZXNzGAsgASgJUg1zZXJ2ZXJBZGRyZXNzEh8KC25mdF9hZGRy'
-    'ZXNzGAwgASgJUgpuZnRBZGRyZXNz');
+    'CglBcHBDb25maWcSDgoCaWQYASABKANSAmlkEiYKD2NyZWF0ZV9jYXJkX2ZlZRgDIAEoAVINY3'
+    'JlYXRlQ2FyZEZlZRIoChBjcmVhdGVfcGNhcmRfZmVlGAQgASgBUg5jcmVhdGVQY2FyZEZlZRIe'
+    'CgtnYXNfZmVlX2V0aBgPIAEoAVIJZ2FzRmVlRXRoEiIKDWdhc19mZWVfbWF0aWMYECABKAFSC2'
+    'dhc0ZlZU1hdGljEh0KCmNyZWF0ZWRfYXQYCSABKANSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0'
+    'GAogASgDUgl1cGRhdGVkQXQSJQoOc2VydmVyX2FkZHJlc3MYCyABKAlSDXNlcnZlckFkZHJlc3'
+    'MSJwoPc2VydmVyX3RhZGRyZXNzGBEgASgJUg5zZXJ2ZXJUYWRkcmVzcxIfCgtuZnRfYWRkcmVz'
+    'cxgMIAEoCVIKbmZ0QWRkcmVzcxIoChBwcm9maXRfc2VsbF9jb2luGA0gASgBUg5wcm9maXRTZW'
+    'xsQ29pbhImCg9wcm9maXRfYnV5X2NvaW4YDiABKAFSDXByb2ZpdEJ1eUNvaW4SNwoYcHJvZml0'
+    'X3dpdGhkcmF3X3RvX3ZjYXJkGAUgASgBUhVwcm9maXRXaXRoZHJhd1RvVmNhcmQSNwoYcHJvZm'
+    'l0X3dpdGhkcmF3X3RvX3BjYXJkGAYgASgBUhVwcm9maXRXaXRoZHJhd1RvUGNhcmQSLgoTcHJv'
+    'Zml0X3ZjYXJkX2NyZWF0ZRgHIAEoAVIRcHJvZml0VmNhcmRDcmVhdGUSLgoTcHJvZml0X3BjYX'
+    'JkX2NyZWF0ZRgIIAEoAVIRcHJvZml0UGNhcmRDcmVhdGU=');
 
 @$core.Deprecated('Use accountHistoryDescriptor instead')
 const AccountHistory$json = {
