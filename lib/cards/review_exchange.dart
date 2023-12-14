@@ -444,7 +444,6 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           alert(S.of(context).tips_sendTokenError, context, () {});
           return;
         }
-        removeLoading(loading);
       });
     } else if (widget.fromCoin == 'USDT') {
       Eth.sendUsdtTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
@@ -458,7 +457,6 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           alert(S.of(context).tips_sendTokenError, context, () {});
           return;
         }
-        removeLoading(loading);
       });
     } else if (widget.fromCoin == 'USDC') {
       Eth.sendUsdcTo(GlobalParams.currNetwork.platformAddress, widget.fromAmt)
@@ -472,8 +470,8 @@ class _ReviewExchangeState extends State<ReviewExchange> {
           alert(S.of(context).tips_sendTokenError, context, () {});
           return;
         }
-        removeLoading(loading);
       });
     }
+    removeLoading(loading);
   }
 }
