@@ -392,6 +392,8 @@ const GetUserSwapPriceResponse$json = {
     {'1': 'target_amt', '3': 1, '4': 1, '5': 1, '10': 'targetAmt'},
     {'1': 'settle_price', '3': 2, '4': 1, '5': 1, '10': 'settlePrice'},
     {'1': 'raw_price', '3': 3, '4': 1, '5': 1, '10': 'rawPrice'},
+    {'1': 'gas_fee', '3': 4, '4': 1, '5': 1, '10': 'gasFee'},
+    {'1': 'fee_rate', '3': 5, '4': 1, '5': 1, '10': 'feeRate'},
   ],
 };
 
@@ -399,7 +401,8 @@ const GetUserSwapPriceResponse$json = {
 final $typed_data.Uint8List getUserSwapPriceResponseDescriptor = $convert.base64Decode(
     'ChhHZXRVc2VyU3dhcFByaWNlUmVzcG9uc2USHQoKdGFyZ2V0X2FtdBgBIAEoAVIJdGFyZ2V0QW'
     '10EiEKDHNldHRsZV9wcmljZRgCIAEoAVILc2V0dGxlUHJpY2USGwoJcmF3X3ByaWNlGAMgASgB'
-    'UghyYXdQcmljZQ==');
+    'UghyYXdQcmljZRIXCgdnYXNfZmVlGAQgASgBUgZnYXNGZWUSGQoIZmVlX3JhdGUYBSABKAFSB2'
+    'ZlZVJhdGU=');
 
 @$core.Deprecated('Use sellNftRequestDescriptor instead')
 const SellNftRequest$json = {
@@ -628,6 +631,7 @@ const AppConfig$json = {
     {'1': 'profit_withdraw_to_pcard', '3': 6, '4': 1, '5': 1, '10': 'profitWithdrawToPcard'},
     {'1': 'profit_vcard_create', '3': 7, '4': 1, '5': 1, '10': 'profitVcardCreate'},
     {'1': 'profit_pcard_create', '3': 8, '4': 1, '5': 1, '10': 'profitPcardCreate'},
+    {'1': 'system_agent_id', '3': 18, '4': 1, '5': 3, '10': 'systemAgentId'},
   ],
 };
 
@@ -644,7 +648,8 @@ final $typed_data.Uint8List appConfigDescriptor = $convert.base64Decode(
     'X3dpdGhkcmF3X3RvX3ZjYXJkGAUgASgBUhVwcm9maXRXaXRoZHJhd1RvVmNhcmQSNwoYcHJvZm'
     'l0X3dpdGhkcmF3X3RvX3BjYXJkGAYgASgBUhVwcm9maXRXaXRoZHJhd1RvUGNhcmQSLgoTcHJv'
     'Zml0X3ZjYXJkX2NyZWF0ZRgHIAEoAVIRcHJvZml0VmNhcmRDcmVhdGUSLgoTcHJvZml0X3BjYX'
-    'JkX2NyZWF0ZRgIIAEoAVIRcHJvZml0UGNhcmRDcmVhdGU=');
+    'JkX2NyZWF0ZRgIIAEoAVIRcHJvZml0UGNhcmRDcmVhdGUSJgoPc3lzdGVtX2FnZW50X2lkGBIg'
+    'ASgDUg1zeXN0ZW1BZ2VudElk');
 
 @$core.Deprecated('Use accountHistoryDescriptor instead')
 const AccountHistory$json = {

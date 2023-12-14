@@ -1405,6 +1405,8 @@ class GetUserSwapPriceResponse extends $pb.GeneratedMessage {
     ..a<$core.double>(1, _omitFieldNames ? '' : 'targetAmt', $pb.PbFieldType.OD)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'settlePrice', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'rawPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'gasFee', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'feeRate', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -1455,6 +1457,24 @@ class GetUserSwapPriceResponse extends $pb.GeneratedMessage {
   $core.bool hasRawPrice() => $_has(2);
   @$pb.TagNumber(3)
   void clearRawPrice() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get gasFee => $_getN(3);
+  @$pb.TagNumber(4)
+  set gasFee($core.double v) { $_setDouble(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasGasFee() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearGasFee() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get feeRate => $_getN(4);
+  @$pb.TagNumber(5)
+  set feeRate($core.double v) { $_setDouble(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasFeeRate() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFeeRate() => clearField(5);
 }
 
 class SellNftRequest extends $pb.GeneratedMessage {
@@ -2370,6 +2390,7 @@ class AppConfig extends $pb.GeneratedMessage {
     ..a<$core.double>(15, _omitFieldNames ? '' : 'gasFeeEth', $pb.PbFieldType.OD)
     ..a<$core.double>(16, _omitFieldNames ? '' : 'gasFeeMatic', $pb.PbFieldType.OD)
     ..aOS(17, _omitFieldNames ? '' : 'serverTaddress')
+    ..aInt64(18, _omitFieldNames ? '' : 'systemAgentId')
     ..hasRequiredFields = false
   ;
 
@@ -2537,6 +2558,15 @@ class AppConfig extends $pb.GeneratedMessage {
   $core.bool hasServerTaddress() => $_has(15);
   @$pb.TagNumber(17)
   void clearServerTaddress() => clearField(17);
+
+  @$pb.TagNumber(18)
+  $fixnum.Int64 get systemAgentId => $_getI64(16);
+  @$pb.TagNumber(18)
+  set systemAgentId($fixnum.Int64 v) { $_setInt64(16, v); }
+  @$pb.TagNumber(18)
+  $core.bool hasSystemAgentId() => $_has(16);
+  @$pb.TagNumber(18)
+  void clearSystemAgentId() => clearField(18);
 }
 
 class AccountHistory extends $pb.GeneratedMessage {

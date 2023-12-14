@@ -289,14 +289,14 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  Text(S.of(context).reviewExchange_Fee(widget.priceInfo.rawPrice),
+                  Text(S.of(context).reviewExchange_Fee("${widget.priceInfo.feeRate*100}%"),
                       style: const TextStyle(
                         color: Color(0xFF666666),
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                       )),
                   const SizedBox(height: 6),
-                  Text(S.of(context).reviewExchange_cost(widget.priceInfo.rawPrice),
+                  Text(S.of(context).reviewExchange_cost(widget.priceInfo.gasFee),
                       style: const TextStyle(
                         color: Color(0xFF666666),
                         fontSize: 12,

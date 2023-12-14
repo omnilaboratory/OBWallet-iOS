@@ -76,6 +76,7 @@ const UserInfo$json = {
     {'1': 'invitation_code', '3': 30, '4': 1, '5': 9, '10': 'invitationCode'},
     {'1': 'regist_code', '3': 31, '4': 1, '5': 9, '10': 'registCode'},
     {'1': 'invitation_userid', '3': 32, '4': 1, '5': 3, '10': 'invitationUserid'},
+    {'1': 'ref_userid', '3': 34, '4': 1, '5': 3, '10': 'refUserid'},
   ],
 };
 
@@ -98,7 +99,8 @@ final $typed_data.Uint8List userInfoDescriptor = $convert.base64Decode(
     'EhsKCXVzZXJfdHlwZRgcIAEoA1IIdXNlclR5cGUSKAoQaXNfYWdlbnRfY2hhbm5lbBghIAEoCF'
     'IOaXNBZ2VudENoYW5uZWwSGQoIbXVzZXJfaWQYHSABKANSB211c2VySWQSJwoPaW52aXRhdGlv'
     'bl9jb2RlGB4gASgJUg5pbnZpdGF0aW9uQ29kZRIfCgtyZWdpc3RfY29kZRgfIAEoCVIKcmVnaX'
-    'N0Q29kZRIrChFpbnZpdGF0aW9uX3VzZXJpZBggIAEoA1IQaW52aXRhdGlvblVzZXJpZA==');
+    'N0Q29kZRIrChFpbnZpdGF0aW9uX3VzZXJpZBggIAEoA1IQaW52aXRhdGlvblVzZXJpZBIdCgpy'
+    'ZWZfdXNlcmlkGCIgASgDUglyZWZVc2VyaWQ=');
 
 @$core.Deprecated('Use signUpRequestDescriptor instead')
 const SignUpRequest$json = {

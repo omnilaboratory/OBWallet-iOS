@@ -164,6 +164,7 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOS(31, _omitFieldNames ? '' : 'registCode')
     ..aInt64(32, _omitFieldNames ? '' : 'invitationUserid')
     ..aOB(33, _omitFieldNames ? '' : 'isAgentChannel')
+    ..aInt64(34, _omitFieldNames ? '' : 'refUserid')
     ..hasRequiredFields = false
   ;
 
@@ -484,6 +485,15 @@ class UserInfo extends $pb.GeneratedMessage {
   $core.bool hasIsAgentChannel() => $_has(32);
   @$pb.TagNumber(33)
   void clearIsAgentChannel() => clearField(33);
+
+  @$pb.TagNumber(34)
+  $fixnum.Int64 get refUserid => $_getI64(33);
+  @$pb.TagNumber(34)
+  set refUserid($fixnum.Int64 v) { $_setInt64(33, v); }
+  @$pb.TagNumber(34)
+  $core.bool hasRefUserid() => $_has(33);
+  @$pb.TagNumber(34)
+  void clearRefUserid() => clearField(34);
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {

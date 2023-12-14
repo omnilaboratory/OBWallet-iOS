@@ -101,8 +101,11 @@ message UserInfo {
   //用户注册时输入的邀请码
   string regist_code=31;
 
-  //注册后,系统填充的邀请人id
+  //注册后,系统根据regist_code填充的邀请人(代理商)id；如果是代理商邀请的,就是代理商id；如果不是代理商邀请的,使用平台代理商id.
   int64 invitation_userid=32;
+
+  //注册后,系统根据regist_code填充的邀请人id.
+  int64 ref_userid=34;
 }
 
 message SignUpRequest {

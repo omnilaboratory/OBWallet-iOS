@@ -222,6 +222,8 @@ message GetUserSwapPriceResponse {
   double settle_price=2;
 //    币种官方报价
   double raw_price=3;
+  double gas_fee=4;
+  double fee_rate=5;
 }
 
 message SellNftRequest {
@@ -414,6 +416,8 @@ message AppConfig{
   double profit_vcard_create = 7;
   //开实体卡利润 exapmle 10$
   double profit_pcard_create = 8;
+  //平台代理商id
+  int64 system_agent_id=18;
 }
 
 //    type AppConfig struct {
