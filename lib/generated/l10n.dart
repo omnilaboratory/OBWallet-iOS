@@ -2109,6 +2109,16 @@ class S {
       args: [],
     );
   }
+
+  /// `get {amount} and fee {fee}.`
+  String tips_WithdrawResult(Object amount, Object fee) {
+    return Intl.message(
+      'get $amount and fee $fee.',
+      name: 'tips_WithdrawResult',
+      desc: '',
+      args: [amount, fee],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

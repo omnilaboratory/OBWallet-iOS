@@ -6,6 +6,7 @@ import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -62,7 +63,7 @@ class _SendState extends State<Send> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       width: size.width * 0.8,
-                      height: size.height * 0.65,
+                      height: size.height * 0.68,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -123,8 +124,17 @@ class _SendState extends State<Send> {
                                 _amountController.text =
                                     totalBalanceUsd.toString();
                                 setState(() {});
+                                currentValue = totalBalanceUsd;
                               }
+                              getWithdrawResAmt(currentValue);
                             }),
+                            const SizedBox(height: 20),
+                            Text(
+                              S.of(context).tips_WithdrawResult(
+                                  withdrawResAmtResponse.amt,
+                                  withdrawResAmtResponse.fee),
+                              style: const TextStyle(color: Colors.black54),
+                            ),
                             const SizedBox(height: 20),
                             Text(
                               S.of(context).send_tips,
@@ -256,6 +266,28 @@ class _SendState extends State<Send> {
         var accountInfo = info.data as AccountInfo;
         log("$accountInfo");
         totalBalanceUsd = accountInfo.balanceUsd;
+        if (mounted) {
+          setState(() {});
+        }
+      }
+    });
+  }
+
+  late GetWithdrawResAmtResponse withdrawResAmtResponse =
+      GetWithdrawResAmtResponse();
+
+  void getWithdrawResAmt(double amount) {
+    if (amount == 0) {
+      withdrawResAmtResponse = GetWithdrawResAmtResponse();
+      if (mounted) {
+        setState(() {});
+      }
+      return;
+    }
+
+    CardService.getInstance().getWithdrawResAmt(context, amount).then((info) {
+      if (info.code == 1) {
+        withdrawResAmtResponse = info.data as GetWithdrawResAmtResponse;
         if (mounted) {
           setState(() {});
         }

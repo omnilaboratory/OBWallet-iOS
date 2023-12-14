@@ -33,10 +33,12 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m4(nftTotalCount, nftTotalValue) =>
       "You have selected ${nftTotalCount} NFTs and value is \$${nftTotalValue}";
 
-  static String m5(createCardFee) =>
+  static String m5(amount, fee) => "get ${amount} and fee ${fee}.";
+
+  static String m6(createCardFee) =>
       "There is a fee of \$${createCardFee} to apply for a virtual card. \n The USD is insufficient, please click Deposit on the Home page to purchase USDT and then exchange it for USD.";
 
-  static String m6(tokenName) => "${tokenName} Activity";
+  static String m7(tokenName) => "${tokenName} Activity";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -267,6 +269,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invitation Code"),
         "signUp_Nickname": MessageLookupByLibrary.simpleMessage("Nickname"),
         "signUp_Title": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "tips_WithdrawResult": m5,
         "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("Wrong email"),
         "tips_WrongTopUp":
             MessageLookupByLibrary.simpleMessage("Top up to wallet address"),
@@ -321,7 +324,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The amount cannot exceed the maximum."),
         "tips_maxAmount1": MessageLookupByLibrary.simpleMessage(
             "The from amount cannot exceed the maximum."),
-        "tips_needFiveDollarFee": m5,
+        "tips_needFiveDollarFee": m6,
         "tips_selectCountry":
             MessageLookupByLibrary.simpleMessage("Please select the country."),
         "tips_selectDateOfBirth": MessageLookupByLibrary.simpleMessage(
@@ -357,7 +360,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tokenActivity_Receive":
             MessageLookupByLibrary.simpleMessage("Receive"),
         "tokenActivity_Send": MessageLookupByLibrary.simpleMessage("Send"),
-        "tokenActivity_title": m6,
+        "tokenActivity_title": m7,
         "txHistory_Exchange": MessageLookupByLibrary.simpleMessage("Exchange"),
         "txHistory_Send": MessageLookupByLibrary.simpleMessage("Send"),
         "txHistory_title": MessageLookupByLibrary.simpleMessage("Crypto")

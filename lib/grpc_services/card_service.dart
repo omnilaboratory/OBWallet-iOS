@@ -134,4 +134,20 @@ class CardService {
     }
     return ret;
   }
+
+  Future<GrpcResponse> getWithdrawResAmt(
+      BuildContext context, double amt) async {
+    var request = GetWithdrawResAmtRequest();
+    request.amt = amt;
+    log("$request");
+    var ret = GrpcResponse();
+    try {
+      var resp = await cardServiceClient?.getWithdrawResAmt(request);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context, "getWithdrawResAmt", e, ret);
+    }
+    return ret;
+  }
 }
