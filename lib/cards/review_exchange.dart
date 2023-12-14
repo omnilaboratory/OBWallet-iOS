@@ -94,13 +94,13 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                 height: size.height * 0.65,
                 child: Column(children: [
                   const SizedBox(height: 25),
-                  createDialogTitle(S.of(context).reReviewExchange_title),
+                  createDialogTitle(S.of(context).reviewExchange_title),
                   const SizedBox(height: 25),
                   buildTitle(),
                   Padding(
                     padding: const EdgeInsets.only(top: 27),
                     child: Text(
-                      S.of(context).reReviewExchange_YouWillSwap,
+                      S.of(context).reviewExchange_YouWillSwap,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Color(0xFF666666),
@@ -256,7 +256,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          S.of(context).reReviewExchange_Slippage,
+                          S.of(context).reviewExchange_Slippage,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Color(0xFF666666),
@@ -288,6 +288,20 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 6),
+                  Text(S.of(context).reviewExchange_Fee(widget.priceInfo.rawPrice),
+                      style: const TextStyle(
+                        color: Color(0xFF666666),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      )),
+                  const SizedBox(height: 6),
+                  Text(S.of(context).reviewExchange_cost(widget.priceInfo.rawPrice),
+                      style: const TextStyle(
+                        color: Color(0xFF666666),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      )),
                   const Spacer(
                     flex: 1,
                   ),

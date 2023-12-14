@@ -531,32 +531,52 @@ class S {
   }
 
   /// `Review Exchange`
-  String get reReviewExchange_title {
+  String get reviewExchange_title {
     return Intl.message(
       'Review Exchange',
-      name: 'reReviewExchange_title',
+      name: 'reviewExchange_title',
       desc: '',
       args: [],
     );
   }
 
   /// `You will swap`
-  String get reReviewExchange_YouWillSwap {
+  String get reviewExchange_YouWillSwap {
     return Intl.message(
       'You will swap',
-      name: 'reReviewExchange_YouWillSwap',
+      name: 'reviewExchange_YouWillSwap',
       desc: '',
       args: [],
     );
   }
 
   /// `Slippage`
-  String get reReviewExchange_Slippage {
+  String get reviewExchange_Slippage {
     return Intl.message(
       'Slippage',
-      name: 'reReviewExchange_Slippage',
+      name: 'reviewExchange_Slippage',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Fee {fee}`
+  String reviewExchange_Fee(Object fee) {
+    return Intl.message(
+      'Fee $fee',
+      name: 'reviewExchange_Fee',
+      desc: '',
+      args: [fee],
+    );
+  }
+
+  /// `Network Cost {cost}`
+  String reviewExchange_cost(Object cost) {
+    return Intl.message(
+      'Network Cost $cost',
+      name: 'reviewExchange_cost',
+      desc: '',
+      args: [cost],
     );
   }
 

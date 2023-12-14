@@ -53,9 +53,11 @@
   "exchange_Deposit": "Deposit",
   "exchange_Step": "Step {step}",
 
-  "reReviewExchange_title": "Review Exchange",
-  "reReviewExchange_YouWillSwap": "You will swap",
-  "reReviewExchange_Slippage": "Slippage",
+  "reviewExchange_title": "Review Exchange",
+  "reviewExchange_YouWillSwap": "You will swap",
+  "reviewExchange_Slippage": "Slippage",
+  "reviewExchange_Fee": "Fee {fee}",
+  "reviewExchange_cost": "Network Cost {cost}",
 
   "tokenActivity_title": "{tokenName} Activity",
   "tokenActivity_Pay": "Pay",
