@@ -317,7 +317,7 @@ class _ReviewExchangeState extends State<ReviewExchange> {
                         ),
                         BottomButton(
                           icon: 'asset/images/icon_confirm_green.png',
-                          text: S.of(context).common_Confirm,
+                          text: S.of(context).common_Confirm.toUpperCase(),
                           onPressed: onConfirm,
                         )
                       ]),
