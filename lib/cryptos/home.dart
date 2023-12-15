@@ -5,6 +5,7 @@ import 'package:awallet/cryptos/ethereum_page.dart';
 import 'package:awallet/cryptos/more_menu.dart';
 import 'package:awallet/cryptos/tx_history.dart';
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/profile/guide.dart';
 import 'package:flutter/material.dart';
 
 import 'bitcoin_page.dart';
@@ -122,6 +123,17 @@ class _CryptoHomeState extends State<CryptoHome> {
               //             return const Update();
               //           });
               //     }),
+
+              InkWell(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const Guide();
+                      });
+                },
+                child: const Icon(Icons.help_center_outlined, size: 28),
+              ),
               ButtonForAppBarAction(
                   imageUrl: "asset/images/icon_tx_history.png",
                   onTap: () {

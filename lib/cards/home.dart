@@ -108,25 +108,7 @@ class _CardHomeState extends State<CardHome>
             Padding(
               padding: const EdgeInsets.only(right: 20.0),
               child: Row(
-                children: [
-                  ButtonForAppBarAction(
-                      width: 32,
-                      height: 24,
-                      imageClr: kycClr[currKycClrIndex],
-                      imageUrl: "asset/images/icon_kyc.png",
-                      onTap: () {
-                        if (CommonService.userInfo!.kycStatus ==
-                            EnumKycStatus.none.value) {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Kyc();
-                              });
-                        } else {
-                          showKycTips(context);
-                        }
-                      }),
-                ],
+                children: headerActions(context),
               ),
             ),
           ],
@@ -147,6 +129,38 @@ class _CardHomeState extends State<CardHome>
         ),
       ),
     );
+  }
+
+  List<Widget> headerActions(BuildContext context) {
+    List<Widget> list = [];
+    list.add(InkWell(
+      onTap: () {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const Guide();
+            });
+      },
+      child: const Icon(Icons.help_center_outlined, size: 28),
+    ));
+
+    list.add(ButtonForAppBarAction(
+        width: 32,
+        height: 24,
+        imageClr: kycClr[currKycClrIndex],
+        imageUrl: "asset/images/icon_kyc.png",
+        onTap: () {
+          if (CommonService.userInfo!.kycStatus == EnumKycStatus.none.value) {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return Kyc();
+                });
+          } else {
+            showKycTips(context);
+          }
+        }));
+    return list;
   }
 
   Widget buildTabBars() {

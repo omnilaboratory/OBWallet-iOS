@@ -57,7 +57,7 @@ class _ProfileHomeState extends State<ProfileHome> {
     // }));
     list.add(const SizedBox(height: 10));
     list.add(
-        btnBtnItem(Icons.token_outlined, S.of(context).profile_guide_title, () {
+        btnBtnItem(Icons.help_center_outlined, S.of(context).profile_guide_title, () {
       showDialog(
           context: context,
           builder: (context) {
