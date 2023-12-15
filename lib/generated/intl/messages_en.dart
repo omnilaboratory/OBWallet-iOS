@@ -37,7 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m6(nftTotalCount, nftTotalValue) =>
       "You have selected ${nftTotalCount} NFTs and value is \$${nftTotalValue}";
 
-  static String m7(amount, fee) => "get ${amount} and fee ${fee}.";
+  static String m7(amount, fee) => "Will get \$${amount} and fee is \$${fee}.";
 
   static String m8(createCardFee) =>
       "There is a fee of \$${createCardFee} to apply for a virtual card. \n The USD is insufficient, please click Deposit on the Home page to purchase USDT and then exchange it for USD.";
@@ -336,7 +336,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tips_selectDateOfBirth": MessageLookupByLibrary.simpleMessage(
             "Please select the date of birth."),
         "tips_sendTokenError": MessageLookupByLibrary.simpleMessage(
-            "The gas fee is insufficient."),
+            "Please deposit enough ETH as gas fee."),
         "tips_successDeposit":
             MessageLookupByLibrary.simpleMessage("Deposit successful."),
         "tips_successWithdraw":

@@ -232,6 +232,6 @@
   "tips_createWallet": "Please create a crypto wallet first.",
   "tips_needFiveDollarFee": "There is a fee of ${createCardFee} to apply for a virtual card. \n The USD is insufficient, please click Deposit on the Home page to purchase USDT and then exchange it for USD.",
   "tips_codeIsOnClipboard": "Invitation Code is on your clipboard.",
-  "tips_sendTokenError": "The gas fee is insufficient.",
-  "tips_WithdrawResult": "get {amount} and fee {fee}."
+  "tips_sendTokenError": "Please deposit enough ETH as gas fee.",
+  "tips_WithdrawResult": "Will get ${amount} and fee is ${fee}."
 }

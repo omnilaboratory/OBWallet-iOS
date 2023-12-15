@@ -2120,20 +2120,20 @@ class S {
     );
   }
 
-  /// `The gas fee is insufficient.`
+  /// `Please deposit enough ETH as gas fee.`
   String get tips_sendTokenError {
     return Intl.message(
-      'The gas fee is insufficient.',
+      'Please deposit enough ETH as gas fee.',
       name: 'tips_sendTokenError',
       desc: '',
       args: [],
     );
   }
 
-  /// `get {amount} and fee {fee}.`
+  /// `Will get ${amount} and fee is ${fee}.`
   String tips_WithdrawResult(Object amount, Object fee) {
     return Intl.message(
-      'get $amount and fee $fee.',
+      'Will get \$$amount and fee is \$$fee.',
       name: 'tips_WithdrawResult',
       desc: '',
       args: [amount, fee],

@@ -159,6 +159,8 @@ class _SendState extends State<Send> {
                       )
                     ],
                   ),
+                  
+                  Center(child: Text(widget.netName == 'Polygon' ? '(Polygon Asset)' : '')),
                   const SizedBox(height: 20),
                   Visibility(
                     visible: false,
