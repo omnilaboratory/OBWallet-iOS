@@ -338,6 +338,7 @@ class _CardRechargeState extends State<CardRecharge> {
         } else if (widget.type == EnumChargeType.deposit) {
           showToast(S.of(context).tips_successDeposit);
         }
+        GlobalParams.eventBus.fire("updateCardBalance");
       } else {
         log(value.msg);
         alert(value.msg, context, () {});

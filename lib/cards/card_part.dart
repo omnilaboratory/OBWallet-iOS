@@ -64,7 +64,7 @@ class _CardPartState extends State<CardPart> {
     });
 
     GlobalParams.eventBus.on().listen((event) {
-      if (event == "applyCard") {
+      if (event == "applyCard"||event == "updateCardBalance") {
         if (mounted) {
           _onBalanceRefresh();
         }
