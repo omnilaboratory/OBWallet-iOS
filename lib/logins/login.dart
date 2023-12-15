@@ -251,6 +251,8 @@ class _LoginState extends State<Login> {
 
   void login() {
     log("login start");
+
+    var loading = showLoading(context);
     var username = _unameController.value.text.trim();
     var password = _pswController.value.text.trim();
     LocalStorage.save(LocalStorage.username, username);
@@ -264,6 +266,7 @@ class _LoginState extends State<Login> {
             LocalStorage.userToken, (loginInfo.data as SignInResponse).token);
         getUserInfoAndGoHome();
       }
+      removeLoading(loading);
     });
   }
 
