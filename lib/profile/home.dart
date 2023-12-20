@@ -49,12 +49,12 @@ class _ProfileHomeState extends State<ProfileHome> {
             context, MaterialPageRoute(builder: (context) => const MyReward()));
       }));
     }
-    // list.add(const SizedBox(height: 10));
-    // list.add(btnBtnItem(
-    //     Icons.language, S.of(context).profile_language_title, () {
-    //   Navigator.push(
-    //       context, MaterialPageRoute(builder: (context) => const Language()));
-    // }));
+    list.add(const SizedBox(height: 10));
+    list.add(btnBtnItem(
+        Icons.language, S.of(context).profile_language_title, () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Language()));
+    }));
     list.add(const SizedBox(height: 10));
     list.add(
         btnBtnItem(Icons.help_center_outlined, S.of(context).profile_guide_title, () {
