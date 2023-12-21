@@ -16,7 +16,7 @@ class Language extends StatefulWidget {
 class _LanguageState extends State<Language> {
   List<LanguageInfo> dataList = [
     LanguageInfo(key: "en", name: "English"),
-    LanguageInfo(key: "zh", name: "繁体中文")
+    LanguageInfo(key: "tc", name: "繁体中文")
   ];
 
   @override
