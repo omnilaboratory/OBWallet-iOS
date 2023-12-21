@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awallet/logins/login.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
@@ -52,6 +50,13 @@ class _MyAppState extends State<MyApp> {
       ],
       supportedLocales: S.delegate.supportedLocales,
       locale: Locale(LocalStorage.get("currLangName") ?? "en"),
+      localeResolutionCallback:
+          (Locale? locale, Iterable<Locale> supportedLocales) {
+        if (locale?.languageCode != "en") {
+          return const Locale('zh', 'TW');
+        }
+        return const Locale('en', 'US');
+      },
       title: 'AWallet',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
