@@ -151,13 +151,13 @@ class UserService {
   ) async {
     var ret = GrpcResponse();
     try {
-      log("getUserInfo ${CommonService.token} ${CommonService.userInfo?.email}");
+      // log("getUserInfo ${CommonService.token} ${CommonService.userInfo?.email}");
       var resp = await userServiceClient?.getUserInfo(GetUserInfoRequest());
       ret.code = 1;
       ret.data = resp;
       var userInfo = resp as GetUserInfoResponse;
       CommonService.userInfo = userInfo.user;
-      log("getUserInfo ${userInfo.user}");
+      // log("getUserInfo ${userInfo.user}");
       CommonService.userId = userInfo.user.id.toString();
     } catch (e) {
       setError(context, "getUserInfo", e, ret);

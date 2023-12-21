@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/language_info.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/language_item.dart';
@@ -16,7 +18,7 @@ class Language extends StatefulWidget {
 class _LanguageState extends State<Language> {
   List<LanguageInfo> dataList = [
     LanguageInfo(key: "en", name: "English"),
-    LanguageInfo(key: "tc", name: "繁体中文")
+    LanguageInfo(key: "zh_TW", name: "繁体中文")
   ];
 
   @override
