@@ -49,8 +49,7 @@ class _MyRewardState extends State<MyReward> {
             child: Row(
               children: [
                 Text(
-                    S.of(context).profile_MyReward_totalReward +
-                        StringTools.formatCurrencyNum(totalReward),
+                    '${S.of(context).profile_MyReward_totalReward}\$${StringTools.formatCurrencyNum(totalReward)}',
                     style: const TextStyle(
                       fontSize: 20,
                     )),

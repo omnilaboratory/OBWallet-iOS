@@ -53,7 +53,7 @@ class _MyRewardFromUserState extends State<MyRewardFromUser> {
               children: [
                 Text(
                     S.of(context).profile_reward_subTitle1(
-                        StringTools.formatCurrencyNum(totalReward), totalUser),
+                        '\$${StringTools.formatCurrencyNum(totalReward)}', totalUser),
                     style: const TextStyle(
                       fontSize: 20,
                     )),

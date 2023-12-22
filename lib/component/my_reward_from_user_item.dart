@@ -24,7 +24,7 @@ class MyRewardFromUserItem extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 14,
                 )),
-            Text(info.amount.toString(),
+            Text('\$${info.amount}',
                 style: const TextStyle(
                   fontSize: 14,
                 )),
