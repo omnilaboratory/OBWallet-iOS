@@ -273,8 +273,6 @@ class _LoginState extends State<Login> {
   void getUserInfoAndGoHome() {
     log("getUserInfoAndGoHome");
     CardService.getInstance().cardInfo(context);
-    UserService.getInstance()
-        .updateUserLang(context, LocalStorage.get("currLangName").toLowerCase());
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
         Navigator.pushReplacement(

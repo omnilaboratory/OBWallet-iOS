@@ -23,9 +23,10 @@ class AccountService {
 
   static AccountService getInstance() {
     accountServiceClient ??= accountClient(channel!,
-        options: CallOptions(
-            metadata: {"token": CommonService.token},
-            timeout: Duration(seconds: GlobalParams.grpcTimeout)));
+        options: CallOptions(metadata: {
+          "token": CommonService.token,
+          "language": GlobalParams.currLangName.toLowerCase()
+        }, timeout: Duration(seconds: GlobalParams.grpcTimeout)));
     return _instance;
   }
 
@@ -91,7 +92,8 @@ class AccountService {
   }
 
   Future<GrpcResponse> getSwapTxList(BuildContext context, int start, int limit,
-      TrackedTx_ContractSymbol? symbol,{bool loadNftTokenLog = false}) async {
+      TrackedTx_ContractSymbol? symbol,
+      {bool loadNftTokenLog = false}) async {
     var request = GetSwapTxListRequest();
     request.start = Int64.parseInt(start.toString());
     request.limit = Int64.parseInt(limit.toString());
@@ -125,7 +127,6 @@ class AccountService {
     }
     return ret;
   }
-
 
   Future<GrpcResponse> getTrackedTxList(
       BuildContext context, int start, int limit) async {
@@ -208,8 +209,9 @@ class AccountService {
     }
     return ret;
   }
-  
-  Future<GrpcResponse> getUserSwapPrice(BuildContext context, GetUserSwapPriceRequest request) async {
+
+  Future<GrpcResponse> getUserSwapPrice(
+      BuildContext context, GetUserSwapPriceRequest request) async {
     log("$request");
     var ret = GrpcResponse();
     try {

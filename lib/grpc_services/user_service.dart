@@ -25,9 +25,10 @@ class UserService {
 
   static UserService getInstance() {
     userServiceClient ??= UserServiceClient(channel!,
-        options: CallOptions(
-            metadata: {"token": CommonService.token},
-            timeout: Duration(seconds: GlobalParams.grpcTimeout)));
+        options: CallOptions(metadata: {
+          "token": CommonService.token,
+          "language": GlobalParams.currLangName.toLowerCase()
+        }, timeout: Duration(seconds: GlobalParams.grpcTimeout)));
     return _instance;
   }
 
@@ -260,21 +261,6 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> updateUserLang(BuildContext context,String language) async {
-    var req = UpdateUserLangRequest();
-    req.language = language;
-    log("updateUserLang $req");
-    var ret = GrpcResponse();
-    try {
-      var resp = await userServiceClient?.updateUserLang(req);
-      ret.code = 1;
-      ret.data = resp;
-    } catch (e) {
-      setError(context, "updateUserLang", e, ret);
-    }
-    return ret;
-  }
-
   Future<GrpcResponse> listReward(
       BuildContext context, int start, int limit) async {
     var req = ListRewardRequest();
@@ -292,8 +278,9 @@ class UserService {
     }
     return ret;
   }
+
   Future<GrpcResponse> listRewardWithUser(
-      BuildContext context,Int64 dateSec, int start, int limit) async {
+      BuildContext context, Int64 dateSec, int start, int limit) async {
     var req = ListRewardWithUserRequest();
     req.dateSec = dateSec;
     req.start = Int64.parseInt(start.toString());

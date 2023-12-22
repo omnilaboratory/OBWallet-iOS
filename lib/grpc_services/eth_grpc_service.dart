@@ -17,9 +17,10 @@ class EthGrpcService {
 
   static EthGrpcService getInstance() {
     ethServiceClient ??= ethClient(channel!,
-        options: CallOptions(
-            metadata: {"token": CommonService.token},
-            timeout: Duration(seconds: GlobalParams.grpcTimeout)));
+        options: CallOptions(metadata: {
+          "token": CommonService.token,
+          "language": GlobalParams.currLangName.toLowerCase()
+        }, timeout: Duration(seconds: GlobalParams.grpcTimeout)));
     return _instance;
   }
 
@@ -35,11 +36,12 @@ class EthGrpcService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context,"ethTrackTx",e, ret);
+      UserService.getInstance().setError(context, "ethTrackTx", e, ret);
       ret.msg = e.toString();
     }
     return ret;
   }
+
   Future<GrpcResponse> ethGetAppConf(BuildContext context) async {
     var request = ETHGetAppConfRequest();
     var ret = GrpcResponse();
@@ -48,7 +50,7 @@ class EthGrpcService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context,"ethTrackTx",e, ret);
+      UserService.getInstance().setError(context, "ethTrackTx", e, ret);
     }
     return ret;
   }

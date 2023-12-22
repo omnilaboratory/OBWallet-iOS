@@ -29,25 +29,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String currLangName = "en";
 
   @override
   void initState() {
     super.initState();
     LocalStorage.initSP().then((value) {
       if (LocalStorage.get("currLangName") == null) {
-        LocalStorage.save("currLangName", currLangName);
+        LocalStorage.save("currLangName", GlobalParams.currLangName);
       } else {
-        currLangName = LocalStorage.get("currLangName");
+        GlobalParams.currLangName = LocalStorage.get("currLangName");
       }
-      UserService.getInstance()
-          .updateUserLang(context, currLangName.toLowerCase());
       setState(() {});
     });
     GlobalParams.eventBus.on().listen((event) {
       if (event == "changeLang") {
-        UserService.getInstance()
-            .updateUserLang(context, LocalStorage.get("currLangName").toLowerCase());
+        GlobalParams.currLangName = LocalStorage.get("currLangName");
         setState(() {});
       }
     });
@@ -75,7 +71,7 @@ class _MyAppState extends State<MyApp> {
       localeResolutionCallback:
           (Locale? locale, Iterable<Locale> supportedLocales) {
         if (locale?.languageCode != "en") {
-          currLangName = "zh_TW";
+          GlobalParams.currLangName = "zh_TW";
           return const Locale('zh', 'TW');
         }
         return const Locale('en', 'US');

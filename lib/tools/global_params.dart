@@ -11,6 +11,7 @@ class GlobalParams {
   static EnumNetworkType currNetwork = EnumNetworkType.goerli;
 
   static int grpcTimeout = 30;
+  static String currLangName = "en";
 
   static resetTokens(){
 

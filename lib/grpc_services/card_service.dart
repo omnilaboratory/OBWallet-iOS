@@ -22,9 +22,10 @@ class CardService {
 
   static CardService getInstance() {
     cardServiceClient ??= CardServiceClient(channel!,
-        options: CallOptions(
-            metadata: {"token": CommonService.token},
-            timeout: Duration(seconds: GlobalParams.grpcTimeout)));
+        options: CallOptions(metadata: {
+          "token": CommonService.token,
+          "language": GlobalParams.currLangName.toLowerCase()
+        }, timeout: Duration(seconds: GlobalParams.grpcTimeout)));
     return _instance;
   }
 
