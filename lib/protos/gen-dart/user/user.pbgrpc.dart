@@ -57,6 +57,10 @@ class UserServiceClient extends $grpc.Client {
       '/user.UserService/UpdateUser',
       ($2.UserInfo value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.UserInfo.fromBuffer(value));
+  static final _$updateUserLang = $grpc.ClientMethod<$2.UpdateUserLangRequest, $2.UpdateUserLangResponse>(
+      '/user.UserService/UpdateUserLang',
+      ($2.UpdateUserLangRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.UpdateUserLangResponse.fromBuffer(value));
   static final _$upload = $grpc.ClientMethod<$2.UploadRequest, $2.UploadResponse>(
       '/user.UserService/Upload',
       ($2.UploadRequest value) => value.writeToBuffer(),
@@ -118,6 +122,10 @@ class UserServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$2.UserInfo> updateUser($2.UserInfo request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateUser, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$2.UpdateUserLangResponse> updateUserLang($2.UpdateUserLangRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateUserLang, request, options: options);
   }
 
   $grpc.ResponseFuture<$2.UploadResponse> upload($2.UploadRequest request, {$grpc.CallOptions? options}) {
@@ -209,6 +217,13 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $2.UserInfo.fromBuffer(value),
         ($2.UserInfo value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UpdateUserLangRequest, $2.UpdateUserLangResponse>(
+        'UpdateUserLang',
+        updateUserLang_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.UpdateUserLangRequest.fromBuffer(value),
+        ($2.UpdateUserLangResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.UploadRequest, $2.UploadResponse>(
         'Upload',
         upload_Pre,
@@ -282,6 +297,10 @@ abstract class UserServiceBase extends $grpc.Service {
     return updateUser(call, await request);
   }
 
+  $async.Future<$2.UpdateUserLangResponse> updateUserLang_Pre($grpc.ServiceCall call, $async.Future<$2.UpdateUserLangRequest> request) async {
+    return updateUserLang(call, await request);
+  }
+
   $async.Future<$2.UploadResponse> upload_Pre($grpc.ServiceCall call, $async.Future<$2.UploadRequest> request) async {
     return upload(call, await request);
   }
@@ -311,6 +330,7 @@ abstract class UserServiceBase extends $grpc.Service {
   $async.Future<$2.ForgetPwdResponse> forgetPwd($grpc.ServiceCall call, $2.ForgetPwdRequest request);
   $async.Future<$2.UserInfo> kyc($grpc.ServiceCall call, $2.UserInfo request);
   $async.Future<$2.UserInfo> updateUser($grpc.ServiceCall call, $2.UserInfo request);
+  $async.Future<$2.UpdateUserLangResponse> updateUserLang($grpc.ServiceCall call, $2.UpdateUserLangRequest request);
   $async.Future<$2.UploadResponse> upload($grpc.ServiceCall call, $2.UploadRequest request);
   $async.Future<$2.GetUserInfoResponse> getUserInfo($grpc.ServiceCall call, $2.GetUserInfoRequest request);
   $async.Future<$2.ListInvitedUserResponse> listInvitedUser($grpc.ServiceCall call, $2.ListInvitedUserRequest request);

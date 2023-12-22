@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/logins/login.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
@@ -36,11 +37,17 @@ class _MyAppState extends State<MyApp> {
     LocalStorage.initSP().then((value) {
       if (LocalStorage.get("currLangName") == null) {
         LocalStorage.save("currLangName", currLangName);
+      } else {
+        currLangName = LocalStorage.get("currLangName");
       }
+      UserService.getInstance()
+          .updateUserLang(context, currLangName.toLowerCase());
       setState(() {});
     });
     GlobalParams.eventBus.on().listen((event) {
       if (event == "changeLang") {
+        UserService.getInstance()
+            .updateUserLang(context, LocalStorage.get("currLangName").toLowerCase());
         setState(() {});
       }
     });
@@ -67,7 +74,6 @@ class _MyAppState extends State<MyApp> {
       locale: locale,
       localeResolutionCallback:
           (Locale? locale, Iterable<Locale> supportedLocales) {
-        log("localeResolutionCallback $locale ${locale?.languageCode}");
         if (locale?.languageCode != "en") {
           currLangName = "zh_TW";
           return const Locale('zh', 'TW');

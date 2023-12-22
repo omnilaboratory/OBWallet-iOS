@@ -43,7 +43,6 @@ class LocalStorage {
   }
 
   static save(String key, String value) {
-    log("save $key $value");
     prefs?.setString(key, value);
   }
 

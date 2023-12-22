@@ -124,6 +124,80 @@ class ForgetPwdResponse extends $pb.GeneratedMessage {
   static ForgetPwdResponse? _defaultInstance;
 }
 
+class UpdateUserLangRequest extends $pb.GeneratedMessage {
+  factory UpdateUserLangRequest() => create();
+  UpdateUserLangRequest._() : super();
+  factory UpdateUserLangRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateUserLangRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateUserLangRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'language')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateUserLangRequest clone() => UpdateUserLangRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateUserLangRequest copyWith(void Function(UpdateUserLangRequest) updates) => super.copyWith((message) => updates(message as UpdateUserLangRequest)) as UpdateUserLangRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateUserLangRequest create() => UpdateUserLangRequest._();
+  UpdateUserLangRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateUserLangRequest> createRepeated() => $pb.PbList<UpdateUserLangRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateUserLangRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateUserLangRequest>(create);
+  static UpdateUserLangRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get language => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set language($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLanguage() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLanguage() => clearField(1);
+}
+
+class UpdateUserLangResponse extends $pb.GeneratedMessage {
+  factory UpdateUserLangResponse() => create();
+  UpdateUserLangResponse._() : super();
+  factory UpdateUserLangResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateUserLangResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateUserLangResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateUserLangResponse clone() => UpdateUserLangResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateUserLangResponse copyWith(void Function(UpdateUserLangResponse) updates) => super.copyWith((message) => updates(message as UpdateUserLangResponse)) as UpdateUserLangResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateUserLangResponse create() => UpdateUserLangResponse._();
+  UpdateUserLangResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateUserLangResponse> createRepeated() => $pb.PbList<UpdateUserLangResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateUserLangResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateUserLangResponse>(create);
+  static UpdateUserLangResponse? _defaultInstance;
+}
+
 class UserInfo extends $pb.GeneratedMessage {
   factory UserInfo() => create();
   UserInfo._() : super();
@@ -165,6 +239,7 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aInt64(32, _omitFieldNames ? '' : 'invitationUserid')
     ..aOB(33, _omitFieldNames ? '' : 'isAgentChannel')
     ..aInt64(34, _omitFieldNames ? '' : 'refUserid')
+    ..aOS(35, _omitFieldNames ? '' : 'language')
     ..hasRequiredFields = false
   ;
 
@@ -494,6 +569,15 @@ class UserInfo extends $pb.GeneratedMessage {
   $core.bool hasRefUserid() => $_has(33);
   @$pb.TagNumber(34)
   void clearRefUserid() => clearField(34);
+
+  @$pb.TagNumber(35)
+  $core.String get language => $_getSZ(34);
+  @$pb.TagNumber(35)
+  set language($core.String v) { $_setString(34, v); }
+  @$pb.TagNumber(35)
+  $core.bool hasLanguage() => $_has(34);
+  @$pb.TagNumber(35)
+  void clearLanguage() => clearField(35);
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {

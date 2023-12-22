@@ -260,6 +260,21 @@ class UserService {
     return ret;
   }
 
+  Future<GrpcResponse> updateUserLang(BuildContext context,String language) async {
+    var req = UpdateUserLangRequest();
+    req.language = language;
+    log("updateUserLang $req");
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.updateUserLang(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      setError(context, "updateUserLang", e, ret);
+    }
+    return ret;
+  }
+
   Future<GrpcResponse> listReward(
       BuildContext context, int start, int limit) async {
     var req = ListRewardRequest();

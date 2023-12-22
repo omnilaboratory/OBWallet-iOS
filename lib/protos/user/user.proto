@@ -26,6 +26,8 @@ service UserService {
   // input parameter UserInfo-Obj must first get from GetUserInfo-rpc,
   // then update the UserInfo-obj,last call UpdateUser with UserInfo-obj
   rpc UpdateUser(UserInfo) returns (UserInfo) {}
+
+  rpc UpdateUserLang(UpdateUserLangRequest) returns (UpdateUserLangResponse) {}
   //ignored
   rpc Upload(UploadRequest) returns (UploadResponse) {}
   //获取用户信息
@@ -47,6 +49,12 @@ message ForgetPwdRequest {
   string verify_code_id = 4;
 }
 message ForgetPwdResponse {
+
+}
+message UpdateUserLangRequest {
+  string language=1;
+}
+message UpdateUserLangResponse {
 
 }
 message UserInfo {
@@ -106,6 +114,8 @@ message UserInfo {
 
   //注册后,系统根据regist_code填充的邀请人id.
   int64 ref_userid=34;
+  //用户语言偏好
+  string language =35;
 }
 
 message SignUpRequest {

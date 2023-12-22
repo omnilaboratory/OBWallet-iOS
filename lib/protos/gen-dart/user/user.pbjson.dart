@@ -39,6 +39,27 @@ const ForgetPwdResponse$json = {
 final $typed_data.Uint8List forgetPwdResponseDescriptor = $convert.base64Decode(
     'ChFGb3JnZXRQd2RSZXNwb25zZQ==');
 
+@$core.Deprecated('Use updateUserLangRequestDescriptor instead')
+const UpdateUserLangRequest$json = {
+  '1': 'UpdateUserLangRequest',
+  '2': [
+    {'1': 'language', '3': 1, '4': 1, '5': 9, '10': 'language'},
+  ],
+};
+
+/// Descriptor for `UpdateUserLangRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateUserLangRequestDescriptor = $convert.base64Decode(
+    'ChVVcGRhdGVVc2VyTGFuZ1JlcXVlc3QSGgoIbGFuZ3VhZ2UYASABKAlSCGxhbmd1YWdl');
+
+@$core.Deprecated('Use updateUserLangResponseDescriptor instead')
+const UpdateUserLangResponse$json = {
+  '1': 'UpdateUserLangResponse',
+};
+
+/// Descriptor for `UpdateUserLangResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateUserLangResponseDescriptor = $convert.base64Decode(
+    'ChZVcGRhdGVVc2VyTGFuZ1Jlc3BvbnNl');
+
 @$core.Deprecated('Use userInfoDescriptor instead')
 const UserInfo$json = {
   '1': 'UserInfo',
@@ -77,6 +98,7 @@ const UserInfo$json = {
     {'1': 'regist_code', '3': 31, '4': 1, '5': 9, '10': 'registCode'},
     {'1': 'invitation_userid', '3': 32, '4': 1, '5': 3, '10': 'invitationUserid'},
     {'1': 'ref_userid', '3': 34, '4': 1, '5': 3, '10': 'refUserid'},
+    {'1': 'language', '3': 35, '4': 1, '5': 9, '10': 'language'},
   ],
 };
 
@@ -100,7 +122,7 @@ final $typed_data.Uint8List userInfoDescriptor = $convert.base64Decode(
     'IOaXNBZ2VudENoYW5uZWwSGQoIbXVzZXJfaWQYHSABKANSB211c2VySWQSJwoPaW52aXRhdGlv'
     'bl9jb2RlGB4gASgJUg5pbnZpdGF0aW9uQ29kZRIfCgtyZWdpc3RfY29kZRgfIAEoCVIKcmVnaX'
     'N0Q29kZRIrChFpbnZpdGF0aW9uX3VzZXJpZBggIAEoA1IQaW52aXRhdGlvblVzZXJpZBIdCgpy'
-    'ZWZfdXNlcmlkGCIgASgDUglyZWZVc2VyaWQ=');
+    'ZWZfdXNlcmlkGCIgASgDUglyZWZVc2VyaWQSGgoIbGFuZ3VhZ2UYIyABKAlSCGxhbmd1YWdl');
 
 @$core.Deprecated('Use signUpRequestDescriptor instead')
 const SignUpRequest$json = {

@@ -223,6 +223,7 @@ message GetUserSwapPriceResponse {
 //    币种官方报价
   double raw_price=3;
   double gas_fee=4;
+  //费率, 如返回的0.003 表示0.3%
   double fee_rate=5;
 }
 
