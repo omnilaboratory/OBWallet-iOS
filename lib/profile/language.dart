@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awallet/bean/language_info.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/language_item.dart';

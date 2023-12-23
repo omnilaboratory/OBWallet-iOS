@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/logins/login.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
@@ -10,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'generated/l10n.dart';
+import 'grpc_services/common_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,11 +37,13 @@ class _MyAppState extends State<MyApp> {
       } else {
         GlobalParams.currLangName = LocalStorage.get("currLangName");
       }
+      resetServicesFromChangeLanguage();
       setState(() {});
     });
     GlobalParams.eventBus.on().listen((event) {
       if (event == "changeLang") {
         GlobalParams.currLangName = LocalStorage.get("currLangName");
+        resetServicesFromChangeLanguage();
         setState(() {});
       }
     });

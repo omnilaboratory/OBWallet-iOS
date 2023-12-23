@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awallet/bean/btn_info.dart';
 import 'package:awallet/bean/enum_network_type.dart';
 import 'package:awallet/component/btn_icon_name.dart';

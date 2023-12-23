@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/enum_charge_type.dart';
-import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
@@ -61,19 +60,8 @@ class _CardRechargeState extends State<CardRecharge> {
     // updateKycState();
     GlobalParams.eventBus.on().listen((event) {
       if (event == "kyc_state") {
-        updateKycState();
       }
     });
-  }
-
-  updateKycState() {
-    return;
-    if (CommonService.userInfo!.kycStatus == EnumKycStatus.pending.value ||
-        CommonService.userInfo!.kycStatus == EnumKycStatus.passed.value) {
-      if (cardInputAmount.isNotEmpty && double.parse(cardInputAmount) >= 100) {
-        getDcPayUrl(double.parse(cardInputAmount));
-      }
-    }
   }
 
   onClose() {

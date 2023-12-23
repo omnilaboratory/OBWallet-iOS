@@ -47,10 +47,13 @@ resetServices() {
   CommonService.tokenListPolygon = [];
   GlobalParams.resetTokens();
   CommonService.cardInfo = CardInfo();
+  CommonService.firstEnterApp = true;
+  EthService.walletInfo = null;
+  resetServicesFromChangeLanguage();
+}
+resetServicesFromChangeLanguage() {
   UserService.userServiceClient = null;
   AccountService.accountServiceClient = null;
   CardService.cardServiceClient = null;
   EthGrpcService.ethServiceClient = null;
-  EthService.walletInfo = null;
-  CommonService.firstEnterApp = true;
 }

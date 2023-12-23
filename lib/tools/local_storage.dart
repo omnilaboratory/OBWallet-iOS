@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

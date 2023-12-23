@@ -1,5 +1,4 @@
 import 'package:awallet/bean/language_info.dart';
-import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 

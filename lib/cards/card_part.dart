@@ -26,7 +26,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'card_deposit.dart';
 import 'kyc.dart';
 
 class CardPart extends StatefulWidget {

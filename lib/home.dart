@@ -1,6 +1,5 @@
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/profile/home.dart';
-import 'package:awallet/shop/home.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 
