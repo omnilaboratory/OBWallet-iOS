@@ -173,8 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "kyc_tips1": MessageLookupByLibrary.simpleMessage(
             "Please input English and Number."),
         "kyc_title": MessageLookupByLibrary.simpleMessage("Kyc"),
-        "login_Desc":
-            MessageLookupByLibrary.simpleMessage("Wallet Description"),
+        "login_Desc": MessageLookupByLibrary.simpleMessage(""),
         "login_ForgotPsw":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "login_SignIn": MessageLookupByLibrary.simpleMessage("Sign In"),

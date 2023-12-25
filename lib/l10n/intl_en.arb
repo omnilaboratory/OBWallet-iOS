@@ -23,7 +23,7 @@
 
 
   "login_Welcome": "Welcome",
-  "login_Desc": "Wallet Description",
+  "login_Desc": "",
   "login_SignIn": "Sign In",
   "login_ForgotPsw": "Forgot Password?",
   "login_SignUp": "Sign Up",

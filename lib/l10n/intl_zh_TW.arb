@@ -23,7 +23,7 @@
 
 
   "login_Welcome": "歡迎",
-  "login_Desc": "錢包描述",
+  "login_Desc": "",
   "login_SignIn": "登錄",
   "login_ForgotPsw": "忘記密碼?",
   "login_SignUp": "註冊",

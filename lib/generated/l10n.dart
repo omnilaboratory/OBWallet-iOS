@@ -270,10 +270,10 @@ class S {
     );
   }
 
-  /// `Wallet Description`
+  /// ``
   String get login_Desc {
     return Intl.message(
-      'Wallet Description',
+      '',
       name: 'login_Desc',
       desc: '',
       args: [],

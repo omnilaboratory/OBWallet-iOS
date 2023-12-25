@@ -146,7 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "kyc_dateOfBirth": MessageLookupByLibrary.simpleMessage("出生日期"),
         "kyc_tips1": MessageLookupByLibrary.simpleMessage("請輸入英文和數字。"),
         "kyc_title": MessageLookupByLibrary.simpleMessage("認證"),
-        "login_Desc": MessageLookupByLibrary.simpleMessage("錢包描述"),
+        "login_Desc": MessageLookupByLibrary.simpleMessage(""),
         "login_ForgotPsw": MessageLookupByLibrary.simpleMessage("忘記密碼?"),
         "login_SignIn": MessageLookupByLibrary.simpleMessage("登錄"),
         "login_SignUp": MessageLookupByLibrary.simpleMessage("註冊"),

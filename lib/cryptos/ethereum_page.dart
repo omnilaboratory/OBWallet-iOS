@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:awallet/bean/dollar_face_info.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
@@ -38,6 +39,8 @@ class _EthereumPageState extends State<EthereumPage> {
 
   List<Widget> nftList = [];
 
+  Timer? timer;
+
   @override
   void initState() {
     GlobalParams.eventBus.on().listen((event) {
@@ -52,15 +55,21 @@ class _EthereumPageState extends State<EthereumPage> {
     });
 
     super.initState();
+
+    timer ??= Timer.periodic(const Duration(seconds: 30), (timer) {
+      _updateBalance();
+    });
     _updateBalance();
   }
 
   @override
   void dispose() {
+    timer?.cancel();
     super.dispose();
   }
 
   _updateBalance() {
+    log("EthereumPage updateBalance");
     var address = LocalStorage.getEthAddress();
     if (address != null) {
       EthService.getInstance().updateTokenBalances(context).then((value) {
@@ -222,7 +231,8 @@ class _EthereumPageState extends State<EthereumPage> {
                     onTap: () {
                       createNewWallet();
                     },
-                    child: createBtn("icon_plus.png", S.of(context).ethereumPage_CreateNewWallet)),
+                    child: createBtn("icon_plus.png",
+                        S.of(context).ethereumPage_CreateNewWallet)),
                 InkWell(
                     onTap: () async {
                       var flag = await showDialog(
@@ -235,8 +245,8 @@ class _EthereumPageState extends State<EthereumPage> {
                         setState(() {});
                       }
                     },
-                    child: createBtn(
-                        "image_recover_wallet.png", S.of(context).ethereumPage_RecoverWallet)),
+                    child: createBtn("image_recover_wallet.png",
+                        S.of(context).ethereumPage_RecoverWallet)),
               ]),
         ),
       ),
