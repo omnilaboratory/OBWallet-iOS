@@ -48,7 +48,7 @@ class Eth {
       // Get the private key
       var key = cred.privateKeyInt;
       var privateKey = key.toRadixString(16);
-      log('privateKey: $privateKey');
+      // log('privateKey: $privateKey');
 
       // Save the address and private key to local storage on device
       LocalStorage.setEthAddress(address);
