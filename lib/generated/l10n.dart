@@ -1680,6 +1680,36 @@ class S {
     );
   }
 
+  /// `RealCard`
+  String get realCard_title {
+    return Intl.message(
+      'RealCard',
+      name: 'realCard_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get realCard_name {
+    return Intl.message(
+      'Name',
+      name: 'realCard_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID Card Num`
+  String get realCard_idCardNum {
+    return Intl.message(
+      'ID Card Num',
+      name: 'realCard_idCardNum',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Wrong email`
   String get tips_WrongEmail {
     return Intl.message(

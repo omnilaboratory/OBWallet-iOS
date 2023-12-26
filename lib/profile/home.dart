@@ -1,3 +1,4 @@
+import 'package:awallet/cards/real_card_step1.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/common_service.dart';
@@ -63,6 +64,12 @@ class _ProfileHomeState extends State<ProfileHome> {
           builder: (context) {
             return const Guide();
           });
+    }));
+    list.add(const SizedBox(height: 10));
+    list.add(
+        btnBtnItem(Icons.car_crash, "实体卡", () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const RealCardStep1()));
     }));
     list.add(const SizedBox(height: 10));
     list.add(btnBtnItem(

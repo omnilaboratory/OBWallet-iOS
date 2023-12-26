@@ -221,6 +221,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile_reward_subTitle1": m3,
         "profile_title_RewardFrom":
             MessageLookupByLibrary.simpleMessage("Reward From"),
+        "realCard_idCardNum":
+            MessageLookupByLibrary.simpleMessage("ID Card Num"),
+        "realCard_name": MessageLookupByLibrary.simpleMessage("Name"),
+        "realCard_title": MessageLookupByLibrary.simpleMessage("RealCard"),
         "receiveWallet_LightningInvoice":
             MessageLookupByLibrary.simpleMessage("Lightning Invoice"),
         "receiveWallet_WalletAddress":

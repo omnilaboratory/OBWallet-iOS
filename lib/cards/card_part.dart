@@ -316,6 +316,12 @@ class _CardPartState extends State<CardPart> {
       return;
     }
 
+    // kyc not pass, can not applyCard
+    if (CommonService.userInfo!.kycStatus != EnumKycStatus.passed.value) {
+      showKycTips(context);
+      return;
+    }
+
     if (CommonService.userInfo!.kycStatus != EnumKycStatus.none.value) {
       AccountService.getInstance().getAccountInfo(context).then((info) {
         if (info.code == 1) {

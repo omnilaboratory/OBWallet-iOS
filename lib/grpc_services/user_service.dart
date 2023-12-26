@@ -168,7 +168,6 @@ class UserService {
 
   Future<GrpcResponse> uploadImage(
       BuildContext context, UploadRequest req) async {
-    log("$req");
     var ret = GrpcResponse();
     try {
       var resp = await userServiceClient?.upload(req);

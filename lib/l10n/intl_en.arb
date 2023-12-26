@@ -188,6 +188,10 @@
   "profile_guide_desc4": "USD can withdraw to virtual card.",
   "profile_guide_desc5": "Check your virtual card.",
 
+  "realCard_title": "RealCard",
+  "realCard_name": "Name",
+  "realCard_idCardNum": "ID Card Num",
+
   "tips_WrongEmail": "Wrong email",
   "tips_WrongTxid": "Wrong txid",
   "tips_WrongTopUp": "Top up to wallet address",
