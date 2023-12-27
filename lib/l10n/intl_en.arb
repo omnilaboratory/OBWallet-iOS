@@ -192,6 +192,15 @@
   "realCard_name": "Name",
   "realCard_idCardNum": "ID Card Num",
 
+  "realCard_Step2_title": "卡片寄送地址",
+  "realCard_Step2_phone": "手机号",
+  "realCard_Step2_city": "收件城市",
+  "realCard_Step2_cityCode": "城市邮编",
+  "realCard_Step2_address": "详细地址",
+
+  "realCard_Step3_title": "账单寄送地址",
+  "realCard_Step3_note": "请填写非中国大陆地区的英文地址",
+
   "tips_WrongEmail": "Wrong email",
   "tips_WrongTxid": "Wrong txid",
   "tips_WrongTopUp": "Top up to wallet address",

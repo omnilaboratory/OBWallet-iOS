@@ -45,6 +45,7 @@ TextFormField createTextFormField(
     decoration: InputDecoration(
       hintText: hintText,
       prefixIcon: icon,
+      isCollapsed: true,
       hintStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
       border: borderType == 0 ? outlineInputBorder : outlineRightInputBorder,
       focusedBorder:

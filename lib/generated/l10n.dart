@@ -1710,6 +1710,76 @@ class S {
     );
   }
 
+  /// `卡片寄送地址`
+  String get realCard_Step2_title {
+    return Intl.message(
+      '卡片寄送地址',
+      name: 'realCard_Step2_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `手机号`
+  String get realCard_Step2_phone {
+    return Intl.message(
+      '手机号',
+      name: 'realCard_Step2_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `收件城市`
+  String get realCard_Step2_city {
+    return Intl.message(
+      '收件城市',
+      name: 'realCard_Step2_city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `城市邮编`
+  String get realCard_Step2_cityCode {
+    return Intl.message(
+      '城市邮编',
+      name: 'realCard_Step2_cityCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `详细地址`
+  String get realCard_Step2_address {
+    return Intl.message(
+      '详细地址',
+      name: 'realCard_Step2_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `账单寄送地址`
+  String get realCard_Step3_title {
+    return Intl.message(
+      '账单寄送地址',
+      name: 'realCard_Step3_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `请填写非中国大陆地区的英文地址`
+  String get realCard_Step3_note {
+    return Intl.message(
+      '请填写非中国大陆地区的英文地址',
+      name: 'realCard_Step3_note',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Wrong email`
   String get tips_WrongEmail {
     return Intl.message(

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:awallet/cards/real_card_step2.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
@@ -41,9 +42,12 @@ class _RealCardStep1State extends State<RealCardStep1> {
               const SizedBox(height: 30),
               BottomButton(
                 icon: 'asset/images/icon_arrow_right_green.png',
-                text: 'NEXT',
+                text: S.of(context).common_Next,
                 onPressed: () {
                   FocusScope.of(context).requestFocus(FocusNode());
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const RealCardStep2()));
+
                 },
               ),
             ],
