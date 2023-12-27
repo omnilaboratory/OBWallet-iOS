@@ -188,6 +188,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile_reward_subTitle1": m3,
         "profile_title_RewardFrom":
             MessageLookupByLibrary.simpleMessage("來自獎勵"),
+        "realCard_Step2_address": MessageLookupByLibrary.simpleMessage("详细地址"),
+        "realCard_Step2_city": MessageLookupByLibrary.simpleMessage("收件城市"),
+        "realCard_Step2_cityCode": MessageLookupByLibrary.simpleMessage("城市邮编"),
+        "realCard_Step2_phone": MessageLookupByLibrary.simpleMessage("手机号"),
+        "realCard_Step2_title": MessageLookupByLibrary.simpleMessage("卡片寄送地址"),
+        "realCard_Step3_note":
+            MessageLookupByLibrary.simpleMessage("请填写非中国大陆地区的英文地址"),
+        "realCard_Step3_title": MessageLookupByLibrary.simpleMessage("账单寄送地址"),
+        "realCard_idCardNum":
+            MessageLookupByLibrary.simpleMessage("ID Card Num"),
+        "realCard_name": MessageLookupByLibrary.simpleMessage("Name"),
+        "realCard_title": MessageLookupByLibrary.simpleMessage("RealCard"),
         "receiveWallet_LightningInvoice":
             MessageLookupByLibrary.simpleMessage("閃電網路發票"),
         "receiveWallet_WalletAddress":

@@ -188,6 +188,19 @@
   "profile_guide_desc4": "USD 可以提款到虛擬卡。",
   "profile_guide_desc5": "檢查您的虛擬卡。",
 
+  "realCard_title": "RealCard",
+  "realCard_name": "Name",
+  "realCard_idCardNum": "ID Card Num",
+
+  "realCard_Step2_title": "卡片寄送地址",
+  "realCard_Step2_phone": "手机号",
+  "realCard_Step2_city": "收件城市",
+  "realCard_Step2_cityCode": "城市邮编",
+  "realCard_Step2_address": "详细地址",
+
+  "realCard_Step3_title": "账单寄送地址",
+  "realCard_Step3_note": "请填写非中国大陆地区的英文地址",
+
   "tips_WrongEmail": "錯誤的郵件",
   "tips_WrongTxid": "錯誤的交易 ID",
   "tips_WrongTopUp": "充值到錢包地址",
