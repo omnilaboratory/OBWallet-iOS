@@ -9,7 +9,7 @@ class LocalStorage {
   static String ethPrivateKey = "privateKey";
 
   static String? getEthAddress() {
-    return get("${ethAddress}_${CommonService.userId}");
+    return CommonService.userInfo?.walletAddress;
   }
 
   static removeEthAddress() {

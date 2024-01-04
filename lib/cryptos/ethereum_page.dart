@@ -24,8 +24,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'ethereum_recover_wallet.dart';
-
 class EthereumPage extends StatefulWidget {
   const EthereumPage({super.key});
 
@@ -85,7 +83,7 @@ class _EthereumPageState extends State<EthereumPage> {
   Widget build(BuildContext context) {
     var address = LocalStorage.getEthAddress();
     if (address == null) {
-      return createOrRecoverWallet();
+      showToast("no wallet address");
     }
     var walletInfo = EthService.getInstance().getWalletInfo();
 
@@ -211,45 +209,6 @@ class _EthereumPageState extends State<EthereumPage> {
                   });
             }),
       ],
-    );
-  }
-
-  Widget createOrRecoverWallet() {
-    return Center(
-      child: SingleChildScrollView(
-        child: SizedBox(
-          height: 380,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child:
-                      Image(image: AssetImage("asset/images/img_wallet.png")),
-                ),
-                InkWell(
-                    onTap: () {
-                      createNewWallet();
-                    },
-                    child: createBtn("icon_plus.png",
-                        S.of(context).ethereumPage_CreateNewWallet)),
-                InkWell(
-                    onTap: () async {
-                      var flag = await showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const EthereumRecoverWallet();
-                          });
-                      if (flag != null && flag) {
-                        updateTokenBalances();
-                        setState(() {});
-                      }
-                    },
-                    child: createBtn("image_recover_wallet.png",
-                        S.of(context).ethereumPage_RecoverWallet)),
-              ]),
-        ),
-      ),
     );
   }
 

@@ -114,16 +114,6 @@ class _CryptoHomeState extends State<CryptoHome> {
           padding: const EdgeInsets.only(right: 20.0),
           child: Row(
             children: [
-              // ButtonForAppBarAction(
-              //     imageUrl: "asset/images/icon_fresh.png",
-              //     onTap: () {
-              //       showDialog(
-              //           context: context,
-              //           builder: (context) {
-              //             return const Update();
-              //           });
-              //     }),
-
               InkWell(
                 onTap: () {
                   showDialog(
@@ -141,15 +131,6 @@ class _CryptoHomeState extends State<CryptoHome> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const TxHistory()));
-                  }),
-              ButtonForAppBarAction(
-                  imageUrl: "asset/images/icon_more_3pot.png",
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const MoreMenu();
-                        });
                   }),
             ],
           ),
