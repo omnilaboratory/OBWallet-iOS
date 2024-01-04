@@ -267,7 +267,7 @@ class _SendState extends State<Send> {
       if (info.code == 1) {
         var accountInfo = info.data as AccountInfo;
         log("$accountInfo");
-        totalBalanceUsd = accountInfo.balanceUsd;
+        totalBalanceUsd = accountInfo.balance;
         if (mounted) {
           setState(() {});
         }

@@ -104,7 +104,7 @@ class _ExchangeBakState extends State<ExchangeBak> {
       if (value.code == 1) {
         var resp = value.data as AccountInfo;
         log(resp.toString());
-        currSelectedCurrency.balance = resp.balanceUsd;
+        currSelectedCurrency.balance = resp.balance;
         setState(() {
           if (currSelectedCurrency.balance == 0) {
             canCurrencyClick = false;

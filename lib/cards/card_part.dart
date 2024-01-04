@@ -326,7 +326,7 @@ class _CardPartState extends State<CardPart> {
       AccountService.getInstance().getAccountInfo(context).then((info) {
         if (info.code == 1) {
           var accountInfo = info.data as AccountInfo;
-          if (accountInfo.balanceUsd < createCardFee) {
+          if (accountInfo.balance < createCardFee) {
             alert(S.of(context).tips_needFiveDollarFee(createCardFee), context,
                 () {
               // showDialog(

@@ -364,7 +364,7 @@ class _AccountState extends State<Account> {
     AccountService.getInstance().getAccountInfo(context).then((info) {
       if (info.code == 1) {
         var accountInfo = info.data as AccountInfo;
-        totalBalanceUsd = accountInfo.balanceUsd;
+        totalBalanceUsd = accountInfo.balance;
         if (mounted) {
           setState(() {});
         }
