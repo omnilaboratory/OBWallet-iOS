@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/grpc_response.dart';
-import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/protos/gen-dart/user/user_wallet.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
