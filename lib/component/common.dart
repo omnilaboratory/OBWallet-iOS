@@ -45,7 +45,7 @@ TextFormField createTextFormField(
     decoration: InputDecoration(
       hintText: hintText,
       prefixIcon: icon,
-      isCollapsed: true,
+      isCollapsed: maxLines > 1,
       hintStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
       border: borderType == 0 ? outlineInputBorder : outlineRightInputBorder,
       focusedBorder:
@@ -213,12 +213,11 @@ OverlayEntry showLoading(BuildContext context) {
   return entry;
 }
 
-removeLoading(OverlayEntry loading){
+removeLoading(OverlayEntry loading) {
   if (loading.mounted) {
     loading.remove();
   }
 }
-
 
 SmartRefresher buildNewSmartRefresher(RefreshController controller, Widget body,
     {VoidCallback? onRefresh,
