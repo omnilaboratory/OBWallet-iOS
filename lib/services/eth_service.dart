@@ -8,6 +8,7 @@ import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/grpc_services/user_wallet_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
@@ -31,25 +32,7 @@ class EthService {
 
   createWalletInfo(BuildContext context) async {
     String? address = LocalStorage.getEthAddress();
-    if (address == null || address.isEmpty) {
-      address = await Eth.genEthAddress(context);
-    }
-    walletInfo = CryptoWalletInfo(address: address, balance: 0);
-  }
-
-  bool recoverWallet(BuildContext context, String? wif) {
-    if (wif == null || wif.isEmpty) {
-      return false;
-    }
-    var address = Eth.getEthAddressFromPrivKey(wif);
-    if (address.isEmpty) {
-      return false;
-    }
-    walletInfo = CryptoWalletInfo(address: address, balance: 0);
-    LocalStorage.setEthAddress(address);
-    LocalStorage.setEthPrivateKey(wif);
-    UserService.getInstance().updateUser(context, address);
-    return true;
+    walletInfo = CryptoWalletInfo(address: address!, balance: 0);
   }
 
   List<TokenInfo> getTokenList() {
@@ -81,28 +64,22 @@ class EthService {
 
   updateTokenBalances(BuildContext context) async {
     log('updateTokenBalances');
-    String address = LocalStorage.getEthAddress()!;
     double totalBalance = 0;
 
-    double balance = await Eth.getBalanceOfETH(address);
+    double balance = await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.ETH.name);
     totalBalance = await setTokenUsdValue(
         context, getTokenList()[0], balance, totalBalance);
 
 
-    balance = await Eth.getBalanceOfUSDT(address);
+    balance = await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.USDT.name);
     totalBalance = await setTokenUsdValue(
         context, getTokenList()[1], balance, totalBalance);
 
     if (GlobalParams.currNetwork == EnumNetworkType.mainnet) {
-      balance = await Eth.getBalanceOfUSDC(address);
+      balance =await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.USDC.name);
       totalBalance = await setTokenUsdValue(
           context, getTokenList()[2], balance, totalBalance);
     }
-
-    // Polygon usdt
-    balance = await Eth.getBalanceOfPolygonUSDT(address);
-    totalBalance = await setTokenUsdValue(
-        context, getTokenListPolygon()[0], balance, totalBalance);
 
     walletInfo = getWalletInfo();
     walletInfo?.balance = totalBalance;
@@ -123,18 +100,17 @@ class EthService {
 
   Future<TokenInfo> getTokenBalance(
       BuildContext context, TokenInfo tokenInfo) async {
-    String address = LocalStorage.getEthAddress()!;
     double balance = 0;
     if (tokenInfo.name == "ETH") {
-      balance = await Eth.getBalanceOfETH(address);
+      balance = await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.ETH.name);
       log("getTokenBalance $balance");
     }
     if (tokenInfo.name == "USDT") {
-      balance = await Eth.getBalanceOfUSDT(address);
+      balance = await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.USDT.name);
     }
     if (GlobalParams.currNetwork == EnumNetworkType.mainnet) {
       if (tokenInfo.name == "USDC") {
-        balance = await Eth.getBalanceOfUSDC(address);
+        balance = await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.USDC.name);
       }
     }
     tokenInfo.balance = balance;

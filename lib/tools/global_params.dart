@@ -1,10 +1,12 @@
 import 'package:awallet/bean/enum_eth_key.dart';
 import 'package:awallet/bean/enum_network_type.dart';
 import 'package:awallet/bean/token_info.dart';
+import 'package:awallet/protos/gen-dart/user/account.pb.dart';
 import 'package:event_bus/event_bus.dart';
 
 int pageSize = 10;
 
+// "Polygon"
 class GlobalParams {
   static EventBus eventBus = EventBus();
 
@@ -13,36 +15,52 @@ class GlobalParams {
   static int grpcTimeout = 30;
   static String currLangName = "en";
 
-  static resetTokens(){
-
+  static resetTokens() {
     // mainnet
-    GlobalParams.dataInNetwork[EnumNetworkType.mainnet][EnumEthKey.tokenList]=[
-      TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
-      TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
-      TokenInfo(name: "USDC", iconUrl: 'asset/images/icon_usdc_logo.png'),
-    ];
-
-    GlobalParams.dataInNetwork[EnumNetworkType.mainnet][EnumEthKey.polygonTokenList]=[
+    GlobalParams.dataInNetwork[EnumNetworkType.mainnet]
+        [EnumEthKey.tokenList] = [
+      TokenInfo(
+          name: "ETH",
+          iconUrl: 'asset/images/icon_eth_logo.png',
+          netName: NetWork.ETH.name),
       TokenInfo(
           name: "USDT",
           iconUrl: 'asset/images/icon_tether.png',
-          netName: "Polygon")
+          netName: NetWork.ETH.name),
+      TokenInfo(
+          name: "USDC",
+          iconUrl: 'asset/images/icon_usdc_logo.png',
+          netName: NetWork.ETH.name),
+    ];
+
+    GlobalParams.dataInNetwork[EnumNetworkType.mainnet]
+        [EnumEthKey.polygonTokenList] = [
+      TokenInfo(
+          name: "USDT",
+          iconUrl: 'asset/images/icon_tether.png',
+          netName: NetWork.POLYGON.name)
     ];
 
     // goerli
-    GlobalParams.dataInNetwork[EnumNetworkType.goerli][EnumEthKey.tokenList]=[
-      TokenInfo(name: "ETH", iconUrl: 'asset/images/icon_eth_logo.png'),
-      TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
-    ];
-
-    GlobalParams.dataInNetwork[EnumNetworkType.goerli][EnumEthKey.polygonTokenList]=[
+    GlobalParams.dataInNetwork[EnumNetworkType.goerli][EnumEthKey.tokenList] = [
+      TokenInfo(
+          name: "ETH",
+          iconUrl: 'asset/images/icon_eth_logo.png',
+          netName: NetWork.ETH.name),
       TokenInfo(
           name: "USDT",
           iconUrl: 'asset/images/icon_tether.png',
-          netName: "Polygon")
+          netName: NetWork.ETH.name),
+    ];
+
+    GlobalParams.dataInNetwork[EnumNetworkType.goerli]
+        [EnumEthKey.polygonTokenList] = [
+      TokenInfo(
+          name: "USDT",
+          iconUrl: 'asset/images/icon_tether.png',
+          netName: NetWork.POLYGON.name)
     ];
   }
-
 
   static Map<EnumNetworkType, dynamic> dataInNetwork = Map.from({
     EnumNetworkType.mainnet: Map.from({

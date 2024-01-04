@@ -1,6 +1,7 @@
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/cryptos/token_activity.dart';
+import 'package:awallet/protos/gen-dart/user/account.pb.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,7 @@ class CryptoTokenItem extends StatelessWidget {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return Send(name: 'USDT',netName: "Polygon");
+                    return Send(name: 'USDT',netName: NetWork.POLYGON.name);
                   });
             }
           },

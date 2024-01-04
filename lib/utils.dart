@@ -9,6 +9,7 @@ import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:web3dart/web3dart.dart';
 
 import 'bean/enum_kyc_status.dart';
 
@@ -187,6 +188,17 @@ class Utils {
     return null;
   }
 
+  static NetWork? getChainNetWork(String code) {
+    if (code.isNotEmpty) {
+      for (var value in NetWork.values) {
+        if (value.name.toLowerCase() == code.toLowerCase()) {
+          return value;
+        }
+      }
+    }
+    return NetWork.ETH;
+  }
+
   static EnumKycStatus getEnumKycStatus(String code) {
     for (var value in EnumKycStatus.values) {
       if (value.value.toLowerCase() == code.toLowerCase()) {
@@ -203,5 +215,15 @@ class Utils {
       }
     }
     return 0;
+  }
+
+  static bool validateAddress(String address) {
+    try {
+      EthereumAddress.fromHex(address);
+      return true;
+    } catch (e) {
+      log('Invalid address');
+    }
+    return false;
   }
 }

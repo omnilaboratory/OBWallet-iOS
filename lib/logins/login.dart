@@ -34,7 +34,6 @@ class _LoginState extends State<Login> {
         log("login token $userToken");
         autoLogin(userToken);
       }
-      Eth.initWeb3Client();
       setState(() {});
     });
 

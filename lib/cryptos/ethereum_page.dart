@@ -1,25 +1,18 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:awallet/bean/dollar_face_info.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_token_item.dart';
 import 'package:awallet/component/crypto_wallet_card.dart';
-import 'package:awallet/component/dollar_face.dart';
 import 'package:awallet/component/square_button.dart';
-import 'package:awallet/cryptos/nft_exchange.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/generated/l10n.dart';
-import 'package:awallet/grpc_services/account_service.dart';
-import 'package:awallet/grpc_services/common_service.dart';
-import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
-import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -44,11 +37,6 @@ class _EthereumPageState extends State<EthereumPage> {
     GlobalParams.eventBus.on().listen((event) {
       if (event == "MoreMenu_setNetwork" || event == "exchange_showTips") {
         _updateBalance();
-      }
-      if (event == "nftChange") {
-        if (mounted) {
-          updateNftList();
-        }
       }
     });
 
@@ -92,22 +80,14 @@ class _EthereumPageState extends State<EthereumPage> {
     localList.addAll(EthService.getInstance().getTokenListPolygon());
 
     Widget buildTokenAndNftList() {
-      return currTypeIndex == 0
-          ? ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return CryptoTokenItem(tokenInfo: localList[index]);
-              },
-              itemCount: localList.length,
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
-            )
-          : nftList.isEmpty
-              ? Text(S.of(context).common_NoData)
-              : Wrap(
-                  spacing: 20,
-                  runSpacing: 16.0,
-                  children: nftList,
-                );
+      return ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          return CryptoTokenItem(tokenInfo: localList[index]);
+        },
+        itemCount: localList.length,
+        shrinkWrap: true,
+        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
+      );
     }
 
     return SmartRefresher(
@@ -126,31 +106,6 @@ class _EthereumPageState extends State<EthereumPage> {
             ),
           ),
           const SizedBox(height: 2),
-          // no nft  don't delete
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: [
-          //     InkWell(
-          //         onTap: () {
-          //           onClickType(0);
-          //         },
-          //         child: Text(S.of(context).ethereumPage_Tokens,
-          //             style: TextStyle(
-          //                 fontSize: 16,
-          //                 color:
-          //                     currTypeIndex == 0 ? Colors.blue : Colors.grey))),
-          //     InkWell(
-          //         onTap: () {
-          //           onClickType(1);
-          //         },
-          //         child: Text(S.of(context).ethereumPage_NFTs,
-          //             style: TextStyle(
-          //                 fontSize: 16,
-          //                 color:
-          //                     currTypeIndex == 1 ? Colors.blue : Colors.grey)))
-          //   ],
-          // ),
-          // const SizedBox(height: 20),
           Expanded(
             child: SingleChildScrollView(
                 child: Column(
@@ -251,65 +206,5 @@ class _EthereumPageState extends State<EthereumPage> {
     if (mounted) {
       setState(() {});
     }
-  }
-
-  final RefreshController _refreshListController =
-      RefreshController(initialRefresh: false);
-  var currTypeIndex = 0;
-
-  void onClickType(int type) {
-    if (currTypeIndex == type) {
-      return;
-    }
-    if (_refreshListController.isRefresh || _refreshListController.isLoading) {
-      return;
-    }
-    currTypeIndex = type;
-    if (type == 0) {}
-    if (type == 1) {
-      updateNftList();
-    }
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  void updateNftList() {
-    nftList.clear();
-    AccountService.getInstance().getNftBalance(context).then((resp) {
-      if (resp.code == 1) {
-        CommonService.nftInfoList.clear();
-        List<NftToken> nftInfos = resp.data;
-        if (nftInfos.isNotEmpty) {
-          nftInfos.sort((a, b) => b.tokenId.compareTo(a.tokenId));
-
-          for (int i = 0; i < nftInfos.length; i++) {
-            NftToken token = nftInfos[i];
-            DollarFaceInfo nodeInfo = DollarFaceInfo(
-                faceType:
-                    Utils.getEnumDollarFaceIndex(token.tokenId.toString()),
-                amount: token.amt.toInt());
-
-            if (nodeInfo.amount <= 0) {
-              continue;
-            }
-            CommonService.nftInfoList.add(nodeInfo);
-            nftList.add(GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => NftExchange(faceInfo: nodeInfo)));
-              },
-              child: DollarFace(
-                  faceType: nodeInfo.faceType, amount: nodeInfo.amount),
-            ));
-          }
-        }
-      }
-      if (mounted) {
-        setState(() {});
-      }
-    });
   }
 }

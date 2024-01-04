@@ -4,12 +4,13 @@ import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/cryptos/send_confirm.dart';
-import 'package:awallet/eth.dart';
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/protos/gen-dart/user/account.pb.dart';
 import 'package:awallet/services/eth_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:awallet/tools/string_tool.dart';
+import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -73,7 +74,7 @@ class _SendState extends State<Send> {
       return;
     }
 
-    if (!Eth.validateAddress(_addressController.value.text.trim())) {
+    if (!Utils.validateAddress(_addressController.value.text.trim())) {
       showToast(S.of(context).tips_invalidAddress);
       return;
     }
@@ -158,7 +159,7 @@ class _SendState extends State<Send> {
                     ],
                   ),
                   
-                  Center(child: Text(widget.netName == 'Polygon' ? '(Polygon Asset)' : '')),
+                  Center(child: Text(widget.netName == NetWork.POLYGON.name ? '(Polygon Asset)' : '')),
                   const SizedBox(height: 20),
                   Visibility(
                     visible: false,

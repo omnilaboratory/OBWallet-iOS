@@ -2,7 +2,6 @@ import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/button_for_app_bar.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/cryptos/ethereum_page.dart';
-import 'package:awallet/cryptos/more_menu.dart';
 import 'package:awallet/cryptos/tx_history.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/profile/guide.dart';

@@ -29,18 +29,31 @@ class UserWalletService {
 
   factory UserWalletService() => _instance;
 
-  Future<GrpcResponse> getTokenBalance(
-      BuildContext context, String tokenName) async {
+  Future<double> getTokenBalance(String tokenName) async {
     var request = GetTokenBalalanceRequest();
     request.tokenName = tokenName;
     log("$request");
+    try {
+      var resp = await walletClient?.getTokenBalalance(request)
+          as GetTokenBalalanceResponse;
+      log("getTokenBalance $resp");
+      return resp.balanceUsd;
+    } catch (e) {
+      log("$e");
+    }
+    return 0;
+  }
+
+  Future<GrpcResponse> transferToken(
+      BuildContext context, TransferTokenRequest request) async {
+    log("$request");
     var ret = GrpcResponse();
     try {
-      var resp = await walletClient?.getTokenBalalance(request);
+      var resp = await walletClient?.transferToken(request);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, "getTokenBalance", e, ret);
+      UserService.getInstance().setError(context, "transferToken", e, ret);
     }
     return ret;
   }

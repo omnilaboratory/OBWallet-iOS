@@ -1,15 +1,15 @@
-import 'dart:developer';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
-import 'package:awallet/eth.dart';
 import 'package:awallet/generated/l10n.dart';
-import 'package:awallet/grpc_services/eth_grpc_service.dart';
+import 'package:awallet/grpc_services/user_wallet_service.dart';
+import 'package:awallet/protos/gen-dart/user/account.pb.dart';
+import 'package:awallet/protos/gen-dart/user/user_wallet.pb.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/string_tool.dart';
+import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
@@ -34,66 +34,19 @@ class SendConfirm extends StatefulWidget {
 class _SendConfirmState extends State<SendConfirm> {
   onConfirm() async {
     var loading = showLoading(context);
-    if (widget.name == 'ETH') {
-      Eth.sendEthTo(widget.address, double.parse(widget.amount)).then((value) {
-        try {
-          if (value.isNotEmpty) {
-            log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(context, value);
-            GlobalParams.eventBus.fire("SendConfirm_Close");
-            Navigator.pop(context);
-          }
-        } catch (e) {}
-        removeLoading(loading);
-      });
-    } else if (widget.name == 'USDT') {
-      if (widget.netName.isEmpty) {
-        Eth.sendUsdtTo(widget.address, double.parse(widget.amount))
-            .then((value) {
-          try {
-            if (value.isNotEmpty) {
-              log('txId: $value');
-              EthGrpcService.getInstance().ethTrackTx(context, value);
-              GlobalParams.eventBus.fire("SendConfirm_Close");
-              Navigator.pop(context);
-            }
-          } catch (e) {}
-          removeLoading(loading);
-        });
-      }
+    TransferTokenRequest request = TransferTokenRequest();
+    request.network = Utils.getChainNetWork(widget.netName)!;
+    request.token = Utils.getContractSymbol(widget.name)!;
+    request.to = widget.address;
+    request.amt = double.parse(widget.amount);
+    UserWalletService.getInstance()
+        .transferToken(context, request)
+        .then((resp) {
 
-      if (widget.netName.toLowerCase() == "polygon") {
-        Eth.sendPolygonUsdtTo(widget.address, double.parse(widget.amount))
-            .then((value) {
-          try {
-            if (value.isNotEmpty) {
-              log('txId: $value');
-              EthGrpcService.getInstance().ethTrackTx(context, value);
-              GlobalParams.eventBus.fire("SendConfirm_Close");
-              Navigator.pop(context);
-            } else {
-              removeLoading(loading);
-              alert(S.of(context).tips_sendTokenError, context, () {});
-              return;
-            }
-          } catch (e) {}
-          removeLoading(loading);
-        });
-      }
-    } else if (widget.name == 'USDC') {
-      Eth.sendUsdcTo(widget.address, double.parse(widget.amount)).then((value) {
-        try {
-          if (value.isNotEmpty) {
-            log('txId: $value');
-            EthGrpcService.getInstance().ethTrackTx(context, value);
-            GlobalParams.eventBus.fire("SendConfirm_Close");
-            Navigator.pop(context);
-          }
-        } catch (e) {}
-        removeLoading(loading);
-      });
-    }
-    removeLoading(loading);
+      GlobalParams.eventBus.fire("SendConfirm_Close");
+      Navigator.pop(context);
+      removeLoading(loading);
+    });
   }
 
   onBack() {

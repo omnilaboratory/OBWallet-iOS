@@ -14,7 +14,7 @@ import 'bean/enum_eth_key.dart';
 import 'contract_abis/TestNftContract.g.dart';
 import 'contract_abis/USDT.g.dart';
 
-class Eth {
+class EthV1 {
 
   // static String apiUrl = "https://eth-mainnet.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
   // static String apiUrl = "https://eth-goerli.g.alchemy.com/v2/JWXQeMFoFECvkbukMCi5GGiEMdmQb3Ch";
