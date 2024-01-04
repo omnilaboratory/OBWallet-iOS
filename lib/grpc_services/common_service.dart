@@ -6,7 +6,7 @@ import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/grpc_services/user_wallet_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
-import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/services/token_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:grpc/grpc.dart';
 
@@ -49,7 +49,7 @@ resetServices() {
   GlobalParams.resetTokens();
   CommonService.cardInfo = CardInfo();
   CommonService.firstEnterApp = true;
-  EthService.walletInfo = null;
+  TokenService.walletInfo = null;
   resetServicesFromChangeLanguage();
 }
 resetServicesFromChangeLanguage() {

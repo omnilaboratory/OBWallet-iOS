@@ -1,4 +1,3 @@
-import 'package:awallet/bean/enum_eth_key.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
@@ -6,7 +5,7 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/cryptos/send_confirm.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/protos/gen-dart/user/account.pb.dart';
-import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/services/token_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/precision_limit_formatter.dart';
 import 'package:awallet/tools/string_tool.dart';
@@ -29,30 +28,14 @@ class _SendState extends State<Send> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
 
-  var initTokenList = EthService.getInstance().getTokenList();
-  List<TokenInfo> tokenList = [];
+  List<TokenInfo> tokenList = TokenService.getInstance().getTokenList();
   late TokenInfo dropdownValue;
   int num = 6;
   late bool canClick;
 
   @override
   void initState() {
-    if (widget.netName.isEmpty) {
-      tokenList.addAll(initTokenList);
-      for (int i = 0; i < tokenList.length; i++) {
-        TokenInfo tokenInfo = tokenList[i];
-        if (tokenInfo.name == widget.name) {
-          int index = tokenList.indexOf(tokenInfo);
-          tokenList.insert(0, tokenList.removeAt(index));
-        }
-      }
-    } else {
-      tokenList.addAll(GlobalParams.dataInNetwork[GlobalParams.currNetwork]![
-          EnumEthKey.polygonTokenList]!);
-    }
-
     dropdownValue = tokenList[0];
-
     if (dropdownValue.balance == 0) {
       canClick = false;
     } else {

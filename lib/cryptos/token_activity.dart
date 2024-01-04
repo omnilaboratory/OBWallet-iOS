@@ -11,7 +11,7 @@ import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
-import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/services/token_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
@@ -39,7 +39,7 @@ class _TokenActivityState extends State<TokenActivity> {
 
 
   void onFreshBalance() {
-    EthService.getInstance().getTokenBalance(context,widget.tokenInfo).then((value) {
+    TokenService.getInstance().getTokenBalance(context,widget.tokenInfo).then((value) {
       if (mounted) {
         setState(() {});
       }
@@ -168,7 +168,7 @@ class _TokenActivityState extends State<TokenActivity> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const ReceiveWalletAddress();
+                    return ReceiveWalletAddress(network:Utils.getChainNetWork(widget.tokenInfo.netName)!);
                   });
             }),
         SquareButton(

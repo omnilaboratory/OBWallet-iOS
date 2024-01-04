@@ -6,7 +6,6 @@ import 'package:event_bus/event_bus.dart';
 
 int pageSize = 10;
 
-// "Polygon"
 class GlobalParams {
   static EventBus eventBus = EventBus();
 
@@ -19,10 +18,6 @@ class GlobalParams {
     // mainnet
     GlobalParams.dataInNetwork[EnumNetworkType.mainnet]
         [EnumEthKey.tokenList] = [
-      TokenInfo(
-          name: "ETH",
-          iconUrl: 'asset/images/icon_eth_logo.png',
-          netName: NetWork.ETH.name),
       TokenInfo(
           name: "USDT",
           iconUrl: 'asset/images/icon_tether.png',

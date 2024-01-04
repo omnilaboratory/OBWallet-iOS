@@ -1,33 +1,65 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/crypto_wallet_info.dart';
-import 'package:awallet/bean/enum_eth_key.dart';
 import 'package:awallet/bean/enum_network_type.dart';
 import 'package:awallet/bean/token_info.dart';
-import 'package:awallet/eth.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
-import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/grpc_services/user_wallet_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/cupertino.dart';
 
-class EthService {
-  static final EthService _instance = EthService._internal();
+Map<NetWork, List<TokenInfo>> tokenList = Map.from({
+  NetWork.ETH: [
+    TokenInfo(
+        name: "USDT",
+        iconUrl: 'asset/images/icon_tether.png',
+        netName: NetWork.ETH.name),
+    TokenInfo(
+        name: "USDC",
+        iconUrl: 'asset/images/icon_usdc_logo.png',
+        netName: NetWork.ETH.name),
+  ],
+  NetWork.POLYGON: [
+    TokenInfo(
+        name: "USDT",
+        iconUrl: 'asset/images/icon_tether.png',
+        netName: NetWork.POLYGON.name),
+    TokenInfo(
+        name: "USDC",
+        iconUrl: 'asset/images/icon_usdc_logo.png',
+        netName: NetWork.POLYGON.name),
+  ],
+  NetWork.TRON: [
+    TokenInfo(
+        name: "USDT",
+        iconUrl: 'asset/images/icon_tether.png',
+        netName: NetWork.TRON.name),
+    TokenInfo(
+        name: "USDC",
+        iconUrl: 'asset/images/icon_usdc_logo.png',
+        netName: NetWork.TRON.name),
+  ],
+});
 
-  EthService._internal();
+class TokenService {
+  static final TokenService _instance = TokenService._internal();
 
-  static EthService getInstance() => _instance;
+  TokenService._internal();
 
-  factory EthService() => _instance;
+  static TokenService getInstance() => _instance;
+
+  factory TokenService() => _instance;
 
   static CryptoWalletInfo? walletInfo;
 
-  CryptoWalletInfo getWalletInfo() {
-    walletInfo ??= CryptoWalletInfo(address: LocalStorage.getEthAddress()!);
-    return walletInfo!;
+  CryptoWalletInfo getWalletInfo({NetWork? network}) {
+    if (network == NetWork.TRON) {
+      return CryptoWalletInfo(address: CommonService.userInfo!.tronAddress);
+    }
+    return CryptoWalletInfo(address: LocalStorage.getEthAddress()!);
   }
 
   createWalletInfo(BuildContext context) async {
@@ -35,51 +67,31 @@ class EthService {
     walletInfo = CryptoWalletInfo(address: address!, balance: 0);
   }
 
-  List<TokenInfo> getTokenList() {
-    if (CommonService.tokenList.isEmpty) {
-      if (GlobalParams.dataInNetwork[GlobalParams.currNetwork]
-              [EnumEthKey.tokenList] ==
-          null) {
-        GlobalParams.resetTokens();
-      }
-
-      CommonService.tokenList = GlobalParams
-          .dataInNetwork[GlobalParams.currNetwork][EnumEthKey.tokenList];
+  List<TokenInfo> getTokenList({NetWork? network}) {
+    if (network != null) {
+      return tokenList[network]!;
+    } else {
+      List<TokenInfo> retList = [];
+      tokenList.forEach((key, value) {
+        retList.addAll(value);
+      });
+      return retList;
     }
-    return CommonService.tokenList;
-  }
-
-  List<TokenInfo> getTokenListPolygon() {
-    if (CommonService.tokenListPolygon.isEmpty) {
-      if (GlobalParams.dataInNetwork[GlobalParams.currNetwork]
-              [EnumEthKey.polygonTokenList] ==
-          null) {
-        GlobalParams.resetTokens();
-      }
-      CommonService.tokenListPolygon = GlobalParams
-          .dataInNetwork[GlobalParams.currNetwork][EnumEthKey.polygonTokenList];
-    }
-    return CommonService.tokenListPolygon;
   }
 
   updateTokenBalances(BuildContext context) async {
     log('updateTokenBalances');
     double totalBalance = 0;
 
-    double balance = await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.ETH.name);
+    double balance = await UserWalletService.getInstance()
+        .getTokenBalance(TrackedTx_ContractSymbol.ETH.name);
     totalBalance = await setTokenUsdValue(
         context, getTokenList()[0], balance, totalBalance);
 
-
-    balance = await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.USDT.name);
+    balance = await UserWalletService.getInstance()
+        .getTokenBalance(TrackedTx_ContractSymbol.USDT.name);
     totalBalance = await setTokenUsdValue(
         context, getTokenList()[1], balance, totalBalance);
-
-    if (GlobalParams.currNetwork == EnumNetworkType.mainnet) {
-      balance =await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.USDC.name);
-      totalBalance = await setTokenUsdValue(
-          context, getTokenList()[2], balance, totalBalance);
-    }
 
     walletInfo = getWalletInfo();
     walletInfo?.balance = totalBalance;
@@ -102,15 +114,18 @@ class EthService {
       BuildContext context, TokenInfo tokenInfo) async {
     double balance = 0;
     if (tokenInfo.name == "ETH") {
-      balance = await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.ETH.name);
+      balance = await UserWalletService.getInstance()
+          .getTokenBalance(TrackedTx_ContractSymbol.ETH.name);
       log("getTokenBalance $balance");
     }
     if (tokenInfo.name == "USDT") {
-      balance = await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.USDT.name);
+      balance = await UserWalletService.getInstance()
+          .getTokenBalance(TrackedTx_ContractSymbol.USDT.name);
     }
     if (GlobalParams.currNetwork == EnumNetworkType.mainnet) {
       if (tokenInfo.name == "USDC") {
-        balance = await UserWalletService.getInstance().getTokenBalance(TrackedTx_ContractSymbol.USDC.name);
+        balance = await UserWalletService.getInstance()
+            .getTokenBalance(TrackedTx_ContractSymbol.USDC.name);
       }
     }
     tokenInfo.balance = balance;

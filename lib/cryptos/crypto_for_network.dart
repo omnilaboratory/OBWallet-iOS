@@ -10,21 +10,26 @@ import 'package:awallet/component/square_button.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/generated/l10n.dart';
-import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/protos/gen-dart/user/account.pb.dart';
+import 'package:awallet/services/token_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class EthereumPage extends StatefulWidget {
-  const EthereumPage({super.key});
+import 'home.dart';
+
+class CryptoForNetwork extends StatefulWidget {
+  NetWork chainNetwork;
+
+  CryptoForNetwork({super.key, required this.chainNetwork});
 
   @override
-  State<EthereumPage> createState() => _EthereumPageState();
+  State<CryptoForNetwork> createState() => _CryptoForNetworkState();
 }
 
-class _EthereumPageState extends State<EthereumPage> {
+class _CryptoForNetworkState extends State<CryptoForNetwork> {
   final RefreshController _refreshBalanceController =
       RefreshController(initialRefresh: false);
 
@@ -58,7 +63,7 @@ class _EthereumPageState extends State<EthereumPage> {
     log("EthereumPage updateBalance");
     var address = LocalStorage.getEthAddress();
     if (address != null) {
-      EthService.getInstance().updateTokenBalances(context).then((value) {
+      TokenService.getInstance().updateTokenBalances(context).then((value) {
         if (mounted) {
           setState(() {});
         }
@@ -73,13 +78,10 @@ class _EthereumPageState extends State<EthereumPage> {
     if (address == null) {
       showToast("no wallet address");
     }
-    var walletInfo = EthService.getInstance().getWalletInfo();
+    var walletInfo = TokenService.getInstance().getWalletInfo(network: widget.chainNetwork);
+    var localList = TokenService.getInstance().getTokenList(network: widget.chainNetwork);
 
-    var localList = [];
-    localList.addAll(EthService.getInstance().getTokenList());
-    localList.addAll(EthService.getInstance().getTokenListPolygon());
-
-    Widget buildTokenAndNftList() {
+    Widget buildTokenList() {
       return ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return CryptoTokenItem(tokenInfo: localList[index]);
@@ -109,7 +111,7 @@ class _EthereumPageState extends State<EthereumPage> {
           Expanded(
             child: SingleChildScrollView(
                 child: Column(
-              children: [buildTokenAndNftList(), const SizedBox(height: 20)],
+              children: [buildTokenList(), const SizedBox(height: 20)],
             )),
           )
         ],
@@ -149,7 +151,7 @@ class _EthereumPageState extends State<EthereumPage> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return const ReceiveWalletAddress();
+                    return ReceiveWalletAddress(network: widget.chainNetwork);
                   });
             }),
         SquareButton(
@@ -193,16 +195,8 @@ class _EthereumPageState extends State<EthereumPage> {
     );
   }
 
-  void createNewWallet() {
-    var loading = showLoading(context);
-    EthService.getInstance().createWalletInfo(context).then((value) async {
-      await updateTokenBalances();
-      removeLoading(loading);
-    });
-  }
-
   Future<void> updateTokenBalances() async {
-    await EthService.getInstance().updateTokenBalances(context);
+    await TokenService.getInstance().updateTokenBalances(context);
     if (mounted) {
       setState(() {});
     }

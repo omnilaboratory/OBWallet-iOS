@@ -42,19 +42,11 @@ class CryptoTokenItem extends StatelessWidget {
         ),
         child: InkWell(
           onTap: () {
-            if (tokenInfo.netName.isEmpty) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          TokenActivity(tokenInfo: tokenInfo)));
-            } else {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return Send(name: 'USDT',netName: NetWork.POLYGON.name);
-                  });
-            }
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        TokenActivity(tokenInfo: tokenInfo)));
           },
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,

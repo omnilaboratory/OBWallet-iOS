@@ -2,11 +2,14 @@ import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_receive_center.dart';
 import 'package:awallet/generated/l10n.dart';
-import 'package:awallet/tools/local_storage.dart';
+import 'package:awallet/protos/gen-dart/user/account.pb.dart';
+import 'package:awallet/services/token_service.dart';
 import 'package:flutter/material.dart';
 
 class ReceiveWalletAddress extends StatefulWidget {
-  const ReceiveWalletAddress({super.key});
+  NetWork network;
+
+  ReceiveWalletAddress({super.key, required this.network});
 
   @override
   State<ReceiveWalletAddress> createState() => _ReceiveWalletAddressState();
@@ -37,8 +40,12 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                   createDialogTitle(S.of(context).ethereumPage_Receive),
                   const SizedBox(height: 10),
                   CryptoReceiveCenter(
-                      address: LocalStorage.getEthAddress()!,
-                      tips: S.of(context).tips_WrongTopUp,qrSize: 140,),
+                    address: TokenService.getInstance()
+                        .getWalletInfo(network: widget.network)
+                        .address!,
+                    tips: S.of(context).tips_WrongTopUp,
+                    qrSize: 140,
+                  ),
                 ])),
             const SizedBox(height: 30),
             BottomWhiteButton(
@@ -130,7 +137,8 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child: Text(S.of(context).receiveWallet_WalletAddress, style: const TextStyle(fontSize: 14)),
+            child: Text(S.of(context).receiveWallet_WalletAddress,
+                style: const TextStyle(fontSize: 14)),
             onPressed: () {
               if (currChainTypeBtnIndex != 0) {
                 currChainTypeBtnIndex = 0;
@@ -152,7 +160,8 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
               ),
             ),
             child: Text(S.of(context).receiveWallet_LightningInvoice,
-                textAlign: TextAlign.center, style: const TextStyle(fontSize: 14)),
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 14)),
             onPressed: () {
               if (currChainTypeBtnIndex != 1) {
                 currChainTypeBtnIndex = 1;

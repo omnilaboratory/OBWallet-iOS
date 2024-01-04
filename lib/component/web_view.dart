@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/services/token_service.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 // Import for Android features.
@@ -79,7 +79,7 @@ Page resource error:
         'close',
         onMessageReceived: (JavaScriptMessage message) {
           log(message.message);
-          EthService.getInstance().createWalletInfo(context);
+          TokenService.getInstance().createWalletInfo(context);
           Navigator.pop(context);
         },
       )

@@ -13,7 +13,7 @@ import 'package:awallet/component/number_controller_widget.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
-import 'package:awallet/services/eth_service.dart';
+import 'package:awallet/services/token_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:awallet/tools/precision_limit_formatter.dart';
@@ -41,7 +41,7 @@ class _ExchangeState extends State<Exchange> {
 
   late GetUserSwapPriceResponse currPriceInfo;
 
-  var initTokenList = EthService.getInstance().getTokenList();
+  var initTokenList = TokenService.getInstance().getTokenList();
   List<TokenInfo> tokenList = [];
   var currencyList = GlobalParams.currencyList;
 
@@ -81,7 +81,7 @@ class _ExchangeState extends State<Exchange> {
     // updateTokenBalances for crypto
     var address = LocalStorage.getEthAddress();
     if (address != null) {
-      EthService.getInstance().updateTokenBalances(context).then((value) {
+      TokenService.getInstance().updateTokenBalances(context).then((value) {
         if (mounted) {
           setState(() {
             if (currSelectedToken.balance == 0) {

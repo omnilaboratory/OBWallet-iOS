@@ -30,9 +30,7 @@ class _CardHomeState extends State<CardHome>
     Account(),
     const CardPart(),
   ];
-  late TabController _tabController =
-      TabController(length: tabNames.length, vsync: this, initialIndex: 0);
-
+  late TabController _tabController ;
   @override
   void initState() {
     super.initState();
@@ -58,6 +56,7 @@ class _CardHomeState extends State<CardHome>
 
     _tabController =
         TabController(length: tabNames.length, vsync: this, initialIndex: 0);
+
     updateKycState();
 
     GlobalParams.eventBus.on().listen((event) {

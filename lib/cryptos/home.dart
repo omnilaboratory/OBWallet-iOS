@@ -1,13 +1,14 @@
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/component/button_for_app_bar.dart';
 import 'package:awallet/component/head_logo.dart';
-import 'package:awallet/cryptos/ethereum_page.dart';
 import 'package:awallet/cryptos/tx_history.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/profile/guide.dart';
+import 'package:awallet/protos/gen-dart/user/account.pb.dart';
 import 'package:flutter/material.dart';
 
-import 'bitcoin_page.dart';
+import 'crypto_for_network.dart';
+
 
 class CryptoHome extends StatefulWidget {
   const CryptoHome({super.key});
@@ -16,15 +17,16 @@ class CryptoHome extends StatefulWidget {
   State<CryptoHome> createState() => _CryptoHomeState();
 }
 
-class _CryptoHomeState extends State<CryptoHome> {
+class _CryptoHomeState extends State<CryptoHome>
+    with SingleTickerProviderStateMixin {
   double balance = 0;
-
-  var tabNames = ['Ethereum','Bitcoin'];
+  var tabNames = [NetWork.ETH.name, NetWork.POLYGON.name, NetWork.TRON.name];
 
   List<Widget> tabList = [];
   List<Widget> tabViewList = [
-    const EthereumPage(),
-    const BitcoinPage(),
+    CryptoForNetwork(chainNetwork: NetWork.ETH),
+    CryptoForNetwork(chainNetwork: NetWork.POLYGON),
+    CryptoForNetwork(chainNetwork: NetWork.TRON),
   ];
 
   @override
@@ -40,6 +42,7 @@ class _CryptoHomeState extends State<CryptoHome> {
         ),
       ));
     }
+
     super.initState();
   }
 
@@ -138,5 +141,3 @@ class _CryptoHomeState extends State<CryptoHome> {
     );
   }
 }
-
-
