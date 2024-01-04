@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package user;
+
+import 'user/account.proto';
+
+//户钱包
+service uwallet {
+
+  //获用户usdt/usdc 余额
+  rpc GetTokenBalalance(GetTokenBalalanceRequest) returns(GetTokenBalalanceResponse);
+
+//  //转账链上本地币如eth matic tron 到其它地址
+//  rpc Transfer (TransferRequest) returns (TransferResponse);
+
+  //转账Token 到其它地址
+  rpc TransferToken (TransferTokenRequest) returns (TransferTokenResponse);
+
+//  //花费账号token: 如换取usd时, 账号token减少, 账号usd增加
+//  rpc PayToken (PayTokenRequest) returns (PayTokenResponse);
+//  //增加账号token: 如换取usdt/usdc时,账号token增加, 账号usd减少
+//  rpc RechargeToken (PayTokenRequest) returns (PayTokenResponse);
+
+  //链上token 历史
+//  rpc ListHistory (ListHistoryRequest) returns (ListHistoryResponse);
+}
+
+message ImportKeyRequest {
+  string keyhex=1;
+}
+message ImportKeyResponse {
+  string address=1;
+}
+message GetTokenBalalanceRequest {
+  // USD USDT USDC ETH TRON MATIC
+  string token_name=1;
+}
+message GetTokenBalalanceResponse {
+  double balance_usd=1;
+  double balance_usdt=2;
+  double balance_usdc=3;
+}
+
+message GetAddressRequest {
+
+}
+message GetAddressResponse {
+  string address=1;
+}
+message DumpKeyRequest {
+
+}
+message DumpKeyResponse {
+  string key=1;
+}
+
+message StateTestRequest {
+
+}
+message StateTestResponse {
+  string msg=1;
+}
+message ListHistoryRequest {
+// USD USDT USDC ETH MATIC TRON  ...
+    string token_name = 1;
+    int64 page = 2;
+    int64 size = 3;
+}
+message ListHistoryResponse {
+    int64 count=3;
+    string token = 1;
+    int64 page = 2;
+    repeated CoinHistory items=5;
+}
+
+message TransferRequest {
+//  网络ETH POLYGON TRON
+  NetWork network=3;
+// only USDT USDC
+  TrackedTx.ContractSymbol token   = 4;
+  string to = 1;
+  double amt = 2;
+}
+message TransferResponse {
+  string tx_id = 1;
+}
+message TransferTokenRequest {
+  //only USDT USDC
+  TrackedTx.ContractSymbol token   = 1;
+  string to = 2;
+  double amt = 3;
+  NetWork network=4;
+}
+message TransferTokenResponse {
+  string tx_id = 1;
+}
+message TrackTxRequest {
+  string tx_id = 1;
+}
+message TrackTxResponse {
+}
+message AddTokenResponse {
+}
+message CoinHistory {
+  int64 id = 1;
+  //@gotags: gorm:"index:idx_coinh_userid_coin"
+  int64 user_id =10;
+  string TokenAddress = 2;
+  //@gotags: gorm:"index:idx_coinh_userid_coin"
+  string TokenName = 3;
+  string To = 4;
+  double amt = 5;
+  string tx_id = 6;
+  int64 updated_at = 7;
+  NetWork network = 8;
+  string user_address =9;
+}

@@ -14,7 +14,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../google/protobuf/timestamp.pb.dart' as $3;
+import '../google/protobuf/timestamp.pb.dart' as $4;
 import 'account.pbenum.dart';
 
 export 'account.pbenum.dart';
@@ -484,6 +484,7 @@ class GetAccountHistoryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetAccountHistoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'start')
     ..aInt64(2, _omitFieldNames ? '' : 'limit')
+    ..e<TrackedTx_ContractSymbol>(3, _omitFieldNames ? '' : 'token', $pb.PbFieldType.OE, defaultOrMaker: TrackedTx_ContractSymbol.USD, valueOf: TrackedTx_ContractSymbol.valueOf, enumValues: TrackedTx_ContractSymbol.values)
     ..hasRequiredFields = false
   ;
 
@@ -525,6 +526,15 @@ class GetAccountHistoryRequest extends $pb.GeneratedMessage {
   $core.bool hasLimit() => $_has(1);
   @$pb.TagNumber(2)
   void clearLimit() => clearField(2);
+
+  @$pb.TagNumber(3)
+  TrackedTx_ContractSymbol get token => $_getN(2);
+  @$pb.TagNumber(3)
+  set token(TrackedTx_ContractSymbol v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearToken() => clearField(3);
 }
 
 class GetAccountHistoryResponse extends $pb.GeneratedMessage {
@@ -570,6 +580,7 @@ class GetAccountInfoRequest extends $pb.GeneratedMessage {
   factory GetAccountInfoRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetAccountInfoRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'tokenName')
     ..hasRequiredFields = false
   ;
 
@@ -593,6 +604,15 @@ class GetAccountInfoRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetAccountInfoRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAccountInfoRequest>(create);
   static GetAccountInfoRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get tokenName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set tokenName($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTokenName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTokenName() => clearField(1);
 }
 
 class AccountInfo extends $pb.GeneratedMessage {
@@ -604,9 +624,11 @@ class AccountInfo extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AccountInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'id')
     ..aInt64(2, _omitFieldNames ? '' : 'userId')
-    ..a<$core.double>(5, _omitFieldNames ? '' : 'balanceUsd', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'balance', $pb.PbFieldType.OD)
     ..aInt64(6, _omitFieldNames ? '' : 'createdAt')
     ..a<$core.double>(7, _omitFieldNames ? '' : 'lockedUsd', $pb.PbFieldType.OD)
+    ..aOS(8, _omitFieldNames ? '' : 'balanceType')
+    ..aInt64(9, _omitFieldNames ? '' : 'updatedAt')
     ..hasRequiredFields = false
   ;
 
@@ -650,13 +672,13 @@ class AccountInfo extends $pb.GeneratedMessage {
   void clearUserId() => clearField(2);
 
   @$pb.TagNumber(5)
-  $core.double get balanceUsd => $_getN(2);
+  $core.double get balance => $_getN(2);
   @$pb.TagNumber(5)
-  set balanceUsd($core.double v) { $_setDouble(2, v); }
+  set balance($core.double v) { $_setDouble(2, v); }
   @$pb.TagNumber(5)
-  $core.bool hasBalanceUsd() => $_has(2);
+  $core.bool hasBalance() => $_has(2);
   @$pb.TagNumber(5)
-  void clearBalanceUsd() => clearField(5);
+  void clearBalance() => clearField(5);
 
   @$pb.TagNumber(6)
   $fixnum.Int64 get createdAt => $_getI64(3);
@@ -675,6 +697,24 @@ class AccountInfo extends $pb.GeneratedMessage {
   $core.bool hasLockedUsd() => $_has(4);
   @$pb.TagNumber(7)
   void clearLockedUsd() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get balanceType => $_getSZ(5);
+  @$pb.TagNumber(8)
+  set balanceType($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasBalanceType() => $_has(5);
+  @$pb.TagNumber(8)
+  void clearBalanceType() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get updatedAt => $_getI64(6);
+  @$pb.TagNumber(9)
+  set updatedAt($fixnum.Int64 v) { $_setInt64(6, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasUpdatedAt() => $_has(6);
+  @$pb.TagNumber(9)
+  void clearUpdatedAt() => clearField(9);
 }
 
 class TrackedTx extends $pb.GeneratedMessage {
@@ -1916,7 +1956,7 @@ class Timestamp extends $pb.GeneratedMessage {
   factory Timestamp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Timestamp', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..aOM<$3.Timestamp>(1, _omitFieldNames ? '' : 'timestamp', subBuilder: $3.Timestamp.create)
+    ..aOM<$4.Timestamp>(1, _omitFieldNames ? '' : 'timestamp', subBuilder: $4.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -1942,15 +1982,15 @@ class Timestamp extends $pb.GeneratedMessage {
   static Timestamp? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $3.Timestamp get timestamp => $_getN(0);
+  $4.Timestamp get timestamp => $_getN(0);
   @$pb.TagNumber(1)
-  set timestamp($3.Timestamp v) { setField(1, v); }
+  set timestamp($4.Timestamp v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTimestamp() => $_has(0);
   @$pb.TagNumber(1)
   void clearTimestamp() => clearField(1);
   @$pb.TagNumber(1)
-  $3.Timestamp ensureTimestamp() => $_ensure(0);
+  $4.Timestamp ensureTimestamp() => $_ensure(0);
 }
 
 class NftToken extends $pb.GeneratedMessage {
@@ -2391,6 +2431,7 @@ class AppConfig extends $pb.GeneratedMessage {
     ..a<$core.double>(16, _omitFieldNames ? '' : 'gasFeeMatic', $pb.PbFieldType.OD)
     ..aOS(17, _omitFieldNames ? '' : 'serverTaddress')
     ..aInt64(18, _omitFieldNames ? '' : 'systemAgentId')
+    ..a<$core.double>(19, _omitFieldNames ? '' : 'gasFeeTrx', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -2567,6 +2608,15 @@ class AppConfig extends $pb.GeneratedMessage {
   $core.bool hasSystemAgentId() => $_has(16);
   @$pb.TagNumber(18)
   void clearSystemAgentId() => clearField(18);
+
+  @$pb.TagNumber(19)
+  $core.double get gasFeeTrx => $_getN(17);
+  @$pb.TagNumber(19)
+  set gasFeeTrx($core.double v) { $_setDouble(17, v); }
+  @$pb.TagNumber(19)
+  $core.bool hasGasFeeTrx() => $_has(17);
+  @$pb.TagNumber(19)
+  void clearGasFeeTrx() => clearField(19);
 }
 
 class AccountHistory extends $pb.GeneratedMessage {
@@ -2585,6 +2635,7 @@ class AccountHistory extends $pb.GeneratedMessage {
     ..e<TrackedTx_ContractSymbol>(7, _omitFieldNames ? '' : 'Symbol', $pb.PbFieldType.OE, protoName: 'Symbol', defaultOrMaker: TrackedTx_ContractSymbol.USD, valueOf: TrackedTx_ContractSymbol.valueOf, enumValues: TrackedTx_ContractSymbol.values)
     ..aInt64(8, _omitFieldNames ? '' : 'accountId')
     ..aInt64(9, _omitFieldNames ? '' : 'confirms')
+    ..e<NetWork>(10, _omitFieldNames ? '' : 'network', $pb.PbFieldType.OE, defaultOrMaker: NetWork.UnKownNetWork, valueOf: NetWork.valueOf, enumValues: NetWork.values)
     ..hasRequiredFields = false
   ;
 
@@ -2689,6 +2740,15 @@ class AccountHistory extends $pb.GeneratedMessage {
   $core.bool hasConfirms() => $_has(8);
   @$pb.TagNumber(9)
   void clearConfirms() => clearField(9);
+
+  @$pb.TagNumber(10)
+  NetWork get network => $_getN(9);
+  @$pb.TagNumber(10)
+  set network(NetWork v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasNetwork() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearNetwork() => clearField(10);
 }
 
 

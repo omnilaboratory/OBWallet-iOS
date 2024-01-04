@@ -16,7 +16,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'account.pb.dart' as $0;
 import 'card.pbenum.dart';
-import 'country.pbenum.dart' as $4;
+import 'country.pbenum.dart' as $5;
 
 export 'card.pbenum.dart';
 
@@ -203,7 +203,7 @@ class CardInfo extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'cardNo')
-    ..e<$4.CurrencyCode>(3, _omitFieldNames ? '' : 'symbol', $pb.PbFieldType.OE, defaultOrMaker: $4.CurrencyCode.UNKNOWNCurrency, valueOf: $4.CurrencyCode.valueOf, enumValues: $4.CurrencyCode.values)
+    ..e<$5.CurrencyCode>(3, _omitFieldNames ? '' : 'symbol', $pb.PbFieldType.OE, defaultOrMaker: $5.CurrencyCode.UNKNOWNCurrency, valueOf: $5.CurrencyCode.valueOf, enumValues: $5.CurrencyCode.values)
     ..aInt64(4, _omitFieldNames ? '' : 'userId')
     ..a<$core.double>(5, _omitFieldNames ? '' : 'balance', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'createdAt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
@@ -254,9 +254,9 @@ class CardInfo extends $pb.GeneratedMessage {
   void clearCardNo() => clearField(2);
 
   @$pb.TagNumber(3)
-  $4.CurrencyCode get symbol => $_getN(2);
+  $5.CurrencyCode get symbol => $_getN(2);
   @$pb.TagNumber(3)
-  set symbol($4.CurrencyCode v) { setField(3, v); }
+  set symbol($5.CurrencyCode v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSymbol() => $_has(2);
   @$pb.TagNumber(3)
@@ -333,7 +333,7 @@ class ApplyCardRequest extends $pb.GeneratedMessage {
   factory ApplyCardRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ApplyCardRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..e<$4.CurrencyCode>(2, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $4.CurrencyCode.UNKNOWNCurrency, valueOf: $4.CurrencyCode.valueOf, enumValues: $4.CurrencyCode.values)
+    ..e<$5.CurrencyCode>(2, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $5.CurrencyCode.UNKNOWNCurrency, valueOf: $5.CurrencyCode.valueOf, enumValues: $5.CurrencyCode.values)
     ..hasRequiredFields = false
   ;
 
@@ -359,9 +359,9 @@ class ApplyCardRequest extends $pb.GeneratedMessage {
   static ApplyCardRequest? _defaultInstance;
 
   @$pb.TagNumber(2)
-  $4.CurrencyCode get currency => $_getN(0);
+  $5.CurrencyCode get currency => $_getN(0);
   @$pb.TagNumber(2)
-  set currency($4.CurrencyCode v) { setField(2, v); }
+  set currency($5.CurrencyCode v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCurrency() => $_has(0);
   @$pb.TagNumber(2)

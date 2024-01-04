@@ -15,7 +15,7 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'account.pb.dart' as $0;
-import 'country.pbenum.dart' as $4;
+import 'country.pbenum.dart' as $5;
 import 'user.pbenum.dart';
 
 export 'user.pbenum.dart';
@@ -209,7 +209,7 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'userName')
     ..aOS(3, _omitFieldNames ? '' : 'passwordHash')
     ..aOS(4, _omitFieldNames ? '' : 'email')
-    ..e<$4.CountryCode>(5, _omitFieldNames ? '' : 'countryCode', $pb.PbFieldType.OE, defaultOrMaker: $4.CountryCode.UNKNOWNISO, valueOf: $4.CountryCode.valueOf, enumValues: $4.CountryCode.values)
+    ..e<$5.CountryCode>(5, _omitFieldNames ? '' : 'countryCode', $pb.PbFieldType.OE, defaultOrMaker: $5.CountryCode.UNKNOWNISO, valueOf: $5.CountryCode.valueOf, enumValues: $5.CountryCode.values)
     ..aOS(6, _omitFieldNames ? '' : 'id1')
     ..aOS(7, _omitFieldNames ? '' : 'id2')
     ..aOS(8, _omitFieldNames ? '' : 'idNum')
@@ -227,7 +227,7 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOB(20, _omitFieldNames ? '' : 'kycinfoOk')
     ..aOS(21, _omitFieldNames ? '' : 'openId')
     ..aOS(22, _omitFieldNames ? '' : 'kycStatus')
-    ..e<$4.CurrencyCode>(23, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $4.CurrencyCode.UNKNOWNCurrency, valueOf: $4.CurrencyCode.valueOf, enumValues: $4.CurrencyCode.values)
+    ..e<$5.CurrencyCode>(23, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $5.CurrencyCode.UNKNOWNCurrency, valueOf: $5.CurrencyCode.valueOf, enumValues: $5.CurrencyCode.values)
     ..a<$fixnum.Int64>(24, _omitFieldNames ? '' : 'createdAt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(25, _omitFieldNames ? '' : 'ethAddress')
     ..aOS(26, _omitFieldNames ? '' : 'btcAddress')
@@ -240,6 +240,8 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOB(33, _omitFieldNames ? '' : 'isAgentChannel')
     ..aInt64(34, _omitFieldNames ? '' : 'refUserid')
     ..aOS(35, _omitFieldNames ? '' : 'language')
+    ..aOS(37, _omitFieldNames ? '' : 'walletAddress')
+    ..aOS(38, _omitFieldNames ? '' : 'tronAddress')
     ..hasRequiredFields = false
   ;
 
@@ -301,9 +303,9 @@ class UserInfo extends $pb.GeneratedMessage {
   void clearEmail() => clearField(4);
 
   @$pb.TagNumber(5)
-  $4.CountryCode get countryCode => $_getN(4);
+  $5.CountryCode get countryCode => $_getN(4);
   @$pb.TagNumber(5)
-  set countryCode($4.CountryCode v) { setField(5, v); }
+  set countryCode($5.CountryCode v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCountryCode() => $_has(4);
   @$pb.TagNumber(5)
@@ -463,9 +465,9 @@ class UserInfo extends $pb.GeneratedMessage {
   void clearKycStatus() => clearField(22);
 
   @$pb.TagNumber(23)
-  $4.CurrencyCode get currency => $_getN(22);
+  $5.CurrencyCode get currency => $_getN(22);
   @$pb.TagNumber(23)
-  set currency($4.CurrencyCode v) { setField(23, v); }
+  set currency($5.CurrencyCode v) { setField(23, v); }
   @$pb.TagNumber(23)
   $core.bool hasCurrency() => $_has(22);
   @$pb.TagNumber(23)
@@ -578,6 +580,24 @@ class UserInfo extends $pb.GeneratedMessage {
   $core.bool hasLanguage() => $_has(34);
   @$pb.TagNumber(35)
   void clearLanguage() => clearField(35);
+
+  @$pb.TagNumber(37)
+  $core.String get walletAddress => $_getSZ(35);
+  @$pb.TagNumber(37)
+  set walletAddress($core.String v) { $_setString(35, v); }
+  @$pb.TagNumber(37)
+  $core.bool hasWalletAddress() => $_has(35);
+  @$pb.TagNumber(37)
+  void clearWalletAddress() => clearField(37);
+
+  @$pb.TagNumber(38)
+  $core.String get tronAddress => $_getSZ(36);
+  @$pb.TagNumber(38)
+  set tronAddress($core.String v) { $_setString(36, v); }
+  @$pb.TagNumber(38)
+  $core.bool hasTronAddress() => $_has(36);
+  @$pb.TagNumber(38)
+  void clearTronAddress() => clearField(38);
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {
@@ -1167,8 +1187,8 @@ class KycRequest extends $pb.GeneratedMessage {
   factory KycRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'KycRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..e<$4.CountryCode>(1, _omitFieldNames ? '' : 'countryCode', $pb.PbFieldType.OE, defaultOrMaker: $4.CountryCode.UNKNOWNISO, valueOf: $4.CountryCode.valueOf, enumValues: $4.CountryCode.values)
-    ..e<$4.CurrencyCode>(2, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $4.CurrencyCode.UNKNOWNCurrency, valueOf: $4.CurrencyCode.valueOf, enumValues: $4.CurrencyCode.values)
+    ..e<$5.CountryCode>(1, _omitFieldNames ? '' : 'countryCode', $pb.PbFieldType.OE, defaultOrMaker: $5.CountryCode.UNKNOWNISO, valueOf: $5.CountryCode.valueOf, enumValues: $5.CountryCode.values)
+    ..e<$5.CurrencyCode>(2, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $5.CurrencyCode.UNKNOWNCurrency, valueOf: $5.CurrencyCode.valueOf, enumValues: $5.CurrencyCode.values)
     ..aOS(3, _omitFieldNames ? '' : 'id1')
     ..aOS(4, _omitFieldNames ? '' : 'id2')
     ..aOS(5, _omitFieldNames ? '' : 'idNum')
@@ -1207,18 +1227,18 @@ class KycRequest extends $pb.GeneratedMessage {
   static KycRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $4.CountryCode get countryCode => $_getN(0);
+  $5.CountryCode get countryCode => $_getN(0);
   @$pb.TagNumber(1)
-  set countryCode($4.CountryCode v) { setField(1, v); }
+  set countryCode($5.CountryCode v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCountryCode() => $_has(0);
   @$pb.TagNumber(1)
   void clearCountryCode() => clearField(1);
 
   @$pb.TagNumber(2)
-  $4.CurrencyCode get currency => $_getN(1);
+  $5.CurrencyCode get currency => $_getN(1);
   @$pb.TagNumber(2)
-  set currency($4.CurrencyCode v) { setField(2, v); }
+  set currency($5.CurrencyCode v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCurrency() => $_has(1);
   @$pb.TagNumber(2)

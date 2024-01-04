@@ -62,9 +62,14 @@ message UserInfo {
   string user_name = 2;
   string password_hash = 3;
   string email = 4;
+  //中心钱包eth地址
+  // @gotags: gorm:"Index"
+  string wallet_address=37;
+  //中心钱包tron地址
+  string tron_address=38;
+  //Deprecated: client wallet  address
   string eth_address=25;
   string btc_address=26;
-
   // kyc info
   CountryCode country_code = 5;
   CurrencyCode currency=23;

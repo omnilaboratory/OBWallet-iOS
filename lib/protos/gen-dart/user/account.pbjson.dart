@@ -13,6 +13,23 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use netWorkDescriptor instead')
+const NetWork$json = {
+  '1': 'NetWork',
+  '2': [
+    {'1': 'UnKownNetWork', '2': 0},
+    {'1': 'ETH', '2': 1},
+    {'1': 'POLYGON', '2': 2},
+    {'1': 'TRON', '2': 3},
+    {'1': 'ACOUNT', '2': 4},
+  ],
+};
+
+/// Descriptor for `NetWork`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List netWorkDescriptor = $convert.base64Decode(
+    'CgdOZXRXb3JrEhEKDVVuS293bk5ldFdvcmsQABIHCgNFVEgQARILCgdQT0xZR09OEAISCAoEVF'
+    'JPThADEgoKBkFDT1VOVBAE');
+
 @$core.Deprecated('Use getCoinPriceRequestDescriptor instead')
 const GetCoinPriceRequest$json = {
   '1': 'GetCoinPriceRequest',
@@ -155,13 +172,15 @@ const GetAccountHistoryRequest$json = {
   '2': [
     {'1': 'start', '3': 1, '4': 1, '5': 3, '10': 'start'},
     {'1': 'limit', '3': 2, '4': 1, '5': 3, '10': 'limit'},
+    {'1': 'token', '3': 3, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'token'},
   ],
 };
 
 /// Descriptor for `GetAccountHistoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getAccountHistoryRequestDescriptor = $convert.base64Decode(
     'ChhHZXRBY2NvdW50SGlzdG9yeVJlcXVlc3QSFAoFc3RhcnQYASABKANSBXN0YXJ0EhQKBWxpbW'
-    'l0GAIgASgDUgVsaW1pdA==');
+    'l0GAIgASgDUgVsaW1pdBI0CgV0b2tlbhgDIAEoDjIeLnVzZXIuVHJhY2tlZFR4LkNvbnRyYWN0'
+    'U3ltYm9sUgV0b2tlbg==');
 
 @$core.Deprecated('Use getAccountHistoryResponseDescriptor instead')
 const GetAccountHistoryResponse$json = {
@@ -179,11 +198,14 @@ final $typed_data.Uint8List getAccountHistoryResponseDescriptor = $convert.base6
 @$core.Deprecated('Use getAccountInfoRequestDescriptor instead')
 const GetAccountInfoRequest$json = {
   '1': 'GetAccountInfoRequest',
+  '2': [
+    {'1': 'token_name', '3': 1, '4': 1, '5': 9, '10': 'tokenName'},
+  ],
 };
 
 /// Descriptor for `GetAccountInfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getAccountInfoRequestDescriptor = $convert.base64Decode(
-    'ChVHZXRBY2NvdW50SW5mb1JlcXVlc3Q=');
+    'ChVHZXRBY2NvdW50SW5mb1JlcXVlc3QSHQoKdG9rZW5fbmFtZRgBIAEoCVIJdG9rZW5OYW1l');
 
 @$core.Deprecated('Use accountInfoDescriptor instead')
 const AccountInfo$json = {
@@ -191,8 +213,10 @@ const AccountInfo$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
     {'1': 'user_id', '3': 2, '4': 1, '5': 3, '10': 'userId'},
-    {'1': 'balance_usd', '3': 5, '4': 1, '5': 1, '10': 'balanceUsd'},
+    {'1': 'balance', '3': 5, '4': 1, '5': 1, '10': 'balance'},
+    {'1': 'balance_type', '3': 8, '4': 1, '5': 9, '10': 'balanceType'},
     {'1': 'locked_usd', '3': 7, '4': 1, '5': 1, '10': 'lockedUsd'},
+    {'1': 'updated_at', '3': 9, '4': 1, '5': 3, '10': 'updatedAt'},
     {'1': 'created_at', '3': 6, '4': 1, '5': 3, '10': 'createdAt'},
   ],
 };
@@ -200,8 +224,9 @@ const AccountInfo$json = {
 /// Descriptor for `AccountInfo`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List accountInfoDescriptor = $convert.base64Decode(
     'CgtBY2NvdW50SW5mbxIOCgJpZBgBIAEoA1ICaWQSFwoHdXNlcl9pZBgCIAEoA1IGdXNlcklkEh'
-    '8KC2JhbGFuY2VfdXNkGAUgASgBUgpiYWxhbmNlVXNkEh0KCmxvY2tlZF91c2QYByABKAFSCWxv'
-    'Y2tlZFVzZBIdCgpjcmVhdGVkX2F0GAYgASgDUgljcmVhdGVkQXQ=');
+    'gKB2JhbGFuY2UYBSABKAFSB2JhbGFuY2USIQoMYmFsYW5jZV90eXBlGAggASgJUgtiYWxhbmNl'
+    'VHlwZRIdCgpsb2NrZWRfdXNkGAcgASgBUglsb2NrZWRVc2QSHQoKdXBkYXRlZF9hdBgJIAEoA1'
+    'IJdXBkYXRlZEF0Eh0KCmNyZWF0ZWRfYXQYBiABKANSCWNyZWF0ZWRBdA==');
 
 @$core.Deprecated('Use trackedTxDescriptor instead')
 const TrackedTx$json = {
@@ -620,6 +645,7 @@ const AppConfig$json = {
     {'1': 'create_pcard_fee', '3': 4, '4': 1, '5': 1, '10': 'createPcardFee'},
     {'1': 'gas_fee_eth', '3': 15, '4': 1, '5': 1, '10': 'gasFeeEth'},
     {'1': 'gas_fee_matic', '3': 16, '4': 1, '5': 1, '10': 'gasFeeMatic'},
+    {'1': 'gas_fee_trx', '3': 19, '4': 1, '5': 1, '10': 'gasFeeTrx'},
     {'1': 'created_at', '3': 9, '4': 1, '5': 3, '10': 'createdAt'},
     {'1': 'updated_at', '3': 10, '4': 1, '5': 3, '10': 'updatedAt'},
     {'1': 'server_address', '3': 11, '4': 1, '5': 9, '10': 'serverAddress'},
@@ -640,16 +666,16 @@ final $typed_data.Uint8List appConfigDescriptor = $convert.base64Decode(
     'CglBcHBDb25maWcSDgoCaWQYASABKANSAmlkEiYKD2NyZWF0ZV9jYXJkX2ZlZRgDIAEoAVINY3'
     'JlYXRlQ2FyZEZlZRIoChBjcmVhdGVfcGNhcmRfZmVlGAQgASgBUg5jcmVhdGVQY2FyZEZlZRIe'
     'CgtnYXNfZmVlX2V0aBgPIAEoAVIJZ2FzRmVlRXRoEiIKDWdhc19mZWVfbWF0aWMYECABKAFSC2'
-    'dhc0ZlZU1hdGljEh0KCmNyZWF0ZWRfYXQYCSABKANSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0'
-    'GAogASgDUgl1cGRhdGVkQXQSJQoOc2VydmVyX2FkZHJlc3MYCyABKAlSDXNlcnZlckFkZHJlc3'
-    'MSJwoPc2VydmVyX3RhZGRyZXNzGBEgASgJUg5zZXJ2ZXJUYWRkcmVzcxIfCgtuZnRfYWRkcmVz'
-    'cxgMIAEoCVIKbmZ0QWRkcmVzcxIoChBwcm9maXRfc2VsbF9jb2luGA0gASgBUg5wcm9maXRTZW'
-    'xsQ29pbhImCg9wcm9maXRfYnV5X2NvaW4YDiABKAFSDXByb2ZpdEJ1eUNvaW4SNwoYcHJvZml0'
-    'X3dpdGhkcmF3X3RvX3ZjYXJkGAUgASgBUhVwcm9maXRXaXRoZHJhd1RvVmNhcmQSNwoYcHJvZm'
-    'l0X3dpdGhkcmF3X3RvX3BjYXJkGAYgASgBUhVwcm9maXRXaXRoZHJhd1RvUGNhcmQSLgoTcHJv'
-    'Zml0X3ZjYXJkX2NyZWF0ZRgHIAEoAVIRcHJvZml0VmNhcmRDcmVhdGUSLgoTcHJvZml0X3BjYX'
-    'JkX2NyZWF0ZRgIIAEoAVIRcHJvZml0UGNhcmRDcmVhdGUSJgoPc3lzdGVtX2FnZW50X2lkGBIg'
-    'ASgDUg1zeXN0ZW1BZ2VudElk');
+    'dhc0ZlZU1hdGljEh4KC2dhc19mZWVfdHJ4GBMgASgBUglnYXNGZWVUcngSHQoKY3JlYXRlZF9h'
+    'dBgJIAEoA1IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYCiABKANSCXVwZGF0ZWRBdBIlCg5zZX'
+    'J2ZXJfYWRkcmVzcxgLIAEoCVINc2VydmVyQWRkcmVzcxInCg9zZXJ2ZXJfdGFkZHJlc3MYESAB'
+    'KAlSDnNlcnZlclRhZGRyZXNzEh8KC25mdF9hZGRyZXNzGAwgASgJUgpuZnRBZGRyZXNzEigKEH'
+    'Byb2ZpdF9zZWxsX2NvaW4YDSABKAFSDnByb2ZpdFNlbGxDb2luEiYKD3Byb2ZpdF9idXlfY29p'
+    'bhgOIAEoAVINcHJvZml0QnV5Q29pbhI3Chhwcm9maXRfd2l0aGRyYXdfdG9fdmNhcmQYBSABKA'
+    'FSFXByb2ZpdFdpdGhkcmF3VG9WY2FyZBI3Chhwcm9maXRfd2l0aGRyYXdfdG9fcGNhcmQYBiAB'
+    'KAFSFXByb2ZpdFdpdGhkcmF3VG9QY2FyZBIuChNwcm9maXRfdmNhcmRfY3JlYXRlGAcgASgBUh'
+    'Fwcm9maXRWY2FyZENyZWF0ZRIuChNwcm9maXRfcGNhcmRfY3JlYXRlGAggASgBUhFwcm9maXRQ'
+    'Y2FyZENyZWF0ZRImCg9zeXN0ZW1fYWdlbnRfaWQYEiABKANSDXN5c3RlbUFnZW50SWQ=');
 
 @$core.Deprecated('Use accountHistoryDescriptor instead')
 const AccountHistory$json = {
@@ -664,6 +690,7 @@ const AccountHistory$json = {
     {'1': 'created_at', '3': 5, '4': 1, '5': 4, '10': 'createdAt'},
     {'1': 'updated_at', '3': 6, '4': 1, '5': 4, '10': 'updatedAt'},
     {'1': 'Symbol', '3': 7, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'Symbol'},
+    {'1': 'network', '3': 10, '4': 1, '5': 14, '6': '.user.NetWork', '10': 'network'},
   ],
   '4': [AccountHistory_SourceType$json],
 };
@@ -677,6 +704,9 @@ const AccountHistory_SourceType$json = {
     {'1': 'Withdraw', '2': 2},
     {'1': 'Swap', '2': 3},
     {'1': 'CreateCard', '2': 4},
+    {'1': 'TokenTransfer', '2': 5},
+    {'1': 'Reward', '2': 6},
+    {'1': 'TelaRecharge', '2': 7},
   ],
 };
 
@@ -687,7 +717,8 @@ final $typed_data.Uint8List accountHistoryDescriptor = $convert.base64Decode(
     'GgoIY29uZmlybXMYCSABKANSCGNvbmZpcm1zEkAKC3NvdXJjZV90eXBlGAQgASgOMh8udXNlci'
     '5BY2NvdW50SGlzdG9yeS5Tb3VyY2VUeXBlUgpzb3VyY2VUeXBlEh0KCmNyZWF0ZWRfYXQYBSAB'
     'KARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAYgASgEUgl1cGRhdGVkQXQSNgoGU3ltYm9sGA'
-    'cgASgOMh4udXNlci5UcmFja2VkVHguQ29udHJhY3RTeW1ib2xSBlN5bWJvbCJOCgpTb3VyY2VU'
-    'eXBlEgoKBlVuS25vdxAAEgwKCFJlY2hhcmdlEAESDAoIV2l0aGRyYXcQAhIICgRTd2FwEAMSDg'
-    'oKQ3JlYXRlQ2FyZBAE');
+    'cgASgOMh4udXNlci5UcmFja2VkVHguQ29udHJhY3RTeW1ib2xSBlN5bWJvbBInCgduZXR3b3Jr'
+    'GAogASgOMg0udXNlci5OZXRXb3JrUgduZXR3b3JrIn8KClNvdXJjZVR5cGUSCgoGVW5Lbm93EA'
+    'ASDAoIUmVjaGFyZ2UQARIMCghXaXRoZHJhdxACEggKBFN3YXAQAxIOCgpDcmVhdGVDYXJkEAQS'
+    'EQoNVG9rZW5UcmFuc2ZlchAFEgoKBlJld2FyZBAGEhAKDFRlbGFSZWNoYXJnZRAH');
 
