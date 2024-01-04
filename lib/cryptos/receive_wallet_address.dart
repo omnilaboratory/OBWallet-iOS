@@ -35,21 +35,10 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                 child: Column(children: [
                   const SizedBox(height: 30),
                   createDialogTitle(S.of(context).ethereumPage_Receive),
-                  Padding(
-                      padding:
-                          const EdgeInsets.only(left: 25, right: 25, top: 20),
-                      child: buildChainButtons()),
-                  Visibility(
-                    visible: false,
-                    child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 15, right: 15, top: 15),
-                        child: buildChainTypeButtons()),
-                  ),
                   const SizedBox(height: 10),
                   CryptoReceiveCenter(
                       address: LocalStorage.getEthAddress()!,
-                      tips: S.of(context).tips_WrongTopUp),
+                      tips: S.of(context).tips_WrongTopUp,qrSize: 140,),
                 ])),
             const SizedBox(height: 30),
             BottomWhiteButton(
@@ -141,7 +130,7 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child: Text(S.of(context).receiveWallet_WalletAddress, style: TextStyle(fontSize: 14)),
+            child: Text(S.of(context).receiveWallet_WalletAddress, style: const TextStyle(fontSize: 14)),
             onPressed: () {
               if (currChainTypeBtnIndex != 0) {
                 currChainTypeBtnIndex = 0;
@@ -163,7 +152,7 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
               ),
             ),
             child: Text(S.of(context).receiveWallet_LightningInvoice,
-                textAlign: TextAlign.center, style: TextStyle(fontSize: 14)),
+                textAlign: TextAlign.center, style: const TextStyle(fontSize: 14)),
             onPressed: () {
               if (currChainTypeBtnIndex != 1) {
                 currChainTypeBtnIndex = 1;
