@@ -16,9 +16,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class Send extends StatefulWidget {
   String name;
-  String netName;
+  NetWork network;
 
-  Send({super.key, required this.name, this.netName = ""});
+  Send({super.key, required this.name, required this.network});
 
   @override
   State<Send> createState() => _SendState();
@@ -28,19 +28,13 @@ class _SendState extends State<Send> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
 
-  List<TokenInfo> tokenList = TokenService.getInstance().getTokenList();
+  List<TokenInfo> tokenList = [];
   late TokenInfo dropdownValue;
   int num = 6;
   late bool canClick;
 
   @override
   void initState() {
-    dropdownValue = tokenList[0];
-    if (dropdownValue.balance == 0) {
-      canClick = false;
-    } else {
-      canClick = true;
-    }
     GlobalParams.eventBus.on().listen((event) {
       if (event == "SendConfirm_Close") {
         setState(() {
@@ -48,6 +42,17 @@ class _SendState extends State<Send> {
         });
       }
     });
+
+    tokenList =
+        TokenService.getInstance().getTokenList(network: widget.network);
+
+    dropdownValue = tokenList[0];
+    if (dropdownValue.balance == 0) {
+      canClick = false;
+    } else {
+      canClick = true;
+    }
+
     super.initState();
   }
 
@@ -85,7 +90,7 @@ class _SendState extends State<Send> {
             name: dropdownValue.name,
             address: _addressController.value.text.toString(),
             amount: _amountController.value.text.toString(),
-            netName: widget.netName,
+            network: widget.network,
           );
         });
   }
@@ -125,7 +130,8 @@ class _SendState extends State<Send> {
                           alignment: AlignmentDirectional.centerEnd,
                           children: [
                             Center(
-                              child: createDialogTitle(S.of(context).crypto_send_title),
+                              child: createDialogTitle(
+                                  S.of(context).crypto_send_title),
                             ),
                             const Positioned(
                               right: 24,
@@ -141,8 +147,10 @@ class _SendState extends State<Send> {
                       )
                     ],
                   ),
-                  
-                  Center(child: Text(widget.netName == NetWork.POLYGON.name ? '(Polygon Asset)' : '')),
+                  Center(
+                      child: Text(widget.network == NetWork.POLYGON.name
+                          ? '(Polygon Asset)'
+                          : '')),
                   const SizedBox(height: 20),
                   Visibility(
                     visible: false,
@@ -396,7 +404,8 @@ class _SendState extends State<Send> {
                             child: SizedBox(
                               width: size.width * 0.8,
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 25, top: 15),
+                                padding:
+                                    const EdgeInsets.only(left: 25, top: 15),
                                 child: Text(
                                   S.of(context).crypto_send_Memo,
                                   style: const TextStyle(
@@ -444,7 +453,8 @@ class _SendState extends State<Send> {
                             child: SizedBox(
                               width: size.width * 0.8,
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 25, top: 15),
+                                padding:
+                                    const EdgeInsets.only(left: 25, top: 15),
                                 child: Text(
                                   S.of(context).crypto_send_MinerFee,
                                   style: const TextStyle(
@@ -461,11 +471,14 @@ class _SendState extends State<Send> {
                             child: SizedBox(
                               width: size.width * 0.8,
                               child: Padding(
-                                  padding: const EdgeInsets.only(left: 25, top: 0),
+                                  padding:
+                                      const EdgeInsets.only(left: 25, top: 0),
                                   child: Row(
                                     children: [
                                       Text(
-                                        S.of(context).crypto_send_EstimatedRange,
+                                        S
+                                            .of(context)
+                                            .crypto_send_EstimatedRange,
                                         style: const TextStyle(
                                           color: Color(0xFF333333),
                                           fontSize: 16,
@@ -537,7 +550,9 @@ class _SendState extends State<Send> {
                                             child: Row(
                                               children: [
                                                 Text(
-                                                  S.of(context).crypto_send_Standard,
+                                                  S
+                                                      .of(context)
+                                                      .crypto_send_Standard,
                                                   style: const TextStyle(
                                                     color: Color(0xFF4A92FF),
                                                     fontSize: 12,
@@ -699,7 +714,8 @@ class _SendState extends State<Send> {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child: Text(S.of(context).receiveWallet_WalletAddress, style: TextStyle(fontSize: 14)),
+            child: Text(S.of(context).receiveWallet_WalletAddress,
+                style: TextStyle(fontSize: 14)),
             onPressed: () {
               if (currChainTypeBtnIndex != 0) {
                 currChainTypeBtnIndex = 0;
@@ -721,7 +737,8 @@ class _SendState extends State<Send> {
               ),
             ),
             child: Text(S.of(context).receiveWallet_LightningInvoice,
-                textAlign: TextAlign.center, style: const TextStyle(fontSize: 14)),
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 14)),
             onPressed: () {
               if (currChainTypeBtnIndex != 1) {
                 currChainTypeBtnIndex = 1;

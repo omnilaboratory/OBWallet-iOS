@@ -18,8 +18,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'home.dart';
-
 class CryptoForNetwork extends StatefulWidget {
   NetWork chainNetwork;
 
@@ -140,7 +138,7 @@ class _CryptoForNetworkState extends State<CryptoForNetwork> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return Exchange(type: EnumExchangeType.sell, name: 'ETH');
+                    return Exchange(type: EnumExchangeType.sell, name: 'ETH',network: widget.chainNetwork);
                   });
             }),
         SquareButton(
@@ -162,7 +160,7 @@ class _CryptoForNetworkState extends State<CryptoForNetwork> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return Send(name: 'ETH');
+                    return Send(name: 'ETH',network: widget.chainNetwork,);
                   });
             }),
       ],

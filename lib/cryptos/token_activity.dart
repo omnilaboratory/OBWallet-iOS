@@ -4,15 +4,15 @@ import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_token_card.dart';
+import 'package:awallet/component/crypto_tx_item.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/component/square_button.dart';
-import 'package:awallet/component/crypto_tx_item.dart';
 import 'package:awallet/cryptos/receive_wallet_address.dart';
 import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
-import 'package:awallet/services/token_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
+import 'package:awallet/services/token_service.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,9 +37,10 @@ class _TokenActivityState extends State<TokenActivity> {
   final RefreshController _refreshBalanceController =
       RefreshController(initialRefresh: false);
 
-
   void onFreshBalance() {
-    TokenService.getInstance().getTokenBalance(context,widget.tokenInfo).then((value) {
+    TokenService.getInstance()
+        .getTokenBalance(context, widget.tokenInfo)
+        .then((value) {
       if (mounted) {
         setState(() {});
       }
@@ -168,7 +169,9 @@ class _TokenActivityState extends State<TokenActivity> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return ReceiveWalletAddress(network:Utils.getChainNetWork(widget.tokenInfo.netName)!);
+                    return ReceiveWalletAddress(
+                        network:
+                            Utils.getChainNetWork(widget.tokenInfo.netName)!);
                   });
             }),
         SquareButton(
@@ -179,7 +182,10 @@ class _TokenActivityState extends State<TokenActivity> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return Send(name: widget.tokenInfo.name);
+                    return Send(
+                      name: widget.tokenInfo.name,
+                      network: Utils.getChainNetWork(widget.tokenInfo.netName)!,
+                    );
                   });
             }),
       ],
@@ -190,7 +196,8 @@ class _TokenActivityState extends State<TokenActivity> {
     return AppBar(
       leadingWidth: 42,
       titleSpacing: 0,
-      title: HeadLogo(title: S.of(context).tokenActivity_title(widget.tokenInfo.name)),
+      title: HeadLogo(
+          title: S.of(context).tokenActivity_title(widget.tokenInfo.name)),
     );
   }
 

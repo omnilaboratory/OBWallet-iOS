@@ -5,7 +5,7 @@ import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/cards/card_recharge.dart';
-import 'package:awallet/cards/review_exchange.dart';
+import 'package:awallet/cards/exchange_confirm.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
@@ -25,8 +25,9 @@ import 'package:flutter_dash/flutter_dash.dart';
 class Exchange extends StatefulWidget {
   EnumExchangeType type;
   String name;
+  NetWork? network;
 
-  Exchange({super.key, this.type = EnumExchangeType.sell, required this.name});
+  Exchange({super.key, this.type = EnumExchangeType.sell, required this.name,this.network});
 
   @override
   State<Exchange> createState() => _ExchangeState();
@@ -41,7 +42,6 @@ class _ExchangeState extends State<Exchange> {
 
   late GetUserSwapPriceResponse currPriceInfo;
 
-  var initTokenList = TokenService.getInstance().getTokenList();
   List<TokenInfo> tokenList = [];
   var currencyList = GlobalParams.currencyList;
 
@@ -55,7 +55,7 @@ class _ExchangeState extends State<Exchange> {
   void initState() {
     super.initState();
     //init data
-    tokenList.addAll(initTokenList);
+    tokenList=TokenService.getInstance().getTokenList(network: widget.network);
     for (int i = 0; i < tokenList.length; i++) {
       TokenInfo tokenInfo = tokenList[i];
       if (tokenInfo.name == widget.name) {
@@ -237,7 +237,7 @@ class _ExchangeState extends State<Exchange> {
     showDialog(
         context: context,
         builder: (context) {
-          return ReviewExchange(
+          return ExchangeConfirm(
               fromAmt: double.parse(
                   _amountTokenController.text.replaceAll(",", "")),
               toAmt: double.parse(

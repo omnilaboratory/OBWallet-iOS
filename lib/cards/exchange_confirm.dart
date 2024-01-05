@@ -15,7 +15,7 @@ import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
-class ReviewExchange extends StatefulWidget {
+class ExchangeConfirm extends StatefulWidget {
   double fromAmt = 0;
   double toAmt = 0;
   String fromCoin;
@@ -23,7 +23,7 @@ class ReviewExchange extends StatefulWidget {
   EnumExchangeType type;
   GetUserSwapPriceResponse priceInfo;
 
-  ReviewExchange({
+  ExchangeConfirm({
     super.key,
     required this.fromAmt,
     required this.toAmt,
@@ -34,10 +34,10 @@ class ReviewExchange extends StatefulWidget {
   });
 
   @override
-  State<ReviewExchange> createState() => _ReviewExchangeState();
+  State<ExchangeConfirm> createState() => _ExchangeConfirmState();
 }
 
-class _ReviewExchangeState extends State<ReviewExchange> {
+class _ExchangeConfirmState extends State<ExchangeConfirm> {
   double fromPrice = 1;
   double toPrice = 1;
 

@@ -17,14 +17,14 @@ class SendConfirm extends StatefulWidget {
   final String address;
   final String amount;
   final String name;
-  final String netName;
+  final NetWork network;
 
   const SendConfirm({
     super.key,
     required this.address,
     required this.amount,
     required this.name,
-    required this.netName,
+    required this.network,
   });
 
   @override
@@ -35,7 +35,7 @@ class _SendConfirmState extends State<SendConfirm> {
   onConfirm() async {
     var loading = showLoading(context);
     TransferTokenRequest request = TransferTokenRequest();
-    request.network = Utils.getChainNetWork(widget.netName)!;
+    request.network = widget.network;
     request.token = Utils.getContractSymbol(widget.name)!;
     request.to = widget.address;
     request.amt = double.parse(widget.amount);
