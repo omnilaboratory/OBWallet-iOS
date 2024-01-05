@@ -1,10 +1,11 @@
+import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
-import 'package:awallet/component/crypto_receive_center.dart';
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pb.dart';
-import 'package:awallet/services/token_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ReceiveWalletAddress extends StatefulWidget {
   NetWork network;
@@ -29,22 +30,63 @@ class _ReceiveWalletAddressState extends State<ReceiveWalletAddress> {
         child: SingleChildScrollView(
           child: Column(children: [
             Container(
+                padding: const EdgeInsets.only(top: 30),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 width: size.width * 0.8,
-                height: 450,
+                height: 400,
                 child: Column(children: [
-                  const SizedBox(height: 30),
                   createDialogTitle(S.of(context).ethereumPage_Receive),
                   const SizedBox(height: 10),
-                  CryptoReceiveCenter(
-                    address: TokenService.getInstance()
-                        .getWalletInfo(network: widget.network)
-                        .address!,
-                    tips: S.of(context).tips_WrongTopUp,
-                    qrSize: 140,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 12),
+                        const Text("Ether: ",
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.w400)),
+                        const SizedBox(height: 6),
+                        Text(CommonService.userInfo!.walletAddress,
+                            style: const TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w400)),
+                        const SizedBox(height: 40),
+                        const Text("Tron: ",
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.w400)),
+                        const SizedBox(height: 6),
+                        Text(CommonService.userInfo!.tronAddress,
+                            style: const TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w400)),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          BottomButton(
+                            icon: 'asset/images/icon_copy_green.png',
+                            text: 'Ether',
+                            onPressed: () {
+                              showToast(S.of(context).tips_addressIsOnClipboard);
+                              Clipboard.setData(ClipboardData(text: CommonService.userInfo!.walletAddress));
+                            },
+                          ),
+                          BottomButton(
+                            icon: 'asset/images/icon_copy_green.png',
+                            text: 'Tron',
+                            onPressed: () {
+                              showToast(S.of(context).tips_addressIsOnClipboard);
+                              Clipboard.setData(ClipboardData(text: CommonService.userInfo!.tronAddress));
+                            },
+                          )
+                        ]),
                   ),
                 ])),
             const SizedBox(height: 30),
