@@ -155,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "main_home_Crypto": MessageLookupByLibrary.simpleMessage("加密貨幣"),
         "main_home_Profile": MessageLookupByLibrary.simpleMessage("個人資料"),
         "main_home_Shop": MessageLookupByLibrary.simpleMessage("商店"),
+        "nftExchange_Chain": MessageLookupByLibrary.simpleMessage("链条类型"),
         "nftExchange_From": MessageLookupByLibrary.simpleMessage("從"),
         "nftExchange_To": MessageLookupByLibrary.simpleMessage("至"),
         "nftExchange_nftBalance": m2,

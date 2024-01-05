@@ -30,6 +30,7 @@ class _SendState extends State<Send> {
 
   List<TokenInfo> tokenList = [];
   late TokenInfo dropdownValue;
+  late NetWork selectedNetwork = NetWork.ETH;
   int num = 6;
   late bool canClick;
 
@@ -90,7 +91,7 @@ class _SendState extends State<Send> {
             name: dropdownValue.name,
             address: _addressController.value.text.toString(),
             amount: _amountController.value.text.toString(),
-            network: widget.network,
+            network: selectedNetwork,
           );
         });
   }
@@ -152,13 +153,6 @@ class _SendState extends State<Send> {
                           ? '(Polygon Asset)'
                           : '')),
                   const SizedBox(height: 20),
-                  Visibility(
-                    visible: false,
-                    child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 15, right: 15, top: 15),
-                        child: buildChainTypeButtons()),
-                  ),
                   Expanded(
                     flex: 1000,
                     child: SingleChildScrollView(
@@ -213,18 +207,49 @@ class _SendState extends State<Send> {
                                   ),
                                 ),
                               )),
-                          SizedBox(
-                            width: size.width * 0.8,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 25, top: 15),
-                              child: Text(
-                                S.of(context).crypto_send_AssetAmount,
-                                style: const TextStyle(
-                                  color: Color(0xFF999999),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 25, right: 25, top: 20, bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  S.of(context).nftExchange_Chain,
+                                  style: const TextStyle(
+                                    color: Color(0xFF999999),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(height: 6),
+                                Container(
+                                  decoration: const ShapeDecoration(
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 0.50,
+                                          color: Color(0xFFE6E6E6)),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                    ),
+                                  ),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<NetWork>(
+                                      icon: const Image(
+                                          width: 24,
+                                          height: 24,
+                                          image: AssetImage(
+                                              "asset/images/icon_arrow_down_black.png")),
+                                      value: selectedNetwork,
+                                      isExpanded: true,
+                                      items:
+                                          buildChainNetworkDropdownItemList(),
+                                      onChanged: (value) {
+                                        selectedNetwork = value!;
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Padding(
@@ -291,7 +316,7 @@ class _SendState extends State<Send> {
                                                 "asset/images/icon_arrow_down_black.png")),
                                         value: dropdownValue,
                                         isExpanded: true,
-                                        items: buildCountryDropdownItemList(),
+                                        items: buildTokenDropdownItemList(),
                                         onChanged: (value) {
                                           setState(() {
                                             _amountController.text = '';
@@ -399,183 +424,6 @@ class _SendState extends State<Send> {
                                   )
                                 ],
                               )),
-                          Visibility(
-                            visible: false,
-                            child: SizedBox(
-                              width: size.width * 0.8,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 25, top: 15),
-                                child: Text(
-                                  S.of(context).crypto_send_Memo,
-                                  style: const TextStyle(
-                                    color: Color(0xFF999999),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Visibility(
-                            visible: false,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 25, right: 25, top: 5),
-                              child: TextField(
-                                maxLines: 10,
-                                minLines: 1,
-                                onChanged: (text) {
-                                  setState(() {});
-                                },
-                                keyboardType: TextInputType.visiblePassword,
-                                cursorColor: const Color(0xFF4A92FF),
-                                style: const TextStyle(
-                                  color: Color(0xFF666666),
-                                  fontSize: 14,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 7),
-                                  isCollapsed: true,
-                                  border: _outlineInputBorder,
-                                  focusedBorder: _outlineInputBorder,
-                                  enabledBorder: _outlineInputBorder,
-                                  disabledBorder: _outlineInputBorder,
-                                  focusedErrorBorder: _outlineInputBorder,
-                                  errorBorder: _outlineInputBorder,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Visibility(
-                            visible: false,
-                            child: SizedBox(
-                              width: size.width * 0.8,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 25, top: 15),
-                                child: Text(
-                                  S.of(context).crypto_send_MinerFee,
-                                  style: const TextStyle(
-                                    color: Color(0xFF999999),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Visibility(
-                            visible: false,
-                            child: SizedBox(
-                              width: size.width * 0.8,
-                              child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 25, top: 0),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        S
-                                            .of(context)
-                                            .crypto_send_EstimatedRange,
-                                        style: const TextStyle(
-                                          color: Color(0xFF333333),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      const Image(
-                                        width: 14,
-                                        height: 14,
-                                        image: AssetImage(
-                                            "asset/images/icon_refresh_small_black.png"),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Text(
-                                        S.of(context).crypto_send_RefreshIn5s,
-                                        style: const TextStyle(
-                                          color: Color(0xFF333333),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                          ),
-                          Visibility(
-                            visible: false,
-                            child: SizedBox(
-                              width: size.width * 0.8,
-                              child: const Padding(
-                                padding: EdgeInsets.only(left: 25, top: 0),
-                                child: Text(
-                                  '\$100.00',
-                                  style: TextStyle(
-                                    color: Color(0xFF333333),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Visibility(
-                            visible: false,
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 25, right: 25, top: 0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Stack(
-                                        alignment:
-                                            AlignmentDirectional.centerStart,
-                                        children: [
-                                          const Positioned(
-                                            child: Text(
-                                              "0.0001234 BTC",
-                                              style: TextStyle(
-                                                color: Color(0xFF666666),
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                height: 1.29,
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            right: 0,
-                                            child: Row(
-                                              children: [
-                                                Text(
-                                                  S
-                                                      .of(context)
-                                                      .crypto_send_Standard,
-                                                  style: const TextStyle(
-                                                    color: Color(0xFF4A92FF),
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w400,
-                                                    height: 1.29,
-                                                  ),
-                                                ),
-                                                const SizedBox(width: 7),
-                                                const Image(
-                                                  width: 6,
-                                                  height: 12,
-                                                  image: AssetImage(
-                                                      "asset/images/icon_arrow_right_small_balck.png"),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                )),
-                          ),
                         ],
                       ),
                     ),
@@ -608,7 +456,33 @@ class _SendState extends State<Send> {
     );
   }
 
-  List<DropdownMenuItem<TokenInfo>> buildCountryDropdownItemList() {
+  List<DropdownMenuItem<NetWork>> buildChainNetworkDropdownItemList() {
+    List<DropdownMenuItem<NetWork>> list = [];
+    NetWork.values.forEach((element) {
+      if (element == NetWork.UnKownNetWork || element == NetWork.ACOUNT) {
+        return;
+      }
+      list.add(DropdownMenuItem<NetWork>(
+        value: element,
+        child: Row(
+          children: [
+            const SizedBox(width: 7),
+            Text(
+              element.name,
+              style: const TextStyle(
+                color: Color(0xFF333333),
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+      ));
+    });
+    return list;
+  }
+
+  List<DropdownMenuItem<TokenInfo>> buildTokenDropdownItemList() {
     List<DropdownMenuItem<TokenInfo>> list = tokenList.map((TokenInfo value) {
       return DropdownMenuItem<TokenInfo>(
         value: value,
@@ -715,7 +589,7 @@ class _SendState extends State<Send> {
               ),
             ),
             child: Text(S.of(context).receiveWallet_WalletAddress,
-                style: TextStyle(fontSize: 14)),
+                style: const TextStyle(fontSize: 14)),
             onPressed: () {
               if (currChainTypeBtnIndex != 0) {
                 currChainTypeBtnIndex = 0;

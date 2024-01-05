@@ -1220,6 +1220,16 @@ class S {
     );
   }
 
+  /// `Chain Type`
+  String get nftExchange_Chain {
+    return Intl.message(
+      'Chain Type',
+      name: 'nftExchange_Chain',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Balance: {amount} NFTs`
   String nftExchange_nftBalance(Object amount) {
     return Intl.message(

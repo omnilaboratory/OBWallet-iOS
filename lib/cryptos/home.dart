@@ -51,37 +51,11 @@ class _CryptoHomeState extends State<CryptoHome>
     super.dispose();
   }
 
-  var tokenList = [
-    TokenInfo(
-        name: "BTC",
-        iconUrl: 'asset/images/icon_bitcoin.png',
-        balance: 100000.0,
-        balanceOfDollar: 1220222222000.0),
-    TokenInfo(name: "USDT", iconUrl: 'asset/images/icon_tether.png'),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: tabNames.length, child: buildHomeScaffold());
-  }
-
-  Scaffold buildHomeScaffold() {
     return Scaffold(
       appBar: buildAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-        child: Column(
-          children: [
-            buildTabBars(),
-            const SizedBox(height: 20),
-            Expanded(
-                child: TabBarView(
-              children: tabViewList,
-            ))
-          ],
-        ),
-      ),
+      body: CryptoForNetwork(chainNetwork: NetWork.ETH),
     );
   }
 
@@ -92,17 +66,7 @@ class _CryptoHomeState extends State<CryptoHome>
         color: const Color(0xFFF6F6F6),
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: TabBar(
-        padding: const EdgeInsets.only(left: 4, right: 4),
-        indicator: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(4.0)),
-        indicatorPadding: const EdgeInsets.only(top: 4, bottom: 4),
-        labelColor: const Color(0xFF4A92FF),
-        unselectedLabelColor: const Color(0xFF999999),
-        dividerColor: Colors.transparent,
-        indicatorSize: TabBarIndicatorSize.tab,
-        tabs: tabList,
-      ),
+      child: CryptoForNetwork(chainNetwork: NetWork.ETH),
     );
   }
 

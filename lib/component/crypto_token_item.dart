@@ -21,16 +21,16 @@ class CryptoTokenItem extends StatelessWidget {
         // fontWeight: FontWeight.w600,
       ),
     ));
-    if (tokenInfo.netName.isNotEmpty) {
-      nameAndNet.add(Text(
-        tokenInfo.netName,
-        style: const TextStyle(
-          color: Color(0xFF666666),
-          fontSize: 14,
-          // fontWeight: FontWeight.w600,
-        ),
-      ));
-    }
+    // if (tokenInfo.netName.isNotEmpty) {
+    //   nameAndNet.add(Text(
+    //     tokenInfo.netName,
+    //     style: const TextStyle(
+    //       color: Color(0xFF666666),
+    //       fontSize: 14,
+    //       // fontWeight: FontWeight.w600,
+    //     ),
+    //   ));
+    // }
 
     return Container(
         margin: const EdgeInsets.only(bottom: 10),

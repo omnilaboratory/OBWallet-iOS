@@ -134,6 +134,7 @@
   "nftExchange_title": "NFT Exchange",
   "nftExchange_From": "From",
   "nftExchange_To": "To",
+  "nftExchange_Chain": "Chain Type",
   "nftExchange_nftBalance": "Balance: {amount} NFTs",
 
   "receiveWallet_WalletAddress": "Wallet Address",

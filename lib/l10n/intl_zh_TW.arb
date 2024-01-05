@@ -134,6 +134,7 @@
   "nftExchange_title": "NFT 兌換",
   "nftExchange_From": "從",
   "nftExchange_To": "至",
+  "nftExchange_Chain": "链条类型",
   "nftExchange_nftBalance": "餘額: {amount} NFT",
 
   "receiveWallet_WalletAddress": "錢包地址",
