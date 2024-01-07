@@ -149,7 +149,7 @@ class _SendState extends State<Send> {
                     ],
                   ),
                   Center(
-                      child: Text(widget.network == NetWork.POLYGON.name
+                      child: Text(widget.network == NetWork.POLYGON
                           ? '(Polygon Asset)'
                           : '')),
                   const SizedBox(height: 20),
