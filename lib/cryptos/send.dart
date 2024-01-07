@@ -223,6 +223,7 @@ class _SendState extends State<Send> {
                                 ),
                                 const SizedBox(height: 6),
                                 Container(
+                                  padding: const EdgeInsets.only(right: 10),
                                   decoration: const ShapeDecoration(
                                     shape: RoundedRectangleBorder(
                                       side: BorderSide(
