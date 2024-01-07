@@ -459,9 +459,9 @@ class _SendState extends State<Send> {
 
   List<DropdownMenuItem<NetWork>> buildChainNetworkDropdownItemList() {
     List<DropdownMenuItem<NetWork>> list = [];
-    NetWork.values.forEach((element) {
+    for (var element in NetWork.values) {
       if (element == NetWork.UnKownNetWork || element == NetWork.ACOUNT) {
-        return;
+        continue;
       }
       list.add(DropdownMenuItem<NetWork>(
         value: element,
@@ -479,7 +479,7 @@ class _SendState extends State<Send> {
           ],
         ),
       ));
-    });
+    }
     return list;
   }
 
