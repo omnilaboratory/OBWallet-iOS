@@ -63,7 +63,7 @@ class _CardPartState extends State<CardPart> {
     });
 
     GlobalParams.eventBus.on().listen((event) {
-      if (event == "applyCard"||event == "updateCardBalance") {
+      if (event == "applyCard" || event == "updateCardBalance") {
         if (mounted) {
           _onBalanceRefresh();
         }
@@ -317,7 +317,8 @@ class _CardPartState extends State<CardPart> {
     }
 
     // kyc not pass, can not applyCard
-    if (CommonService.userInfo!.kycStatus != EnumKycStatus.passed.value) {
+    if (CommonService.userInfo?.kycStatus == '' ||
+        CommonService.userInfo!.kycStatus != EnumKycStatus.passed.value) {
       showKycTips(context);
       return;
     }

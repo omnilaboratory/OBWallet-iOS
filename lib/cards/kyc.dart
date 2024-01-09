@@ -27,6 +27,14 @@ showKycTips(BuildContext context) {
     alert(S.of(context).tips_kycPending, context, () {});
     return;
   }
+  if (CommonService.userInfo!.kycStatus == '') {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Kyc();
+        });
+    return;
+  }
   if (CommonService.userInfo!.kycStatus == EnumKycStatus.rejected.value) {
     alert(S.of(context).tips_kycRejected, context, () {
       showDialog(
