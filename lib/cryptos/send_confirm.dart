@@ -43,9 +43,9 @@ class _SendConfirmState extends State<SendConfirm> {
         .transferToken(context, request)
         .then((resp) {
 
-      GlobalParams.eventBus.fire("SendConfirm_Close");
       Navigator.pop(context);
       removeLoading(loading);
+      GlobalParams.eventBus.fire("SendConfirm_Close");
     });
   }
 

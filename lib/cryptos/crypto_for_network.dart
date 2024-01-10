@@ -38,7 +38,7 @@ class _CryptoForNetworkState extends State<CryptoForNetwork> {
   @override
   void initState() {
     GlobalParams.eventBus.on().listen((event) {
-      if (event == "MoreMenu_setNetwork" || event == "exchange_showTips") {
+      if (event == "MoreMenu_setNetwork" || event == "exchange_showTips"||event == "SendConfirm_Close") {
         if(mounted){
           _updateBalance();
         }
