@@ -114,7 +114,7 @@ message PcardApplyInfo {
   string id_name = 4;
   //证件号码
   string id_no = 3;
-  //性别
+  //性别: 1男 2女
   string gender = 14;
   //birsthday format: 1990-01-01
   string bod = 5;

@@ -40,15 +40,11 @@ final $typed_data.Uint8List importKeyResponseDescriptor = $convert.base64Decode(
 @$core.Deprecated('Use getTokenBalalanceRequestDescriptor instead')
 const GetTokenBalalanceRequest$json = {
   '1': 'GetTokenBalalanceRequest',
-  '2': [
-    {'1': 'token_name', '3': 1, '4': 1, '5': 9, '10': 'tokenName'},
-  ],
 };
 
 /// Descriptor for `GetTokenBalalanceRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getTokenBalalanceRequestDescriptor = $convert.base64Decode(
-    'ChhHZXRUb2tlbkJhbGFsYW5jZVJlcXVlc3QSHQoKdG9rZW5fbmFtZRgBIAEoCVIJdG9rZW5OYW'
-    '1l');
+    'ChhHZXRUb2tlbkJhbGFsYW5jZVJlcXVlc3Q=');
 
 @$core.Deprecated('Use getTokenBalalanceResponseDescriptor instead')
 const GetTokenBalalanceResponse$json = {

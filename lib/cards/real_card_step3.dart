@@ -1,7 +1,10 @@
+import 'package:awallet/cards/real_card_step1.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/grpc_services/card_service.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 
 class RealCardStep3 extends StatefulWidget {
@@ -12,6 +15,7 @@ class RealCardStep3 extends StatefulWidget {
 }
 
 class _RealCardStep3State extends State<RealCardStep3> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _cityCodeController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
@@ -30,37 +34,55 @@ class _RealCardStep3State extends State<RealCardStep3> {
           title: HeadLogo(title: S.of(context).realCard_Step3_title),
         ),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              buildInputField(),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  BottomButton(
-                    icon: 'asset/images/icon_arrow_left_green.png',
-                    text: S.of(context).common_Back.toUpperCase(),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  BottomButton(
-                    icon: 'asset/images/icon_confirm_green.png',
-                    text: S.of(context).common_Done,
-                    onPressed: () {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                    },
-                  ),
-                ],
-              ),
-            ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                buildInputField(),
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    BottomButton(
+                      icon: 'asset/images/icon_arrow_left_green.png',
+                      text: S.of(context).common_Back.toUpperCase(),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    BottomButton(
+                      icon: 'asset/images/icon_confirm_green.png',
+                      text: S.of(context).common_Done,
+                      onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
+
+                        if ((_formKey.currentState as FormState).validate() ==
+                            false) {
+                          return;
+                        }
+                        applyInfo.foreignCity = _cityController.text.trim();
+                        applyInfo.foreignPostcode = _cityCodeController.text.trim();
+                        applyInfo.foreignAddress = _addressController.text.trim();
+
+                        CardService.getInstance().applyRealCard(context, applyInfo).then((resp) {
+                          if(resp.code==1){
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            GlobalParams.eventBus.fire("applyRealCard_Finish");
+                          }
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-
-  late int selectedCardType = 0;
 
   Widget buildInputField() {
     return Container(

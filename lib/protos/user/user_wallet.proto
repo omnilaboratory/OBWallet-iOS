@@ -33,7 +33,7 @@ message ImportKeyResponse {
 }
 message GetTokenBalalanceRequest {
   // USD USDT USDC ETH TRON MATIC
-  string token_name=1;
+//  string token_name=1;
 }
 message GetTokenBalalanceResponse {
   double balance_usd=1;

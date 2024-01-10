@@ -152,16 +152,43 @@ class CardService {
     return ret;
   }
 
-
   Future<GrpcResponse> uploadImage(
       BuildContext context, UserUploadRequest req) async {
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient?.userUpload(req);
       ret.code = 1;
-      ret.data = resp;
+      ret.data = resp?.fileUrl;
     } catch (e) {
       UserService.getInstance().setError(context, "uploadImage", e, ret);
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> applyRealCard(
+      BuildContext context, PcardApplyInfo req) async {
+    var ret = GrpcResponse();
+    log("$req");
+    try {
+      var resp = await cardServiceClient?.updatePcardApplyInfo(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context, "applyRealCard", e, ret);
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> getRealCardStatus(BuildContext context) async {
+    var ret = GrpcResponse();
+    try {
+      var resp = await cardServiceClient
+          ?.getPcardApplyInfo(GetPcardApplyInfoRequest()) as PcardApplyInfo;
+      ret.code = 1;
+      log("$resp");
+      ret.data = resp.status;
+    } catch (e) {
+      UserService.getInstance().setError(context, "getRealCardStatus", e, ret);
     }
     return ret;
   }

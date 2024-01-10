@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:awallet/cards/real_card_step1.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/profile/my_users.dart';
 import 'package:awallet/profile/update_psw.dart';
+import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +25,44 @@ class ProfileHome extends StatefulWidget {
 }
 
 class _ProfileHomeState extends State<ProfileHome> {
+  String realCardStatus = "";
+  bool realCardEnable = false;
+
+  @override
+  void initState() {
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "applyRealCard_Finish") {
+        updateRealCardBtnStatus();
+      }
+    });
+    updateRealCardBtnStatus();
+    super.initState();
+  }
+
+  updateRealCardBtnStatus() {
+    if(mounted){
+      realCardEnable = false;
+      CardService.getInstance().getRealCardStatus(context).then((resp) {
+        if (resp.code == 1) {
+          log("${resp.data}");
+          if (resp.data == "0") {
+            realCardStatus = "待审核";
+          } else if (resp.data == "1") {
+            realCardStatus = "审核通过";
+          } else if (resp.data == "2") {
+            realCardEnable = true;
+            realCardStatus = "申请失败";
+          } else {
+            realCardEnable = true;
+          }
+        } else {
+          realCardEnable = true;
+        }
+        setState(() {});
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> list = [];
@@ -51,14 +93,14 @@ class _ProfileHomeState extends State<ProfileHome> {
       }));
     }
     list.add(const SizedBox(height: 10));
-    list.add(btnBtnItem(
-        Icons.language, S.of(context).profile_language_title, () {
+    list.add(
+        btnBtnItem(Icons.language, S.of(context).profile_language_title, () {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const Language()));
     }));
     list.add(const SizedBox(height: 10));
-    list.add(
-        btnBtnItem(Icons.help_center_outlined, S.of(context).profile_guide_title, () {
+    list.add(btnBtnItem(
+        Icons.help_center_outlined, S.of(context).profile_guide_title, () {
       showDialog(
           context: context,
           builder: (context) {
@@ -66,10 +108,11 @@ class _ProfileHomeState extends State<ProfileHome> {
           });
     }));
     list.add(const SizedBox(height: 10));
-    list.add(
-        btnBtnItem(Icons.car_crash, "实体卡", () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const RealCardStep1()));
+    list.add(btnBtnItem(Icons.car_crash, "实体卡", subName: realCardStatus, () {
+      if (realCardEnable) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const RealCardStep1()));
+      }
     }));
     list.add(const SizedBox(height: 10));
     list.add(btnBtnItem(
@@ -150,7 +193,17 @@ class _ProfileHomeState extends State<ProfileHome> {
     );
   }
 
-  Widget btnBtnItem(IconData icon, String name, Function onTap) {
+  Widget btnBtnItem(IconData icon, String name, Function onTap,
+      {String? subName}) {
+    List<Widget> list = [];
+    list.add(Icon(icon));
+    list.add(const SizedBox(width: 10));
+    list.add(Text(name));
+    if (subName != null) {
+      list.add(const Spacer());
+      list.add(Text(subName));
+    }
+
     return InkWell(
       onTap: () {
         onTap();
@@ -166,7 +219,7 @@ class _ProfileHomeState extends State<ProfileHome> {
           ),
         ),
         child: Row(
-          children: [Icon(icon), const SizedBox(width: 10), Text(name)],
+          children: list,
         ),
       ),
     );

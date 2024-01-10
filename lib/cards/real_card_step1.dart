@@ -7,11 +7,11 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/card_service.dart';
-import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
-import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+PcardApplyInfo applyInfo = PcardApplyInfo();
 
 class RealCardStep1 extends StatefulWidget {
   const RealCardStep1({super.key});
@@ -21,8 +21,17 @@ class RealCardStep1 extends StatefulWidget {
 }
 
 class _RealCardStep1State extends State<RealCardStep1> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _idNumController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+
+  @override
+  void initState() {
+    applyInfo = PcardApplyInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,21 +47,37 @@ class _RealCardStep1State extends State<RealCardStep1> {
           title: HeadLogo(title: S.of(context).realCard_title),
         ),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              buildInputField(),
-              const SizedBox(height: 30),
-              BottomButton(
-                icon: 'asset/images/icon_arrow_right_green.png',
-                text: S.of(context).common_Next,
-                onPressed: () {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const RealCardStep2()));
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                buildInputField(),
+                const SizedBox(height: 30),
+                BottomButton(
+                  icon: 'asset/images/icon_arrow_right_green.png',
+                  text: S.of(context).common_Next,
+                  onPressed: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    if ((_formKey.currentState as FormState).validate() ==
+                        false) {
+                      return;
+                    }
 
-                },
-              ),
-            ],
+                    applyInfo.idType = selectedCardType + 1;
+                    applyInfo.idName = _unameController.text.trim();
+                    applyInfo.idNo = _idNumController.text.trim();
+                    applyInfo.gender = (selectedSex + 1).toString();
+                    applyInfo.firstName = _firstNameController.text.trim();
+                    applyInfo.lastName = _lastNameController.text.trim();
+                    applyInfo.maritalStatus = (selectedMarry + 1).toString();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RealCardStep2()));
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -62,19 +87,33 @@ class _RealCardStep1State extends State<RealCardStep1> {
   final picker = ImagePicker();
   XFile? cardImage0;
   XFile? cardImage1;
-  var req = UserUploadRequest();
 
   getImage(int type) {
     picker.pickImage(source: ImageSource.gallery).then((image) async {
-      req.fileName = image!.name;
-      req.fileBytes = await image.readAsBytes();
-      setState(() {
-        if (type == 0) {
-          cardImage0 = image;
-        } else {
-          cardImage1 = image;
-        }
-      });
+      if (image != null) {
+        UserUploadRequest req = UserUploadRequest();
+        req.fileName = image.name;
+        req.fileBytes = await image.readAsBytes();
+        CardService.getInstance().uploadImage(context, req).then((resp) {
+          if (resp.code == 1) {
+            log("${resp.data}");
+            if (type == 0) {
+              applyInfo.idImage1 = resp.data;
+            }
+            if (type == 1) {
+              applyInfo.idImage2 = resp.data;
+            }
+          }
+        });
+
+        setState(() {
+          if (type == 0) {
+            cardImage0 = image;
+          } else {
+            cardImage1 = image;
+          }
+        });
+      }
     });
   }
 
@@ -99,10 +138,10 @@ class _RealCardStep1State extends State<RealCardStep1> {
                 _idNumController, S.of(context).realCard_idCardNum,
                 icon: const Icon(Icons.person_pin), maxLength: 30),
             buildSex(),
-            createTextFormField(_idNumController, "姓氏拼音",
+            createTextFormField(_firstNameController, "姓氏拼音",
                 icon: const Icon(Icons.person_pin), maxLength: 30),
             const SizedBox(height: 15),
-            createTextFormField(_idNumController, "名字拼音",
+            createTextFormField(_lastNameController, "名字拼音",
                 icon: const Icon(Icons.person_pin), maxLength: 30),
             buildMarry(),
           ],
@@ -220,9 +259,6 @@ class _RealCardStep1State extends State<RealCardStep1> {
         GestureDetector(
           onTap: () {
             getImage(0);
-            CardService.getInstance().uploadImage(context, req).then((resp) => {
-                  if (resp.code == 1) {log("${resp.data}")}
-                });
           },
           child: cardImage0 == null
               ? const Image(
@@ -240,7 +276,6 @@ class _RealCardStep1State extends State<RealCardStep1> {
         GestureDetector(
           onTap: () {
             getImage(1);
-            CardService.getInstance().uploadImage(context, req);
           },
           child: cardImage1 == null
               ? const Image(

@@ -107,7 +107,6 @@ class GetTokenBalalanceRequest extends $pb.GeneratedMessage {
   factory GetTokenBalalanceRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTokenBalalanceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'tokenName')
     ..hasRequiredFields = false
   ;
 
@@ -131,15 +130,6 @@ class GetTokenBalalanceRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetTokenBalalanceRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTokenBalalanceRequest>(create);
   static GetTokenBalalanceRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get tokenName => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set tokenName($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasTokenName() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearTokenName() => clearField(1);
 }
 
 class GetTokenBalalanceResponse extends $pb.GeneratedMessage {
