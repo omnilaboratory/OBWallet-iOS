@@ -77,6 +77,118 @@ final $typed_data.Uint8List cardInfoDescriptor = $convert.base64Decode(
     'Eh0KCmNyZWF0ZWRfYXQYBiABKARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAcgASgEUgl1cG'
     'RhdGVkQXQ=');
 
+@$core.Deprecated('Use listPcardApplyInfoRequestDescriptor instead')
+const ListPcardApplyInfoRequest$json = {
+  '1': 'ListPcardApplyInfoRequest',
+  '2': [
+    {'1': 'order_by', '3': 1, '4': 1, '5': 9, '10': 'orderBy'},
+  ],
+};
+
+/// Descriptor for `ListPcardApplyInfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listPcardApplyInfoRequestDescriptor = $convert.base64Decode(
+    'ChlMaXN0UGNhcmRBcHBseUluZm9SZXF1ZXN0EhkKCG9yZGVyX2J5GAEgASgJUgdvcmRlckJ5');
+
+@$core.Deprecated('Use listPcardApplyInfoResponseDescriptor instead')
+const ListPcardApplyInfoResponse$json = {
+  '1': 'ListPcardApplyInfoResponse',
+  '2': [
+    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.user.PcardApplyInfo', '10': 'items'},
+  ],
+};
+
+/// Descriptor for `ListPcardApplyInfoResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listPcardApplyInfoResponseDescriptor = $convert.base64Decode(
+    'ChpMaXN0UGNhcmRBcHBseUluZm9SZXNwb25zZRIqCgVpdGVtcxgBIAMoCzIULnVzZXIuUGNhcm'
+    'RBcHBseUluZm9SBWl0ZW1z');
+
+@$core.Deprecated('Use userUploadRequestDescriptor instead')
+const UserUploadRequest$json = {
+  '1': 'UserUploadRequest',
+  '2': [
+    {'1': 'file_name', '3': 1, '4': 1, '5': 9, '10': 'fileName'},
+    {'1': 'file_bytes', '3': 2, '4': 1, '5': 12, '10': 'fileBytes'},
+  ],
+};
+
+/// Descriptor for `UserUploadRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userUploadRequestDescriptor = $convert.base64Decode(
+    'ChFVc2VyVXBsb2FkUmVxdWVzdBIbCglmaWxlX25hbWUYASABKAlSCGZpbGVOYW1lEh0KCmZpbG'
+    'VfYnl0ZXMYAiABKAxSCWZpbGVCeXRlcw==');
+
+@$core.Deprecated('Use userUploadResponseDescriptor instead')
+const UserUploadResponse$json = {
+  '1': 'UserUploadResponse',
+  '2': [
+    {'1': 'file_url', '3': 3, '4': 1, '5': 9, '10': 'fileUrl'},
+  ],
+};
+
+/// Descriptor for `UserUploadResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userUploadResponseDescriptor = $convert.base64Decode(
+    'ChJVc2VyVXBsb2FkUmVzcG9uc2USGQoIZmlsZV91cmwYAyABKAlSB2ZpbGVVcmw=');
+
+@$core.Deprecated('Use getPcardApplyInfoRequestDescriptor instead')
+const GetPcardApplyInfoRequest$json = {
+  '1': 'GetPcardApplyInfoRequest',
+};
+
+/// Descriptor for `GetPcardApplyInfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getPcardApplyInfoRequestDescriptor = $convert.base64Decode(
+    'ChhHZXRQY2FyZEFwcGx5SW5mb1JlcXVlc3Q=');
+
+@$core.Deprecated('Use pcardApplyInfoDescriptor instead')
+const PcardApplyInfo$json = {
+  '1': 'PcardApplyInfo',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'id_type', '3': 2, '4': 1, '5': 5, '10': 'idType'},
+    {'1': 'id_image1', '3': 20, '4': 1, '5': 9, '10': 'idImage1'},
+    {'1': 'id_image2', '3': 21, '4': 1, '5': 9, '10': 'idImage2'},
+    {'1': 'card_no', '3': 24, '4': 1, '5': 9, '10': 'cardNo'},
+    {'1': 'status', '3': 25, '4': 1, '5': 9, '10': 'status'},
+    {'1': 'status_msg', '3': 26, '4': 1, '5': 9, '10': 'statusMsg'},
+    {'1': 'id_name', '3': 4, '4': 1, '5': 9, '10': 'idName'},
+    {'1': 'id_no', '3': 3, '4': 1, '5': 9, '10': 'idNo'},
+    {'1': 'gender', '3': 14, '4': 1, '5': 9, '10': 'gender'},
+    {'1': 'bod', '3': 5, '4': 1, '5': 9, '10': 'bod'},
+    {'1': 'first_name', '3': 6, '4': 1, '5': 9, '10': 'firstName'},
+    {'1': 'last_name', '3': 7, '4': 1, '5': 9, '10': 'lastName'},
+    {'1': 'marital_status', '3': 19, '4': 1, '5': 9, '10': 'maritalStatus'},
+    {'1': 'shipping_region', '3': 8, '4': 1, '5': 9, '10': 'shippingRegion'},
+    {'1': 'shipping_address_type', '3': 9, '4': 1, '5': 9, '10': 'shippingAddressType'},
+    {'1': 'shipping_province', '3': 10, '4': 1, '5': 9, '10': 'shippingProvince'},
+    {'1': 'shipping_city', '3': 11, '4': 1, '5': 9, '10': 'shippingCity'},
+    {'1': 'postcode', '3': 12, '4': 1, '5': 9, '10': 'postcode'},
+    {'1': 'shipping_address', '3': 13, '4': 1, '5': 9, '10': 'shippingAddress'},
+    {'1': 'mobile', '3': 15, '4': 1, '5': 9, '10': 'mobile'},
+    {'1': 'foreign_city', '3': 17, '4': 1, '5': 9, '10': 'foreignCity'},
+    {'1': 'foreign_postcode', '3': 18, '4': 1, '5': 9, '10': 'foreignPostcode'},
+    {'1': 'foreign_address', '3': 16, '4': 1, '5': 9, '10': 'foreignAddress'},
+    {'1': 'created_at', '3': 22, '4': 1, '5': 3, '10': 'createdAt'},
+    {'1': 'updated_at', '3': 23, '4': 1, '5': 3, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `PcardApplyInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pcardApplyInfoDescriptor = $convert.base64Decode(
+    'Cg5QY2FyZEFwcGx5SW5mbxIOCgJpZBgBIAEoA1ICaWQSFwoHaWRfdHlwZRgCIAEoBVIGaWRUeX'
+    'BlEhsKCWlkX2ltYWdlMRgUIAEoCVIIaWRJbWFnZTESGwoJaWRfaW1hZ2UyGBUgASgJUghpZElt'
+    'YWdlMhIXCgdjYXJkX25vGBggASgJUgZjYXJkTm8SFgoGc3RhdHVzGBkgASgJUgZzdGF0dXMSHQ'
+    'oKc3RhdHVzX21zZxgaIAEoCVIJc3RhdHVzTXNnEhcKB2lkX25hbWUYBCABKAlSBmlkTmFtZRIT'
+    'CgVpZF9ubxgDIAEoCVIEaWRObxIWCgZnZW5kZXIYDiABKAlSBmdlbmRlchIQCgNib2QYBSABKA'
+    'lSA2JvZBIdCgpmaXJzdF9uYW1lGAYgASgJUglmaXJzdE5hbWUSGwoJbGFzdF9uYW1lGAcgASgJ'
+    'UghsYXN0TmFtZRIlCg5tYXJpdGFsX3N0YXR1cxgTIAEoCVINbWFyaXRhbFN0YXR1cxInCg9zaG'
+    'lwcGluZ19yZWdpb24YCCABKAlSDnNoaXBwaW5nUmVnaW9uEjIKFXNoaXBwaW5nX2FkZHJlc3Nf'
+    'dHlwZRgJIAEoCVITc2hpcHBpbmdBZGRyZXNzVHlwZRIrChFzaGlwcGluZ19wcm92aW5jZRgKIA'
+    'EoCVIQc2hpcHBpbmdQcm92aW5jZRIjCg1zaGlwcGluZ19jaXR5GAsgASgJUgxzaGlwcGluZ0Np'
+    'dHkSGgoIcG9zdGNvZGUYDCABKAlSCHBvc3Rjb2RlEikKEHNoaXBwaW5nX2FkZHJlc3MYDSABKA'
+    'lSD3NoaXBwaW5nQWRkcmVzcxIWCgZtb2JpbGUYDyABKAlSBm1vYmlsZRIhCgxmb3JlaWduX2Np'
+    'dHkYESABKAlSC2ZvcmVpZ25DaXR5EikKEGZvcmVpZ25fcG9zdGNvZGUYEiABKAlSD2ZvcmVpZ2'
+    '5Qb3N0Y29kZRInCg9mb3JlaWduX2FkZHJlc3MYECABKAlSDmZvcmVpZ25BZGRyZXNzEh0KCmNy'
+    'ZWF0ZWRfYXQYFiABKANSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GBcgASgDUgl1cGRhdGVkQX'
+    'Q=');
+
 @$core.Deprecated('Use applyCardRequestDescriptor instead')
 const ApplyCardRequest$json = {
   '1': 'ApplyCardRequest',

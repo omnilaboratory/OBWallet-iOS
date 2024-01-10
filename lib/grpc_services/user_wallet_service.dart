@@ -29,19 +29,16 @@ class UserWalletService {
 
   factory UserWalletService() => _instance;
 
-  Future<double> getTokenBalance(String tokenName) async {
+  Future<GetTokenBalalanceResponse?> getAllTokenBalance() async {
     var request = GetTokenBalalanceRequest();
-    request.tokenName = tokenName;
-    log("$request");
     try {
       var resp = await walletClient?.getTokenBalalance(request)
           as GetTokenBalalanceResponse;
-      log("getTokenBalance $resp");
-      return resp.balanceUsd;
+      return resp;
     } catch (e) {
       log("$e");
     }
-    return 0;
+    return null;
   }
 
   Future<GrpcResponse> transferToken(

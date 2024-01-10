@@ -57,6 +57,7 @@ const GetTokenBalalanceResponse$json = {
     {'1': 'balance_usd', '3': 1, '4': 1, '5': 1, '10': 'balanceUsd'},
     {'1': 'balance_usdt', '3': 2, '4': 1, '5': 1, '10': 'balanceUsdt'},
     {'1': 'balance_usdc', '3': 3, '4': 1, '5': 1, '10': 'balanceUsdc'},
+    {'1': 'all_usd', '3': 4, '4': 1, '5': 1, '10': 'allUsd'},
   ],
 };
 
@@ -64,7 +65,7 @@ const GetTokenBalalanceResponse$json = {
 final $typed_data.Uint8List getTokenBalalanceResponseDescriptor = $convert.base64Decode(
     'ChlHZXRUb2tlbkJhbGFsYW5jZVJlc3BvbnNlEh8KC2JhbGFuY2VfdXNkGAEgASgBUgpiYWxhbm'
     'NlVXNkEiEKDGJhbGFuY2VfdXNkdBgCIAEoAVILYmFsYW5jZVVzZHQSIQoMYmFsYW5jZV91c2Rj'
-    'GAMgASgBUgtiYWxhbmNlVXNkYw==');
+    'GAMgASgBUgtiYWxhbmNlVXNkYxIXCgdhbGxfdXNkGAQgASgBUgZhbGxVc2Q=');
 
 @$core.Deprecated('Use getAddressRequestDescriptor instead')
 const GetAddressRequest$json = {

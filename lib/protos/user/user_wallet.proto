@@ -39,6 +39,9 @@ message GetTokenBalalanceResponse {
   double balance_usd=1;
   double balance_usdt=2;
   double balance_usdc=3;
+  //资产usd总价值
+  double all_usd=4;
+
 }
 
 message GetAddressRequest {

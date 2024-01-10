@@ -151,4 +151,18 @@ class CardService {
     }
     return ret;
   }
+
+
+  Future<GrpcResponse> uploadImage(
+      BuildContext context, UserUploadRequest req) async {
+    var ret = GrpcResponse();
+    try {
+      var resp = await cardServiceClient?.userUpload(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context, "uploadImage", e, ret);
+    }
+    return ret;
+  }
 }

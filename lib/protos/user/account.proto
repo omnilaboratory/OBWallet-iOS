@@ -167,6 +167,7 @@ message SwapTx{
   int64 user_id = 2;
   // Deprecated
   string tx_id = 3;
+
   int64 confirms = 9;
 
   TrackedTx.Status status = 13;
@@ -197,7 +198,7 @@ message SwapTx{
 }
 
 message SellCoinRequest {
-  string txid=6;
+//  string txid=6;
   TrackedTx.ContractSymbol coin=2;
   double coin_amt =3;
   double usd_amt =4;

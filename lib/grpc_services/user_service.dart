@@ -166,19 +166,6 @@ class UserService {
     return ret;
   }
 
-  Future<GrpcResponse> uploadImage(
-      BuildContext context, UploadRequest req) async {
-    var ret = GrpcResponse();
-    try {
-      var resp = await userServiceClient?.upload(req);
-      ret.code = 1;
-      ret.data = resp;
-    } catch (e) {
-      setError(context, "uploadImage", e, ret);
-    }
-    return ret;
-  }
-
   Future<GrpcResponse> kyc(BuildContext context, UserInfo req) async {
     var ret = GrpcResponse();
     try {

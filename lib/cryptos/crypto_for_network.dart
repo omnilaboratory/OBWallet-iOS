@@ -39,7 +39,9 @@ class _CryptoForNetworkState extends State<CryptoForNetwork> {
   void initState() {
     GlobalParams.eventBus.on().listen((event) {
       if (event == "MoreMenu_setNetwork" || event == "exchange_showTips") {
-        _updateBalance();
+        if(mounted){
+          _updateBalance();
+        }
       }
     });
 
@@ -64,8 +66,8 @@ class _CryptoForNetworkState extends State<CryptoForNetwork> {
       TokenService.getInstance().updateTokenBalances(context).then((value) {
         if (mounted) {
           setState(() {});
+          _refreshBalanceController.refreshCompleted();
         }
-        _refreshBalanceController.refreshCompleted();
       });
     }
   }

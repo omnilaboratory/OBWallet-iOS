@@ -25,6 +25,13 @@ service CardService{
   rpc CardRecharge(CardRechargeRequest) returns (CardRechargeResponse) {}
   //从第三方商户购买nft
   rpc BuyNftForPay(BuyNftForPayRequest) returns (BuyNftForPayResponse) {}
+  //修改实体卡申请信息
+  rpc UpdatePcardApplyInfo(PcardApplyInfo) returns (PcardApplyInfo) {}
+  //获取实体卡申请信息
+  rpc GetPcardApplyInfo(GetPcardApplyInfoRequest) returns (PcardApplyInfo) {}
+  rpc ListPcardApplyInfo(ListPcardApplyInfoRequest) returns (ListPcardApplyInfoResponse) {}
+  //上传图片
+  rpc UserUpload(UserUploadRequest) returns (UserUploadResponse) {}
 }
 message BuyNftForPayRequest {
   //客户邮箱
@@ -51,6 +58,7 @@ message BuyNftForPayResponse {
   int64 user_id=2;
 }
 
+
 message CardInfo {
   int64 id = 1;
   string card_no =2;
@@ -64,6 +72,85 @@ message CardInfo {
   uint64 created_at = 6;
   uint64 updated_at = 7;
 }
+
+message ListPcardApplyInfoRequest {
+  //updated_at desc ; default( id desc)
+ string order_by =1;
+}
+message ListPcardApplyInfoResponse {
+  repeated PcardApplyInfo items=1;
+}
+message UserUploadRequest {
+  //fileName with extention. example : abc.jpg abc.jpeg
+    string file_name =1;
+    //image binary data
+    bytes file_bytes =2;
+}
+message UserUploadResponse {
+    string file_url=3;
+}
+
+message GetPcardApplyInfoRequest {
+
+}
+//    Physical card
+message PcardApplyInfo {
+  //database id: user id
+  int64 id = 1;
+
+  //证件类型 1 中国大陆身份证 2 港澳台或境外护照
+  int32 id_type = 2;
+  //  证件正面；上传才有.
+  string id_image1 = 20;
+  //  证件反面,上传才有.
+  string id_image2 = 21;
+  //实体卡号, 申请通过后才有.
+  string card_no=24;
+  //卡状态, 0 申请提交, 1 申请通过,2 申请拒绝
+  string status=25;
+  //拒绝原因
+  string status_msg=26;
+  //证件姓名
+  string id_name = 4;
+  //证件号码
+  string id_no = 3;
+  //性别
+  string gender = 14;
+  //birsthday format: 1990-01-01
+  string bod = 5;
+  //姓氏拼音
+  string first_name = 6;
+  //名字拼音
+  string last_name = 7;
+  //婚姻状况 1 未婚 2 已婚
+  string marital_status = 19;
+
+  //收件地区 1 中国大陆 2 香港 3 新加坡
+  string shipping_region = 8;
+  //收件地址类型 1家庭地址 2 公司地址
+  string shipping_address_type = 9;
+
+  //省份
+  string shipping_province = 10;
+  //城市
+  string shipping_city = 11;
+  //邮编
+  string postcode = 12;
+  //收件详细地址
+  string shipping_address = 13;
+
+  //手机号码
+  string mobile = 15;
+  //境外城市
+  string foreign_city = 17;
+  //境外城市邮编
+  string foreign_postcode = 18;
+  //境外地址
+  string foreign_address = 16;
+  int64 created_at = 22;
+  int64 updated_at = 23;
+}
+
 message ApplyCardRequest {
 // default USD
   CurrencyCode currency=2;

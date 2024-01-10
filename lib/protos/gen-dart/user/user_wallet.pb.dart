@@ -152,6 +152,7 @@ class GetTokenBalalanceResponse extends $pb.GeneratedMessage {
     ..a<$core.double>(1, _omitFieldNames ? '' : 'balanceUsd', $pb.PbFieldType.OD)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'balanceUsdt', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'balanceUsdc', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'allUsd', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -202,6 +203,15 @@ class GetTokenBalalanceResponse extends $pb.GeneratedMessage {
   $core.bool hasBalanceUsdc() => $_has(2);
   @$pb.TagNumber(3)
   void clearBalanceUsdc() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get allUsd => $_getN(3);
+  @$pb.TagNumber(4)
+  set allUsd($core.double v) { $_setDouble(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasAllUsd() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAllUsd() => clearField(4);
 }
 
 class GetAddressRequest extends $pb.GeneratedMessage {

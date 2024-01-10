@@ -1156,7 +1156,6 @@ class SellCoinRequest extends $pb.GeneratedMessage {
     ..a<$core.double>(3, _omitFieldNames ? '' : 'coinAmt', $pb.PbFieldType.OD)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'usdAmt', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'rate', $pb.PbFieldType.OD)
-    ..aOS(6, _omitFieldNames ? '' : 'txid')
     ..hasRequiredFields = false
   ;
 
@@ -1216,15 +1215,6 @@ class SellCoinRequest extends $pb.GeneratedMessage {
   $core.bool hasRate() => $_has(3);
   @$pb.TagNumber(5)
   void clearRate() => clearField(5);
-
-  @$pb.TagNumber(6)
-  $core.String get txid => $_getSZ(4);
-  @$pb.TagNumber(6)
-  set txid($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasTxid() => $_has(4);
-  @$pb.TagNumber(6)
-  void clearTxid() => clearField(6);
 }
 
 class SellCoinResponse extends $pb.GeneratedMessage {

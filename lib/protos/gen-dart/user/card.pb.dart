@@ -326,6 +326,502 @@ class CardInfo extends $pb.GeneratedMessage {
   void clearOpenId() => clearField(11);
 }
 
+class ListPcardApplyInfoRequest extends $pb.GeneratedMessage {
+  factory ListPcardApplyInfoRequest() => create();
+  ListPcardApplyInfoRequest._() : super();
+  factory ListPcardApplyInfoRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListPcardApplyInfoRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListPcardApplyInfoRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'orderBy')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListPcardApplyInfoRequest clone() => ListPcardApplyInfoRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListPcardApplyInfoRequest copyWith(void Function(ListPcardApplyInfoRequest) updates) => super.copyWith((message) => updates(message as ListPcardApplyInfoRequest)) as ListPcardApplyInfoRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListPcardApplyInfoRequest create() => ListPcardApplyInfoRequest._();
+  ListPcardApplyInfoRequest createEmptyInstance() => create();
+  static $pb.PbList<ListPcardApplyInfoRequest> createRepeated() => $pb.PbList<ListPcardApplyInfoRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListPcardApplyInfoRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListPcardApplyInfoRequest>(create);
+  static ListPcardApplyInfoRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get orderBy => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set orderBy($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasOrderBy() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrderBy() => clearField(1);
+}
+
+class ListPcardApplyInfoResponse extends $pb.GeneratedMessage {
+  factory ListPcardApplyInfoResponse() => create();
+  ListPcardApplyInfoResponse._() : super();
+  factory ListPcardApplyInfoResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListPcardApplyInfoResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListPcardApplyInfoResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..pc<PcardApplyInfo>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: PcardApplyInfo.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListPcardApplyInfoResponse clone() => ListPcardApplyInfoResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListPcardApplyInfoResponse copyWith(void Function(ListPcardApplyInfoResponse) updates) => super.copyWith((message) => updates(message as ListPcardApplyInfoResponse)) as ListPcardApplyInfoResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListPcardApplyInfoResponse create() => ListPcardApplyInfoResponse._();
+  ListPcardApplyInfoResponse createEmptyInstance() => create();
+  static $pb.PbList<ListPcardApplyInfoResponse> createRepeated() => $pb.PbList<ListPcardApplyInfoResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListPcardApplyInfoResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListPcardApplyInfoResponse>(create);
+  static ListPcardApplyInfoResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<PcardApplyInfo> get items => $_getList(0);
+}
+
+class UserUploadRequest extends $pb.GeneratedMessage {
+  factory UserUploadRequest() => create();
+  UserUploadRequest._() : super();
+  factory UserUploadRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserUploadRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserUploadRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fileName')
+    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'fileBytes', $pb.PbFieldType.OY)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UserUploadRequest clone() => UserUploadRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UserUploadRequest copyWith(void Function(UserUploadRequest) updates) => super.copyWith((message) => updates(message as UserUploadRequest)) as UserUploadRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UserUploadRequest create() => UserUploadRequest._();
+  UserUploadRequest createEmptyInstance() => create();
+  static $pb.PbList<UserUploadRequest> createRepeated() => $pb.PbList<UserUploadRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UserUploadRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserUploadRequest>(create);
+  static UserUploadRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get fileName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fileName($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFileName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFileName() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.int> get fileBytes => $_getN(1);
+  @$pb.TagNumber(2)
+  set fileBytes($core.List<$core.int> v) { $_setBytes(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFileBytes() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFileBytes() => clearField(2);
+}
+
+class UserUploadResponse extends $pb.GeneratedMessage {
+  factory UserUploadResponse() => create();
+  UserUploadResponse._() : super();
+  factory UserUploadResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserUploadResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserUploadResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(3, _omitFieldNames ? '' : 'fileUrl')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UserUploadResponse clone() => UserUploadResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UserUploadResponse copyWith(void Function(UserUploadResponse) updates) => super.copyWith((message) => updates(message as UserUploadResponse)) as UserUploadResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UserUploadResponse create() => UserUploadResponse._();
+  UserUploadResponse createEmptyInstance() => create();
+  static $pb.PbList<UserUploadResponse> createRepeated() => $pb.PbList<UserUploadResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UserUploadResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserUploadResponse>(create);
+  static UserUploadResponse? _defaultInstance;
+
+  @$pb.TagNumber(3)
+  $core.String get fileUrl => $_getSZ(0);
+  @$pb.TagNumber(3)
+  set fileUrl($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasFileUrl() => $_has(0);
+  @$pb.TagNumber(3)
+  void clearFileUrl() => clearField(3);
+}
+
+class GetPcardApplyInfoRequest extends $pb.GeneratedMessage {
+  factory GetPcardApplyInfoRequest() => create();
+  GetPcardApplyInfoRequest._() : super();
+  factory GetPcardApplyInfoRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetPcardApplyInfoRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPcardApplyInfoRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetPcardApplyInfoRequest clone() => GetPcardApplyInfoRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetPcardApplyInfoRequest copyWith(void Function(GetPcardApplyInfoRequest) updates) => super.copyWith((message) => updates(message as GetPcardApplyInfoRequest)) as GetPcardApplyInfoRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetPcardApplyInfoRequest create() => GetPcardApplyInfoRequest._();
+  GetPcardApplyInfoRequest createEmptyInstance() => create();
+  static $pb.PbList<GetPcardApplyInfoRequest> createRepeated() => $pb.PbList<GetPcardApplyInfoRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetPcardApplyInfoRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPcardApplyInfoRequest>(create);
+  static GetPcardApplyInfoRequest? _defaultInstance;
+}
+
+class PcardApplyInfo extends $pb.GeneratedMessage {
+  factory PcardApplyInfo() => create();
+  PcardApplyInfo._() : super();
+  factory PcardApplyInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PcardApplyInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PcardApplyInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'idType', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'idNo')
+    ..aOS(4, _omitFieldNames ? '' : 'idName')
+    ..aOS(5, _omitFieldNames ? '' : 'bod')
+    ..aOS(6, _omitFieldNames ? '' : 'firstName')
+    ..aOS(7, _omitFieldNames ? '' : 'lastName')
+    ..aOS(8, _omitFieldNames ? '' : 'shippingRegion')
+    ..aOS(9, _omitFieldNames ? '' : 'shippingAddressType')
+    ..aOS(10, _omitFieldNames ? '' : 'shippingProvince')
+    ..aOS(11, _omitFieldNames ? '' : 'shippingCity')
+    ..aOS(12, _omitFieldNames ? '' : 'postcode')
+    ..aOS(13, _omitFieldNames ? '' : 'shippingAddress')
+    ..aOS(14, _omitFieldNames ? '' : 'gender')
+    ..aOS(15, _omitFieldNames ? '' : 'mobile')
+    ..aOS(16, _omitFieldNames ? '' : 'foreignAddress')
+    ..aOS(17, _omitFieldNames ? '' : 'foreignCity')
+    ..aOS(18, _omitFieldNames ? '' : 'foreignPostcode')
+    ..aOS(19, _omitFieldNames ? '' : 'maritalStatus')
+    ..aOS(20, _omitFieldNames ? '' : 'idImage1')
+    ..aOS(21, _omitFieldNames ? '' : 'idImage2')
+    ..aInt64(22, _omitFieldNames ? '' : 'createdAt')
+    ..aInt64(23, _omitFieldNames ? '' : 'updatedAt')
+    ..aOS(24, _omitFieldNames ? '' : 'cardNo')
+    ..aOS(25, _omitFieldNames ? '' : 'status')
+    ..aOS(26, _omitFieldNames ? '' : 'statusMsg')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PcardApplyInfo clone() => PcardApplyInfo()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PcardApplyInfo copyWith(void Function(PcardApplyInfo) updates) => super.copyWith((message) => updates(message as PcardApplyInfo)) as PcardApplyInfo;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PcardApplyInfo create() => PcardApplyInfo._();
+  PcardApplyInfo createEmptyInstance() => create();
+  static $pb.PbList<PcardApplyInfo> createRepeated() => $pb.PbList<PcardApplyInfo>();
+  @$core.pragma('dart2js:noInline')
+  static PcardApplyInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PcardApplyInfo>(create);
+  static PcardApplyInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get idType => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set idType($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasIdType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIdType() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get idNo => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set idNo($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasIdNo() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearIdNo() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get idName => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set idName($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasIdName() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearIdName() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get bod => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set bod($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasBod() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBod() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get firstName => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set firstName($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasFirstName() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearFirstName() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get lastName => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set lastName($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasLastName() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearLastName() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get shippingRegion => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set shippingRegion($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasShippingRegion() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearShippingRegion() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get shippingAddressType => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set shippingAddressType($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasShippingAddressType() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearShippingAddressType() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.String get shippingProvince => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set shippingProvince($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasShippingProvince() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearShippingProvince() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.String get shippingCity => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set shippingCity($core.String v) { $_setString(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasShippingCity() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearShippingCity() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.String get postcode => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set postcode($core.String v) { $_setString(11, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasPostcode() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearPostcode() => clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.String get shippingAddress => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set shippingAddress($core.String v) { $_setString(12, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasShippingAddress() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearShippingAddress() => clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.String get gender => $_getSZ(13);
+  @$pb.TagNumber(14)
+  set gender($core.String v) { $_setString(13, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasGender() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearGender() => clearField(14);
+
+  @$pb.TagNumber(15)
+  $core.String get mobile => $_getSZ(14);
+  @$pb.TagNumber(15)
+  set mobile($core.String v) { $_setString(14, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasMobile() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearMobile() => clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.String get foreignAddress => $_getSZ(15);
+  @$pb.TagNumber(16)
+  set foreignAddress($core.String v) { $_setString(15, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasForeignAddress() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearForeignAddress() => clearField(16);
+
+  @$pb.TagNumber(17)
+  $core.String get foreignCity => $_getSZ(16);
+  @$pb.TagNumber(17)
+  set foreignCity($core.String v) { $_setString(16, v); }
+  @$pb.TagNumber(17)
+  $core.bool hasForeignCity() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearForeignCity() => clearField(17);
+
+  @$pb.TagNumber(18)
+  $core.String get foreignPostcode => $_getSZ(17);
+  @$pb.TagNumber(18)
+  set foreignPostcode($core.String v) { $_setString(17, v); }
+  @$pb.TagNumber(18)
+  $core.bool hasForeignPostcode() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearForeignPostcode() => clearField(18);
+
+  @$pb.TagNumber(19)
+  $core.String get maritalStatus => $_getSZ(18);
+  @$pb.TagNumber(19)
+  set maritalStatus($core.String v) { $_setString(18, v); }
+  @$pb.TagNumber(19)
+  $core.bool hasMaritalStatus() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearMaritalStatus() => clearField(19);
+
+  @$pb.TagNumber(20)
+  $core.String get idImage1 => $_getSZ(19);
+  @$pb.TagNumber(20)
+  set idImage1($core.String v) { $_setString(19, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasIdImage1() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearIdImage1() => clearField(20);
+
+  @$pb.TagNumber(21)
+  $core.String get idImage2 => $_getSZ(20);
+  @$pb.TagNumber(21)
+  set idImage2($core.String v) { $_setString(20, v); }
+  @$pb.TagNumber(21)
+  $core.bool hasIdImage2() => $_has(20);
+  @$pb.TagNumber(21)
+  void clearIdImage2() => clearField(21);
+
+  @$pb.TagNumber(22)
+  $fixnum.Int64 get createdAt => $_getI64(21);
+  @$pb.TagNumber(22)
+  set createdAt($fixnum.Int64 v) { $_setInt64(21, v); }
+  @$pb.TagNumber(22)
+  $core.bool hasCreatedAt() => $_has(21);
+  @$pb.TagNumber(22)
+  void clearCreatedAt() => clearField(22);
+
+  @$pb.TagNumber(23)
+  $fixnum.Int64 get updatedAt => $_getI64(22);
+  @$pb.TagNumber(23)
+  set updatedAt($fixnum.Int64 v) { $_setInt64(22, v); }
+  @$pb.TagNumber(23)
+  $core.bool hasUpdatedAt() => $_has(22);
+  @$pb.TagNumber(23)
+  void clearUpdatedAt() => clearField(23);
+
+  @$pb.TagNumber(24)
+  $core.String get cardNo => $_getSZ(23);
+  @$pb.TagNumber(24)
+  set cardNo($core.String v) { $_setString(23, v); }
+  @$pb.TagNumber(24)
+  $core.bool hasCardNo() => $_has(23);
+  @$pb.TagNumber(24)
+  void clearCardNo() => clearField(24);
+
+  @$pb.TagNumber(25)
+  $core.String get status => $_getSZ(24);
+  @$pb.TagNumber(25)
+  set status($core.String v) { $_setString(24, v); }
+  @$pb.TagNumber(25)
+  $core.bool hasStatus() => $_has(24);
+  @$pb.TagNumber(25)
+  void clearStatus() => clearField(25);
+
+  @$pb.TagNumber(26)
+  $core.String get statusMsg => $_getSZ(25);
+  @$pb.TagNumber(26)
+  set statusMsg($core.String v) { $_setString(25, v); }
+  @$pb.TagNumber(26)
+  $core.bool hasStatusMsg() => $_has(25);
+  @$pb.TagNumber(26)
+  void clearStatusMsg() => clearField(26);
+}
+
 class ApplyCardRequest extends $pb.GeneratedMessage {
   factory ApplyCardRequest() => create();
   ApplyCardRequest._() : super();

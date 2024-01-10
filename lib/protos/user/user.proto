@@ -29,7 +29,7 @@ service UserService {
 
   rpc UpdateUserLang(UpdateUserLangRequest) returns (UpdateUserLangResponse) {}
   //ignored
-  rpc Upload(UploadRequest) returns (UploadResponse) {}
+//  rpc Upload(UploadRequest) returns (UploadResponse) {}
   //获取用户信息
   rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
   //返回被当前用户邀请的所有人.
@@ -213,17 +213,17 @@ message KycRequest {
 message KycResponse {
 }
 
-message UploadRequest {
-  //usage: example id1 id2;
-  string tag = 1;
-  //  image file name at local
-  string name = 2;
-  //image binanry
-  bytes content = 3;
-}
-message UploadResponse {
-  string image_url = 1;
-}
+//message UploadRequest {
+//  //usage: example id1 id2;
+//  string tag = 1;
+//  //  image file name at local
+//  string name = 2;
+//  //image binanry
+//  bytes content = 3;
+//}
+//message UploadResponse {
+//  string image_url = 1;
+//}
 
 message GetUserInfoRequest {
 }

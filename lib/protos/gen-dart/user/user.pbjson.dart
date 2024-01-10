@@ -314,33 +314,6 @@ const KycResponse$json = {
 final $typed_data.Uint8List kycResponseDescriptor = $convert.base64Decode(
     'CgtLeWNSZXNwb25zZQ==');
 
-@$core.Deprecated('Use uploadRequestDescriptor instead')
-const UploadRequest$json = {
-  '1': 'UploadRequest',
-  '2': [
-    {'1': 'tag', '3': 1, '4': 1, '5': 9, '10': 'tag'},
-    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'content', '3': 3, '4': 1, '5': 12, '10': 'content'},
-  ],
-};
-
-/// Descriptor for `UploadRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List uploadRequestDescriptor = $convert.base64Decode(
-    'Cg1VcGxvYWRSZXF1ZXN0EhAKA3RhZxgBIAEoCVIDdGFnEhIKBG5hbWUYAiABKAlSBG5hbWUSGA'
-    'oHY29udGVudBgDIAEoDFIHY29udGVudA==');
-
-@$core.Deprecated('Use uploadResponseDescriptor instead')
-const UploadResponse$json = {
-  '1': 'UploadResponse',
-  '2': [
-    {'1': 'image_url', '3': 1, '4': 1, '5': 9, '10': 'imageUrl'},
-  ],
-};
-
-/// Descriptor for `UploadResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List uploadResponseDescriptor = $convert.base64Decode(
-    'Cg5VcGxvYWRSZXNwb25zZRIbCglpbWFnZV91cmwYASABKAlSCGltYWdlVXJs');
-
 @$core.Deprecated('Use getUserInfoRequestDescriptor instead')
 const GetUserInfoRequest$json = {
   '1': 'GetUserInfoRequest',

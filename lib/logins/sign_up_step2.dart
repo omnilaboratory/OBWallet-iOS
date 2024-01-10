@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:awallet/cards/kyc.dart';
 import 'package:awallet/component/bottom_button.dart';
+import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
@@ -150,7 +152,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
               GestureDetector(
                 onTap: () {
                   getImage(0);
-                  UserService.getInstance().uploadImage(context, req);
+                  CardService.getInstance().uploadImage(context, req);
                 },
                 child: cardImage0 == null
                     ? const Image(
@@ -169,7 +171,7 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
               GestureDetector(
                 onTap: () {
                   getImage(1);
-                  UserService.getInstance().uploadImage(context, req);
+                  CardService.getInstance().uploadImage(context, req);
                 },
                 child: cardImage1 == null
                     ? const Image(
@@ -195,12 +197,12 @@ class _SignUpStepTwoState extends State<SignUpStepTwo> {
   final picker = ImagePicker();
   XFile? cardImage0;
   XFile? cardImage1;
-  var req = UploadRequest();
+  var req = UserUploadRequest();
 
   getImage(int type) {
     picker.pickImage(source: ImageSource.gallery).then((image) async {
-      req.name = image!.name;
-      req.content = await image.readAsBytes();
+      req.fileName = image!.name;
+      req.fileBytes = await image.readAsBytes();
       setState(() {
         if (type == 0) {
           cardImage0 = image;

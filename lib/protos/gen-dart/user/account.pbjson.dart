@@ -341,7 +341,6 @@ final $typed_data.Uint8List swapTxDescriptor = $convert.base64Decode(
 const SellCoinRequest$json = {
   '1': 'SellCoinRequest',
   '2': [
-    {'1': 'txid', '3': 6, '4': 1, '5': 9, '10': 'txid'},
     {'1': 'coin', '3': 2, '4': 1, '5': 14, '6': '.user.TrackedTx.ContractSymbol', '10': 'coin'},
     {'1': 'coin_amt', '3': 3, '4': 1, '5': 1, '10': 'coinAmt'},
     {'1': 'usd_amt', '3': 4, '4': 1, '5': 1, '10': 'usdAmt'},
@@ -351,9 +350,9 @@ const SellCoinRequest$json = {
 
 /// Descriptor for `SellCoinRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sellCoinRequestDescriptor = $convert.base64Decode(
-    'Cg9TZWxsQ29pblJlcXVlc3QSEgoEdHhpZBgGIAEoCVIEdHhpZBIyCgRjb2luGAIgASgOMh4udX'
-    'Nlci5UcmFja2VkVHguQ29udHJhY3RTeW1ib2xSBGNvaW4SGQoIY29pbl9hbXQYAyABKAFSB2Nv'
-    'aW5BbXQSFwoHdXNkX2FtdBgEIAEoAVIGdXNkQW10EhIKBHJhdGUYBSABKAFSBHJhdGU=');
+    'Cg9TZWxsQ29pblJlcXVlc3QSMgoEY29pbhgCIAEoDjIeLnVzZXIuVHJhY2tlZFR4LkNvbnRyYW'
+    'N0U3ltYm9sUgRjb2luEhkKCGNvaW5fYW10GAMgASgBUgdjb2luQW10EhcKB3VzZF9hbXQYBCAB'
+    'KAFSBnVzZEFtdBISCgRyYXRlGAUgASgBUgRyYXRl');
 
 @$core.Deprecated('Use sellCoinResponseDescriptor instead')
 const SellCoinResponse$json = {

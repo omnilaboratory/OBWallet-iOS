@@ -6,7 +6,9 @@ import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -60,12 +62,12 @@ class _RealCardStep1State extends State<RealCardStep1> {
   final picker = ImagePicker();
   XFile? cardImage0;
   XFile? cardImage1;
-  var req = UploadRequest();
+  var req = UserUploadRequest();
 
   getImage(int type) {
     picker.pickImage(source: ImageSource.gallery).then((image) async {
-      req.name = image!.name;
-      req.content = await image.readAsBytes();
+      req.fileName = image!.name;
+      req.fileBytes = await image.readAsBytes();
       setState(() {
         if (type == 0) {
           cardImage0 = image;
@@ -218,7 +220,7 @@ class _RealCardStep1State extends State<RealCardStep1> {
         GestureDetector(
           onTap: () {
             getImage(0);
-            UserService.getInstance().uploadImage(context, req).then((resp) => {
+            CardService.getInstance().uploadImage(context, req).then((resp) => {
                   if (resp.code == 1) {log("${resp.data}")}
                 });
           },
@@ -238,7 +240,7 @@ class _RealCardStep1State extends State<RealCardStep1> {
         GestureDetector(
           onTap: () {
             getImage(1);
-            UserService.getInstance().uploadImage(context, req);
+            CardService.getInstance().uploadImage(context, req);
           },
           child: cardImage1 == null
               ? const Image(
