@@ -1700,6 +1700,36 @@ class S {
     );
   }
 
+  /// `待审核`
+  String get realCard_status1 {
+    return Intl.message(
+      '待审核',
+      name: 'realCard_status1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `审核通过`
+  String get realCard_status2 {
+    return Intl.message(
+      '审核通过',
+      name: 'realCard_status2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `申请失败`
+  String get realCard_status3 {
+    return Intl.message(
+      '申请失败',
+      name: 'realCard_status3',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Name`
   String get realCard_name {
     return Intl.message(
@@ -1715,6 +1745,136 @@ class S {
     return Intl.message(
       'ID Card Num',
       name: 'realCard_idCardNum',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `姓氏拼音`
+  String get realCard_firstName {
+    return Intl.message(
+      '姓氏拼音',
+      name: 'realCard_firstName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `名字拼音`
+  String get realCard_lastName {
+    return Intl.message(
+      '名字拼音',
+      name: 'realCard_lastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `中国大陆身份证`
+  String get realCard_chinaIdCard {
+    return Intl.message(
+      '中国大陆身份证',
+      name: 'realCard_chinaIdCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `港澳台及境外护照`
+  String get realCard_otherIdCard {
+    return Intl.message(
+      '港澳台及境外护照',
+      name: 'realCard_otherIdCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `男`
+  String get realCard_gender_male {
+    return Intl.message(
+      '男',
+      name: 'realCard_gender_male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `女`
+  String get realCard_gender_female {
+    return Intl.message(
+      '女',
+      name: 'realCard_gender_female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `未婚`
+  String get realCard_marry_no {
+    return Intl.message(
+      '未婚',
+      name: 'realCard_marry_no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `已婚`
+  String get realCard_marry_yes {
+    return Intl.message(
+      '已婚',
+      name: 'realCard_marry_yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `中国大陆`
+  String get realCard_shipRegion_china {
+    return Intl.message(
+      '中国大陆',
+      name: 'realCard_shipRegion_china',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `中国香港`
+  String get realCard_shipRegion_hongKong {
+    return Intl.message(
+      '中国香港',
+      name: 'realCard_shipRegion_hongKong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `家庭地址`
+  String get realCard_shipAddress_home {
+    return Intl.message(
+      '家庭地址',
+      name: 'realCard_shipAddress_home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `公司地址`
+  String get realCard_shipAddress_company {
+    return Intl.message(
+      '公司地址',
+      name: 'realCard_shipAddress_company',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `上传正确的图片`
+  String get realCard_tips_uploadImage {
+    return Intl.message(
+      '上传正确的图片',
+      name: 'realCard_tips_uploadImage',
       desc: '',
       args: [],
     );

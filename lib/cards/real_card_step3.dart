@@ -55,11 +55,10 @@ class _RealCardStep3State extends State<RealCardStep3> {
                       text: S.of(context).common_Done,
                       onPressed: () {
                         FocusScope.of(context).requestFocus(FocusNode());
-
-                        if ((_formKey.currentState as FormState).validate() ==
-                            false) {
-                          return;
-                        }
+                        // if ((_formKey.currentState as FormState).validate() ==
+                        //     false) {
+                        //   return;
+                        // }
                         applyInfo.foreignCity = _cityController.text.trim();
                         applyInfo.foreignPostcode = _cityCodeController.text.trim();
                         applyInfo.foreignAddress = _addressController.text.trim();
@@ -101,11 +100,11 @@ class _RealCardStep3State extends State<RealCardStep3> {
             const SizedBox(height: 25),
             createTextFormField(
                 _cityController, S.of(context).realCard_Step2_city,
-                icon: const Icon(Icons.person_pin), maxLength: 30),
+                icon: const Icon(Icons.location_city), maxLength: 30),
             const SizedBox(height: 15),
             createTextFormField(
                 _cityCodeController, S.of(context).realCard_Step2_cityCode,
-                icon: const Icon(Icons.person_pin), maxLength: 10),
+                icon: const Icon(Icons.local_post_office), maxLength: 10),
             const SizedBox(height: 15),
             createTextFormField(
                 _addressController, S.of(context).realCard_Step2_address,

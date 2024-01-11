@@ -58,10 +58,20 @@ class _RealCardStep1State extends State<RealCardStep1> {
                   text: S.of(context).common_Next,
                   onPressed: () {
                     FocusScope.of(context).requestFocus(FocusNode());
+
+                    if (applyInfo.idImage1.isEmpty ||
+                        applyInfo.idImage2.isEmpty) {
+                      alert(S.of(context).realCard_tips_uploadImage, context,
+                              () {});
+                      return;
+                    }
+
                     if ((_formKey.currentState as FormState).validate() ==
                         false) {
                       return;
                     }
+
+
 
                     applyInfo.idType = selectedCardType + 1;
                     applyInfo.idName = _unameController.text.trim();
@@ -136,13 +146,17 @@ class _RealCardStep1State extends State<RealCardStep1> {
             const SizedBox(height: 15),
             createTextFormField(
                 _idNumController, S.of(context).realCard_idCardNum,
-                icon: const Icon(Icons.person_pin), maxLength: 30),
+                icon: const Icon(Icons.card_membership), maxLength: 30),
             buildSex(),
-            createTextFormField(_firstNameController, "姓氏拼音",
-                icon: const Icon(Icons.person_pin), maxLength: 30),
+            createTextFormField(
+                _firstNameController, S.of(context).realCard_firstName,
+                icon: const Icon(Icons.drive_file_rename_outline),
+                maxLength: 30),
             const SizedBox(height: 15),
-            createTextFormField(_lastNameController, "名字拼音",
-                icon: const Icon(Icons.person_pin), maxLength: 30),
+            createTextFormField(
+                _lastNameController, S.of(context).realCard_lastName,
+                icon: const Icon(Icons.drive_file_rename_outline),
+                maxLength: 30),
             buildMarry(),
           ],
         ));
@@ -154,7 +168,7 @@ class _RealCardStep1State extends State<RealCardStep1> {
         Flexible(
           child: RadioListTile<int>(
             value: 0,
-            title: Text('未婚'),
+            title: Text(S.of(context).realCard_marry_no),
             groupValue: selectedMarry,
             contentPadding: EdgeInsets.zero,
             onChanged: (value) {
@@ -167,7 +181,7 @@ class _RealCardStep1State extends State<RealCardStep1> {
         Flexible(
           child: RadioListTile<int>(
             value: 1,
-            title: Text('已婚'),
+            title: Text(S.of(context).realCard_marry_yes),
             groupValue: selectedMarry,
             contentPadding: EdgeInsets.zero,
             onChanged: (value) {
@@ -187,7 +201,7 @@ class _RealCardStep1State extends State<RealCardStep1> {
         Flexible(
           child: RadioListTile<int>(
             value: 0,
-            title: Text('男'),
+            title: Text(S.of(context).realCard_gender_male),
             contentPadding: EdgeInsets.zero,
             groupValue: selectedSex,
             onChanged: (value) {
@@ -200,7 +214,7 @@ class _RealCardStep1State extends State<RealCardStep1> {
         Flexible(
           child: RadioListTile<int>(
             value: 1,
-            title: Text('女'),
+            title: Text(S.of(context).realCard_gender_female),
             contentPadding: EdgeInsets.zero,
             groupValue: selectedSex,
             onChanged: (value) {
@@ -222,7 +236,7 @@ class _RealCardStep1State extends State<RealCardStep1> {
           Flexible(
             child: RadioListTile<int>(
               value: 0,
-              title: const Text('中国大陆身份证'),
+              title: Text(S.of(context).realCard_chinaIdCard),
               groupValue: selectedCardType,
               onChanged: (value) {
                 setState(() {
@@ -236,7 +250,7 @@ class _RealCardStep1State extends State<RealCardStep1> {
           Flexible(
             child: RadioListTile<int>(
               value: 1,
-              title: const Text('港澳台及境外护照'),
+              title: Text(S.of(context).realCard_otherIdCard),
               groupValue: selectedCardType,
               onChanged: (value) {
                 setState(() {

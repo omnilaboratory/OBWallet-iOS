@@ -100,15 +100,15 @@ class _RealCardStep2State extends State<RealCardStep2> {
             const SizedBox(height: 25),
             createTextFormField(
                 _phoneController, S.of(context).realCard_Step2_phone,
-                icon: const Icon(Icons.person_pin), maxLength: 30),
+                icon: const Icon(Icons.phone), maxLength: 30),
             const SizedBox(height: 15),
             createTextFormField(
                 _cityController, S.of(context).realCard_Step2_city,
-                icon: const Icon(Icons.person_pin), maxLength: 30),
+                icon: const Icon(Icons.location_city), maxLength: 30),
             const SizedBox(height: 15),
             createTextFormField(
                 _cityCodeController, S.of(context).realCard_Step2_cityCode,
-                icon: const Icon(Icons.person_pin), maxLength: 10),
+                icon: const Icon(Icons.local_post_office), maxLength: 10),
             const SizedBox(height: 15),
             createTextFormField(
                 _addressController, S.of(context).realCard_Step2_address,
@@ -126,7 +126,7 @@ class _RealCardStep2State extends State<RealCardStep2> {
           Flexible(
             child: RadioListTile<int>(
               value: 0,
-              title: const Text('中国大陆'),
+              title: Text(S.of(context).realCard_shipRegion_china),
               groupValue: selectedShipRegionType,
               onChanged: (value) {
                 setState(() {
@@ -138,7 +138,7 @@ class _RealCardStep2State extends State<RealCardStep2> {
           Flexible(
             child: RadioListTile<int>(
               value: 1,
-              title: const Text('中国香港'),
+              title: Text(S.of(context).realCard_shipRegion_hongKong),
               groupValue: selectedShipRegionType,
               onChanged: (value) {
                 setState(() {
@@ -162,7 +162,7 @@ class _RealCardStep2State extends State<RealCardStep2> {
           Flexible(
             child: RadioListTile<int>(
               value: 0,
-              title: const Text('家庭地址'),
+              title: Text(S.of(context).realCard_shipAddress_home),
               groupValue: selectedShipRegionType2,
               onChanged: (value) {
                 setState(() {
@@ -174,7 +174,7 @@ class _RealCardStep2State extends State<RealCardStep2> {
           Flexible(
             child: RadioListTile<int>(
               value: 1,
-              title: const Text('公司地址'),
+              title: Text(S.of(context).realCard_shipAddress_company),
               groupValue: selectedShipRegionType2,
               onChanged: (value) {
                 setState(() {

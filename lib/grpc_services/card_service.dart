@@ -188,7 +188,8 @@ class CardService {
       log("$resp");
       ret.data = resp.status;
     } catch (e) {
-      UserService.getInstance().setError(context, "getRealCardStatus", e, ret);
+      UserService.getInstance()
+          .setError(context, "getRealCardStatus", e, ret, isShowToast: false);
     }
     return ret;
   }

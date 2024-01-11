@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awallet/cards/real_card_step1.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
@@ -40,18 +38,17 @@ class _ProfileHomeState extends State<ProfileHome> {
   }
 
   updateRealCardBtnStatus() {
-    if(mounted){
+    if (mounted) {
       realCardEnable = false;
       CardService.getInstance().getRealCardStatus(context).then((resp) {
         if (resp.code == 1) {
-          log("${resp.data}");
-          if (resp.data == "0") {
-            realCardStatus = "待审核";
+          if (resp.data == "0" || resp.data == "") {
+            realCardStatus = S.of(context).realCard_status1;
           } else if (resp.data == "1") {
-            realCardStatus = "审核通过";
+            realCardStatus = S.of(context).realCard_status2;
           } else if (resp.data == "2") {
             realCardEnable = true;
-            realCardStatus = "申请失败";
+            realCardStatus = S.of(context).realCard_status3;
           } else {
             realCardEnable = true;
           }
@@ -108,7 +105,8 @@ class _ProfileHomeState extends State<ProfileHome> {
           });
     }));
     list.add(const SizedBox(height: 10));
-    list.add(btnBtnItem(Icons.car_crash, "实体卡", subName: realCardStatus, () {
+    list.add(btnBtnItem(Icons.car_crash, S.of(context).realCard_title,
+        subName: realCardStatus, () {
       if (realCardEnable) {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const RealCardStep1()));
@@ -202,6 +200,7 @@ class _ProfileHomeState extends State<ProfileHome> {
     if (subName != null) {
       list.add(const Spacer());
       list.add(Text(subName));
+      list.add(const SizedBox(width: 10));
     }
 
     return InkWell(
