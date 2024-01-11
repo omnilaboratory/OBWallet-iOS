@@ -561,7 +561,7 @@ class PcardApplyInfo extends $pb.GeneratedMessage {
     ..aInt64(22, _omitFieldNames ? '' : 'createdAt')
     ..aInt64(23, _omitFieldNames ? '' : 'updatedAt')
     ..aOS(24, _omitFieldNames ? '' : 'cardNo')
-    ..aOS(25, _omitFieldNames ? '' : 'status')
+    ..aInt64(25, _omitFieldNames ? '' : 'status')
     ..aOS(26, _omitFieldNames ? '' : 'statusMsg')
     ..hasRequiredFields = false
   ;
@@ -804,9 +804,9 @@ class PcardApplyInfo extends $pb.GeneratedMessage {
   void clearCardNo() => clearField(24);
 
   @$pb.TagNumber(25)
-  $core.String get status => $_getSZ(24);
+  $fixnum.Int64 get status => $_getI64(24);
   @$pb.TagNumber(25)
-  set status($core.String v) { $_setString(24, v); }
+  set status($fixnum.Int64 v) { $_setInt64(24, v); }
   @$pb.TagNumber(25)
   $core.bool hasStatus() => $_has(24);
   @$pb.TagNumber(25)

@@ -107,7 +107,7 @@ message PcardApplyInfo {
   //实体卡号, 申请通过后才有.
   string card_no=24;
   //卡状态, 0 申请提交, 1 申请通过,2 申请拒绝
-  string status=25;
+  int64 status=25;
   //拒绝原因
   string status_msg=26;
   //证件姓名

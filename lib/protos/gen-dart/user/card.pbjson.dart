@@ -146,7 +146,7 @@ const PcardApplyInfo$json = {
     {'1': 'id_image1', '3': 20, '4': 1, '5': 9, '10': 'idImage1'},
     {'1': 'id_image2', '3': 21, '4': 1, '5': 9, '10': 'idImage2'},
     {'1': 'card_no', '3': 24, '4': 1, '5': 9, '10': 'cardNo'},
-    {'1': 'status', '3': 25, '4': 1, '5': 9, '10': 'status'},
+    {'1': 'status', '3': 25, '4': 1, '5': 3, '10': 'status'},
     {'1': 'status_msg', '3': 26, '4': 1, '5': 9, '10': 'statusMsg'},
     {'1': 'id_name', '3': 4, '4': 1, '5': 9, '10': 'idName'},
     {'1': 'id_no', '3': 3, '4': 1, '5': 9, '10': 'idNo'},
@@ -174,7 +174,7 @@ const PcardApplyInfo$json = {
 final $typed_data.Uint8List pcardApplyInfoDescriptor = $convert.base64Decode(
     'Cg5QY2FyZEFwcGx5SW5mbxIOCgJpZBgBIAEoA1ICaWQSFwoHaWRfdHlwZRgCIAEoBVIGaWRUeX'
     'BlEhsKCWlkX2ltYWdlMRgUIAEoCVIIaWRJbWFnZTESGwoJaWRfaW1hZ2UyGBUgASgJUghpZElt'
-    'YWdlMhIXCgdjYXJkX25vGBggASgJUgZjYXJkTm8SFgoGc3RhdHVzGBkgASgJUgZzdGF0dXMSHQ'
+    'YWdlMhIXCgdjYXJkX25vGBggASgJUgZjYXJkTm8SFgoGc3RhdHVzGBkgASgDUgZzdGF0dXMSHQ'
     'oKc3RhdHVzX21zZxgaIAEoCVIJc3RhdHVzTXNnEhcKB2lkX25hbWUYBCABKAlSBmlkTmFtZRIT'
     'CgVpZF9ubxgDIAEoCVIEaWRObxIWCgZnZW5kZXIYDiABKAlSBmdlbmRlchIQCgNib2QYBSABKA'
     'lSA2JvZBIdCgpmaXJzdF9uYW1lGAYgASgJUglmaXJzdE5hbWUSGwoJbGFzdF9uYW1lGAcgASgJ'

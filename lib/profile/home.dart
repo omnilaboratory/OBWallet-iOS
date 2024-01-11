@@ -42,11 +42,11 @@ class _ProfileHomeState extends State<ProfileHome> {
       realCardEnable = false;
       CardService.getInstance().getRealCardStatus(context).then((resp) {
         if (resp.code == 1) {
-          if (resp.data == "0" || resp.data == "") {
+          if (resp.data == 0) {
             realCardStatus = S.of(context).realCard_status1;
-          } else if (resp.data == "1") {
+          } else if (resp.data == 1) {
             realCardStatus = S.of(context).realCard_status2;
-          } else if (resp.data == "2") {
+          } else if (resp.data == 2) {
             realCardEnable = true;
             realCardStatus = S.of(context).realCard_status3;
           } else {
