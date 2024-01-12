@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/utils.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:flutter/material.dart';
@@ -184,7 +185,9 @@ class _UpdateState extends State<Update> {
           const SizedBox(height: 30),
           BottomWhiteButton(
             icon: 'asset/images/icon_close_white.png',
-            text: 'CANCEL',
+            text: S.of(context)
+                .common_Cancel
+                .toUpperCase(),
             onPressed: onClose,
           )
         ]),

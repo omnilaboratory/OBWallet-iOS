@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:awallet/bean/enum_charge_type.dart';
+import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
@@ -159,12 +160,13 @@ class _SendState extends State<Send> {
                           ]),
                     ),
                     const SizedBox(height: 20),
-                    InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Image(
-                            image: AssetImage("asset/images/btn_cancel.png")))
+                    BottomWhiteButton(
+                      icon: 'asset/images/icon_close_white.png',
+                      text: S.of(context).common_Cancel.toUpperCase(),
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
+                    )
                   ],
                 ),
               ),
