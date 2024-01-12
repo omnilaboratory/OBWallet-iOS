@@ -40,7 +40,7 @@ class _ProfileHomeState extends State<ProfileHome> {
   updateRealCardBtnStatus() {
     if (mounted) {
       realCardEnable = false;
-      CardService.getInstance().getRealCardStatus(context).then((resp) {
+      CardService.getInstance().getRealCardStatus().then((resp) {
         if (resp.code == 1) {
           if (resp.data == 0) {
             realCardStatus = S.of(context).realCard_status1;

@@ -179,17 +179,18 @@ class CardService {
     return ret;
   }
 
-  Future<GrpcResponse> getRealCardStatus(BuildContext context) async {
+  Future<GrpcResponse> getRealCardStatus() async {
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient
           ?.getPcardApplyInfo(GetPcardApplyInfoRequest()) as PcardApplyInfo;
       ret.code = 1;
-      log("$resp");
-      ret.data = resp.status;
+      if (resp.createdAt == 0) {
+        ret.data = -1;
+      } else {
+        ret.data = resp.status;
+      }
     } catch (e) {
-      UserService.getInstance()
-          .setError(context, "getRealCardStatus", e, ret, isShowToast: false);
     }
     return ret;
   }
