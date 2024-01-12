@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/cards/real_card_step2.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
@@ -62,7 +63,7 @@ class _RealCardStep1State extends State<RealCardStep1> {
                     if (applyInfo.idImage1.isEmpty ||
                         applyInfo.idImage2.isEmpty) {
                       alert(S.of(context).realCard_tips_uploadImage, context,
-                              () {});
+                          () {});
                       return;
                     }
 
@@ -70,8 +71,6 @@ class _RealCardStep1State extends State<RealCardStep1> {
                         false) {
                       return;
                     }
-
-
 
                     applyInfo.idType = selectedCardType + 1;
                     applyInfo.idName = _unameController.text.trim();
@@ -236,7 +235,12 @@ class _RealCardStep1State extends State<RealCardStep1> {
           Flexible(
             child: RadioListTile<int>(
               value: 0,
-              title: Text(S.of(context).realCard_chinaIdCard),
+              title: AutoSizeText(
+                S.of(context).realCard_chinaIdCard,
+                maxLines: 2,
+                minFontSize: 10,
+                maxFontSize: 16,
+              ),
               groupValue: selectedCardType,
               onChanged: (value) {
                 setState(() {
@@ -250,7 +254,12 @@ class _RealCardStep1State extends State<RealCardStep1> {
           Flexible(
             child: RadioListTile<int>(
               value: 1,
-              title: Text(S.of(context).realCard_otherIdCard),
+              title: AutoSizeText(
+                S.of(context).realCard_otherIdCard,
+                maxLines: 2,
+                minFontSize: 8,
+                maxFontSize: 16,
+              ),
               groupValue: selectedCardType,
               onChanged: (value) {
                 setState(() {
