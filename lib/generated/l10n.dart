@@ -1690,40 +1690,40 @@ class S {
     );
   }
 
-  /// `RealCard`
+  /// `Apply Real Card`
   String get realCard_title {
     return Intl.message(
-      'RealCard',
+      'Apply Real Card',
       name: 'realCard_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `待审核`
+  /// `Pending`
   String get realCard_status1 {
     return Intl.message(
-      '待审核',
+      'Pending',
       name: 'realCard_status1',
       desc: '',
       args: [],
     );
   }
 
-  /// `审核通过`
+  /// `Approved`
   String get realCard_status2 {
     return Intl.message(
-      '审核通过',
+      'Approved',
       name: 'realCard_status2',
       desc: '',
       args: [],
     );
   }
 
-  /// `申请失败`
+  /// `Application Failed`
   String get realCard_status3 {
     return Intl.message(
-      '申请失败',
+      'Application Failed',
       name: 'realCard_status3',
       desc: '',
       args: [],
@@ -1740,210 +1740,210 @@ class S {
     );
   }
 
-  /// `ID Card Num`
+  /// `ID Card Number`
   String get realCard_idCardNum {
     return Intl.message(
-      'ID Card Num',
+      'ID Card Number',
       name: 'realCard_idCardNum',
       desc: '',
       args: [],
     );
   }
 
-  /// `姓氏拼音`
+  /// `First Name (Pinyin)`
   String get realCard_firstName {
     return Intl.message(
-      '姓氏拼音',
+      'First Name (Pinyin)',
       name: 'realCard_firstName',
       desc: '',
       args: [],
     );
   }
 
-  /// `名字拼音`
+  /// `Last Name (Pinyin)`
   String get realCard_lastName {
     return Intl.message(
-      '名字拼音',
+      'Last Name (Pinyin)',
       name: 'realCard_lastName',
       desc: '',
       args: [],
     );
   }
 
-  /// `中国大陆身份证`
+  /// `Mainland China ID Card`
   String get realCard_chinaIdCard {
     return Intl.message(
-      '中国大陆身份证',
+      'Mainland China ID Card',
       name: 'realCard_chinaIdCard',
       desc: '',
       args: [],
     );
   }
 
-  /// `港澳台及境外护照`
+  /// `Hong Kong, Macau, Taiwan or Foreign Passport`
   String get realCard_otherIdCard {
     return Intl.message(
-      '港澳台及境外护照',
+      'Hong Kong, Macau, Taiwan or Foreign Passport',
       name: 'realCard_otherIdCard',
       desc: '',
       args: [],
     );
   }
 
-  /// `男`
+  /// `Male`
   String get realCard_gender_male {
     return Intl.message(
-      '男',
+      'Male',
       name: 'realCard_gender_male',
       desc: '',
       args: [],
     );
   }
 
-  /// `女`
+  /// `Female`
   String get realCard_gender_female {
     return Intl.message(
-      '女',
+      'Female',
       name: 'realCard_gender_female',
       desc: '',
       args: [],
     );
   }
 
-  /// `未婚`
+  /// `Unmarried`
   String get realCard_marry_no {
     return Intl.message(
-      '未婚',
+      'Unmarried',
       name: 'realCard_marry_no',
       desc: '',
       args: [],
     );
   }
 
-  /// `已婚`
+  /// `Married`
   String get realCard_marry_yes {
     return Intl.message(
-      '已婚',
+      'Married',
       name: 'realCard_marry_yes',
       desc: '',
       args: [],
     );
   }
 
-  /// `中国大陆`
+  /// `Mainland China`
   String get realCard_shipRegion_china {
     return Intl.message(
-      '中国大陆',
+      'Mainland China',
       name: 'realCard_shipRegion_china',
       desc: '',
       args: [],
     );
   }
 
-  /// `中国香港`
+  /// `Hong Kong, China`
   String get realCard_shipRegion_hongKong {
     return Intl.message(
-      '中国香港',
+      'Hong Kong, China',
       name: 'realCard_shipRegion_hongKong',
       desc: '',
       args: [],
     );
   }
 
-  /// `家庭地址`
+  /// `Home Address`
   String get realCard_shipAddress_home {
     return Intl.message(
-      '家庭地址',
+      'Home Address',
       name: 'realCard_shipAddress_home',
       desc: '',
       args: [],
     );
   }
 
-  /// `公司地址`
+  /// `Company Address`
   String get realCard_shipAddress_company {
     return Intl.message(
-      '公司地址',
+      'Company Address',
       name: 'realCard_shipAddress_company',
       desc: '',
       args: [],
     );
   }
 
-  /// `上传正确的图片`
+  /// `Please upload correct image`
   String get realCard_tips_uploadImage {
     return Intl.message(
-      '上传正确的图片',
+      'Please upload correct image',
       name: 'realCard_tips_uploadImage',
       desc: '',
       args: [],
     );
   }
 
-  /// `卡片寄送地址`
+  /// `Card Shipping Address`
   String get realCard_Step2_title {
     return Intl.message(
-      '卡片寄送地址',
+      'Card Shipping Address',
       name: 'realCard_Step2_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `手机号`
+  /// `Phone Number`
   String get realCard_Step2_phone {
     return Intl.message(
-      '手机号',
+      'Phone Number',
       name: 'realCard_Step2_phone',
       desc: '',
       args: [],
     );
   }
 
-  /// `收件城市`
+  /// `Recipient City`
   String get realCard_Step2_city {
     return Intl.message(
-      '收件城市',
+      'Recipient City',
       name: 'realCard_Step2_city',
       desc: '',
       args: [],
     );
   }
 
-  /// `城市邮编`
+  /// `City Zip Code`
   String get realCard_Step2_cityCode {
     return Intl.message(
-      '城市邮编',
+      'City Zip Code',
       name: 'realCard_Step2_cityCode',
       desc: '',
       args: [],
     );
   }
 
-  /// `详细地址`
+  /// `Detailed Address`
   String get realCard_Step2_address {
     return Intl.message(
-      '详细地址',
+      'Detailed Address',
       name: 'realCard_Step2_address',
       desc: '',
       args: [],
     );
   }
 
-  /// `账单寄送地址`
+  /// `Billing Address`
   String get realCard_Step3_title {
     return Intl.message(
-      '账单寄送地址',
+      'Billing Address',
       name: 'realCard_Step3_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `请填写非中国大陆地区的英文地址`
+  /// `Please fill in non-Mainland China English address`
   String get realCard_Step3_note {
     return Intl.message(
-      '请填写非中国大陆地区的英文地址',
+      'Please fill in non-Mainland China English address',
       name: 'realCard_Step3_note',
       desc: '',
       args: [],

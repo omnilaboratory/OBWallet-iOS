@@ -189,39 +189,39 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile_reward_subTitle1": m3,
         "profile_title_RewardFrom":
             MessageLookupByLibrary.simpleMessage("來自獎勵"),
-        "realCard_Step2_address": MessageLookupByLibrary.simpleMessage("详细地址"),
+        "realCard_Step2_address": MessageLookupByLibrary.simpleMessage("詳細地址"),
         "realCard_Step2_city": MessageLookupByLibrary.simpleMessage("收件城市"),
-        "realCard_Step2_cityCode": MessageLookupByLibrary.simpleMessage("城市邮编"),
-        "realCard_Step2_phone": MessageLookupByLibrary.simpleMessage("手机号"),
+        "realCard_Step2_cityCode": MessageLookupByLibrary.simpleMessage("城市郵編"),
+        "realCard_Step2_phone": MessageLookupByLibrary.simpleMessage("手機號"),
         "realCard_Step2_title": MessageLookupByLibrary.simpleMessage("卡片寄送地址"),
         "realCard_Step3_note":
-            MessageLookupByLibrary.simpleMessage("请填写非中国大陆地区的英文地址"),
-        "realCard_Step3_title": MessageLookupByLibrary.simpleMessage("账单寄送地址"),
-        "realCard_chinaIdCard": MessageLookupByLibrary.simpleMessage("中国大陆身份证"),
+            MessageLookupByLibrary.simpleMessage("請填寫非中國大陸地區的英文地址"),
+        "realCard_Step3_title": MessageLookupByLibrary.simpleMessage("帳單寄送地址"),
+        "realCard_chinaIdCard": MessageLookupByLibrary.simpleMessage("中國大陸身份證"),
         "realCard_firstName": MessageLookupByLibrary.simpleMessage("姓氏拼音"),
         "realCard_gender_female": MessageLookupByLibrary.simpleMessage("女"),
         "realCard_gender_male": MessageLookupByLibrary.simpleMessage("男"),
-        "realCard_idCardNum": MessageLookupByLibrary.simpleMessage("身份证号"),
+        "realCard_idCardNum": MessageLookupByLibrary.simpleMessage("身份證號"),
         "realCard_lastName": MessageLookupByLibrary.simpleMessage("名字拼音"),
         "realCard_marry_no": MessageLookupByLibrary.simpleMessage("未婚"),
         "realCard_marry_yes": MessageLookupByLibrary.simpleMessage("已婚"),
         "realCard_name": MessageLookupByLibrary.simpleMessage("姓名"),
         "realCard_otherIdCard":
-            MessageLookupByLibrary.simpleMessage("港澳台及境外护照"),
+            MessageLookupByLibrary.simpleMessage("香港、澳門、台灣或外國護照"),
         "realCard_shipAddress_company":
             MessageLookupByLibrary.simpleMessage("公司地址"),
         "realCard_shipAddress_home":
             MessageLookupByLibrary.simpleMessage("家庭地址"),
         "realCard_shipRegion_china":
-            MessageLookupByLibrary.simpleMessage("中国大陆"),
+            MessageLookupByLibrary.simpleMessage("中國大陸"),
         "realCard_shipRegion_hongKong":
-            MessageLookupByLibrary.simpleMessage("中国香港"),
-        "realCard_status1": MessageLookupByLibrary.simpleMessage("待审核"),
-        "realCard_status2": MessageLookupByLibrary.simpleMessage("审核通过"),
-        "realCard_status3": MessageLookupByLibrary.simpleMessage("申请失败"),
+            MessageLookupByLibrary.simpleMessage("中國香港"),
+        "realCard_status1": MessageLookupByLibrary.simpleMessage("覆核中"),
+        "realCard_status2": MessageLookupByLibrary.simpleMessage("覆核通過"),
+        "realCard_status3": MessageLookupByLibrary.simpleMessage("申請失敗"),
         "realCard_tips_uploadImage":
-            MessageLookupByLibrary.simpleMessage("上传正确的图片"),
-        "realCard_title": MessageLookupByLibrary.simpleMessage("实体卡"),
+            MessageLookupByLibrary.simpleMessage("請上傳正確的圖片"),
+        "realCard_title": MessageLookupByLibrary.simpleMessage("申請實體卡"),
         "receiveWallet_LightningInvoice":
             MessageLookupByLibrary.simpleMessage("閃電網路發票"),
         "receiveWallet_WalletAddress":

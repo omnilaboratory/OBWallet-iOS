@@ -65,6 +65,14 @@ class _ProfileHomeState extends State<ProfileHome> {
     List<Widget> list = [];
     list.add(buildUserInfo());
     list.add(const SizedBox(height: 40));
+    list.add(btnBtnItem(Icons.credit_card, S.of(context).realCard_title,
+        subName: realCardStatus, () {
+      if (realCardEnable) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const RealCardStep1()));
+      }
+    }));
+    list.add(const SizedBox(height: 10));
     list.add(btnBtnItem(Icons.insert_invitation_sharp,
         S.of(context).profile_home_InvitationCode, () {
       showDialog(
@@ -103,14 +111,6 @@ class _ProfileHomeState extends State<ProfileHome> {
           builder: (context) {
             return const Guide();
           });
-    }));
-    list.add(const SizedBox(height: 10));
-    list.add(btnBtnItem(Icons.credit_card_rounded, S.of(context).realCard_title,
-        subName: realCardStatus, () {
-      if (realCardEnable) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const RealCardStep1()));
-      }
     }));
     list.add(const SizedBox(height: 10));
     list.add(btnBtnItem(

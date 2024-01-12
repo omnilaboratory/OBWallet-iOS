@@ -222,40 +222,52 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile_reward_subTitle1": m3,
         "profile_title_RewardFrom":
             MessageLookupByLibrary.simpleMessage("Reward From"),
-        "realCard_Step2_address": MessageLookupByLibrary.simpleMessage("详细地址"),
-        "realCard_Step2_city": MessageLookupByLibrary.simpleMessage("收件城市"),
-        "realCard_Step2_cityCode": MessageLookupByLibrary.simpleMessage("城市邮编"),
-        "realCard_Step2_phone": MessageLookupByLibrary.simpleMessage("手机号"),
-        "realCard_Step2_title": MessageLookupByLibrary.simpleMessage("卡片寄送地址"),
-        "realCard_Step3_note":
-            MessageLookupByLibrary.simpleMessage("请填写非中国大陆地区的英文地址"),
-        "realCard_Step3_title": MessageLookupByLibrary.simpleMessage("账单寄送地址"),
-        "realCard_chinaIdCard": MessageLookupByLibrary.simpleMessage("中国大陆身份证"),
-        "realCard_firstName": MessageLookupByLibrary.simpleMessage("姓氏拼音"),
-        "realCard_gender_female": MessageLookupByLibrary.simpleMessage("女"),
-        "realCard_gender_male": MessageLookupByLibrary.simpleMessage("男"),
+        "realCard_Step2_address":
+            MessageLookupByLibrary.simpleMessage("Detailed Address"),
+        "realCard_Step2_city":
+            MessageLookupByLibrary.simpleMessage("Recipient City"),
+        "realCard_Step2_cityCode":
+            MessageLookupByLibrary.simpleMessage("City Zip Code"),
+        "realCard_Step2_phone":
+            MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "realCard_Step2_title":
+            MessageLookupByLibrary.simpleMessage("Card Shipping Address"),
+        "realCard_Step3_note": MessageLookupByLibrary.simpleMessage(
+            "Please fill in non-Mainland China English address"),
+        "realCard_Step3_title":
+            MessageLookupByLibrary.simpleMessage("Billing Address"),
+        "realCard_chinaIdCard":
+            MessageLookupByLibrary.simpleMessage("Mainland China ID Card"),
+        "realCard_firstName":
+            MessageLookupByLibrary.simpleMessage("First Name (Pinyin)"),
+        "realCard_gender_female":
+            MessageLookupByLibrary.simpleMessage("Female"),
+        "realCard_gender_male": MessageLookupByLibrary.simpleMessage("Male"),
         "realCard_idCardNum":
-            MessageLookupByLibrary.simpleMessage("ID Card Num"),
-        "realCard_lastName": MessageLookupByLibrary.simpleMessage("名字拼音"),
-        "realCard_marry_no": MessageLookupByLibrary.simpleMessage("未婚"),
-        "realCard_marry_yes": MessageLookupByLibrary.simpleMessage("已婚"),
+            MessageLookupByLibrary.simpleMessage("ID Card Number"),
+        "realCard_lastName":
+            MessageLookupByLibrary.simpleMessage("Last Name (Pinyin)"),
+        "realCard_marry_no": MessageLookupByLibrary.simpleMessage("Unmarried"),
+        "realCard_marry_yes": MessageLookupByLibrary.simpleMessage("Married"),
         "realCard_name": MessageLookupByLibrary.simpleMessage("Name"),
-        "realCard_otherIdCard":
-            MessageLookupByLibrary.simpleMessage("港澳台及境外护照"),
+        "realCard_otherIdCard": MessageLookupByLibrary.simpleMessage(
+            "Hong Kong, Macau, Taiwan or Foreign Passport"),
         "realCard_shipAddress_company":
-            MessageLookupByLibrary.simpleMessage("公司地址"),
+            MessageLookupByLibrary.simpleMessage("Company Address"),
         "realCard_shipAddress_home":
-            MessageLookupByLibrary.simpleMessage("家庭地址"),
+            MessageLookupByLibrary.simpleMessage("Home Address"),
         "realCard_shipRegion_china":
-            MessageLookupByLibrary.simpleMessage("中国大陆"),
+            MessageLookupByLibrary.simpleMessage("Mainland China"),
         "realCard_shipRegion_hongKong":
-            MessageLookupByLibrary.simpleMessage("中国香港"),
-        "realCard_status1": MessageLookupByLibrary.simpleMessage("待审核"),
-        "realCard_status2": MessageLookupByLibrary.simpleMessage("审核通过"),
-        "realCard_status3": MessageLookupByLibrary.simpleMessage("申请失败"),
+            MessageLookupByLibrary.simpleMessage("Hong Kong, China"),
+        "realCard_status1": MessageLookupByLibrary.simpleMessage("Pending"),
+        "realCard_status2": MessageLookupByLibrary.simpleMessage("Approved"),
+        "realCard_status3":
+            MessageLookupByLibrary.simpleMessage("Application Failed"),
         "realCard_tips_uploadImage":
-            MessageLookupByLibrary.simpleMessage("上传正确的图片"),
-        "realCard_title": MessageLookupByLibrary.simpleMessage("RealCard"),
+            MessageLookupByLibrary.simpleMessage("Please upload correct image"),
+        "realCard_title":
+            MessageLookupByLibrary.simpleMessage("Apply Real Card"),
         "receiveWallet_LightningInvoice":
             MessageLookupByLibrary.simpleMessage("Lightning Invoice"),
         "receiveWallet_WalletAddress":
