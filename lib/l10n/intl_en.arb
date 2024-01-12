@@ -218,6 +218,10 @@
   "realCard_Step3_title": "Billing Address", 
   "realCard_Step3_note": "Please fill in non-Mainland China English address",
 
+  "alert_title": "Message",
+  "alert_ok": "OK",
+  "alert_cancel": "Cancel",
+
   "tips_WrongEmail": "Wrong email",
   "tips_WrongTxid": "Wrong txid",
   "tips_WrongTopUp": "Top up to wallet address",

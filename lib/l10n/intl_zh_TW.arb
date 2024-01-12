@@ -218,6 +218,10 @@
   "realCard_Step3_title": "帳單寄送地址",  
   "realCard_Step3_note": "請填寫非中國大陸地區的英文地址",
 
+  "alert_title": "Message",
+  "alert_ok": "OK",
+  "alert_cancel": "Cancel",
+
   "tips_WrongEmail": "錯誤的郵件",
   "tips_WrongTxid": "錯誤的交易 ID",
   "tips_WrongTopUp": "充值到錢包地址",

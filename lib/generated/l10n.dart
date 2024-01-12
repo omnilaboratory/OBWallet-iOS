@@ -1950,6 +1950,36 @@ class S {
     );
   }
 
+  /// `Message`
+  String get alert_title {
+    return Intl.message(
+      'Message',
+      name: 'alert_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get alert_ok {
+    return Intl.message(
+      'OK',
+      name: 'alert_ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get alert_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'alert_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Wrong email`
   String get tips_WrongEmail {
     return Intl.message(

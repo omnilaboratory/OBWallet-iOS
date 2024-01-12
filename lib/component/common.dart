@@ -169,9 +169,9 @@ alert(String msg, BuildContext context, Function? callback,
       },
       width: 120,
       color: Colors.grey,
-      child: const Text(
-        "Cancel",
-        style: TextStyle(color: Colors.white, fontSize: 20),
+      child: Text(
+        S.of(context).alert_cancel,
+        style: const TextStyle(color: Colors.white, fontSize: 20),
       ),
     ));
   }
@@ -184,9 +184,9 @@ alert(String msg, BuildContext context, Function? callback,
     },
     width: 120,
     color: Colors.blueAccent,
-    child: const Text(
-      "OK",
-      style: TextStyle(color: Colors.white, fontSize: 20),
+    child: Text(
+      S.of(context).alert_ok,
+      style: const TextStyle(color: Colors.white, fontSize: 20),
     ),
   ));
 
@@ -194,7 +194,7 @@ alert(String msg, BuildContext context, Function? callback,
           context: context,
           type: AlertType.none,
           onWillPopActive: true,
-          title: 'Message',
+          title: S.of(context).alert_title,
           desc: msg,
           buttons: btns,
           style: const AlertStyle(

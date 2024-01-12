@@ -45,6 +45,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "alert_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "alert_ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "alert_title": MessageLookupByLibrary.simpleMessage("Message"),
         "applyCard_ApplyCard": MessageLookupByLibrary.simpleMessage("申請卡片"),
         "applyCard_ApplyLater": MessageLookupByLibrary.simpleMessage("稍後申請"),
         "applyCard_Desc1": MessageLookupByLibrary.simpleMessage("我們的新虛擬卡片允許您:"),
