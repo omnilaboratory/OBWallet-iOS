@@ -47,10 +47,6 @@ class _AccountState extends State<Account> {
 
   @override
   void initState() {
-    var address = LocalStorage.getEthAddress();
-    if (address != null) {
-      UserService.getInstance().updateUser(context, address);
-    }
     _onBalanceRefresh();
     _onListRefresh();
     getCardBalanceFromServer();

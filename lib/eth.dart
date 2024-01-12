@@ -53,7 +53,6 @@ class EthV1 {
       // Save the address and private key to local storage on device
       LocalStorage.setEthAddress(address);
       LocalStorage.setEthPrivateKey(privateKey);
-      UserService.getInstance().updateUser(context,address);
       return address;
     } catch (e) {
       log('genEthAddress -> error: $e');

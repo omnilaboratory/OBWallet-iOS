@@ -218,19 +218,6 @@ class UserService {
     } catch (e) {}
   }
 
-  Future<GrpcResponse> updateUser(BuildContext context, String address) async {
-    CommonService.userInfo?.ethAddress = address;
-    var ret = GrpcResponse();
-    try {
-      var resp = await userServiceClient?.updateUser(CommonService.userInfo!);
-      ret.code = 1;
-      ret.data = resp;
-    } catch (e) {
-      setError(context, "updateUser", e, ret);
-    }
-    return ret;
-  }
-
   Future<GrpcResponse> listInvitedUser(
       BuildContext context, int start, int limit) async {
     var req = ListInvitedUserRequest();
