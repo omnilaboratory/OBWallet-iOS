@@ -243,7 +243,7 @@ class _CardPartState extends State<CardPart> {
     var size = MediaQuery.sizeOf(context);
     var iconWidth = (size.width - 40) / 3;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         SquareButton(
             icon: 'asset/images/icon_pay.png',
@@ -269,26 +269,26 @@ class _CardPartState extends State<CardPart> {
                 _onBalanceRefresh();
               }
             }),
-        SquareButton(
-            icon: 'asset/images/icon_withdraw.png',
-            text: S.of(context).card_card_Withdraw,
-            iconWidth: iconWidth,
-            onPressed: () async {
-              var flag = await showDialog(
-                  context: context,
-                  builder: (context) {
-                    return CardRecharge(
-                        amt: '',
-                        type: EnumChargeType.withdraw,
-                        cardNo: CommonService.cardInfo.cardNo,
-                        date: formatCardExpiryDate(),
-                        cvc: CommonService.cardInfo.cvv);
-                  });
-
-              if (flag != null && flag) {
-                _onBalanceRefresh();
-              }
-            }),
+        // SquareButton(
+        //     icon: 'asset/images/icon_withdraw.png',
+        //     text: S.of(context).card_card_Withdraw,
+        //     iconWidth: iconWidth,
+        //     onPressed: () async {
+        //       var flag = await showDialog(
+        //           context: context,
+        //           builder: (context) {
+        //             return CardRecharge(
+        //                 amt: '',
+        //                 type: EnumChargeType.withdraw,
+        //                 cardNo: CommonService.cardInfo.cardNo,
+        //                 date: formatCardExpiryDate(),
+        //                 cvc: CommonService.cardInfo.cvv);
+        //           });
+        //
+        //       if (flag != null && flag) {
+        //         _onBalanceRefresh();
+        //       }
+        //     }),
       ],
     );
   }
