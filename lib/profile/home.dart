@@ -105,7 +105,7 @@ class _ProfileHomeState extends State<ProfileHome> {
           });
     }));
     list.add(const SizedBox(height: 10));
-    list.add(btnBtnItem(Icons.car_crash, S.of(context).realCard_title,
+    list.add(btnBtnItem(Icons.credit_card_rounded, S.of(context).realCard_title,
         subName: realCardStatus, () {
       if (realCardEnable) {
         Navigator.push(context,
