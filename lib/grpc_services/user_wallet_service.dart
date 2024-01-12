@@ -22,7 +22,7 @@ class UserWalletService {
     walletClient ??= uwalletClient(channel!,
         options: CallOptions(metadata: {
           "token": CommonService.token,
-          "language": GlobalParams.currLangName.toLowerCase()
+          "language": GlobalParams.currLangName
         }, timeout: Duration(seconds: GlobalParams.grpcTimeout)));
     return _instance;
   }
