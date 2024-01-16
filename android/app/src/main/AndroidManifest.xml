@@ -12,8 +12,8 @@
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
 
     <application
-        android:label="awallet"
-        android:name="${applicationName}"
+        android:label="CWallet"
+        android:name= "CWallet"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
