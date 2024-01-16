@@ -29,19 +29,21 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m3(totalReward, totalUser) =>
       "獎勵總數: ${totalReward} 來自 ${totalUser} 用戶";
 
-  static String m4(fee) => "費用 ${fee}";
+  static String m4(fee) => "申請實體卡有${fee}元的費用，請先充值。";
 
-  static String m5(cost) => "網路成本 ${cost}";
+  static String m5(fee) => "費用 ${fee}";
 
-  static String m6(nftTotalCount, nftTotalValue) =>
+  static String m6(cost) => "網路成本 ${cost}";
+
+  static String m7(nftTotalCount, nftTotalValue) =>
       "您已選擇 ${nftTotalCount} 個 NFT,總值 ${nftTotalValue} 美元";
 
-  static String m7(amount, fee) => "將獲得 ${amount},手續費為 ${fee}";
+  static String m8(amount, fee) => "將獲得 ${amount},手續費為 ${fee}";
 
-  static String m8(createCardFee) =>
+  static String m9(createCardFee) =>
       "申請虛擬卡需要支付 ${createCardFee} 美元的費用。\n美元不足,請點擊首頁的存款購買 USDT,然後兌換為美元。";
 
-  static String m9(tokenName) => "${tokenName} 活動";
+  static String m10(tokenName) => "${tokenName} 活動";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -201,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("請填寫非中國大陸地區的英文地址"),
         "realCard_Step3_title": MessageLookupByLibrary.simpleMessage("帳單寄送地址"),
         "realCard_chinaIdCard": MessageLookupByLibrary.simpleMessage("中國大陸身份證"),
+        "realCard_fee": m4,
         "realCard_firstName": MessageLookupByLibrary.simpleMessage("姓氏拼音"),
         "realCard_gender_female": MessageLookupByLibrary.simpleMessage("女"),
         "realCard_gender_male": MessageLookupByLibrary.simpleMessage("男"),
@@ -235,11 +238,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "recharge_CardNumber": MessageLookupByLibrary.simpleMessage("卡號"),
         "recharge_Title1": MessageLookupByLibrary.simpleMessage("充值到賬戶"),
         "recharge_Title2": MessageLookupByLibrary.simpleMessage("提款到賬戶"),
-        "reviewExchange_Fee": m4,
+        "reviewExchange_Fee": m5,
         "reviewExchange_Slippage": MessageLookupByLibrary.simpleMessage("滑點"),
         "reviewExchange_YouWillSwap":
             MessageLookupByLibrary.simpleMessage("您將兌換"),
-        "reviewExchange_cost": m5,
+        "reviewExchange_cost": m6,
         "reviewExchange_title": MessageLookupByLibrary.simpleMessage("兌換詳情"),
         "selectCard_title": MessageLookupByLibrary.simpleMessage("選擇喜愛的卡片"),
         "send_AccountBalance": MessageLookupByLibrary.simpleMessage("賬戶餘額"),
@@ -260,12 +263,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "shop_nft_title": MessageLookupByLibrary.simpleMessage("NFT"),
         "shop_nft_tx_history_title":
             MessageLookupByLibrary.simpleMessage("NFT交易歷史"),
-        "shop_tips": m6,
+        "shop_tips": m7,
         "shop_title": MessageLookupByLibrary.simpleMessage("商店"),
         "signUp_InvitationCode": MessageLookupByLibrary.simpleMessage("邀請碼"),
         "signUp_Nickname": MessageLookupByLibrary.simpleMessage("暱稱"),
         "signUp_Title": MessageLookupByLibrary.simpleMessage("註冊"),
-        "tips_WithdrawResult": m7,
+        "tips_WithdrawResult": m8,
         "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("錯誤的郵件"),
         "tips_WrongTopUp": MessageLookupByLibrary.simpleMessage("充值到錢包地址"),
         "tips_WrongTxid": MessageLookupByLibrary.simpleMessage("錯誤的交易 ID"),
@@ -304,7 +307,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("認證被拒絕,請重新提交。"),
         "tips_maxAmount": MessageLookupByLibrary.simpleMessage("金額不能超過最大值。"),
         "tips_maxAmount1": MessageLookupByLibrary.simpleMessage("從金額不能超過最大值。"),
-        "tips_needFiveDollarFee": m8,
+        "tips_needFiveDollarFee": m9,
         "tips_selectCountry": MessageLookupByLibrary.simpleMessage("請選擇國家。"),
         "tips_selectDateOfBirth":
             MessageLookupByLibrary.simpleMessage("請選擇出生日期。"),
@@ -329,7 +332,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tokenActivity_Pay": MessageLookupByLibrary.simpleMessage("支付"),
         "tokenActivity_Receive": MessageLookupByLibrary.simpleMessage("接收"),
         "tokenActivity_Send": MessageLookupByLibrary.simpleMessage("發送"),
-        "tokenActivity_title": m9,
+        "tokenActivity_title": m10,
         "txHistory_Exchange": MessageLookupByLibrary.simpleMessage("兌換"),
         "txHistory_Send": MessageLookupByLibrary.simpleMessage("轉账"),
         "txHistory_title": MessageLookupByLibrary.simpleMessage("加密貨幣")

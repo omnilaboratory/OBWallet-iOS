@@ -190,6 +190,7 @@
   "profile_guide_desc5": "檢查您的虛擬卡。",
 
   "realCard_title": "申請實體卡",
+  "realCard_fee": "申請實體卡有{fee}元的費用，請先充值。",
   "realCard_status1": "覆核中", 
   "realCard_status2": "覆核通過",
   "realCard_status3": "申請失敗",
