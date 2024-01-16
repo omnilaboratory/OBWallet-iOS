@@ -1,10 +1,13 @@
 import 'package:awallet/cards/real_card_step1.dart';
+import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/profile/my_users.dart';
 import 'package:awallet/profile/update_psw.dart';
+import 'package:awallet/protos/gen-dart/user/account.pb.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
@@ -66,10 +69,18 @@ class _ProfileHomeState extends State<ProfileHome> {
     list.add(buildUserInfo());
     list.add(const SizedBox(height: 40));
     list.add(btnBtnItem(Icons.credit_card, S.of(context).realCard_title,
-        subName: realCardStatus, () {
+        subName: realCardStatus, () async {
       if (realCardEnable) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const RealCardStep1()));
+        var resp = await AccountService.getInstance().getAccountInfo(context);
+        if (resp.code == 1) {
+          var accountInfo = resp.data as AccountInfo;
+          if (accountInfo.balance < 50) {
+            alert(S.of(context).realCard_fee(50), context, () {});
+          } else {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const RealCardStep1()));
+          }
+        }
       }
     }));
     list.add(const SizedBox(height: 10));

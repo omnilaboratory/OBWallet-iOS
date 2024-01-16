@@ -1700,6 +1700,16 @@ class S {
     );
   }
 
+  /// `There is a ${fee} fee to apply real card. Please top up first.`
+  String realCard_fee(Object fee) {
+    return Intl.message(
+      'There is a \$$fee fee to apply real card. Please top up first.',
+      name: 'realCard_fee',
+      desc: '',
+      args: [fee],
+    );
+  }
+
   /// `Pending`
   String get realCard_status1 {
     return Intl.message(
