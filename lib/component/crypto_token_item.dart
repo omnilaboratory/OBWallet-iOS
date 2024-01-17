@@ -1,7 +1,5 @@
 import 'package:awallet/bean/token_info.dart';
-import 'package:awallet/cryptos/send.dart';
 import 'package:awallet/cryptos/token_activity.dart';
-import 'package:awallet/protos/gen-dart/user/account.pb.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 
@@ -21,16 +19,6 @@ class CryptoTokenItem extends StatelessWidget {
         // fontWeight: FontWeight.w600,
       ),
     ));
-    // if (tokenInfo.netName.isNotEmpty) {
-    //   nameAndNet.add(Text(
-    //     tokenInfo.netName,
-    //     style: const TextStyle(
-    //       color: Color(0xFF666666),
-    //       fontSize: 14,
-    //       // fontWeight: FontWeight.w600,
-    //     ),
-    //   ));
-    // }
 
     return Container(
         margin: const EdgeInsets.only(bottom: 10),

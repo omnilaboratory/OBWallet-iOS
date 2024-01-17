@@ -4,7 +4,6 @@ import 'package:awallet/bean/card_item_info.dart';
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
-import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/card_item.dart';

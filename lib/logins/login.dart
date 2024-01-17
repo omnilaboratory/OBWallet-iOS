@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:awallet/component/common.dart';
-import 'package:awallet/eth.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
