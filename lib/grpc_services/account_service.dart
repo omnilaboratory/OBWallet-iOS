@@ -113,10 +113,13 @@ class AccountService {
   }
 
   Future<GrpcResponse> getAccountHistory(
-      BuildContext context, int start, int limit) async {
+      BuildContext context, int start, int limit,{TrackedTx_ContractSymbol? token}) async {
     var request = GetAccountHistoryRequest();
     request.start = Int64.parseInt(start.toString());
     request.limit = Int64.parseInt(limit.toString());
+    if (token != null) {
+      request.token = token;
+    }
     var ret = GrpcResponse();
     try {
       var resp = await accountServiceClient?.getAccountHistory(request);

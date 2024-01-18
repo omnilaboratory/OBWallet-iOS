@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/bean/token_info.dart';
@@ -203,25 +205,22 @@ class _TokenActivityState extends State<TokenActivity> {
 
   void getSwapTxList() {
     AccountService.getInstance()
-        .getSwapTxList(context, dataStartIndex, pageSize,
-            Utils.getContractSymbol(widget.tokenInfo.name))
+        .getAccountHistory(context, dataStartIndex, pageSize,
+        token:Utils.getContractSymbol(widget.tokenInfo.name))
         .then((result) {
       if (result.code == 1) {
-        var resp = result.data as GetSwapTxListResponse;
-        var items = resp.items;
+        var items = (result.data as GetAccountHistoryResponse).items;
         if (items.isNotEmpty) {
           for (var element in items) {
             txHistoryList.add(CryptoTxInfo(
-                title:
-                    "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
+                title: element.sourceType.name,
                 txTime: DateTime.fromMillisecondsSinceEpoch(
                     (element.createdAt * 1000).toInt()),
-                fromSymbol: element.fromSymbol.name,
-                targetSymbol: element.targetSymbol.name,
-                amount: element.amt,
-                amountOfDollar: element.settleAmt,
-                status:
-                    element.status.value > 2 ? element.status.value - 2 : 0));
+                fromSymbol: element.sourceId,
+                targetSymbol: "",
+                amount: element.amt.abs(),
+                amountOfDollar: null,
+                status: 3));
           }
           if (mounted) {
             setState(() {});

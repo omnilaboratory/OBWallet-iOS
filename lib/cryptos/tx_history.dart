@@ -130,24 +130,21 @@ class _TxHistoryState extends State<TxHistory> {
 
   void getSwapTxList() {
     AccountService.getInstance()
-        .getSwapTxList(context, dataStartIndex, localPageSize, null)
+        .getAccountHistory(context, dataStartIndex, localPageSize)
         .then((result) {
       if (result.code == 1) {
-        var resp = result.data as GetSwapTxListResponse;
-        var items = resp.items;
+        var items = (result.data as GetAccountHistoryResponse).items;
         if (items.isNotEmpty) {
           for (var element in items) {
             txHistoryList.add(CryptoTxInfo(
-                title:
-                    "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
+                title: element.sourceType.name,
                 txTime: DateTime.fromMillisecondsSinceEpoch(
                     (element.createdAt * 1000).toInt()),
-                fromSymbol: element.fromSymbol.name,
-                targetSymbol: element.targetSymbol.name,
-                amount: element.amt,
-                amountOfDollar: element.settleAmt,
-                status:
-                    element.status.value > 2 ? element.status.value - 2 : 0));
+                fromSymbol: element.sourceId,
+                targetSymbol: "",
+                amount: element.amt.abs(),
+                amountOfDollar: null,
+                status: 3));
           }
         }
         if (mounted) {

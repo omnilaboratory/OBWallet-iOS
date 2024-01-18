@@ -286,23 +286,21 @@ class _AccountState extends State<Account> {
 
   getSwapTxList() {
     AccountService.getInstance()
-        .getSwapTxList(context, dataStartIndex, pageSize, null)
+        .getAccountHistory(context, dataStartIndex, pageSize)
         .then((resp) {
       if (resp.code == 1) {
-        var items = (resp.data as GetSwapTxListResponse).items;
+        var items = (resp.data as GetAccountHistoryResponse).items;
         if (items.isNotEmpty) {
           for (var element in items) {
             txs.add(CryptoTxInfo(
-                title:
-                    "Exchange (${element.fromSymbol.name}-${element.targetSymbol.name})",
+                title: element.sourceType.name,
                 txTime: DateTime.fromMillisecondsSinceEpoch(
                     (element.createdAt * 1000).toInt()),
-                fromSymbol: element.fromSymbol.name,
-                targetSymbol: element.targetSymbol.name,
-                amount: element.amt,
-                amountOfDollar: element.settleAmt,
-                status:
-                    element.status.value > 2 ? element.status.value - 2 : 0));
+                fromSymbol: element.sourceId,
+                targetSymbol: "",
+                amount: element.amt.abs(),
+                amountOfDollar: null,
+                status: 3));
           }
           if (mounted) {
             setState(() {});
