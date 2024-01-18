@@ -71,7 +71,6 @@ class TokenService {
     if (resp != null) {
       walletInfo?.balance = resp.allUsd;
 
-
       getTokenList().forEach((tokenInfo) {
         if (tokenInfo.name == "USDT") {
           tokenInfo.balance = resp.balanceUsdt;
@@ -82,8 +81,6 @@ class TokenService {
           tokenInfo.balanceOfDollar = tokenInfo.balance;
         }
       });
-
-
     }
   }
 

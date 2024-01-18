@@ -60,7 +60,6 @@ class _CryptoForNetworkState extends State<CryptoForNetwork> {
   }
 
   _updateBalance() {
-    log("EthereumPage updateBalance");
     var address = LocalStorage.getEthAddress();
     if (address != null) {
       TokenService.getInstance().updateTokenBalances(context).then((value) {

@@ -34,7 +34,6 @@ class UserWalletService {
     try {
       var resp = await walletClient?.getTokenBalalance(request)
           as GetTokenBalalanceResponse;
-      log("getAllTokenBalance $resp");
       return resp;
     } catch (e) {
       log("$e");
