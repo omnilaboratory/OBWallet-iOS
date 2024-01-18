@@ -51,7 +51,7 @@ class _CryptoWalletCardState extends State<CryptoWalletCard> {
             children: [
               const Text("Ether: ",
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,color: Colors.white)),
-              Text(StringTools.starString(widget.walletInfo.address,maxLength: 26),
+              Text(StringTools.starString(widget.walletInfo.address, maxLength: 20),
                   style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400,color: Colors.white)),
               const SizedBox(width: 10),
               GestureDetector(
@@ -71,7 +71,7 @@ class _CryptoWalletCardState extends State<CryptoWalletCard> {
             children: [
               const Text("Tron: ",
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,color: Colors.white)),
-              Text(StringTools.starString(CommonService.userInfo?.tronAddress,maxLength: 26),
+              Text(StringTools.starString(CommonService.userInfo?.tronAddress, maxLength: 20),
                   style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400,color: Colors.white)),
               const SizedBox(width: 10),
               GestureDetector(
