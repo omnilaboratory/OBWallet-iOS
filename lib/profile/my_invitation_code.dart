@@ -67,7 +67,7 @@ class _MyInvitationCodeState extends State<MyInvitationCode> {
                             Text(invitationCode!,
                                 style: const TextStyle(
                                   color: Colors.blue,
-                                  fontSize: 40,
+                                  fontSize: 60,
                                 )),
                             const SizedBox(width: 10),
                             Image.asset(

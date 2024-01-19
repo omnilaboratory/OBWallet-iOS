@@ -198,9 +198,9 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  flex: 3,
+                  flex: 2,
                   child: SizedBox(
-                    width: 180,
+                    width: 120,
                     child: createTextFormField(
                         _codeController,
                         S.of(context).common_VerifyCode,
@@ -211,20 +211,30 @@ class _SignUpStepOneState extends State<SignUpStepOne> {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: GestureDetector(
                       onTap: () {
                         getVerifyCode();
                       },
-                      child: AutoSizeText(
-                        getCodeTitle,
-                        maxLines: 1,
-                        maxFontSize: 12,
-                        minFontSize: 6,
-                        style: TextStyle(
-                            color: getCodeTitleEnable
-                                ? Colors.lightBlue
-                                : Colors.grey),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(0, 0, 0, 0.01),
+                          borderRadius: BorderRadius.circular(2.0),
+                        ),
+                        height: 70,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: AutoSizeText(
+                            getCodeTitle,
+                            maxLines: 2,
+                            maxFontSize: 20,
+                            minFontSize: 16,
+                            style: TextStyle(
+                                color: getCodeTitleEnable
+                                    ? Colors.lightBlue
+                                    : Colors.grey),
+                          ),
+                        ),
                       )),
                 )
               ],
