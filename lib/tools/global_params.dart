@@ -14,49 +14,6 @@ class GlobalParams {
   static int grpcTimeout = 30;
   static String currLangName = "en";
 
-  static resetTokens() {
-    // mainnet
-    GlobalParams.dataInNetwork[EnumNetworkType.mainnet]
-        [EnumEthKey.tokenList] = [
-      TokenInfo(
-          name: "USDT",
-          iconUrl: 'asset/images/icon_tether.png',
-          netName: NetWork.ETH.name),
-      TokenInfo(
-          name: "USDC",
-          iconUrl: 'asset/images/icon_usdc_logo.png',
-          netName: NetWork.ETH.name),
-    ];
-
-    GlobalParams.dataInNetwork[EnumNetworkType.mainnet]
-        [EnumEthKey.polygonTokenList] = [
-      TokenInfo(
-          name: "USDT",
-          iconUrl: 'asset/images/icon_tether.png',
-          netName: NetWork.POLYGON.name)
-    ];
-
-    // goerli
-    GlobalParams.dataInNetwork[EnumNetworkType.goerli][EnumEthKey.tokenList] = [
-      TokenInfo(
-          name: "ETH",
-          iconUrl: 'asset/images/icon_eth_logo.png',
-          netName: NetWork.ETH.name),
-      TokenInfo(
-          name: "USDT",
-          iconUrl: 'asset/images/icon_tether.png',
-          netName: NetWork.ETH.name),
-    ];
-
-    GlobalParams.dataInNetwork[EnumNetworkType.goerli]
-        [EnumEthKey.polygonTokenList] = [
-      TokenInfo(
-          name: "USDT",
-          iconUrl: 'asset/images/icon_tether.png',
-          netName: NetWork.POLYGON.name)
-    ];
-  }
-
   static Map<EnumNetworkType, dynamic> dataInNetwork = Map.from({
     EnumNetworkType.mainnet: Map.from({
       EnumEthKey.apiUrl:

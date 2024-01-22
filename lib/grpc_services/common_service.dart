@@ -46,7 +46,6 @@ resetServices() {
   CommonService.userInfo = null;
   CommonService.tokenList = [];
   CommonService.tokenListPolygon = [];
-  GlobalParams.resetTokens();
   CommonService.cardInfo = CardInfo();
   CommonService.firstEnterApp = true;
   TokenService.walletInfo = null;
