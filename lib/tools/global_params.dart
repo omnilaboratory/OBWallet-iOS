@@ -9,7 +9,7 @@ int pageSize = 10;
 class GlobalParams {
   static EventBus eventBus = EventBus();
 
-  static EnumNetworkType currNetwork = EnumNetworkType.mainnet;
+  static EnumNetworkType currNetwork = EnumNetworkType.goerli;
 
   static int grpcTimeout = 30;
   static String currLangName = "en";

@@ -4,6 +4,7 @@ import 'package:awallet/bean/card_item_info.dart';
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
+import 'package:awallet/cards/real_card_step1.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/card_item.dart';
@@ -35,6 +36,8 @@ class CardPart extends StatefulWidget {
 }
 
 class _CardPartState extends State<CardPart> {
+  bool realCardEnable = false;
+
   var txs = [];
   int currTypeIndex = 0;
   int dataStartIndex = 0;
@@ -52,6 +55,7 @@ class _CardPartState extends State<CardPart> {
     super.initState();
     _onBalanceRefresh();
     _onListRefresh();
+    updateRealCardBtnStatus();
 
     EthGrpcService.getInstance().ethGetAppConf(context).then((resp) {
       if (resp.code == 1) {
@@ -67,31 +71,87 @@ class _CardPartState extends State<CardPart> {
           _onBalanceRefresh();
         }
       }
+      if (event == "applyRealCard_Finish") {
+        updateRealCardBtnStatus();
+      }
     });
+  }
+
+  updateRealCardBtnStatus() {
+    if (mounted) {
+      realCardEnable = false;
+      CardService.getInstance().getRealCardStatus().then((resp) {
+        if (resp.code == 1) {
+          if (resp.data == 0) {
+          } else if (resp.data == 1) {
+          } else if (resp.data == 2) {
+            realCardEnable = true;
+          } else {
+            realCardEnable = true;
+          }
+        } else {
+          realCardEnable = true;
+        }
+        setState(() {});
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    log("hasCard $hasCard");
+    List<Widget> list = [];
+    list.add(const SizedBox(height: 20));
+    if (realCardEnable) {
+      list.add(realCardBtn(context));
+      list.add(const SizedBox(height: 10));
+    }
+
+    list.add(CardItem(
+        cardItemInfo: CardItemInfo(
+            cardNo: CommonService.cardInfo.cardNo,
+            balance: CommonService.cardInfo.balance,
+            exp: CommonService.cardInfo.expiryDate,
+            cvv: CommonService.cardInfo.cvv)));
+    list.add(const SizedBox(height: 15));
+    list.add(hasCard ? buildCardDetail(context) : buildApplyCardPart());
+
     return SmartRefresher(
       controller: _refreshBalanceController,
       onRefresh: _onBalanceRefresh,
       child: Center(
         child: Column(
-          children: [
-            const SizedBox(height: 20),
-            CardItem(
-                cardItemInfo: CardItemInfo(
-                    cardNo: CommonService.cardInfo.cardNo,
-                    balance: CommonService.cardInfo.balance,
-                    exp: CommonService.cardInfo.expiryDate,
-                    cvv: CommonService.cardInfo.cvv)),
-            const SizedBox(height: 15),
-            hasCard ? buildCardDetail(context) : buildApplyCardPart(),
-          ],
+          children: list,
         ),
       ),
     );
+  }
+
+  InkWell realCardBtn(BuildContext context) {
+    return InkWell(
+        onTap: () async {
+          var resp = await AccountService.getInstance().getAccountInfo(context);
+          if (resp.code == 1) {
+            var accountInfo = resp.data as AccountInfo;
+            if (accountInfo.balance < 50) {
+              alert(S.of(context).realCard_fee(50), context, () {});
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RealCardStep1()));
+            }
+          }
+        },
+        child: Container(
+            width: double.infinity,
+            height: 40,
+            decoration: ShapeDecoration(
+              color: const Color(0x11B7B8BD),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
+            ),
+            child: Center(child: Text(S.of(context).realCard_title))));
   }
 
   Widget buildApplyCardPart() {
