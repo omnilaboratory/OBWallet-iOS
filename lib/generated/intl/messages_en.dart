@@ -53,7 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "alert_ok": MessageLookupByLibrary.simpleMessage("OK"),
         "alert_title": MessageLookupByLibrary.simpleMessage("Message"),
         "applyCard_ApplyCard":
-            MessageLookupByLibrary.simpleMessage("Apply Card"),
+            MessageLookupByLibrary.simpleMessage("Apply Virtual Card"),
         "applyCard_ApplyLater":
             MessageLookupByLibrary.simpleMessage("APPLY LATER"),
         "applyCard_Desc1": MessageLookupByLibrary.simpleMessage(
@@ -61,7 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "applyCard_Desc2": MessageLookupByLibrary.simpleMessage(
             "- Pay conveniently for online transactions \n- Exchange Currencies & Crypto \n- Send & Receive"),
         "applyCard_Desc3": m0,
-        "applyCard_Title": MessageLookupByLibrary.simpleMessage("Apply Card"),
+        "applyCard_Title":
+            MessageLookupByLibrary.simpleMessage("Apply Virtual Card"),
         "applyCard_VirtualCard":
             MessageLookupByLibrary.simpleMessage("Virtual Card"),
         "cardActivity_tile":

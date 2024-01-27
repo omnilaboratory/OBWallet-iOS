@@ -146,12 +146,20 @@ class _CardPartState extends State<CardPart> {
             width: double.infinity,
             height: 40,
             decoration: ShapeDecoration(
-              color: const Color(0x11B7B8BD),
+              color: Colors.blue,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6),
+                
               ),
             ),
-            child: Center(child: Text(S.of(context).realCard_title))));
+            child: Center(
+              child: Text(
+                S.of(context).realCard_title, 
+                style: const TextStyle(fontSize: 18, color: Colors.white)
+              )
+            )
+          )
+        );
   }
 
   Widget buildApplyCardPart() {

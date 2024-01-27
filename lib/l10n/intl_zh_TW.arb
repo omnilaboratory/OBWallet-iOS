@@ -33,13 +33,13 @@
   "signUp_Nickname": "暱稱",
   "signUp_InvitationCode": "邀請碼",
 
-  "applyCard_Title": "申請卡片",
+  "applyCard_Title": "申請虛擬卡",
   "applyCard_VirtualCard": "虛擬卡片",
   "applyCard_Desc1": "我們的新虛擬卡片允許您:",
   "applyCard_Desc2": "- 方便線上交易支付 \n- 兌換貨幣和加密貨幣 \n- 發送和接收",
   "applyCard_Desc3": "*** 申請虛擬卡片需要支付 {createFee} 美元的費用。",
   "applyCard_ApplyLater": "稍後申請",
-  "applyCard_ApplyCard": "申請卡片",
+  "applyCard_ApplyCard": "申請虛擬卡",
 
   "cardActivity_tile": "卡活動",
   "exchange_tile": "兌換",

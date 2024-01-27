@@ -33,13 +33,13 @@
   "signUp_Nickname": "Nickname",
   "signUp_InvitationCode": "Invitation Code",
 
-  "applyCard_Title": "Apply Card",
+  "applyCard_Title": "Apply Virtual Card",
   "applyCard_VirtualCard": "Virtual Card",
   "applyCard_Desc1": "Our new virtual card allows you to：",
   "applyCard_Desc2": "- Pay conveniently for online transactions \n- Exchange Currencies & Crypto \n- Send & Receive",
   "applyCard_Desc3": "*** There is a fee of ${createFee} to apply for a virtual card.",
   "applyCard_ApplyLater": "APPLY LATER",
-  "applyCard_ApplyCard": "Apply Card",
+  "applyCard_ApplyCard": "Apply Virtual Card",
 
   "cardActivity_tile": "Card Activity",
   "exchange_tile": "Exchange",

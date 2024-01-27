@@ -350,10 +350,10 @@ class S {
     );
   }
 
-  /// `Apply Card`
+  /// `Apply Virtual Card`
   String get applyCard_Title {
     return Intl.message(
-      'Apply Card',
+      'Apply Virtual Card',
       name: 'applyCard_Title',
       desc: '',
       args: [],
@@ -410,10 +410,10 @@ class S {
     );
   }
 
-  /// `Apply Card`
+  /// `Apply Virtual Card`
   String get applyCard_ApplyCard {
     return Intl.message(
-      'Apply Card',
+      'Apply Virtual Card',
       name: 'applyCard_ApplyCard',
       desc: '',
       args: [],
