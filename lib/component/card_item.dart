@@ -21,7 +21,7 @@ class CardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    
+
     return Stack(
       alignment: AlignmentDirectional.bottomEnd,
       children: [
@@ -161,17 +161,17 @@ class CardItem extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.only(bottom: 100),
-      child: Row(
-        children: [
-          const SizedBox(width: 20),
-          GestureDetector(
-            onTap: () {
-              if (cardItemInfo.cardNo.isNotEmpty) {
-                showToast(S.current.tips_cardNoIsOnClipboard);
-                Clipboard.setData(ClipboardData(text: cardItemInfo.cardNo));
-              }
-            },
-            child: Text(
+      child: GestureDetector(
+        onTap: () {
+          if (cardItemInfo.cardNo.isNotEmpty) {
+            showToast(S.current.tips_cardNoIsOnClipboard);
+            Clipboard.setData(ClipboardData(text: cardItemInfo.cardNo));
+          }
+        },
+        child: Row(
+          children: [
+            const SizedBox(width: 20),
+            Text(
               getCardNo(),
               style: const TextStyle(
                 color: Color(0xFF666666),
@@ -179,8 +179,15 @@ class CardItem extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-          )
-        ],
+            const SizedBox(width: 10),
+            const Image(
+              width: 24,
+              height: 24,
+              image: AssetImage('asset/images/icon_copy.png'),
+              color: Colors.blue,
+            )
+          ],
+        ),
       ),
     );
   }
