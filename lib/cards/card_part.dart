@@ -113,7 +113,11 @@ class _CardPartState extends State<CardPart> {
             exp: CommonService.cardInfo.expiryDate,
             cvv: CommonService.cardInfo.cvv)));
     list.add(const SizedBox(height: 15));
-    list.add(hasCard ? buildCardDetail(context) : buildApplyCardPart());
+    if (hasCard) {
+      list.add(buildCardDetail(context));
+    } else {
+      list.add(buildApplyCardPart());
+    }
 
     return SmartRefresher(
       controller: _refreshBalanceController,
@@ -149,17 +153,12 @@ class _CardPartState extends State<CardPart> {
               color: Colors.blue,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6),
-                
               ),
             ),
             child: Center(
-              child: Text(
-                S.of(context).realCard_title, 
-                style: const TextStyle(fontSize: 18, color: Colors.white)
-              )
-            )
-          )
-        );
+                child: Text(S.of(context).realCard_title,
+                    style:
+                        const TextStyle(fontSize: 18, color: Colors.white)))));
   }
 
   Widget buildApplyCardPart() {
