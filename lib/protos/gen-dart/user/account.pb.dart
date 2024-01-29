@@ -717,6 +717,280 @@ class AccountInfo extends $pb.GeneratedMessage {
   void clearUpdatedAt() => clearField(9);
 }
 
+class AccountOnchainBalanceHistory extends $pb.GeneratedMessage {
+  factory AccountOnchainBalanceHistory() => create();
+  AccountOnchainBalanceHistory._() : super();
+  factory AccountOnchainBalanceHistory.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccountOnchainBalanceHistory.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AccountOnchainBalanceHistory', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..aInt64(2, _omitFieldNames ? '' : 'userId')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'amt', $pb.PbFieldType.OD)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'gasUsded', $pb.PbFieldType.OD)
+    ..aOS(7, _omitFieldNames ? '' : 'balanceType')
+    ..e<NetWork>(8, _omitFieldNames ? '' : 'network', $pb.PbFieldType.OE, defaultOrMaker: NetWork.UnKownNetWork, valueOf: NetWork.valueOf, enumValues: NetWork.values)
+    ..aInt64(9, _omitFieldNames ? '' : 'updatedAt')
+    ..aInt64(10, _omitFieldNames ? '' : 'createdAt')
+    ..aOS(11, _omitFieldNames ? '' : 'txId')
+    ..aOS(12, _omitFieldNames ? '' : 'gasTxId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccountOnchainBalanceHistory clone() => AccountOnchainBalanceHistory()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccountOnchainBalanceHistory copyWith(void Function(AccountOnchainBalanceHistory) updates) => super.copyWith((message) => updates(message as AccountOnchainBalanceHistory)) as AccountOnchainBalanceHistory;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AccountOnchainBalanceHistory create() => AccountOnchainBalanceHistory._();
+  AccountOnchainBalanceHistory createEmptyInstance() => create();
+  static $pb.PbList<AccountOnchainBalanceHistory> createRepeated() => $pb.PbList<AccountOnchainBalanceHistory>();
+  @$core.pragma('dart2js:noInline')
+  static AccountOnchainBalanceHistory getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccountOnchainBalanceHistory>(create);
+  static AccountOnchainBalanceHistory? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get userId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set userId($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserId() => clearField(2);
+
+  @$pb.TagNumber(5)
+  $core.double get amt => $_getN(2);
+  @$pb.TagNumber(5)
+  set amt($core.double v) { $_setDouble(2, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasAmt() => $_has(2);
+  @$pb.TagNumber(5)
+  void clearAmt() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.double get gasUsded => $_getN(3);
+  @$pb.TagNumber(6)
+  set gasUsded($core.double v) { $_setDouble(3, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasGasUsded() => $_has(3);
+  @$pb.TagNumber(6)
+  void clearGasUsded() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get balanceType => $_getSZ(4);
+  @$pb.TagNumber(7)
+  set balanceType($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasBalanceType() => $_has(4);
+  @$pb.TagNumber(7)
+  void clearBalanceType() => clearField(7);
+
+  @$pb.TagNumber(8)
+  NetWork get network => $_getN(5);
+  @$pb.TagNumber(8)
+  set network(NetWork v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasNetwork() => $_has(5);
+  @$pb.TagNumber(8)
+  void clearNetwork() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get updatedAt => $_getI64(6);
+  @$pb.TagNumber(9)
+  set updatedAt($fixnum.Int64 v) { $_setInt64(6, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasUpdatedAt() => $_has(6);
+  @$pb.TagNumber(9)
+  void clearUpdatedAt() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get createdAt => $_getI64(7);
+  @$pb.TagNumber(10)
+  set createdAt($fixnum.Int64 v) { $_setInt64(7, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasCreatedAt() => $_has(7);
+  @$pb.TagNumber(10)
+  void clearCreatedAt() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.String get txId => $_getSZ(8);
+  @$pb.TagNumber(11)
+  set txId($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasTxId() => $_has(8);
+  @$pb.TagNumber(11)
+  void clearTxId() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.String get gasTxId => $_getSZ(9);
+  @$pb.TagNumber(12)
+  set gasTxId($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasGasTxId() => $_has(9);
+  @$pb.TagNumber(12)
+  void clearGasTxId() => clearField(12);
+}
+
+class AccountOnchainBalance extends $pb.GeneratedMessage {
+  factory AccountOnchainBalance() => create();
+  AccountOnchainBalance._() : super();
+  factory AccountOnchainBalance.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccountOnchainBalance.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AccountOnchainBalance', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..aInt64(2, _omitFieldNames ? '' : 'userId')
+    ..aOS(3, _omitFieldNames ? '' : 'balanceType')
+    ..e<NetWork>(4, _omitFieldNames ? '' : 'network', $pb.PbFieldType.OE, defaultOrMaker: NetWork.UnKownNetWork, valueOf: NetWork.valueOf, enumValues: NetWork.values)
+    ..aInt64(5, _omitFieldNames ? '' : 'updatedAt')
+    ..aInt64(6, _omitFieldNames ? '' : 'createdAt')
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'approvedStatus', $pb.PbFieldType.O3)
+    ..aOS(8, _omitFieldNames ? '' : 'errMsg')
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'approvedGasUsded', $pb.PbFieldType.OD)
+    ..aOS(10, _omitFieldNames ? '' : 'approvedTxId')
+    ..a<$core.double>(11, _omitFieldNames ? '' : 'balance', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccountOnchainBalance clone() => AccountOnchainBalance()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccountOnchainBalance copyWith(void Function(AccountOnchainBalance) updates) => super.copyWith((message) => updates(message as AccountOnchainBalance)) as AccountOnchainBalance;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AccountOnchainBalance create() => AccountOnchainBalance._();
+  AccountOnchainBalance createEmptyInstance() => create();
+  static $pb.PbList<AccountOnchainBalance> createRepeated() => $pb.PbList<AccountOnchainBalance>();
+  @$core.pragma('dart2js:noInline')
+  static AccountOnchainBalance getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccountOnchainBalance>(create);
+  static AccountOnchainBalance? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get userId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set userId($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get balanceType => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set balanceType($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasBalanceType() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBalanceType() => clearField(3);
+
+  @$pb.TagNumber(4)
+  NetWork get network => $_getN(3);
+  @$pb.TagNumber(4)
+  set network(NetWork v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasNetwork() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearNetwork() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get updatedAt => $_getI64(4);
+  @$pb.TagNumber(5)
+  set updatedAt($fixnum.Int64 v) { $_setInt64(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasUpdatedAt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearUpdatedAt() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get createdAt => $_getI64(5);
+  @$pb.TagNumber(6)
+  set createdAt($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasCreatedAt() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCreatedAt() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.int get approvedStatus => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set approvedStatus($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasApprovedStatus() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearApprovedStatus() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get errMsg => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set errMsg($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasErrMsg() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearErrMsg() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.double get approvedGasUsded => $_getN(8);
+  @$pb.TagNumber(9)
+  set approvedGasUsded($core.double v) { $_setDouble(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasApprovedGasUsded() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearApprovedGasUsded() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.String get approvedTxId => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set approvedTxId($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasApprovedTxId() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearApprovedTxId() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.double get balance => $_getN(10);
+  @$pb.TagNumber(11)
+  set balance($core.double v) { $_setDouble(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasBalance() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearBalance() => clearField(11);
+}
+
 class TrackedTx extends $pb.GeneratedMessage {
   factory TrackedTx() => create();
   TrackedTx._() : super();
@@ -2282,6 +2556,7 @@ class AgentConfig extends $pb.GeneratedMessage {
     ..a<$core.double>(8, _omitFieldNames ? '' : 'rewardPcardCreate', $pb.PbFieldType.OD)
     ..aInt64(9, _omitFieldNames ? '' : 'createdAt')
     ..aInt64(10, _omitFieldNames ? '' : 'updatedAt')
+    ..aInt64(11, _omitFieldNames ? '' : 'agentCardType')
     ..hasRequiredFields = false
   ;
 
@@ -2395,6 +2670,15 @@ class AgentConfig extends $pb.GeneratedMessage {
   $core.bool hasUpdatedAt() => $_has(9);
   @$pb.TagNumber(10)
   void clearUpdatedAt() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get agentCardType => $_getI64(10);
+  @$pb.TagNumber(11)
+  set agentCardType($fixnum.Int64 v) { $_setInt64(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasAgentCardType() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearAgentCardType() => clearField(11);
 }
 
 class AppConfig extends $pb.GeneratedMessage {
@@ -2422,6 +2706,7 @@ class AppConfig extends $pb.GeneratedMessage {
     ..aOS(17, _omitFieldNames ? '' : 'serverTaddress')
     ..aInt64(18, _omitFieldNames ? '' : 'systemAgentId')
     ..a<$core.double>(19, _omitFieldNames ? '' : 'gasFeeTrx', $pb.PbFieldType.OD)
+    ..aInt64(20, _omitFieldNames ? '' : 'agentCardType')
     ..hasRequiredFields = false
   ;
 
@@ -2607,6 +2892,15 @@ class AppConfig extends $pb.GeneratedMessage {
   $core.bool hasGasFeeTrx() => $_has(17);
   @$pb.TagNumber(19)
   void clearGasFeeTrx() => clearField(19);
+
+  @$pb.TagNumber(20)
+  $fixnum.Int64 get agentCardType => $_getI64(18);
+  @$pb.TagNumber(20)
+  set agentCardType($fixnum.Int64 v) { $_setInt64(18, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasAgentCardType() => $_has(18);
+  @$pb.TagNumber(20)
+  void clearAgentCardType() => clearField(20);
 }
 
 class AccountHistory extends $pb.GeneratedMessage {

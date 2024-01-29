@@ -42,6 +42,7 @@ class _CardPartState extends State<CardPart> {
   int currTypeIndex = 0;
   int dataStartIndex = 0;
   double createCardFee = 5.0;
+  int agentCardType = -1;
   bool hasCard = CommonService.userInfo!.cardCount > 0;
 
   final RefreshController _refreshListController =
@@ -59,8 +60,9 @@ class _CardPartState extends State<CardPart> {
 
     EthGrpcService.getInstance().ethGetAppConf(context).then((resp) {
       if (resp.code == 1) {
-        var createCardConfInfo = resp.data as AppConfig;
-        createCardFee = createCardConfInfo.createCardFee;
+        var appConfig = resp.data as AppConfig;
+        createCardFee = appConfig.createCardFee;
+        agentCardType = appConfig.agentCardType.toInt();
         setState(() {});
       }
     });
@@ -101,7 +103,7 @@ class _CardPartState extends State<CardPart> {
   Widget build(BuildContext context) {
     List<Widget> list = [];
     list.add(const SizedBox(height: 20));
-    if (realCardEnable) {
+    if (realCardEnable && (agentCardType == 0 || agentCardType == 2)) {
       list.add(realCardBtn(context));
       list.add(const SizedBox(height: 10));
     }
@@ -116,7 +118,9 @@ class _CardPartState extends State<CardPart> {
     if (hasCard) {
       list.add(buildCardDetail(context));
     } else {
-      list.add(buildApplyCardPart());
+      if (agentCardType == 0 || agentCardType == 1) {
+        list.add(buildApplyCardPart());
+      }
     }
 
     return SmartRefresher(

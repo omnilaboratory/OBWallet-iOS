@@ -123,6 +123,42 @@ message AccountInfo{
   double locked_usd=7;
   int64 updated_at=9;
   int64 created_at=6;
+
+}
+//归集历史记录
+message AccountOnchainBalanceHistory{
+  int64 id=1;
+  //@gotags: gorm:"index"
+  int64 user_id=2;
+  double amt=5;
+  double gas_usded=6;
+  string gas_tx_id=12;
+  string tx_id=11;
+  //余额类型:USD USDT USDC
+  string balance_type=7;
+  NetWork network=8;
+  int64 updated_at=9;
+  int64 created_at=10;
+}
+
+//用户钱包,链上余额. 需要在充值时更新, 归集时更新
+message AccountOnchainBalance{
+  int64 id=1;
+  //@gotags: gorm:"index:idx_onchainbal_user_id_type"
+  int64 user_id=2;
+  double balance=11;
+  //余额类型:USD USDT USDC
+  //@gotags: gorm:"index:idx_onchainbal_user_id_type"
+  string balance_type=3;
+  NetWork network=4;
+  int64 updated_at=5;
+  int64 created_at=6;
+  //erc20 approved to server eth address; 1: approved-gas sended, 2:approved-ok
+  //@gotags: gorm:"not null;"
+  int32 approved_status =7;
+  string err_msg=8;
+  double approved_gas_usded=9;
+  string approved_tx_id=10;
 }
 
 message TrackedTx{
@@ -145,6 +181,7 @@ message TrackedTx{
 
   enum ContractSymbol {
     USD = 0;
+    //链上的本地币种, 如:polygon上的matic, eth上的eth, tron上的trx
     ETH = 1;
     USDT = 2;
     USDC = 3;
@@ -387,6 +424,8 @@ message AgentConfig{
   //开实体卡佣金 exapmle 20$
   double reward_pcard_create = 8;
 
+  //agent_card_type 0 可以开实体卡和虚拟卡; 1 只能开虚拟卡; 2 只能开实体卡;
+  int64 agent_card_type=11;
   int64 created_at = 9;
   int64 updated_at = 10;
 }
@@ -398,14 +437,16 @@ message AppConfig{
 
   //创建虚拟卡费用 exapmle 5$
   double create_card_fee = 3;
-  //创建实体卡费用 exapmle 10$
+  //创建实体卡费用 exapmle 30$
   double create_pcard_fee = 4;
+  //agent_card_type 0 可以开实体卡和虚拟卡; 1 只能开虚拟卡; 2 只能开实体卡;
+  int64 agent_card_type=20;
 
   //usd兑换数币以太坊gas费 example 5$
   double gas_fee_eth = 15;
   //polygon网主usdt转账gas费 example 0.005$
   double gas_fee_matic = 16;
-  //tron网usdt转账gas费 example 0.08$
+  //tron网usdt转账gas费 example 0.8$
   double gas_fee_trx = 19;
 
   int64 created_at = 9;
@@ -429,7 +470,7 @@ message AppConfig{
 
   //开虚拟卡利润 exapmle 5$
   double profit_vcard_create = 7;
-  //开实体卡利润 exapmle 10$
+  //开实体卡利润 exapmle 30$
   double profit_pcard_create = 8;
   //平台代理商id
   int64 system_agent_id=18;
@@ -473,7 +514,10 @@ message AccountHistory{
     Withdraw = 2;
     //数币兑换
     Swap = 3;
+//    创建虚拟卡
     CreateCard=4;
+    //    创建实休卡
+    CreatePCard=8;
     //提币
     TokenTransfer=5;
     //佣金发放

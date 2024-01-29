@@ -228,6 +228,60 @@ final $typed_data.Uint8List accountInfoDescriptor = $convert.base64Decode(
     'VHlwZRIdCgpsb2NrZWRfdXNkGAcgASgBUglsb2NrZWRVc2QSHQoKdXBkYXRlZF9hdBgJIAEoA1'
     'IJdXBkYXRlZEF0Eh0KCmNyZWF0ZWRfYXQYBiABKANSCWNyZWF0ZWRBdA==');
 
+@$core.Deprecated('Use accountOnchainBalanceHistoryDescriptor instead')
+const AccountOnchainBalanceHistory$json = {
+  '1': 'AccountOnchainBalanceHistory',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'user_id', '3': 2, '4': 1, '5': 3, '10': 'userId'},
+    {'1': 'amt', '3': 5, '4': 1, '5': 1, '10': 'amt'},
+    {'1': 'gas_usded', '3': 6, '4': 1, '5': 1, '10': 'gasUsded'},
+    {'1': 'gas_tx_id', '3': 12, '4': 1, '5': 9, '10': 'gasTxId'},
+    {'1': 'tx_id', '3': 11, '4': 1, '5': 9, '10': 'txId'},
+    {'1': 'balance_type', '3': 7, '4': 1, '5': 9, '10': 'balanceType'},
+    {'1': 'network', '3': 8, '4': 1, '5': 14, '6': '.user.NetWork', '10': 'network'},
+    {'1': 'updated_at', '3': 9, '4': 1, '5': 3, '10': 'updatedAt'},
+    {'1': 'created_at', '3': 10, '4': 1, '5': 3, '10': 'createdAt'},
+  ],
+};
+
+/// Descriptor for `AccountOnchainBalanceHistory`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountOnchainBalanceHistoryDescriptor = $convert.base64Decode(
+    'ChxBY2NvdW50T25jaGFpbkJhbGFuY2VIaXN0b3J5Eg4KAmlkGAEgASgDUgJpZBIXCgd1c2VyX2'
+    'lkGAIgASgDUgZ1c2VySWQSEAoDYW10GAUgASgBUgNhbXQSGwoJZ2FzX3VzZGVkGAYgASgBUghn'
+    'YXNVc2RlZBIaCglnYXNfdHhfaWQYDCABKAlSB2dhc1R4SWQSEwoFdHhfaWQYCyABKAlSBHR4SW'
+    'QSIQoMYmFsYW5jZV90eXBlGAcgASgJUgtiYWxhbmNlVHlwZRInCgduZXR3b3JrGAggASgOMg0u'
+    'dXNlci5OZXRXb3JrUgduZXR3b3JrEh0KCnVwZGF0ZWRfYXQYCSABKANSCXVwZGF0ZWRBdBIdCg'
+    'pjcmVhdGVkX2F0GAogASgDUgljcmVhdGVkQXQ=');
+
+@$core.Deprecated('Use accountOnchainBalanceDescriptor instead')
+const AccountOnchainBalance$json = {
+  '1': 'AccountOnchainBalance',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'user_id', '3': 2, '4': 1, '5': 3, '10': 'userId'},
+    {'1': 'balance', '3': 11, '4': 1, '5': 1, '10': 'balance'},
+    {'1': 'balance_type', '3': 3, '4': 1, '5': 9, '10': 'balanceType'},
+    {'1': 'network', '3': 4, '4': 1, '5': 14, '6': '.user.NetWork', '10': 'network'},
+    {'1': 'updated_at', '3': 5, '4': 1, '5': 3, '10': 'updatedAt'},
+    {'1': 'created_at', '3': 6, '4': 1, '5': 3, '10': 'createdAt'},
+    {'1': 'approved_status', '3': 7, '4': 1, '5': 5, '10': 'approvedStatus'},
+    {'1': 'err_msg', '3': 8, '4': 1, '5': 9, '10': 'errMsg'},
+    {'1': 'approved_gas_usded', '3': 9, '4': 1, '5': 1, '10': 'approvedGasUsded'},
+    {'1': 'approved_tx_id', '3': 10, '4': 1, '5': 9, '10': 'approvedTxId'},
+  ],
+};
+
+/// Descriptor for `AccountOnchainBalance`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountOnchainBalanceDescriptor = $convert.base64Decode(
+    'ChVBY2NvdW50T25jaGFpbkJhbGFuY2USDgoCaWQYASABKANSAmlkEhcKB3VzZXJfaWQYAiABKA'
+    'NSBnVzZXJJZBIYCgdiYWxhbmNlGAsgASgBUgdiYWxhbmNlEiEKDGJhbGFuY2VfdHlwZRgDIAEo'
+    'CVILYmFsYW5jZVR5cGUSJwoHbmV0d29yaxgEIAEoDjINLnVzZXIuTmV0V29ya1IHbmV0d29yax'
+    'IdCgp1cGRhdGVkX2F0GAUgASgDUgl1cGRhdGVkQXQSHQoKY3JlYXRlZF9hdBgGIAEoA1IJY3Jl'
+    'YXRlZEF0EicKD2FwcHJvdmVkX3N0YXR1cxgHIAEoBVIOYXBwcm92ZWRTdGF0dXMSFwoHZXJyX2'
+    '1zZxgIIAEoCVIGZXJyTXNnEiwKEmFwcHJvdmVkX2dhc191c2RlZBgJIAEoAVIQYXBwcm92ZWRH'
+    'YXNVc2RlZBIkCg5hcHByb3ZlZF90eF9pZBgKIAEoCVIMYXBwcm92ZWRUeElk');
+
 @$core.Deprecated('Use trackedTxDescriptor instead')
 const TrackedTx$json = {
   '1': 'TrackedTx',
@@ -619,6 +673,7 @@ const AgentConfig$json = {
     {'1': 'reward_withdraw_to_pcard', '3': 6, '4': 1, '5': 1, '10': 'rewardWithdrawToPcard'},
     {'1': 'reward_vcard_create', '3': 7, '4': 1, '5': 1, '10': 'rewardVcardCreate'},
     {'1': 'reward_pcard_create', '3': 8, '4': 1, '5': 1, '10': 'rewardPcardCreate'},
+    {'1': 'agent_card_type', '3': 11, '4': 1, '5': 3, '10': 'agentCardType'},
     {'1': 'created_at', '3': 9, '4': 1, '5': 3, '10': 'createdAt'},
     {'1': 'updated_at', '3': 10, '4': 1, '5': 3, '10': 'updatedAt'},
   ],
@@ -632,8 +687,9 @@ final $typed_data.Uint8List agentConfigDescriptor = $convert.base64Decode(
     'Jhd190b192Y2FyZBgFIAEoAVIVcmV3YXJkV2l0aGRyYXdUb1ZjYXJkEjcKGHJld2FyZF93aXRo'
     'ZHJhd190b19wY2FyZBgGIAEoAVIVcmV3YXJkV2l0aGRyYXdUb1BjYXJkEi4KE3Jld2FyZF92Y2'
     'FyZF9jcmVhdGUYByABKAFSEXJld2FyZFZjYXJkQ3JlYXRlEi4KE3Jld2FyZF9wY2FyZF9jcmVh'
-    'dGUYCCABKAFSEXJld2FyZFBjYXJkQ3JlYXRlEh0KCmNyZWF0ZWRfYXQYCSABKANSCWNyZWF0ZW'
-    'RBdBIdCgp1cGRhdGVkX2F0GAogASgDUgl1cGRhdGVkQXQ=');
+    'dGUYCCABKAFSEXJld2FyZFBjYXJkQ3JlYXRlEiYKD2FnZW50X2NhcmRfdHlwZRgLIAEoA1INYW'
+    'dlbnRDYXJkVHlwZRIdCgpjcmVhdGVkX2F0GAkgASgDUgljcmVhdGVkQXQSHQoKdXBkYXRlZF9h'
+    'dBgKIAEoA1IJdXBkYXRlZEF0');
 
 @$core.Deprecated('Use appConfigDescriptor instead')
 const AppConfig$json = {
@@ -642,6 +698,7 @@ const AppConfig$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
     {'1': 'create_card_fee', '3': 3, '4': 1, '5': 1, '10': 'createCardFee'},
     {'1': 'create_pcard_fee', '3': 4, '4': 1, '5': 1, '10': 'createPcardFee'},
+    {'1': 'agent_card_type', '3': 20, '4': 1, '5': 3, '10': 'agentCardType'},
     {'1': 'gas_fee_eth', '3': 15, '4': 1, '5': 1, '10': 'gasFeeEth'},
     {'1': 'gas_fee_matic', '3': 16, '4': 1, '5': 1, '10': 'gasFeeMatic'},
     {'1': 'gas_fee_trx', '3': 19, '4': 1, '5': 1, '10': 'gasFeeTrx'},
@@ -663,18 +720,19 @@ const AppConfig$json = {
 /// Descriptor for `AppConfig`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List appConfigDescriptor = $convert.base64Decode(
     'CglBcHBDb25maWcSDgoCaWQYASABKANSAmlkEiYKD2NyZWF0ZV9jYXJkX2ZlZRgDIAEoAVINY3'
-    'JlYXRlQ2FyZEZlZRIoChBjcmVhdGVfcGNhcmRfZmVlGAQgASgBUg5jcmVhdGVQY2FyZEZlZRIe'
-    'CgtnYXNfZmVlX2V0aBgPIAEoAVIJZ2FzRmVlRXRoEiIKDWdhc19mZWVfbWF0aWMYECABKAFSC2'
-    'dhc0ZlZU1hdGljEh4KC2dhc19mZWVfdHJ4GBMgASgBUglnYXNGZWVUcngSHQoKY3JlYXRlZF9h'
-    'dBgJIAEoA1IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYCiABKANSCXVwZGF0ZWRBdBIlCg5zZX'
-    'J2ZXJfYWRkcmVzcxgLIAEoCVINc2VydmVyQWRkcmVzcxInCg9zZXJ2ZXJfdGFkZHJlc3MYESAB'
-    'KAlSDnNlcnZlclRhZGRyZXNzEh8KC25mdF9hZGRyZXNzGAwgASgJUgpuZnRBZGRyZXNzEigKEH'
-    'Byb2ZpdF9zZWxsX2NvaW4YDSABKAFSDnByb2ZpdFNlbGxDb2luEiYKD3Byb2ZpdF9idXlfY29p'
-    'bhgOIAEoAVINcHJvZml0QnV5Q29pbhI3Chhwcm9maXRfd2l0aGRyYXdfdG9fdmNhcmQYBSABKA'
-    'FSFXByb2ZpdFdpdGhkcmF3VG9WY2FyZBI3Chhwcm9maXRfd2l0aGRyYXdfdG9fcGNhcmQYBiAB'
-    'KAFSFXByb2ZpdFdpdGhkcmF3VG9QY2FyZBIuChNwcm9maXRfdmNhcmRfY3JlYXRlGAcgASgBUh'
-    'Fwcm9maXRWY2FyZENyZWF0ZRIuChNwcm9maXRfcGNhcmRfY3JlYXRlGAggASgBUhFwcm9maXRQ'
-    'Y2FyZENyZWF0ZRImCg9zeXN0ZW1fYWdlbnRfaWQYEiABKANSDXN5c3RlbUFnZW50SWQ=');
+    'JlYXRlQ2FyZEZlZRIoChBjcmVhdGVfcGNhcmRfZmVlGAQgASgBUg5jcmVhdGVQY2FyZEZlZRIm'
+    'Cg9hZ2VudF9jYXJkX3R5cGUYFCABKANSDWFnZW50Q2FyZFR5cGUSHgoLZ2FzX2ZlZV9ldGgYDy'
+    'ABKAFSCWdhc0ZlZUV0aBIiCg1nYXNfZmVlX21hdGljGBAgASgBUgtnYXNGZWVNYXRpYxIeCgtn'
+    'YXNfZmVlX3RyeBgTIAEoAVIJZ2FzRmVlVHJ4Eh0KCmNyZWF0ZWRfYXQYCSABKANSCWNyZWF0ZW'
+    'RBdBIdCgp1cGRhdGVkX2F0GAogASgDUgl1cGRhdGVkQXQSJQoOc2VydmVyX2FkZHJlc3MYCyAB'
+    'KAlSDXNlcnZlckFkZHJlc3MSJwoPc2VydmVyX3RhZGRyZXNzGBEgASgJUg5zZXJ2ZXJUYWRkcm'
+    'VzcxIfCgtuZnRfYWRkcmVzcxgMIAEoCVIKbmZ0QWRkcmVzcxIoChBwcm9maXRfc2VsbF9jb2lu'
+    'GA0gASgBUg5wcm9maXRTZWxsQ29pbhImCg9wcm9maXRfYnV5X2NvaW4YDiABKAFSDXByb2ZpdE'
+    'J1eUNvaW4SNwoYcHJvZml0X3dpdGhkcmF3X3RvX3ZjYXJkGAUgASgBUhVwcm9maXRXaXRoZHJh'
+    'd1RvVmNhcmQSNwoYcHJvZml0X3dpdGhkcmF3X3RvX3BjYXJkGAYgASgBUhVwcm9maXRXaXRoZH'
+    'Jhd1RvUGNhcmQSLgoTcHJvZml0X3ZjYXJkX2NyZWF0ZRgHIAEoAVIRcHJvZml0VmNhcmRDcmVh'
+    'dGUSLgoTcHJvZml0X3BjYXJkX2NyZWF0ZRgIIAEoAVIRcHJvZml0UGNhcmRDcmVhdGUSJgoPc3'
+    'lzdGVtX2FnZW50X2lkGBIgASgDUg1zeXN0ZW1BZ2VudElk');
 
 @$core.Deprecated('Use accountHistoryDescriptor instead')
 const AccountHistory$json = {
@@ -703,6 +761,7 @@ const AccountHistory_SourceType$json = {
     {'1': 'Withdraw', '2': 2},
     {'1': 'Swap', '2': 3},
     {'1': 'CreateCard', '2': 4},
+    {'1': 'CreatePCard', '2': 8},
     {'1': 'TokenTransfer', '2': 5},
     {'1': 'Reward', '2': 6},
     {'1': 'TelaRecharge', '2': 7},
@@ -717,7 +776,8 @@ final $typed_data.Uint8List accountHistoryDescriptor = $convert.base64Decode(
     '5BY2NvdW50SGlzdG9yeS5Tb3VyY2VUeXBlUgpzb3VyY2VUeXBlEh0KCmNyZWF0ZWRfYXQYBSAB'
     'KARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAYgASgEUgl1cGRhdGVkQXQSNgoGU3ltYm9sGA'
     'cgASgOMh4udXNlci5UcmFja2VkVHguQ29udHJhY3RTeW1ib2xSBlN5bWJvbBInCgduZXR3b3Jr'
-    'GAogASgOMg0udXNlci5OZXRXb3JrUgduZXR3b3JrIn8KClNvdXJjZVR5cGUSCgoGVW5Lbm93EA'
-    'ASDAoIUmVjaGFyZ2UQARIMCghXaXRoZHJhdxACEggKBFN3YXAQAxIOCgpDcmVhdGVDYXJkEAQS'
-    'EQoNVG9rZW5UcmFuc2ZlchAFEgoKBlJld2FyZBAGEhAKDFRlbGFSZWNoYXJnZRAH');
+    'GAogASgOMg0udXNlci5OZXRXb3JrUgduZXR3b3JrIpABCgpTb3VyY2VUeXBlEgoKBlVuS25vdx'
+    'AAEgwKCFJlY2hhcmdlEAESDAoIV2l0aGRyYXcQAhIICgRTd2FwEAMSDgoKQ3JlYXRlQ2FyZBAE'
+    'Eg8KC0NyZWF0ZVBDYXJkEAgSEQoNVG9rZW5UcmFuc2ZlchAFEgoKBlJld2FyZBAGEhAKDFRlbG'
+    'FSZWNoYXJnZRAH');
 

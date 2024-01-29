@@ -84,6 +84,7 @@ class AccountHistory_SourceType extends $pb.ProtobufEnum {
   static const AccountHistory_SourceType Withdraw = AccountHistory_SourceType._(2, _omitEnumNames ? '' : 'Withdraw');
   static const AccountHistory_SourceType Swap = AccountHistory_SourceType._(3, _omitEnumNames ? '' : 'Swap');
   static const AccountHistory_SourceType CreateCard = AccountHistory_SourceType._(4, _omitEnumNames ? '' : 'CreateCard');
+  static const AccountHistory_SourceType CreatePCard = AccountHistory_SourceType._(8, _omitEnumNames ? '' : 'CreatePCard');
   static const AccountHistory_SourceType TokenTransfer = AccountHistory_SourceType._(5, _omitEnumNames ? '' : 'TokenTransfer');
   static const AccountHistory_SourceType Reward = AccountHistory_SourceType._(6, _omitEnumNames ? '' : 'Reward');
   static const AccountHistory_SourceType TelaRecharge = AccountHistory_SourceType._(7, _omitEnumNames ? '' : 'TelaRecharge');
@@ -94,6 +95,7 @@ class AccountHistory_SourceType extends $pb.ProtobufEnum {
     Withdraw,
     Swap,
     CreateCard,
+    CreatePCard,
     TokenTransfer,
     Reward,
     TelaRecharge,
