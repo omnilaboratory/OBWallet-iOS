@@ -1690,20 +1690,20 @@ class S {
     );
   }
 
-  /// `Apply Real Card`
+  /// `Apply Physical Card`
   String get realCard_title {
     return Intl.message(
-      'Apply Real Card',
+      'Apply Physical Card',
       name: 'realCard_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `There is a ${fee} fee to apply real card. Please top up first.`
+  /// `There is a ${fee} fee to apply physical card. Please top up first.`
   String realCard_fee(Object fee) {
     return Intl.message(
-      'There is a \$$fee fee to apply real card. Please top up first.',
+      'There is a \$$fee fee to apply physical card. Please top up first.',
       name: 'realCard_fee',
       desc: '',
       args: [fee],

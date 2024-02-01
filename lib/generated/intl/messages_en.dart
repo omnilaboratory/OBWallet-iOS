@@ -31,7 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Total Reward: ${totalReward} from ${totalUser} Users";
 
   static String m4(fee) =>
-      "There is a \$${fee} fee to apply real card. Please top up first.";
+      "There is a \$${fee} fee to apply physical card. Please top up first.";
 
   static String m5(fee) => "Fee ${fee}";
 
@@ -275,7 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_tips_uploadImage":
             MessageLookupByLibrary.simpleMessage("Please upload correct image"),
         "realCard_title":
-            MessageLookupByLibrary.simpleMessage("Apply Real Card"),
+            MessageLookupByLibrary.simpleMessage("Apply Physical Card"),
         "receiveWallet_LightningInvoice":
             MessageLookupByLibrary.simpleMessage("Lightning Invoice"),
         "receiveWallet_WalletAddress":

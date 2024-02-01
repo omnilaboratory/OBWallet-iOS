@@ -189,8 +189,8 @@
   "profile_guide_desc4": "USD can withdraw to virtual card.",
   "profile_guide_desc5": "Check your virtual card.",
 
-  "realCard_title": "Apply Real Card",
-  "realCard_fee": "There is a ${fee} fee to apply real card. Please top up first.",
+  "realCard_title": "Apply Physical Card",
+  "realCard_fee": "There is a ${fee} fee to apply physical card. Please top up first.",
   "realCard_status1": "Pending",
   "realCard_status2": "Approved",
   "realCard_status3": "Application Failed",
