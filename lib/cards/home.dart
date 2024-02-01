@@ -22,12 +22,13 @@ class CardHome extends StatefulWidget {
 
 class _CardHomeState extends State<CardHome>
     with SingleTickerProviderStateMixin {
-  var tabNames = [S.current.card_home_Account, S.current.card_home_Card];
+  var tabNames = [S.current.card_home_Account, S.current.card_home_Card, S.current.realCard_card_title];
   var currKycClrIndex = 0;
 
   List<Widget> tabList = [];
   List<Widget> tabViewList = [
     Account(),
+    const CardPart(),
     const CardPart(),
   ];
   late TabController _tabController ;

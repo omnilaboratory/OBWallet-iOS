@@ -36,7 +36,6 @@ class CardPart extends StatefulWidget {
 }
 
 class _CardPartState extends State<CardPart> {
-  bool realCardEnable = false;
 
   var txs = [];
   int currTypeIndex = 0;
@@ -56,7 +55,6 @@ class _CardPartState extends State<CardPart> {
     super.initState();
     _onBalanceRefresh();
     _onListRefresh();
-    updateRealCardBtnStatus();
 
     EthGrpcService.getInstance().ethGetAppConf(context).then((resp) {
       if (resp.code == 1) {
@@ -73,41 +71,13 @@ class _CardPartState extends State<CardPart> {
           _onBalanceRefresh();
         }
       }
-      if (event == "applyRealCard_Finish") {
-        updateRealCardBtnStatus();
-      }
     });
-  }
-
-  updateRealCardBtnStatus() {
-    if (mounted) {
-      realCardEnable = false;
-      CardService.getInstance().getRealCardStatus().then((resp) {
-        if (resp.code == 1) {
-          if (resp.data == 0) {
-          } else if (resp.data == 1) {
-          } else if (resp.data == 2) {
-            realCardEnable = true;
-          } else {
-            realCardEnable = true;
-          }
-        } else {
-          realCardEnable = true;
-        }
-        setState(() {});
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> list = [];
     list.add(const SizedBox(height: 20));
-    if (realCardEnable && (agentCardType == 0 || agentCardType == 2)) {
-      list.add(realCardBtn(context));
-      list.add(const SizedBox(height: 10));
-    }
-
     list.add(CardItem(
         cardItemInfo: CardItemInfo(
             cardNo: CommonService.cardInfo.cardNo,

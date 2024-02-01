@@ -80,7 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "card_card_Payment": MessageLookupByLibrary.simpleMessage("Payment"),
         "card_card_Withdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
         "card_home_Account": MessageLookupByLibrary.simpleMessage("Account"),
-        "card_home_Card": MessageLookupByLibrary.simpleMessage("Card"),
+        "card_home_Card": MessageLookupByLibrary.simpleMessage("Virtual Card"),
         "card_home_title": MessageLookupByLibrary.simpleMessage("Home"),
         "common_Back": MessageLookupByLibrary.simpleMessage("Back"),
         "common_Cancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
@@ -243,6 +243,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please fill in non-Mainland China English address"),
         "realCard_Step3_title":
             MessageLookupByLibrary.simpleMessage("Billing Address"),
+        "realCard_card_title":
+            MessageLookupByLibrary.simpleMessage("Physical Card"),
         "realCard_chinaIdCard":
             MessageLookupByLibrary.simpleMessage("Mainland China ID Card"),
         "realCard_fee": m4,

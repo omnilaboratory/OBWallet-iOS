@@ -98,7 +98,7 @@
 
   "card_home_title": "Home",
   "card_home_Account": "Account",
-  "card_home_Card": "Card",
+  "card_home_Card": "Virtual Card",
   "card_RecentTransactions": "Recent Transactions",
   "card_account_Exchange": "Exchange",
   "card_account_Account": "Account",
@@ -190,6 +190,7 @@
   "profile_guide_desc5": "Check your virtual card.",
 
   "realCard_title": "Apply Physical Card",
+  "realCard_card_title": "Physical Card",
   "realCard_fee": "There is a ${fee} fee to apply physical card. Please top up first.",
   "realCard_status1": "Pending",
   "realCard_status2": "Approved",

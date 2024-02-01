@@ -910,10 +910,10 @@ class S {
     );
   }
 
-  /// `Card`
+  /// `Virtual Card`
   String get card_home_Card {
     return Intl.message(
-      'Card',
+      'Virtual Card',
       name: 'card_home_Card',
       desc: '',
       args: [],
@@ -1695,6 +1695,16 @@ class S {
     return Intl.message(
       'Apply Physical Card',
       name: 'realCard_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Physical Card`
+  String get realCard_card_title {
+    return Intl.message(
+      'Physical Card',
+      name: 'realCard_card_title',
       desc: '',
       args: [],
     );
