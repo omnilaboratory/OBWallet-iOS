@@ -54,8 +54,8 @@ class CardItem extends StatelessWidget {
                               'asset/images/image_virtual_card_bg.png'),
                         ),
                       ),
-                      child: const Text(
-                        'Virtual Card',
+                      child: Text(
+                        this.type==0?'Virtual Card':'Physical Card',
                         style: TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 14,
@@ -140,25 +140,6 @@ class CardItem extends StatelessWidget {
   }
 
   Container buildCardNo() {
-    if (type == 1) {
-      return Container(
-        padding: const EdgeInsets.only(bottom: 100),
-        child: Row(
-          children: [
-            const SizedBox(width: 20),
-            Text(
-              getCardNo(),
-              style: const TextStyle(
-                color: Color(0xFF666666),
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
-            )
-          ],
-        ),
-      );
-    }
-
     return Container(
       padding: const EdgeInsets.only(bottom: 100),
       child: GestureDetector(

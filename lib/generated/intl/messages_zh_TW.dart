@@ -202,6 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_Step3_note":
             MessageLookupByLibrary.simpleMessage("請填寫非中國大陸地區的英文地址"),
         "realCard_Step3_title": MessageLookupByLibrary.simpleMessage("帳單寄送地址"),
+        "realCard_card_bind": MessageLookupByLibrary.simpleMessage("绑定實體卡"),
         "realCard_card_title": MessageLookupByLibrary.simpleMessage("實體卡"),
         "realCard_chinaIdCard": MessageLookupByLibrary.simpleMessage("中國大陸身份證"),
         "realCard_fee": m4,

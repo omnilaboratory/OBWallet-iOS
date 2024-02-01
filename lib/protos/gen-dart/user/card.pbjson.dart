@@ -65,6 +65,7 @@ const CardInfo$json = {
     {'1': 'balance', '3': 5, '4': 1, '5': 1, '10': 'balance'},
     {'1': 'created_at', '3': 6, '4': 1, '5': 4, '10': 'createdAt'},
     {'1': 'updated_at', '3': 7, '4': 1, '5': 4, '10': 'updatedAt'},
+    {'1': 'is_vcard', '3': 8, '4': 1, '5': 8, '10': 'isVcard'},
   ],
 };
 
@@ -75,7 +76,7 @@ final $typed_data.Uint8List cardInfoDescriptor = $convert.base64Decode(
     'CSABKAlSCmV4cGlyeURhdGUSEAoDY3Z2GAogASgJUgNjdnYSFwoHb3Blbl9pZBgLIAEoCVIGb3'
     'BlbklkEhcKB3VzZXJfaWQYBCABKANSBnVzZXJJZBIYCgdiYWxhbmNlGAUgASgBUgdiYWxhbmNl'
     'Eh0KCmNyZWF0ZWRfYXQYBiABKARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAcgASgEUgl1cG'
-    'RhdGVkQXQ=');
+    'RhdGVkQXQSGQoIaXNfdmNhcmQYCCABKAhSB2lzVmNhcmQ=');
 
 @$core.Deprecated('Use listPcardApplyInfoRequestDescriptor instead')
 const ListPcardApplyInfoRequest$json = {
@@ -407,6 +408,34 @@ const CardWithdrawResponse$json = {
 /// Descriptor for `CardWithdrawResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardWithdrawResponseDescriptor = $convert.base64Decode(
     'ChRDYXJkV2l0aGRyYXdSZXNwb25zZQ==');
+
+@$core.Deprecated('Use cardBindRequestDescriptor instead')
+const CardBindRequest$json = {
+  '1': 'CardBindRequest',
+  '2': [
+    {'1': 'cardNo', '3': 1, '4': 1, '5': 9, '10': 'cardNo'},
+    {'1': 'cvv', '3': 2, '4': 1, '5': 9, '10': 'cvv'},
+    {'1': 'cid', '3': 3, '4': 1, '5': 9, '10': 'cid'},
+    {'1': 'firstName', '3': 4, '4': 1, '5': 9, '10': 'firstName'},
+    {'1': 'lastName', '3': 5, '4': 1, '5': 9, '10': 'lastName'},
+    {'1': 'email', '3': 6, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+/// Descriptor for `CardBindRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cardBindRequestDescriptor = $convert.base64Decode(
+    'Cg9DYXJkQmluZFJlcXVlc3QSFgoGY2FyZE5vGAEgASgJUgZjYXJkTm8SEAoDY3Z2GAIgASgJUg'
+    'NjdnYSEAoDY2lkGAMgASgJUgNjaWQSHAoJZmlyc3ROYW1lGAQgASgJUglmaXJzdE5hbWUSGgoI'
+    'bGFzdE5hbWUYBSABKAlSCGxhc3ROYW1lEhQKBWVtYWlsGAYgASgJUgVlbWFpbA==');
+
+@$core.Deprecated('Use cardBindResponseDescriptor instead')
+const CardBindResponse$json = {
+  '1': 'CardBindResponse',
+};
+
+/// Descriptor for `CardBindResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cardBindResponseDescriptor = $convert.base64Decode(
+    'ChBDYXJkQmluZFJlc3BvbnNl');
 
 @$core.Deprecated('Use getWithdrawResAmtRequestDescriptor instead')
 const GetWithdrawResAmtRequest$json = {

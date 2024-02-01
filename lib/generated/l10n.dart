@@ -1710,6 +1710,16 @@ class S {
     );
   }
 
+  /// `Bind Card`
+  String get realCard_card_bind {
+    return Intl.message(
+      'Bind Card',
+      name: 'realCard_card_bind',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `There is a ${fee} fee to apply physical card. Please top up first.`
   String realCard_fee(Object fee) {
     return Intl.message(

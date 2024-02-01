@@ -37,6 +37,7 @@ class CardPhysicalPart extends StatefulWidget {
 
 class _CardPhysicalPartState extends State<CardPhysicalPart> {
   bool realCardEnable = false;
+  bool bindCard = false;
 
   var txs = [];
   int currTypeIndex = 0;
@@ -82,10 +83,13 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   updateRealCardBtnStatus() {
     if (mounted) {
       realCardEnable = false;
+      bindCard = false;
       CardService.getInstance().getRealCardStatus().then((resp) {
         if (resp.code == 1) {
           if (resp.data == 0) {
           } else if (resp.data == 1) {
+            //  bindcard
+            bindCard = true;
           } else if (resp.data == 2) {
             realCardEnable = true;
           } else {
@@ -108,12 +112,20 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       list.add(const SizedBox(height: 10));
     }
 
+    bindCard = true;
+    if (bindCard) {
+      list.add(bindCardBtn(context));
+      list.add(const SizedBox(height: 10));
+    }
+
     list.add(CardItem(
-        cardItemInfo: CardItemInfo(
-            cardNo: CommonService.cardInfo.cardNo,
-            balance: CommonService.cardInfo.balance,
-            exp: CommonService.cardInfo.expiryDate,
-            cvv: CommonService.cardInfo.cvv)));
+      cardItemInfo: CardItemInfo(
+          cardNo: CommonService.cardPhysicalInfo.cardNo,
+          balance: CommonService.cardPhysicalInfo.balance,
+          exp: CommonService.cardPhysicalInfo.expiryDate,
+          cvv: CommonService.cardPhysicalInfo.cvv),
+      type: 1,
+    ));
     list.add(const SizedBox(height: 15));
     if (hasCard) {
       list.add(buildCardDetail(context));
@@ -161,6 +173,24 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
             ),
             child: Center(
                 child: Text(S.of(context).realCard_title,
+                    style:
+                        const TextStyle(fontSize: 18, color: Colors.white)))));
+  }
+
+  InkWell bindCardBtn(BuildContext context) {
+    return InkWell(
+        onTap: () async {},
+        child: Container(
+            width: double.infinity,
+            height: 40,
+            decoration: ShapeDecoration(
+              color: Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
+            ),
+            child: Center(
+                child: Text(S.of(context).realCard_card_bind,
                     style:
                         const TextStyle(fontSize: 18, color: Colors.white)))));
   }

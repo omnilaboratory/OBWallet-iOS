@@ -100,6 +100,7 @@ message UserInfo {
   //passed or pending
   string kyc_status=22;
   uint64 created_at = 24;
+  //虚似卡数量
   uint64 card_count = 27;
   //type=0 为app注册用户；type=1 为商户端自动注册用户；type=2 商户；type=3代理商用户,此类型用户在app端注册后,需要后台手动标记为代理商;  type=1/2的用户，钱包key由服务器管理
   //user with user_type>0 ,this type user's eth wallet is managed by our server

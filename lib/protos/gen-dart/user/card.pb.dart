@@ -208,6 +208,7 @@ class CardInfo extends $pb.GeneratedMessage {
     ..a<$core.double>(5, _omitFieldNames ? '' : 'balance', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'createdAt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(7, _omitFieldNames ? '' : 'updatedAt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOB(8, _omitFieldNames ? '' : 'isVcard')
     ..aOS(9, _omitFieldNames ? '' : 'expiryDate')
     ..aOS(10, _omitFieldNames ? '' : 'cvv')
     ..aOS(11, _omitFieldNames ? '' : 'openId')
@@ -298,30 +299,39 @@ class CardInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearUpdatedAt() => clearField(7);
 
+  @$pb.TagNumber(8)
+  $core.bool get isVcard => $_getBF(7);
+  @$pb.TagNumber(8)
+  set isVcard($core.bool v) { $_setBool(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasIsVcard() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearIsVcard() => clearField(8);
+
   @$pb.TagNumber(9)
-  $core.String get expiryDate => $_getSZ(7);
+  $core.String get expiryDate => $_getSZ(8);
   @$pb.TagNumber(9)
-  set expiryDate($core.String v) { $_setString(7, v); }
+  set expiryDate($core.String v) { $_setString(8, v); }
   @$pb.TagNumber(9)
-  $core.bool hasExpiryDate() => $_has(7);
+  $core.bool hasExpiryDate() => $_has(8);
   @$pb.TagNumber(9)
   void clearExpiryDate() => clearField(9);
 
   @$pb.TagNumber(10)
-  $core.String get cvv => $_getSZ(8);
+  $core.String get cvv => $_getSZ(9);
   @$pb.TagNumber(10)
-  set cvv($core.String v) { $_setString(8, v); }
+  set cvv($core.String v) { $_setString(9, v); }
   @$pb.TagNumber(10)
-  $core.bool hasCvv() => $_has(8);
+  $core.bool hasCvv() => $_has(9);
   @$pb.TagNumber(10)
   void clearCvv() => clearField(10);
 
   @$pb.TagNumber(11)
-  $core.String get openId => $_getSZ(9);
+  $core.String get openId => $_getSZ(10);
   @$pb.TagNumber(11)
-  set openId($core.String v) { $_setString(9, v); }
+  set openId($core.String v) { $_setString(10, v); }
   @$pb.TagNumber(11)
-  $core.bool hasOpenId() => $_has(9);
+  $core.bool hasOpenId() => $_has(10);
   @$pb.TagNumber(11)
   void clearOpenId() => clearField(11);
 }
@@ -1660,6 +1670,130 @@ class CardWithdrawResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CardWithdrawResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardWithdrawResponse>(create);
   static CardWithdrawResponse? _defaultInstance;
+}
+
+class CardBindRequest extends $pb.GeneratedMessage {
+  factory CardBindRequest() => create();
+  CardBindRequest._() : super();
+  factory CardBindRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardBindRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardBindRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'cardNo', protoName: 'cardNo')
+    ..aOS(2, _omitFieldNames ? '' : 'cvv')
+    ..aOS(3, _omitFieldNames ? '' : 'cid')
+    ..aOS(4, _omitFieldNames ? '' : 'firstName', protoName: 'firstName')
+    ..aOS(5, _omitFieldNames ? '' : 'lastName', protoName: 'lastName')
+    ..aOS(6, _omitFieldNames ? '' : 'email')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CardBindRequest clone() => CardBindRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CardBindRequest copyWith(void Function(CardBindRequest) updates) => super.copyWith((message) => updates(message as CardBindRequest)) as CardBindRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CardBindRequest create() => CardBindRequest._();
+  CardBindRequest createEmptyInstance() => create();
+  static $pb.PbList<CardBindRequest> createRepeated() => $pb.PbList<CardBindRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CardBindRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardBindRequest>(create);
+  static CardBindRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get cardNo => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set cardNo($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCardNo() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCardNo() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get cvv => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set cvv($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCvv() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCvv() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get cid => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set cid($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCid() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCid() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get firstName => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set firstName($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasFirstName() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFirstName() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get lastName => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set lastName($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasLastName() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearLastName() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get email => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set email($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasEmail() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearEmail() => clearField(6);
+}
+
+class CardBindResponse extends $pb.GeneratedMessage {
+  factory CardBindResponse() => create();
+  CardBindResponse._() : super();
+  factory CardBindResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardBindResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardBindResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CardBindResponse clone() => CardBindResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CardBindResponse copyWith(void Function(CardBindResponse) updates) => super.copyWith((message) => updates(message as CardBindResponse)) as CardBindResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CardBindResponse create() => CardBindResponse._();
+  CardBindResponse createEmptyInstance() => create();
+  static $pb.PbList<CardBindResponse> createRepeated() => $pb.PbList<CardBindResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CardBindResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardBindResponse>(create);
+  static CardBindResponse? _defaultInstance;
 }
 
 class GetWithdrawResAmtRequest extends $pb.GeneratedMessage {

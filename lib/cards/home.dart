@@ -11,6 +11,8 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 
+import 'card_physical_part.dart';
+
 var kycClr = [Colors.purple, Colors.blue, Colors.green, Colors.red];
 
 class CardHome extends StatefulWidget {
@@ -29,7 +31,7 @@ class _CardHomeState extends State<CardHome>
   List<Widget> tabViewList = [
     Account(),
     const CardPart(),
-    const CardPart(),
+    const CardPhysicalPart(),
   ];
   late TabController _tabController ;
   @override

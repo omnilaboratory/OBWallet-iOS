@@ -41,7 +41,6 @@ class _CardPartState extends State<CardPart> {
   int currTypeIndex = 0;
   int dataStartIndex = 0;
   double createCardFee = 5.0;
-  int agentCardType = -1;
   bool hasCard = CommonService.userInfo!.cardCount > 0;
 
   final RefreshController _refreshListController =
@@ -60,7 +59,6 @@ class _CardPartState extends State<CardPart> {
       if (resp.code == 1) {
         var appConfig = resp.data as AppConfig;
         createCardFee = appConfig.createCardFee;
-        agentCardType = appConfig.agentCardType.toInt();
         setState(() {});
       }
     });
@@ -87,10 +85,6 @@ class _CardPartState extends State<CardPart> {
     list.add(const SizedBox(height: 15));
     if (hasCard) {
       list.add(buildCardDetail(context));
-    } else {
-      if (agentCardType == 0 || agentCardType == 1) {
-        list.add(buildApplyCardPart());
-      }
     }
 
     return SmartRefresher(
