@@ -79,26 +79,26 @@ class _ProfileHomeState extends State<ProfileHome> {
     List<Widget> list = [];
     list.add(buildUserInfo());
     list.add(const SizedBox(height: 40));
-    if (agentCardType == 0 || agentCardType == 2) {
-      list.add(btnBtnItem(Icons.credit_card, S.of(context).realCard_title,
-          subName: realCardStatus, () async {
-        if (realCardEnable) {
-          var resp = await AccountService.getInstance().getAccountInfo(context);
-          if (resp.code == 1) {
-            var accountInfo = resp.data as AccountInfo;
-            if (accountInfo.balance < 50) {
-              alert(S.of(context).realCard_fee(50), context, () {});
-            } else {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RealCardStep1()));
-            }
-          }
-        }
-      }));
-      list.add(const SizedBox(height: 10));
-    }
+    // if (agentCardType == 0 || agentCardType == 2 ) {
+    //   list.add(btnBtnItem(Icons.credit_card, S.of(context).realCard_title,
+    //       subName: realCardStatus, () async {
+    //     if (realCardEnable) {
+    //       var resp = await AccountService.getInstance().getAccountInfo(context);
+    //       if (resp.code == 1) {
+    //         var accountInfo = resp.data as AccountInfo;
+    //         if (accountInfo.balance < 50) {
+    //           alert(S.of(context).realCard_fee(50), context, () {});
+    //         } else {
+    //           Navigator.push(
+    //               context,
+    //               MaterialPageRoute(
+    //                   builder: (context) => const RealCardStep1()));
+    //         }
+    //       }
+    //     }
+    //   }));
+    //   list.add(const SizedBox(height: 10));
+    // }
 
     list.add(btnBtnItem(Icons.insert_invitation_sharp,
         S.of(context).profile_home_InvitationCode, () {

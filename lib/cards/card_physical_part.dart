@@ -4,6 +4,7 @@ import 'package:awallet/bean/card_item_info.dart';
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
+import 'package:awallet/cards/physical_card_bind.dart';
 import 'package:awallet/cards/real_card_step1.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/bottom_button.dart';
@@ -15,12 +16,9 @@ import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
-import 'package:awallet/grpc_services/eth_grpc_service.dart';
-import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
-import 'package:awallet/tools/string_tool.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
@@ -36,15 +34,10 @@ class CardPhysicalPart extends StatefulWidget {
 }
 
 class _CardPhysicalPartState extends State<CardPhysicalPart> {
-  bool realCardEnable = false;
-  bool bindCard = false;
-
   var txs = [];
   int currTypeIndex = 0;
   int dataStartIndex = 0;
-  double createCardFee = 5.0;
-  int agentCardType = -1;
-  bool hasCard = CommonService.userInfo!.cardCount > 0;
+  bool hasCard = CommonService.cardPhysicalInfo.cardNo.isNotEmpty;
 
   final RefreshController _refreshListController =
       RefreshController(initialRefresh: false);
@@ -57,67 +50,20 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     super.initState();
     _onBalanceRefresh();
     _onListRefresh();
-    updateRealCardBtnStatus();
-
-    EthGrpcService.getInstance().ethGetAppConf(context).then((resp) {
-      if (resp.code == 1) {
-        var appConfig = resp.data as AppConfig;
-        createCardFee = appConfig.createCardFee;
-        agentCardType = appConfig.agentCardType.toInt();
-        setState(() {});
-      }
-    });
 
     GlobalParams.eventBus.on().listen((event) {
-      if (event == "applyCard" || event == "updateCardBalance") {
+      if (event == "cardBind_Finish") {
         if (mounted) {
           _onBalanceRefresh();
         }
       }
-      if (event == "applyRealCard_Finish") {
-        updateRealCardBtnStatus();
-      }
     });
-  }
-
-  updateRealCardBtnStatus() {
-    if (mounted) {
-      realCardEnable = false;
-      bindCard = false;
-      CardService.getInstance().getRealCardStatus().then((resp) {
-        if (resp.code == 1) {
-          if (resp.data == 0) {
-          } else if (resp.data == 1) {
-            //  bindcard
-            bindCard = true;
-          } else if (resp.data == 2) {
-            realCardEnable = true;
-          } else {
-            realCardEnable = true;
-          }
-        } else {
-          realCardEnable = true;
-        }
-        setState(() {});
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> list = [];
     list.add(const SizedBox(height: 20));
-    if (realCardEnable && (agentCardType == 0 || agentCardType == 2)) {
-      list.add(realCardBtn(context));
-      list.add(const SizedBox(height: 10));
-    }
-
-    bindCard = true;
-    if (bindCard) {
-      list.add(bindCardBtn(context));
-      list.add(const SizedBox(height: 10));
-    }
-
     list.add(CardItem(
       cardItemInfo: CardItemInfo(
           cardNo: CommonService.cardPhysicalInfo.cardNo,
@@ -130,9 +76,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     if (hasCard) {
       list.add(buildCardDetail(context));
     } else {
-      if (agentCardType == 0 || agentCardType == 1) {
-        list.add(buildApplyCardPart());
-      }
+      list.add(buildBindCardPart());
     }
 
     return SmartRefresher(
@@ -177,38 +121,11 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                         const TextStyle(fontSize: 18, color: Colors.white)))));
   }
 
-  InkWell bindCardBtn(BuildContext context) {
-    return InkWell(
-        onTap: () async {},
-        child: Container(
-            width: double.infinity,
-            height: 40,
-            decoration: ShapeDecoration(
-              color: Colors.blue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6),
-              ),
-            ),
-            child: Center(
-                child: Text(S.of(context).realCard_card_bind,
-                    style:
-                        const TextStyle(fontSize: 18, color: Colors.white)))));
-  }
-
-  Widget buildApplyCardPart() {
+  Widget buildBindCardPart() {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            S.of(context).applyCard_Desc1,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Color(0xFF333333),
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.only(left: 0, top: 17),
             child: Text(
@@ -217,25 +134,16 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                 color: Color(0xFF666666),
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                height: 1.82,
+                height: 2,
               ),
             ),
-          ),
-
-          const SizedBox(height: 20),
-          Text(
-            S
-                .of(context)
-                .applyCard_Desc3(StringTools.formatCurrencyNum(createCardFee)),
-            style: const TextStyle(
-                color: Colors.black54, fontStyle: FontStyle.italic),
           ),
 
           const Spacer(),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             BottomButton(
               icon: 'asset/images/icon_arrow_right_green.png',
-              text: S.of(context).applyCard_ApplyCard.toUpperCase(),
+              text: S.of(context).realCard_card_bind.toUpperCase(),
               onPressed: () {
                 onClickApplyCard();
               },
@@ -320,8 +228,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   void _onBalanceRefresh() async {
     CardService.getInstance().cardInfo(context).then((resp) {
       if (resp.code == 1) {
-        log("cardInfo");
-        hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
+        hasCard = CommonService.cardPhysicalInfo.cardNo.isNotEmpty;
         if (mounted) {
           setState(() {});
         }
@@ -363,39 +270,19 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                   builder: (context) {
                     return Send(
                         type: EnumChargeType.deposit,
-                        cardNo: CommonService.cardInfo.cardNo);
+                        cardNo: CommonService.cardPhysicalInfo.cardNo);
                   });
 
               if (flag != null && flag) {
                 _onBalanceRefresh();
               }
             }),
-        // SquareButton(
-        //     icon: 'asset/images/icon_withdraw.png',
-        //     text: S.of(context).card_card_Withdraw,
-        //     iconWidth: iconWidth,
-        //     onPressed: () async {
-        //       var flag = await showDialog(
-        //           context: context,
-        //           builder: (context) {
-        //             return CardRecharge(
-        //                 amt: '',
-        //                 type: EnumChargeType.withdraw,
-        //                 cardNo: CommonService.cardInfo.cardNo,
-        //                 date: formatCardExpiryDate(),
-        //                 cvc: CommonService.cardInfo.cvv);
-        //           });
-        //
-        //       if (flag != null && flag) {
-        //         _onBalanceRefresh();
-        //       }
-        //     }),
       ],
     );
   }
 
   String formatCardExpiryDate() {
-    String expiryDate = CommonService.cardInfo.expiryDate;
+    String expiryDate = CommonService.cardPhysicalInfo.expiryDate;
     if (expiryDate.isEmpty) {
       expiryDate = "****";
     }
@@ -412,7 +299,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   }
 
   onClickApplyCard() async {
-    if (CommonService.userInfo!.cardCount > 0) {
+    if (CommonService.cardPhysicalInfo.cardNo.isNotEmpty) {
       showToast("You have a card already");
       return;
     }
@@ -424,66 +311,11 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       return;
     }
 
-    if (CommonService.userInfo!.kycStatus != EnumKycStatus.none.value) {
-      AccountService.getInstance().getAccountInfo(context).then((info) {
-        if (info.code == 1) {
-          var accountInfo = info.data as AccountInfo;
-          if (accountInfo.balance < createCardFee) {
-            alert(S.of(context).tips_needFiveDollarFee(createCardFee), context,
-                () {
-              // showDialog(
-              //     context: context,
-              //     builder: (context) {
-              //       return CardDeposit(
-              //         type: "applyCard",
-              //         title: "Deposit",
-              //         amt: createCardFee,
-              //         tokenIds: const [],
-              //         tokenIdValues: const [],
-              //       );
-              //     });
-            });
-          } else {
-            var loading = showLoading(context);
-            CardService.getInstance()
-                .applyCard(context, "USD", isShowToast: false)
-                .then((resp) {
-              if (resp.code == 1) {
-                _onBalanceRefresh();
-              } else {
-                alert(resp.msg, context, () {});
-              }
-              removeLoading(loading);
-            });
-          }
-        }
-      });
-      return;
-    }
-
-    if (CommonService.userInfo!.kycStatus == EnumKycStatus.none.value) {
-      UserService.getInstance().getUserInfo(context).then((resp) async {
-        if (resp.code == 1 && resp.data != null) {
-          if (CommonService.userInfo!.kycStatus == EnumKycStatus.none.value) {
-            var flag = await showDialog(
-                context: context,
-                builder: (context) {
-                  return Kyc(type: "applyCard");
-                });
-            if (flag != null && flag) {
-              _onBalanceRefresh();
-              if (mounted) {
-                setState(() {});
-              }
-            }
-          } else {
-            showKycTips(context);
-          }
-        }
-      });
-    } else {
-      showKycTips(context);
-    }
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const PhysicalCardBind();
+        });
   }
 
   onClickType(int type) {
@@ -501,7 +333,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   }
 
   getOnlineCardExchangeInfoList() {
-    if (CommonService.cardInfo.cardNo.isEmpty) {
+    if (CommonService.cardPhysicalInfo.cardNo.isEmpty) {
       if (_refreshListController.isRefresh) {
         _refreshListController.refreshCompleted();
       }
@@ -514,7 +346,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     CardService.getInstance()
         .cardExchangeInfoList(
             context,
-            CommonService.cardInfo.cardNo,
+            CommonService.cardPhysicalInfo.cardNo,
             Int64.parseInt(dataStartIndex.toString()),
             Int64.parseInt(pageSize.toString()))
         .then((resp) {
@@ -554,7 +386,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   }
 
   getOfflineCardHistoryListFromServer() {
-    if (CommonService.cardInfo.cardNo.isEmpty) {
+    if (CommonService.cardPhysicalInfo.cardNo.isEmpty) {
       if (_refreshListController.isRefresh) {
         _refreshListController.refreshCompleted();
       }
@@ -566,7 +398,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     CardService.getInstance()
         .cardHistory(
             context,
-            CommonService.cardInfo.cardNo,
+            CommonService.cardPhysicalInfo.cardNo,
             Int64.parseInt(dataStartIndex.toString()),
             Int64.parseInt(pageSize.toString()))
         .then((resp) {

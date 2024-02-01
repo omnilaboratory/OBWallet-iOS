@@ -37,7 +37,19 @@ class CardService {
       var resp = await cardServiceClient?.cardList(CardListRequest());
       ret.code = 1;
       if (resp!.items.isNotEmpty) {
-        CommonService.cardInfo = resp.items[0];
+        var items = resp.items;
+        for (int i = 0; i < items.length; i++) {
+          var item = items[i];
+          if (item.isVcard) {
+            if (CommonService.cardInfo.cardNo.isEmpty) {
+              CommonService.cardInfo = item;
+            }
+          } else {
+            if (CommonService.cardPhysicalInfo.cardNo.isEmpty) {
+              CommonService.cardPhysicalInfo = item;
+            }
+          }
+        }
       }
     } catch (e) {
       UserService.getInstance().setError(context, "cardList", e, ret);
@@ -178,6 +190,19 @@ class CardService {
     }
     return ret;
   }
+  Future<GrpcResponse> cardBind(
+      BuildContext context, CardBindRequest req) async {
+    var ret = GrpcResponse();
+    log("$req");
+    try {
+      var resp = await cardServiceClient?.cardBind(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context, "cardBind", e, ret);
+    }
+    return ret;
+  }
 
   Future<GrpcResponse> getRealCardStatus() async {
     var ret = GrpcResponse();
@@ -190,8 +215,7 @@ class CardService {
       } else {
         ret.data = resp.status;
       }
-    } catch (e) {
-    }
+    } catch (e) {}
     return ret;
   }
 }

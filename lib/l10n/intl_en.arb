@@ -221,6 +221,11 @@
   "realCard_Step3_title": "Billing Address", 
   "realCard_Step3_note": "Please fill in non-Mainland China English address",
 
+  "bindCard_title": "Physical Card Bind",
+  "bindCard_cardNo": "Card No",
+  "bindCard_cvv": "cvv",
+  "bindCard_cid": "cid",
+
   "alert_title": "Message",
   "alert_ok": "OK",
   "alert_cancel": "Cancel",

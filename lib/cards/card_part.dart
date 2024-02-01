@@ -4,7 +4,6 @@ import 'package:awallet/bean/card_item_info.dart';
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
-import 'package:awallet/cards/real_card_step1.dart';
 import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/card_item.dart';
@@ -36,12 +35,11 @@ class CardPart extends StatefulWidget {
 }
 
 class _CardPartState extends State<CardPart> {
-
   var txs = [];
   int currTypeIndex = 0;
   int dataStartIndex = 0;
   double createCardFee = 5.0;
-  bool hasCard = CommonService.userInfo!.cardCount > 0;
+  bool hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
 
   final RefreshController _refreshListController =
       RefreshController(initialRefresh: false);
@@ -85,6 +83,8 @@ class _CardPartState extends State<CardPart> {
     list.add(const SizedBox(height: 15));
     if (hasCard) {
       list.add(buildCardDetail(context));
+    } else {
+      list.add(buildApplyCardPart());
     }
 
     return SmartRefresher(
@@ -96,37 +96,6 @@ class _CardPartState extends State<CardPart> {
         ),
       ),
     );
-  }
-
-  InkWell realCardBtn(BuildContext context) {
-    return InkWell(
-        onTap: () async {
-          var resp = await AccountService.getInstance().getAccountInfo(context);
-          if (resp.code == 1) {
-            var accountInfo = resp.data as AccountInfo;
-            if (accountInfo.balance < 50) {
-              alert(S.of(context).realCard_fee(50), context, () {});
-            } else {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RealCardStep1()));
-            }
-          }
-        },
-        child: Container(
-            width: double.infinity,
-            height: 40,
-            decoration: ShapeDecoration(
-              color: Colors.blue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6),
-              ),
-            ),
-            child: Center(
-                child: Text(S.of(context).realCard_title,
-                    style:
-                        const TextStyle(fontSize: 18, color: Colors.white)))));
   }
 
   Widget buildApplyCardPart() {
