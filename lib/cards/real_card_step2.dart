@@ -17,6 +17,7 @@ class _RealCardStep2State extends State<RealCardStep2> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _cityCodeController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
 
@@ -66,6 +67,7 @@ class _RealCardStep2State extends State<RealCardStep2> {
                         applyInfo.shippingAddressType =
                             (selectedShipRegionType2 + 1).toString();
                         applyInfo.mobile = _phoneController.text.trim();
+                        // applyInfo.email = _emailController.text.trim();
                         applyInfo.shippingCity = _cityController.text.trim();
                         applyInfo.postcode = _cityCodeController.text.trim();
                         applyInfo.shippingAddress = _addressController.text.trim();
@@ -101,6 +103,10 @@ class _RealCardStep2State extends State<RealCardStep2> {
             createTextFormField(
                 _phoneController, S.of(context).realCard_Step2_phone,
                 icon: const Icon(Icons.phone), maxLength: 30),
+            const SizedBox(height: 15),
+            createTextFormField(
+                _emailController, S.of(context).common_Email,
+                icon: const Icon(Icons.email), maxLength: 30),
             const SizedBox(height: 15),
             createTextFormField(
                 _cityController, S.of(context).realCard_Step2_city,
