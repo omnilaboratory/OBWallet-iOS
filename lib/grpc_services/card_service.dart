@@ -199,7 +199,7 @@ class CardService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, "cardBind", e, ret);
+      UserService.getInstance().setError(context, "cardBind", e, ret,isShowToast: false);
     }
     return ret;
   }

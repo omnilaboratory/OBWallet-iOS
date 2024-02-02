@@ -304,13 +304,6 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       return;
     }
 
-    // kyc not pass, can not applyCard
-    if (CommonService.userInfo?.kycStatus == '' ||
-        CommonService.userInfo!.kycStatus != EnumKycStatus.passed.value) {
-      showKycTips(context);
-      return;
-    }
-
     showDialog(
         context: context,
         builder: (context) {

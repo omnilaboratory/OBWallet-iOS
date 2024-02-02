@@ -41,7 +41,10 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
     CardService.getInstance().cardBind(context, cardBindRequest).then((resp) {
       if (resp.code == 1) {
         Navigator.pop(context);
+        GlobalParams.eventBus.fire("kyc_state");
         GlobalParams.eventBus.fire("cardBind_Finish");
+      } else {
+        alert(resp.msg, context, () {});
       }
     });
   }
