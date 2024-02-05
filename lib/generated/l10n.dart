@@ -1980,40 +1980,40 @@ class S {
     );
   }
 
-  /// `Physical Card Bind`
+  /// `Bind Physical Card`
   String get bindCard_title {
     return Intl.message(
-      'Physical Card Bind',
+      'Bind Physical Card',
       name: 'bindCard_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Card No`
+  /// `Card Number`
   String get bindCard_cardNo {
     return Intl.message(
-      'Card No',
+      'Card Number',
       name: 'bindCard_cardNo',
       desc: '',
       args: [],
     );
   }
 
-  /// `cvv`
+  /// `CVV`
   String get bindCard_cvv {
     return Intl.message(
-      'cvv',
+      'CVV',
       name: 'bindCard_cvv',
       desc: '',
       args: [],
     );
   }
 
-  /// `cid`
+  /// `CID`
   String get bindCard_cid {
     return Intl.message(
-      'cid',
+      'CID',
       name: 'bindCard_cid',
       desc: '',
       args: [],

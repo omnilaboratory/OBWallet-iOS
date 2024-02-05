@@ -221,6 +221,11 @@
   "realCard_Step3_title": "帳單寄送地址",  
   "realCard_Step3_note": "請填寫非中國大陸地區的英文地址",
 
+  "bindCard_title": "綁定實體卡",
+  "bindCard_cardNo": "卡號",
+  "bindCard_cvv": "CVV",
+  "bindCard_cid": "CID",
+
   "alert_title": "消息",
   "alert_ok": "確定", 
   "alert_cancel": "取消",

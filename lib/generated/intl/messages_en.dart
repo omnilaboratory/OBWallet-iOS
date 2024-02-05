@@ -65,11 +65,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Apply Virtual Card"),
         "applyCard_VirtualCard":
             MessageLookupByLibrary.simpleMessage("Virtual Card"),
-        "bindCard_cardNo": MessageLookupByLibrary.simpleMessage("Card No"),
-        "bindCard_cid": MessageLookupByLibrary.simpleMessage("cid"),
-        "bindCard_cvv": MessageLookupByLibrary.simpleMessage("cvv"),
+        "bindCard_cardNo": MessageLookupByLibrary.simpleMessage("Card Number"),
+        "bindCard_cid": MessageLookupByLibrary.simpleMessage("CID"),
+        "bindCard_cvv": MessageLookupByLibrary.simpleMessage("CVV"),
         "bindCard_title":
-            MessageLookupByLibrary.simpleMessage("Physical Card Bind"),
+            MessageLookupByLibrary.simpleMessage("Bind Physical Card"),
         "cardActivity_tile":
             MessageLookupByLibrary.simpleMessage("Card Activity"),
         "cardRecharge_title":
