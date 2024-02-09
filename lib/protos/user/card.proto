@@ -21,17 +21,28 @@ service CardService{
   rpc CardWithdraw(CardWithdrawRequest) returns (CardWithdrawResponse) {}
   //绑定实体卡
   rpc CardBind(CardBindRequest) returns (CardBindResponse) {}
+  //获取实体卡邮箱激活码
+  rpc GetCardActivateCode(GetCardActivateCodeRequest) returns (GetCardActivateCodeResponse) {}
+  //激活实体卡
+  rpc CardActivate(CardActivateRequest) returns (CardActivateResponse) {}
   //获取卡提现应得金额
   rpc GetWithdrawResAmt(GetWithdrawResAmtRequest) returns (GetWithdrawResAmtResponse) {}
   //账号充值
   rpc CardRecharge(CardRechargeRequest) returns (CardRechargeResponse) {}
   //从第三方商户购买nft
   rpc BuyNftForPay(BuyNftForPayRequest) returns (BuyNftForPayResponse) {}
+
   //修改实体卡申请信息
-  rpc UpdatePcardApplyInfo(PcardApplyInfo) returns (PcardApplyInfo) {}
+//  rpc UpdatePcardApplyInfo(PcardApplyInfo) returns (PcardApplyInfo) {}
+  //申请实体卡: 每次提交kyc2信息,都会申请一张实体卡.
+  //doc :https://apifox.com/apidoc/shared-63556276-242e-4fee-b799-c5a35723dfcb/api-146975823
+//  rpc KYC2(Kyc2Info) returns (PcardApplyInfo) {}  //获取最后一次提交的kyc2信息
+//  rpc GetLastKYC2Info(GetLastKYC2InfoRequest) returns (Kyc2Info) {}
+
   //获取实体卡申请信息
-  rpc GetPcardApplyInfo(GetPcardApplyInfoRequest) returns (PcardApplyInfo) {}
-  rpc ListPcardApplyInfo(ListPcardApplyInfoRequest) returns (ListPcardApplyInfoResponse) {}
+//  rpc GetPcardApplyInfo(GetPcardApplyInfoRequest) returns (PcardApplyInfo) {}
+//  rpc ListPcardApplyInfo(ListPcardApplyInfoRequest) returns (ListPcardApplyInfoResponse) {}
+
   //上传图片
   rpc UserUpload(UserUploadRequest) returns (UserUploadResponse) {}
 }
@@ -75,6 +86,8 @@ message CardInfo {
   uint64 updated_at = 7;
   //是否是虚拟卡
   bool is_vcard=8;
+  //实体卡状态: 0 待激活 1 已激活
+  int64 pcard_status=12;
 }
 
 message ListPcardApplyInfoRequest {
@@ -93,11 +106,75 @@ message UserUploadRequest {
 message UserUploadResponse {
     string file_url=3;
 }
+message GetLastKYC2InfoRequest{
+}
+message Kyc2Info{
+  int64 id=27;
+//  ///客户id, 账号用的email, 服务端系统填充用户注册邮箱
+//  string cid = 13;
+
+  ///证件类型，1:身份证 2:护照
+  string idType = 1;
+  ///证件编号
+  string idNo = 2;
+  ///证件反面文件url
+  string idBackFile = 3;
+  ///证件正面文件url
+  string idFrontFile = 4;
+  ///姓
+  string firstName = 5;
+  ///名
+  string lastName = 6;
+  ///出生年月日，格式：yyyy-MM-dd
+  string dob = 7;
+  ///性别，M=男，F=女
+  string gender = 8;
+  ///地址类型，家庭地址0，公司地址1
+  string addressType = 9;
+  ///婚姻状况，0未婚、1已婚、2离婚、3丧偶、4其他
+  string marState = 10;
+  ///卡预留手机号区号
+  string areaCode = 11;
+  ///卡预留手机号，实体卡邮寄联系方式，可作为实体卡用户账号accountNo字段
+  string cardPhone = 12;
+  ///卡预留邮箱，激活接收验证码的邮箱 服务端系统填充用户注册邮箱
+//  string cardEmail = 14;
+
+  ///邮政编码
+  string postalCode = 15;
+  ///城市
+  string city = 16;
+  ///详细地址，完整的地址
+  string address = 17;
+
+  ///账单地址选项，0机构所在地址、1自定义地址
+//  string billAddressOption = 19;
+//  ///账单地址，完整的地址，billAddressOption为1时，必填
+//  string billAddress = 20;
+//  ///账单城市，billAddressOption为1时，必填
+//  string billCity = 21;
+//  ///账单邮政编码，billAddressOption为1时，必填
+//  string billPostalCode = 22;
+
+  //  0提交 1通过 2拒绝
+  int64 status = 23;
+  //拒绝原因
+  string error_msg = 24;
+  //    通过后的卡号.
+  string card_no = 25;
+  //    通过后的open_id.
+  string open_id = 29;
+  //    申请时间,服务端填充
+  int64 created_at = 26;
+  //用户id, 服务端填充
+  int64 user_id=28;
+}
 
 message GetPcardApplyInfoRequest {
 
 }
-//    Physical card
+
+//    Physical card 申请表单
 message PcardApplyInfo {
   //database id: user id
   int64 id = 1;
@@ -156,8 +233,10 @@ message PcardApplyInfo {
 }
 
 message ApplyCardRequest {
-// default USD
-  CurrencyCode currency=2;
+  // default USD
+  CurrencyCode currency = 2;
+  //是否是虚拟卡,默认false开虚拟卡
+  bool isRealCard  = 3;
 }
 message ApplyCardResponse {
 }
@@ -244,18 +323,41 @@ message CardWithdrawRequest {
 }
 message CardWithdrawResponse {
 }
+
+//doc: https://apifox.com/apidoc/shared-63556276-242e-4fee-b799-c5a35723dfcb/api-146977549
+message GetCardActivateCodeRequest {
+  string  cardNo = 1;
+}
+message GetCardActivateCodeResponse {
+}
+
+// doc: https://apifox.com/apidoc/shared-63556276-242e-4fee-b799-c5a35723dfcb/api-146978557
+message CardActivateRequest {
+  string  cardNo = 1;
+//手机验证码(暂不用提供)
+  string  codeToken=2;
+//邮箱验证码
+  string  verifyCode=3;
+}
+message CardActivateResponse {
+}
+
+
 //doc https://apifox.com/apidoc/shared-63556276-242e-4fee-b799-c5a35723dfcb/api-146093744
 message CardBindRequest {
   string  cardNo = 1;
-  string cvv = 2;
-  //身份证；可由kyc信息IdNum填充,用户可修改
+//  string cvv = 2;
+
+  //身份证；如果有kyc信息,可由kyc信息IdNum填充,用户可修改
   string cid = 3;
-  //firstName 可由kyc信息firstName填充,用户可修改
+  //firstName 如果有kyc信息,可由kyc信息firstName填充,用户可修改
   string  firstName = 4;
-  //lastName 可由kyc信息lastName填充,用户可修改
+  //lastName 如果有kyc信息,可由kyc信息lastName填充,用户可修改
   string  lastName = 5;
   //email 可由用户信息email填充,用户可修改
   string  email = 6;
+  // 申请卡的手机号
+  string mobile=7;
 
   //  "openId": "string"
 }

@@ -66,6 +66,7 @@ const CardInfo$json = {
     {'1': 'created_at', '3': 6, '4': 1, '5': 4, '10': 'createdAt'},
     {'1': 'updated_at', '3': 7, '4': 1, '5': 4, '10': 'updatedAt'},
     {'1': 'is_vcard', '3': 8, '4': 1, '5': 8, '10': 'isVcard'},
+    {'1': 'pcard_status', '3': 12, '4': 1, '5': 3, '10': 'pcardStatus'},
   ],
 };
 
@@ -76,7 +77,8 @@ final $typed_data.Uint8List cardInfoDescriptor = $convert.base64Decode(
     'CSABKAlSCmV4cGlyeURhdGUSEAoDY3Z2GAogASgJUgNjdnYSFwoHb3Blbl9pZBgLIAEoCVIGb3'
     'BlbklkEhcKB3VzZXJfaWQYBCABKANSBnVzZXJJZBIYCgdiYWxhbmNlGAUgASgBUgdiYWxhbmNl'
     'Eh0KCmNyZWF0ZWRfYXQYBiABKARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAcgASgEUgl1cG'
-    'RhdGVkQXQSGQoIaXNfdmNhcmQYCCABKAhSB2lzVmNhcmQ=');
+    'RhdGVkQXQSGQoIaXNfdmNhcmQYCCABKAhSB2lzVmNhcmQSIQoMcGNhcmRfc3RhdHVzGAwgASgD'
+    'UgtwY2FyZFN0YXR1cw==');
 
 @$core.Deprecated('Use listPcardApplyInfoRequestDescriptor instead')
 const ListPcardApplyInfoRequest$json = {
@@ -128,6 +130,58 @@ const UserUploadResponse$json = {
 /// Descriptor for `UserUploadResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userUploadResponseDescriptor = $convert.base64Decode(
     'ChJVc2VyVXBsb2FkUmVzcG9uc2USGQoIZmlsZV91cmwYAyABKAlSB2ZpbGVVcmw=');
+
+@$core.Deprecated('Use getLastKYC2InfoRequestDescriptor instead')
+const GetLastKYC2InfoRequest$json = {
+  '1': 'GetLastKYC2InfoRequest',
+};
+
+/// Descriptor for `GetLastKYC2InfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getLastKYC2InfoRequestDescriptor = $convert.base64Decode(
+    'ChZHZXRMYXN0S1lDMkluZm9SZXF1ZXN0');
+
+@$core.Deprecated('Use kyc2InfoDescriptor instead')
+const Kyc2Info$json = {
+  '1': 'Kyc2Info',
+  '2': [
+    {'1': 'id', '3': 27, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'idType', '3': 1, '4': 1, '5': 9, '10': 'idType'},
+    {'1': 'idNo', '3': 2, '4': 1, '5': 9, '10': 'idNo'},
+    {'1': 'idBackFile', '3': 3, '4': 1, '5': 9, '10': 'idBackFile'},
+    {'1': 'idFrontFile', '3': 4, '4': 1, '5': 9, '10': 'idFrontFile'},
+    {'1': 'firstName', '3': 5, '4': 1, '5': 9, '10': 'firstName'},
+    {'1': 'lastName', '3': 6, '4': 1, '5': 9, '10': 'lastName'},
+    {'1': 'dob', '3': 7, '4': 1, '5': 9, '10': 'dob'},
+    {'1': 'gender', '3': 8, '4': 1, '5': 9, '10': 'gender'},
+    {'1': 'addressType', '3': 9, '4': 1, '5': 9, '10': 'addressType'},
+    {'1': 'marState', '3': 10, '4': 1, '5': 9, '10': 'marState'},
+    {'1': 'areaCode', '3': 11, '4': 1, '5': 9, '10': 'areaCode'},
+    {'1': 'cardPhone', '3': 12, '4': 1, '5': 9, '10': 'cardPhone'},
+    {'1': 'postalCode', '3': 15, '4': 1, '5': 9, '10': 'postalCode'},
+    {'1': 'city', '3': 16, '4': 1, '5': 9, '10': 'city'},
+    {'1': 'address', '3': 17, '4': 1, '5': 9, '10': 'address'},
+    {'1': 'status', '3': 23, '4': 1, '5': 3, '10': 'status'},
+    {'1': 'error_msg', '3': 24, '4': 1, '5': 9, '10': 'errorMsg'},
+    {'1': 'card_no', '3': 25, '4': 1, '5': 9, '10': 'cardNo'},
+    {'1': 'open_id', '3': 29, '4': 1, '5': 9, '10': 'openId'},
+    {'1': 'created_at', '3': 26, '4': 1, '5': 3, '10': 'createdAt'},
+    {'1': 'user_id', '3': 28, '4': 1, '5': 3, '10': 'userId'},
+  ],
+};
+
+/// Descriptor for `Kyc2Info`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List kyc2InfoDescriptor = $convert.base64Decode(
+    'CghLeWMySW5mbxIOCgJpZBgbIAEoA1ICaWQSFgoGaWRUeXBlGAEgASgJUgZpZFR5cGUSEgoEaW'
+    'RObxgCIAEoCVIEaWRObxIeCgppZEJhY2tGaWxlGAMgASgJUgppZEJhY2tGaWxlEiAKC2lkRnJv'
+    'bnRGaWxlGAQgASgJUgtpZEZyb250RmlsZRIcCglmaXJzdE5hbWUYBSABKAlSCWZpcnN0TmFtZR'
+    'IaCghsYXN0TmFtZRgGIAEoCVIIbGFzdE5hbWUSEAoDZG9iGAcgASgJUgNkb2ISFgoGZ2VuZGVy'
+    'GAggASgJUgZnZW5kZXISIAoLYWRkcmVzc1R5cGUYCSABKAlSC2FkZHJlc3NUeXBlEhoKCG1hcl'
+    'N0YXRlGAogASgJUghtYXJTdGF0ZRIaCghhcmVhQ29kZRgLIAEoCVIIYXJlYUNvZGUSHAoJY2Fy'
+    'ZFBob25lGAwgASgJUgljYXJkUGhvbmUSHgoKcG9zdGFsQ29kZRgPIAEoCVIKcG9zdGFsQ29kZR'
+    'ISCgRjaXR5GBAgASgJUgRjaXR5EhgKB2FkZHJlc3MYESABKAlSB2FkZHJlc3MSFgoGc3RhdHVz'
+    'GBcgASgDUgZzdGF0dXMSGwoJZXJyb3JfbXNnGBggASgJUghlcnJvck1zZxIXCgdjYXJkX25vGB'
+    'kgASgJUgZjYXJkTm8SFwoHb3Blbl9pZBgdIAEoCVIGb3BlbklkEh0KCmNyZWF0ZWRfYXQYGiAB'
+    'KANSCWNyZWF0ZWRBdBIXCgd1c2VyX2lkGBwgASgDUgZ1c2VySWQ=');
 
 @$core.Deprecated('Use getPcardApplyInfoRequestDescriptor instead')
 const GetPcardApplyInfoRequest$json = {
@@ -195,13 +249,14 @@ const ApplyCardRequest$json = {
   '1': 'ApplyCardRequest',
   '2': [
     {'1': 'currency', '3': 2, '4': 1, '5': 14, '6': '.user.CurrencyCode', '10': 'currency'},
+    {'1': 'isRealCard', '3': 3, '4': 1, '5': 8, '10': 'isRealCard'},
   ],
 };
 
 /// Descriptor for `ApplyCardRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List applyCardRequestDescriptor = $convert.base64Decode(
     'ChBBcHBseUNhcmRSZXF1ZXN0Ei4KCGN1cnJlbmN5GAIgASgOMhIudXNlci5DdXJyZW5jeUNvZG'
-    'VSCGN1cnJlbmN5');
+    'VSCGN1cnJlbmN5Eh4KCmlzUmVhbENhcmQYAyABKAhSCmlzUmVhbENhcmQ=');
 
 @$core.Deprecated('Use applyCardResponseDescriptor instead')
 const ApplyCardResponse$json = {
@@ -409,24 +464,69 @@ const CardWithdrawResponse$json = {
 final $typed_data.Uint8List cardWithdrawResponseDescriptor = $convert.base64Decode(
     'ChRDYXJkV2l0aGRyYXdSZXNwb25zZQ==');
 
+@$core.Deprecated('Use getCardActivateCodeRequestDescriptor instead')
+const GetCardActivateCodeRequest$json = {
+  '1': 'GetCardActivateCodeRequest',
+  '2': [
+    {'1': 'cardNo', '3': 1, '4': 1, '5': 9, '10': 'cardNo'},
+  ],
+};
+
+/// Descriptor for `GetCardActivateCodeRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getCardActivateCodeRequestDescriptor = $convert.base64Decode(
+    'ChpHZXRDYXJkQWN0aXZhdGVDb2RlUmVxdWVzdBIWCgZjYXJkTm8YASABKAlSBmNhcmRObw==');
+
+@$core.Deprecated('Use getCardActivateCodeResponseDescriptor instead')
+const GetCardActivateCodeResponse$json = {
+  '1': 'GetCardActivateCodeResponse',
+};
+
+/// Descriptor for `GetCardActivateCodeResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getCardActivateCodeResponseDescriptor = $convert.base64Decode(
+    'ChtHZXRDYXJkQWN0aXZhdGVDb2RlUmVzcG9uc2U=');
+
+@$core.Deprecated('Use cardActivateRequestDescriptor instead')
+const CardActivateRequest$json = {
+  '1': 'CardActivateRequest',
+  '2': [
+    {'1': 'cardNo', '3': 1, '4': 1, '5': 9, '10': 'cardNo'},
+    {'1': 'codeToken', '3': 2, '4': 1, '5': 9, '10': 'codeToken'},
+    {'1': 'verifyCode', '3': 3, '4': 1, '5': 9, '10': 'verifyCode'},
+  ],
+};
+
+/// Descriptor for `CardActivateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cardActivateRequestDescriptor = $convert.base64Decode(
+    'ChNDYXJkQWN0aXZhdGVSZXF1ZXN0EhYKBmNhcmRObxgBIAEoCVIGY2FyZE5vEhwKCWNvZGVUb2'
+    'tlbhgCIAEoCVIJY29kZVRva2VuEh4KCnZlcmlmeUNvZGUYAyABKAlSCnZlcmlmeUNvZGU=');
+
+@$core.Deprecated('Use cardActivateResponseDescriptor instead')
+const CardActivateResponse$json = {
+  '1': 'CardActivateResponse',
+};
+
+/// Descriptor for `CardActivateResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cardActivateResponseDescriptor = $convert.base64Decode(
+    'ChRDYXJkQWN0aXZhdGVSZXNwb25zZQ==');
+
 @$core.Deprecated('Use cardBindRequestDescriptor instead')
 const CardBindRequest$json = {
   '1': 'CardBindRequest',
   '2': [
     {'1': 'cardNo', '3': 1, '4': 1, '5': 9, '10': 'cardNo'},
-    {'1': 'cvv', '3': 2, '4': 1, '5': 9, '10': 'cvv'},
     {'1': 'cid', '3': 3, '4': 1, '5': 9, '10': 'cid'},
     {'1': 'firstName', '3': 4, '4': 1, '5': 9, '10': 'firstName'},
     {'1': 'lastName', '3': 5, '4': 1, '5': 9, '10': 'lastName'},
     {'1': 'email', '3': 6, '4': 1, '5': 9, '10': 'email'},
+    {'1': 'mobile', '3': 7, '4': 1, '5': 9, '10': 'mobile'},
   ],
 };
 
 /// Descriptor for `CardBindRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardBindRequestDescriptor = $convert.base64Decode(
-    'Cg9DYXJkQmluZFJlcXVlc3QSFgoGY2FyZE5vGAEgASgJUgZjYXJkTm8SEAoDY3Z2GAIgASgJUg'
-    'NjdnYSEAoDY2lkGAMgASgJUgNjaWQSHAoJZmlyc3ROYW1lGAQgASgJUglmaXJzdE5hbWUSGgoI'
-    'bGFzdE5hbWUYBSABKAlSCGxhc3ROYW1lEhQKBWVtYWlsGAYgASgJUgVlbWFpbA==');
+    'Cg9DYXJkQmluZFJlcXVlc3QSFgoGY2FyZE5vGAEgASgJUgZjYXJkTm8SEAoDY2lkGAMgASgJUg'
+    'NjaWQSHAoJZmlyc3ROYW1lGAQgASgJUglmaXJzdE5hbWUSGgoIbGFzdE5hbWUYBSABKAlSCGxh'
+    'c3ROYW1lEhQKBWVtYWlsGAYgASgJUgVlbWFpbBIWCgZtb2JpbGUYByABKAlSBm1vYmlsZQ==');
 
 @$core.Deprecated('Use cardBindResponseDescriptor instead')
 const CardBindResponse$json = {

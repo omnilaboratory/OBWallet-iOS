@@ -20,7 +20,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _cardNoController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _cvvController = TextEditingController();
+  final TextEditingController _mobileController = TextEditingController();
   final TextEditingController _cidController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -34,7 +34,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
     CardBindRequest cardBindRequest = CardBindRequest();
     cardBindRequest.cardNo = _cardNoController.text.trim();
     cardBindRequest.email = _emailController.text.trim();
-    cardBindRequest.cvv = _cvvController.text.trim();
+    cardBindRequest.mobile = _mobileController.text.trim();
     cardBindRequest.cid = _cidController.text.trim();
     cardBindRequest.firstName = _firstNameController.text.trim();
     cardBindRequest.lastName = _lastNameController.text.trim();
@@ -128,8 +128,8 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
                       icon: const Icon(Icons.add_card_outlined), maxLength: 30),
                   const SizedBox(height: 10),
                   createTextFormField(
-                      _cvvController, S.of(context).bindCard_cvv,
-                      icon: const Icon(Icons.av_timer_sharp), maxLength: 6),
+                      _mobileController, S.of(context).bindCard_mobile,
+                      icon: const Icon(Icons.av_timer_sharp), maxLength: 20),
                 ],
               ),
             ),

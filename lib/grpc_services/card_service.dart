@@ -182,9 +182,9 @@ class CardService {
     var ret = GrpcResponse();
     log("$req");
     try {
-      var resp = await cardServiceClient?.updatePcardApplyInfo(req);
+      // var resp = await cardServiceClient?.kYc(req);
       ret.code = 1;
-      ret.data = resp;
+      // ret.data = resp;
     } catch (e) {
       UserService.getInstance().setError(context, "applyRealCard", e, ret);
     }
@@ -207,14 +207,15 @@ class CardService {
   Future<GrpcResponse> getRealCardStatus() async {
     var ret = GrpcResponse();
     try {
-      var resp = await cardServiceClient
-          ?.getPcardApplyInfo(GetPcardApplyInfoRequest()) as PcardApplyInfo;
+      // var resp = await cardServiceClient
+      //     ?.getPcardApplyInfo(GetPcardApplyInfoRequest()) as PcardApplyInfo;
       ret.code = 1;
-      if (resp.createdAt == 0) {
-        ret.data = -1;
-      } else {
-        ret.data = resp.status;
-      }
+      // if (resp.createdAt == 0) {
+      //   ret.data = -1;
+      // } else {
+      //   ret.data = resp.status;
+      // }
+      ret.data = -1;
     } catch (e) {}
     return ret;
   }

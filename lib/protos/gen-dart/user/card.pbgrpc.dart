@@ -53,6 +53,14 @@ class CardServiceClient extends $grpc.Client {
       '/user.CardService/CardBind',
       ($1.CardBindRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.CardBindResponse.fromBuffer(value));
+  static final _$getCardActivateCode = $grpc.ClientMethod<$1.GetCardActivateCodeRequest, $1.GetCardActivateCodeResponse>(
+      '/user.CardService/GetCardActivateCode',
+      ($1.GetCardActivateCodeRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.GetCardActivateCodeResponse.fromBuffer(value));
+  static final _$cardActivate = $grpc.ClientMethod<$1.CardActivateRequest, $1.CardActivateResponse>(
+      '/user.CardService/CardActivate',
+      ($1.CardActivateRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.CardActivateResponse.fromBuffer(value));
   static final _$getWithdrawResAmt = $grpc.ClientMethod<$1.GetWithdrawResAmtRequest, $1.GetWithdrawResAmtResponse>(
       '/user.CardService/GetWithdrawResAmt',
       ($1.GetWithdrawResAmtRequest value) => value.writeToBuffer(),
@@ -65,18 +73,6 @@ class CardServiceClient extends $grpc.Client {
       '/user.CardService/BuyNftForPay',
       ($1.BuyNftForPayRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.BuyNftForPayResponse.fromBuffer(value));
-  static final _$updatePcardApplyInfo = $grpc.ClientMethod<$1.PcardApplyInfo, $1.PcardApplyInfo>(
-      '/user.CardService/UpdatePcardApplyInfo',
-      ($1.PcardApplyInfo value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $1.PcardApplyInfo.fromBuffer(value));
-  static final _$getPcardApplyInfo = $grpc.ClientMethod<$1.GetPcardApplyInfoRequest, $1.PcardApplyInfo>(
-      '/user.CardService/GetPcardApplyInfo',
-      ($1.GetPcardApplyInfoRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $1.PcardApplyInfo.fromBuffer(value));
-  static final _$listPcardApplyInfo = $grpc.ClientMethod<$1.ListPcardApplyInfoRequest, $1.ListPcardApplyInfoResponse>(
-      '/user.CardService/ListPcardApplyInfo',
-      ($1.ListPcardApplyInfoRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $1.ListPcardApplyInfoResponse.fromBuffer(value));
   static final _$userUpload = $grpc.ClientMethod<$1.UserUploadRequest, $1.UserUploadResponse>(
       '/user.CardService/UserUpload',
       ($1.UserUploadRequest value) => value.writeToBuffer(),
@@ -120,6 +116,14 @@ class CardServiceClient extends $grpc.Client {
     return $createUnaryCall(_$cardBind, request, options: options);
   }
 
+  $grpc.ResponseFuture<$1.GetCardActivateCodeResponse> getCardActivateCode($1.GetCardActivateCodeRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getCardActivateCode, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.CardActivateResponse> cardActivate($1.CardActivateRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$cardActivate, request, options: options);
+  }
+
   $grpc.ResponseFuture<$1.GetWithdrawResAmtResponse> getWithdrawResAmt($1.GetWithdrawResAmtRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getWithdrawResAmt, request, options: options);
   }
@@ -130,18 +134,6 @@ class CardServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$1.BuyNftForPayResponse> buyNftForPay($1.BuyNftForPayRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$buyNftForPay, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$1.PcardApplyInfo> updatePcardApplyInfo($1.PcardApplyInfo request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$updatePcardApplyInfo, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$1.PcardApplyInfo> getPcardApplyInfo($1.GetPcardApplyInfoRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$getPcardApplyInfo, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$1.ListPcardApplyInfoResponse> listPcardApplyInfo($1.ListPcardApplyInfoRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$listPcardApplyInfo, request, options: options);
   }
 
   $grpc.ResponseFuture<$1.UserUploadResponse> userUpload($1.UserUploadRequest request, {$grpc.CallOptions? options}) {
@@ -210,6 +202,20 @@ abstract class CardServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.CardBindRequest.fromBuffer(value),
         ($1.CardBindResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.GetCardActivateCodeRequest, $1.GetCardActivateCodeResponse>(
+        'GetCardActivateCode',
+        getCardActivateCode_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.GetCardActivateCodeRequest.fromBuffer(value),
+        ($1.GetCardActivateCodeResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.CardActivateRequest, $1.CardActivateResponse>(
+        'CardActivate',
+        cardActivate_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.CardActivateRequest.fromBuffer(value),
+        ($1.CardActivateResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.GetWithdrawResAmtRequest, $1.GetWithdrawResAmtResponse>(
         'GetWithdrawResAmt',
         getWithdrawResAmt_Pre,
@@ -231,27 +237,6 @@ abstract class CardServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.BuyNftForPayRequest.fromBuffer(value),
         ($1.BuyNftForPayResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.PcardApplyInfo, $1.PcardApplyInfo>(
-        'UpdatePcardApplyInfo',
-        updatePcardApplyInfo_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $1.PcardApplyInfo.fromBuffer(value),
-        ($1.PcardApplyInfo value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.GetPcardApplyInfoRequest, $1.PcardApplyInfo>(
-        'GetPcardApplyInfo',
-        getPcardApplyInfo_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $1.GetPcardApplyInfoRequest.fromBuffer(value),
-        ($1.PcardApplyInfo value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.ListPcardApplyInfoRequest, $1.ListPcardApplyInfoResponse>(
-        'ListPcardApplyInfo',
-        listPcardApplyInfo_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $1.ListPcardApplyInfoRequest.fromBuffer(value),
-        ($1.ListPcardApplyInfoResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.UserUploadRequest, $1.UserUploadResponse>(
         'UserUpload',
         userUpload_Pre,
@@ -293,6 +278,14 @@ abstract class CardServiceBase extends $grpc.Service {
     return cardBind(call, await request);
   }
 
+  $async.Future<$1.GetCardActivateCodeResponse> getCardActivateCode_Pre($grpc.ServiceCall call, $async.Future<$1.GetCardActivateCodeRequest> request) async {
+    return getCardActivateCode(call, await request);
+  }
+
+  $async.Future<$1.CardActivateResponse> cardActivate_Pre($grpc.ServiceCall call, $async.Future<$1.CardActivateRequest> request) async {
+    return cardActivate(call, await request);
+  }
+
   $async.Future<$1.GetWithdrawResAmtResponse> getWithdrawResAmt_Pre($grpc.ServiceCall call, $async.Future<$1.GetWithdrawResAmtRequest> request) async {
     return getWithdrawResAmt(call, await request);
   }
@@ -303,18 +296,6 @@ abstract class CardServiceBase extends $grpc.Service {
 
   $async.Future<$1.BuyNftForPayResponse> buyNftForPay_Pre($grpc.ServiceCall call, $async.Future<$1.BuyNftForPayRequest> request) async {
     return buyNftForPay(call, await request);
-  }
-
-  $async.Future<$1.PcardApplyInfo> updatePcardApplyInfo_Pre($grpc.ServiceCall call, $async.Future<$1.PcardApplyInfo> request) async {
-    return updatePcardApplyInfo(call, await request);
-  }
-
-  $async.Future<$1.PcardApplyInfo> getPcardApplyInfo_Pre($grpc.ServiceCall call, $async.Future<$1.GetPcardApplyInfoRequest> request) async {
-    return getPcardApplyInfo(call, await request);
-  }
-
-  $async.Future<$1.ListPcardApplyInfoResponse> listPcardApplyInfo_Pre($grpc.ServiceCall call, $async.Future<$1.ListPcardApplyInfoRequest> request) async {
-    return listPcardApplyInfo(call, await request);
   }
 
   $async.Future<$1.UserUploadResponse> userUpload_Pre($grpc.ServiceCall call, $async.Future<$1.UserUploadRequest> request) async {
@@ -329,11 +310,10 @@ abstract class CardServiceBase extends $grpc.Service {
   $async.Future<$1.CardListResponse> cardList($grpc.ServiceCall call, $1.CardListRequest request);
   $async.Future<$1.CardWithdrawResponse> cardWithdraw($grpc.ServiceCall call, $1.CardWithdrawRequest request);
   $async.Future<$1.CardBindResponse> cardBind($grpc.ServiceCall call, $1.CardBindRequest request);
+  $async.Future<$1.GetCardActivateCodeResponse> getCardActivateCode($grpc.ServiceCall call, $1.GetCardActivateCodeRequest request);
+  $async.Future<$1.CardActivateResponse> cardActivate($grpc.ServiceCall call, $1.CardActivateRequest request);
   $async.Future<$1.GetWithdrawResAmtResponse> getWithdrawResAmt($grpc.ServiceCall call, $1.GetWithdrawResAmtRequest request);
   $async.Future<$1.CardRechargeResponse> cardRecharge($grpc.ServiceCall call, $1.CardRechargeRequest request);
   $async.Future<$1.BuyNftForPayResponse> buyNftForPay($grpc.ServiceCall call, $1.BuyNftForPayRequest request);
-  $async.Future<$1.PcardApplyInfo> updatePcardApplyInfo($grpc.ServiceCall call, $1.PcardApplyInfo request);
-  $async.Future<$1.PcardApplyInfo> getPcardApplyInfo($grpc.ServiceCall call, $1.GetPcardApplyInfoRequest request);
-  $async.Future<$1.ListPcardApplyInfoResponse> listPcardApplyInfo($grpc.ServiceCall call, $1.ListPcardApplyInfoRequest request);
   $async.Future<$1.UserUploadResponse> userUpload($grpc.ServiceCall call, $1.UserUploadRequest request);
 }

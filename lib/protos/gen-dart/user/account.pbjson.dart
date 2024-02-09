@@ -216,6 +216,7 @@ const AccountInfo$json = {
     {'1': 'balance', '3': 5, '4': 1, '5': 1, '10': 'balance'},
     {'1': 'balance_type', '3': 8, '4': 1, '5': 9, '10': 'balanceType'},
     {'1': 'locked_usd', '3': 7, '4': 1, '5': 1, '10': 'lockedUsd'},
+    {'1': 'locked_type', '3': 10, '4': 1, '5': 3, '10': 'lockedType'},
     {'1': 'updated_at', '3': 9, '4': 1, '5': 3, '10': 'updatedAt'},
     {'1': 'created_at', '3': 6, '4': 1, '5': 3, '10': 'createdAt'},
   ],
@@ -225,8 +226,9 @@ const AccountInfo$json = {
 final $typed_data.Uint8List accountInfoDescriptor = $convert.base64Decode(
     'CgtBY2NvdW50SW5mbxIOCgJpZBgBIAEoA1ICaWQSFwoHdXNlcl9pZBgCIAEoA1IGdXNlcklkEh'
     'gKB2JhbGFuY2UYBSABKAFSB2JhbGFuY2USIQoMYmFsYW5jZV90eXBlGAggASgJUgtiYWxhbmNl'
-    'VHlwZRIdCgpsb2NrZWRfdXNkGAcgASgBUglsb2NrZWRVc2QSHQoKdXBkYXRlZF9hdBgJIAEoA1'
-    'IJdXBkYXRlZEF0Eh0KCmNyZWF0ZWRfYXQYBiABKANSCWNyZWF0ZWRBdA==');
+    'VHlwZRIdCgpsb2NrZWRfdXNkGAcgASgBUglsb2NrZWRVc2QSHwoLbG9ja2VkX3R5cGUYCiABKA'
+    'NSCmxvY2tlZFR5cGUSHQoKdXBkYXRlZF9hdBgJIAEoA1IJdXBkYXRlZEF0Eh0KCmNyZWF0ZWRf'
+    'YXQYBiABKANSCWNyZWF0ZWRBdA==');
 
 @$core.Deprecated('Use accountOnchainBalanceHistoryDescriptor instead')
 const AccountOnchainBalanceHistory$json = {

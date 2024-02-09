@@ -87,10 +87,15 @@ const UserInfo$json = {
     {'1': 'city', '3': 16, '4': 1, '5': 9, '10': 'city'},
     {'1': 'state', '3': 17, '4': 1, '5': 9, '10': 'state'},
     {'1': 'post_code', '3': 18, '4': 1, '5': 9, '10': 'postCode'},
-    {'1': 'updated_at', '3': 19, '4': 1, '5': 4, '10': 'updatedAt'},
+    {'1': 'areaCode', '3': 36, '4': 1, '5': 9, '10': 'areaCode'},
+    {'1': 'marState', '3': 39, '4': 1, '5': 9, '10': 'marState'},
+    {'1': 'addressType', '3': 40, '4': 1, '5': 9, '10': 'addressType'},
+    {'1': 'gender', '3': 41, '4': 1, '5': 9, '10': 'gender'},
+    {'1': 'idType', '3': 42, '4': 1, '5': 9, '10': 'idType'},
     {'1': 'kycinfo_ok', '3': 20, '4': 1, '5': 8, '10': 'kycinfoOk'},
     {'1': 'open_id', '3': 21, '4': 1, '5': 9, '10': 'openId'},
     {'1': 'kyc_status', '3': 22, '4': 1, '5': 9, '10': 'kycStatus'},
+    {'1': 'updated_at', '3': 19, '4': 1, '5': 4, '10': 'updatedAt'},
     {'1': 'created_at', '3': 24, '4': 1, '5': 4, '10': 'createdAt'},
     {'1': 'card_count', '3': 27, '4': 1, '5': 4, '10': 'cardCount'},
     {'1': 'user_type', '3': 28, '4': 1, '5': 3, '10': 'userType'},
@@ -118,15 +123,17 @@ final $typed_data.Uint8List userInfoDescriptor = $convert.base64Decode(
     'FtZRIWCgZtb2JpbGUYDCABKAlSBm1vYmlsZRIQCgNkb2IYDSABKAlSA2RvYhIaCghhZGRyZXNz'
     'MRgOIAEoCVIIYWRkcmVzczESGgoIYWRkcmVzczIYDyABKAlSCGFkZHJlc3MyEhIKBGNpdHkYEC'
     'ABKAlSBGNpdHkSFAoFc3RhdGUYESABKAlSBXN0YXRlEhsKCXBvc3RfY29kZRgSIAEoCVIIcG9z'
-    'dENvZGUSHQoKdXBkYXRlZF9hdBgTIAEoBFIJdXBkYXRlZEF0Eh0KCmt5Y2luZm9fb2sYFCABKA'
-    'hSCWt5Y2luZm9PaxIXCgdvcGVuX2lkGBUgASgJUgZvcGVuSWQSHQoKa3ljX3N0YXR1cxgWIAEo'
-    'CVIJa3ljU3RhdHVzEh0KCmNyZWF0ZWRfYXQYGCABKARSCWNyZWF0ZWRBdBIdCgpjYXJkX2NvdW'
-    '50GBsgASgEUgljYXJkQ291bnQSGwoJdXNlcl90eXBlGBwgASgDUgh1c2VyVHlwZRIoChBpc19h'
-    'Z2VudF9jaGFubmVsGCEgASgIUg5pc0FnZW50Q2hhbm5lbBIZCghtdXNlcl9pZBgdIAEoA1IHbX'
-    'VzZXJJZBInCg9pbnZpdGF0aW9uX2NvZGUYHiABKAlSDmludml0YXRpb25Db2RlEh8KC3JlZ2lz'
-    'dF9jb2RlGB8gASgJUgpyZWdpc3RDb2RlEisKEWludml0YXRpb25fdXNlcmlkGCAgASgDUhBpbn'
-    'ZpdGF0aW9uVXNlcmlkEh0KCnJlZl91c2VyaWQYIiABKANSCXJlZlVzZXJpZBIaCghsYW5ndWFn'
-    'ZRgjIAEoCVIIbGFuZ3VhZ2U=');
+    'dENvZGUSGgoIYXJlYUNvZGUYJCABKAlSCGFyZWFDb2RlEhoKCG1hclN0YXRlGCcgASgJUghtYX'
+    'JTdGF0ZRIgCgthZGRyZXNzVHlwZRgoIAEoCVILYWRkcmVzc1R5cGUSFgoGZ2VuZGVyGCkgASgJ'
+    'UgZnZW5kZXISFgoGaWRUeXBlGCogASgJUgZpZFR5cGUSHQoKa3ljaW5mb19vaxgUIAEoCFIJa3'
+    'ljaW5mb09rEhcKB29wZW5faWQYFSABKAlSBm9wZW5JZBIdCgpreWNfc3RhdHVzGBYgASgJUglr'
+    'eWNTdGF0dXMSHQoKdXBkYXRlZF9hdBgTIAEoBFIJdXBkYXRlZEF0Eh0KCmNyZWF0ZWRfYXQYGC'
+    'ABKARSCWNyZWF0ZWRBdBIdCgpjYXJkX2NvdW50GBsgASgEUgljYXJkQ291bnQSGwoJdXNlcl90'
+    'eXBlGBwgASgDUgh1c2VyVHlwZRIoChBpc19hZ2VudF9jaGFubmVsGCEgASgIUg5pc0FnZW50Q2'
+    'hhbm5lbBIZCghtdXNlcl9pZBgdIAEoA1IHbXVzZXJJZBInCg9pbnZpdGF0aW9uX2NvZGUYHiAB'
+    'KAlSDmludml0YXRpb25Db2RlEh8KC3JlZ2lzdF9jb2RlGB8gASgJUgpyZWdpc3RDb2RlEisKEW'
+    'ludml0YXRpb25fdXNlcmlkGCAgASgDUhBpbnZpdGF0aW9uVXNlcmlkEh0KCnJlZl91c2VyaWQY'
+    'IiABKANSCXJlZlVzZXJpZBIaCghsYW5ndWFnZRgjIAEoCVIIbGFuZ3VhZ2U=');
 
 @$core.Deprecated('Use signUpRequestDescriptor instead')
 const SignUpRequest$json = {

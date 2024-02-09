@@ -240,8 +240,13 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOB(33, _omitFieldNames ? '' : 'isAgentChannel')
     ..aInt64(34, _omitFieldNames ? '' : 'refUserid')
     ..aOS(35, _omitFieldNames ? '' : 'language')
+    ..aOS(36, _omitFieldNames ? '' : 'areaCode', protoName: 'areaCode')
     ..aOS(37, _omitFieldNames ? '' : 'walletAddress')
     ..aOS(38, _omitFieldNames ? '' : 'tronAddress')
+    ..aOS(39, _omitFieldNames ? '' : 'marState', protoName: 'marState')
+    ..aOS(40, _omitFieldNames ? '' : 'addressType', protoName: 'addressType')
+    ..aOS(41, _omitFieldNames ? '' : 'gender')
+    ..aOS(42, _omitFieldNames ? '' : 'idType', protoName: 'idType')
     ..hasRequiredFields = false
   ;
 
@@ -581,23 +586,68 @@ class UserInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(35)
   void clearLanguage() => clearField(35);
 
+  @$pb.TagNumber(36)
+  $core.String get areaCode => $_getSZ(35);
+  @$pb.TagNumber(36)
+  set areaCode($core.String v) { $_setString(35, v); }
+  @$pb.TagNumber(36)
+  $core.bool hasAreaCode() => $_has(35);
+  @$pb.TagNumber(36)
+  void clearAreaCode() => clearField(36);
+
   @$pb.TagNumber(37)
-  $core.String get walletAddress => $_getSZ(35);
+  $core.String get walletAddress => $_getSZ(36);
   @$pb.TagNumber(37)
-  set walletAddress($core.String v) { $_setString(35, v); }
+  set walletAddress($core.String v) { $_setString(36, v); }
   @$pb.TagNumber(37)
-  $core.bool hasWalletAddress() => $_has(35);
+  $core.bool hasWalletAddress() => $_has(36);
   @$pb.TagNumber(37)
   void clearWalletAddress() => clearField(37);
 
   @$pb.TagNumber(38)
-  $core.String get tronAddress => $_getSZ(36);
+  $core.String get tronAddress => $_getSZ(37);
   @$pb.TagNumber(38)
-  set tronAddress($core.String v) { $_setString(36, v); }
+  set tronAddress($core.String v) { $_setString(37, v); }
   @$pb.TagNumber(38)
-  $core.bool hasTronAddress() => $_has(36);
+  $core.bool hasTronAddress() => $_has(37);
   @$pb.TagNumber(38)
   void clearTronAddress() => clearField(38);
+
+  @$pb.TagNumber(39)
+  $core.String get marState => $_getSZ(38);
+  @$pb.TagNumber(39)
+  set marState($core.String v) { $_setString(38, v); }
+  @$pb.TagNumber(39)
+  $core.bool hasMarState() => $_has(38);
+  @$pb.TagNumber(39)
+  void clearMarState() => clearField(39);
+
+  @$pb.TagNumber(40)
+  $core.String get addressType => $_getSZ(39);
+  @$pb.TagNumber(40)
+  set addressType($core.String v) { $_setString(39, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasAddressType() => $_has(39);
+  @$pb.TagNumber(40)
+  void clearAddressType() => clearField(40);
+
+  @$pb.TagNumber(41)
+  $core.String get gender => $_getSZ(40);
+  @$pb.TagNumber(41)
+  set gender($core.String v) { $_setString(40, v); }
+  @$pb.TagNumber(41)
+  $core.bool hasGender() => $_has(40);
+  @$pb.TagNumber(41)
+  void clearGender() => clearField(41);
+
+  @$pb.TagNumber(42)
+  $core.String get idType => $_getSZ(41);
+  @$pb.TagNumber(42)
+  set idType($core.String v) { $_setString(41, v); }
+  @$pb.TagNumber(42)
+  $core.bool hasIdType() => $_has(41);
+  @$pb.TagNumber(42)
+  void clearIdType() => clearField(42);
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {

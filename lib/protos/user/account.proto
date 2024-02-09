@@ -121,6 +121,8 @@ message AccountInfo{
   //余额类型:USD USDT USDC
   string balance_type=8;
   double locked_usd=7;
+  // 开虚拟卡1 开实卡2
+  int64 locked_type=10;
   int64 updated_at=9;
   int64 created_at=6;
 

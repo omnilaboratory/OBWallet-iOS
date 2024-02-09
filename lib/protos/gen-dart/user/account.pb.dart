@@ -629,6 +629,7 @@ class AccountInfo extends $pb.GeneratedMessage {
     ..a<$core.double>(7, _omitFieldNames ? '' : 'lockedUsd', $pb.PbFieldType.OD)
     ..aOS(8, _omitFieldNames ? '' : 'balanceType')
     ..aInt64(9, _omitFieldNames ? '' : 'updatedAt')
+    ..aInt64(10, _omitFieldNames ? '' : 'lockedType')
     ..hasRequiredFields = false
   ;
 
@@ -715,6 +716,15 @@ class AccountInfo extends $pb.GeneratedMessage {
   $core.bool hasUpdatedAt() => $_has(6);
   @$pb.TagNumber(9)
   void clearUpdatedAt() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get lockedType => $_getI64(7);
+  @$pb.TagNumber(10)
+  set lockedType($fixnum.Int64 v) { $_setInt64(7, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasLockedType() => $_has(7);
+  @$pb.TagNumber(10)
+  void clearLockedType() => clearField(10);
 }
 
 class AccountOnchainBalanceHistory extends $pb.GeneratedMessage {

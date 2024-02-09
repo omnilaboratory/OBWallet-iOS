@@ -223,7 +223,7 @@
 
   "bindCard_title": "綁定實體卡",
   "bindCard_cardNo": "卡號",
-  "bindCard_cvv": "CVV",
+  "bindCard_mobile": "手机号",
   "bindCard_cid": "CID",
 
   "alert_title": "消息",

@@ -223,7 +223,7 @@
 
   "bindCard_title": "Bind Physical Card",
   "bindCard_cardNo": "Card Number",
-  "bindCard_cvv": "CVV",
+  "bindCard_mobile": "Phone",
   "bindCard_cid": "CID",
 
   "alert_title": "Message",

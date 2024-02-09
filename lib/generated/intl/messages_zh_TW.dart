@@ -60,7 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "applyCard_VirtualCard": MessageLookupByLibrary.simpleMessage("虛擬卡片"),
         "bindCard_cardNo": MessageLookupByLibrary.simpleMessage("卡號"),
         "bindCard_cid": MessageLookupByLibrary.simpleMessage("CID"),
-        "bindCard_cvv": MessageLookupByLibrary.simpleMessage("CVV"),
+        "bindCard_mobile": MessageLookupByLibrary.simpleMessage("手机号"),
         "bindCard_title": MessageLookupByLibrary.simpleMessage("綁定實體卡"),
         "cardActivity_tile": MessageLookupByLibrary.simpleMessage("卡活動"),
         "cardRecharge_title": MessageLookupByLibrary.simpleMessage("支付NFT"),

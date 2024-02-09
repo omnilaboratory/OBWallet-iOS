@@ -2000,11 +2000,11 @@ class S {
     );
   }
 
-  /// `CVV`
-  String get bindCard_cvv {
+  /// `Phone`
+  String get bindCard_mobile {
     return Intl.message(
-      'CVV',
-      name: 'bindCard_cvv',
+      'Phone',
+      name: 'bindCard_mobile',
       desc: '',
       args: [],
     );

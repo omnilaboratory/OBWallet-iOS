@@ -70,6 +70,7 @@ message UserInfo {
   //Deprecated: client wallet  address
   string eth_address=25;
   string btc_address=26;
+
   // kyc info
   CountryCode country_code = 5;
   CurrencyCode currency=23;
@@ -94,11 +95,24 @@ message UserInfo {
   string state = 17;
   string post_code = 18;
 
-  uint64 updated_at = 19;
+  //卡预留手机号区号
+  string areaCode = 36;
+  //婚姻状况，0未婚、1已婚、2离婚、3丧偶、4其他
+  string marState = 39;
+  //地址类型，家庭地址0，公司地址1
+  string addressType = 40;
+  //性别，M=男，F=女
+  string gender = 41;
+  //证件类型，1:身份证 2:护照
+  string idType =  42;
+
+
   bool kycinfo_ok =20;
   string open_id=21;
   //passed or pending
   string kyc_status=22;
+
+  uint64 updated_at = 19;
   uint64 created_at = 24;
   //虚似卡数量
   uint64 card_count = 27;
