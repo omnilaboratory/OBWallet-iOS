@@ -2000,10 +2000,10 @@ class S {
     );
   }
 
-  /// `Phone`
+  /// `Phone Number`
   String get bindCard_mobile {
     return Intl.message(
-      'Phone',
+      'Phone Number',
       name: 'bindCard_mobile',
       desc: '',
       args: [],

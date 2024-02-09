@@ -129,7 +129,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
                   const SizedBox(height: 10),
                   createTextFormField(
                       _mobileController, S.of(context).bindCard_mobile,
-                      icon: const Icon(Icons.av_timer_sharp), maxLength: 20),
+                      icon: const Icon(Icons.phone), maxLength: 20),
                 ],
               ),
             ),

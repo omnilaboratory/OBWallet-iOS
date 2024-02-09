@@ -67,7 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Virtual Card"),
         "bindCard_cardNo": MessageLookupByLibrary.simpleMessage("Card Number"),
         "bindCard_cid": MessageLookupByLibrary.simpleMessage("CID"),
-        "bindCard_mobile": MessageLookupByLibrary.simpleMessage("Phone"),
+        "bindCard_mobile": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "bindCard_title":
             MessageLookupByLibrary.simpleMessage("Bind Physical Card"),
         "cardActivity_tile":
