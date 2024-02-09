@@ -138,7 +138,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
                 icon: const Icon(Icons.email), maxLength: 30),
             const SizedBox(height: 10),
             createTextFormField(_cidController, S.of(context).bindCard_cid,
-                icon: const Icon(Icons.perm_identity_outlined), maxLength: 6),
+                icon: const Icon(Icons.perm_identity_outlined), maxLength: 30),
             const SizedBox(height: 10),
             createTextFormField(
                 _firstNameController, S.of(context).realCard_firstName,
