@@ -79,7 +79,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     width: size.width * 0.85,
-                    height: size.height * 0.8,
+                    height: size.height * 0.7,
                     child: Column(children: [
                       const SizedBox(height: 25),
                       createDialogTitle(S.of(context).bindCard_title),
