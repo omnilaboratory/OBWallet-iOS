@@ -21,7 +21,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
   final TextEditingController _cardNoController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _mobileController = TextEditingController();
-  final TextEditingController _cidController = TextEditingController();
+  // final TextEditingController _cidController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
 
@@ -35,7 +35,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
     cardBindRequest.cardNo = _cardNoController.text.trim();
     cardBindRequest.email = _emailController.text.trim();
     cardBindRequest.mobile = _mobileController.text.trim();
-    cardBindRequest.cid = _cidController.text.trim();
+    // cardBindRequest.cid = _cidController.text.trim();
     cardBindRequest.firstName = _firstNameController.text.trim();
     cardBindRequest.lastName = _lastNameController.text.trim();
     CardService.getInstance().cardBind(context, cardBindRequest).then((resp) {
@@ -136,9 +136,6 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
             const SizedBox(height: 10),
             createTextFormField(_emailController, S.of(context).common_Email,
                 icon: const Icon(Icons.email), maxLength: 30),
-            const SizedBox(height: 10),
-            createTextFormField(_cidController, S.of(context).bindCard_cid,
-                icon: const Icon(Icons.perm_identity_outlined), maxLength: 30),
             const SizedBox(height: 10),
             createTextFormField(
                 _firstNameController, S.of(context).realCard_firstName,
