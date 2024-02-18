@@ -88,7 +88,7 @@ class _KycState extends State<Kyc> {
 
   @override
   Widget build(BuildContext context) {
-    if(dateOfBirthTips.isEmpty){
+    if (dateOfBirthTips.isEmpty) {
       dateOfBirthTips = S.of(context).kyc_dateOfBirth;
     }
     var size = MediaQuery.of(context).size;
@@ -147,24 +147,29 @@ class _KycState extends State<Kyc> {
                                         ),
                                       ),
                                     ]),
-                                const SizedBox(height: 16),
-                                createTextFormField(
-                                    _socialIdController, S.of(context).kyc_IdentityId,
+                                buildCardType(),
+                                const SizedBox(height: 6),
+                                createTextFormField(_socialIdController,
+                                    S.of(context).kyc_IdentityId,
                                     maxLength: 30,
                                     icon: const Icon(Icons.credit_card)),
                                 Row(
                                   children: [
                                     Expanded(
                                         child: createTextFormField(
-                                            _firstNameController, S.of(context).kyc_FirstName,
+                                            _firstNameController,
+                                            S.of(context).kyc_FirstName,
                                             maxLength: 20)),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
-                                            _lastNameController, S.of(context).kyc_LastName,
+                                            _lastNameController,
+                                            S.of(context).kyc_LastName,
                                             maxLength: 20)),
                                   ],
                                 ),
+                                buildGender(),
+                                buildMarry(),
                                 const SizedBox(height: 16),
                                 Row(
                                   children: [
@@ -249,9 +254,9 @@ class _KycState extends State<Kyc> {
                                     ],
                                   ),
                                 ),
-                                const SizedBox(height: 16),
-                                createTextFormField(
-                                    _address1Controller, S.of(context).kyc_AddressLine),
+                                buildAddressType(),
+                                createTextFormField(_address1Controller,
+                                    S.of(context).kyc_AddressLine),
                                 const SizedBox(height: 16),
                                 createTextFormField(_address2Controller,
                                     S.of(context).kyc_AddressLine2,
@@ -261,11 +266,13 @@ class _KycState extends State<Kyc> {
                                   children: [
                                     Expanded(
                                         child: createTextFormField(
-                                            _stateController, S.of(context).kyc_StateRegion)),
+                                            _stateController,
+                                            S.of(context).kyc_StateRegion)),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
-                                            _cityController, S.of(context).kyc_City)),
+                                            _cityController,
+                                            S.of(context).kyc_City)),
                                   ],
                                 ),
                                 const SizedBox(height: 16),
@@ -370,10 +377,16 @@ class _KycState extends State<Kyc> {
         var userInfo = userInfoResp.data as GetUserInfoResponse;
         CommonService.userInfo = userInfo.user;
         UserInfo info = userInfo.user;
+        info.idType = (selectedCardType + 1).toString();
+        info.marState = selectedMarry.toString();
+        info.gender = selectedGender == 0 ? "M" : "F";
+        info.addressType = selectedAddressType.toString();
+
         info.socialId = _socialIdController.value.text.trim();
         info.idNum = info.socialId;
         info.firstName = _firstNameController.value.text.trim();
         info.lastName = _lastNameController.value.text.trim();
+        info.areaCode = selectedPhoneCountry!.phoneCode;
         info.mobile = selectedPhoneCountry!.phoneCode +
             _mobileNumberController.value.text.trim();
         info.dob = dateOfBirthTips;
@@ -410,9 +423,164 @@ class _KycState extends State<Kyc> {
               });
             }
           }
-          entry.remove();
+          removeLoading(entry);
         });
       }
     });
+  }
+
+  late int selectedCardType = 0;
+  late int selectedGender = 0;
+  late int selectedMarry = 0;
+  late int selectedAddressType = 0;
+
+  Widget buildCardType() {
+    return SizedBox(
+      // height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Flexible(
+            child: RadioListTile<int>(
+              value: 0,
+              title: AutoSizeText(
+                S.of(context).realCard_chinaIdCard,
+                maxLines: 2,
+                minFontSize: 10,
+                maxFontSize: 16,
+              ),
+              groupValue: selectedCardType,
+              onChanged: (value) {
+                setState(() {
+                  selectedCardType = value!;
+                });
+              },
+            ),
+          ),
+          Flexible(
+            child: RadioListTile<int>(
+              value: 1,
+              title: AutoSizeText(
+                S.of(context).realCard_otherIdCard,
+                maxLines: 2,
+                minFontSize: 8,
+                maxFontSize: 16,
+              ),
+              groupValue: selectedCardType,
+              onChanged: (value) {
+                setState(() {
+                  selectedCardType = value!;
+                });
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildGender() {
+    return Row(
+      children: <Widget>[
+        Flexible(
+          child: RadioListTile<int>(
+            value: 0,
+            title: Text(S.of(context).realCard_gender_male,
+                style: const TextStyle(fontSize: 12)),
+            contentPadding: EdgeInsets.zero,
+            groupValue: selectedGender,
+            onChanged: (value) {
+              setState(() {
+                selectedGender = value!;
+              });
+            },
+          ),
+        ),
+        Flexible(
+          child: RadioListTile<int>(
+            value: 1,
+            title: Text(S.of(context).realCard_gender_female,
+                style: const TextStyle(fontSize: 12)),
+            contentPadding: EdgeInsets.zero,
+            groupValue: selectedGender,
+            onChanged: (value) {
+              setState(() {
+                selectedGender = value!;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildMarry() {
+    return Row(
+      children: <Widget>[
+        Flexible(
+          child: RadioListTile<int>(
+            value: 0,
+            title: Text(S.of(context).realCard_marry_no,
+                style: const TextStyle(fontSize: 12)),
+            groupValue: selectedMarry,
+            contentPadding: EdgeInsets.zero,
+            onChanged: (value) {
+              setState(() {
+                selectedMarry = value!;
+              });
+            },
+          ),
+        ),
+        Flexible(
+          child: RadioListTile<int>(
+            value: 1,
+            title: Text(S.of(context).realCard_marry_yes,
+                style: const TextStyle(fontSize: 12)),
+            groupValue: selectedMarry,
+            contentPadding: EdgeInsets.zero,
+            onChanged: (value) {
+              setState(() {
+                selectedMarry = value!;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildAddressType() {
+    return Row(
+      children: <Widget>[
+        Flexible(
+          child: RadioListTile<int>(
+            value: 0,
+            title: Text(S.of(context).realCard_shipAddress_home,
+                style: const TextStyle(fontSize: 12)),
+            groupValue: selectedAddressType,
+            contentPadding: EdgeInsets.zero,
+            onChanged: (value) {
+              setState(() {
+                selectedAddressType = value!;
+              });
+            },
+          ),
+        ),
+        Flexible(
+          child: RadioListTile<int>(
+            value: 1,
+            title: Text(S.of(context).realCard_shipAddress_company,
+                style: const TextStyle(fontSize: 12)),
+            groupValue: selectedAddressType,
+            contentPadding: EdgeInsets.zero,
+            onChanged: (value) {
+              setState(() {
+                selectedAddressType = value!;
+              });
+            },
+          ),
+        ),
+      ],
+    );
   }
 }
