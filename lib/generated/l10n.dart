@@ -2500,6 +2500,16 @@ class S {
     );
   }
 
+  /// `Are you sure you want to logout？`
+  String get tips_logout {
+    return Intl.message(
+      'Are you sure you want to logout？',
+      name: 'tips_logout',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Will get ${amount} and fee is ${fee}.`
   String tips_WithdrawResult(Object amount, Object fee) {
     return Intl.message(

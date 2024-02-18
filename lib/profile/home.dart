@@ -1,8 +1,6 @@
-import 'package:awallet/cards/real_card_step1.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
-import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/eth_grpc_service.dart';
@@ -152,11 +150,13 @@ class _ProfileHomeState extends State<ProfileHome> {
     list.add(const SizedBox(height: 10));
     list.add(btnBtnItem(
         Icons.logout_outlined, S.of(context).profile_home_Logout, () {
-      LocalStorage.remove(LocalStorage.userToken);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const Login()),
-      );
+      alert(S.of(context).tips_logout, context, () {
+        LocalStorage.remove(LocalStorage.userToken);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const Login()),
+        );
+      }, showCancel: true);
     }));
 
     return Scaffold(

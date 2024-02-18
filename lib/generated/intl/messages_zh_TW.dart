@@ -311,6 +311,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tips_kycPending": MessageLookupByLibrary.simpleMessage("認證正在處理中。"),
         "tips_kycRejected":
             MessageLookupByLibrary.simpleMessage("認證被拒絕,請重新提交。"),
+        "tips_logout": MessageLookupByLibrary.simpleMessage("確定要登出嗎？"),
         "tips_maxAmount": MessageLookupByLibrary.simpleMessage("金額不能超過最大值。"),
         "tips_maxAmount1": MessageLookupByLibrary.simpleMessage("從金額不能超過最大值。"),
         "tips_needFiveDollarFee": m9,

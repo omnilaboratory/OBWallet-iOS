@@ -388,6 +388,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("KYC is pending."),
         "tips_kycRejected": MessageLookupByLibrary.simpleMessage(
             "KYC is rejected and please do it again."),
+        "tips_logout": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to logout？"),
         "tips_maxAmount": MessageLookupByLibrary.simpleMessage(
             "The amount cannot exceed the maximum."),
         "tips_maxAmount1": MessageLookupByLibrary.simpleMessage(
