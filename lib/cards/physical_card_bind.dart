@@ -31,6 +31,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
       return;
     }
 
+    var loading = showLoading(context);
     CardBindRequest cardBindRequest = CardBindRequest();
     cardBindRequest.cardNo = _cardNoController.text.trim();
     cardBindRequest.email = _emailController.text.trim();
@@ -39,6 +40,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
     cardBindRequest.firstName = _firstNameController.text.trim();
     cardBindRequest.lastName = _lastNameController.text.trim();
     CardService.getInstance().cardBind(context, cardBindRequest).then((resp) {
+      removeLoading(loading);
       if (resp.code == 1) {
         Navigator.pop(context);
         GlobalParams.eventBus.fire("kyc_state");
