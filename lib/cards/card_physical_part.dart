@@ -63,7 +63,11 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   @override
   Widget build(BuildContext context) {
     List<Widget> list = [];
-    list.add(const SizedBox(height: 20));
+    list.add(const SizedBox(height: 10));
+    if (hasCard) {
+      list.add(buildBindAndApplyBtns(context));
+      list.add(const SizedBox(height: 10));
+    }
     list.add(CardItem(
       cardItemInfo: CardItemInfo(
           cardNo: CommonService.cardPhysicalInfo.cardNo,
@@ -90,21 +94,56 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     );
   }
 
+  Row buildBindAndApplyBtns(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        InkWell(
+          onTap: () {
+            onClickBindCard();
+          },
+          child: Container(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 2, horizontal: 30),
+              decoration: BoxDecoration(
+                color: Colors.black12,
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+              child: Text(S.of(context).realCard_card_bind)),
+        ),
+        InkWell(
+          onTap: () {
+            onClickApplyCard();
+          },
+          child: Container(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 2, horizontal: 30),
+              decoration: BoxDecoration(
+                color: Colors.black12,
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+              child: Text(S.of(context).realCard_apply)),
+        ),
+      ],
+    );
+  }
+
   InkWell realCardBtn(BuildContext context) {
     return InkWell(
-        onTap: () async {
-          var resp = await AccountService.getInstance().getAccountInfo(context);
-          if (resp.code == 1) {
-            var accountInfo = resp.data as AccountInfo;
-            if (accountInfo.balance < 50) {
-              alert(S.of(context).realCard_fee(50), context, () {});
-            } else {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RealCardStep1()));
+        onTap: () {
+          AccountService.getInstance().getAccountInfo(context).then((resp)  {
+            if (resp.code == 1) {
+              var accountInfo = resp.data as AccountInfo;
+              if (accountInfo.balance < 50) {
+                alert(S.of(context).realCard_fee(50), context, () {});
+              } else {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RealCardStep1()));
+              }
             }
-          }
+          });
         },
         child: Container(
             width: double.infinity,
@@ -313,24 +352,21 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
         });
   }
 
-  onClickApplyCard(){
-
+  onClickApplyCard() {
     if (CommonService.userInfo?.kycStatus == '' ||
         CommonService.userInfo!.kycStatus != EnumKycStatus.passed.value) {
       showKycTips(context);
       return;
     }
 
-    var loading = showLoading(context);
     CardService.getInstance()
-        .applyCard(context,isRealCard: true, isShowToast: false)
+        .applyCard(context, isRealCard: true, isShowToast: false)
         .then((resp) {
       if (resp.code == 1) {
         _onBalanceRefresh();
       } else {
         alert(resp.msg, context, () {});
       }
-      removeLoading(loading);
     });
   }
 
