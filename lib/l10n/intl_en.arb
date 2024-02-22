@@ -190,8 +190,9 @@
   "profile_guide_desc5": "Check your virtual card.",
 
   "realCard_title": "Apply Physical Card",
+  "realCard_apply": "Apply",
   "realCard_card_title": "Physical Card",
-  "realCard_card_bind": "Bind Card",
+  "realCard_card_bind": "Bind",
   "realCard_fee": "There is a ${fee} fee to apply physical card. Please top up first.",
   "realCard_status1": "Pending",
   "realCard_status2": "Approved",

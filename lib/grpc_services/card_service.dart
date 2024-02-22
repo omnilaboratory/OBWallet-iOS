@@ -57,10 +57,11 @@ class CardService {
     return ret;
   }
 
-  Future<GrpcResponse> applyCard(BuildContext context, String icNo,
-      {bool isShowToast = true}) async {
+  Future<GrpcResponse> applyCard(BuildContext context,
+      {bool isShowToast = true,bool isRealCard = false}) async {
     var request = ApplyCardRequest();
     request.currency = CurrencyCode.USD;
+    request.isRealCard = isRealCard;
     log("$request");
     var ret = GrpcResponse();
     try {

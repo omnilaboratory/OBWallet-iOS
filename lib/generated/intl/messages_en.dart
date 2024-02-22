@@ -248,7 +248,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please fill in non-Mainland China English address"),
         "realCard_Step3_title":
             MessageLookupByLibrary.simpleMessage("Billing Address"),
-        "realCard_card_bind": MessageLookupByLibrary.simpleMessage("Bind Card"),
+        "realCard_apply": MessageLookupByLibrary.simpleMessage("Apply"),
+        "realCard_card_bind": MessageLookupByLibrary.simpleMessage("Bind"),
         "realCard_card_title":
             MessageLookupByLibrary.simpleMessage("Physical Card"),
         "realCard_chinaIdCard":

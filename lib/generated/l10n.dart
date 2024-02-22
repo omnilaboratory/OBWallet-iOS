@@ -1700,6 +1700,16 @@ class S {
     );
   }
 
+  /// `Apply`
+  String get realCard_apply {
+    return Intl.message(
+      'Apply',
+      name: 'realCard_apply',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Physical Card`
   String get realCard_card_title {
     return Intl.message(
@@ -1710,10 +1720,10 @@ class S {
     );
   }
 
-  /// `Bind Card`
+  /// `Bind`
   String get realCard_card_bind {
     return Intl.message(
-      'Bind Card',
+      'Bind',
       name: 'realCard_card_bind',
       desc: '',
       args: [],

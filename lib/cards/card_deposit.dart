@@ -239,7 +239,7 @@ class _CardDepositState extends State<CardDeposit> {
         } else {
           if (widget.type == "applyCard") {
             CardService.getInstance()
-                .applyCard(context, "USD")
+                .applyCard(context)
                 .then((value) => {GlobalParams.eventBus.fire("applyCard")});
           }
 

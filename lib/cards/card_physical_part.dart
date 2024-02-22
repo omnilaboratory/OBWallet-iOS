@@ -140,14 +140,21 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
           ),
 
           const Spacer(),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             BottomButton(
               icon: 'asset/images/icon_arrow_right_green.png',
               text: S.of(context).realCard_card_bind.toUpperCase(),
               onPressed: () {
+                onClickBindCard();
+              },
+            ),
+            BottomButton(
+              icon: 'asset/images/icon_arrow_right_green.png',
+              text: S.of(context).realCard_apply.toUpperCase(),
+              onPressed: () {
                 onClickApplyCard();
               },
-            )
+            ),
           ]),
           // const SizedBox(height: 75)
           const Spacer(),
@@ -298,17 +305,33 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     }
   }
 
-  onClickApplyCard() async {
-    if (CommonService.cardPhysicalInfo.cardNo.isNotEmpty) {
-      showToast("You have a card already");
-      return;
-    }
-
+  onClickBindCard() async {
     showDialog(
         context: context,
         builder: (context) {
           return const PhysicalCardBind();
         });
+  }
+
+  onClickApplyCard(){
+
+    if (CommonService.userInfo?.kycStatus == '' ||
+        CommonService.userInfo!.kycStatus != EnumKycStatus.passed.value) {
+      showKycTips(context);
+      return;
+    }
+
+    var loading = showLoading(context);
+    CardService.getInstance()
+        .applyCard(context,isRealCard: true, isShowToast: false)
+        .then((resp) {
+      if (resp.code == 1) {
+        _onBalanceRefresh();
+      } else {
+        alert(resp.msg, context, () {});
+      }
+      removeLoading(loading);
+    });
   }
 
   onClickType(int type) {

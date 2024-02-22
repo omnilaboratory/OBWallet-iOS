@@ -349,7 +349,7 @@ class _CardPartState extends State<CardPart> {
           } else {
             var loading = showLoading(context);
             CardService.getInstance()
-                .applyCard(context, "USD", isShowToast: false)
+                .applyCard(context, isShowToast: false)
                 .then((resp) {
               if (resp.code == 1) {
                 _onBalanceRefresh();
