@@ -1,4 +1,3 @@
-import 'package:fixnum/src/int64.dart';
 class CardItemInfo {
   final String iconUrl;
   final String country;
