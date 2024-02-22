@@ -11,8 +11,9 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 
 class PhysicalCardActive extends StatefulWidget {
+  final String cardNo;
   const PhysicalCardActive({
-    super.key,
+    super.key, required this.cardNo
   });
 
   @override
@@ -23,6 +24,12 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _cardNoController = TextEditingController();
   final TextEditingController _codeController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _cardNoController.text = widget.cardNo;
+  }
 
   String verifyCodeResponse = "";
   String getCodeTitle = S.current.common_GetCode;
@@ -120,11 +127,6 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return GestureDetector(
@@ -191,7 +193,7 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
                   const SizedBox(height: 20),
                   createTextFormField(
                       _cardNoController, S.of(context).bindCard_cardNo,
-                      icon: const Icon(Icons.add_card_outlined), maxLength: 30),
+                      icon: const Icon(Icons.add_card_outlined), maxLength: 30,enabled: false),
                   const SizedBox(height: 10),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

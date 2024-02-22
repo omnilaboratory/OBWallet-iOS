@@ -96,8 +96,7 @@ class _SelectCardTypeState extends State<SelectCardType> {
                                     },
                                     child: CardItem(
                                       cardItemInfo: cardItemInfoArr[index],
-                                      type: 1,
-                                      selected: currSelected == index,
+                                      type: 1
                                     ),
                                   );
                                 }

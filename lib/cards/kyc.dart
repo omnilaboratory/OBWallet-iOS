@@ -387,8 +387,7 @@ class _KycState extends State<Kyc> {
         info.firstName = _firstNameController.value.text.trim();
         info.lastName = _lastNameController.value.text.trim();
         info.areaCode = selectedPhoneCountry!.phoneCode;
-        info.mobile = selectedPhoneCountry!.phoneCode +
-            _mobileNumberController.value.text.trim();
+        info.mobile = _mobileNumberController.value.text.trim();
         info.dob = dateOfBirthTips;
         info.address1 = _address1Controller.value.text.trim();
         info.address2 = _address2Controller.value.text.trim();

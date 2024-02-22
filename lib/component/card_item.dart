@@ -10,15 +10,13 @@ import 'common.dart';
 class CardItem extends StatelessWidget {
   final CardItemInfo cardItemInfo;
 
-  // 0: card detail  1 card template
+  // 0: 'Virtual Card', 1 'Physical Card'
   final int type;
-  final bool selected;
 
   const CardItem(
       {super.key,
       required this.cardItemInfo,
-      this.type = 0,
-      this.selected = false});
+      this.type = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +32,7 @@ class CardItem extends StatelessWidget {
               width: size.width,
               height: 200,
               decoration: ShapeDecoration(
-                color: selected
-                    ? const Color(0xFFC1C1C1)
-                    : const Color(0x23C1C1C1),
+                color: const Color(0x23C1C1C1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
                 ),
@@ -81,7 +77,7 @@ class CardItem extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      return const PhysicalCardActive();
+                      return PhysicalCardActive(cardNo: cardItemInfo.cardNo);
                     });
 
               },
