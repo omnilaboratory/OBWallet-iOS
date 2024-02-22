@@ -38,6 +38,7 @@ class CardService {
       ret.code = 1;
       if (resp!.items.isNotEmpty) {
         var items = resp.items;
+        CommonService.realCardList = [];
         for (int i = 0; i < items.length; i++) {
           var item = items[i];
           if (item.isVcard) {
@@ -45,9 +46,7 @@ class CardService {
               CommonService.cardInfo = item;
             }
           } else {
-            if (CommonService.cardPhysicalInfo.cardNo.isEmpty) {
-              CommonService.cardPhysicalInfo = item;
-            }
+            CommonService.realCardList.add(item);
           }
         }
       }
@@ -197,6 +196,34 @@ class CardService {
     log("$req");
     try {
       var resp = await cardServiceClient?.cardBind(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance().setError(context, "cardBind", e, ret,isShowToast: false);
+    }
+    return ret;
+  }
+  Future<GrpcResponse> getCardActivateCode(
+      BuildContext context, String cardNo) async {
+    GetCardActivateCodeRequest req = GetCardActivateCodeRequest();
+    req.cardNo = cardNo;
+    var ret = GrpcResponse();
+    log("$req");
+    try {
+      var resp = await cardServiceClient?.getCardActivateCode(req);
+      ret.code = 1;
+      ret.data = resp?.codeToken;
+    } catch (e) {
+      UserService.getInstance().setError(context, "getCardActivateCode", e, ret,isShowToast: false);
+    }
+    return ret;
+  }
+  Future<GrpcResponse> cardActivate(
+      BuildContext context, CardActivateRequest req) async {
+    var ret = GrpcResponse();
+    log("$req");
+    try {
+      var resp = await cardServiceClient?.cardActivate(req);
       ret.code = 1;
       ret.data = resp;
     } catch (e) {

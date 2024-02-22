@@ -19,6 +19,7 @@ import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
@@ -37,7 +38,9 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   var txs = [];
   int currTypeIndex = 0;
   int dataStartIndex = 0;
-  bool hasCard = CommonService.cardPhysicalInfo.cardNo.isNotEmpty;
+  bool hasCard = CommonService.realCardList.isNotEmpty;
+
+  CardInfo currCardInfo = CardInfo();
 
   final RefreshController _refreshListController =
       RefreshController(initialRefresh: false);
@@ -50,9 +53,11 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     super.initState();
     _onBalanceRefresh();
     _onListRefresh();
-
+    if (hasCard) {
+      currCardInfo = CommonService.realCardList[0];
+    }
     GlobalParams.eventBus.on().listen((event) {
-      if (event == "cardBind_Finish") {
+      if (event == "cardBind_Finish" || event == "cardActive_Finish") {
         if (mounted) {
           _onBalanceRefresh();
         }
@@ -68,14 +73,43 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       list.add(buildBindAndApplyBtns(context));
       list.add(const SizedBox(height: 10));
     }
-    list.add(CardItem(
-      cardItemInfo: CardItemInfo(
-          cardNo: CommonService.cardPhysicalInfo.cardNo,
-          balance: CommonService.cardPhysicalInfo.balance,
-          exp: CommonService.cardPhysicalInfo.expiryDate,
-          cvv: CommonService.cardPhysicalInfo.cvv),
-      type: 1,
-    ));
+    if (hasCard) {
+      list.add(SizedBox(
+        height: 200,
+        child: Swiper(
+          itemCount: CommonService.realCardList.length,
+          autoplay: false,
+          loop: false,
+          onIndexChanged: (index) {
+            currCardInfo = CommonService.realCardList[index];
+            setState(() {});
+          },
+          duration: 600,
+          itemBuilder: (BuildContext context, int index) {
+            return CardItem(
+              cardItemInfo: CardItemInfo(
+                  cardNo: currCardInfo.cardNo,
+                  balance: currCardInfo.balance,
+                  exp: currCardInfo.expiryDate,
+                  cvv: currCardInfo.cvv,
+                  pcardStatus: currCardInfo.pcardStatus.toInt()),
+              type: 1,
+            );
+          },
+          pagination: const SwiperPagination(margin: EdgeInsets.only(top: 20)),
+        ),
+      ));
+    } else {
+      list.add(CardItem(
+        cardItemInfo: CardItemInfo(
+            cardNo: currCardInfo.cardNo,
+            balance: currCardInfo.balance,
+            exp: currCardInfo.expiryDate,
+            cvv: currCardInfo.cvv),
+        type: 1,
+      ));
+    }
+
     list.add(const SizedBox(height: 15));
     if (hasCard) {
       list.add(buildCardDetail(context));
@@ -103,8 +137,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
             onClickBindCard();
           },
           child: Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 2, horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 30),
               decoration: BoxDecoration(
                 color: Colors.black12,
                 borderRadius: BorderRadius.circular(4.0),
@@ -116,8 +149,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
             onClickApplyCard();
           },
           child: Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 2, horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 30),
               decoration: BoxDecoration(
                 color: Colors.black12,
                 borderRadius: BorderRadius.circular(4.0),
@@ -131,7 +163,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   InkWell realCardBtn(BuildContext context) {
     return InkWell(
         onTap: () {
-          AccountService.getInstance().getAccountInfo(context).then((resp)  {
+          AccountService.getInstance().getAccountInfo(context).then((resp) {
             if (resp.code == 1) {
               var accountInfo = resp.data as AccountInfo;
               if (accountInfo.balance < 50) {
@@ -274,7 +306,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   void _onBalanceRefresh() async {
     CardService.getInstance().cardInfo(context).then((resp) {
       if (resp.code == 1) {
-        hasCard = CommonService.cardPhysicalInfo.cardNo.isNotEmpty;
+        hasCard = CommonService.realCardList.isNotEmpty;
         if (mounted) {
           setState(() {});
         }
@@ -316,7 +348,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                   builder: (context) {
                     return Send(
                         type: EnumChargeType.deposit,
-                        cardNo: CommonService.cardPhysicalInfo.cardNo);
+                        cardNo: currCardInfo.cardNo);
                   });
 
               if (flag != null && flag) {
@@ -328,7 +360,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   }
 
   String formatCardExpiryDate() {
-    String expiryDate = CommonService.cardPhysicalInfo.expiryDate;
+    String expiryDate = currCardInfo.expiryDate;
     if (expiryDate.isEmpty) {
       expiryDate = "****";
     }
@@ -385,7 +417,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   }
 
   getOnlineCardExchangeInfoList() {
-    if (CommonService.cardPhysicalInfo.cardNo.isEmpty) {
+    if (currCardInfo.cardNo.isEmpty) {
       if (_refreshListController.isRefresh) {
         _refreshListController.refreshCompleted();
       }
@@ -398,7 +430,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     CardService.getInstance()
         .cardExchangeInfoList(
             context,
-            CommonService.cardPhysicalInfo.cardNo,
+            currCardInfo.cardNo,
             Int64.parseInt(dataStartIndex.toString()),
             Int64.parseInt(pageSize.toString()))
         .then((resp) {
@@ -438,7 +470,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   }
 
   getOfflineCardHistoryListFromServer() {
-    if (CommonService.cardPhysicalInfo.cardNo.isEmpty) {
+    if (currCardInfo.cardNo.isEmpty) {
       if (_refreshListController.isRefresh) {
         _refreshListController.refreshCompleted();
       }
@@ -450,7 +482,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     CardService.getInstance()
         .cardHistory(
             context,
-            CommonService.cardPhysicalInfo.cardNo,
+            currCardInfo.cardNo,
             Int64.parseInt(dataStartIndex.toString()),
             Int64.parseInt(pageSize.toString()))
         .then((resp) {

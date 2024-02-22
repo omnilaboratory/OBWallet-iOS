@@ -1,4 +1,6 @@
+
 import 'package:awallet/bean/card_item_info.dart';
+import 'package:awallet/cards/physical_card_active.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -55,8 +57,8 @@ class CardItem extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        this.type==0?'Virtual Card':'Physical Card',
-                        style: TextStyle(
+                        type == 0 ? 'Virtual Card' : 'Physical Card',
+                        style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -68,6 +70,31 @@ class CardItem extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        Visibility(
+          visible: cardItemInfo.pcardStatus == 0,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 154, right: 160),
+            child: InkWell(
+              onTap: () {
+
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const PhysicalCardActive();
+                    });
+
+              },
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                  child: Text(S.of(context).realCard_card_active)),
+            ),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 160, right: 20),

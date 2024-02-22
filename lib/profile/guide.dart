@@ -57,7 +57,10 @@ class _GuideState extends State<Guide> {
                       height: 520,
                       child: Swiper(
                         itemCount: imageUrls.length,
-                        autoplay: true,
+                        autoplay: false,
+                        onIndexChanged: (index){
+                          print(index);
+                        },
                         duration: 600,
                         itemBuilder: (BuildContext context, int index) {
                           return Column(

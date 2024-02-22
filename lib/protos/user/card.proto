@@ -74,7 +74,12 @@ message BuyNftForPayResponse {
 
 message CardInfo {
   int64 id = 1;
+  //app显示的的卡号
   string card_no =2;
+  //完整的卡号
+  string real_card_no =13;
+  //实体卡特定id
+  string cardLogId=14;
   //USD CNY SGD
   CurrencyCode symbol=3;
   string expiry_date =9;
@@ -84,7 +89,7 @@ message CardInfo {
   double balance=5;
   uint64 created_at = 6;
   uint64 updated_at = 7;
-  //是否是虚拟卡
+  //是否是虚拟卡:  虚拟卡的card_no和 realCardNo相同；实体卡有区别.
   bool is_vcard=8;
   //实体卡状态: 0 待激活 1 已激活
   int64 pcard_status=12;
@@ -329,14 +334,15 @@ message GetCardActivateCodeRequest {
   string  cardNo = 1;
 }
 message GetCardActivateCodeResponse {
+  string  codeToken=2;
 }
 
 // doc: https://apifox.com/apidoc/shared-63556276-242e-4fee-b799-c5a35723dfcb/api-146978557
 message CardActivateRequest {
   string  cardNo = 1;
-//手机验证码(暂不用提供)
+  //激活码获得时返回的codeToken
   string  codeToken=2;
-//邮箱验证码
+  //邮箱验证码
   string  verifyCode=3;
 }
 message CardActivateResponse {

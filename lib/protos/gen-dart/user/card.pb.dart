@@ -213,6 +213,8 @@ class CardInfo extends $pb.GeneratedMessage {
     ..aOS(10, _omitFieldNames ? '' : 'cvv')
     ..aOS(11, _omitFieldNames ? '' : 'openId')
     ..aInt64(12, _omitFieldNames ? '' : 'pcardStatus')
+    ..aOS(13, _omitFieldNames ? '' : 'realCardNo')
+    ..aOS(14, _omitFieldNames ? '' : 'cardLogId', protoName: 'cardLogId')
     ..hasRequiredFields = false
   ;
 
@@ -344,6 +346,24 @@ class CardInfo extends $pb.GeneratedMessage {
   $core.bool hasPcardStatus() => $_has(11);
   @$pb.TagNumber(12)
   void clearPcardStatus() => clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.String get realCardNo => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set realCardNo($core.String v) { $_setString(12, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasRealCardNo() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearRealCardNo() => clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.String get cardLogId => $_getSZ(13);
+  @$pb.TagNumber(14)
+  set cardLogId($core.String v) { $_setString(13, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasCardLogId() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearCardLogId() => clearField(14);
 }
 
 class ListPcardApplyInfoRequest extends $pb.GeneratedMessage {
@@ -2025,6 +2045,7 @@ class GetCardActivateCodeResponse extends $pb.GeneratedMessage {
   factory GetCardActivateCodeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetCardActivateCodeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(2, _omitFieldNames ? '' : 'codeToken', protoName: 'codeToken')
     ..hasRequiredFields = false
   ;
 
@@ -2048,6 +2069,15 @@ class GetCardActivateCodeResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetCardActivateCodeResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetCardActivateCodeResponse>(create);
   static GetCardActivateCodeResponse? _defaultInstance;
+
+  @$pb.TagNumber(2)
+  $core.String get codeToken => $_getSZ(0);
+  @$pb.TagNumber(2)
+  set codeToken($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCodeToken() => $_has(0);
+  @$pb.TagNumber(2)
+  void clearCodeToken() => clearField(2);
 }
 
 class CardActivateRequest extends $pb.GeneratedMessage {

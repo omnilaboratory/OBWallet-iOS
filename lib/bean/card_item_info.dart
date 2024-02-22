@@ -1,3 +1,4 @@
+import 'package:fixnum/src/int64.dart';
 class CardItemInfo {
   final String iconUrl;
   final String country;
@@ -5,6 +6,7 @@ class CardItemInfo {
   final double balance;
   final String exp;
   final String cvv;
+  final int pcardStatus;
 
   CardItemInfo({
     this.cardNo = "",
@@ -13,5 +15,6 @@ class CardItemInfo {
     this.cvv = "***",
     this.iconUrl = "asset/images/icon_master.png",
     this.country = "Hong Kong",
+    this.pcardStatus = 1
   });
 }

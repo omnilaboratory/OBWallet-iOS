@@ -22,7 +22,7 @@ mixin CommonService {
   static List<TokenInfo> tokenList = [];
   static List<TokenInfo> tokenListPolygon = [];
   static CardInfo cardInfo = CardInfo();
-  static CardInfo cardPhysicalInfo = CardInfo();
+  static List<CardInfo> realCardList = [];
   static String userId = "1";
   static bool firstEnterApp = true;
   static bool isSignUp = false;

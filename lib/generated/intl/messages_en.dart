@@ -249,6 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_Step3_title":
             MessageLookupByLibrary.simpleMessage("Billing Address"),
         "realCard_apply": MessageLookupByLibrary.simpleMessage("Apply"),
+        "realCard_card_active": MessageLookupByLibrary.simpleMessage("Active"),
         "realCard_card_bind": MessageLookupByLibrary.simpleMessage("Bind"),
         "realCard_card_title":
             MessageLookupByLibrary.simpleMessage("Physical Card"),
