@@ -84,8 +84,8 @@
 
   "selectCard_title": "選擇喜愛的卡片",
 
-  "send_title1": "提款到卡片",
-  "send_title2": "充值到卡片",
+  "send_title1": "充值到卡",
+  "send_title2": "充值到卡",
   "send_Withdraw": "提款",
   "send_Deposit": "充值",
   "send_tips": "*** 虛擬卡每月提款限額為 50,000 美元。",

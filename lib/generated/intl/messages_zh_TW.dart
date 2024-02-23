@@ -258,8 +258,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_Withdraw": MessageLookupByLibrary.simpleMessage("提款"),
         "send_tips":
             MessageLookupByLibrary.simpleMessage("*** 虛擬卡每月提款限額為 50,000 美元。"),
-        "send_title1": MessageLookupByLibrary.simpleMessage("提款到卡片"),
-        "send_title2": MessageLookupByLibrary.simpleMessage("充值到卡片"),
+        "send_title1": MessageLookupByLibrary.simpleMessage("充值到卡"),
+        "send_title2": MessageLookupByLibrary.simpleMessage("充值到卡"),
         "shop_BuyNFT": MessageLookupByLibrary.simpleMessage("購買 NFT"),
         "shop_nft_Chain": MessageLookupByLibrary.simpleMessage("鏈"),
         "shop_nft_ContractAddress":

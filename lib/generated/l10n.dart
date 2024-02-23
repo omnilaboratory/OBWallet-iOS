@@ -790,10 +790,10 @@ class S {
     );
   }
 
-  /// `Withdraw to Card`
+  /// `Deposit to Card`
   String get send_title1 {
     return Intl.message(
-      'Withdraw to Card',
+      'Deposit to Card',
       name: 'send_title1',
       desc: '',
       args: [],

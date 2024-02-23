@@ -317,7 +317,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_Withdraw": MessageLookupByLibrary.simpleMessage("withdraw"),
         "send_tips": MessageLookupByLibrary.simpleMessage(
             "*** The virtual card withdrawal limit is \$50,000 per month."),
-        "send_title1": MessageLookupByLibrary.simpleMessage("Withdraw to Card"),
+        "send_title1": MessageLookupByLibrary.simpleMessage("Deposit to Card"),
         "send_title2": MessageLookupByLibrary.simpleMessage("Deposit to Card"),
         "shop_BuyNFT": MessageLookupByLibrary.simpleMessage("Buy NFT"),
         "shop_nft_Chain": MessageLookupByLibrary.simpleMessage("Chain"),
