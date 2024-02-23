@@ -1930,13 +1930,13 @@ class S {
     );
   }
 
-  /// `开卡费用说明`
-  String get realCard_open_fee_desc {
+  /// `开卡费用说明{fee}`
+  String realCard_open_fee_desc(Object fee) {
     return Intl.message(
-      '开卡费用说明',
+      '开卡费用说明$fee',
       name: 'realCard_open_fee_desc',
       desc: '',
-      args: [],
+      args: [fee],
     );
   }
 

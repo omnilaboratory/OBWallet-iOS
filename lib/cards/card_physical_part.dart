@@ -16,6 +16,7 @@ import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
+import 'package:awallet/grpc_services/eth_grpc_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -392,7 +393,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     }
 
 
-    alert(S.of(context).realCard_open_fee_desc, context,(){
+    alert(S.of(context).realCard_open_fee_desc(createPcardFee), context,(){
       CardService.getInstance()
           .applyCard(context, isRealCard: true, isShowToast: false)
           .then((resp) {

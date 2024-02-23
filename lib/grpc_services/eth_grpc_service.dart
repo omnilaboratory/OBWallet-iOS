@@ -6,6 +6,8 @@ import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:grpc/grpc.dart';
 
+double createPcardFee = 30;
+
 class EthGrpcService {
   static final EthGrpcService _instance = EthGrpcService._internal();
 
@@ -49,6 +51,7 @@ class EthGrpcService {
       var resp = await ethServiceClient?.eTHGetAppConf(request);
       ret.code = 1;
       ret.data = resp;
+      createPcardFee = resp!.createPcardFee.toDouble();
     } catch (e) {
       UserService.getInstance().setError(context, "ethTrackTx", e, ret);
     }
