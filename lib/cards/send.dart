@@ -148,7 +148,8 @@ class _SendState extends State<Send> {
                             BottomButton(
                               icon: 'asset/images/icon_confirm_green.png',
                               text: widget.type == EnumChargeType.withdraw
-                                  ? S.of(context).send_Withdraw.toUpperCase()
+                                  // ? S.of(context).send_Withdraw.toUpperCase()
+                                  ? S.of(context).send_Deposit.toUpperCase()
                                   : S.of(context).send_Deposit.toUpperCase(),
                               onPressed: () {
                                 if ((_formKey.currentState as FormState)
