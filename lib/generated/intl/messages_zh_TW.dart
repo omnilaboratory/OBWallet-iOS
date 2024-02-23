@@ -220,6 +220,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_marry_no": MessageLookupByLibrary.simpleMessage("未婚"),
         "realCard_marry_yes": MessageLookupByLibrary.simpleMessage("已婚"),
         "realCard_name": MessageLookupByLibrary.simpleMessage("姓名"),
+        "realCard_open_fee_desc":
+            MessageLookupByLibrary.simpleMessage("开卡费用说明"),
         "realCard_otherIdCard":
             MessageLookupByLibrary.simpleMessage("香港、澳門、台灣或外國護照"),
         "realCard_shipAddress_company":

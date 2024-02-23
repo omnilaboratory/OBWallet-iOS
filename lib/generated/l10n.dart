@@ -1930,6 +1930,16 @@ class S {
     );
   }
 
+  /// `开卡费用说明`
+  String get realCard_open_fee_desc {
+    return Intl.message(
+      '开卡费用说明',
+      name: 'realCard_open_fee_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Card Shipping Address`
   String get realCard_Step2_title {
     return Intl.message(

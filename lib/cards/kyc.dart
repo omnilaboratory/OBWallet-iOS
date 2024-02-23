@@ -1,18 +1,22 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../component/bottom_button.dart';
@@ -148,6 +152,8 @@ class _KycState extends State<Kyc> {
                                       ),
                                     ]),
                                 buildCardType(),
+                                const SizedBox(height: 6),
+                                buildImagePicker(),
                                 const SizedBox(height: 6),
                                 createTextFormField(_socialIdController,
                                     S.of(context).kyc_IdentityId,
@@ -371,6 +377,13 @@ class _KycState extends State<Kyc> {
       return;
     }
 
+    if (idImage1.isEmpty ||
+        idImage2.isEmpty) {
+      alert(S.of(context).realCard_tips_uploadImage, context,
+              () {});
+      return;
+    }
+
     FocusScope.of(context).requestFocus(FocusNode());
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
@@ -378,6 +391,8 @@ class _KycState extends State<Kyc> {
         CommonService.userInfo = userInfo.user;
         UserInfo info = userInfo.user;
         info.idType = (selectedCardType + 1).toString();
+        info.id1 = idImage1;
+        info.id2 = idImage2;
         info.marState = selectedMarry.toString();
         info.gender = selectedGender == 0 ? "M" : "F";
         info.addressType = selectedAddressType.toString();
@@ -581,5 +596,84 @@ class _KycState extends State<Kyc> {
         ),
       ],
     );
+  }
+
+
+  Row buildImagePicker() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+          onTap: () {
+            getImage(0);
+          },
+          child: cardImage0 == null
+              ? const Image(
+            image: AssetImage("asset/images/user_idCard_template1.png"),
+            width: 130,
+            height: 84,
+          )
+              : Image.file(
+            File(cardImage0!.path),
+            width: 130,
+            height: 84,
+            fit: BoxFit.fitHeight,
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            getImage(1);
+          },
+          child: cardImage1 == null
+              ? const Image(
+            image: AssetImage("asset/images/user_idCard_template2.png"),
+            width: 130,
+            height: 84,
+          )
+              : Image.file(
+            File(cardImage1!.path),
+            width: 130,
+            height: 84,
+            fit: BoxFit.fitHeight,
+          ),
+        ),
+      ],
+    );
+  }
+
+
+  final picker = ImagePicker();
+  XFile? cardImage0;
+  XFile? cardImage1;
+  late String idImage1;
+  late String idImage2;
+
+  getImage(int type) {
+    picker.pickImage(source: ImageSource.gallery).then((image) async {
+      if (image != null) {
+        UserUploadRequest req = UserUploadRequest();
+        req.fileName = image.name;
+        req.fileBytes = await image.readAsBytes();
+        CardService.getInstance().uploadImage(context, req).then((resp) {
+          if (resp.code == 1) {
+            log("${resp.data}");
+            if (type == 0) {
+              idImage1 = resp.data;
+            }
+            if (type == 1) {
+              idImage2 = resp.data;
+            }
+          }
+        });
+
+        setState(() {
+          if (type == 0) {
+            cardImage0 = image;
+          } else {
+            cardImage1 = image;
+          }
+        });
+      }
+    });
   }
 }

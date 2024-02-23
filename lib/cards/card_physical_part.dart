@@ -391,15 +391,19 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       return;
     }
 
-    CardService.getInstance()
-        .applyCard(context, isRealCard: true, isShowToast: false)
-        .then((resp) {
-      if (resp.code == 1) {
-        _onBalanceRefresh();
-      } else {
-        alert(resp.msg, context, () {});
-      }
+
+    alert(S.of(context).realCard_open_fee_desc, context,(){
+      CardService.getInstance()
+          .applyCard(context, isRealCard: true, isShowToast: false)
+          .then((resp) {
+        if (resp.code == 1) {
+          _onBalanceRefresh();
+        } else {
+          alert(resp.msg, context, () {});
+        }
+      });
     });
+
   }
 
   onClickType(int type) {

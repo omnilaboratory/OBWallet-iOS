@@ -213,6 +213,7 @@
   "realCard_shipAddress_home": "Home Address",
   "realCard_shipAddress_company": "Company Address",
   "realCard_tips_uploadImage": "Please upload correct image",
+  "realCard_open_fee_desc": "开卡费用说明",
 
   "realCard_Step2_title": "Card Shipping Address",  
   "realCard_Step2_phone": "Phone Number",
