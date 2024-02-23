@@ -400,6 +400,16 @@ class S {
     );
   }
 
+  /// `*** There is a fee of ${createFee} to apply for a physical card.`
+  String applyCard_Desc4(Object createFee) {
+    return Intl.message(
+      '*** There is a fee of \$$createFee to apply for a physical card.',
+      name: 'applyCard_Desc4',
+      desc: '',
+      args: [createFee],
+    );
+  }
+
   /// `APPLY LATER`
   String get applyCard_ApplyLater {
     return Intl.message(
@@ -1930,10 +1940,10 @@ class S {
     );
   }
 
-  /// `开卡费用说明{fee}`
+  /// `A fee of ${fee} is required to apply for the physical card.`
   String realCard_open_fee_desc(Object fee) {
     return Intl.message(
-      '开卡费用说明$fee',
+      'A fee of \$$fee is required to apply for the physical card.',
       name: 'realCard_open_fee_desc',
       desc: '',
       args: [fee],

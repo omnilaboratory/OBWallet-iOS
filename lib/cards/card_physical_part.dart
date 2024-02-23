@@ -26,6 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../tools/string_tool.dart';
 import 'kyc.dart';
 
 class CardPhysicalPart extends StatefulWidget {
@@ -209,6 +210,13 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                 height: 2,
               ),
             ),
+          ),
+
+          const SizedBox(height: 20),
+          Text(
+            S.of(context).applyCard_Desc4(StringTools.formatCurrencyNum(createPcardFee)),
+            style: const TextStyle(
+                color: Colors.black54, fontStyle: FontStyle.italic),
           ),
 
           const Spacer(),
