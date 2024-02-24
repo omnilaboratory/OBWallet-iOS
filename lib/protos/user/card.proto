@@ -247,7 +247,7 @@ message ApplyCardResponse {
 }
 
 message CardListRequest {
-
+  bool without_balance = 1;
 }
 message CardListResponse {
   repeated CardInfo items=1;

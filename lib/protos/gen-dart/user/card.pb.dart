@@ -1237,6 +1237,7 @@ class CardListRequest extends $pb.GeneratedMessage {
   factory CardListRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'withoutBalance')
     ..hasRequiredFields = false
   ;
 
@@ -1260,6 +1261,15 @@ class CardListRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CardListRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardListRequest>(create);
   static CardListRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get withoutBalance => $_getBF(0);
+  @$pb.TagNumber(1)
+  set withoutBalance($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasWithoutBalance() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearWithoutBalance() => clearField(1);
 }
 
 class CardListResponse extends $pb.GeneratedMessage {

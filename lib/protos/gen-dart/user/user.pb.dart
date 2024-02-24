@@ -247,6 +247,7 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOS(40, _omitFieldNames ? '' : 'addressType', protoName: 'addressType')
     ..aOS(41, _omitFieldNames ? '' : 'gender')
     ..aOS(42, _omitFieldNames ? '' : 'idType', protoName: 'idType')
+    ..aOS(43, _omitFieldNames ? '' : 'country')
     ..hasRequiredFields = false
   ;
 
@@ -648,6 +649,15 @@ class UserInfo extends $pb.GeneratedMessage {
   $core.bool hasIdType() => $_has(41);
   @$pb.TagNumber(42)
   void clearIdType() => clearField(42);
+
+  @$pb.TagNumber(43)
+  $core.String get country => $_getSZ(42);
+  @$pb.TagNumber(43)
+  set country($core.String v) { $_setString(42, v); }
+  @$pb.TagNumber(43)
+  $core.bool hasCountry() => $_has(42);
+  @$pb.TagNumber(43)
+  void clearCountry() => clearField(43);
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {

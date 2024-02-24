@@ -72,7 +72,11 @@ message UserInfo {
   string btc_address=26;
 
   // kyc info
+
   CountryCode country_code = 5;
+
+//国家(快递用，（CHN 中国 HKG 香港）
+  string country = 43;
   CurrencyCode currency=23;
   //image-path1; identity card front  // old obd-ui-field
   string id1 = 6;

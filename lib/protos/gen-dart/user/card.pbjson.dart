@@ -273,11 +273,15 @@ final $typed_data.Uint8List applyCardResponseDescriptor = $convert.base64Decode(
 @$core.Deprecated('Use cardListRequestDescriptor instead')
 const CardListRequest$json = {
   '1': 'CardListRequest',
+  '2': [
+    {'1': 'without_balance', '3': 1, '4': 1, '5': 8, '10': 'withoutBalance'},
+  ],
 };
 
 /// Descriptor for `CardListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardListRequestDescriptor = $convert.base64Decode(
-    'Cg9DYXJkTGlzdFJlcXVlc3Q=');
+    'Cg9DYXJkTGlzdFJlcXVlc3QSJwoPd2l0aG91dF9iYWxhbmNlGAEgASgIUg53aXRob3V0QmFsYW'
+    '5jZQ==');
 
 @$core.Deprecated('Use cardListResponseDescriptor instead')
 const CardListResponse$json = {

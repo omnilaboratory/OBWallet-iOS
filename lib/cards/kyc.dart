@@ -10,6 +10,7 @@ import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/country.pb.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
@@ -377,10 +378,8 @@ class _KycState extends State<Kyc> {
       return;
     }
 
-    if (idImage1.isEmpty ||
-        idImage2.isEmpty) {
-      alert(S.of(context).realCard_tips_uploadImage, context,
-              () {});
+    if (idImage1.isEmpty || idImage2.isEmpty) {
+      alert(S.of(context).realCard_tips_uploadImage, context, () {});
       return;
     }
 
@@ -411,6 +410,11 @@ class _KycState extends State<Kyc> {
         info.postCode = _postalController.value.text.trim();
         info.countryCode =
             Utils.getCountryCodeByCode(selectedCountry!.countryCode);
+        if (info.countryCode == CountryCode.CN) {
+          info.country = "CHN";
+        } else {
+          info.country = "HKG";
+        }
 
         OverlayEntry entry = showLoading(context);
         UserService.getInstance().kyc(context, info).then((value) async {
@@ -598,7 +602,6 @@ class _KycState extends State<Kyc> {
     );
   }
 
-
   Row buildImagePicker() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -609,16 +612,16 @@ class _KycState extends State<Kyc> {
           },
           child: cardImage0 == null
               ? const Image(
-            image: AssetImage("asset/images/user_idCard_template1.png"),
-            width: 130,
-            height: 84,
-          )
+                  image: AssetImage("asset/images/user_idCard_template1.png"),
+                  width: 130,
+                  height: 84,
+                )
               : Image.file(
-            File(cardImage0!.path),
-            width: 130,
-            height: 84,
-            fit: BoxFit.fitHeight,
-          ),
+                  File(cardImage0!.path),
+                  width: 130,
+                  height: 84,
+                  fit: BoxFit.fitHeight,
+                ),
         ),
         GestureDetector(
           onTap: () {
@@ -626,21 +629,20 @@ class _KycState extends State<Kyc> {
           },
           child: cardImage1 == null
               ? const Image(
-            image: AssetImage("asset/images/user_idCard_template2.png"),
-            width: 130,
-            height: 84,
-          )
+                  image: AssetImage("asset/images/user_idCard_template2.png"),
+                  width: 130,
+                  height: 84,
+                )
               : Image.file(
-            File(cardImage1!.path),
-            width: 130,
-            height: 84,
-            fit: BoxFit.fitHeight,
-          ),
+                  File(cardImage1!.path),
+                  width: 130,
+                  height: 84,
+                  fit: BoxFit.fitHeight,
+                ),
         ),
       ],
     );
   }
-
 
   final picker = ImagePicker();
   XFile? cardImage0;
