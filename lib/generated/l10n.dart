@@ -1990,20 +1990,20 @@ class S {
     );
   }
 
-  /// `A fee of ${fee} is required to apply for the physical card.`
+  /// `There is a fee of ${fee} to apply the physical card, please confirm.`
   String realCard_open_fee_desc(Object fee) {
     return Intl.message(
-      'A fee of \$$fee is required to apply for the physical card.',
+      'There is a fee of \$$fee to apply the physical card, please confirm.',
       name: 'realCard_open_fee_desc',
       desc: '',
       args: [fee],
     );
   }
 
-  /// `需要${fee}余额不足，请充值`
+  /// `A payment of ${fee} is required, the balance is insufficient. Please top up.`
   String realCard_open_balance_not_enough(Object fee) {
     return Intl.message(
-      '需要\$$fee余额不足，请充值',
+      'A payment of \$$fee is required, the balance is insufficient. Please top up.',
       name: 'realCard_open_balance_not_enough',
       desc: '',
       args: [fee],
