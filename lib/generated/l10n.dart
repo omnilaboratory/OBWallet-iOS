@@ -670,30 +670,30 @@ class S {
     );
   }
 
-  /// `Kyc`
+  /// `KYC`
   String get kyc_title {
     return Intl.message(
-      'Kyc',
+      'KYC',
       name: 'kyc_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `kyc_id_tips_china`
+  /// `Currently only supports Mainland China`
   String get kyc_id_tips_china {
     return Intl.message(
-      'kyc_id_tips_china',
+      'Currently only supports Mainland China',
       name: 'kyc_id_tips_china',
       desc: '',
       args: [],
     );
   }
 
-  /// `kyc_id_tips_otherArea`
+  /// `Supports 128 countries worldwide`
   String get kyc_id_tips_otherArea {
     return Intl.message(
-      'kyc_id_tips_otherArea',
+      'Supports 128 countries worldwide',
       name: 'kyc_id_tips_otherArea',
       desc: '',
       args: [],
@@ -715,6 +715,16 @@ class S {
     return Intl.message(
       'Please input English and Number.',
       name: 'kyc_tips1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passport Id`
+  String get kyc_PassportId {
+    return Intl.message(
+      'Passport Id',
+      name: 'kyc_PassportId',
       desc: '',
       args: [],
     );
@@ -1850,20 +1860,20 @@ class S {
     );
   }
 
-  /// `Mainland China ID Card`
+  /// `ID Card`
   String get realCard_chinaIdCard {
     return Intl.message(
-      'Mainland China ID Card',
+      'ID Card',
       name: 'realCard_chinaIdCard',
       desc: '',
       args: [],
     );
   }
 
-  /// `Hong Kong, Macau, Taiwan or Foreign Passport`
+  /// `Passport`
   String get realCard_otherIdCard {
     return Intl.message(
-      'Hong Kong, Macau, Taiwan or Foreign Passport',
+      'Passport',
       name: 'realCard_otherIdCard',
       desc: '',
       args: [],

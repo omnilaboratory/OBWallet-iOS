@@ -155,13 +155,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "kyc_IdentityId": MessageLookupByLibrary.simpleMessage("身分證號"),
         "kyc_LastName": MessageLookupByLibrary.simpleMessage("姓氏"),
         "kyc_MobileNumber": MessageLookupByLibrary.simpleMessage("手機號碼"),
+        "kyc_PassportId": MessageLookupByLibrary.simpleMessage("護照號碼"),
         "kyc_PostalZipCode": MessageLookupByLibrary.simpleMessage("郵遞區號"),
         "kyc_StateRegion": MessageLookupByLibrary.simpleMessage("州/地區"),
         "kyc_dateOfBirth": MessageLookupByLibrary.simpleMessage("出生日期"),
-        "kyc_id_tips_china":
-            MessageLookupByLibrary.simpleMessage("kyc_id_tips_china"),
+        "kyc_id_tips_china": MessageLookupByLibrary.simpleMessage("目前僅支持中國大陸"),
         "kyc_id_tips_otherArea":
-            MessageLookupByLibrary.simpleMessage("kyc_id_tips_otherArea"),
+            MessageLookupByLibrary.simpleMessage("支持全球128个國家"),
         "kyc_tips1": MessageLookupByLibrary.simpleMessage("請輸入英文和數字。"),
         "kyc_title": MessageLookupByLibrary.simpleMessage("認證"),
         "login_Desc": MessageLookupByLibrary.simpleMessage(""),
@@ -219,7 +219,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_card_active": MessageLookupByLibrary.simpleMessage("激活"),
         "realCard_card_bind": MessageLookupByLibrary.simpleMessage("绑定"),
         "realCard_card_title": MessageLookupByLibrary.simpleMessage("實體卡"),
-        "realCard_chinaIdCard": MessageLookupByLibrary.simpleMessage("中國大陸身份證"),
+        "realCard_chinaIdCard": MessageLookupByLibrary.simpleMessage("身份證"),
         "realCard_fee": m5,
         "realCard_firstName": MessageLookupByLibrary.simpleMessage("姓氏拼音"),
         "realCard_gender_female": MessageLookupByLibrary.simpleMessage("女"),
@@ -230,8 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_marry_yes": MessageLookupByLibrary.simpleMessage("已婚"),
         "realCard_name": MessageLookupByLibrary.simpleMessage("姓名"),
         "realCard_open_fee_desc": m6,
-        "realCard_otherIdCard":
-            MessageLookupByLibrary.simpleMessage("香港、澳門、台灣或外國護照"),
+        "realCard_otherIdCard": MessageLookupByLibrary.simpleMessage("護照"),
         "realCard_shipAddress_company":
             MessageLookupByLibrary.simpleMessage("公司地址"),
         "realCard_shipAddress_home":

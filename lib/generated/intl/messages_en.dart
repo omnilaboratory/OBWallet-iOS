@@ -184,18 +184,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "kyc_LastName": MessageLookupByLibrary.simpleMessage("Last Name"),
         "kyc_MobileNumber":
             MessageLookupByLibrary.simpleMessage("Mobile Number"),
+        "kyc_PassportId": MessageLookupByLibrary.simpleMessage("Passport Id"),
         "kyc_PostalZipCode":
             MessageLookupByLibrary.simpleMessage("Postal/Zip Code"),
         "kyc_StateRegion": MessageLookupByLibrary.simpleMessage("State/Region"),
         "kyc_dateOfBirth":
             MessageLookupByLibrary.simpleMessage("Date of birth"),
-        "kyc_id_tips_china":
-            MessageLookupByLibrary.simpleMessage("kyc_id_tips_china"),
-        "kyc_id_tips_otherArea":
-            MessageLookupByLibrary.simpleMessage("kyc_id_tips_otherArea"),
+        "kyc_id_tips_china": MessageLookupByLibrary.simpleMessage(
+            "Currently only supports Mainland China"),
+        "kyc_id_tips_otherArea": MessageLookupByLibrary.simpleMessage(
+            "Supports 128 countries worldwide"),
         "kyc_tips1": MessageLookupByLibrary.simpleMessage(
             "Please input English and Number."),
-        "kyc_title": MessageLookupByLibrary.simpleMessage("Kyc"),
+        "kyc_title": MessageLookupByLibrary.simpleMessage("KYC"),
         "login_Desc": MessageLookupByLibrary.simpleMessage(""),
         "login_ForgotPsw":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
@@ -264,8 +265,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_card_bind": MessageLookupByLibrary.simpleMessage("Bind"),
         "realCard_card_title":
             MessageLookupByLibrary.simpleMessage("Physical Card"),
-        "realCard_chinaIdCard":
-            MessageLookupByLibrary.simpleMessage("Mainland China ID Card"),
+        "realCard_chinaIdCard": MessageLookupByLibrary.simpleMessage("ID Card"),
         "realCard_fee": m5,
         "realCard_firstName":
             MessageLookupByLibrary.simpleMessage("First Name (Pinyin)"),
@@ -280,8 +280,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_marry_yes": MessageLookupByLibrary.simpleMessage("Married"),
         "realCard_name": MessageLookupByLibrary.simpleMessage("Name"),
         "realCard_open_fee_desc": m6,
-        "realCard_otherIdCard": MessageLookupByLibrary.simpleMessage(
-            "Hong Kong, Macau, Taiwan or Foreign Passport"),
+        "realCard_otherIdCard":
+            MessageLookupByLibrary.simpleMessage("Passport"),
         "realCard_shipAddress_company":
             MessageLookupByLibrary.simpleMessage("Company Address"),
         "realCard_shipAddress_home":

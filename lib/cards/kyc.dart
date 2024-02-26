@@ -178,9 +178,13 @@ class _KycState extends State<Kyc> {
                                 buildImagePicker(),
                                 const SizedBox(height: 6),
                                 createTextFormField(_socialIdController,
-                                    S.of(context).kyc_IdentityId,
-                                    maxLength: 30,
-                                    icon: const Icon(Icons.credit_card)),
+                                  selectedCardType == 1
+                                    ? S.of(context).kyc_IdentityId
+                                    : S.of(context).kyc_PassportId,
+                                  maxLength: 30,
+                                  icon: const Icon(Icons.credit_card)
+                                ),
+
                                 Row(
                                   children: [
                                     Expanded(
