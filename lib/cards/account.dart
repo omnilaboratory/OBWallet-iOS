@@ -76,9 +76,6 @@ class _AccountState extends State<Account> {
             break;
           }
         }
-        if (hasCard && mounted) {
-          setState(() {});
-        }
       }
     });
   }
