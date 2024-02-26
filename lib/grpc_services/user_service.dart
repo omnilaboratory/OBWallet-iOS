@@ -159,7 +159,7 @@ class UserService {
       var userInfo = resp as GetUserInfoResponse;
       CommonService.userInfo = userInfo.user;
       CommonService.userId = userInfo.user.id.toString();
-      log("getUserInfo ${userInfo.user}");
+      // log("getUserInfo ${userInfo.user}");
     } catch (e) {
       setError(context, "getUserInfo", e, ret);
     }
@@ -168,6 +168,7 @@ class UserService {
 
   Future<GrpcResponse> kyc(BuildContext context, UserInfo req) async {
     var ret = GrpcResponse();
+    log("kyc $req");
     try {
       var resp = await userServiceClient?.kyc(req);
       ret.code = 1;
