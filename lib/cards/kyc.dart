@@ -177,13 +177,13 @@ class _KycState extends State<Kyc> {
                                 const SizedBox(height: 6),
                                 buildImagePicker(),
                                 const SizedBox(height: 6),
-                                createTextFormField(_socialIdController,
-                                  selectedCardType == 1
-                                    ? S.of(context).kyc_IdentityId
-                                    : S.of(context).kyc_PassportId,
-                                  maxLength: 30,
-                                  icon: const Icon(Icons.credit_card)
-                                ),
+                                createTextFormField(
+                                    _socialIdController,
+                                    selectedCardType == 1
+                                        ? S.of(context).kyc_IdentityId
+                                        : S.of(context).kyc_PassportId,
+                                    maxLength: 30,
+                                    icon: const Icon(Icons.credit_card)),
 
                                 Row(
                                   children: [
@@ -403,12 +403,14 @@ class _KycState extends State<Kyc> {
       return;
     }
 
+    // china
     if (selectedCardType == 1) {
       if (idImage1.isEmpty || idImage2.isEmpty) {
         alert(S.of(context).realCard_tips_uploadImage, context, () {});
         return;
       }
     }
+    // out china
     if (selectedCardType == 2) {
       if (idImage1.isEmpty) {
         alert(S.of(context).realCard_tips_uploadImage, context, () {});
@@ -424,7 +426,9 @@ class _KycState extends State<Kyc> {
         UserInfo info = userInfo.user;
         info.idType = (selectedCardType).toString();
         info.id1 = idImage1;
-        info.id2 = idImage2;
+        if (selectedCardType == 1) {
+          info.id2 = idImage2;
+        }
         info.marState = selectedMarry.toString();
         info.gender = selectedGender == 0 ? "M" : "F";
         info.addressType = selectedAddressType.toString();
