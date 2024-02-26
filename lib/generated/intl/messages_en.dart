@@ -33,7 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m4(totalReward, totalUser) =>
       "Total Reward: ${totalReward} from ${totalUser} Users";
 
-  static String m5(email) => "验证码会发送到你的邮箱${email}";
+  static String m5(email) =>
+      "The verification code will be sent to your email address: ${email}";
 
   static String m6(fee) =>
       "There is a \$${fee} fee to apply physical card. Please top up first.";

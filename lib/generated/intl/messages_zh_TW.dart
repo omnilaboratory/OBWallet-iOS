@@ -31,13 +31,13 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m4(totalReward, totalUser) =>
       "獎勵總數: ${totalReward} 來自 ${totalUser} 用戶";
 
-  static String m5(email) => "验证码会发送到你的邮箱\n${email}";
+  static String m5(email) => "驗證碼會寄到你的信箱\n${email}";
 
   static String m6(fee) => "申請實體卡有${fee}元的費用，請先充值。";
 
-  static String m7(fee) => "需要支付${fee}美元，余额不足，请充值。";
+  static String m7(fee) => "需支付${fee}美元，餘額不足，請儲值。";
 
-  static String m8(fee) => "申請實體卡需要支付${fee}美元，请确认。";
+  static String m8(fee) => "申請實體卡需支付${fee}美元，請確認。";
 
   static String m9(fee) => "費用 ${fee}";
 
@@ -224,7 +224,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_card_active_tips": m5,
         "realCard_card_active_title":
             MessageLookupByLibrary.simpleMessage("激活實體卡"),
-        "realCard_card_bind": MessageLookupByLibrary.simpleMessage("绑定"),
+        "realCard_card_bind": MessageLookupByLibrary.simpleMessage("綁定"),
         "realCard_card_title": MessageLookupByLibrary.simpleMessage("實體卡"),
         "realCard_chinaIdCard": MessageLookupByLibrary.simpleMessage("身份證"),
         "realCard_fee": m6,

@@ -199,7 +199,7 @@
   "realCard_card_bind": "Bind",
   "realCard_card_active": "Active",
   "realCard_card_active_title": "Active Physical Card",
-  "realCard_card_active_tips": "验证码会发送到你的邮箱{email}",
+  "realCard_card_active_tips": "The verification code will be sent to your email address: {email}",
   "realCard_fee": "There is a ${fee} fee to apply physical card. Please top up first.",
   "realCard_status1": "Pending",
   "realCard_status2": "Approved",

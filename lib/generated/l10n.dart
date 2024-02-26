@@ -1790,10 +1790,10 @@ class S {
     );
   }
 
-  /// `验证码会发送到你的邮箱{email}`
+  /// `The verification code will be sent to your email address: {email}`
   String realCard_card_active_tips(Object email) {
     return Intl.message(
-      '验证码会发送到你的邮箱$email',
+      'The verification code will be sent to your email address: $email',
       name: 'realCard_card_active_tips',
       desc: '',
       args: [email],
