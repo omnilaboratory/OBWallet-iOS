@@ -406,7 +406,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       if (info.code == 1) {
         var accountInfo = info.data as AccountInfo;
         if (accountInfo.balance < createPcardFee) {
-          alert(S.of(context).realCard_open_balance_not_enough, context, () {});
+          alert(S.of(context).realCard_open_balance_not_enough(createPcardFee), context, () {});
         } else {
           alert(S.of(context).realCard_open_fee_desc(createPcardFee), context,
               () {

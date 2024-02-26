@@ -36,22 +36,24 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m5(fee) =>
       "There is a \$${fee} fee to apply physical card. Please top up first.";
 
-  static String m6(fee) =>
+  static String m6(fee) => "需要\$${fee}余额不足，请充值";
+
+  static String m7(fee) =>
       "A fee of \$${fee} is required to apply for the physical card.";
 
-  static String m7(fee) => "Fee ${fee}";
+  static String m8(fee) => "Fee ${fee}";
 
-  static String m8(cost) => "Network Cost ${cost}";
+  static String m9(cost) => "Network Cost ${cost}";
 
-  static String m9(nftTotalCount, nftTotalValue) =>
+  static String m10(nftTotalCount, nftTotalValue) =>
       "You have selected ${nftTotalCount} NFTs and value is \$${nftTotalValue}";
 
-  static String m10(amount, fee) => "Will get \$${amount} and fee is \$${fee}.";
+  static String m11(amount, fee) => "Will get \$${amount} and fee is \$${fee}.";
 
-  static String m11(createCardFee) =>
+  static String m12(createCardFee) =>
       "There is a fee of \$${createCardFee} to apply for a virtual card. \n The USD is insufficient, please click Deposit on the Home page to purchase USDT and then exchange it for USD.";
 
-  static String m12(tokenName) => "${tokenName} Activity";
+  static String m13(tokenName) => "${tokenName} Activity";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -279,9 +281,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_marry_no": MessageLookupByLibrary.simpleMessage("Unmarried"),
         "realCard_marry_yes": MessageLookupByLibrary.simpleMessage("Married"),
         "realCard_name": MessageLookupByLibrary.simpleMessage("Name"),
-        "realCard_open_balance_not_enough":
-            MessageLookupByLibrary.simpleMessage("需要｛fee｝余额不足，请充值"),
-        "realCard_open_fee_desc": m6,
+        "realCard_open_balance_not_enough": m6,
+        "realCard_open_fee_desc": m7,
         "realCard_otherIdCard":
             MessageLookupByLibrary.simpleMessage("Passport"),
         "realCard_shipAddress_company":
@@ -315,12 +316,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Deposit to Account"),
         "recharge_Title2":
             MessageLookupByLibrary.simpleMessage("Withdraw to Account"),
-        "reviewExchange_Fee": m7,
+        "reviewExchange_Fee": m8,
         "reviewExchange_Slippage":
             MessageLookupByLibrary.simpleMessage("Slippage"),
         "reviewExchange_YouWillSwap":
             MessageLookupByLibrary.simpleMessage("You will swap"),
-        "reviewExchange_cost": m8,
+        "reviewExchange_cost": m9,
         "reviewExchange_title":
             MessageLookupByLibrary.simpleMessage("Review Exchange"),
         "selectCard_title":
@@ -347,13 +348,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "shop_nft_title": MessageLookupByLibrary.simpleMessage("NFT"),
         "shop_nft_tx_history_title":
             MessageLookupByLibrary.simpleMessage("NFT Tx History"),
-        "shop_tips": m9,
+        "shop_tips": m10,
         "shop_title": MessageLookupByLibrary.simpleMessage("Shop"),
         "signUp_InvitationCode":
             MessageLookupByLibrary.simpleMessage("Invitation Code"),
         "signUp_Nickname": MessageLookupByLibrary.simpleMessage("Nickname"),
         "signUp_Title": MessageLookupByLibrary.simpleMessage("Sign Up"),
-        "tips_WithdrawResult": m10,
+        "tips_WithdrawResult": m11,
         "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("Wrong email"),
         "tips_WrongTopUp":
             MessageLookupByLibrary.simpleMessage("Top up to wallet address"),
@@ -410,7 +411,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The amount cannot exceed the maximum."),
         "tips_maxAmount1": MessageLookupByLibrary.simpleMessage(
             "The from amount cannot exceed the maximum."),
-        "tips_needFiveDollarFee": m11,
+        "tips_needFiveDollarFee": m12,
         "tips_selectCountry":
             MessageLookupByLibrary.simpleMessage("Please select the country."),
         "tips_selectDateOfBirth": MessageLookupByLibrary.simpleMessage(
@@ -446,7 +447,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tokenActivity_Receive":
             MessageLookupByLibrary.simpleMessage("Receive"),
         "tokenActivity_Send": MessageLookupByLibrary.simpleMessage("Send"),
-        "tokenActivity_title": m12,
+        "tokenActivity_title": m13,
         "txHistory_Exchange": MessageLookupByLibrary.simpleMessage("Exchange"),
         "txHistory_Send": MessageLookupByLibrary.simpleMessage("Send"),
         "txHistory_title": MessageLookupByLibrary.simpleMessage("Crypto")

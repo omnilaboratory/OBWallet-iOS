@@ -218,7 +218,7 @@
   "realCard_shipAddress_company": "Company Address",
   "realCard_tips_uploadImage": "Please upload correct image",
   "realCard_open_fee_desc": "A fee of ${fee} is required to apply for the physical card.",
-  "realCard_open_balance_not_enough": "需要｛fee｝余额不足，请充值",
+  "realCard_open_balance_not_enough": "需要${fee}余额不足，请充值",
 
 
   "realCard_Step2_title": "Card Shipping Address",  
