@@ -218,7 +218,7 @@
   "realCard_shipAddress_company": "公司地址",  
   "realCard_tips_uploadImage": "請上傳正確的圖片",  
   "realCard_open_fee_desc": "申請實體卡需要支付{fee}美元",
-  "realCard_open_balance_not_enough": "需要｛fee｝余额不足，请充值",
+  "realCard_open_balance_not_enough": "需要{fee}余额不足，请充值",
 
   "realCard_Step2_title": "卡片寄送地址",     
   "realCard_Step2_phone": "手機號", 
