@@ -473,9 +473,13 @@ class _KycState extends State<Kyc> {
                     );
                   });
             } else {
-              alert(S.of(context).tips_waitForReview, context, () {
+              if (resp.kycStatus == EnumKycStatus.passed.value) {
                 Navigator.pop(context, true);
-              });
+              } else {
+                alert(S.of(context).tips_waitForReview, context, () {
+                  Navigator.pop(context, true);
+                });
+              }
             }
           }
           removeLoading(entry);

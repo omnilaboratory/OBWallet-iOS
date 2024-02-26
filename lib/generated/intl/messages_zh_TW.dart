@@ -229,6 +229,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_marry_no": MessageLookupByLibrary.simpleMessage("未婚"),
         "realCard_marry_yes": MessageLookupByLibrary.simpleMessage("已婚"),
         "realCard_name": MessageLookupByLibrary.simpleMessage("姓名"),
+        "realCard_open_balance_not_enough":
+            MessageLookupByLibrary.simpleMessage("需要｛fee｝余额不足，请充值"),
         "realCard_open_fee_desc": m6,
         "realCard_otherIdCard": MessageLookupByLibrary.simpleMessage("護照"),
         "realCard_shipAddress_company":

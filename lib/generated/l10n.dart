@@ -1980,6 +1980,16 @@ class S {
     );
   }
 
+  /// `需要｛fee｝余额不足，请充值`
+  String get realCard_open_balance_not_enough {
+    return Intl.message(
+      '需要｛fee｝余额不足，请充值',
+      name: 'realCard_open_balance_not_enough',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Card Shipping Address`
   String get realCard_Step2_title {
     return Intl.message(

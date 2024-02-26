@@ -214,7 +214,9 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
 
           const SizedBox(height: 20),
           Text(
-            S.of(context).applyCard_Desc4(StringTools.formatCurrencyNum(createPcardFee)),
+            S
+                .of(context)
+                .applyCard_Desc4(StringTools.formatCurrencyNum(createPcardFee)),
             style: const TextStyle(
                 color: Colors.black54, fontStyle: FontStyle.italic),
           ),
@@ -400,19 +402,27 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       return;
     }
 
-
-    alert(S.of(context).realCard_open_fee_desc(createPcardFee), context,(){
-      CardService.getInstance()
-          .applyCard(context, isRealCard: true, isShowToast: false)
-          .then((resp) {
-        if (resp.code == 1) {
-          _onBalanceRefresh();
+    AccountService.getInstance().getAccountInfo(context).then((info) {
+      if (info.code == 1) {
+        var accountInfo = info.data as AccountInfo;
+        if (accountInfo.balance < createPcardFee) {
+          alert(S.of(context).realCard_open_balance_not_enough, context, () {});
         } else {
-          alert(resp.msg, context, () {});
+          alert(S.of(context).realCard_open_fee_desc(createPcardFee), context,
+              () {
+            CardService.getInstance()
+                .applyCard(context, isRealCard: true, isShowToast: false)
+                .then((resp) {
+              if (resp.code == 1) {
+                _onBalanceRefresh();
+              } else {
+                alert(resp.msg, context, () {});
+              }
+            });
+          });
         }
-      });
+      }
     });
-
   }
 
   onClickType(int type) {
