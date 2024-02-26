@@ -130,29 +130,50 @@ class _KycState extends State<Kyc> {
                             key: _formKey,
                             child: Column(
                               children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                // Row(
+                                //     mainAxisAlignment: MainAxisAlignment.center,
+                                //     children: [
+                                //       const Image(
+                                //           width: 30,
+                                //           height: 30,
+                                //           image: AssetImage(
+                                //               "asset/images/icon_smile.png")),
+                                //       const SizedBox(width: 8),
+                                //       SizedBox(
+                                //         child: Text(
+                                //           S.of(context).kyc_tips1,
+                                //           maxLines: 2,
+                                //           style: const TextStyle(
+                                //             color: Color(0xFF999999),
+                                //             fontSize: 13,
+                                //             fontWeight: FontWeight.w500,
+                                //             height: 1.47,
+                                //           ),
+                                //         ),
+                                //       ),
+                                //     ]),
+                                const SizedBox(height: 6),
+                                buildCardType(),
+                                const SizedBox(height: 6),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Row(
                                     children: [
-                                      const Image(
-                                          width: 30,
-                                          height: 30,
-                                          image: AssetImage(
-                                              "asset/images/icon_smile.png")),
-                                      const SizedBox(width: 8),
-                                      SizedBox(
-                                        child: Text(
-                                          S.of(context).kyc_tips1,
-                                          maxLines: 2,
+                                      Text(
+                                          selectedCardType == 1
+                                              ? S.of(context).kyc_id_tips_china
+                                              : S
+                                                  .of(context)
+                                                  .kyc_id_tips_otherArea,
                                           style: const TextStyle(
                                             color: Color(0xFF999999),
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500,
                                             height: 1.47,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                                buildCardType(),
+                                          )),
+                                    ],
+                                  ),
+                                ),
                                 const SizedBox(height: 6),
                                 buildImagePicker(),
                                 const SizedBox(height: 6),
@@ -378,9 +399,17 @@ class _KycState extends State<Kyc> {
       return;
     }
 
-    if (idImage1.isEmpty || idImage2.isEmpty) {
-      alert(S.of(context).realCard_tips_uploadImage, context, () {});
-      return;
+    if (selectedCardType == 1) {
+      if (idImage1.isEmpty || idImage2.isEmpty) {
+        alert(S.of(context).realCard_tips_uploadImage, context, () {});
+        return;
+      }
+    }
+    if (selectedCardType == 2) {
+      if (idImage1.isEmpty) {
+        alert(S.of(context).realCard_tips_uploadImage, context, () {});
+        return;
+      }
     }
 
     FocusScope.of(context).requestFocus(FocusNode());
@@ -389,7 +418,7 @@ class _KycState extends State<Kyc> {
         var userInfo = userInfoResp.data as GetUserInfoResponse;
         CommonService.userInfo = userInfo.user;
         UserInfo info = userInfo.user;
-        info.idType = (selectedCardType + 1).toString();
+        info.idType = (selectedCardType).toString();
         info.id1 = idImage1;
         info.id2 = idImage2;
         info.marState = selectedMarry.toString();
@@ -447,7 +476,7 @@ class _KycState extends State<Kyc> {
     });
   }
 
-  late int selectedCardType = 0;
+  late int selectedCardType = 2;
   late int selectedGender = 0;
   late int selectedMarry = 0;
   late int selectedAddressType = 0;
@@ -460,9 +489,9 @@ class _KycState extends State<Kyc> {
         children: <Widget>[
           Flexible(
             child: RadioListTile<int>(
-              value: 0,
+              value: 2,
               title: AutoSizeText(
-                S.of(context).realCard_chinaIdCard,
+                S.of(context).realCard_otherIdCard,
                 maxLines: 2,
                 minFontSize: 10,
                 maxFontSize: 16,
@@ -479,7 +508,7 @@ class _KycState extends State<Kyc> {
             child: RadioListTile<int>(
               value: 1,
               title: AutoSizeText(
-                S.of(context).realCard_otherIdCard,
+                S.of(context).realCard_chinaIdCard,
                 maxLines: 2,
                 minFontSize: 8,
                 maxFontSize: 16,
@@ -603,44 +632,47 @@ class _KycState extends State<Kyc> {
   }
 
   Row buildImagePicker() {
+    List<Widget> children = [];
+    children.add(GestureDetector(
+      onTap: () {
+        getImage(0);
+      },
+      child: cardImage0 == null
+          ? const Image(
+              image: AssetImage("asset/images/user_idCard_template1.png"),
+              width: 130,
+              height: 84,
+            )
+          : Image.file(
+              File(cardImage0!.path),
+              width: 130,
+              height: 84,
+              fit: BoxFit.fitHeight,
+            ),
+    ));
+    if (selectedCardType == 1) {
+      children.add(const SizedBox(width: 10));
+      children.add(GestureDetector(
+        onTap: () {
+          getImage(1);
+        },
+        child: cardImage1 == null
+            ? const Image(
+                image: AssetImage("asset/images/user_idCard_template2.png"),
+                width: 130,
+                height: 84,
+              )
+            : Image.file(
+                File(cardImage1!.path),
+                width: 130,
+                height: 84,
+                fit: BoxFit.fitHeight,
+              ),
+      ));
+    }
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        GestureDetector(
-          onTap: () {
-            getImage(0);
-          },
-          child: cardImage0 == null
-              ? const Image(
-                  image: AssetImage("asset/images/user_idCard_template1.png"),
-                  width: 130,
-                  height: 84,
-                )
-              : Image.file(
-                  File(cardImage0!.path),
-                  width: 130,
-                  height: 84,
-                  fit: BoxFit.fitHeight,
-                ),
-        ),
-        GestureDetector(
-          onTap: () {
-            getImage(1);
-          },
-          child: cardImage1 == null
-              ? const Image(
-                  image: AssetImage("asset/images/user_idCard_template2.png"),
-                  width: 130,
-                  height: 84,
-                )
-              : Image.file(
-                  File(cardImage1!.path),
-                  width: 130,
-                  height: 84,
-                  fit: BoxFit.fitHeight,
-                ),
-        ),
-      ],
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: children,
     );
   }
 

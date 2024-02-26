@@ -71,6 +71,8 @@
   "txHistory_Send": "Send",
 
   "kyc_title": "Kyc",
+  "kyc_id_tips_china": "kyc_id_tips_china",
+  "kyc_id_tips_otherArea": "kyc_id_tips_otherArea",
   "kyc_dateOfBirth": "Date of birth",
   "kyc_tips1": "Please input English and Number.",
   "kyc_IdentityId": "Identity Id",

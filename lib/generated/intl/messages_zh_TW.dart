@@ -158,6 +158,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "kyc_PostalZipCode": MessageLookupByLibrary.simpleMessage("郵遞區號"),
         "kyc_StateRegion": MessageLookupByLibrary.simpleMessage("州/地區"),
         "kyc_dateOfBirth": MessageLookupByLibrary.simpleMessage("出生日期"),
+        "kyc_id_tips_china":
+            MessageLookupByLibrary.simpleMessage("kyc_id_tips_china"),
+        "kyc_id_tips_otherArea":
+            MessageLookupByLibrary.simpleMessage("kyc_id_tips_otherArea"),
         "kyc_tips1": MessageLookupByLibrary.simpleMessage("請輸入英文和數字。"),
         "kyc_title": MessageLookupByLibrary.simpleMessage("認證"),
         "login_Desc": MessageLookupByLibrary.simpleMessage(""),

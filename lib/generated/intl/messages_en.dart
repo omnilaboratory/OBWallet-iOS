@@ -189,6 +189,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "kyc_StateRegion": MessageLookupByLibrary.simpleMessage("State/Region"),
         "kyc_dateOfBirth":
             MessageLookupByLibrary.simpleMessage("Date of birth"),
+        "kyc_id_tips_china":
+            MessageLookupByLibrary.simpleMessage("kyc_id_tips_china"),
+        "kyc_id_tips_otherArea":
+            MessageLookupByLibrary.simpleMessage("kyc_id_tips_otherArea"),
         "kyc_tips1": MessageLookupByLibrary.simpleMessage(
             "Please input English and Number."),
         "kyc_title": MessageLookupByLibrary.simpleMessage("Kyc"),

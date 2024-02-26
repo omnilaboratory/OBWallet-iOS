@@ -680,6 +680,26 @@ class S {
     );
   }
 
+  /// `kyc_id_tips_china`
+  String get kyc_id_tips_china {
+    return Intl.message(
+      'kyc_id_tips_china',
+      name: 'kyc_id_tips_china',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `kyc_id_tips_otherArea`
+  String get kyc_id_tips_otherArea {
+    return Intl.message(
+      'kyc_id_tips_otherArea',
+      name: 'kyc_id_tips_otherArea',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Date of birth`
   String get kyc_dateOfBirth {
     return Intl.message(

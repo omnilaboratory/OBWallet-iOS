@@ -71,6 +71,8 @@
   "txHistory_Send": "轉账",
 
   "kyc_title": "認證",
+  "kyc_id_tips_china": "kyc_id_tips_china",
+  "kyc_id_tips_otherArea": "kyc_id_tips_otherArea",
   "kyc_dateOfBirth": "出生日期",
   "kyc_tips1": "請輸入英文和數字。",
   "kyc_IdentityId": "身分證號",
