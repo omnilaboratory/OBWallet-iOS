@@ -6,15 +6,15 @@ import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/card_service.dart';
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 
 class PhysicalCardActive extends StatefulWidget {
   final String cardNo;
-  const PhysicalCardActive({
-    super.key, required this.cardNo
-  });
+
+  const PhysicalCardActive({super.key, required this.cardNo});
 
   @override
   State<PhysicalCardActive> createState() => _PhysicalCardActiveState();
@@ -77,7 +77,8 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
   getVerifyCode() async {
     FocusScope.of(context).requestFocus(FocusNode());
     if (_cardNoController.value.text.isEmpty) {
-      showToast("${S.of(context).common_Wrong}${S.of(context).bindCard_cardNo}");
+      showToast(
+          "${S.of(context).common_Wrong}${S.of(context).bindCard_cardNo}");
       return;
     }
 
@@ -147,12 +148,30 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     width: size.width * 0.85,
-                    height: size.height * 0.45,
+                    height: size.height * 0.5,
                     child: Column(children: [
                       const SizedBox(height: 25),
-                      createDialogTitle(S.of(context).bindCard_title),
+                      createDialogTitle(
+                          S.of(context).realCard_card_active_title),
                       const SizedBox(height: 25),
                       buildInputField(),
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        child: Row(
+                          children: [
+                            Text(
+                                S.of(context).realCard_card_active_tips(
+                                    CommonService.userInfo!.email),
+                                maxLines: 4,
+                                style: const TextStyle(
+                                  color: Color(0xFF999999),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                )),
+                          ],
+                        ),
+                      ),
                       const Spacer(
                         flex: 1,
                       ),
@@ -193,7 +212,9 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
                   const SizedBox(height: 20),
                   createTextFormField(
                       _cardNoController, S.of(context).bindCard_cardNo,
-                      icon: const Icon(Icons.add_card_outlined), maxLength: 30,enabled: false),
+                      icon: const Icon(Icons.add_card_outlined),
+                      maxLength: 30,
+                      enabled: false),
                   const SizedBox(height: 10),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

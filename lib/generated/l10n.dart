@@ -1780,6 +1780,26 @@ class S {
     );
   }
 
+  /// `Active Physical Card`
+  String get realCard_card_active_title {
+    return Intl.message(
+      'Active Physical Card',
+      name: 'realCard_card_active_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `验证码会发送到你的邮箱{email}`
+  String realCard_card_active_tips(Object email) {
+    return Intl.message(
+      '验证码会发送到你的邮箱$email',
+      name: 'realCard_card_active_tips',
+      desc: '',
+      args: [email],
+    );
+  }
+
   /// `There is a ${fee} fee to apply physical card. Please top up first.`
   String realCard_fee(Object fee) {
     return Intl.message(

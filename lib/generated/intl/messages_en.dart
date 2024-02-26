@@ -33,27 +33,29 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m4(totalReward, totalUser) =>
       "Total Reward: ${totalReward} from ${totalUser} Users";
 
-  static String m5(fee) =>
+  static String m5(email) => "验证码会发送到你的邮箱${email}";
+
+  static String m6(fee) =>
       "There is a \$${fee} fee to apply physical card. Please top up first.";
 
-  static String m6(fee) => "需要\$${fee}余额不足，请充值";
+  static String m7(fee) => "需要\$${fee}余额不足，请充值";
 
-  static String m7(fee) =>
+  static String m8(fee) =>
       "A fee of \$${fee} is required to apply for the physical card.";
 
-  static String m8(fee) => "Fee ${fee}";
+  static String m9(fee) => "Fee ${fee}";
 
-  static String m9(cost) => "Network Cost ${cost}";
+  static String m10(cost) => "Network Cost ${cost}";
 
-  static String m10(nftTotalCount, nftTotalValue) =>
+  static String m11(nftTotalCount, nftTotalValue) =>
       "You have selected ${nftTotalCount} NFTs and value is \$${nftTotalValue}";
 
-  static String m11(amount, fee) => "Will get \$${amount} and fee is \$${fee}.";
+  static String m12(amount, fee) => "Will get \$${amount} and fee is \$${fee}.";
 
-  static String m12(createCardFee) =>
+  static String m13(createCardFee) =>
       "There is a fee of \$${createCardFee} to apply for a virtual card. \n The USD is insufficient, please click Deposit on the Home page to purchase USDT and then exchange it for USD.";
 
-  static String m13(tokenName) => "${tokenName} Activity";
+  static String m14(tokenName) => "${tokenName} Activity";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -264,11 +266,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Billing Address"),
         "realCard_apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "realCard_card_active": MessageLookupByLibrary.simpleMessage("Active"),
+        "realCard_card_active_tips": m5,
+        "realCard_card_active_title":
+            MessageLookupByLibrary.simpleMessage("Active Physical Card"),
         "realCard_card_bind": MessageLookupByLibrary.simpleMessage("Bind"),
         "realCard_card_title":
             MessageLookupByLibrary.simpleMessage("Physical Card"),
         "realCard_chinaIdCard": MessageLookupByLibrary.simpleMessage("ID Card"),
-        "realCard_fee": m5,
+        "realCard_fee": m6,
         "realCard_firstName":
             MessageLookupByLibrary.simpleMessage("First Name (Pinyin)"),
         "realCard_gender_female":
@@ -281,8 +286,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_marry_no": MessageLookupByLibrary.simpleMessage("Unmarried"),
         "realCard_marry_yes": MessageLookupByLibrary.simpleMessage("Married"),
         "realCard_name": MessageLookupByLibrary.simpleMessage("Name"),
-        "realCard_open_balance_not_enough": m6,
-        "realCard_open_fee_desc": m7,
+        "realCard_open_balance_not_enough": m7,
+        "realCard_open_fee_desc": m8,
         "realCard_otherIdCard":
             MessageLookupByLibrary.simpleMessage("Passport"),
         "realCard_shipAddress_company":
@@ -316,12 +321,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Deposit to Account"),
         "recharge_Title2":
             MessageLookupByLibrary.simpleMessage("Withdraw to Account"),
-        "reviewExchange_Fee": m8,
+        "reviewExchange_Fee": m9,
         "reviewExchange_Slippage":
             MessageLookupByLibrary.simpleMessage("Slippage"),
         "reviewExchange_YouWillSwap":
             MessageLookupByLibrary.simpleMessage("You will swap"),
-        "reviewExchange_cost": m9,
+        "reviewExchange_cost": m10,
         "reviewExchange_title":
             MessageLookupByLibrary.simpleMessage("Review Exchange"),
         "selectCard_title":
@@ -348,13 +353,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "shop_nft_title": MessageLookupByLibrary.simpleMessage("NFT"),
         "shop_nft_tx_history_title":
             MessageLookupByLibrary.simpleMessage("NFT Tx History"),
-        "shop_tips": m10,
+        "shop_tips": m11,
         "shop_title": MessageLookupByLibrary.simpleMessage("Shop"),
         "signUp_InvitationCode":
             MessageLookupByLibrary.simpleMessage("Invitation Code"),
         "signUp_Nickname": MessageLookupByLibrary.simpleMessage("Nickname"),
         "signUp_Title": MessageLookupByLibrary.simpleMessage("Sign Up"),
-        "tips_WithdrawResult": m11,
+        "tips_WithdrawResult": m12,
         "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("Wrong email"),
         "tips_WrongTopUp":
             MessageLookupByLibrary.simpleMessage("Top up to wallet address"),
@@ -411,7 +416,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The amount cannot exceed the maximum."),
         "tips_maxAmount1": MessageLookupByLibrary.simpleMessage(
             "The from amount cannot exceed the maximum."),
-        "tips_needFiveDollarFee": m12,
+        "tips_needFiveDollarFee": m13,
         "tips_selectCountry":
             MessageLookupByLibrary.simpleMessage("Please select the country."),
         "tips_selectDateOfBirth": MessageLookupByLibrary.simpleMessage(
@@ -447,7 +452,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tokenActivity_Receive":
             MessageLookupByLibrary.simpleMessage("Receive"),
         "tokenActivity_Send": MessageLookupByLibrary.simpleMessage("Send"),
-        "tokenActivity_title": m13,
+        "tokenActivity_title": m14,
         "txHistory_Exchange": MessageLookupByLibrary.simpleMessage("Exchange"),
         "txHistory_Send": MessageLookupByLibrary.simpleMessage("Send"),
         "txHistory_title": MessageLookupByLibrary.simpleMessage("Crypto")

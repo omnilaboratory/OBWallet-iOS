@@ -419,7 +419,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                 alert(resp.msg, context, () {});
               }
             });
-          });
+          },showCancel: true);
         }
       }
     });
