@@ -110,9 +110,7 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
                                   isExpanded: true,
                                   items: buildCardList(),
                                   onChanged: (value) {
-                                    setState(() {
-                                      currSelectedCard = value!;
-                                    });
+                                    currSelectedCard = value!;
                                   },
                                 ),
                               ),

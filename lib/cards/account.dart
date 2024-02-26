@@ -6,7 +6,6 @@ import 'package:awallet/bean/enum_exchange_type.dart';
 import 'package:awallet/cards/account_transfer_to_card.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/exchange.dart';
-import 'package:awallet/cards/send.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
@@ -15,6 +14,7 @@ import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
@@ -41,14 +41,14 @@ class _AccountState extends State<Account> {
       RefreshController(initialRefresh: false);
 
   double totalBalanceUsd = 0;
-  bool hasCard =
-      CommonService.userInfo != null && CommonService.userInfo!.cardCount > 0;
+  bool hasCard = false;
 
   @override
   void initState() {
     _onBalanceRefresh();
     _onListRefresh();
     getCardBalanceFromServer();
+    checkHasCard();
 
     GlobalParams.eventBus.on().listen((event) {
       if (mounted) {
@@ -59,6 +59,28 @@ class _AccountState extends State<Account> {
     });
 
     super.initState();
+  }
+
+  void checkHasCard() {
+    CardService.getInstance().cardList(context).then((info) {
+      if (info.code == 1) {
+        var items = info.data;
+        for (int i = 0; i < items.length; i++) {
+          var item = items[i] as CardInfo;
+          if (item.isVcard == true) {
+            hasCard = true;
+            break;
+          }
+          if (item.isVcard == false && item.pcardStatus == 1) {
+            hasCard = true;
+            break;
+          }
+        }
+        if (hasCard && mounted) {
+          setState(() {});
+        }
+      }
+    });
   }
 
   @override
@@ -150,9 +172,7 @@ class _AccountState extends State<Account> {
               var flag = await showDialog(
                   context: context,
                   builder: (context) {
-                    return CardRecharge(
-                        amt: '',
-                        type: EnumChargeType.deposit);
+                    return CardRecharge(amt: '', type: EnumChargeType.deposit);
                   });
               if (flag != null && flag) {
                 _onBalanceRefresh();
