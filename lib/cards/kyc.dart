@@ -500,9 +500,9 @@ class _KycState extends State<Kyc> {
               value: 2,
               title: AutoSizeText(
                 S.of(context).realCard_otherIdCard,
-                maxLines: 2,
+                maxLines: 1,
                 minFontSize: 10,
-                maxFontSize: 16,
+                maxFontSize: 14,
               ),
               groupValue: selectedCardType,
               onChanged: (value) {
@@ -517,9 +517,9 @@ class _KycState extends State<Kyc> {
               value: 1,
               title: AutoSizeText(
                 S.of(context).realCard_chinaIdCard,
-                maxLines: 2,
-                minFontSize: 8,
-                maxFontSize: 16,
+                maxLines: 1,
+                minFontSize: 10,
+                maxFontSize: 14,
               ),
               groupValue: selectedCardType,
               onChanged: (value) {
