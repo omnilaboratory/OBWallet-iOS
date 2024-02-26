@@ -33,9 +33,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m5(fee) => "申請實體卡有${fee}元的費用，請先充值。";
 
-  static String m6(fee) => "需要${fee}余额不足，请充值";
+  static String m6(fee) => "需要支付${fee}美元，余额不足，请充值。";
 
-  static String m7(fee) => "申請實體卡需要支付${fee}美元";
+  static String m7(fee) => "申請實體卡需要支付${fee}美元，请确认。";
 
   static String m8(fee) => "費用 ${fee}";
 

@@ -36,10 +36,11 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m5(fee) =>
       "There is a \$${fee} fee to apply physical card. Please top up first.";
 
-  static String m6(fee) => "需要\$${fee}余额不足，请充值";
+  static String m6(fee) =>
+      "A payment of \$${fee} is required, the balance is insufficient. Please top up.";
 
   static String m7(fee) =>
-      "A fee of \$${fee} is required to apply for the physical card.";
+      "There is a fee of \$${fee} to apply the physical card, please confirm.";
 
   static String m8(fee) => "Fee ${fee}";
 
