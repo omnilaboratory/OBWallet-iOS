@@ -31,7 +31,7 @@ class CardService {
 
   factory CardService() => _instance;
 
-  Future<GrpcResponse> cardInfo(BuildContext context) async {
+  Future<GrpcResponse> cardList(BuildContext context) async {
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient?.cardList(CardListRequest());
@@ -49,7 +49,9 @@ class CardService {
             CommonService.realCardList.add(item);
           }
         }
+        ret.data = resp.items;
       }
+
     } catch (e) {
       UserService.getInstance().setError(context, "cardList", e, ret);
     }

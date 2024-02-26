@@ -221,7 +221,7 @@ class _CardPartState extends State<CardPart> {
   }
 
   void _onBalanceRefresh() async {
-    CardService.getInstance().cardInfo(context).then((resp) {
+    CardService.getInstance().cardList(context).then((resp) {
       if (resp.code == 1) {
         log("cardInfo");
         hasCard = CommonService.cardInfo.cardNo.isNotEmpty;

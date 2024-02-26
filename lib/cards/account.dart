@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_exchange_type.dart';
+import 'package:awallet/cards/account_transfer_to_card.dart';
 import 'package:awallet/cards/card_recharge.dart';
 import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/cards/send.dart';
@@ -168,9 +169,7 @@ class _AccountState extends State<Account> {
                 var flag = await showDialog(
                     context: context,
                     builder: (context) {
-                      return Send(
-                          type: EnumChargeType.withdraw,
-                          cardNo: CommonService.cardInfo.cardNo);
+                      return AccountTransferToCard();
                     });
                 if (flag != null && flag) {
                   _onBalanceRefresh();
@@ -235,7 +234,7 @@ class _AccountState extends State<Account> {
   }
 
   getCardBalanceFromServer() {
-    CardService.getInstance().cardInfo(context).then((resp) {
+    CardService.getInstance().cardList(context).then((resp) {
       if (resp.code == 1) {
         hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
       }

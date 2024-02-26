@@ -270,7 +270,7 @@ class _LoginState extends State<Login> {
 
   void getUserInfoAndGoHome() {
     log("getUserInfoAndGoHome");
-    CardService.getInstance().cardInfo(context);
+    CardService.getInstance().cardList(context);
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
         Navigator.pushReplacement(
