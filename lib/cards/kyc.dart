@@ -10,6 +10,7 @@ import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/country.pbenum.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
@@ -462,8 +463,8 @@ class _KycState extends State<Kyc> {
         info.idNum = info.socialId;
         info.firstName = _firstNameController.value.text.trim().toUpperCase();
         info.lastName = _lastNameController.value.text.trim().toUpperCase();
-        // info.country =
-        //     Utils.getCountryCodeByCode(selectedCountry!.countryCode);
+        info.country =
+            Utils.getCountryCodeByCode(selectedCountry!.countryCode);
 
         info.areaCode = selectedPhoneCountry!.phoneCode;
         if (!info.areaCode.startsWith("+")) {
@@ -476,8 +477,7 @@ class _KycState extends State<Kyc> {
         info.city = _cityController.value.text.trim();
         info.postCode = _postalController.value.text.trim();
         info.countryCode =
-            Utils.getCountryCodeByCode(selectedCountry!.countryCode);
-        info.country =selectedCountryForAddress!.name;
+            Utils.getCountryCodeByCode(selectedCountryForAddress!.countryCode);
 
         OverlayEntry entry = showLoading(context);
         UserService.getInstance().kyc(context, info).then((value) async {

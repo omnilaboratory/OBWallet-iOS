@@ -30,7 +30,7 @@ class _SendState extends State<Send> {
 
   List<TokenInfo> tokenList = [];
   late TokenInfo dropdownValue;
-  late NetWork selectedNetwork = NetWork.ETH;
+  late NetWork selectedNetwork = NetWork.ETHEREUM;
   int num = 6;
   late bool canClick;
 

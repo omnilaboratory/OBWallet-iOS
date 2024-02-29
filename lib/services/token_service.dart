@@ -7,15 +7,15 @@ import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/cupertino.dart';
 
 Map<NetWork, List<TokenInfo>> tokenList = Map.from({
-  NetWork.ETH: [
+  NetWork.ETHEREUM: [
     TokenInfo(
         name: "USDT",
         iconUrl: 'asset/images/icon_tether.png',
-        netName: NetWork.ETH.name),
+        netName: NetWork.ETHEREUM.name),
     TokenInfo(
         name: "USDC",
         iconUrl: 'asset/images/icon_usdc_logo.png',
-        netName: NetWork.ETH.name),
+        netName: NetWork.ETHEREUM.name),
   ],
   NetWork.POLYGON: [
     TokenInfo(
@@ -61,7 +61,7 @@ class TokenService {
   }
 
   List<TokenInfo> getTokenList({NetWork? network}) {
-    return tokenList[NetWork.ETH]!;
+    return tokenList[NetWork.ETHEREUM]!;
   }
 
   updateTokenBalances(BuildContext context) async {

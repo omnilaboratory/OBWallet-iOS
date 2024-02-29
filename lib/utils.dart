@@ -196,7 +196,7 @@ class Utils {
         }
       }
     }
-    return NetWork.ETH;
+    return NetWork.ETHEREUM;
   }
 
   static EnumKycStatus getEnumKycStatus(String code) {

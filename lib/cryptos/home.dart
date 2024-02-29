@@ -19,11 +19,11 @@ class CryptoHome extends StatefulWidget {
 class _CryptoHomeState extends State<CryptoHome>
     with SingleTickerProviderStateMixin {
   double balance = 0;
-  var tabNames = [NetWork.ETH.name, NetWork.POLYGON.name, NetWork.TRON.name];
+  var tabNames = [NetWork.ETHEREUM.name, NetWork.POLYGON.name, NetWork.TRON.name];
 
   List<Widget> tabList = [];
   List<Widget> tabViewList = [
-    CryptoForNetwork(chainNetwork: NetWork.ETH),
+    CryptoForNetwork(chainNetwork: NetWork.ETHEREUM),
     CryptoForNetwork(chainNetwork: NetWork.POLYGON),
     CryptoForNetwork(chainNetwork: NetWork.TRON),
   ];
@@ -54,7 +54,7 @@ class _CryptoHomeState extends State<CryptoHome>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: CryptoForNetwork(chainNetwork: NetWork.ETH),
+      body: CryptoForNetwork(chainNetwork: NetWork.ETHEREUM),
     );
   }
 
@@ -65,7 +65,7 @@ class _CryptoHomeState extends State<CryptoHome>
         color: const Color(0xFFF6F6F6),
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: CryptoForNetwork(chainNetwork: NetWork.ETH),
+      child: CryptoForNetwork(chainNetwork: NetWork.ETHEREUM),
     );
   }
 

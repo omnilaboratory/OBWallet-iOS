@@ -15,14 +15,14 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 class NetWork extends $pb.ProtobufEnum {
   static const NetWork UnKownNetWork = NetWork._(0, _omitEnumNames ? '' : 'UnKownNetWork');
-  static const NetWork ETH = NetWork._(1, _omitEnumNames ? '' : 'ETH');
+  static const NetWork ETHEREUM = NetWork._(1, _omitEnumNames ? '' : 'ETHEREUM');
   static const NetWork POLYGON = NetWork._(2, _omitEnumNames ? '' : 'POLYGON');
   static const NetWork TRON = NetWork._(3, _omitEnumNames ? '' : 'TRON');
   static const NetWork ACOUNT = NetWork._(4, _omitEnumNames ? '' : 'ACOUNT');
 
   static const $core.List<NetWork> values = <NetWork> [
     UnKownNetWork,
-    ETH,
+    ETHEREUM,
     POLYGON,
     TRON,
     ACOUNT,

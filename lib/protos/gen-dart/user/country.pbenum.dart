@@ -563,5 +563,498 @@ class CountryCode extends $pb.ProtobufEnum {
   const CountryCode._($core.int v, $core.String n) : super(v, n);
 }
 
+class CountryISOCode extends $pb.ProtobufEnum {
+  static const CountryISOCode UNKNOWN = CountryISOCode._(0, _omitEnumNames ? '' : 'UNKNOWN');
+  static const CountryISOCode AFG = CountryISOCode._(1, _omitEnumNames ? '' : 'AFG');
+  static const CountryISOCode ALB = CountryISOCode._(2, _omitEnumNames ? '' : 'ALB');
+  static const CountryISOCode DZA = CountryISOCode._(3, _omitEnumNames ? '' : 'DZA');
+  static const CountryISOCode ASM = CountryISOCode._(4, _omitEnumNames ? '' : 'ASM');
+  static const CountryISOCode AND = CountryISOCode._(5, _omitEnumNames ? '' : 'AND');
+  static const CountryISOCode AGO = CountryISOCode._(6, _omitEnumNames ? '' : 'AGO');
+  static const CountryISOCode AIA = CountryISOCode._(7, _omitEnumNames ? '' : 'AIA');
+  static const CountryISOCode ATA = CountryISOCode._(8, _omitEnumNames ? '' : 'ATA');
+  static const CountryISOCode ATG = CountryISOCode._(9, _omitEnumNames ? '' : 'ATG');
+  static const CountryISOCode ARG = CountryISOCode._(10, _omitEnumNames ? '' : 'ARG');
+  static const CountryISOCode ARM = CountryISOCode._(11, _omitEnumNames ? '' : 'ARM');
+  static const CountryISOCode ABW = CountryISOCode._(12, _omitEnumNames ? '' : 'ABW');
+  static const CountryISOCode AUS = CountryISOCode._(13, _omitEnumNames ? '' : 'AUS');
+  static const CountryISOCode AUT = CountryISOCode._(14, _omitEnumNames ? '' : 'AUT');
+  static const CountryISOCode AZE = CountryISOCode._(15, _omitEnumNames ? '' : 'AZE');
+  static const CountryISOCode BHS = CountryISOCode._(16, _omitEnumNames ? '' : 'BHS');
+  static const CountryISOCode BHR = CountryISOCode._(17, _omitEnumNames ? '' : 'BHR');
+  static const CountryISOCode BGD = CountryISOCode._(18, _omitEnumNames ? '' : 'BGD');
+  static const CountryISOCode BRB = CountryISOCode._(19, _omitEnumNames ? '' : 'BRB');
+  static const CountryISOCode BLR = CountryISOCode._(20, _omitEnumNames ? '' : 'BLR');
+  static const CountryISOCode BEL = CountryISOCode._(21, _omitEnumNames ? '' : 'BEL');
+  static const CountryISOCode BLZ = CountryISOCode._(22, _omitEnumNames ? '' : 'BLZ');
+  static const CountryISOCode BEN = CountryISOCode._(23, _omitEnumNames ? '' : 'BEN');
+  static const CountryISOCode BMU = CountryISOCode._(24, _omitEnumNames ? '' : 'BMU');
+  static const CountryISOCode BTN = CountryISOCode._(25, _omitEnumNames ? '' : 'BTN');
+  static const CountryISOCode BOL = CountryISOCode._(26, _omitEnumNames ? '' : 'BOL');
+  static const CountryISOCode BIH = CountryISOCode._(27, _omitEnumNames ? '' : 'BIH');
+  static const CountryISOCode BWA = CountryISOCode._(28, _omitEnumNames ? '' : 'BWA');
+  static const CountryISOCode BRA = CountryISOCode._(29, _omitEnumNames ? '' : 'BRA');
+  static const CountryISOCode IOT = CountryISOCode._(30, _omitEnumNames ? '' : 'IOT');
+  static const CountryISOCode VGB = CountryISOCode._(31, _omitEnumNames ? '' : 'VGB');
+  static const CountryISOCode BRN = CountryISOCode._(32, _omitEnumNames ? '' : 'BRN');
+  static const CountryISOCode BGR = CountryISOCode._(33, _omitEnumNames ? '' : 'BGR');
+  static const CountryISOCode BFA = CountryISOCode._(34, _omitEnumNames ? '' : 'BFA');
+  static const CountryISOCode MMR = CountryISOCode._(35, _omitEnumNames ? '' : 'MMR');
+  static const CountryISOCode BDI = CountryISOCode._(36, _omitEnumNames ? '' : 'BDI');
+  static const CountryISOCode KHM = CountryISOCode._(37, _omitEnumNames ? '' : 'KHM');
+  static const CountryISOCode CMR = CountryISOCode._(38, _omitEnumNames ? '' : 'CMR');
+  static const CountryISOCode CAN = CountryISOCode._(39, _omitEnumNames ? '' : 'CAN');
+  static const CountryISOCode CPV = CountryISOCode._(40, _omitEnumNames ? '' : 'CPV');
+  static const CountryISOCode CYM = CountryISOCode._(41, _omitEnumNames ? '' : 'CYM');
+  static const CountryISOCode CAF = CountryISOCode._(42, _omitEnumNames ? '' : 'CAF');
+  static const CountryISOCode TCD = CountryISOCode._(43, _omitEnumNames ? '' : 'TCD');
+  static const CountryISOCode CHL = CountryISOCode._(44, _omitEnumNames ? '' : 'CHL');
+  static const CountryISOCode CHN = CountryISOCode._(45, _omitEnumNames ? '' : 'CHN');
+  static const CountryISOCode CXR = CountryISOCode._(46, _omitEnumNames ? '' : 'CXR');
+  static const CountryISOCode CCK = CountryISOCode._(47, _omitEnumNames ? '' : 'CCK');
+  static const CountryISOCode COL = CountryISOCode._(48, _omitEnumNames ? '' : 'COL');
+  static const CountryISOCode COM = CountryISOCode._(49, _omitEnumNames ? '' : 'COM');
+  static const CountryISOCode COG = CountryISOCode._(50, _omitEnumNames ? '' : 'COG');
+  static const CountryISOCode COD = CountryISOCode._(51, _omitEnumNames ? '' : 'COD');
+  static const CountryISOCode COK = CountryISOCode._(52, _omitEnumNames ? '' : 'COK');
+  static const CountryISOCode CRI = CountryISOCode._(53, _omitEnumNames ? '' : 'CRI');
+  static const CountryISOCode HRV = CountryISOCode._(54, _omitEnumNames ? '' : 'HRV');
+  static const CountryISOCode CUB = CountryISOCode._(55, _omitEnumNames ? '' : 'CUB');
+  static const CountryISOCode CUW = CountryISOCode._(56, _omitEnumNames ? '' : 'CUW');
+  static const CountryISOCode CYP = CountryISOCode._(57, _omitEnumNames ? '' : 'CYP');
+  static const CountryISOCode CZE = CountryISOCode._(58, _omitEnumNames ? '' : 'CZE');
+  static const CountryISOCode DNK = CountryISOCode._(59, _omitEnumNames ? '' : 'DNK');
+  static const CountryISOCode DJI = CountryISOCode._(60, _omitEnumNames ? '' : 'DJI');
+  static const CountryISOCode DMA = CountryISOCode._(61, _omitEnumNames ? '' : 'DMA');
+  static const CountryISOCode DOM = CountryISOCode._(62, _omitEnumNames ? '' : 'DOM');
+  static const CountryISOCode TLS = CountryISOCode._(63, _omitEnumNames ? '' : 'TLS');
+  static const CountryISOCode ECU = CountryISOCode._(64, _omitEnumNames ? '' : 'ECU');
+  static const CountryISOCode EGY = CountryISOCode._(65, _omitEnumNames ? '' : 'EGY');
+  static const CountryISOCode SLV = CountryISOCode._(66, _omitEnumNames ? '' : 'SLV');
+  static const CountryISOCode GNQ = CountryISOCode._(67, _omitEnumNames ? '' : 'GNQ');
+  static const CountryISOCode ERI = CountryISOCode._(68, _omitEnumNames ? '' : 'ERI');
+  static const CountryISOCode EST = CountryISOCode._(69, _omitEnumNames ? '' : 'EST');
+  static const CountryISOCode ETH = CountryISOCode._(70, _omitEnumNames ? '' : 'ETH');
+  static const CountryISOCode FLK = CountryISOCode._(71, _omitEnumNames ? '' : 'FLK');
+  static const CountryISOCode FRO = CountryISOCode._(72, _omitEnumNames ? '' : 'FRO');
+  static const CountryISOCode FJI = CountryISOCode._(73, _omitEnumNames ? '' : 'FJI');
+  static const CountryISOCode FIN = CountryISOCode._(74, _omitEnumNames ? '' : 'FIN');
+  static const CountryISOCode FRA = CountryISOCode._(75, _omitEnumNames ? '' : 'FRA');
+  static const CountryISOCode PYF = CountryISOCode._(76, _omitEnumNames ? '' : 'PYF');
+  static const CountryISOCode GAB = CountryISOCode._(77, _omitEnumNames ? '' : 'GAB');
+  static const CountryISOCode GMB = CountryISOCode._(78, _omitEnumNames ? '' : 'GMB');
+  static const CountryISOCode GEO = CountryISOCode._(79, _omitEnumNames ? '' : 'GEO');
+  static const CountryISOCode DEU = CountryISOCode._(80, _omitEnumNames ? '' : 'DEU');
+  static const CountryISOCode GHA = CountryISOCode._(81, _omitEnumNames ? '' : 'GHA');
+  static const CountryISOCode GIB = CountryISOCode._(82, _omitEnumNames ? '' : 'GIB');
+  static const CountryISOCode GRC = CountryISOCode._(83, _omitEnumNames ? '' : 'GRC');
+  static const CountryISOCode GRL = CountryISOCode._(84, _omitEnumNames ? '' : 'GRL');
+  static const CountryISOCode GRD = CountryISOCode._(85, _omitEnumNames ? '' : 'GRD');
+  static const CountryISOCode GUM = CountryISOCode._(86, _omitEnumNames ? '' : 'GUM');
+  static const CountryISOCode GTM = CountryISOCode._(87, _omitEnumNames ? '' : 'GTM');
+  static const CountryISOCode GGY = CountryISOCode._(88, _omitEnumNames ? '' : 'GGY');
+  static const CountryISOCode GIN = CountryISOCode._(89, _omitEnumNames ? '' : 'GIN');
+  static const CountryISOCode GNB = CountryISOCode._(90, _omitEnumNames ? '' : 'GNB');
+  static const CountryISOCode GUY = CountryISOCode._(91, _omitEnumNames ? '' : 'GUY');
+  static const CountryISOCode HTI = CountryISOCode._(92, _omitEnumNames ? '' : 'HTI');
+  static const CountryISOCode HND = CountryISOCode._(93, _omitEnumNames ? '' : 'HND');
+  static const CountryISOCode HKG = CountryISOCode._(94, _omitEnumNames ? '' : 'HKG');
+  static const CountryISOCode HUN = CountryISOCode._(95, _omitEnumNames ? '' : 'HUN');
+  static const CountryISOCode ISL = CountryISOCode._(96, _omitEnumNames ? '' : 'ISL');
+  static const CountryISOCode IND = CountryISOCode._(97, _omitEnumNames ? '' : 'IND');
+  static const CountryISOCode IDN = CountryISOCode._(98, _omitEnumNames ? '' : 'IDN');
+  static const CountryISOCode IRN = CountryISOCode._(99, _omitEnumNames ? '' : 'IRN');
+  static const CountryISOCode IRQ = CountryISOCode._(100, _omitEnumNames ? '' : 'IRQ');
+  static const CountryISOCode IRL = CountryISOCode._(101, _omitEnumNames ? '' : 'IRL');
+  static const CountryISOCode IMN = CountryISOCode._(102, _omitEnumNames ? '' : 'IMN');
+  static const CountryISOCode ISR = CountryISOCode._(103, _omitEnumNames ? '' : 'ISR');
+  static const CountryISOCode ITA = CountryISOCode._(104, _omitEnumNames ? '' : 'ITA');
+  static const CountryISOCode CIV = CountryISOCode._(105, _omitEnumNames ? '' : 'CIV');
+  static const CountryISOCode JAM = CountryISOCode._(106, _omitEnumNames ? '' : 'JAM');
+  static const CountryISOCode JPN = CountryISOCode._(107, _omitEnumNames ? '' : 'JPN');
+  static const CountryISOCode JEY = CountryISOCode._(108, _omitEnumNames ? '' : 'JEY');
+  static const CountryISOCode JOR = CountryISOCode._(109, _omitEnumNames ? '' : 'JOR');
+  static const CountryISOCode KAZ = CountryISOCode._(110, _omitEnumNames ? '' : 'KAZ');
+  static const CountryISOCode KEN = CountryISOCode._(111, _omitEnumNames ? '' : 'KEN');
+  static const CountryISOCode KIR = CountryISOCode._(112, _omitEnumNames ? '' : 'KIR');
+  static const CountryISOCode XKX = CountryISOCode._(113, _omitEnumNames ? '' : 'XKX');
+  static const CountryISOCode KWT = CountryISOCode._(114, _omitEnumNames ? '' : 'KWT');
+  static const CountryISOCode KGZ = CountryISOCode._(115, _omitEnumNames ? '' : 'KGZ');
+  static const CountryISOCode LAO = CountryISOCode._(116, _omitEnumNames ? '' : 'LAO');
+  static const CountryISOCode LVA = CountryISOCode._(117, _omitEnumNames ? '' : 'LVA');
+  static const CountryISOCode LBN = CountryISOCode._(118, _omitEnumNames ? '' : 'LBN');
+  static const CountryISOCode LSO = CountryISOCode._(119, _omitEnumNames ? '' : 'LSO');
+  static const CountryISOCode LBR = CountryISOCode._(120, _omitEnumNames ? '' : 'LBR');
+  static const CountryISOCode LBY = CountryISOCode._(121, _omitEnumNames ? '' : 'LBY');
+  static const CountryISOCode LIE = CountryISOCode._(122, _omitEnumNames ? '' : 'LIE');
+  static const CountryISOCode LTU = CountryISOCode._(123, _omitEnumNames ? '' : 'LTU');
+  static const CountryISOCode LUX = CountryISOCode._(124, _omitEnumNames ? '' : 'LUX');
+  static const CountryISOCode MAC = CountryISOCode._(125, _omitEnumNames ? '' : 'MAC');
+  static const CountryISOCode MKD = CountryISOCode._(126, _omitEnumNames ? '' : 'MKD');
+  static const CountryISOCode MDG = CountryISOCode._(127, _omitEnumNames ? '' : 'MDG');
+  static const CountryISOCode MWI = CountryISOCode._(128, _omitEnumNames ? '' : 'MWI');
+  static const CountryISOCode MYS = CountryISOCode._(129, _omitEnumNames ? '' : 'MYS');
+  static const CountryISOCode MDV = CountryISOCode._(130, _omitEnumNames ? '' : 'MDV');
+  static const CountryISOCode MLI = CountryISOCode._(131, _omitEnumNames ? '' : 'MLI');
+  static const CountryISOCode MLT = CountryISOCode._(132, _omitEnumNames ? '' : 'MLT');
+  static const CountryISOCode MHL = CountryISOCode._(133, _omitEnumNames ? '' : 'MHL');
+  static const CountryISOCode MRT = CountryISOCode._(134, _omitEnumNames ? '' : 'MRT');
+  static const CountryISOCode MUS = CountryISOCode._(135, _omitEnumNames ? '' : 'MUS');
+  static const CountryISOCode MYT = CountryISOCode._(136, _omitEnumNames ? '' : 'MYT');
+  static const CountryISOCode MEX = CountryISOCode._(137, _omitEnumNames ? '' : 'MEX');
+  static const CountryISOCode FSM = CountryISOCode._(138, _omitEnumNames ? '' : 'FSM');
+  static const CountryISOCode MDA = CountryISOCode._(139, _omitEnumNames ? '' : 'MDA');
+  static const CountryISOCode MCO = CountryISOCode._(140, _omitEnumNames ? '' : 'MCO');
+  static const CountryISOCode MNG = CountryISOCode._(141, _omitEnumNames ? '' : 'MNG');
+  static const CountryISOCode MNE = CountryISOCode._(142, _omitEnumNames ? '' : 'MNE');
+  static const CountryISOCode MSR = CountryISOCode._(143, _omitEnumNames ? '' : 'MSR');
+  static const CountryISOCode MAR = CountryISOCode._(144, _omitEnumNames ? '' : 'MAR');
+  static const CountryISOCode MOZ = CountryISOCode._(145, _omitEnumNames ? '' : 'MOZ');
+  static const CountryISOCode NAM = CountryISOCode._(146, _omitEnumNames ? '' : 'NAM');
+  static const CountryISOCode NRU = CountryISOCode._(147, _omitEnumNames ? '' : 'NRU');
+  static const CountryISOCode NPL = CountryISOCode._(148, _omitEnumNames ? '' : 'NPL');
+  static const CountryISOCode NLD = CountryISOCode._(149, _omitEnumNames ? '' : 'NLD');
+  static const CountryISOCode ANT = CountryISOCode._(150, _omitEnumNames ? '' : 'ANT');
+  static const CountryISOCode NCL = CountryISOCode._(151, _omitEnumNames ? '' : 'NCL');
+  static const CountryISOCode NZL = CountryISOCode._(152, _omitEnumNames ? '' : 'NZL');
+  static const CountryISOCode NIC = CountryISOCode._(153, _omitEnumNames ? '' : 'NIC');
+  static const CountryISOCode NER = CountryISOCode._(154, _omitEnumNames ? '' : 'NER');
+  static const CountryISOCode NGA = CountryISOCode._(155, _omitEnumNames ? '' : 'NGA');
+  static const CountryISOCode NIU = CountryISOCode._(156, _omitEnumNames ? '' : 'NIU');
+  static const CountryISOCode MNP = CountryISOCode._(157, _omitEnumNames ? '' : 'MNP');
+  static const CountryISOCode PRK = CountryISOCode._(158, _omitEnumNames ? '' : 'PRK');
+  static const CountryISOCode NOR = CountryISOCode._(159, _omitEnumNames ? '' : 'NOR');
+  static const CountryISOCode OMN = CountryISOCode._(160, _omitEnumNames ? '' : 'OMN');
+  static const CountryISOCode PAK = CountryISOCode._(161, _omitEnumNames ? '' : 'PAK');
+  static const CountryISOCode PLW = CountryISOCode._(162, _omitEnumNames ? '' : 'PLW');
+  static const CountryISOCode PSE = CountryISOCode._(163, _omitEnumNames ? '' : 'PSE');
+  static const CountryISOCode PAN = CountryISOCode._(164, _omitEnumNames ? '' : 'PAN');
+  static const CountryISOCode PNG = CountryISOCode._(165, _omitEnumNames ? '' : 'PNG');
+  static const CountryISOCode PRY = CountryISOCode._(166, _omitEnumNames ? '' : 'PRY');
+  static const CountryISOCode PER = CountryISOCode._(167, _omitEnumNames ? '' : 'PER');
+  static const CountryISOCode PHL = CountryISOCode._(168, _omitEnumNames ? '' : 'PHL');
+  static const CountryISOCode PCN = CountryISOCode._(169, _omitEnumNames ? '' : 'PCN');
+  static const CountryISOCode POL = CountryISOCode._(170, _omitEnumNames ? '' : 'POL');
+  static const CountryISOCode PRT = CountryISOCode._(171, _omitEnumNames ? '' : 'PRT');
+  static const CountryISOCode PRI = CountryISOCode._(172, _omitEnumNames ? '' : 'PRI');
+  static const CountryISOCode QAT = CountryISOCode._(173, _omitEnumNames ? '' : 'QAT');
+  static const CountryISOCode REU = CountryISOCode._(174, _omitEnumNames ? '' : 'REU');
+  static const CountryISOCode ROU = CountryISOCode._(175, _omitEnumNames ? '' : 'ROU');
+  static const CountryISOCode RUS = CountryISOCode._(176, _omitEnumNames ? '' : 'RUS');
+  static const CountryISOCode RWA = CountryISOCode._(177, _omitEnumNames ? '' : 'RWA');
+  static const CountryISOCode BLM = CountryISOCode._(178, _omitEnumNames ? '' : 'BLM');
+  static const CountryISOCode WSM = CountryISOCode._(179, _omitEnumNames ? '' : 'WSM');
+  static const CountryISOCode SMR = CountryISOCode._(180, _omitEnumNames ? '' : 'SMR');
+  static const CountryISOCode STP = CountryISOCode._(181, _omitEnumNames ? '' : 'STP');
+  static const CountryISOCode SAU = CountryISOCode._(182, _omitEnumNames ? '' : 'SAU');
+  static const CountryISOCode SEN = CountryISOCode._(183, _omitEnumNames ? '' : 'SEN');
+  static const CountryISOCode SRB = CountryISOCode._(184, _omitEnumNames ? '' : 'SRB');
+  static const CountryISOCode SYC = CountryISOCode._(185, _omitEnumNames ? '' : 'SYC');
+  static const CountryISOCode SLE = CountryISOCode._(186, _omitEnumNames ? '' : 'SLE');
+  static const CountryISOCode SGP = CountryISOCode._(187, _omitEnumNames ? '' : 'SGP');
+  static const CountryISOCode SXM = CountryISOCode._(188, _omitEnumNames ? '' : 'SXM');
+  static const CountryISOCode SVK = CountryISOCode._(189, _omitEnumNames ? '' : 'SVK');
+  static const CountryISOCode SVN = CountryISOCode._(190, _omitEnumNames ? '' : 'SVN');
+  static const CountryISOCode SLB = CountryISOCode._(191, _omitEnumNames ? '' : 'SLB');
+  static const CountryISOCode SOM = CountryISOCode._(192, _omitEnumNames ? '' : 'SOM');
+  static const CountryISOCode ZAF = CountryISOCode._(193, _omitEnumNames ? '' : 'ZAF');
+  static const CountryISOCode KOR = CountryISOCode._(194, _omitEnumNames ? '' : 'KOR');
+  static const CountryISOCode SSD = CountryISOCode._(195, _omitEnumNames ? '' : 'SSD');
+  static const CountryISOCode ESP = CountryISOCode._(196, _omitEnumNames ? '' : 'ESP');
+  static const CountryISOCode LKA = CountryISOCode._(197, _omitEnumNames ? '' : 'LKA');
+  static const CountryISOCode SHN = CountryISOCode._(198, _omitEnumNames ? '' : 'SHN');
+  static const CountryISOCode KNA = CountryISOCode._(199, _omitEnumNames ? '' : 'KNA');
+  static const CountryISOCode LCA = CountryISOCode._(200, _omitEnumNames ? '' : 'LCA');
+  static const CountryISOCode MAF = CountryISOCode._(201, _omitEnumNames ? '' : 'MAF');
+  static const CountryISOCode SPM = CountryISOCode._(202, _omitEnumNames ? '' : 'SPM');
+  static const CountryISOCode VCT = CountryISOCode._(203, _omitEnumNames ? '' : 'VCT');
+  static const CountryISOCode SDN = CountryISOCode._(204, _omitEnumNames ? '' : 'SDN');
+  static const CountryISOCode SUR = CountryISOCode._(205, _omitEnumNames ? '' : 'SUR');
+  static const CountryISOCode SJM = CountryISOCode._(206, _omitEnumNames ? '' : 'SJM');
+  static const CountryISOCode SWZ = CountryISOCode._(207, _omitEnumNames ? '' : 'SWZ');
+  static const CountryISOCode SWE = CountryISOCode._(208, _omitEnumNames ? '' : 'SWE');
+  static const CountryISOCode CHE = CountryISOCode._(209, _omitEnumNames ? '' : 'CHE');
+  static const CountryISOCode SYR = CountryISOCode._(210, _omitEnumNames ? '' : 'SYR');
+  static const CountryISOCode TWN = CountryISOCode._(211, _omitEnumNames ? '' : 'TWN');
+  static const CountryISOCode TJK = CountryISOCode._(212, _omitEnumNames ? '' : 'TJK');
+  static const CountryISOCode TZA = CountryISOCode._(213, _omitEnumNames ? '' : 'TZA');
+  static const CountryISOCode THA = CountryISOCode._(214, _omitEnumNames ? '' : 'THA');
+  static const CountryISOCode TGO = CountryISOCode._(215, _omitEnumNames ? '' : 'TGO');
+  static const CountryISOCode TKL = CountryISOCode._(216, _omitEnumNames ? '' : 'TKL');
+  static const CountryISOCode TON = CountryISOCode._(217, _omitEnumNames ? '' : 'TON');
+  static const CountryISOCode TTO = CountryISOCode._(218, _omitEnumNames ? '' : 'TTO');
+  static const CountryISOCode TUN = CountryISOCode._(219, _omitEnumNames ? '' : 'TUN');
+  static const CountryISOCode TUR = CountryISOCode._(220, _omitEnumNames ? '' : 'TUR');
+  static const CountryISOCode TKM = CountryISOCode._(221, _omitEnumNames ? '' : 'TKM');
+  static const CountryISOCode TCA = CountryISOCode._(222, _omitEnumNames ? '' : 'TCA');
+  static const CountryISOCode TUV = CountryISOCode._(223, _omitEnumNames ? '' : 'TUV');
+  static const CountryISOCode ARE = CountryISOCode._(224, _omitEnumNames ? '' : 'ARE');
+  static const CountryISOCode UGA = CountryISOCode._(225, _omitEnumNames ? '' : 'UGA');
+  static const CountryISOCode GBR = CountryISOCode._(226, _omitEnumNames ? '' : 'GBR');
+  static const CountryISOCode UKR = CountryISOCode._(227, _omitEnumNames ? '' : 'UKR');
+  static const CountryISOCode URY = CountryISOCode._(228, _omitEnumNames ? '' : 'URY');
+  static const CountryISOCode USA = CountryISOCode._(229, _omitEnumNames ? '' : 'USA');
+  static const CountryISOCode UZB = CountryISOCode._(230, _omitEnumNames ? '' : 'UZB');
+  static const CountryISOCode VUT = CountryISOCode._(231, _omitEnumNames ? '' : 'VUT');
+  static const CountryISOCode VAT = CountryISOCode._(232, _omitEnumNames ? '' : 'VAT');
+  static const CountryISOCode VEN = CountryISOCode._(233, _omitEnumNames ? '' : 'VEN');
+  static const CountryISOCode VNM = CountryISOCode._(234, _omitEnumNames ? '' : 'VNM');
+  static const CountryISOCode VIR = CountryISOCode._(235, _omitEnumNames ? '' : 'VIR');
+  static const CountryISOCode WLF = CountryISOCode._(236, _omitEnumNames ? '' : 'WLF');
+  static const CountryISOCode ESH = CountryISOCode._(237, _omitEnumNames ? '' : 'ESH');
+  static const CountryISOCode YEM = CountryISOCode._(238, _omitEnumNames ? '' : 'YEM');
+  static const CountryISOCode ZMB = CountryISOCode._(239, _omitEnumNames ? '' : 'ZMB');
+  static const CountryISOCode ZWE = CountryISOCode._(240, _omitEnumNames ? '' : 'ZWE');
+
+  static const $core.List<CountryISOCode> values = <CountryISOCode> [
+    UNKNOWN,
+    AFG,
+    ALB,
+    DZA,
+    ASM,
+    AND,
+    AGO,
+    AIA,
+    ATA,
+    ATG,
+    ARG,
+    ARM,
+    ABW,
+    AUS,
+    AUT,
+    AZE,
+    BHS,
+    BHR,
+    BGD,
+    BRB,
+    BLR,
+    BEL,
+    BLZ,
+    BEN,
+    BMU,
+    BTN,
+    BOL,
+    BIH,
+    BWA,
+    BRA,
+    IOT,
+    VGB,
+    BRN,
+    BGR,
+    BFA,
+    MMR,
+    BDI,
+    KHM,
+    CMR,
+    CAN,
+    CPV,
+    CYM,
+    CAF,
+    TCD,
+    CHL,
+    CHN,
+    CXR,
+    CCK,
+    COL,
+    COM,
+    COG,
+    COD,
+    COK,
+    CRI,
+    HRV,
+    CUB,
+    CUW,
+    CYP,
+    CZE,
+    DNK,
+    DJI,
+    DMA,
+    DOM,
+    TLS,
+    ECU,
+    EGY,
+    SLV,
+    GNQ,
+    ERI,
+    EST,
+    ETH,
+    FLK,
+    FRO,
+    FJI,
+    FIN,
+    FRA,
+    PYF,
+    GAB,
+    GMB,
+    GEO,
+    DEU,
+    GHA,
+    GIB,
+    GRC,
+    GRL,
+    GRD,
+    GUM,
+    GTM,
+    GGY,
+    GIN,
+    GNB,
+    GUY,
+    HTI,
+    HND,
+    HKG,
+    HUN,
+    ISL,
+    IND,
+    IDN,
+    IRN,
+    IRQ,
+    IRL,
+    IMN,
+    ISR,
+    ITA,
+    CIV,
+    JAM,
+    JPN,
+    JEY,
+    JOR,
+    KAZ,
+    KEN,
+    KIR,
+    XKX,
+    KWT,
+    KGZ,
+    LAO,
+    LVA,
+    LBN,
+    LSO,
+    LBR,
+    LBY,
+    LIE,
+    LTU,
+    LUX,
+    MAC,
+    MKD,
+    MDG,
+    MWI,
+    MYS,
+    MDV,
+    MLI,
+    MLT,
+    MHL,
+    MRT,
+    MUS,
+    MYT,
+    MEX,
+    FSM,
+    MDA,
+    MCO,
+    MNG,
+    MNE,
+    MSR,
+    MAR,
+    MOZ,
+    NAM,
+    NRU,
+    NPL,
+    NLD,
+    ANT,
+    NCL,
+    NZL,
+    NIC,
+    NER,
+    NGA,
+    NIU,
+    MNP,
+    PRK,
+    NOR,
+    OMN,
+    PAK,
+    PLW,
+    PSE,
+    PAN,
+    PNG,
+    PRY,
+    PER,
+    PHL,
+    PCN,
+    POL,
+    PRT,
+    PRI,
+    QAT,
+    REU,
+    ROU,
+    RUS,
+    RWA,
+    BLM,
+    WSM,
+    SMR,
+    STP,
+    SAU,
+    SEN,
+    SRB,
+    SYC,
+    SLE,
+    SGP,
+    SXM,
+    SVK,
+    SVN,
+    SLB,
+    SOM,
+    ZAF,
+    KOR,
+    SSD,
+    ESP,
+    LKA,
+    SHN,
+    KNA,
+    LCA,
+    MAF,
+    SPM,
+    VCT,
+    SDN,
+    SUR,
+    SJM,
+    SWZ,
+    SWE,
+    CHE,
+    SYR,
+    TWN,
+    TJK,
+    TZA,
+    THA,
+    TGO,
+    TKL,
+    TON,
+    TTO,
+    TUN,
+    TUR,
+    TKM,
+    TCA,
+    TUV,
+    ARE,
+    UGA,
+    GBR,
+    UKR,
+    URY,
+    USA,
+    UZB,
+    VUT,
+    VAT,
+    VEN,
+    VNM,
+    VIR,
+    WLF,
+    ESH,
+    YEM,
+    ZMB,
+    ZWE,
+  ];
+
+  static final $core.Map<$core.int, CountryISOCode> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static CountryISOCode? valueOf($core.int value) => _byValue[value];
+
+  const CountryISOCode._($core.int v, $core.String n) : super(v, n);
+}
+
 
 const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

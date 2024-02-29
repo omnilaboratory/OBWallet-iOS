@@ -18,7 +18,7 @@ const NetWork$json = {
   '1': 'NetWork',
   '2': [
     {'1': 'UnKownNetWork', '2': 0},
-    {'1': 'ETH', '2': 1},
+    {'1': 'ETHEREUM', '2': 1},
     {'1': 'POLYGON', '2': 2},
     {'1': 'TRON', '2': 3},
     {'1': 'ACOUNT', '2': 4},
@@ -27,8 +27,8 @@ const NetWork$json = {
 
 /// Descriptor for `NetWork`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List netWorkDescriptor = $convert.base64Decode(
-    'CgdOZXRXb3JrEhEKDVVuS293bk5ldFdvcmsQABIHCgNFVEgQARILCgdQT0xZR09OEAISCAoEVF'
-    'JPThADEgoKBkFDT1VOVBAE');
+    'CgdOZXRXb3JrEhEKDVVuS293bk5ldFdvcmsQABIMCghFVEhFUkVVTRABEgsKB1BPTFlHT04QAh'
+    'IICgRUUk9OEAMSCgoGQUNPVU5UEAQ=');
 
 @$core.Deprecated('Use getCoinPriceRequestDescriptor instead')
 const GetCoinPriceRequest$json = {

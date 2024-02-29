@@ -73,7 +73,7 @@ const UserInfo$json = {
     {'1': 'eth_address', '3': 25, '4': 1, '5': 9, '10': 'ethAddress'},
     {'1': 'btc_address', '3': 26, '4': 1, '5': 9, '10': 'btcAddress'},
     {'1': 'country_code', '3': 5, '4': 1, '5': 14, '6': '.user.CountryCode', '10': 'countryCode'},
-    {'1': 'country', '3': 43, '4': 1, '5': 9, '10': 'country'},
+    {'1': 'country', '3': 43, '4': 1, '5': 14, '6': '.user.CountryCode', '10': 'country'},
     {'1': 'currency', '3': 23, '4': 1, '5': 14, '6': '.user.CurrencyCode', '10': 'currency'},
     {'1': 'id1', '3': 6, '4': 1, '5': 9, '10': 'id1'},
     {'1': 'id2', '3': 7, '4': 1, '5': 9, '10': 'id2'},
@@ -117,25 +117,25 @@ final $typed_data.Uint8List userInfoDescriptor = $convert.base64Decode(
     'YWlsEiUKDndhbGxldF9hZGRyZXNzGCUgASgJUg13YWxsZXRBZGRyZXNzEiEKDHRyb25fYWRkcm'
     'VzcxgmIAEoCVILdHJvbkFkZHJlc3MSHwoLZXRoX2FkZHJlc3MYGSABKAlSCmV0aEFkZHJlc3MS'
     'HwoLYnRjX2FkZHJlc3MYGiABKAlSCmJ0Y0FkZHJlc3MSNAoMY291bnRyeV9jb2RlGAUgASgOMh'
-    'EudXNlci5Db3VudHJ5Q29kZVILY291bnRyeUNvZGUSGAoHY291bnRyeRgrIAEoCVIHY291bnRy'
-    'eRIuCghjdXJyZW5jeRgXIAEoDjISLnVzZXIuQ3VycmVuY3lDb2RlUghjdXJyZW5jeRIQCgNpZD'
-    'EYBiABKAlSA2lkMRIQCgNpZDIYByABKAlSA2lkMhIVCgZpZF9udW0YCCABKAlSBWlkTnVtEhsK'
-    'CXNvY2lhbF9pZBgJIAEoCVIIc29jaWFsSWQSHAoJZmlyc3ROYW1lGAogASgJUglmaXJzdE5hbW'
-    'USGgoIbGFzdE5hbWUYCyABKAlSCGxhc3ROYW1lEhYKBm1vYmlsZRgMIAEoCVIGbW9iaWxlEhAK'
-    'A2RvYhgNIAEoCVIDZG9iEhoKCGFkZHJlc3MxGA4gASgJUghhZGRyZXNzMRIaCghhZGRyZXNzMh'
-    'gPIAEoCVIIYWRkcmVzczISEgoEY2l0eRgQIAEoCVIEY2l0eRIUCgVzdGF0ZRgRIAEoCVIFc3Rh'
-    'dGUSGwoJcG9zdF9jb2RlGBIgASgJUghwb3N0Q29kZRIaCghhcmVhQ29kZRgkIAEoCVIIYXJlYU'
-    'NvZGUSGgoIbWFyU3RhdGUYJyABKAlSCG1hclN0YXRlEiAKC2FkZHJlc3NUeXBlGCggASgJUgth'
-    'ZGRyZXNzVHlwZRIWCgZnZW5kZXIYKSABKAlSBmdlbmRlchIWCgZpZFR5cGUYKiABKAlSBmlkVH'
-    'lwZRIdCgpreWNpbmZvX29rGBQgASgIUglreWNpbmZvT2sSFwoHb3Blbl9pZBgVIAEoCVIGb3Bl'
-    'bklkEh0KCmt5Y19zdGF0dXMYFiABKAlSCWt5Y1N0YXR1cxIdCgp1cGRhdGVkX2F0GBMgASgEUg'
-    'l1cGRhdGVkQXQSHQoKY3JlYXRlZF9hdBgYIAEoBFIJY3JlYXRlZEF0Eh0KCmNhcmRfY291bnQY'
-    'GyABKARSCWNhcmRDb3VudBIbCgl1c2VyX3R5cGUYHCABKANSCHVzZXJUeXBlEigKEGlzX2FnZW'
-    '50X2NoYW5uZWwYISABKAhSDmlzQWdlbnRDaGFubmVsEhkKCG11c2VyX2lkGB0gASgDUgdtdXNl'
-    'cklkEicKD2ludml0YXRpb25fY29kZRgeIAEoCVIOaW52aXRhdGlvbkNvZGUSHwoLcmVnaXN0X2'
-    'NvZGUYHyABKAlSCnJlZ2lzdENvZGUSKwoRaW52aXRhdGlvbl91c2VyaWQYICABKANSEGludml0'
-    'YXRpb25Vc2VyaWQSHQoKcmVmX3VzZXJpZBgiIAEoA1IJcmVmVXNlcmlkEhoKCGxhbmd1YWdlGC'
-    'MgASgJUghsYW5ndWFnZQ==');
+    'EudXNlci5Db3VudHJ5Q29kZVILY291bnRyeUNvZGUSKwoHY291bnRyeRgrIAEoDjIRLnVzZXIu'
+    'Q291bnRyeUNvZGVSB2NvdW50cnkSLgoIY3VycmVuY3kYFyABKA4yEi51c2VyLkN1cnJlbmN5Q2'
+    '9kZVIIY3VycmVuY3kSEAoDaWQxGAYgASgJUgNpZDESEAoDaWQyGAcgASgJUgNpZDISFQoGaWRf'
+    'bnVtGAggASgJUgVpZE51bRIbCglzb2NpYWxfaWQYCSABKAlSCHNvY2lhbElkEhwKCWZpcnN0Tm'
+    'FtZRgKIAEoCVIJZmlyc3ROYW1lEhoKCGxhc3ROYW1lGAsgASgJUghsYXN0TmFtZRIWCgZtb2Jp'
+    'bGUYDCABKAlSBm1vYmlsZRIQCgNkb2IYDSABKAlSA2RvYhIaCghhZGRyZXNzMRgOIAEoCVIIYW'
+    'RkcmVzczESGgoIYWRkcmVzczIYDyABKAlSCGFkZHJlc3MyEhIKBGNpdHkYECABKAlSBGNpdHkS'
+    'FAoFc3RhdGUYESABKAlSBXN0YXRlEhsKCXBvc3RfY29kZRgSIAEoCVIIcG9zdENvZGUSGgoIYX'
+    'JlYUNvZGUYJCABKAlSCGFyZWFDb2RlEhoKCG1hclN0YXRlGCcgASgJUghtYXJTdGF0ZRIgCgth'
+    'ZGRyZXNzVHlwZRgoIAEoCVILYWRkcmVzc1R5cGUSFgoGZ2VuZGVyGCkgASgJUgZnZW5kZXISFg'
+    'oGaWRUeXBlGCogASgJUgZpZFR5cGUSHQoKa3ljaW5mb19vaxgUIAEoCFIJa3ljaW5mb09rEhcK'
+    'B29wZW5faWQYFSABKAlSBm9wZW5JZBIdCgpreWNfc3RhdHVzGBYgASgJUglreWNTdGF0dXMSHQ'
+    'oKdXBkYXRlZF9hdBgTIAEoBFIJdXBkYXRlZEF0Eh0KCmNyZWF0ZWRfYXQYGCABKARSCWNyZWF0'
+    'ZWRBdBIdCgpjYXJkX2NvdW50GBsgASgEUgljYXJkQ291bnQSGwoJdXNlcl90eXBlGBwgASgDUg'
+    'h1c2VyVHlwZRIoChBpc19hZ2VudF9jaGFubmVsGCEgASgIUg5pc0FnZW50Q2hhbm5lbBIZCght'
+    'dXNlcl9pZBgdIAEoA1IHbXVzZXJJZBInCg9pbnZpdGF0aW9uX2NvZGUYHiABKAlSDmludml0YX'
+    'Rpb25Db2RlEh8KC3JlZ2lzdF9jb2RlGB8gASgJUgpyZWdpc3RDb2RlEisKEWludml0YXRpb25f'
+    'dXNlcmlkGCAgASgDUhBpbnZpdGF0aW9uVXNlcmlkEh0KCnJlZl91c2VyaWQYIiABKANSCXJlZl'
+    'VzZXJpZBIaCghsYW5ndWFnZRgjIAEoCVIIbGFuZ3VhZ2U=');
 
 @$core.Deprecated('Use signUpRequestDescriptor instead')
 const SignUpRequest$json = {

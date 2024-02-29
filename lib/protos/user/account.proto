@@ -530,7 +530,7 @@ message AccountHistory{
 }
 enum NetWork{
   UnKownNetWork=0;
-  ETH=1;
+  ETHEREUM=1;
   POLYGON=2;
   TRON=3;
   //账号系统内部转账

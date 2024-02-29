@@ -247,7 +247,7 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOS(40, _omitFieldNames ? '' : 'addressType', protoName: 'addressType')
     ..aOS(41, _omitFieldNames ? '' : 'gender')
     ..aOS(42, _omitFieldNames ? '' : 'idType', protoName: 'idType')
-    ..aOS(43, _omitFieldNames ? '' : 'country')
+    ..e<$5.CountryCode>(43, _omitFieldNames ? '' : 'country', $pb.PbFieldType.OE, defaultOrMaker: $5.CountryCode.UNKNOWNISO, valueOf: $5.CountryCode.valueOf, enumValues: $5.CountryCode.values)
     ..hasRequiredFields = false
   ;
 
@@ -651,9 +651,9 @@ class UserInfo extends $pb.GeneratedMessage {
   void clearIdType() => clearField(42);
 
   @$pb.TagNumber(43)
-  $core.String get country => $_getSZ(42);
+  $5.CountryCode get country => $_getN(42);
   @$pb.TagNumber(43)
-  set country($core.String v) { $_setString(42, v); }
+  set country($5.CountryCode v) { setField(43, v); }
   @$pb.TagNumber(43)
   $core.bool hasCountry() => $_has(42);
   @$pb.TagNumber(43)

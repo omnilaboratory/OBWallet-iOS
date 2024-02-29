@@ -67,31 +67,6 @@ class CardItem extends StatelessWidget {
             ),
           ],
         ),
-        Visibility(
-          visible: cardItemInfo.pcardStatus == 0,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 154, right: 160),
-            child: InkWell(
-              onTap: () {
-
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return PhysicalCardActive(cardNo: cardItemInfo.cardNo);
-                    });
-
-              },
-              child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(4.0),
-                  ),
-                  child: Text(S.of(context).realCard_card_active)),
-            ),
-          ),
-        ),
         Padding(
           padding: const EdgeInsets.only(bottom: 160, right: 20),
           child: Text(
