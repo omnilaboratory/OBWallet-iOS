@@ -116,30 +116,27 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     if (hasCard) {
       if (currCardInfo.pcardStatus.toInt() == 1) {
         list.add(buildCardDetail(context));
-      } else {
-        list.add(const SizedBox(height: 20));
-        list.add(Center(
-          child: InkWell(
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return PhysicalCardActive(cardNo: currCardInfo.cardNo);
-                  });
-            },
-            child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
-                decoration: BoxDecoration(
-                  color: Colors.lightGreenAccent,
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                child: Text(
-                  S.of(context).realCard_card_active,
-                  style: const TextStyle(fontSize: 40),
-                )),
-          ),
-        ));
+      }else{
+        list.add(const SizedBox(height: 50));
+        list.add(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center, 
+            children: [
+              BottomButton(
+                icon: 'asset/images/icon_arrow_right_green.png',
+                text: S.of(context).realCard_card_active.toUpperCase(),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return PhysicalCardActive(cardNo: currCardInfo.cardNo);
+                    }
+                  );
+                }
+              )
+            ]
+          )
+        );
       }
     } else {
       list.add(buildBindCardPart());
