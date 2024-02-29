@@ -376,7 +376,8 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
             }),
         SquareButton(
             icon: 'asset/images/icon_deposit.png',
-            text: S.of(context).card_card_Deposit,
+            // text: S.of(context).card_card_Deposit,
+            text: S.of(context).common_recharge2card,
             iconWidth: iconWidth,
             onPressed: () async {
               var flag = await showDialog(

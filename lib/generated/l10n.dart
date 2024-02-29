@@ -260,6 +260,16 @@ class S {
     );
   }
 
+  /// `Recharge to Card`
+  String get common_recharge2card {
+    return Intl.message(
+      'Recharge to Card',
+      name: 'common_recharge2card',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Welcome`
   String get login_Welcome {
     return Intl.message(

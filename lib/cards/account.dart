@@ -177,7 +177,8 @@ class _AccountState extends State<Account> {
             }),
         SquareButton(
             icon: 'asset/images/icon_withdraw.png',
-            text: S.of(context).common_Withdraw,
+            // text: S.of(context).common_Withdraw,
+            text: S.of(context).common_recharge2card,
             iconWidth: iconWidth,
             onPressed: () async {
               if (hasCard == false) {

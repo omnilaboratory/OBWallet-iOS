@@ -123,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Verify Code"),
         "common_Withdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
         "common_Wrong": MessageLookupByLibrary.simpleMessage("Wrong "),
+        "common_recharge2card":
+            MessageLookupByLibrary.simpleMessage("Recharge to Card"),
         "crypto_sendConfirm_From":
             MessageLookupByLibrary.simpleMessage("From: "),
         "crypto_sendConfirm_Memo":

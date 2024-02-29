@@ -105,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_VerifyCode": MessageLookupByLibrary.simpleMessage("驗證碼"),
         "common_Withdraw": MessageLookupByLibrary.simpleMessage("提款"),
         "common_Wrong": MessageLookupByLibrary.simpleMessage("錯誤"),
+        "common_recharge2card": MessageLookupByLibrary.simpleMessage("充值到卡"),
         "crypto_sendConfirm_From": MessageLookupByLibrary.simpleMessage("從: "),
         "crypto_sendConfirm_Memo": MessageLookupByLibrary.simpleMessage("備註: "),
         "crypto_sendConfirm_PaymentDetails":
