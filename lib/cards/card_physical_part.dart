@@ -94,8 +94,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                   cardNo: currCardInfo.cardNo,
                   balance: currCardInfo.balance,
                   exp: currCardInfo.expiryDate,
-                  cvv: currCardInfo.cvv,
-                  pcardStatus: currCardInfo.pcardStatus.toInt()),
+                  cvv: currCardInfo.cvv),
               type: 1,
             );
           },
@@ -115,9 +114,9 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
 
     list.add(const SizedBox(height: 15));
     if (hasCard) {
-      if(currCardInfo.pcardStatus==1){
+      if (currCardInfo.pcardStatus.toInt() == 1) {
         list.add(buildCardDetail(context));
-      }else{
+      } else {
         list.add(const SizedBox(height: 20));
         list.add(Center(
           child: InkWell(
@@ -130,15 +129,17 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
             },
             child: Container(
                 padding:
-                const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
                 decoration: BoxDecoration(
                   color: Colors.lightGreenAccent,
                   borderRadius: BorderRadius.circular(4.0),
                 ),
-                child: Text(S.of(context).realCard_card_active,style: const TextStyle(fontSize: 40),)),
+                child: Text(
+                  S.of(context).realCard_card_active,
+                  style: const TextStyle(fontSize: 40),
+                )),
           ),
         ));
-
       }
     } else {
       list.add(buildBindCardPart());
@@ -432,7 +433,8 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       if (info.code == 1) {
         var accountInfo = info.data as AccountInfo;
         if (accountInfo.balance < createPcardFee) {
-          alert(S.of(context).realCard_open_balance_not_enough(createPcardFee), context, () {});
+          alert(S.of(context).realCard_open_balance_not_enough(createPcardFee),
+              context, () {});
         } else {
           alert(S.of(context).realCard_open_fee_desc(createPcardFee), context,
               () {
@@ -445,7 +447,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                 alert(resp.msg, context, () {});
               }
             });
-          },showCancel: true);
+          }, showCancel: true);
         }
       }
     });
