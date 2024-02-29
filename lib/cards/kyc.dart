@@ -10,7 +10,6 @@ import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
-import 'package:awallet/protos/gen-dart/user/country.pb.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
@@ -69,12 +68,12 @@ class _KycState extends State<Kyc> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _mobileNumberController = TextEditingController();
   final TextEditingController _address1Controller = TextEditingController();
-  final TextEditingController _address2Controller = TextEditingController();
   final TextEditingController _stateController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _postalController = TextEditingController();
-  Country? selectedCountry = CountryService().findByCode("SG");
-  Country? selectedPhoneCountry = CountryService().findByCode("SG");
+  Country? selectedCountry = CountryService().findByCode("HK");
+  Country? selectedCountryForAddress = CountryService().findByCode("HK");
+  Country? selectedPhoneCountry = CountryService().findByCode("HK");
 
   final List<DateTime?> _dates = [];
   var dateOfBirthTips = "";
@@ -130,28 +129,6 @@ class _KycState extends State<Kyc> {
                             key: _formKey,
                             child: Column(
                               children: [
-                                // Row(
-                                //     mainAxisAlignment: MainAxisAlignment.center,
-                                //     children: [
-                                //       const Image(
-                                //           width: 30,
-                                //           height: 30,
-                                //           image: AssetImage(
-                                //               "asset/images/icon_smile.png")),
-                                //       const SizedBox(width: 8),
-                                //       SizedBox(
-                                //         child: Text(
-                                //           S.of(context).kyc_tips1,
-                                //           maxLines: 2,
-                                //           style: const TextStyle(
-                                //             color: Color(0xFF999999),
-                                //             fontSize: 13,
-                                //             fontWeight: FontWeight.w500,
-                                //             height: 1.47,
-                                //           ),
-                                //         ),
-                                //       ),
-                                //     ]),
                                 const SizedBox(height: 6),
                                 buildCardType(),
                                 const SizedBox(height: 6),
@@ -200,6 +177,57 @@ class _KycState extends State<Kyc> {
                                             maxLength: 20)),
                                   ],
                                 ),
+                                const SizedBox(height: 6),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(S.of(context).kyc_country,
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                        )),
+                                    // const SizedBox(width: 6),
+                                    InkWell(
+                                        onTap: () {
+                                          showCountryPicker(
+                                            context: context,
+                                            showPhoneCode: false,
+                                            useSafeArea: true,
+                                            onSelect: (Country country) {
+                                              selectedCountry = country;
+                                              setState(() {});
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          padding:
+                                          const EdgeInsets.only(left: 6),
+                                          width: 135,
+                                          height: 48,
+                                          decoration: ShapeDecoration(
+                                            shape: outlineInputBorder,
+                                          ),
+                                          child: Center(
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 100,
+                                                  child: AutoSizeText(
+                                                    selectedCountry!.name,
+                                                    maxLines: 2,
+                                                    minFontSize: 10,
+                                                    maxFontSize: 16,
+                                                  ),
+                                                ),
+                                                const Icon(Icons
+                                                    .keyboard_arrow_down_sharp)
+                                              ],
+                                            ),
+                                          ),
+                                        )),
+                                  ],
+                                ),
+
                                 buildGender(),
                                 buildMarry(),
                                 const SizedBox(height: 16),
@@ -290,10 +318,6 @@ class _KycState extends State<Kyc> {
                                 createTextFormField(_address1Controller,
                                     S.of(context).kyc_AddressLine),
                                 const SizedBox(height: 16),
-                                createTextFormField(_address2Controller,
-                                    S.of(context).kyc_AddressLine2,
-                                    needCheck: false),
-                                const SizedBox(height: 16),
                                 Row(
                                   children: [
                                     Expanded(
@@ -324,9 +348,10 @@ class _KycState extends State<Kyc> {
                                           showCountryPicker(
                                             context: context,
                                             showPhoneCode: false,
+                                            countryFilter: ["CN","HK"],
                                             useSafeArea: true,
                                             onSelect: (Country country) {
-                                              selectedCountry = country;
+                                              selectedCountryForAddress = country;
                                               setState(() {});
                                             },
                                           );
@@ -345,7 +370,7 @@ class _KycState extends State<Kyc> {
                                                 SizedBox(
                                                   width: 100,
                                                   child: AutoSizeText(
-                                                    selectedCountry!.name,
+                                                    selectedCountryForAddress!.name,
                                                     maxLines: 2,
                                                     minFontSize: 10,
                                                     maxFontSize: 16,
@@ -393,7 +418,7 @@ class _KycState extends State<Kyc> {
   }
 
   void onKyc() {
-    if (selectedCountry == null) {
+    if (selectedCountryForAddress == null) {
       showToast(S.of(context).tips_selectCountry);
       return;
     }
@@ -435,8 +460,11 @@ class _KycState extends State<Kyc> {
 
         info.socialId = _socialIdController.value.text.trim();
         info.idNum = info.socialId;
-        info.firstName = _firstNameController.value.text.trim();
-        info.lastName = _lastNameController.value.text.trim();
+        info.firstName = _firstNameController.value.text.trim().toUpperCase();
+        info.lastName = _lastNameController.value.text.trim().toUpperCase();
+        // info.country =
+        //     Utils.getCountryCodeByCode(selectedCountry!.countryCode);
+
         info.areaCode = selectedPhoneCountry!.phoneCode;
         if (!info.areaCode.startsWith("+")) {
           info.areaCode = "+${info.areaCode}";
@@ -444,17 +472,12 @@ class _KycState extends State<Kyc> {
         info.mobile = _mobileNumberController.value.text.trim();
         info.dob = dateOfBirthTips;
         info.address1 = _address1Controller.value.text.trim();
-        info.address2 = _address2Controller.value.text.trim();
         info.state = _stateController.value.text.trim();
         info.city = _cityController.value.text.trim();
         info.postCode = _postalController.value.text.trim();
         info.countryCode =
             Utils.getCountryCodeByCode(selectedCountry!.countryCode);
-        if (info.countryCode == CountryCode.CN) {
-          info.country = "CHN";
-        } else {
-          info.country = "HKG";
-        }
+        info.country =selectedCountryForAddress!.name;
 
         OverlayEntry entry = showLoading(context);
         UserService.getInstance().kyc(context, info).then((value) async {

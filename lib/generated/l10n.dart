@@ -680,6 +680,16 @@ class S {
     );
   }
 
+  /// `Country/Zone`
+  String get kyc_country {
+    return Intl.message(
+      'Country/Zone',
+      name: 'kyc_country',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Currently only supports Mainland China`
   String get kyc_id_tips_china {
     return Intl.message(

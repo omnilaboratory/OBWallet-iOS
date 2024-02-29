@@ -71,6 +71,7 @@
   "txHistory_Send": "Send",
 
   "kyc_title": "KYC",
+  "kyc_country": "Country/Zone",
   "kyc_id_tips_china": "Currently only supports Mainland China",
   "kyc_id_tips_otherArea": "Supports 128 countries worldwide",
   "kyc_dateOfBirth": "Date of birth",

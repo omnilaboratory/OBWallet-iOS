@@ -162,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "kyc_PassportId": MessageLookupByLibrary.simpleMessage("護照號碼"),
         "kyc_PostalZipCode": MessageLookupByLibrary.simpleMessage("郵遞區號"),
         "kyc_StateRegion": MessageLookupByLibrary.simpleMessage("州/地區"),
+        "kyc_country": MessageLookupByLibrary.simpleMessage("國家/地區"),
         "kyc_dateOfBirth": MessageLookupByLibrary.simpleMessage("出生日期"),
         "kyc_id_tips_china": MessageLookupByLibrary.simpleMessage("目前僅支持中國大陸"),
         "kyc_id_tips_otherArea":

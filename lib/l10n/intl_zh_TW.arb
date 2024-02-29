@@ -71,6 +71,7 @@
   "txHistory_Send": "轉账",
 
   "kyc_title": "認證",
+  "kyc_country": "國家/地區",
   "kyc_id_tips_china": "目前僅支持中國大陸",
   "kyc_id_tips_otherArea": "支持全球128个國家",
   "kyc_dateOfBirth": "出生日期",

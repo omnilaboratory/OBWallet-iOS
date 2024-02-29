@@ -194,6 +194,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "kyc_PostalZipCode":
             MessageLookupByLibrary.simpleMessage("Postal/Zip Code"),
         "kyc_StateRegion": MessageLookupByLibrary.simpleMessage("State/Region"),
+        "kyc_country": MessageLookupByLibrary.simpleMessage("Country/Zone"),
         "kyc_dateOfBirth":
             MessageLookupByLibrary.simpleMessage("Date of birth"),
         "kyc_id_tips_china": MessageLookupByLibrary.simpleMessage(
