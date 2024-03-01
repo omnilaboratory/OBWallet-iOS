@@ -9,6 +9,7 @@ import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:awallet/utils.dart';
 import 'package:flutter/material.dart';
 
 class PhysicalCardActive extends StatefulWidget {
@@ -77,7 +78,7 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
   getVerifyCode() async {
     FocusScope.of(context).requestFocus(FocusNode());
     var cardNo = _cardNoController.value.text;
-    if (cardNo.isEmpty || cardNo.contains("*")) {
+    if (cardNo.isEmpty || !Utils.isValidCreditCard(cardNo)) {
       showToast(
           "${S.of(context).common_Wrong}${S.of(context).bindCard_cardNo}");
       return;
@@ -109,7 +110,7 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
     }
 
     var cardNo = _cardNoController.text.trim();
-    if (cardNo.isEmpty || cardNo.contains("*")) {
+    if (cardNo.isEmpty || !Utils.isValidCreditCard(cardNo)) {
       showToast(
           "${S.of(context).common_Wrong}${S.of(context).bindCard_cardNo}");
       return;
