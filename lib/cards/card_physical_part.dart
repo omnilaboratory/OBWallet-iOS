@@ -328,8 +328,14 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     CardService.getInstance().cardList(context).then((resp) {
       if (resp.code == 1) {
         hasCard = CommonService.realCardList.isNotEmpty;
+        if (hasCard) {
+          if (currCardInfo.cardNo.isEmpty) {
+            currCardInfo = CommonService.realCardList[0];
+          }
+        }
         if (mounted) {
-          setState(() {});
+          setState(() {
+          });
         }
       }
       _refreshBalanceController.refreshCompleted();
