@@ -76,7 +76,8 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
 
   getVerifyCode() async {
     FocusScope.of(context).requestFocus(FocusNode());
-    if (_cardNoController.value.text.isEmpty) {
+    var cardNo = _cardNoController.value.text;
+    if (cardNo.isEmpty || cardNo.contains("*")) {
       showToast(
           "${S.of(context).common_Wrong}${S.of(context).bindCard_cardNo}");
       return;
@@ -107,9 +108,16 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
       return;
     }
 
+    var cardNo = _cardNoController.text.trim();
+    if (cardNo.isEmpty || cardNo.contains("*")) {
+      showToast(
+          "${S.of(context).common_Wrong}${S.of(context).bindCard_cardNo}");
+      return;
+    }
+
     var loading = showLoading(context);
     CardActivateRequest request = CardActivateRequest();
-    request.cardNo = _cardNoController.text.trim();
+    request.cardNo = cardNo;
     request.codeToken = verifyCodeResponse;
     request.verifyCode = _codeController.text.trim();
     CardService.getInstance().cardActivate(context, request).then((resp) {
@@ -212,9 +220,7 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
                   const SizedBox(height: 20),
                   createTextFormField(
                       _cardNoController, S.of(context).bindCard_cardNo,
-                      icon: const Icon(Icons.add_card_outlined),
-                      maxLength: 30,
-                      enabled: false),
+                      icon: const Icon(Icons.add_card_outlined), maxLength: 30),
                   const SizedBox(height: 10),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
