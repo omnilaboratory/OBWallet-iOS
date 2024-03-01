@@ -239,4 +239,15 @@ class Utils {
     }
     return sum % 10 == 0;
   }
+
+  static bool checkCreditCard(String cardNumber) {
+    if (cardNumber.isEmpty) {
+      return false;
+    }
+    RegExp reg = RegExp(r'^4[0-9]{12}(?:[0-9]{3})?$');
+    if (reg.hasMatch(cardNumber) && isValidCreditCard(cardNumber)) {
+      return true;
+    }
+    return false;
+  }
 }
