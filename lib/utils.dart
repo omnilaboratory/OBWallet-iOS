@@ -240,7 +240,18 @@ class Utils {
     return sum % 10 == 0;
   }
 
-  static bool checkCreditCard(String cardNumber) {
+  static bool checkCreditCardOfMasterCard(String cardNumber) {
+    if (cardNumber.isEmpty) {
+      return false;
+    }
+    RegExp reg = RegExp(r'^5[1-5][0-9]{14}$');
+    if (reg.hasMatch(cardNumber) && isValidCreditCard(cardNumber)) {
+      return true;
+    }
+    return false;
+  }
+
+  static bool checkCreditCardOfVisa(String cardNumber) {
     if (cardNumber.isEmpty) {
       return false;
     }

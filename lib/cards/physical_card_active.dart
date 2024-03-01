@@ -78,7 +78,7 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
   getVerifyCode() async {
     FocusScope.of(context).requestFocus(FocusNode());
     var cardNo = _cardNoController.value.text;
-    if (cardNo.isEmpty || !Utils.checkCreditCard(cardNo)) {
+    if (cardNo.isEmpty || !Utils.checkCreditCardOfMasterCard(cardNo)) {
       showToast(
           "${S.of(context).common_Wrong}${S.of(context).bindCard_cardNo}");
       return;
@@ -110,7 +110,7 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
     }
 
     var cardNo = _cardNoController.text.trim();
-    if (cardNo.isEmpty || !Utils.checkCreditCard(cardNo)) {
+    if (cardNo.isEmpty || !Utils.checkCreditCardOfMasterCard(cardNo)) {
       showToast(
           "${S.of(context).common_Wrong}${S.of(context).bindCard_cardNo}");
       return;
