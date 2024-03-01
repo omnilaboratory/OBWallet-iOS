@@ -75,8 +75,6 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     if (hasCard) {
       list.add(buildBindAndApplyBtns(context));
       list.add(const SizedBox(height: 10));
-    }
-    if (hasCard) {
       list.add(SizedBox(
         height: 200,
         child: Swiper(
@@ -101,6 +99,24 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
           pagination: const SwiperPagination(margin: EdgeInsets.only(top: 20)),
         ),
       ));
+      list.add(const SizedBox(height: 15));
+      if (currCardInfo.pcardStatus.toInt() == 1) {
+        list.add(buildCardDetail(context));
+      } else {
+        list.add(const SizedBox(height: 50));
+        list.add(Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          BottomButton(
+              icon: 'asset/images/icon_arrow_right_green.png',
+              text: S.of(context).realCard_card_active.toUpperCase(),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return PhysicalCardActive(cardNo: currCardInfo.cardNo);
+                    });
+              })
+        ]));
+      }
     } else {
       list.add(CardItem(
         cardItemInfo: CardItemInfo(
@@ -110,38 +126,9 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
             cvv: currCardInfo.cvv),
         type: 1,
       ));
-    }
-
-    list.add(const SizedBox(height: 15));
-    if (hasCard) {
-      if (currCardInfo.pcardStatus.toInt() == 1) {
-        list.add(buildCardDetail(context));
-      }else{
-        list.add(const SizedBox(height: 50));
-        list.add(
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center, 
-            children: [
-              BottomButton(
-                icon: 'asset/images/icon_arrow_right_green.png',
-                text: S.of(context).realCard_card_active.toUpperCase(),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return PhysicalCardActive(cardNo: currCardInfo.cardNo);
-                    }
-                  );
-                }
-              )
-            ]
-          )
-        );
-      }
-    } else {
+      list.add(const SizedBox(height: 15));
       list.add(buildBindCardPart());
     }
-
     return SmartRefresher(
       controller: _refreshBalanceController,
       onRefresh: _onBalanceRefresh,
