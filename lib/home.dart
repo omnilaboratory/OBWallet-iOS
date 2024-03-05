@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/profile/home.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 
+import 'agent/home.dart';
 import 'cards/home.dart';
 import 'cryptos/home.dart';
 
@@ -25,17 +29,11 @@ class _HomePageState extends State<HomePage> {
         _onItemTapped(1);
       }
     });
+    log("userType  ${CommonService.userInfo?.userType.toInt()}");
 
     super.initState();
     _selectedPage = widget.goToPage;
   }
-
-  static final List<Widget> _pages = <Widget>[
-    const CardHome(),
-    const CryptoHome(),
-    // const ShopHome(),
-    const ProfileHome()
-  ];
 
   void _onItemTapped(int index) {
     if (mounted) {
@@ -47,30 +45,40 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> pages = [];
+    List<BottomNavigationBarItem> list = [];
+    pages.add(const CardHome());
+    pages.add(const CryptoHome());
+
+    list.add(BottomNavigationBarItem(
+      icon: const Icon(Icons.credit_card),
+      label: S.of(context).main_home_Card,
+    ));
+    list.add(BottomNavigationBarItem(
+      icon: const Icon(Icons.currency_bitcoin_sharp),
+      label: S.of(context).main_home_Crypto,
+    ));
+    if (CommonService.userInfo?.userType.toInt() == 3) {
+      pages.add(const AgentHome());
+      list.add(BottomNavigationBarItem(
+        icon: const Icon(Icons.support_agent),
+        label: S.of(context).main_home_agent,
+      ));
+    }
+
+    pages.add(const ProfileHome());
+    list.add(BottomNavigationBarItem(
+      icon: const Icon(Icons.person),
+      label: S.of(context).main_home_Profile,
+    ));
+
     return Scaffold(
-      body: Center(child: _pages.elementAt(_selectedPage)),
+      body: Center(child: pages.elementAt(_selectedPage)),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedPage,
           onTap: _onItemTapped,
           type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.credit_card),
-              label: S.of(context).main_home_Card,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.currency_bitcoin_sharp),
-              label: S.of(context).main_home_Crypto,
-            ),
-            // BottomNavigationBarItem(
-            //   icon: const Icon(Icons.shop),
-            //   label: S.of(context).main_home_Shop,
-            // ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.person),
-              label:S.of(context).main_home_Profile,
-            ),
-          ]),
+          items: list),
     );
   }
 }

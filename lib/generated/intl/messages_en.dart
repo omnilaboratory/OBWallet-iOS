@@ -216,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "main_home_Crypto": MessageLookupByLibrary.simpleMessage("Crypto"),
         "main_home_Profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "main_home_Shop": MessageLookupByLibrary.simpleMessage("Shop"),
+        "main_home_agent": MessageLookupByLibrary.simpleMessage("Agent"),
         "nftExchange_Chain": MessageLookupByLibrary.simpleMessage("Chain Type"),
         "nftExchange_From": MessageLookupByLibrary.simpleMessage("From"),
         "nftExchange_To": MessageLookupByLibrary.simpleMessage("To"),

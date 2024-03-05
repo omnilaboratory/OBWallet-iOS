@@ -940,6 +940,16 @@ class S {
     );
   }
 
+  /// `Agent`
+  String get main_home_agent {
+    return Intl.message(
+      'Agent',
+      name: 'main_home_agent',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Profile`
   String get main_home_Profile {
     return Intl.message(
