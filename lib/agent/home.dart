@@ -23,7 +23,9 @@ class _AgentHomeState extends State<AgentHome> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("agentHome")
+              Text("kyc"),
+              SizedBox(height: 20),
+              Text("申请历史列表")
             ],
           ),
         ),

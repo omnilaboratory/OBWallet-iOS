@@ -29,7 +29,6 @@ class _HomePageState extends State<HomePage> {
         _onItemTapped(1);
       }
     });
-    log("userType  ${CommonService.userInfo?.userType.toInt()}");
 
     super.initState();
     _selectedPage = widget.goToPage;
@@ -58,7 +57,7 @@ class _HomePageState extends State<HomePage> {
       icon: const Icon(Icons.currency_bitcoin_sharp),
       label: S.of(context).main_home_Crypto,
     ));
-    if (CommonService.userInfo?.userType.toInt() == 3) {
+    if (CommonService.userInfo?.userType.toInt() == 0) {
       pages.add(const AgentHome());
       list.add(BottomNavigationBarItem(
         icon: const Icon(Icons.support_agent),
