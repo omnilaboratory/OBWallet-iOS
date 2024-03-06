@@ -137,6 +137,71 @@ final $typed_data.Uint8List userInfoDescriptor = $convert.base64Decode(
     'dXNlcmlkGCAgASgDUhBpbnZpdGF0aW9uVXNlcmlkEh0KCnJlZl91c2VyaWQYIiABKANSCXJlZl'
     'VzZXJpZBIaCghsYW5ndWFnZRgjIAEoCVIIbGFuZ3VhZ2U=');
 
+@$core.Deprecated('Use agentKycForCardResponseDescriptor instead')
+const AgentKycForCardResponse$json = {
+  '1': 'AgentKycForCardResponse',
+  '2': [
+    {'1': 'card_no', '3': 1, '4': 1, '5': 9, '10': 'cardNo'},
+  ],
+};
+
+/// Descriptor for `AgentKycForCardResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List agentKycForCardResponseDescriptor = $convert.base64Decode(
+    'ChdBZ2VudEt5Y0ZvckNhcmRSZXNwb25zZRIXCgdjYXJkX25vGAEgASgJUgZjYXJkTm8=');
+
+@$core.Deprecated('Use agentKycInfoDescriptor instead')
+const AgentKycInfo$json = {
+  '1': 'AgentKycInfo',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'agentCId', '3': 2, '4': 1, '5': 9, '10': 'agentCId'},
+    {'1': 'email', '3': 4, '4': 1, '5': 9, '10': 'email'},
+    {'1': 'country_code', '3': 5, '4': 1, '5': 14, '6': '.user.CountryCode', '10': 'countryCode'},
+    {'1': 'country', '3': 43, '4': 1, '5': 14, '6': '.user.CountryCode', '10': 'country'},
+    {'1': 'currency', '3': 23, '4': 1, '5': 14, '6': '.user.CurrencyCode', '10': 'currency'},
+    {'1': 'id1', '3': 6, '4': 1, '5': 9, '10': 'id1'},
+    {'1': 'id2', '3': 7, '4': 1, '5': 9, '10': 'id2'},
+    {'1': 'id_num', '3': 8, '4': 1, '5': 9, '10': 'idNum'},
+    {'1': 'social_id', '3': 9, '4': 1, '5': 9, '10': 'socialId'},
+    {'1': 'firstName', '3': 10, '4': 1, '5': 9, '10': 'firstName'},
+    {'1': 'lastName', '3': 11, '4': 1, '5': 9, '10': 'lastName'},
+    {'1': 'mobile', '3': 12, '4': 1, '5': 9, '10': 'mobile'},
+    {'1': 'dob', '3': 13, '4': 1, '5': 9, '10': 'dob'},
+    {'1': 'address1', '3': 14, '4': 1, '5': 9, '10': 'address1'},
+    {'1': 'city', '3': 16, '4': 1, '5': 9, '10': 'city'},
+    {'1': 'state', '3': 17, '4': 1, '5': 9, '10': 'state'},
+    {'1': 'post_code', '3': 18, '4': 1, '5': 9, '10': 'postCode'},
+    {'1': 'areaCode', '3': 36, '4': 1, '5': 9, '10': 'areaCode'},
+    {'1': 'marState', '3': 39, '4': 1, '5': 9, '10': 'marState'},
+    {'1': 'addressType', '3': 40, '4': 1, '5': 9, '10': 'addressType'},
+    {'1': 'gender', '3': 41, '4': 1, '5': 9, '10': 'gender'},
+    {'1': 'idType', '3': 42, '4': 1, '5': 9, '10': 'idType'},
+    {'1': 'open_id', '3': 21, '4': 1, '5': 9, '10': 'openId'},
+    {'1': 'kyc_status', '3': 22, '4': 1, '5': 9, '10': 'kycStatus'},
+    {'1': 'updated_at', '3': 19, '4': 1, '5': 4, '10': 'updatedAt'},
+    {'1': 'created_at', '3': 24, '4': 1, '5': 4, '10': 'createdAt'},
+    {'1': 'cardNo', '3': 25, '4': 1, '5': 9, '10': 'cardNo'},
+  ],
+};
+
+/// Descriptor for `AgentKycInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List agentKycInfoDescriptor = $convert.base64Decode(
+    'CgxBZ2VudEt5Y0luZm8SDgoCaWQYASABKANSAmlkEhoKCGFnZW50Q0lkGAIgASgJUghhZ2VudE'
+    'NJZBIUCgVlbWFpbBgEIAEoCVIFZW1haWwSNAoMY291bnRyeV9jb2RlGAUgASgOMhEudXNlci5D'
+    'b3VudHJ5Q29kZVILY291bnRyeUNvZGUSKwoHY291bnRyeRgrIAEoDjIRLnVzZXIuQ291bnRyeU'
+    'NvZGVSB2NvdW50cnkSLgoIY3VycmVuY3kYFyABKA4yEi51c2VyLkN1cnJlbmN5Q29kZVIIY3Vy'
+    'cmVuY3kSEAoDaWQxGAYgASgJUgNpZDESEAoDaWQyGAcgASgJUgNpZDISFQoGaWRfbnVtGAggAS'
+    'gJUgVpZE51bRIbCglzb2NpYWxfaWQYCSABKAlSCHNvY2lhbElkEhwKCWZpcnN0TmFtZRgKIAEo'
+    'CVIJZmlyc3ROYW1lEhoKCGxhc3ROYW1lGAsgASgJUghsYXN0TmFtZRIWCgZtb2JpbGUYDCABKA'
+    'lSBm1vYmlsZRIQCgNkb2IYDSABKAlSA2RvYhIaCghhZGRyZXNzMRgOIAEoCVIIYWRkcmVzczES'
+    'EgoEY2l0eRgQIAEoCVIEY2l0eRIUCgVzdGF0ZRgRIAEoCVIFc3RhdGUSGwoJcG9zdF9jb2RlGB'
+    'IgASgJUghwb3N0Q29kZRIaCghhcmVhQ29kZRgkIAEoCVIIYXJlYUNvZGUSGgoIbWFyU3RhdGUY'
+    'JyABKAlSCG1hclN0YXRlEiAKC2FkZHJlc3NUeXBlGCggASgJUgthZGRyZXNzVHlwZRIWCgZnZW'
+    '5kZXIYKSABKAlSBmdlbmRlchIWCgZpZFR5cGUYKiABKAlSBmlkVHlwZRIXCgdvcGVuX2lkGBUg'
+    'ASgJUgZvcGVuSWQSHQoKa3ljX3N0YXR1cxgWIAEoCVIJa3ljU3RhdHVzEh0KCnVwZGF0ZWRfYX'
+    'QYEyABKARSCXVwZGF0ZWRBdBIdCgpjcmVhdGVkX2F0GBggASgEUgljcmVhdGVkQXQSFgoGY2Fy'
+    'ZE5vGBkgASgJUgZjYXJkTm8=');
+
 @$core.Deprecated('Use signUpRequestDescriptor instead')
 const SignUpRequest$json = {
   '1': 'SignUpRequest',

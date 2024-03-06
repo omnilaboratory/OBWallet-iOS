@@ -178,6 +178,18 @@ class UserService {
     }
     return ret;
   }
+  Future<GrpcResponse> agentKycForCard(BuildContext context, AgentKycInfo req) async {
+    var ret = GrpcResponse();
+    log("kyc $req");
+    try {
+      var resp = await userServiceClient?.agentKycForCard(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      setError(context, "kyc", e, ret,isShowToast: false);
+    }
+    return ret;
+  }
 
   Future<GrpcResponse> verifyPwd(
       BuildContext context, String username, String password) async {

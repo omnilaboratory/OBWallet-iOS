@@ -31,10 +31,12 @@ class CardService {
 
   factory CardService() => _instance;
 
-  Future<GrpcResponse> cardList(BuildContext context) async {
+  Future<GrpcResponse> cardList(BuildContext context,{bool isAgentCard = false}) async {
+    var req = CardListRequest();
+    req.isAgentCard = isAgentCard;
     var ret = GrpcResponse();
     try {
-      var resp = await cardServiceClient?.cardList(CardListRequest());
+      var resp = await cardServiceClient?.cardList(req);
       ret.code = 1;
       if (resp!.items.isNotEmpty) {
         var items = resp.items;
@@ -51,7 +53,6 @@ class CardService {
         }
         ret.data = resp.items;
       }
-
     } catch (e) {
       UserService.getInstance().setError(context, "cardList", e, ret);
     }

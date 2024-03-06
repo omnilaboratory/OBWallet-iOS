@@ -7,7 +7,6 @@ import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/card_service.dart';
-import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
@@ -21,9 +20,9 @@ import 'package:intl/intl.dart';
 
 import '../component/bottom_button.dart';
 
-
 class AgentKyc extends StatefulWidget {
   const AgentKyc({super.key});
+
   @override
   State<AgentKyc> createState() => _AgentKycState();
 }
@@ -88,12 +87,6 @@ class _AgentKycState extends State<AgentKyc> {
                           child: Column(
                             children: [
                               const SizedBox(height: 6),
-                              createTextFormField(
-                                  _emailController,
-                                  S.of(context).common_Email,
-                                  icon: const Icon(Icons.email),
-                                  maxLength: 50,
-                                  keyboardType: TextInputType.emailAddress),
                               buildCardType(),
                               const SizedBox(height: 6),
                               Padding(
@@ -125,7 +118,6 @@ class _AgentKycState extends State<AgentKyc> {
                                       : S.of(context).kyc_PassportId,
                                   maxLength: 30,
                                   icon: const Icon(Icons.credit_card)),
-
                               Row(
                                 children: [
                                   Expanded(
@@ -143,7 +135,8 @@ class _AgentKycState extends State<AgentKyc> {
                               ),
                               const SizedBox(height: 6),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(S.of(context).kyc_country,
                                       style: const TextStyle(
@@ -164,8 +157,7 @@ class _AgentKycState extends State<AgentKyc> {
                                         );
                                       },
                                       child: Container(
-                                        padding:
-                                        const EdgeInsets.only(left: 6),
+                                        padding: const EdgeInsets.only(left: 6),
                                         width: 135,
                                         height: 48,
                                         decoration: ShapeDecoration(
@@ -191,7 +183,6 @@ class _AgentKycState extends State<AgentKyc> {
                                       )),
                                 ],
                               ),
-
                               buildGender(),
                               buildMarry(),
                               const SizedBox(height: 16),
@@ -243,6 +234,12 @@ class _AgentKycState extends State<AgentKyc> {
                                   ),
                                 ],
                               ),
+                              const SizedBox(height: 16),
+                              createTextFormField(
+                                  _emailController, S.of(context).common_Email,
+                                  icon: const Icon(Icons.email),
+                                  maxLength: 50,
+                                  keyboardType: TextInputType.emailAddress),
                               const SizedBox(height: 16),
                               Container(
                                 height: 48,
@@ -304,15 +301,14 @@ class _AgentKycState extends State<AgentKyc> {
                                           _postalController,
                                           S.of(context).kyc_PostalZipCode,
                                           maxLength: 6,
-                                          keyboardType:
-                                              TextInputType.number)),
+                                          keyboardType: TextInputType.number)),
                                   const SizedBox(width: 20),
                                   InkWell(
                                       onTap: () {
                                         showCountryPicker(
                                           context: context,
                                           showPhoneCode: false,
-                                          countryFilter: ["CN","HK"],
+                                          countryFilter: ["CN", "HK"],
                                           useSafeArea: true,
                                           onSelect: (Country country) {
                                             selectedCountryForAddress = country;
@@ -321,8 +317,7 @@ class _AgentKycState extends State<AgentKyc> {
                                         );
                                       },
                                       child: Container(
-                                        padding:
-                                            const EdgeInsets.only(left: 6),
+                                        padding: const EdgeInsets.only(left: 6),
                                         width: 135,
                                         height: 48,
                                         decoration: ShapeDecoration(
@@ -334,7 +329,8 @@ class _AgentKycState extends State<AgentKyc> {
                                               SizedBox(
                                                 width: 100,
                                                 child: AutoSizeText(
-                                                  selectedCountryForAddress!.name,
+                                                  selectedCountryForAddress!
+                                                      .name,
                                                   maxLines: 2,
                                                   minFontSize: 10,
                                                   maxFontSize: 16,
@@ -409,9 +405,7 @@ class _AgentKycState extends State<AgentKyc> {
     FocusScope.of(context).requestFocus(FocusNode());
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
-        var userInfo = userInfoResp.data as GetUserInfoResponse;
-        CommonService.userInfo = userInfo.user;
-        UserInfo info = userInfo.user;
+        var info = AgentKycInfo();
         info.idType = (selectedCardType).toString();
         info.id1 = idImage1;
         if (selectedCardType == 1) {
@@ -425,8 +419,7 @@ class _AgentKycState extends State<AgentKyc> {
         info.idNum = info.socialId;
         info.firstName = _firstNameController.value.text.trim().toUpperCase();
         info.lastName = _lastNameController.value.text.trim().toUpperCase();
-        info.country =
-            Utils.getCountryCodeByCode(selectedCountry!.countryCode);
+        info.country = Utils.getCountryCodeByCode(selectedCountry!.countryCode);
 
         info.areaCode = selectedPhoneCountry!.phoneCode;
         if (!info.areaCode.startsWith("+")) {
@@ -443,11 +436,17 @@ class _AgentKycState extends State<AgentKyc> {
             Utils.getCountryCodeByCode(selectedCountryForAddress!.countryCode);
 
         OverlayEntry entry = showLoading(context);
-        // UserService.getInstance().kyc(context, info).then((value) async {
-        //   if (value.code == 1) {
-        //   }
-        //   removeLoading(entry);
-        // });
+        UserService.getInstance()
+            .agentKycForCard(context, info)
+            .then((resp) async {
+          if (resp.code == 1) {
+            GlobalParams.eventBus.fire("agent_kyc_finish");
+            Navigator.of(context).pop();
+          } else {
+            alert(resp.msg, context, () {});
+          }
+          removeLoading(entry);
+        });
       }
     });
   }

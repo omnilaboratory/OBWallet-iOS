@@ -64,6 +64,9 @@ const CardInfo$json = {
     {'1': 'cvv', '3': 10, '4': 1, '5': 9, '10': 'cvv'},
     {'1': 'open_id', '3': 11, '4': 1, '5': 9, '10': 'openId'},
     {'1': 'user_id', '3': 4, '4': 1, '5': 3, '10': 'userId'},
+    {'1': 'agent_id', '3': 15, '4': 1, '5': 3, '10': 'agentId'},
+    {'1': 'user_email', '3': 16, '4': 1, '5': 9, '10': 'userEmail'},
+    {'1': 'user_name', '3': 17, '4': 1, '5': 9, '10': 'userName'},
     {'1': 'balance', '3': 5, '4': 1, '5': 1, '10': 'balance'},
     {'1': 'created_at', '3': 6, '4': 1, '5': 4, '10': 'createdAt'},
     {'1': 'updated_at', '3': 7, '4': 1, '5': 4, '10': 'updatedAt'},
@@ -78,10 +81,11 @@ final $typed_data.Uint8List cardInfoDescriptor = $convert.base64Decode(
     'JlYWxfY2FyZF9ubxgNIAEoCVIKcmVhbENhcmRObxIcCgljYXJkTG9nSWQYDiABKAlSCWNhcmRM'
     'b2dJZBIqCgZzeW1ib2wYAyABKA4yEi51c2VyLkN1cnJlbmN5Q29kZVIGc3ltYm9sEh8KC2V4cG'
     'lyeV9kYXRlGAkgASgJUgpleHBpcnlEYXRlEhAKA2N2dhgKIAEoCVIDY3Z2EhcKB29wZW5faWQY'
-    'CyABKAlSBm9wZW5JZBIXCgd1c2VyX2lkGAQgASgDUgZ1c2VySWQSGAoHYmFsYW5jZRgFIAEoAV'
-    'IHYmFsYW5jZRIdCgpjcmVhdGVkX2F0GAYgASgEUgljcmVhdGVkQXQSHQoKdXBkYXRlZF9hdBgH'
-    'IAEoBFIJdXBkYXRlZEF0EhkKCGlzX3ZjYXJkGAggASgIUgdpc1ZjYXJkEiEKDHBjYXJkX3N0YX'
-    'R1cxgMIAEoA1ILcGNhcmRTdGF0dXM=');
+    'CyABKAlSBm9wZW5JZBIXCgd1c2VyX2lkGAQgASgDUgZ1c2VySWQSGQoIYWdlbnRfaWQYDyABKA'
+    'NSB2FnZW50SWQSHQoKdXNlcl9lbWFpbBgQIAEoCVIJdXNlckVtYWlsEhsKCXVzZXJfbmFtZRgR'
+    'IAEoCVIIdXNlck5hbWUSGAoHYmFsYW5jZRgFIAEoAVIHYmFsYW5jZRIdCgpjcmVhdGVkX2F0GA'
+    'YgASgEUgljcmVhdGVkQXQSHQoKdXBkYXRlZF9hdBgHIAEoBFIJdXBkYXRlZEF0EhkKCGlzX3Zj'
+    'YXJkGAggASgIUgdpc1ZjYXJkEiEKDHBjYXJkX3N0YXR1cxgMIAEoA1ILcGNhcmRTdGF0dXM=');
 
 @$core.Deprecated('Use listPcardApplyInfoRequestDescriptor instead')
 const ListPcardApplyInfoRequest$json = {
@@ -275,13 +279,14 @@ const CardListRequest$json = {
   '1': 'CardListRequest',
   '2': [
     {'1': 'without_balance', '3': 1, '4': 1, '5': 8, '10': 'withoutBalance'},
+    {'1': 'is_agent_card', '3': 2, '4': 1, '5': 8, '10': 'isAgentCard'},
   ],
 };
 
 /// Descriptor for `CardListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardListRequestDescriptor = $convert.base64Decode(
     'Cg9DYXJkTGlzdFJlcXVlc3QSJwoPd2l0aG91dF9iYWxhbmNlGAEgASgIUg53aXRob3V0QmFsYW'
-    '5jZQ==');
+    '5jZRIiCg1pc19hZ2VudF9jYXJkGAIgASgIUgtpc0FnZW50Q2FyZA==');
 
 @$core.Deprecated('Use cardListResponseDescriptor instead')
 const CardListResponse$json = {

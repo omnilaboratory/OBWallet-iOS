@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/profile/home.dart';
@@ -57,7 +55,7 @@ class _HomePageState extends State<HomePage> {
       icon: const Icon(Icons.currency_bitcoin_sharp),
       label: S.of(context).main_home_Crypto,
     ));
-    if (CommonService.userInfo?.userType.toInt() == 0) {
+    if (CommonService.userInfo?.userType.toInt() == 3) {
       pages.add(const AgentHome());
       list.add(BottomNavigationBarItem(
         icon: const Icon(Icons.support_agent),

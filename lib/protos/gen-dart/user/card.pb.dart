@@ -215,6 +215,9 @@ class CardInfo extends $pb.GeneratedMessage {
     ..aInt64(12, _omitFieldNames ? '' : 'pcardStatus')
     ..aOS(13, _omitFieldNames ? '' : 'realCardNo')
     ..aOS(14, _omitFieldNames ? '' : 'cardLogId', protoName: 'cardLogId')
+    ..aInt64(15, _omitFieldNames ? '' : 'agentId')
+    ..aOS(16, _omitFieldNames ? '' : 'userEmail')
+    ..aOS(17, _omitFieldNames ? '' : 'userName')
     ..hasRequiredFields = false
   ;
 
@@ -364,6 +367,33 @@ class CardInfo extends $pb.GeneratedMessage {
   $core.bool hasCardLogId() => $_has(13);
   @$pb.TagNumber(14)
   void clearCardLogId() => clearField(14);
+
+  @$pb.TagNumber(15)
+  $fixnum.Int64 get agentId => $_getI64(14);
+  @$pb.TagNumber(15)
+  set agentId($fixnum.Int64 v) { $_setInt64(14, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasAgentId() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearAgentId() => clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.String get userEmail => $_getSZ(15);
+  @$pb.TagNumber(16)
+  set userEmail($core.String v) { $_setString(15, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasUserEmail() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearUserEmail() => clearField(16);
+
+  @$pb.TagNumber(17)
+  $core.String get userName => $_getSZ(16);
+  @$pb.TagNumber(17)
+  set userName($core.String v) { $_setString(16, v); }
+  @$pb.TagNumber(17)
+  $core.bool hasUserName() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearUserName() => clearField(17);
 }
 
 class ListPcardApplyInfoRequest extends $pb.GeneratedMessage {
@@ -1238,6 +1268,7 @@ class CardListRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'withoutBalance')
+    ..aOB(2, _omitFieldNames ? '' : 'isAgentCard')
     ..hasRequiredFields = false
   ;
 
@@ -1270,6 +1301,15 @@ class CardListRequest extends $pb.GeneratedMessage {
   $core.bool hasWithoutBalance() => $_has(0);
   @$pb.TagNumber(1)
   void clearWithoutBalance() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.bool get isAgentCard => $_getBF(1);
+  @$pb.TagNumber(2)
+  set isAgentCard($core.bool v) { $_setBool(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasIsAgentCard() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIsAgentCard() => clearField(2);
 }
 
 class CardListResponse extends $pb.GeneratedMessage {

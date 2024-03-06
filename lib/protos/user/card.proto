@@ -7,6 +7,8 @@ import "user/account.proto";
 service CardService{
   //申请卡
   rpc ApplyCard(ApplyCardRequest) returns (ApplyCardResponse) {}
+//  rpc AgentApplyCard(AgentApplyCardRequest) returns (ApplyCardResponse) {}
+
   //卡消费历史 History of payment at other website
   rpc CardHistory(CardHistoryRequest) returns (CardHistoryResponse) {}
   //卡充值提现明细
@@ -86,6 +88,13 @@ message CardInfo {
   string cvv =10;
   string open_id =11;
   int64  user_id=4;
+  //代理开卡时, 代理的id
+  int64  agent_id=15;
+  //客户邮箱 代理开的卡才有.
+  string  user_email=16;
+  //客户全名 代理开的卡才有.
+  string  user_name=17;
+
   double balance=5;
   uint64 created_at = 6;
   uint64 updated_at = 7;
@@ -94,6 +103,34 @@ message CardInfo {
   //实体卡状态: 0 待激活 1 已激活
   int64 pcard_status=12;
 }
+
+//message AgentCardInfo {
+//  int64 id = 1;
+//  //app显示的的卡号
+//  string card_no =2;
+//  //完整的卡号
+//  string real_card_no =13;
+//  //实体卡特定id
+//  string cardLogId=14;
+//
+//  //USD CNY SGD
+////  CurrencyCode symbol=3;
+////  string expiry_date =9;
+////  string cvv =10;
+////  double balance=5;
+//
+//  string open_id =11;
+////  int64  user_id=4;
+//  int64  agent_user_id=4;
+//  //客户邮箱
+//  int64  user_email=5;
+//// 客户全名
+//  int64  user_name=15;
+//  uint64 created_at = 6;
+//  uint64 updated_at = 7;
+//  //实体卡状态: 0 待激活 1 已激活
+//  int64 pcard_status=12;
+//}
 
 message ListPcardApplyInfoRequest {
   //updated_at desc ; default( id desc)
@@ -243,11 +280,22 @@ message ApplyCardRequest {
   //是否是虚拟卡,默认false开虚拟卡
   bool isRealCard  = 3;
 }
+//message AgentApplyCardRequest {
+//  // default USD
+//  CurrencyCode currency = 2;
+//  //是否是虚拟卡,默认false开虚拟卡
+//  bool isRealCard = 3;
+//  //    客户账号的email
+//  string custCid = 4;
+//}
 message ApplyCardResponse {
 }
 
 message CardListRequest {
+  //不去远程查询余额,可以提高查询速度
   bool without_balance = 1;
+  //是否是代理卡, 默认false,true时只返回代理开的卡
+  bool is_agent_card = 2;
 }
 message CardListResponse {
   repeated CardInfo items=1;
@@ -354,7 +402,7 @@ message CardBindRequest {
   string  cardNo = 1;
 //  string cvv = 2;
 
-  //身份证；如果有kyc信息,可由kyc信息IdNum填充,用户可修改
+  //用户邮箱,服务端填充用户注册邮箱
   string cid = 3;
   //firstName 如果有kyc信息,可由kyc信息firstName填充,用户可修改
   string  firstName = 4;

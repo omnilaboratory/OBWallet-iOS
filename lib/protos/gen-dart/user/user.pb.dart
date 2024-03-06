@@ -660,6 +660,360 @@ class UserInfo extends $pb.GeneratedMessage {
   void clearCountry() => clearField(43);
 }
 
+class AgentKycForCardResponse extends $pb.GeneratedMessage {
+  factory AgentKycForCardResponse() => create();
+  AgentKycForCardResponse._() : super();
+  factory AgentKycForCardResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AgentKycForCardResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AgentKycForCardResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'cardNo')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AgentKycForCardResponse clone() => AgentKycForCardResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AgentKycForCardResponse copyWith(void Function(AgentKycForCardResponse) updates) => super.copyWith((message) => updates(message as AgentKycForCardResponse)) as AgentKycForCardResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AgentKycForCardResponse create() => AgentKycForCardResponse._();
+  AgentKycForCardResponse createEmptyInstance() => create();
+  static $pb.PbList<AgentKycForCardResponse> createRepeated() => $pb.PbList<AgentKycForCardResponse>();
+  @$core.pragma('dart2js:noInline')
+  static AgentKycForCardResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AgentKycForCardResponse>(create);
+  static AgentKycForCardResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get cardNo => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set cardNo($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCardNo() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCardNo() => clearField(1);
+}
+
+class AgentKycInfo extends $pb.GeneratedMessage {
+  factory AgentKycInfo() => create();
+  AgentKycInfo._() : super();
+  factory AgentKycInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AgentKycInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AgentKycInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'agentCId', protoName: 'agentCId')
+    ..aOS(4, _omitFieldNames ? '' : 'email')
+    ..e<$5.CountryCode>(5, _omitFieldNames ? '' : 'countryCode', $pb.PbFieldType.OE, defaultOrMaker: $5.CountryCode.UNKNOWNISO, valueOf: $5.CountryCode.valueOf, enumValues: $5.CountryCode.values)
+    ..aOS(6, _omitFieldNames ? '' : 'id1')
+    ..aOS(7, _omitFieldNames ? '' : 'id2')
+    ..aOS(8, _omitFieldNames ? '' : 'idNum')
+    ..aOS(9, _omitFieldNames ? '' : 'socialId')
+    ..aOS(10, _omitFieldNames ? '' : 'firstName', protoName: 'firstName')
+    ..aOS(11, _omitFieldNames ? '' : 'lastName', protoName: 'lastName')
+    ..aOS(12, _omitFieldNames ? '' : 'mobile')
+    ..aOS(13, _omitFieldNames ? '' : 'dob')
+    ..aOS(14, _omitFieldNames ? '' : 'address1')
+    ..aOS(16, _omitFieldNames ? '' : 'city')
+    ..aOS(17, _omitFieldNames ? '' : 'state')
+    ..aOS(18, _omitFieldNames ? '' : 'postCode')
+    ..a<$fixnum.Int64>(19, _omitFieldNames ? '' : 'updatedAt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(21, _omitFieldNames ? '' : 'openId')
+    ..aOS(22, _omitFieldNames ? '' : 'kycStatus')
+    ..e<$5.CurrencyCode>(23, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.OE, defaultOrMaker: $5.CurrencyCode.UNKNOWNCurrency, valueOf: $5.CurrencyCode.valueOf, enumValues: $5.CurrencyCode.values)
+    ..a<$fixnum.Int64>(24, _omitFieldNames ? '' : 'createdAt', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(25, _omitFieldNames ? '' : 'cardNo', protoName: 'cardNo')
+    ..aOS(36, _omitFieldNames ? '' : 'areaCode', protoName: 'areaCode')
+    ..aOS(39, _omitFieldNames ? '' : 'marState', protoName: 'marState')
+    ..aOS(40, _omitFieldNames ? '' : 'addressType', protoName: 'addressType')
+    ..aOS(41, _omitFieldNames ? '' : 'gender')
+    ..aOS(42, _omitFieldNames ? '' : 'idType', protoName: 'idType')
+    ..e<$5.CountryCode>(43, _omitFieldNames ? '' : 'country', $pb.PbFieldType.OE, defaultOrMaker: $5.CountryCode.UNKNOWNISO, valueOf: $5.CountryCode.valueOf, enumValues: $5.CountryCode.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AgentKycInfo clone() => AgentKycInfo()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AgentKycInfo copyWith(void Function(AgentKycInfo) updates) => super.copyWith((message) => updates(message as AgentKycInfo)) as AgentKycInfo;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AgentKycInfo create() => AgentKycInfo._();
+  AgentKycInfo createEmptyInstance() => create();
+  static $pb.PbList<AgentKycInfo> createRepeated() => $pb.PbList<AgentKycInfo>();
+  @$core.pragma('dart2js:noInline')
+  static AgentKycInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AgentKycInfo>(create);
+  static AgentKycInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get agentCId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set agentCId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAgentCId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAgentCId() => clearField(2);
+
+  @$pb.TagNumber(4)
+  $core.String get email => $_getSZ(2);
+  @$pb.TagNumber(4)
+  set email($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasEmail() => $_has(2);
+  @$pb.TagNumber(4)
+  void clearEmail() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $5.CountryCode get countryCode => $_getN(3);
+  @$pb.TagNumber(5)
+  set countryCode($5.CountryCode v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasCountryCode() => $_has(3);
+  @$pb.TagNumber(5)
+  void clearCountryCode() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get id1 => $_getSZ(4);
+  @$pb.TagNumber(6)
+  set id1($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasId1() => $_has(4);
+  @$pb.TagNumber(6)
+  void clearId1() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get id2 => $_getSZ(5);
+  @$pb.TagNumber(7)
+  set id2($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasId2() => $_has(5);
+  @$pb.TagNumber(7)
+  void clearId2() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get idNum => $_getSZ(6);
+  @$pb.TagNumber(8)
+  set idNum($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasIdNum() => $_has(6);
+  @$pb.TagNumber(8)
+  void clearIdNum() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get socialId => $_getSZ(7);
+  @$pb.TagNumber(9)
+  set socialId($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasSocialId() => $_has(7);
+  @$pb.TagNumber(9)
+  void clearSocialId() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.String get firstName => $_getSZ(8);
+  @$pb.TagNumber(10)
+  set firstName($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasFirstName() => $_has(8);
+  @$pb.TagNumber(10)
+  void clearFirstName() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.String get lastName => $_getSZ(9);
+  @$pb.TagNumber(11)
+  set lastName($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasLastName() => $_has(9);
+  @$pb.TagNumber(11)
+  void clearLastName() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.String get mobile => $_getSZ(10);
+  @$pb.TagNumber(12)
+  set mobile($core.String v) { $_setString(10, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasMobile() => $_has(10);
+  @$pb.TagNumber(12)
+  void clearMobile() => clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.String get dob => $_getSZ(11);
+  @$pb.TagNumber(13)
+  set dob($core.String v) { $_setString(11, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasDob() => $_has(11);
+  @$pb.TagNumber(13)
+  void clearDob() => clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.String get address1 => $_getSZ(12);
+  @$pb.TagNumber(14)
+  set address1($core.String v) { $_setString(12, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasAddress1() => $_has(12);
+  @$pb.TagNumber(14)
+  void clearAddress1() => clearField(14);
+
+  @$pb.TagNumber(16)
+  $core.String get city => $_getSZ(13);
+  @$pb.TagNumber(16)
+  set city($core.String v) { $_setString(13, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasCity() => $_has(13);
+  @$pb.TagNumber(16)
+  void clearCity() => clearField(16);
+
+  @$pb.TagNumber(17)
+  $core.String get state => $_getSZ(14);
+  @$pb.TagNumber(17)
+  set state($core.String v) { $_setString(14, v); }
+  @$pb.TagNumber(17)
+  $core.bool hasState() => $_has(14);
+  @$pb.TagNumber(17)
+  void clearState() => clearField(17);
+
+  @$pb.TagNumber(18)
+  $core.String get postCode => $_getSZ(15);
+  @$pb.TagNumber(18)
+  set postCode($core.String v) { $_setString(15, v); }
+  @$pb.TagNumber(18)
+  $core.bool hasPostCode() => $_has(15);
+  @$pb.TagNumber(18)
+  void clearPostCode() => clearField(18);
+
+  @$pb.TagNumber(19)
+  $fixnum.Int64 get updatedAt => $_getI64(16);
+  @$pb.TagNumber(19)
+  set updatedAt($fixnum.Int64 v) { $_setInt64(16, v); }
+  @$pb.TagNumber(19)
+  $core.bool hasUpdatedAt() => $_has(16);
+  @$pb.TagNumber(19)
+  void clearUpdatedAt() => clearField(19);
+
+  @$pb.TagNumber(21)
+  $core.String get openId => $_getSZ(17);
+  @$pb.TagNumber(21)
+  set openId($core.String v) { $_setString(17, v); }
+  @$pb.TagNumber(21)
+  $core.bool hasOpenId() => $_has(17);
+  @$pb.TagNumber(21)
+  void clearOpenId() => clearField(21);
+
+  @$pb.TagNumber(22)
+  $core.String get kycStatus => $_getSZ(18);
+  @$pb.TagNumber(22)
+  set kycStatus($core.String v) { $_setString(18, v); }
+  @$pb.TagNumber(22)
+  $core.bool hasKycStatus() => $_has(18);
+  @$pb.TagNumber(22)
+  void clearKycStatus() => clearField(22);
+
+  @$pb.TagNumber(23)
+  $5.CurrencyCode get currency => $_getN(19);
+  @$pb.TagNumber(23)
+  set currency($5.CurrencyCode v) { setField(23, v); }
+  @$pb.TagNumber(23)
+  $core.bool hasCurrency() => $_has(19);
+  @$pb.TagNumber(23)
+  void clearCurrency() => clearField(23);
+
+  @$pb.TagNumber(24)
+  $fixnum.Int64 get createdAt => $_getI64(20);
+  @$pb.TagNumber(24)
+  set createdAt($fixnum.Int64 v) { $_setInt64(20, v); }
+  @$pb.TagNumber(24)
+  $core.bool hasCreatedAt() => $_has(20);
+  @$pb.TagNumber(24)
+  void clearCreatedAt() => clearField(24);
+
+  @$pb.TagNumber(25)
+  $core.String get cardNo => $_getSZ(21);
+  @$pb.TagNumber(25)
+  set cardNo($core.String v) { $_setString(21, v); }
+  @$pb.TagNumber(25)
+  $core.bool hasCardNo() => $_has(21);
+  @$pb.TagNumber(25)
+  void clearCardNo() => clearField(25);
+
+  @$pb.TagNumber(36)
+  $core.String get areaCode => $_getSZ(22);
+  @$pb.TagNumber(36)
+  set areaCode($core.String v) { $_setString(22, v); }
+  @$pb.TagNumber(36)
+  $core.bool hasAreaCode() => $_has(22);
+  @$pb.TagNumber(36)
+  void clearAreaCode() => clearField(36);
+
+  @$pb.TagNumber(39)
+  $core.String get marState => $_getSZ(23);
+  @$pb.TagNumber(39)
+  set marState($core.String v) { $_setString(23, v); }
+  @$pb.TagNumber(39)
+  $core.bool hasMarState() => $_has(23);
+  @$pb.TagNumber(39)
+  void clearMarState() => clearField(39);
+
+  @$pb.TagNumber(40)
+  $core.String get addressType => $_getSZ(24);
+  @$pb.TagNumber(40)
+  set addressType($core.String v) { $_setString(24, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasAddressType() => $_has(24);
+  @$pb.TagNumber(40)
+  void clearAddressType() => clearField(40);
+
+  @$pb.TagNumber(41)
+  $core.String get gender => $_getSZ(25);
+  @$pb.TagNumber(41)
+  set gender($core.String v) { $_setString(25, v); }
+  @$pb.TagNumber(41)
+  $core.bool hasGender() => $_has(25);
+  @$pb.TagNumber(41)
+  void clearGender() => clearField(41);
+
+  @$pb.TagNumber(42)
+  $core.String get idType => $_getSZ(26);
+  @$pb.TagNumber(42)
+  set idType($core.String v) { $_setString(26, v); }
+  @$pb.TagNumber(42)
+  $core.bool hasIdType() => $_has(26);
+  @$pb.TagNumber(42)
+  void clearIdType() => clearField(42);
+
+  @$pb.TagNumber(43)
+  $5.CountryCode get country => $_getN(27);
+  @$pb.TagNumber(43)
+  set country($5.CountryCode v) { setField(43, v); }
+  @$pb.TagNumber(43)
+  $core.bool hasCountry() => $_has(27);
+  @$pb.TagNumber(43)
+  void clearCountry() => clearField(43);
+}
+
 class SignUpRequest extends $pb.GeneratedMessage {
   factory SignUpRequest() => create();
   SignUpRequest._() : super();

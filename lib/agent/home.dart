@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:awallet/agent/agent_kyc.dart';
+import 'package:awallet/component/agent_card_item.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/common.dart';
-import 'package:awallet/component/crypto_tx_item.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/grpc_services/card_service.dart';
+import 'package:awallet/protos/gen-dart/user/card.pb.dart';
+import 'package:awallet/tools/global_params.dart';
+import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -15,9 +21,20 @@ class AgentHome extends StatefulWidget {
 }
 
 class _AgentHomeState extends State<AgentHome> {
-  var txs = [];
+  List<CardInfo> cardInfoList = [];
   final RefreshController _refreshListController =
       RefreshController(initialRefresh: false);
+
+  @override
+  void initState() {
+    GlobalParams.eventBus.on().listen((event) {
+      if (event == "agent_kyc_finish") {
+        _onListRefresh();
+      }
+    });
+    _onListRefresh();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +52,18 @@ class _AgentHomeState extends State<AgentHome> {
                 flex: 9,
                 child: buildNewSmartRefresher(
                   _refreshListController,
-                  txs.isEmpty
+                  cardInfoList.isEmpty
                       ? Center(child: Text(S.of(context).common_NoData))
                       : ListView.builder(
-                          padding: const EdgeInsets.only(top: 20),
-                          itemCount: txs.length,
+                          itemCount: cardInfoList.length,
                           itemBuilder: (BuildContext context, int index) {
-                            if (index < txs.length) {
-                              return CryptoTxItem(txInfo: txs[index]);
+                            if (index < cardInfoList.length) {
+                              return AgentCardItem(
+                                  cardInfo: cardInfoList[index]);
                             }
                             return null;
                           }),
                   onRefresh: _onListRefresh,
-                  onLoading: _onListLoading,
                 )),
             const SizedBox(height: 20),
             Expanded(
@@ -71,17 +87,14 @@ class _AgentHomeState extends State<AgentHome> {
   }
 
   void _onListRefresh() async {
-    txs = [];
+    var resp =
+        await CardService.getInstance().cardList(context, isAgentCard: true);
+    if (resp.code == 1) {
+      cardInfoList = resp.data;
+      setState(() {
 
-    if (_refreshListController.isRefresh) {
-      _refreshListController.refreshCompleted();
+      });
     }
-    if (_refreshListController.isLoading) {
-      _refreshListController.loadComplete();
-    }
-  }
-
-  void _onListLoading() async {
     if (_refreshListController.isRefresh) {
       _refreshListController.refreshCompleted();
     }

@@ -22,6 +22,8 @@ service UserService {
   rpc ForgetPwd(ForgetPwdRequest) returns (ForgetPwdResponse) {}
   //same as UpdateUser-rpc ,but with kyc commit.
   rpc Kyc(UserInfo) returns (UserInfo) {}
+  //代理商提交客户kyc信息,并开卡
+  rpc AgentKycForCard(AgentKycInfo) returns (AgentKycForCardResponse) {}
   //修改用户信息
   // input parameter UserInfo-Obj must first get from GetUserInfo-rpc,
   // then update the UserInfo-obj,last call UpdateUser with UserInfo-obj
@@ -140,6 +142,66 @@ message UserInfo {
   int64 ref_userid=34;
   //用户语言偏好
   string language =35;
+}
+
+message AgentKycForCardResponse {
+  string card_no  = 1;
+}
+message AgentKycInfo {
+  //系统id
+  int64 id = 1;
+  //代理商用户ID,由服务端设置
+  string agentCId=2;
+// 客户的邮箱
+  string email = 4;
+
+
+  CountryCode country_code = 5;
+  //国家(快递用，（CHN 中国 HKG 香港）
+  CountryCode country = 43;
+  CurrencyCode currency=23;
+  //image-path1; identity card front  // old obd-ui-field
+  string id1 = 6;
+  //image-path2; identity card back // old  obd-ui-field
+  string id2 = 7;
+  //id_card number
+  string id_num =8;
+  // old obd-ui-field
+  string social_id = 9;
+  string firstName =10;
+  string lastName =11;
+  string mobile=12;
+  //date of birthday; format: 1981-12-01
+  string dob=13;
+  //addressLine1
+  string address1 = 14;
+  //  addressLine2
+//  string address2 = 15;
+
+  string city = 16;
+  string state = 17;
+  string post_code = 18;
+
+  //卡预留手机号区号
+  string areaCode = 36;
+  //婚姻状况，0未婚、1已婚、2离婚、3丧偶、4其他
+  string marState = 39;
+  //地址类型，家庭地址0，公司地址1
+  string addressType = 40;
+  //性别，M=男，F=女
+  string gender = 41;
+  //证件类型，1:身份证 2:护照
+  string idType =  42;
+
+
+  string open_id=21;
+  //passed or pending
+  string kyc_status=22;
+
+  uint64 updated_at = 19;
+  uint64 created_at = 24;
+  //申请到的实体卡号. kyc通过后,由服务端生成
+  string cardNo=25;
 }
 
 message SignUpRequest {
