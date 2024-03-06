@@ -243,6 +243,11 @@
   "alert_ok": "OK",
   "alert_cancel": "Cancel",
 
+
+  "agent_kyc": "agent_kyc",
+
+
+
   "tips_WrongEmail": "Wrong email",
   "tips_WrongTxid": "Wrong txid",
   "tips_WrongTopUp": "Top up to wallet address",

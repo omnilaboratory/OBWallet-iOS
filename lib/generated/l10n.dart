@@ -2180,6 +2180,16 @@ class S {
     );
   }
 
+  /// `agent_kyc`
+  String get agent_kyc {
+    return Intl.message(
+      'agent_kyc',
+      name: 'agent_kyc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Wrong email`
   String get tips_WrongEmail {
     return Intl.message(
