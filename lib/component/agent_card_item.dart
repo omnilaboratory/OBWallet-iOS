@@ -21,8 +21,7 @@ class _AgentCardItemState extends State<AgentCardItem> {
               context: context,
               builder: (context) {
                 return PhysicalCardActive(
-                    cardNo: widget.cardInfo.cardNo,
-                    email: widget.cardInfo.userEmail);
+                    cardNo: widget.cardInfo.cardNo);
               });
         }
       },

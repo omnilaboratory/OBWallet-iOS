@@ -382,6 +382,7 @@ message GetCardActivateCodeRequest {
   string  cardNo = 1;
 }
 message GetCardActivateCodeResponse {
+  string email=1;
   string  codeToken=2;
 }
 

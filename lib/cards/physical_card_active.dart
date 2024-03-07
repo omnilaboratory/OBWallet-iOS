@@ -6,7 +6,6 @@ import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/card_service.dart';
-import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
@@ -14,9 +13,8 @@ import 'package:flutter/material.dart';
 
 class PhysicalCardActive extends StatefulWidget {
   final String cardNo;
-  final String email;
 
-  const PhysicalCardActive({super.key, required this.cardNo, this.email = ""});
+  const PhysicalCardActive({super.key, required this.cardNo});
 
   @override
   State<PhysicalCardActive> createState() => _PhysicalCardActiveState();
@@ -26,6 +24,8 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _cardNoController = TextEditingController();
   final TextEditingController _codeController = TextEditingController();
+
+  late String email = "";
 
   @override
   void initState() {
@@ -96,12 +96,16 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
 
     CardService.getInstance()
         .getCardActivateCode(context, _cardNoController.value.text)
-        .then((resp) => {
-              if (resp.code == 0)
-                {showToast(resp.msg)}
-              else
-                {verifyCodeResponse = resp.data}
-            });
+        .then((resp) {
+      if (resp.code == 0) {
+        showToast(resp.msg);
+      } else {
+        var data = resp.data as GetCardActivateCodeResponse;
+        verifyCodeResponse = data.codeToken;
+        email = data.email;
+        setState(() {});
+      }
+    });
   }
 
   onConfirm() {
@@ -166,22 +170,24 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
                       const SizedBox(height: 25),
                       buildInputField(),
                       const SizedBox(height: 12),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                        child: Row(
-                          children: [
-                            Text(
-                                S.of(context).realCard_card_active_tips(
-                                    widget.email.isEmpty
-                                        ? CommonService.userInfo!.email
-                                        : widget.email),
-                                maxLines: 4,
-                                style: const TextStyle(
-                                  color: Color(0xFF999999),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                )),
-                          ],
+                      Visibility(
+                        visible: email.isNotEmpty,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: Row(
+                            children: [
+                              Text(
+                                  S
+                                      .of(context)
+                                      .realCard_card_active_tips(email),
+                                  maxLines: 4,
+                                  style: const TextStyle(
+                                    color: Color(0xFF999999),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  )),
+                            ],
+                          ),
                         ),
                       ),
                       const Spacer(

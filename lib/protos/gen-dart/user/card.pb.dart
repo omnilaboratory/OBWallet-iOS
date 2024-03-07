@@ -2095,6 +2095,7 @@ class GetCardActivateCodeResponse extends $pb.GeneratedMessage {
   factory GetCardActivateCodeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetCardActivateCodeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'email')
     ..aOS(2, _omitFieldNames ? '' : 'codeToken', protoName: 'codeToken')
     ..hasRequiredFields = false
   ;
@@ -2120,12 +2121,21 @@ class GetCardActivateCodeResponse extends $pb.GeneratedMessage {
   static GetCardActivateCodeResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetCardActivateCodeResponse>(create);
   static GetCardActivateCodeResponse? _defaultInstance;
 
+  @$pb.TagNumber(1)
+  $core.String get email => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set email($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEmail() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEmail() => clearField(1);
+
   @$pb.TagNumber(2)
-  $core.String get codeToken => $_getSZ(0);
+  $core.String get codeToken => $_getSZ(1);
   @$pb.TagNumber(2)
-  set codeToken($core.String v) { $_setString(0, v); }
+  set codeToken($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasCodeToken() => $_has(0);
+  $core.bool hasCodeToken() => $_has(1);
   @$pb.TagNumber(2)
   void clearCodeToken() => clearField(2);
 }

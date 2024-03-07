@@ -215,7 +215,7 @@ class CardService {
     try {
       var resp = await cardServiceClient?.getCardActivateCode(req);
       ret.code = 1;
-      ret.data = resp?.codeToken;
+      ret.data = resp;
     } catch (e) {
       UserService.getInstance().setError(context, "getCardActivateCode", e, ret,isShowToast: false);
     }

@@ -492,14 +492,15 @@ final $typed_data.Uint8List getCardActivateCodeRequestDescriptor = $convert.base
 const GetCardActivateCodeResponse$json = {
   '1': 'GetCardActivateCodeResponse',
   '2': [
+    {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
     {'1': 'codeToken', '3': 2, '4': 1, '5': 9, '10': 'codeToken'},
   ],
 };
 
 /// Descriptor for `GetCardActivateCodeResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getCardActivateCodeResponseDescriptor = $convert.base64Decode(
-    'ChtHZXRDYXJkQWN0aXZhdGVDb2RlUmVzcG9uc2USHAoJY29kZVRva2VuGAIgASgJUgljb2RlVG'
-    '9rZW4=');
+    'ChtHZXRDYXJkQWN0aXZhdGVDb2RlUmVzcG9uc2USFAoFZW1haWwYASABKAlSBWVtYWlsEhwKCW'
+    'NvZGVUb2tlbhgCIAEoCVIJY29kZVRva2Vu');
 
 @$core.Deprecated('Use cardActivateRequestDescriptor instead')
 const CardActivateRequest$json = {
