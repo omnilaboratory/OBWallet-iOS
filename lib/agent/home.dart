@@ -9,7 +9,6 @@ import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pb.dart';
 import 'package:awallet/tools/global_params.dart';
-import 'package:fixnum/src/int64.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -87,13 +86,16 @@ class _AgentHomeState extends State<AgentHome> {
   }
 
   void _onListRefresh() async {
+    log("_onListRefresh");
     var resp =
         await CardService.getInstance().cardList(context, isAgentCard: true);
     if (resp.code == 1) {
-      cardInfoList = resp.data;
-      setState(() {
+      if(resp.data!=null){
+        cardInfoList = resp.data;
+        setState(() {
 
-      });
+        });
+      }
     }
     if (_refreshListController.isRefresh) {
       _refreshListController.refreshCompleted();

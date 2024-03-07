@@ -239,7 +239,20 @@ class _AgentKycState extends State<AgentKyc> {
                                   _emailController, S.of(context).common_Email,
                                   icon: const Icon(Icons.email),
                                   maxLength: 50,
-                                  keyboardType: TextInputType.emailAddress),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return S.of(context).common_Wrong +
+                                          S.of(context).common_Email;
+                                    }
+                                    bool emailValid =
+                                        RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                            .hasMatch(value);
+                                    if (!emailValid) {
+                                      return S.of(context).common_Wrong +
+                                          S.of(context).common_Email;
+                                    }
+                                    return null;
+                              }, keyboardType: TextInputType.emailAddress),
                               const SizedBox(height: 16),
                               Container(
                                 height: 48,
