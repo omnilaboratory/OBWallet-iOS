@@ -14,8 +14,9 @@ import 'package:flutter/material.dart';
 
 class PhysicalCardActive extends StatefulWidget {
   final String cardNo;
+  final String email;
 
-  const PhysicalCardActive({super.key, required this.cardNo});
+  const PhysicalCardActive({super.key, required this.cardNo, this.email = ""});
 
   @override
   State<PhysicalCardActive> createState() => _PhysicalCardActiveState();
@@ -171,7 +172,9 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
                           children: [
                             Text(
                                 S.of(context).realCard_card_active_tips(
-                                    CommonService.userInfo!.email),
+                                    widget.email.isEmpty
+                                        ? CommonService.userInfo!.email
+                                        : widget.email),
                                 maxLines: 4,
                                 style: const TextStyle(
                                   color: Color(0xFF999999),

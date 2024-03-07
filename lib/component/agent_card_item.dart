@@ -20,7 +20,9 @@ class _AgentCardItemState extends State<AgentCardItem> {
           showDialog(
               context: context,
               builder: (context) {
-                return PhysicalCardActive(cardNo: widget.cardInfo.cardNo);
+                return PhysicalCardActive(
+                    cardNo: widget.cardInfo.cardNo,
+                    email: widget.cardInfo.userEmail);
               });
         }
       },
