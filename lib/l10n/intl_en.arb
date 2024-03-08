@@ -243,10 +243,7 @@
   "alert_ok": "OK",
   "alert_cancel": "Cancel",
 
-
-  "agent_kyc": "agent_kyc",
-
-
+  "agent_kyc": "Agent to Physical Card",
 
   "tips_WrongEmail": "Wrong email",
   "tips_WrongTxid": "Wrong txid",

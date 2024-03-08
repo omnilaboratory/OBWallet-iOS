@@ -61,7 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "agent_kyc": MessageLookupByLibrary.simpleMessage("agent_kyc"),
+        "agent_kyc":
+            MessageLookupByLibrary.simpleMessage("Agent to Physical Card"),
         "alert_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "alert_ok": MessageLookupByLibrary.simpleMessage("OK"),
         "alert_title": MessageLookupByLibrary.simpleMessage("Message"),

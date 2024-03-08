@@ -2180,10 +2180,10 @@ class S {
     );
   }
 
-  /// `agent_kyc`
+  /// `Agent to Physical Card`
   String get agent_kyc {
     return Intl.message(
-      'agent_kyc',
+      'Agent to Physical Card',
       name: 'agent_kyc',
       desc: '',
       args: [],

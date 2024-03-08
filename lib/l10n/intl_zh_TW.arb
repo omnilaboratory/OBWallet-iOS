@@ -243,6 +243,8 @@
   "alert_ok": "確定", 
   "alert_cancel": "取消",
 
+  "agent_kyc": "代理申請實體卡",
+
   "tips_WrongEmail": "錯誤的郵件",
   "tips_WrongTxid": "錯誤的交易 ID",
   "tips_WrongTopUp": "充值到錢包地址",
