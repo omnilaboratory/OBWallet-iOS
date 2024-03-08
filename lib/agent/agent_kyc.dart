@@ -399,10 +399,7 @@ class _AgentKycState extends State<AgentKyc> {
           alert(S.of(context).realCard_open_balance_not_enough(createPcardFee),
               context, () {});
         } else {
-          alert(S.of(context).realCard_open_fee_desc(createPcardFee), context,
-              () {
-            onKyc();
-          }, showCancel: true);
+          onKyc();
         }
       }
     });
