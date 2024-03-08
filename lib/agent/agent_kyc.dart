@@ -6,8 +6,11 @@ import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
+import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
+import 'package:awallet/grpc_services/eth_grpc_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
+import 'package:awallet/protos/gen-dart/user/account.pb.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
@@ -238,20 +241,19 @@ class _AgentKycState extends State<AgentKyc> {
                               createTextFormField(
                                   _emailController, S.of(context).common_Email,
                                   icon: const Icon(Icons.email),
-                                  maxLength: 50,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return S.of(context).common_Wrong +
-                                          S.of(context).common_Email;
-                                    }
-                                    bool emailValid =
-                                        RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                            .hasMatch(value);
-                                    if (!emailValid) {
-                                      return S.of(context).common_Wrong +
-                                          S.of(context).common_Email;
-                                    }
-                                    return null;
+                                  maxLength: 50, validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return S.of(context).common_Wrong +
+                                      S.of(context).common_Email;
+                                }
+                                bool emailValid =
+                                    RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                        .hasMatch(value);
+                                if (!emailValid) {
+                                  return S.of(context).common_Wrong +
+                                      S.of(context).common_Email;
+                                }
+                                return null;
                               }, keyboardType: TextInputType.emailAddress),
                               const SizedBox(height: 16),
                               Container(
@@ -367,7 +369,7 @@ class _AgentKycState extends State<AgentKyc> {
                           onPressed: () {
                             if ((_formKey.currentState as FormState)
                                 .validate()) {
-                              onKyc();
+                              checkBalance();
                             }
                           },
                         ),
@@ -387,6 +389,23 @@ class _AgentKycState extends State<AgentKyc> {
             ),
           )),
     );
+  }
+
+  checkBalance() {
+    AccountService.getInstance().getAccountInfo(context).then((info) {
+      if (info.code == 1) {
+        var accountInfo = info.data as AccountInfo;
+        if (accountInfo.balance < createPcardFee) {
+          alert(S.of(context).realCard_open_balance_not_enough(createPcardFee),
+              context, () {});
+        } else {
+          alert(S.of(context).realCard_open_fee_desc(createPcardFee), context,
+              () {
+            onKyc();
+          }, showCancel: true);
+        }
+      }
+    });
   }
 
   void onKyc() {

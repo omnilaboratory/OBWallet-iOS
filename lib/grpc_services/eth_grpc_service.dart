@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awallet/bean/grpc_response.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
@@ -51,7 +53,9 @@ class EthGrpcService {
       var resp = await ethServiceClient?.eTHGetAppConf(request);
       ret.code = 1;
       ret.data = resp;
+      log("ethGetAppConf ${resp}");
       createPcardFee = resp!.createPcardFee.toDouble();
+
     } catch (e) {
       UserService.getInstance().setError(context, "ethTrackTx", e, ret);
     }

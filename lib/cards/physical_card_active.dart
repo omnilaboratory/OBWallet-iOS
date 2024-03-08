@@ -91,7 +91,6 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
         return;
       }
     }
-
     createTimer();
 
     CardService.getInstance()
