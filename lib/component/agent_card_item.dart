@@ -29,7 +29,7 @@ class _AgentCardItemState extends State<AgentCardItem> {
 
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        margin: const EdgeInsets.only(bottom: 10),
+        margin: const EdgeInsets.only(bottom: 15),
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 61, 149, 236),
           borderRadius: BorderRadius.circular(10.0),
