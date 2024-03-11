@@ -244,6 +244,8 @@
   "alert_cancel": "Cancel",
 
   "agent_kyc": "Agent to Physical Card",
+  "agent_card_active": "Active",
+  "agent_card_inactive": "Inactive",
 
   "tips_WrongEmail": "Wrong email",
   "tips_WrongTxid": "Wrong txid",

@@ -2190,6 +2190,26 @@ class S {
     );
   }
 
+  /// `Active`
+  String get agent_card_active {
+    return Intl.message(
+      'Active',
+      name: 'agent_card_active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inactive`
+  String get agent_card_inactive {
+    return Intl.message(
+      'Inactive',
+      name: 'agent_card_inactive',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Wrong email`
   String get tips_WrongEmail {
     return Intl.message(
