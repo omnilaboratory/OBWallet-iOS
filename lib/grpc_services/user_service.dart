@@ -186,7 +186,7 @@ class UserService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      setError(context, "kyc", e, ret,isShowToast: false);
+      setError(context, "agentKycForCard", e, ret,isShowToast: false);
     }
     return ret;
   }
