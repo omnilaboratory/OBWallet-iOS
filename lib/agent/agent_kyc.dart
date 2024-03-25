@@ -369,7 +369,7 @@ class _AgentKycState extends State<AgentKyc> {
                           onPressed: () {
                             if ((_formKey.currentState as FormState)
                                 .validate()) {
-                              checkBalance();
+                              onKyc();
                             }
                           },
                         ),
