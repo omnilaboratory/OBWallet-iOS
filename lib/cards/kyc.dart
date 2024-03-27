@@ -169,12 +169,18 @@ class _KycState extends State<Kyc> {
                                         child: createTextFormField(
                                             _firstNameController,
                                             S.of(context).kyc_FirstName,
+                                            onChanged: (v){
+                                              _firstNameController.text = _firstNameController.text.toUpperCase();
+                                            },
                                             maxLength: 20)),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
                                             _lastNameController,
                                             S.of(context).kyc_LastName,
+                                            onChanged: (v){
+                                              _lastNameController.text = _lastNameController.text.toUpperCase();
+                                            },
                                             maxLength: 20)),
                                   ],
                                 ),
