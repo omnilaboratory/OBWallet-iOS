@@ -10,7 +10,6 @@ import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
-import 'package:awallet/protos/gen-dart/user/country.pbenum.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
