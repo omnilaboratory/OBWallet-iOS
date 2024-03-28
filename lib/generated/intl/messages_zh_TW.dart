@@ -230,8 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_card_active_tips": m5,
         "realCard_card_active_title":
             MessageLookupByLibrary.simpleMessage("激活實體卡"),
-        "realCard_card_areaCode":
-            MessageLookupByLibrary.simpleMessage("Area Code"),
+        "realCard_card_areaCode": MessageLookupByLibrary.simpleMessage("地区代码"),
         "realCard_card_bind": MessageLookupByLibrary.simpleMessage("綁定"),
         "realCard_card_title": MessageLookupByLibrary.simpleMessage("實體卡"),
         "realCard_chinaIdCard": MessageLookupByLibrary.simpleMessage("身份證"),
