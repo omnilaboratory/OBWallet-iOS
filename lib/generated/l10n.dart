@@ -1800,6 +1800,16 @@ class S {
     );
   }
 
+  /// `Area Code`
+  String get realCard_card_areaCode {
+    return Intl.message(
+      'Area Code',
+      name: 'realCard_card_areaCode',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Active`
   String get realCard_card_active {
     return Intl.message(

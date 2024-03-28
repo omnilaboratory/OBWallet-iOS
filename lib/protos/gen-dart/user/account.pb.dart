@@ -630,6 +630,8 @@ class AccountInfo extends $pb.GeneratedMessage {
     ..aOS(8, _omitFieldNames ? '' : 'balanceType')
     ..aInt64(9, _omitFieldNames ? '' : 'updatedAt')
     ..aInt64(10, _omitFieldNames ? '' : 'lockedType')
+    ..aOB(11, _omitFieldNames ? '' : 'afterPay')
+    ..a<$core.double>(12, _omitFieldNames ? '' : 'billAmount', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -725,6 +727,24 @@ class AccountInfo extends $pb.GeneratedMessage {
   $core.bool hasLockedType() => $_has(7);
   @$pb.TagNumber(10)
   void clearLockedType() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.bool get afterPay => $_getBF(8);
+  @$pb.TagNumber(11)
+  set afterPay($core.bool v) { $_setBool(8, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasAfterPay() => $_has(8);
+  @$pb.TagNumber(11)
+  void clearAfterPay() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.double get billAmount => $_getN(9);
+  @$pb.TagNumber(12)
+  set billAmount($core.double v) { $_setDouble(9, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasBillAmount() => $_has(9);
+  @$pb.TagNumber(12)
+  void clearBillAmount() => clearField(12);
 }
 
 class AccountOnchainBalanceHistory extends $pb.GeneratedMessage {

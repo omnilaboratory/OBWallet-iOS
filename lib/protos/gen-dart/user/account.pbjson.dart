@@ -217,6 +217,8 @@ const AccountInfo$json = {
     {'1': 'balance_type', '3': 8, '4': 1, '5': 9, '10': 'balanceType'},
     {'1': 'locked_usd', '3': 7, '4': 1, '5': 1, '10': 'lockedUsd'},
     {'1': 'locked_type', '3': 10, '4': 1, '5': 3, '10': 'lockedType'},
+    {'1': 'after_pay', '3': 11, '4': 1, '5': 8, '10': 'afterPay'},
+    {'1': 'bill_amount', '3': 12, '4': 1, '5': 1, '10': 'billAmount'},
     {'1': 'updated_at', '3': 9, '4': 1, '5': 3, '10': 'updatedAt'},
     {'1': 'created_at', '3': 6, '4': 1, '5': 3, '10': 'createdAt'},
   ],
@@ -227,8 +229,9 @@ final $typed_data.Uint8List accountInfoDescriptor = $convert.base64Decode(
     'CgtBY2NvdW50SW5mbxIOCgJpZBgBIAEoA1ICaWQSFwoHdXNlcl9pZBgCIAEoA1IGdXNlcklkEh'
     'gKB2JhbGFuY2UYBSABKAFSB2JhbGFuY2USIQoMYmFsYW5jZV90eXBlGAggASgJUgtiYWxhbmNl'
     'VHlwZRIdCgpsb2NrZWRfdXNkGAcgASgBUglsb2NrZWRVc2QSHwoLbG9ja2VkX3R5cGUYCiABKA'
-    'NSCmxvY2tlZFR5cGUSHQoKdXBkYXRlZF9hdBgJIAEoA1IJdXBkYXRlZEF0Eh0KCmNyZWF0ZWRf'
-    'YXQYBiABKANSCWNyZWF0ZWRBdA==');
+    'NSCmxvY2tlZFR5cGUSGwoJYWZ0ZXJfcGF5GAsgASgIUghhZnRlclBheRIfCgtiaWxsX2Ftb3Vu'
+    'dBgMIAEoAVIKYmlsbEFtb3VudBIdCgp1cGRhdGVkX2F0GAkgASgDUgl1cGRhdGVkQXQSHQoKY3'
+    'JlYXRlZF9hdBgGIAEoA1IJY3JlYXRlZEF0');
 
 @$core.Deprecated('Use accountOnchainBalanceHistoryDescriptor instead')
 const AccountOnchainBalanceHistory$json = {
@@ -767,6 +770,7 @@ const AccountHistory_SourceType$json = {
     {'1': 'TokenTransfer', '2': 5},
     {'1': 'Reward', '2': 6},
     {'1': 'TelaRecharge', '2': 7},
+    {'1': 'Borrow', '2': 9},
   ],
 };
 
@@ -778,8 +782,8 @@ final $typed_data.Uint8List accountHistoryDescriptor = $convert.base64Decode(
     '5BY2NvdW50SGlzdG9yeS5Tb3VyY2VUeXBlUgpzb3VyY2VUeXBlEh0KCmNyZWF0ZWRfYXQYBSAB'
     'KARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAYgASgEUgl1cGRhdGVkQXQSNgoGU3ltYm9sGA'
     'cgASgOMh4udXNlci5UcmFja2VkVHguQ29udHJhY3RTeW1ib2xSBlN5bWJvbBInCgduZXR3b3Jr'
-    'GAogASgOMg0udXNlci5OZXRXb3JrUgduZXR3b3JrIpABCgpTb3VyY2VUeXBlEgoKBlVuS25vdx'
+    'GAogASgOMg0udXNlci5OZXRXb3JrUgduZXR3b3JrIpwBCgpTb3VyY2VUeXBlEgoKBlVuS25vdx'
     'AAEgwKCFJlY2hhcmdlEAESDAoIV2l0aGRyYXcQAhIICgRTd2FwEAMSDgoKQ3JlYXRlQ2FyZBAE'
     'Eg8KC0NyZWF0ZVBDYXJkEAgSEQoNVG9rZW5UcmFuc2ZlchAFEgoKBlJld2FyZBAGEhAKDFRlbG'
-    'FSZWNoYXJnZRAH');
+    'FSZWNoYXJnZRAHEgoKBkJvcnJvdxAJ');
 

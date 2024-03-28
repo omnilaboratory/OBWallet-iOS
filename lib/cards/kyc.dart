@@ -10,6 +10,7 @@ import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/grpc_services/common_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/country.pbenum.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
@@ -77,10 +78,13 @@ class _KycState extends State<Kyc> {
 
   final List<DateTime?> _dates = [];
   var dateOfBirthTips = "";
+  bool _postalFieldEnable = true;
 
   @override
   void initState() {
     super.initState();
+    _postalController.text = "999077";
+    _postalFieldEnable = false;
     GlobalParams.eventBus.on().listen((event) {
       if (event == "closeKycPage") {
         if (mounted) {
@@ -346,6 +350,7 @@ class _KycState extends State<Kyc> {
                                             _postalController,
                                             S.of(context).kyc_PostalZipCode,
                                             maxLength: 6,
+                                            enabled: _postalFieldEnable,
                                             keyboardType:
                                                 TextInputType.number)),
                                     const SizedBox(width: 20),
@@ -358,6 +363,17 @@ class _KycState extends State<Kyc> {
                                             useSafeArea: true,
                                             onSelect: (Country country) {
                                               selectedCountryForAddress = country;
+                                              CountryCode code =
+                                              Utils.getCountryCodeByCode(
+                                                  selectedCountryForAddress!
+                                                      .countryCode);
+                                              _postalFieldEnable = true;
+                                              if (code == CountryCode.HK) {
+                                                _postalController.text = "999077";
+                                                _postalFieldEnable = false;
+                                              }else{
+                                                _postalController.text = "";
+                                              }
                                               setState(() {});
                                             },
                                           );

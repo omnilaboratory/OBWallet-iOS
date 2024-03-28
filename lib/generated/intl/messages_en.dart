@@ -279,6 +279,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_card_active_tips": m5,
         "realCard_card_active_title":
             MessageLookupByLibrary.simpleMessage("Active Physical Card"),
+        "realCard_card_areaCode":
+            MessageLookupByLibrary.simpleMessage("Area Code"),
         "realCard_card_bind": MessageLookupByLibrary.simpleMessage("Bind"),
         "realCard_card_title":
             MessageLookupByLibrary.simpleMessage("Physical Card"),

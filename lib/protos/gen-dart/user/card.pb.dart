@@ -2247,6 +2247,7 @@ class CardBindRequest extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'lastName', protoName: 'lastName')
     ..aOS(6, _omitFieldNames ? '' : 'email')
     ..aOS(7, _omitFieldNames ? '' : 'mobile')
+    ..aOS(8, _omitFieldNames ? '' : 'areaCode', protoName: 'areaCode')
     ..hasRequiredFields = false
   ;
 
@@ -2324,6 +2325,15 @@ class CardBindRequest extends $pb.GeneratedMessage {
   $core.bool hasMobile() => $_has(5);
   @$pb.TagNumber(7)
   void clearMobile() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get areaCode => $_getSZ(6);
+  @$pb.TagNumber(8)
+  set areaCode($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasAreaCode() => $_has(6);
+  @$pb.TagNumber(8)
+  void clearAreaCode() => clearField(8);
 }
 
 class CardBindResponse extends $pb.GeneratedMessage {

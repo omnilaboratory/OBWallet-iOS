@@ -21,7 +21,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
   final TextEditingController _cardNoController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _mobileController = TextEditingController();
-  // final TextEditingController _cidController = TextEditingController();
+  final TextEditingController _areaCodeController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
 
@@ -39,6 +39,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
     // cardBindRequest.cid = _cidController.text.trim();
     cardBindRequest.firstName = _firstNameController.text.trim();
     cardBindRequest.lastName = _lastNameController.text.trim();
+    cardBindRequest.areaCode = _areaCodeController.text.trim();
     CardService.getInstance().cardBind(context, cardBindRequest).then((resp) {
       removeLoading(loading);
       if (resp.code == 1) {
@@ -81,7 +82,7 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     width: size.width * 0.85,
-                    height: size.height * 0.7,
+                    height: size.height * 0.78,
                     child: Column(children: [
                       const SizedBox(height: 25),
                       createDialogTitle(S.of(context).bindCard_title),
@@ -138,6 +139,9 @@ class _PhysicalCardBindState extends State<PhysicalCardBind> {
             const SizedBox(height: 10),
             createTextFormField(_emailController, S.of(context).common_Email,
                 icon: const Icon(Icons.email), maxLength: 30),
+            const SizedBox(height: 10),
+            createTextFormField(_areaCodeController, S.of(context).realCard_card_areaCode,
+                icon: const Icon(Icons.area_chart_sharp), maxLength: 6),
             const SizedBox(height: 10),
             createTextFormField(
                 _firstNameController, S.of(context).realCard_firstName,

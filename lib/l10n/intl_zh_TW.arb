@@ -200,6 +200,7 @@
   "realCard_apply": "申請",
   "realCard_card_title": "實體卡",
   "realCard_card_bind": "綁定",
+  "realCard_card_areaCode": "Area Code",
   "realCard_card_active": "激活",
   "realCard_card_active_title": "激活實體卡",
   "realCard_card_active_tips": "驗證碼會寄到你的信箱\n{email}",

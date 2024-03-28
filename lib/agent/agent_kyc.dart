@@ -12,6 +12,7 @@ import 'package:awallet/grpc_services/eth_grpc_service.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/account.pb.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
+import 'package:awallet/protos/gen-dart/user/country.pbenum.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:awallet/utils.dart';
@@ -48,10 +49,14 @@ class _AgentKycState extends State<AgentKyc> {
 
   final List<DateTime?> _dates = [];
   var dateOfBirthTips = "";
+  bool _postalFieldEnable = true;
 
   @override
   void initState() {
     super.initState();
+    _postalController.text = "999077";
+    _postalFieldEnable = false;
+
     GlobalParams.eventBus.on().listen((event) {
       if (event == "closeKycPage") {
         if (mounted) {
@@ -127,19 +132,19 @@ class _AgentKycState extends State<AgentKyc> {
                                       child: createTextFormField(
                                           _firstNameController,
                                           S.of(context).kyc_FirstName,
-                                          onChanged: (v){
-                                            _firstNameController.text = _firstNameController.text.toUpperCase();
-                                          },
-                                          maxLength: 20)),
+                                          onChanged: (v) {
+                                    _firstNameController.text =
+                                        _firstNameController.text.toUpperCase();
+                                  }, maxLength: 20)),
                                   const SizedBox(width: 20),
                                   Expanded(
                                       child: createTextFormField(
                                           _lastNameController,
                                           S.of(context).kyc_LastName,
-                                          onChanged: (v){
-                                            _lastNameController.text = _lastNameController.text.toUpperCase();
-                                          },
-                                          maxLength: 20)),
+                                          onChanged: (v) {
+                                    _lastNameController.text =
+                                        _lastNameController.text.toUpperCase();
+                                  }, maxLength: 20)),
                                 ],
                               ),
                               const SizedBox(height: 6),
@@ -322,6 +327,7 @@ class _AgentKycState extends State<AgentKyc> {
                                           _postalController,
                                           S.of(context).kyc_PostalZipCode,
                                           maxLength: 6,
+                                          enabled: _postalFieldEnable,
                                           keyboardType: TextInputType.number)),
                                   const SizedBox(width: 20),
                                   InkWell(
@@ -333,6 +339,17 @@ class _AgentKycState extends State<AgentKyc> {
                                           useSafeArea: true,
                                           onSelect: (Country country) {
                                             selectedCountryForAddress = country;
+                                            CountryCode code =
+                                                Utils.getCountryCodeByCode(
+                                                    selectedCountryForAddress!
+                                                        .countryCode);
+                                            _postalFieldEnable = true;
+                                            if (code == CountryCode.HK) {
+                                              _postalController.text = "999077";
+                                              _postalFieldEnable = false;
+                                            }else{
+                                              _postalController.text = "";
+                                            }
                                             setState(() {});
                                           },
                                         );

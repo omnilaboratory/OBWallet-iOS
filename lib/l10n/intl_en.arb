@@ -199,6 +199,7 @@
   "realCard_apply": "Apply",
   "realCard_card_title": "Physical Card",
   "realCard_card_bind": "Bind",
+  "realCard_card_areaCode": "Area Code",
   "realCard_card_active": "Active",
   "realCard_card_active_title": "Active Physical Card",
   "realCard_card_active_tips": "The verification code will be sent to your email address: {email}",

@@ -88,6 +88,7 @@ class AccountHistory_SourceType extends $pb.ProtobufEnum {
   static const AccountHistory_SourceType TokenTransfer = AccountHistory_SourceType._(5, _omitEnumNames ? '' : 'TokenTransfer');
   static const AccountHistory_SourceType Reward = AccountHistory_SourceType._(6, _omitEnumNames ? '' : 'Reward');
   static const AccountHistory_SourceType TelaRecharge = AccountHistory_SourceType._(7, _omitEnumNames ? '' : 'TelaRecharge');
+  static const AccountHistory_SourceType Borrow = AccountHistory_SourceType._(9, _omitEnumNames ? '' : 'Borrow');
 
   static const $core.List<AccountHistory_SourceType> values = <AccountHistory_SourceType> [
     UnKnow,
@@ -99,6 +100,7 @@ class AccountHistory_SourceType extends $pb.ProtobufEnum {
     TokenTransfer,
     Reward,
     TelaRecharge,
+    Borrow,
   ];
 
   static final $core.Map<$core.int, AccountHistory_SourceType> _byValue = $pb.ProtobufEnum.initByValue(values);

@@ -382,6 +382,7 @@ message GetCardActivateCodeRequest {
   string  cardNo = 1;
 }
 message GetCardActivateCodeResponse {
+//    接收激活码的邮箱地址
   string email=1;
   string  codeToken=2;
 }
@@ -411,9 +412,10 @@ message CardBindRequest {
   string  lastName = 5;
   //email 可由用户信息email填充,用户可修改
   string  email = 6;
+    //手机区
+  string areaCode = 8;
   // 申请卡的手机号
   string mobile=7;
-
   //  "openId": "string"
 }
 message CardBindResponse {

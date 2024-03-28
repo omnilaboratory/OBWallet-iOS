@@ -535,6 +535,7 @@ const CardBindRequest$json = {
     {'1': 'firstName', '3': 4, '4': 1, '5': 9, '10': 'firstName'},
     {'1': 'lastName', '3': 5, '4': 1, '5': 9, '10': 'lastName'},
     {'1': 'email', '3': 6, '4': 1, '5': 9, '10': 'email'},
+    {'1': 'areaCode', '3': 8, '4': 1, '5': 9, '10': 'areaCode'},
     {'1': 'mobile', '3': 7, '4': 1, '5': 9, '10': 'mobile'},
   ],
 };
@@ -543,7 +544,8 @@ const CardBindRequest$json = {
 final $typed_data.Uint8List cardBindRequestDescriptor = $convert.base64Decode(
     'Cg9DYXJkQmluZFJlcXVlc3QSFgoGY2FyZE5vGAEgASgJUgZjYXJkTm8SEAoDY2lkGAMgASgJUg'
     'NjaWQSHAoJZmlyc3ROYW1lGAQgASgJUglmaXJzdE5hbWUSGgoIbGFzdE5hbWUYBSABKAlSCGxh'
-    'c3ROYW1lEhQKBWVtYWlsGAYgASgJUgVlbWFpbBIWCgZtb2JpbGUYByABKAlSBm1vYmlsZQ==');
+    'c3ROYW1lEhQKBWVtYWlsGAYgASgJUgVlbWFpbBIaCghhcmVhQ29kZRgIIAEoCVIIYXJlYUNvZG'
+    'USFgoGbW9iaWxlGAcgASgJUgZtb2JpbGU=');
 
 @$core.Deprecated('Use cardBindResponseDescriptor instead')
 const CardBindResponse$json = {
