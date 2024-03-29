@@ -481,7 +481,7 @@ class _CardPartState extends State<CardPart> {
           for (var element in items) {
             txs.add(CryptoTxInfo(
                 title: element.authMerchant,
-                txTime: DateTime.now(),
+                txTime: DateTime.parse(element.settleDate),
                 fromSymbol: "USD",
                 targetSymbol: "",
                 amount: double.parse(element.settleAmt),

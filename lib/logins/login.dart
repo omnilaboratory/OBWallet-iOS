@@ -9,6 +9,7 @@ import 'package:awallet/logins/sign_up_step1.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../grpc_services/card_service.dart';
 import 'forget_psw.dart';

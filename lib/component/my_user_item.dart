@@ -23,7 +23,7 @@ class MyUserItem extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 14,
                 )),
-            Text(DateFormat("yyyy.MM.dd hh:mm a").format(info.createTime),
+            Text(DateFormat("yyyy-MM-dd hh:mm a").format(info.createTime),
                 style: const TextStyle(
                   fontSize: 14,
                 )),

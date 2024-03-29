@@ -41,7 +41,7 @@ class CryptoTxItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  DateFormat("yyyy.MM.dd hh:mm a").format(txInfo.txTime),
+                  DateFormat("yyyy-MM-dd").format(txInfo.txTime),
                   style: const TextStyle(
                     color: Color(0xFF999999),
                     fontSize: 12,
