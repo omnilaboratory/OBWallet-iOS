@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
@@ -111,6 +113,7 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
                                   items: buildCardList(),
                                   onChanged: (value) {
                                     currSelectedCard = value!;
+                                    setState(() {});
                                   },
                                 ),
                               ),
@@ -288,13 +291,14 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
         cardNoList = [];
         cardNoList.add(CommonService.cardInfo.cardNo);
         var items = info.data;
+        log("$items");
         for (int i = 0; i < items.length; i++) {
           var item = items[i] as CardInfo;
           if (item.isVcard == false && item.pcardStatus == 1) {
             cardNoList.add(item.cardNo);
           }
         }
-        if (cardNoList.length > 1) {
+        if (cardNoList.isNotEmpty) {
           if (mounted) {
             setState(() {});
           }

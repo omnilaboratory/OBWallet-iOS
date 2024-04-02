@@ -41,7 +41,7 @@ class _AccountState extends State<Account> {
       RefreshController(initialRefresh: false);
 
   double totalBalanceUsd = 0;
-  bool hasCard = false;
+  bool hasCard = CommonService.userInfo!.cardCount > 0;
 
   @override
   void initState() {
@@ -75,6 +75,9 @@ class _AccountState extends State<Account> {
             hasCard = true;
             break;
           }
+        }
+        if (hasCard && mounted) {
+          setState(() {});
         }
       }
     });
@@ -123,8 +126,9 @@ class _AccountState extends State<Account> {
                       child: Text(S.of(context).card_account_Exchange,
                           style: TextStyle(
                               fontSize: 16,
-                              color:
-                                  currTypeIndex == 0 ? Colors.blue : Colors.grey)),
+                              color: currTypeIndex == 0
+                                  ? Colors.blue
+                                  : Colors.grey)),
                     ),
                   )),
               InkWell(
@@ -138,8 +142,9 @@ class _AccountState extends State<Account> {
                       child: Text(S.of(context).card_account_Account,
                           style: TextStyle(
                               fontSize: 16,
-                              color:
-                                  currTypeIndex == 1 ? Colors.blue : Colors.grey)),
+                              color: currTypeIndex == 1
+                                  ? Colors.blue
+                                  : Colors.grey)),
                     ),
                   ))
             ],

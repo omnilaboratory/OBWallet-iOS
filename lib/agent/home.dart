@@ -86,15 +86,12 @@ class _AgentHomeState extends State<AgentHome> {
   }
 
   void _onListRefresh() async {
-    log("_onListRefresh");
     var resp =
         await CardService.getInstance().cardList(context, isAgentCard: true);
     if (resp.code == 1) {
-      if(resp.data!=null){
+      if (resp.data != null) {
         cardInfoList = resp.data;
-        setState(() {
-
-        });
+        setState(() {});
       }
     }
     if (_refreshListController.isRefresh) {
