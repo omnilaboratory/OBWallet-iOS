@@ -45,7 +45,7 @@
   "cardActivity_tile": "Card Activity",
   "exchange_tile": "Exchange",
   "exchange_To": "To",
-  "exchange_wait": "Wait a while...",
+  "exchange_wait": "Wait input(amount should >= ${amount})",
   "exchange_ReceiveAtLeast": "Receive at least",
   "exchange_InputTips1": "Just need to input in From, minimum $10 or 0.01 ETH. There will be a 6.5% fee for exchanging USD into crypto assets, and a 2% fee for exchanging crypto assets into USD.",
   "exchange_Balance": "Balance: ",

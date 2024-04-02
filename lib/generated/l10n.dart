@@ -470,13 +470,13 @@ class S {
     );
   }
 
-  /// `Wait a while...`
-  String get exchange_wait {
+  /// `Wait input(amount should >= ${amount})`
+  String exchange_wait(Object amount) {
     return Intl.message(
-      'Wait a while...',
+      'Wait input(amount should >= \$$amount)',
       name: 'exchange_wait',
       desc: '',
-      args: [],
+      args: [amount],
     );
   }
 

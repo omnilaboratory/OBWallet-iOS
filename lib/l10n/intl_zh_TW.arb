@@ -46,7 +46,7 @@
   "cardActivity_tile": "卡活動",
   "exchange_tile": "兌換",
   "exchange_To": "兌換至",
-  "exchange_wait": "請稍等...",
+  "exchange_wait": "等待輸入(金額必須大於等於${amount})",
   "exchange_ReceiveAtLeast": "至少接收",
   "exchange_InputTips1": "请在From栏輸入最小10美元或0.01 ETH。從美元兌換加密資產將收取 6.5% 的費用,從加密資產兌換美元將收取 2% 的費用。",
   "exchange_Balance": "餘額: ",
