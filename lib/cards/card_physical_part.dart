@@ -57,9 +57,8 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     super.initState();
     if (hasCard) {
       currCardInfo = CommonService.realCardList[currCardIndex];
-    } else {
-      _onBalanceRefresh();
     }
+    _onBalanceRefresh();
     _onListRefresh();
     GlobalParams.eventBus.on().listen((event) {
       if (event == "cardBind_Finish" || event == "cardActive_Finish") {
@@ -344,10 +343,8 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       if (resp.code == 1) {
         var needLoadList = !hasCard;
         hasCard = CommonService.realCardList.isNotEmpty;
-        log("${hasCard}");
         if (hasCard) {
           currCardInfo = CommonService.realCardList[currCardIndex];
-          log("${currCardInfo}");
           if (needLoadList) {
             _onListRefresh();
           }
