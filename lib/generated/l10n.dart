@@ -2210,10 +2210,10 @@ class S {
     );
   }
 
-  /// `Inactive`
+  /// `Click to Active`
   String get agent_card_inactive {
     return Intl.message(
-      'Inactive',
+      'Click to Active',
       name: 'agent_card_inactive',
       desc: '',
       args: [],

@@ -246,7 +246,7 @@
 
   "agent_kyc": "代理申請實體卡",
   "agent_card_active": "已激活",
-  "agent_card_inactive": "未激活",
+  "agent_card_inactive": "點擊去激活",
 
   "tips_WrongEmail": "錯誤的郵件",
   "tips_WrongTxid": "錯誤的交易 ID",

@@ -45,6 +45,9 @@ class _AccountState extends State<Account> {
 
   @override
   void initState() {
+    if (!hasCard) {
+      hasCard = CommonService.realCardList.isNotEmpty;
+    }
     _onBalanceRefresh();
     _onListRefresh();
     getCardBalanceFromServer();

@@ -246,7 +246,7 @@
 
   "agent_kyc": "Agent to Physical Card",
   "agent_card_active": "Active",
-  "agent_card_inactive": "Inactive",
+  "agent_card_inactive": "Click to Active",
 
   "tips_WrongEmail": "Wrong email",
   "tips_WrongTxid": "Wrong txid",

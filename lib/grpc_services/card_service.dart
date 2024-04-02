@@ -31,9 +31,10 @@ class CardService {
 
   factory CardService() => _instance;
 
-  Future<GrpcResponse> cardList(BuildContext context,{bool isAgentCard = false}) async {
+  Future<GrpcResponse> cardList(BuildContext context,{bool isAgentCard = false, bool withoutBalance = true}) async {
     var req = CardListRequest();
     req.isAgentCard = isAgentCard;
+    req.withoutBalance = withoutBalance;
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient?.cardList(req);

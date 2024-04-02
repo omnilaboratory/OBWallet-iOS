@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/bottom_white_button.dart';
@@ -15,7 +13,6 @@ import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class AccountTransferToCard extends StatefulWidget {
   const AccountTransferToCard({super.key});
 
@@ -27,7 +24,7 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
   final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _amountController = TextEditingController();
 
-  late String currSelectedCard;
+  late String currSelectedCard = "";
   String amount = '0';
   double totalBalanceUsd = 0;
 
@@ -36,8 +33,10 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
   @override
   void initState() {
     getAccountBalance();
-    cardNoList.add(CommonService.cardInfo.cardNo);
-    currSelectedCard = cardNoList[0];
+    if (CommonService.cardInfo.cardNo.isNotEmpty) {
+      cardNoList.add(CommonService.cardInfo.cardNo);
+      currSelectedCard = cardNoList[0];
+    }
     getCardList();
     super.initState();
   }
@@ -92,7 +91,8 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
                             const SizedBox(height: 6),
                             Container(
                               height: 48,
-                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 6),
                               decoration: const ShapeDecoration(
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(
@@ -286,12 +286,16 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
   }
 
   void getCardList() {
-    CardService.getInstance().cardList(context).then((info) {
+    CardService.getInstance()
+        .cardList(context, withoutBalance: false)
+        .then((info) {
       if (info.code == 1) {
         cardNoList = [];
-        cardNoList.add(CommonService.cardInfo.cardNo);
+        if (CommonService.cardInfo.cardNo.isNotEmpty) {
+          cardNoList.add(CommonService.cardInfo.cardNo);
+        }
+
         var items = info.data;
-        log("$items");
         for (int i = 0; i < items.length; i++) {
           var item = items[i] as CardInfo;
           if (item.isVcard == false && item.pcardStatus == 1) {
@@ -299,6 +303,7 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
           }
         }
         if (cardNoList.isNotEmpty) {
+          currSelectedCard = cardNoList[0];
           if (mounted) {
             setState(() {});
           }
