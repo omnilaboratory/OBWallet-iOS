@@ -92,7 +92,6 @@ class CardService {
     try {
       var resp = await cardServiceClient?.cardHistory(request);
       ret.code = 1;
-      log("$resp");
       ret.data = resp;
     } catch (e) {
       UserService.getInstance().setError(context, "cardHistory", e, ret);

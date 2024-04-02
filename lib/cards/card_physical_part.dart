@@ -56,8 +56,9 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     super.initState();
     if (hasCard) {
       currCardInfo = CommonService.realCardList[0];
+    } else {
+      _onBalanceRefresh();
     }
-    _onBalanceRefresh();
     _onListRefresh();
     GlobalParams.eventBus.on().listen((event) {
       if (event == "cardBind_Finish" || event == "cardActive_Finish") {
@@ -85,7 +86,6 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
             currCardInfo = CommonService.realCardList[index];
             _onListRefresh();
             setState(() {});
-
           },
           duration: 600,
           itemBuilder: (BuildContext context, int index) {
@@ -334,8 +334,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
           currCardInfo = CommonService.realCardList[0];
         }
         if (mounted) {
-          setState(() {
-          });
+          setState(() {});
         }
       }
       _refreshBalanceController.refreshCompleted();
@@ -530,7 +529,6 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as CardHistoryResponse).items;
-        log("$items");
         if (items.isNotEmpty) {
           for (var element in items) {
             txs.add(CryptoTxInfo(
