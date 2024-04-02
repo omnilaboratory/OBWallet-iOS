@@ -304,7 +304,7 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
     }
 
     CardService.getInstance()
-        .cardList(context, withoutBalance: false)
+        .cardList(context, withoutBalance: true)
         .then((info) {
       if (info.code == 1) {
         cardNoList = [];

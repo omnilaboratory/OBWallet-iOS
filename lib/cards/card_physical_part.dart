@@ -344,8 +344,10 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       if (resp.code == 1) {
         var needLoadList = !hasCard;
         hasCard = CommonService.realCardList.isNotEmpty;
+        log("${hasCard}");
         if (hasCard) {
           currCardInfo = CommonService.realCardList[currCardIndex];
+          log("${currCardInfo}");
           if (needLoadList) {
             _onListRefresh();
           }
