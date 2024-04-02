@@ -83,7 +83,9 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
           loop: false,
           onIndexChanged: (index) {
             currCardInfo = CommonService.realCardList[index];
+            _onListRefresh();
             setState(() {});
+
           },
           duration: 600,
           itemBuilder: (BuildContext context, int index) {
@@ -342,8 +344,8 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
 
   void _onListRefresh() async {
     txs = [];
-    log("_onListRefresh");
     dataStartIndex = 0;
+    log("_onListRefresh $currTypeIndex");
     if (currTypeIndex == 0) {
       gePaymentHistoryListFromServer();
     } else {
