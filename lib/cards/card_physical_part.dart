@@ -54,11 +54,11 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   @override
   void initState() {
     super.initState();
-    _onBalanceRefresh();
-    _onListRefresh();
     if (hasCard) {
       currCardInfo = CommonService.realCardList[0];
     }
+    _onBalanceRefresh();
+    _onListRefresh();
     GlobalParams.eventBus.on().listen((event) {
       if (event == "cardBind_Finish" || event == "cardActive_Finish") {
         if (mounted) {
@@ -73,7 +73,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     List<Widget> list = [];
     list.add(const SizedBox(height: 10));
     if (hasCard) {
-      list.add(buildBindAndApplyBtns(context));
+      // list.add(buildBindAndApplyBtns(context));
       list.add(const SizedBox(height: 10));
       list.add(SizedBox(
         height: 200,
@@ -329,9 +329,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       if (resp.code == 1) {
         hasCard = CommonService.realCardList.isNotEmpty;
         if (hasCard) {
-          if (currCardInfo.cardNo.isEmpty) {
-            currCardInfo = CommonService.realCardList[0];
-          }
+          currCardInfo = CommonService.realCardList[0];
         }
         if (mounted) {
           setState(() {
@@ -344,9 +342,10 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
 
   void _onListRefresh() async {
     txs = [];
+    log("_onListRefresh");
     dataStartIndex = 0;
     if (currTypeIndex == 0) {
-      getOfflineCardHistoryListFromServer();
+      gePaymentHistoryListFromServer();
     } else {
       getOnlineCardExchangeInfoList();
     }
@@ -398,7 +397,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   void _onListLoading() async {
     dataStartIndex += pageSize;
     if (currTypeIndex == 0) {
-      getOfflineCardHistoryListFromServer();
+      gePaymentHistoryListFromServer();
     } else {
       getOnlineCardExchangeInfoList();
     }
@@ -452,7 +451,6 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     }
 
     currTypeIndex = type;
-    dataStartIndex = 1;
     _onListRefresh();
     setState(() {});
   }
@@ -510,7 +508,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     });
   }
 
-  getOfflineCardHistoryListFromServer() {
+  gePaymentHistoryListFromServer() {
     if (currCardInfo.cardNo.isEmpty) {
       if (_refreshListController.isRefresh) {
         _refreshListController.refreshCompleted();
@@ -520,6 +518,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       }
       return;
     }
+
     CardService.getInstance()
         .cardHistory(
             context,

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -25,20 +26,21 @@ class CryptoTxItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(6)),
         ),
         Expanded(
-          flex: 3,
+          flex: 4,
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  txInfo.title,
-                  style: const TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+                AutoSizeText(
+                    txInfo.title,
+                    maxLines: 1,
+                    maxFontSize: 12,
+                    minFontSize: 8,
+                    style: const TextStyle(
+                      color: Color(0xFF333333),
+                      fontWeight: FontWeight.w400,
+                    )),
                 const SizedBox(height: 4),
                 Text(
                   DateFormat("yyyy-MM-dd").format(txInfo.txTime),

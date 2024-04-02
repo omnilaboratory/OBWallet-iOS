@@ -57,7 +57,9 @@ class _CardPartState extends State<CardPart> {
       if (resp.code == 1) {
         var appConfig = resp.data as AppConfig;
         createCardFee = appConfig.createCardFee;
-        setState(() {});
+        if (mounted) {
+          setState(() {});
+        }
       }
     });
 
@@ -399,7 +401,6 @@ class _CardPartState extends State<CardPart> {
     }
 
     currTypeIndex = type;
-    dataStartIndex = 1;
     _onListRefresh();
     setState(() {});
   }

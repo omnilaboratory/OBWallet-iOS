@@ -53,7 +53,7 @@ class EthGrpcService {
       var resp = await ethServiceClient?.eTHGetAppConf(request);
       ret.code = 1;
       ret.data = resp;
-      log("ethGetAppConf ${resp}");
+      // log("ethGetAppConf ${resp}");
       createPcardFee = resp!.createPcardFee.toDouble();
 
     } catch (e) {

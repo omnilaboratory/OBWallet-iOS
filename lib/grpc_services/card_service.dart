@@ -87,11 +87,12 @@ class CardService {
     request.startDate =
         DateFormat("yyyy-MM-dd").format(now.add(const Duration(days: -180)));
     request.endDate = DateFormat("yyyy-MM-dd").format(now);
-    // log("$request");
+    log("$request");
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient?.cardHistory(request);
       ret.code = 1;
+      log("$resp");
       ret.data = resp;
     } catch (e) {
       UserService.getInstance().setError(context, "cardHistory", e, ret);
