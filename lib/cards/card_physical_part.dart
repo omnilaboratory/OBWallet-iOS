@@ -287,20 +287,32 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                   onTap: () {
                     onClickType(0);
                   },
-                  child: Text(S.of(context).card_card_Payment,
-                      style: TextStyle(
-                          fontSize: 16,
-                          color:
-                              currTypeIndex == 0 ? Colors.blue : Colors.grey))),
+                  child: SizedBox(
+                    width: 80,
+                    height: 24,
+                    child: Center(
+                      child: Text(S.of(context).card_card_Payment,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color:
+                                  currTypeIndex == 0 ? Colors.blue : Colors.grey)),
+                    ),
+                  )),
               InkWell(
                   onTap: () {
                     onClickType(1);
                   },
-                  child: Text(S.of(context).card_card_Account,
-                      style: TextStyle(
-                          fontSize: 16,
-                          color:
-                              currTypeIndex == 1 ? Colors.blue : Colors.grey))),
+                  child: SizedBox(
+                    width: 80,
+                    height: 24,
+                    child: Center(
+                      child: Text(S.of(context).card_card_Account,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color:
+                                  currTypeIndex == 1 ? Colors.blue : Colors.grey)),
+                    ),
+                  )),
             ],
           ),
           const SizedBox(height: 10),

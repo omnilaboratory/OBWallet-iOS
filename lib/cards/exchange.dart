@@ -380,7 +380,7 @@ class _ExchangeState extends State<Exchange> {
                         S
                             .of(context)
                             .exchange_wait(10),
-                        style: const TextStyle(color: Colors.black45,
+                        style: const TextStyle(color: Colors.red,
                             fontSize: 12),
                       ),
                     ],
