@@ -286,6 +286,23 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
   }
 
   void getCardList() {
+    cardNoList = [];
+    if (CommonService.cardInfo.cardNo.isNotEmpty) {
+      cardNoList.add(CommonService.cardInfo.cardNo);
+    }
+    if (CommonService.realCardList.isNotEmpty) {
+      for (int i = 0; i < CommonService.realCardList.length; i++) {
+        cardNoList.add(CommonService.realCardList[i].cardNo);
+      }
+      if (cardNoList.isNotEmpty) {
+        currSelectedCard = cardNoList[0];
+        if (mounted) {
+          setState(() {});
+        }
+      }
+      return;
+    }
+
     CardService.getInstance()
         .cardList(context, withoutBalance: false)
         .then((info) {
