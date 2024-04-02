@@ -237,10 +237,13 @@ class _CardPartState extends State<CardPart> {
   }
 
   void _onBalanceRefresh() async {
+    log("_onBalanceRefresh");
     CardService.getInstance().cardList(context).then((resp) {
       if (resp.code == 1) {
         var needLoadList = !hasCard;
         hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
+
+        log("${CommonService.cardInfo}");
         if (mounted) {
           if (needLoadList) {
             _onListRefresh();
