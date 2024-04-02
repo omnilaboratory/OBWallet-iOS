@@ -33,8 +33,8 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
   @override
   void initState() {
     getAccountBalance();
-    if (CommonService.cardInfo.cardNo.isNotEmpty) {
-      cardNoList.add(CommonService.cardInfo.cardNo);
+    if (CommonService.vCardInfo.cardNo.isNotEmpty) {
+      cardNoList.add(CommonService.vCardInfo.cardNo);
       currSelectedCard = cardNoList[0];
     }
     getCardList();
@@ -287,8 +287,8 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
 
   void getCardList() {
     cardNoList = [];
-    if (CommonService.cardInfo.cardNo.isNotEmpty) {
-      cardNoList.add(CommonService.cardInfo.cardNo);
+    if (CommonService.vCardInfo.cardNo.isNotEmpty) {
+      cardNoList.add(CommonService.vCardInfo.cardNo);
     }
     if (CommonService.realCardList.isNotEmpty) {
       for (int i = 0; i < CommonService.realCardList.length; i++) {
@@ -308,8 +308,8 @@ class _AccountTransferToCardState extends State<AccountTransferToCard> {
         .then((info) {
       if (info.code == 1) {
         cardNoList = [];
-        if (CommonService.cardInfo.cardNo.isNotEmpty) {
-          cardNoList.add(CommonService.cardInfo.cardNo);
+        if (CommonService.vCardInfo.cardNo.isNotEmpty) {
+          cardNoList.add(CommonService.vCardInfo.cardNo);
         }
 
         var items = info.data;

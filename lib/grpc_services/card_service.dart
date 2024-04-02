@@ -45,7 +45,7 @@ class CardService {
         for (int i = 0; i < items.length; i++) {
           var item = items[i];
           if (item.isVcard) {
-            CommonService.cardInfo = item;
+            CommonService.vCardInfo = item;
           } else {
             CommonService.realCardList.add(item);
           }

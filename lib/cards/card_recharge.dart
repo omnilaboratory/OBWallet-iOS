@@ -240,7 +240,7 @@ class _CardRechargeState extends State<CardRecharge> {
                 widget.type == EnumChargeType.deposit
                     ? StringTools.formatCurrencyNum(totalBalanceUsd)
                     : StringTools.formatCurrencyNum(
-                        CommonService.cardInfo.balance),
+                        CommonService.vCardInfo.balance),
                 style: const TextStyle(
                   color: Color(0xFF333333),
                   fontSize: 32,
@@ -283,7 +283,7 @@ class _CardRechargeState extends State<CardRecharge> {
     FocusScope.of(context).unfocus();
     if (formKey.currentState!.validate()) {
       if (widget.type == EnumChargeType.deposit) {
-        if (cardNumber.replaceAll(' ', '') == CommonService.cardInfo.cardNo) {
+        if (cardNumber.replaceAll(' ', '') == CommonService.vCardInfo.cardNo) {
           virtualCardPay();
         } else {
           //TODO debug for all recharge 100
@@ -303,7 +303,7 @@ class _CardRechargeState extends State<CardRecharge> {
   }
 
   void virtualCardPay() {
-    if (double.parse(cardInputAmount) > CommonService.cardInfo.balance) {
+    if (double.parse(cardInputAmount) > CommonService.vCardInfo.balance) {
       showToast(S.of(context).tips_maxAmount, toastLength: Toast.LENGTH_SHORT);
       return;
     } else {

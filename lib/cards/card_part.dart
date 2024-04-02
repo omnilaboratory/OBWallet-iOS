@@ -39,7 +39,7 @@ class _CardPartState extends State<CardPart> {
   int currTypeIndex = 0;
   int dataStartIndex = 0;
   double createCardFee = 5.0;
-  bool hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
+  bool hasCard = CommonService.vCardInfo.cardNo.isNotEmpty;
 
   final RefreshController _refreshListController =
       RefreshController(initialRefresh: false);
@@ -78,10 +78,10 @@ class _CardPartState extends State<CardPart> {
     list.add(const SizedBox(height: 10));
     list.add(CardItem(
         cardItemInfo: CardItemInfo(
-            cardNo: CommonService.cardInfo.cardNo,
-            balance: CommonService.cardInfo.balance,
-            exp: CommonService.cardInfo.expiryDate,
-            cvv: CommonService.cardInfo.cvv)));
+            cardNo: CommonService.vCardInfo.cardNo,
+            balance: CommonService.vCardInfo.balance,
+            exp: CommonService.vCardInfo.expiryDate,
+            cvv: CommonService.vCardInfo.cvv)));
     list.add(const SizedBox(height: 15));
     if (hasCard) {
       list.add(buildCardDetail(context));
@@ -241,9 +241,9 @@ class _CardPartState extends State<CardPart> {
     CardService.getInstance().cardList(context).then((resp) {
       if (resp.code == 1) {
         var needLoadList = !hasCard;
-        hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
+        hasCard = CommonService.vCardInfo.cardNo.isNotEmpty;
 
-        log("${CommonService.cardInfo}");
+        log("${CommonService.vCardInfo}");
         if (mounted) {
           if (needLoadList) {
             _onListRefresh();
@@ -289,7 +289,7 @@ class _CardPartState extends State<CardPart> {
                   builder: (context) {
                     return Send(
                         type: EnumChargeType.deposit,
-                        cardNo: CommonService.cardInfo.cardNo);
+                        cardNo: CommonService.vCardInfo.cardNo);
                   });
 
               if (flag != null && flag) {
@@ -321,7 +321,7 @@ class _CardPartState extends State<CardPart> {
   }
 
   String formatCardExpiryDate() {
-    String expiryDate = CommonService.cardInfo.expiryDate;
+    String expiryDate = CommonService.vCardInfo.expiryDate;
     if (expiryDate.isEmpty) {
       expiryDate = "****";
     }
@@ -426,7 +426,7 @@ class _CardPartState extends State<CardPart> {
   }
 
   getOnlineCardExchangeInfoList() {
-    if (CommonService.cardInfo.cardNo.isEmpty) {
+    if (CommonService.vCardInfo.cardNo.isEmpty) {
       if (_refreshListController.isRefresh) {
         _refreshListController.refreshCompleted();
       }
@@ -439,7 +439,7 @@ class _CardPartState extends State<CardPart> {
     CardService.getInstance()
         .cardExchangeInfoList(
             context,
-            CommonService.cardInfo.cardNo,
+            CommonService.vCardInfo.cardNo,
             Int64.parseInt(dataStartIndex.toString()),
             Int64.parseInt(pageSize.toString()))
         .then((resp) {
@@ -479,7 +479,7 @@ class _CardPartState extends State<CardPart> {
   }
 
   getOfflineCardHistoryListFromServer() {
-    if (CommonService.cardInfo.cardNo.isEmpty) {
+    if (CommonService.vCardInfo.cardNo.isEmpty) {
       if (_refreshListController.isRefresh) {
         _refreshListController.refreshCompleted();
       }
@@ -491,7 +491,7 @@ class _CardPartState extends State<CardPart> {
     CardService.getInstance()
         .cardHistory(
             context,
-            CommonService.cardInfo.cardNo,
+            CommonService.vCardInfo.cardNo,
             Int64.parseInt(dataStartIndex.toString()),
             Int64.parseInt(pageSize.toString()))
         .then((resp) {

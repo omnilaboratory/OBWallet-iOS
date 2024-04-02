@@ -274,7 +274,7 @@ class _AccountState extends State<Account> {
   getCardBalanceFromServer() {
     CardService.getInstance().cardList(context).then((resp) {
       if (resp.code == 1) {
-        hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
+        hasCard = CommonService.vCardInfo.cardNo.isNotEmpty;
       }
     });
   }

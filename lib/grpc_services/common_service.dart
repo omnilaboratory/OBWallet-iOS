@@ -21,7 +21,7 @@ mixin CommonService {
   static List<DollarFaceInfo> nftInfoList = [];
   static List<TokenInfo> tokenList = [];
   static List<TokenInfo> tokenListPolygon = [];
-  static CardInfo cardInfo = CardInfo();
+  static CardInfo vCardInfo = CardInfo();
   static List<CardInfo> realCardList = [];
   static String userId = "1";
   static bool firstEnterApp = true;
@@ -47,7 +47,7 @@ resetServices() {
   CommonService.userInfo = null;
   CommonService.tokenList = [];
   CommonService.tokenListPolygon = [];
-  CommonService.cardInfo = CardInfo();
+  CommonService.vCardInfo = CardInfo();
   CommonService.firstEnterApp = true;
   TokenService.walletInfo = null;
   resetServicesFromChangeLanguage();
