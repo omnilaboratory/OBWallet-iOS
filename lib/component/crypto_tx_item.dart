@@ -26,7 +26,7 @@ class CryptoTxItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(6)),
         ),
         Expanded(
-          flex: 4,
+          flex: 5,
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Column(
@@ -54,6 +54,7 @@ class CryptoTxItem extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(width: 4),
         Expanded(
           flex: 2,
           child: Column(

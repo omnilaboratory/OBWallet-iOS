@@ -75,7 +75,7 @@ class _CardPartState extends State<CardPart> {
   @override
   Widget build(BuildContext context) {
     List<Widget> list = [];
-    list.add(const SizedBox(height: 20));
+    list.add(const SizedBox(height: 10));
     list.add(CardItem(
         cardItemInfo: CardItemInfo(
             cardNo: CommonService.cardInfo.cardNo,
@@ -158,14 +158,14 @@ class _CardPartState extends State<CardPart> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 15),
+          const SizedBox(height: 8),
           buildTxButtons(),
-          const SizedBox(height: 15),
+          const SizedBox(height: 8),
           Dash(
             dashColor: const Color(0xFFCFCFCF),
             length: MediaQuery.of(context).size.width - 40,
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 8),
           Text(
             S.of(context).card_RecentTransactions,
             style: const TextStyle(
@@ -225,9 +225,12 @@ class _CardPartState extends State<CardPart> {
   void _onBalanceRefresh() async {
     CardService.getInstance().cardList(context).then((resp) {
       if (resp.code == 1) {
-        log("cardInfo");
+        var needLoadList = !hasCard;
         hasCard = CommonService.cardInfo.cardNo.isNotEmpty;
         if (mounted) {
+          if(needLoadList){
+            _onListRefresh();
+          }
           setState(() {});
         }
       }

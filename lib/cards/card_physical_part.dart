@@ -43,6 +43,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   int dataStartIndex = 0;
   bool hasCard = CommonService.realCardList.isNotEmpty;
 
+  int currCardIndex = 0;
   CardInfo currCardInfo = CardInfo();
 
   final RefreshController _refreshListController =
@@ -55,7 +56,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   void initState() {
     super.initState();
     if (hasCard) {
-      currCardInfo = CommonService.realCardList[0];
+      currCardInfo = CommonService.realCardList[currCardIndex];
     } else {
       _onBalanceRefresh();
     }
@@ -75,7 +76,6 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
     list.add(const SizedBox(height: 10));
     if (hasCard) {
       // list.add(buildBindAndApplyBtns(context));
-      list.add(const SizedBox(height: 10));
       list.add(SizedBox(
         height: 200,
         child: Swiper(
@@ -83,7 +83,8 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
           autoplay: false,
           loop: false,
           onIndexChanged: (index) {
-            currCardInfo = CommonService.realCardList[index];
+            currCardIndex = index;
+            currCardInfo = CommonService.realCardList[currCardIndex];
             _onListRefresh();
             setState(() {});
           },
@@ -262,14 +263,14 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 15),
+          const SizedBox(height: 8),
           buildTxButtons(),
-          const SizedBox(height: 15),
+          const SizedBox(height: 8),
           Dash(
             dashColor: const Color(0xFFCFCFCF),
             length: MediaQuery.of(context).size.width - 40,
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 8),
           Text(
             S.of(context).card_RecentTransactions,
             style: const TextStyle(
@@ -329,9 +330,13 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   void _onBalanceRefresh() async {
     CardService.getInstance().cardList(context).then((resp) {
       if (resp.code == 1) {
+        var needLoadList = !hasCard;
         hasCard = CommonService.realCardList.isNotEmpty;
         if (hasCard) {
-          currCardInfo = CommonService.realCardList[0];
+          currCardInfo = CommonService.realCardList[currCardIndex];
+          if (needLoadList) {
+            _onListRefresh();
+          }
         }
         if (mounted) {
           setState(() {});
@@ -510,6 +515,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   }
 
   gePaymentHistoryListFromServer() {
+    log("gePaymentHistoryListFromServer 0");
     if (currCardInfo.cardNo.isEmpty) {
       if (_refreshListController.isRefresh) {
         _refreshListController.refreshCompleted();
@@ -519,7 +525,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       }
       return;
     }
-
+    log("gePaymentHistoryListFromServer 1");
     CardService.getInstance()
         .cardHistory(
             context,

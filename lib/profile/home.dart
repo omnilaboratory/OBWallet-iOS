@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
