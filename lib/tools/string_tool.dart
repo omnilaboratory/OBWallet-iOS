@@ -2,22 +2,22 @@ import 'package:decimal/decimal.dart';
 import 'package:intl/intl.dart';
 
 class StringTools {
-  static String starString(String? longText, {int maxLength = 16}) {
+  static String starString(String? longText, {int maxLength = 16,String word = "..."}) {
     if (longText != null && longText.isNotEmpty) {
       int totalLength = longText.length;
       if (totalLength > maxLength) {
         int halfLength = ((maxLength - 2) / 2).ceil();
-        return "${longText.substring(0, halfLength)}...${longText.substring(totalLength - 1 - halfLength)}";
+        return "${longText.substring(0, halfLength)}$word${longText.substring(totalLength - 1 - halfLength)}";
       }
     }
     return longText!;
   }
 
-  static String starString2(String? longText, {int begin = 8, int end = 6}) {
+  static String starString2(String? longText, {int begin = 8, int end = 6,String word = "..."}) {
     if (longText != null && longText.isNotEmpty) {
       int totalLength = longText.length;
       if (totalLength > (begin + end)) {
-        return "${longText.substring(0, begin)}...${longText.substring(totalLength - end)}";
+        return "${longText.substring(0, begin)}$word${longText.substring(totalLength - end)}";
       }
     }
     return longText!;

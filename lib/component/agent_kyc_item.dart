@@ -3,6 +3,7 @@ import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/protos/gen-dart/user/user.pb.dart';
 import 'package:awallet/tools/global_params.dart';
+import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 
 class AgentKycItem extends StatelessWidget {
@@ -48,7 +49,7 @@ class AgentKycItem extends StatelessWidget {
             const SizedBox(height: 10),
             Row(
               children: [
-                Text(info.idNum, style: const TextStyle(color: Colors.white)),
+                Text(StringTools.starString2(info.idNum,begin: 4,end: 4,word: "***") , style: const TextStyle(color: Colors.white)),
                 const Spacer(),
                 Text("(${info.areaCode})${info.mobile}",
                     style: const TextStyle(color: Colors.white)),
