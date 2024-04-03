@@ -42,7 +42,7 @@ class _CardHomeState extends State<CardHome>
         child: Text(
           e,
           style: const TextStyle(
-            fontSize: 14,
+            fontSize: 12,
             fontWeight: FontWeight.w500,
           ),
         ),
