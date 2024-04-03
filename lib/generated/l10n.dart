@@ -2240,10 +2240,10 @@ class S {
     );
   }
 
-  /// `Inactive({count})`
+  /// `To Active({count})`
   String agent_card_list_inactive(Object count) {
     return Intl.message(
-      'Inactive($count)',
+      'To Active($count)',
       name: 'agent_card_list_inactive',
       desc: '',
       args: [count],

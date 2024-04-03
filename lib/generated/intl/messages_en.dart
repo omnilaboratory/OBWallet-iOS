@@ -24,7 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(count) => "ALL(${count})";
 
-  static String m2(count) => "Inactive(${count})";
+  static String m2(count) => "To Active(${count})";
 
   static String m3(createFee) =>
       "*** There is a fee of \$${createFee} to apply for a virtual card.";

@@ -249,7 +249,7 @@
   "agent_card_inactive": "Click to Active",
   "agent_card_list_all": "ALL({count})",
   "agent_card_list_active": "Active({count})",
-  "agent_card_list_inactive": "Inactive({count})",
+  "agent_card_list_inactive": "To Active({count})",
 
   "tips_WrongEmail": "Wrong email",
   "tips_WrongTxid": "Wrong txid",
