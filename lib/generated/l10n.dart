@@ -2190,11 +2190,21 @@ class S {
     );
   }
 
-  /// `Agent to Physical Card`
+  /// `NEW KYC AND APPLY`
   String get agent_kyc {
     return Intl.message(
-      'Agent to Physical Card',
+      'NEW KYC AND APPLY',
       name: 'agent_kyc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `KYC history`
+  String get agent_kyc_history {
+    return Intl.message(
+      'KYC history',
+      name: 'agent_kyc_history',
       desc: '',
       args: [],
     );

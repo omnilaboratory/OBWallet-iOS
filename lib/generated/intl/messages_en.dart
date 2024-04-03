@@ -75,8 +75,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "agent_card_list_active": m0,
         "agent_card_list_all": m1,
         "agent_card_list_inactive": m2,
-        "agent_kyc":
-            MessageLookupByLibrary.simpleMessage("Agent to Physical Card"),
+        "agent_kyc": MessageLookupByLibrary.simpleMessage("NEW KYC AND APPLY"),
+        "agent_kyc_history":
+            MessageLookupByLibrary.simpleMessage("KYC history"),
         "alert_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "alert_ok": MessageLookupByLibrary.simpleMessage("OK"),
         "alert_title": MessageLookupByLibrary.simpleMessage("Message"),

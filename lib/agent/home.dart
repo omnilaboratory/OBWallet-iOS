@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:awallet/agent/agent_kyc.dart';
+import 'package:awallet/agent/agent_kyc_history.dart';
 import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
-import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
 
 import 'agent_card_list.dart';
@@ -20,7 +20,7 @@ class _AgentHomeState extends State<AgentHome>
     with SingleTickerProviderStateMixin {
   var tabNames = [
     S.current.agent_card_list_all(0),
-    S.current.agent_card_list_active(1),
+    S.current.agent_card_list_active(0),
     S.current.agent_card_list_inactive(0)
   ];
   List<Widget> tabList = [];
@@ -52,7 +52,7 @@ class _AgentHomeState extends State<AgentHome>
 
   updateCountInfo(List<int> counts) {
     log("updateCountInfo $counts");
-    if(mounted){
+    if (mounted) {
       tabNames[0] = S.of(context).agent_card_list_all(counts[0]);
       tabNames[1] = S.of(context).agent_card_list_active(counts[1]);
       tabNames[2] = S.of(context).agent_card_list_inactive(counts[2]);
@@ -95,15 +95,33 @@ class _AgentHomeState extends State<AgentHome>
                 ),
               ),
               const SizedBox(height: 20),
-              BottomButton(
-                icon: 'asset/images/icon_arrow_right_green.png',
-                text: S.of(context).agent_kyc.toUpperCase(),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AgentKyc()));
-                },
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  BottomButton(
+                    icon: 'asset/images/icon_arrow_right_green.png',
+                    fontSize: 14,
+                    text: S.of(context).agent_kyc.toUpperCase(),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AgentKyc()));
+                    },
+                  ),
+                  // const SizedBox(width: 20),
+                  // BottomButton(
+                  //   icon: 'asset/images/icon_arrow_right_green.png',
+                  //   fontSize: 14,
+                  //   text: S.of(context).agent_kyc_history.toUpperCase(),
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => const AgentKycHistory()));
+                  //   },
+                  // ),
+                ],
               ),
               const SizedBox(height: 20),
             ],
