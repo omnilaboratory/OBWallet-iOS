@@ -501,10 +501,10 @@ class _CardPartState extends State<CardPart> {
             txs.add(CryptoTxInfo(
                 title: element.authMerchant,
                 txTime: DateTime.parse(element.settleDate),
-                fromSymbol: "USD",
+                fromSymbol: element.authCurrency,
                 targetSymbol: "",
-                amount: double.parse(element.settleAmt),
-                amountOfDollar: double.parse(element.settleAmt),
+                amount: double.parse(element.authAmt),
+                amountOfDollar: double.parse(element.authAmt),
                 status: 3));
           }
           if (mounted) {

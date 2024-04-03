@@ -526,7 +526,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   }
 
   gePaymentHistoryListFromServer() {
-    log("gePaymentHistoryListFromServer 0");
+    log("cardHistory 0");
     if (currCardInfo.cardNo.isEmpty) {
       if (_refreshListController.isRefresh) {
         _refreshListController.refreshCompleted();
@@ -536,7 +536,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       }
       return;
     }
-    log("gePaymentHistoryListFromServer 1");
+    log("cardHistory 1 cardNo ${currCardInfo.cardNo}");
     CardService.getInstance()
         .cardHistory(
             context,
@@ -551,10 +551,10 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
             txs.add(CryptoTxInfo(
                 title: element.authMerchant,
                 txTime: DateTime.parse(element.settleDate),
-                fromSymbol: "USD",
+                fromSymbol: element.authCurrency,
                 targetSymbol: "",
-                amount: double.parse(element.settleAmt),
-                amountOfDollar: double.parse(element.settleAmt),
+                amount: double.parse(element.authAmt),
+                amountOfDollar: double.parse(element.authAmt),
                 status: 3));
           }
           if (mounted) {
