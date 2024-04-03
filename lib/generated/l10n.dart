@@ -2220,10 +2220,10 @@ class S {
     );
   }
 
-  /// `All({count})`
+  /// `ALL({count})`
   String agent_card_list_all(Object count) {
     return Intl.message(
-      'All($count)',
+      'ALL($count)',
       name: 'agent_card_list_all',
       desc: '',
       args: [count],

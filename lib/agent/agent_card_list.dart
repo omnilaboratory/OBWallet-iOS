@@ -58,13 +58,12 @@ class _AgentCardListState extends State<AgentCardList> {
       if (resp.data != null) {
         CardListResponse respData = resp.data as CardListResponse;
         cardInfoList = respData.items;
-
-        List<int> counts = [];
         var stateInfo = respData.agentCardStat;
-        counts.add(stateInfo.agentCardStatus0);
-        counts.add(stateInfo.agentCardStatus1);
-        counts.add(stateInfo.agentCardStatus2);
-        widget.onDataReceived(counts);
+        widget.onDataReceived([
+          stateInfo.agentCardStatus0,
+          stateInfo.agentCardStatus1,
+          stateInfo.agentCardStatus2
+        ]);
         setState(() {});
       }
     }

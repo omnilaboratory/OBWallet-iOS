@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(count) => "Active(${count})";
 
-  static String m1(count) => "All(${count})";
+  static String m1(count) => "ALL(${count})";
 
   static String m2(count) => "Inactive(${count})";
 

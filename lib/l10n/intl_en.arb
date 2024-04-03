@@ -247,7 +247,7 @@
   "agent_kyc": "Agent to Physical Card",
   "agent_card_active": "Active",
   "agent_card_inactive": "Click to Active",
-  "agent_card_list_all": "All({count})",
+  "agent_card_list_all": "ALL({count})",
   "agent_card_list_active": "Active({count})",
   "agent_card_list_inactive": "Inactive({count})",
 
