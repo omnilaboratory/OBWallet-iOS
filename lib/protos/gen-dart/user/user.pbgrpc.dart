@@ -57,6 +57,18 @@ class UserServiceClient extends $grpc.Client {
       '/user.UserService/AgentKycForCard',
       ($2.AgentKycInfo value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.AgentKycForCardResponse.fromBuffer(value));
+  static final _$agentCard = $grpc.ClientMethod<$2.AgentCardRequest, $2.AgentKycForCardResponse>(
+      '/user.UserService/AgentCard',
+      ($2.AgentCardRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.AgentKycForCardResponse.fromBuffer(value));
+  static final _$getAgentKycInfo = $grpc.ClientMethod<$2.GetAgentKycInfoRequest, $2.AgentKycInfo>(
+      '/user.UserService/GetAgentKycInfo',
+      ($2.GetAgentKycInfoRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.AgentKycInfo.fromBuffer(value));
+  static final _$listAgentKycInfo = $grpc.ClientMethod<$2.ListAgentKycInfoRequest, $2.ListAgentKycInfoResponse>(
+      '/user.UserService/ListAgentKycInfo',
+      ($2.ListAgentKycInfoRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.ListAgentKycInfoResponse.fromBuffer(value));
   static final _$updateUser = $grpc.ClientMethod<$2.UserInfo, $2.UserInfo>(
       '/user.UserService/UpdateUser',
       ($2.UserInfo value) => value.writeToBuffer(),
@@ -122,6 +134,18 @@ class UserServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$2.AgentKycForCardResponse> agentKycForCard($2.AgentKycInfo request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$agentKycForCard, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$2.AgentKycForCardResponse> agentCard($2.AgentCardRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$agentCard, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$2.AgentKycInfo> getAgentKycInfo($2.GetAgentKycInfoRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getAgentKycInfo, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$2.ListAgentKycInfoResponse> listAgentKycInfo($2.ListAgentKycInfoRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$listAgentKycInfo, request, options: options);
   }
 
   $grpc.ResponseFuture<$2.UserInfo> updateUser($2.UserInfo request, {$grpc.CallOptions? options}) {
@@ -217,6 +241,27 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $2.AgentKycInfo.fromBuffer(value),
         ($2.AgentKycForCardResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.AgentCardRequest, $2.AgentKycForCardResponse>(
+        'AgentCard',
+        agentCard_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.AgentCardRequest.fromBuffer(value),
+        ($2.AgentKycForCardResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.GetAgentKycInfoRequest, $2.AgentKycInfo>(
+        'GetAgentKycInfo',
+        getAgentKycInfo_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.GetAgentKycInfoRequest.fromBuffer(value),
+        ($2.AgentKycInfo value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ListAgentKycInfoRequest, $2.ListAgentKycInfoResponse>(
+        'ListAgentKycInfo',
+        listAgentKycInfo_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.ListAgentKycInfoRequest.fromBuffer(value),
+        ($2.ListAgentKycInfoResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.UserInfo, $2.UserInfo>(
         'UpdateUser',
         updateUser_Pre,
@@ -297,6 +342,18 @@ abstract class UserServiceBase extends $grpc.Service {
     return agentKycForCard(call, await request);
   }
 
+  $async.Future<$2.AgentKycForCardResponse> agentCard_Pre($grpc.ServiceCall call, $async.Future<$2.AgentCardRequest> request) async {
+    return agentCard(call, await request);
+  }
+
+  $async.Future<$2.AgentKycInfo> getAgentKycInfo_Pre($grpc.ServiceCall call, $async.Future<$2.GetAgentKycInfoRequest> request) async {
+    return getAgentKycInfo(call, await request);
+  }
+
+  $async.Future<$2.ListAgentKycInfoResponse> listAgentKycInfo_Pre($grpc.ServiceCall call, $async.Future<$2.ListAgentKycInfoRequest> request) async {
+    return listAgentKycInfo(call, await request);
+  }
+
   $async.Future<$2.UserInfo> updateUser_Pre($grpc.ServiceCall call, $async.Future<$2.UserInfo> request) async {
     return updateUser(call, await request);
   }
@@ -330,6 +387,9 @@ abstract class UserServiceBase extends $grpc.Service {
   $async.Future<$2.ForgetPwdResponse> forgetPwd($grpc.ServiceCall call, $2.ForgetPwdRequest request);
   $async.Future<$2.UserInfo> kyc($grpc.ServiceCall call, $2.UserInfo request);
   $async.Future<$2.AgentKycForCardResponse> agentKycForCard($grpc.ServiceCall call, $2.AgentKycInfo request);
+  $async.Future<$2.AgentKycForCardResponse> agentCard($grpc.ServiceCall call, $2.AgentCardRequest request);
+  $async.Future<$2.AgentKycInfo> getAgentKycInfo($grpc.ServiceCall call, $2.GetAgentKycInfoRequest request);
+  $async.Future<$2.ListAgentKycInfoResponse> listAgentKycInfo($grpc.ServiceCall call, $2.ListAgentKycInfoRequest request);
   $async.Future<$2.UserInfo> updateUser($grpc.ServiceCall call, $2.UserInfo request);
   $async.Future<$2.UpdateUserLangResponse> updateUserLang($grpc.ServiceCall call, $2.UpdateUserLangRequest request);
   $async.Future<$2.GetUserInfoResponse> getUserInfo($grpc.ServiceCall call, $2.GetUserInfoRequest request);

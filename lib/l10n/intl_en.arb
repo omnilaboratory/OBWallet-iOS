@@ -245,6 +245,7 @@
   "alert_cancel": "Cancel",
 
   "agent_kyc": "NEW KYC AND APPLY",
+  "agent_kyc_applyCard": "{email}\n apply new Physical Card ?",
   "agent_kyc_history": "KYC history",
   "agent_card_active": "Active",
   "agent_card_inactive": "Click to Active",
@@ -253,6 +254,7 @@
   "agent_card_list_inactive": "To Active({count})",
 
   "tips_WrongEmail": "Wrong email",
+  "tips_ExistEmail": "Existed email",
   "tips_WrongTxid": "Wrong txid",
   "tips_WrongTopUp": "Top up to wallet address",
   "tips_comeSoon": "Coming Soon...",
@@ -298,5 +300,6 @@
   "tips_codeIsOnClipboard": "Invitation Code is on your clipboard.",
   "tips_sendTokenError": "Please deposit enough ETH as gas fee.",
   "tips_logout": "Are you sure you want to logout？",
-  "tips_WithdrawResult": "Will get ${amount} and fee is ${fee}."
+  "tips_WithdrawResult": "Will get ${amount} and fee is ${fee}.",
+  "tips_successApply": "Apply successful!"
 }

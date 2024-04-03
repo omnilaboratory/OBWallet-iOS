@@ -109,18 +109,18 @@ class _AgentHomeState extends State<AgentHome>
                               builder: (context) => const AgentKyc()));
                     },
                   ),
-                  // const SizedBox(width: 20),
-                  // BottomButton(
-                  //   icon: 'asset/images/icon_arrow_right_green.png',
-                  //   fontSize: 14,
-                  //   text: S.of(context).agent_kyc_history.toUpperCase(),
-                  //   onPressed: () {
-                  //     Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //             builder: (context) => const AgentKycHistory()));
-                  //   },
-                  // ),
+                  const SizedBox(width: 20),
+                  BottomButton(
+                    icon: 'asset/images/icon_arrow_right_green.png',
+                    fontSize: 14,
+                    text: S.of(context).agent_kyc_history.toUpperCase(),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AgentKycHistory()));
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 20),

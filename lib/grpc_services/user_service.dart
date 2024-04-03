@@ -247,6 +247,48 @@ class UserService {
     return ret;
   }
 
+  Future<GrpcResponse> listAgentKycInfo(BuildContext context) async {
+    var req = ListAgentKycInfoRequest();
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.listAgentKycInfo(req);
+      ret.code = 1;
+      ret.data = resp?.list;
+    } catch (e) {
+      setError(context, "listAgentKycInfo", e, ret);
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> agentCard(BuildContext context,String openId) async {
+    var req = AgentCardRequest();
+    req.openId = openId;
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.agentCard(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      setError(context, "agentCard", e, ret,isShowToast: false);
+    }
+    return ret;
+  }
+
+  Future<GrpcResponse> getAgentKycInfo(String email) async {
+    var req = GetAgentKycInfoRequest();
+    req.email = email;
+    var ret = GrpcResponse();
+    try {
+      var resp = await userServiceClient?.getAgentKycInfo(req);
+      ret.code = 1;
+      log("getAgentKycInfo $resp");
+      ret.data = resp;
+    } catch (e) {
+
+    }
+    return ret;
+  }
+
   Future<GrpcResponse> listReward(
       BuildContext context, int start, int limit) async {
     var req = ListRewardRequest();

@@ -28,10 +28,12 @@ TextFormField createTextFormField(
     bool needCheck = true,
     bool enabled = true,
     Function? onChanged,
+      FocusNode ? focusNode,
     Function? validator,
     int maxLines = 1,
     int borderType = 0}) {
   return TextFormField(
+    focusNode: focusNode,
     controller: controller,
     maxLines: maxLines,
     maxLength: maxLength,

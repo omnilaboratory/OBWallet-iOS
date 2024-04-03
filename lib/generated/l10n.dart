@@ -2200,6 +2200,16 @@ class S {
     );
   }
 
+  /// `{email}\n apply new Physical Card ?`
+  String agent_kyc_applyCard(Object email) {
+    return Intl.message(
+      '$email\n apply new Physical Card ?',
+      name: 'agent_kyc_applyCard',
+      desc: '',
+      args: [email],
+    );
+  }
+
   /// `KYC history`
   String get agent_kyc_history {
     return Intl.message(
@@ -2265,6 +2275,16 @@ class S {
     return Intl.message(
       'Wrong email',
       name: 'tips_WrongEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Existed email`
+  String get tips_ExistEmail {
+    return Intl.message(
+      'Existed email',
+      name: 'tips_ExistEmail',
       desc: '',
       args: [],
     );
@@ -2727,6 +2747,16 @@ class S {
       name: 'tips_WithdrawResult',
       desc: '',
       args: [amount, fee],
+    );
+  }
+
+  /// `Apply successful!`
+  String get tips_successApply {
+    return Intl.message(
+      'Apply successful!',
+      name: 'tips_successApply',
+      desc: '',
+      args: [],
     );
   }
 }

@@ -21,19 +21,15 @@
   "common_Withdraw": "提款",
   "common_Exchange": "兌換",
   "common_recharge2card": "充值到卡",
-
-
   "login_Welcome": "歡迎",
   "login_Desc": "",
   "login_SignIn": "登錄",
   "login_ForgotPsw": "忘記密碼?",
   "login_SignUp": "註冊",
   "forgetPsw_Title": "忘記密碼",
-
   "signUp_Title": "註冊",
   "signUp_Nickname": "暱稱",
   "signUp_InvitationCode": "邀請碼",
-
   "applyCard_Title": "申請虛擬卡",
   "applyCard_VirtualCard": "虛擬卡片",
   "applyCard_Desc1": "我們的新虛擬卡片允許您:",
@@ -42,7 +38,6 @@
   "applyCard_Desc4": "*** 申請實體卡片需要支付 {createFee} 美元的費用。",
   "applyCard_ApplyLater": "稍後申請",
   "applyCard_ApplyCard": "申請虛擬卡",
-
   "cardActivity_tile": "卡活動",
   "exchange_tile": "兌換",
   "exchange_To": "兌換至",
@@ -54,23 +49,19 @@
   "exchange_notEnoughBalance": "您的帳戶餘額不足,請充值。",
   "exchange_Deposit": "存款",
   "exchange_Step": "第 {step} 步",
-
   "reviewExchange_title": "兌換詳情",
   "reviewExchange_YouWillSwap": "您將兌換",
   "reviewExchange_Slippage": "滑點",
   "reviewExchange_Fee": "費用 {fee}",
   "reviewExchange_cost": "網路成本 {cost}",
-
   "tokenActivity_title": "{tokenName} 活動",
   "tokenActivity_Pay": "支付",
   "tokenActivity_Exchange": "兌換",
   "tokenActivity_Receive": "接收",
   "tokenActivity_Send": "發送",
-
   "txHistory_title": "加密貨幣",
   "txHistory_Exchange": "兌換",
   "txHistory_Send": "轉账",
-
   "kyc_title": "認證",
   "kyc_country": "國家/地區",
   "kyc_id_tips_china": "目前僅支持中國大陸",
@@ -87,22 +78,18 @@
   "kyc_StateRegion": "州/地區",
   "kyc_City": "城市",
   "kyc_PostalZipCode": "郵遞區號",
-
   "selectCard_title": "選擇喜愛的卡片",
-
   "send_title1": "充值到卡",
   "send_title2": "充值到卡",
   "send_Withdraw": "提款",
   "send_Deposit": "充值",
   "send_tips": "*** 虛擬卡每月提款限額為 50,000 美元。",
   "send_AccountBalance": "賬戶餘額",
-
   "main_home_Card": "卡片",
   "main_home_Crypto": "加密貨幣",
   "main_home_Shop": "商店",
   "main_home_agent": "代理",
   "main_home_Profile": "個人資料",
-
   "card_home_title": "首頁",
   "card_home_Account": "賬戶",
   "card_home_Card": "虛擬卡",
@@ -114,14 +101,12 @@
   "card_card_Pay": "支付",
   "card_card_Deposit": "存款",
   "card_card_Withdraw": "提款",
-
   "recharge_Title1": "充值到賬戶",
   "recharge_Title2": "提款到賬戶",
   "recharge_Amount": "金額",
   "recharge_CardNumber": "卡號",
   "recharge_AccountBalance": "賬戶餘額",
   "recharge_CardBalance": "卡片餘額",
-
   "cardRecharge_title": "支付NFT",
   "ethereumPage_Tokens": "代幣",
   "ethereumPage_NFTs": "NFT",
@@ -131,22 +116,17 @@
   "ethereumPage_Send": "發送",
   "ethereumPage_CreateNewWallet": "創建新錢包",
   "ethereumPage_RecoverWallet": "恢復錢包",
-
   "ethereumRecoverWallet_title": "導入 WIF",
   "ethereumRecoverWallet_WIF": "WIF",
-
   "exportWif_title": "導出 WIF",
   "exportWif_Copy": "複製",
-
   "nftExchange_title": "NFT 兌換",
   "nftExchange_From": "從",
   "nftExchange_To": "至",
   "nftExchange_Chain": "链条类型",
   "nftExchange_nftBalance": "餘額: {amount} NFT",
-
   "receiveWallet_WalletAddress": "錢包地址",
   "receiveWallet_LightningInvoice": "閃電網路發票",
-
   "crypto_send_title": "發送",
   "crypto_send_AssetAmount": "資產和數量",
   "crypto_send_Balance": "餘額: ",
@@ -156,13 +136,11 @@
   "crypto_send_RefreshIn5s": "5秒后刷新",
   "crypto_send_Standard": "標準",
   "crypto_send_Expiration": "到期: ",
-
   "crypto_sendConfirm_title": "標準",
   "crypto_sendConfirm_PaymentDetails": "付款詳情",
   "crypto_sendConfirm_Memo": "備註: ",
   "crypto_sendConfirm_From": "從: ",
   "crypto_sendConfirm_To": "至: ",
-
   "shop_title": "商店",
   "shop_tips": "您已選擇 {nftTotalCount} 個 NFT,總值 {nftTotalValue} 美元",
   "shop_BuyNFT": "購買 NFT",
@@ -174,7 +152,6 @@
   "shop_nft_TokenStandard": "代幣標準",
   "shop_nft_Chain": "鏈",
   "shop_nft_tx_history_title": "NFT交易歷史",
-
   "profile_home_InvitationCode": "我的邀請碼",
   "profile_home_MyUsers": "我的用戶",
   "profile_home_MyReward": "我的獎勵",
@@ -184,9 +161,7 @@
   "profile_UpdatePsw_totalUsers": "用戶總數: ",
   "profile_UpdatePassword_OldPassword": "舊密碼",
   "profile_MyReward_totalReward": "獎勵總數: ",
-
   "profile_language_title": "語言",
-
   "profile_title_RewardFrom": "來自獎勵",
   "profile_reward_subTitle1": "獎勵總數: {totalReward} 來自 {totalUser} 用戶",
   "profile_guide_title": "指南",
@@ -195,7 +170,6 @@
   "profile_guide_desc3": "將 USDT 兌換為 USD。",
   "profile_guide_desc4": "USD 可以提款到虛擬卡。",
   "profile_guide_desc5": "檢查您的虛擬卡。",
-
   "realCard_title": "申請實體卡",
   "realCard_apply": "申請",
   "realCard_card_title": "實體卡",
@@ -205,54 +179,50 @@
   "realCard_card_active_title": "激活實體卡",
   "realCard_card_active_tips": "驗證碼會寄到你的信箱\n{email}",
   "realCard_fee": "申請實體卡有{fee}元的費用，請先充值。",
-  "realCard_status1": "覆核中", 
+  "realCard_status1": "覆核中",
   "realCard_status2": "覆核通過",
   "realCard_status3": "申請失敗",
   "realCard_name": "姓名",
-  "realCard_idCardNum": "身份證號",  
+  "realCard_idCardNum": "身份證號",
   "realCard_firstName": "姓氏拼音",
   "realCard_lastName": "名字拼音",
-  "realCard_chinaIdCard": "身份證", 
-  "realCard_otherIdCard": "護照", 
-  "realCard_gender_male": "男",  
-  "realCard_gender_female": "女", 
-  "realCard_marry_no": "未婚", 
-  "realCard_marry_yes": "已婚",    
-  "realCard_shipRegion_china": "中國大陸", 
-  "realCard_shipRegion_hongKong": "中國香港",   
+  "realCard_chinaIdCard": "身份證",
+  "realCard_otherIdCard": "護照",
+  "realCard_gender_male": "男",
+  "realCard_gender_female": "女",
+  "realCard_marry_no": "未婚",
+  "realCard_marry_yes": "已婚",
+  "realCard_shipRegion_china": "中國大陸",
+  "realCard_shipRegion_hongKong": "中國香港",
   "realCard_shipAddress_home": "家庭地址",
-  "realCard_shipAddress_company": "公司地址",  
-  "realCard_tips_uploadImage": "請上傳正確的圖片",  
+  "realCard_shipAddress_company": "公司地址",
+  "realCard_tips_uploadImage": "請上傳正確的圖片",
   "realCard_open_fee_desc": "申請實體卡需支付{fee}美元，請確認。",
   "realCard_open_balance_not_enough": "需支付{fee}美元，餘額不足，請儲值。",
-
-  "realCard_Step2_title": "卡片寄送地址",     
-  "realCard_Step2_phone": "手機號", 
-  "realCard_Step2_city": "收件城市",   
-  "realCard_Step2_cityCode": "城市郵編",  
-  "realCard_Step2_address": "詳細地址",    
-
-  "realCard_Step3_title": "帳單寄送地址",  
+  "realCard_Step2_title": "卡片寄送地址",
+  "realCard_Step2_phone": "手機號",
+  "realCard_Step2_city": "收件城市",
+  "realCard_Step2_cityCode": "城市郵編",
+  "realCard_Step2_address": "詳細地址",
+  "realCard_Step3_title": "帳單寄送地址",
   "realCard_Step3_note": "請填寫非中國大陸地區的英文地址",
-
   "bindCard_title": "綁定實體卡",
   "bindCard_cardNo": "卡號",
   "bindCard_mobile": "手机号",
   "bindCard_cid": "CID",
-
   "alert_title": "消息",
-  "alert_ok": "確定", 
+  "alert_ok": "確定",
   "alert_cancel": "取消",
-
   "agent_kyc": "KYC幷申請卡",
+  "agent_kyc_applyCard": "{email}\n申請新的實體卡?",
   "agent_kyc_history": "KYC記錄",
   "agent_card_active": "已激活",
   "agent_card_inactive": "點擊去激活",
   "agent_card_list_all": "所有({count})",
   "agent_card_list_active": "已激活({count})",
   "agent_card_list_inactive": "未激活({count})",
-
   "tips_WrongEmail": "錯誤的郵件",
+  "tips_ExistEmail": "已被使用的郵件",
   "tips_WrongTxid": "錯誤的交易 ID",
   "tips_WrongTopUp": "充值到錢包地址",
   "tips_comeSoon": "即將推出......",
@@ -298,5 +268,6 @@
   "tips_codeIsOnClipboard": "邀請碼已複製到剪貼板。",
   "tips_sendTokenError": "請存入足夠的 ETH 作為手續費。",
   "tips_logout": "確定要登出嗎？",
-  "tips_WithdrawResult": "將獲得 {amount},手續費為 {fee}"
+  "tips_WithdrawResult": "將獲得 {amount},手續費為 {fee}",
+  "tips_successApply": "申請成功。"
 }

@@ -149,12 +149,59 @@ const AgentKycForCardResponse$json = {
 final $typed_data.Uint8List agentKycForCardResponseDescriptor = $convert.base64Decode(
     'ChdBZ2VudEt5Y0ZvckNhcmRSZXNwb25zZRIXCgdjYXJkX25vGAEgASgJUgZjYXJkTm8=');
 
+@$core.Deprecated('Use getAgentKycInfoRequestDescriptor instead')
+const GetAgentKycInfoRequest$json = {
+  '1': 'GetAgentKycInfoRequest',
+  '2': [
+    {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+/// Descriptor for `GetAgentKycInfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAgentKycInfoRequestDescriptor = $convert.base64Decode(
+    'ChZHZXRBZ2VudEt5Y0luZm9SZXF1ZXN0EhQKBWVtYWlsGAEgASgJUgVlbWFpbA==');
+
+@$core.Deprecated('Use listAgentKycInfoRequestDescriptor instead')
+const ListAgentKycInfoRequest$json = {
+  '1': 'ListAgentKycInfoRequest',
+};
+
+/// Descriptor for `ListAgentKycInfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listAgentKycInfoRequestDescriptor = $convert.base64Decode(
+    'ChdMaXN0QWdlbnRLeWNJbmZvUmVxdWVzdA==');
+
+@$core.Deprecated('Use listAgentKycInfoResponseDescriptor instead')
+const ListAgentKycInfoResponse$json = {
+  '1': 'ListAgentKycInfoResponse',
+  '2': [
+    {'1': 'list', '3': 1, '4': 3, '5': 11, '6': '.user.AgentKycInfo', '10': 'list'},
+  ],
+};
+
+/// Descriptor for `ListAgentKycInfoResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listAgentKycInfoResponseDescriptor = $convert.base64Decode(
+    'ChhMaXN0QWdlbnRLeWNJbmZvUmVzcG9uc2USJgoEbGlzdBgBIAMoCzISLnVzZXIuQWdlbnRLeW'
+    'NJbmZvUgRsaXN0');
+
+@$core.Deprecated('Use agentCardRequestDescriptor instead')
+const AgentCardRequest$json = {
+  '1': 'AgentCardRequest',
+  '2': [
+    {'1': 'open_id', '3': 1, '4': 1, '5': 9, '10': 'openId'},
+  ],
+};
+
+/// Descriptor for `AgentCardRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List agentCardRequestDescriptor = $convert.base64Decode(
+    'ChBBZ2VudENhcmRSZXF1ZXN0EhcKB29wZW5faWQYASABKAlSBm9wZW5JZA==');
+
 @$core.Deprecated('Use agentKycInfoDescriptor instead')
 const AgentKycInfo$json = {
   '1': 'AgentKycInfo',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
     {'1': 'agentCId', '3': 2, '4': 1, '5': 9, '10': 'agentCId'},
+    {'1': 'agent_id', '3': 3, '4': 1, '5': 3, '10': 'agentId'},
     {'1': 'email', '3': 4, '4': 1, '5': 9, '10': 'email'},
     {'1': 'country_code', '3': 5, '4': 1, '5': 14, '6': '.user.CountryCode', '10': 'countryCode'},
     {'1': 'country', '3': 43, '4': 1, '5': 14, '6': '.user.CountryCode', '10': 'country'},
@@ -187,20 +234,20 @@ const AgentKycInfo$json = {
 /// Descriptor for `AgentKycInfo`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List agentKycInfoDescriptor = $convert.base64Decode(
     'CgxBZ2VudEt5Y0luZm8SDgoCaWQYASABKANSAmlkEhoKCGFnZW50Q0lkGAIgASgJUghhZ2VudE'
-    'NJZBIUCgVlbWFpbBgEIAEoCVIFZW1haWwSNAoMY291bnRyeV9jb2RlGAUgASgOMhEudXNlci5D'
-    'b3VudHJ5Q29kZVILY291bnRyeUNvZGUSKwoHY291bnRyeRgrIAEoDjIRLnVzZXIuQ291bnRyeU'
-    'NvZGVSB2NvdW50cnkSLgoIY3VycmVuY3kYFyABKA4yEi51c2VyLkN1cnJlbmN5Q29kZVIIY3Vy'
-    'cmVuY3kSEAoDaWQxGAYgASgJUgNpZDESEAoDaWQyGAcgASgJUgNpZDISFQoGaWRfbnVtGAggAS'
-    'gJUgVpZE51bRIbCglzb2NpYWxfaWQYCSABKAlSCHNvY2lhbElkEhwKCWZpcnN0TmFtZRgKIAEo'
-    'CVIJZmlyc3ROYW1lEhoKCGxhc3ROYW1lGAsgASgJUghsYXN0TmFtZRIWCgZtb2JpbGUYDCABKA'
-    'lSBm1vYmlsZRIQCgNkb2IYDSABKAlSA2RvYhIaCghhZGRyZXNzMRgOIAEoCVIIYWRkcmVzczES'
-    'EgoEY2l0eRgQIAEoCVIEY2l0eRIUCgVzdGF0ZRgRIAEoCVIFc3RhdGUSGwoJcG9zdF9jb2RlGB'
-    'IgASgJUghwb3N0Q29kZRIaCghhcmVhQ29kZRgkIAEoCVIIYXJlYUNvZGUSGgoIbWFyU3RhdGUY'
-    'JyABKAlSCG1hclN0YXRlEiAKC2FkZHJlc3NUeXBlGCggASgJUgthZGRyZXNzVHlwZRIWCgZnZW'
-    '5kZXIYKSABKAlSBmdlbmRlchIWCgZpZFR5cGUYKiABKAlSBmlkVHlwZRIXCgdvcGVuX2lkGBUg'
-    'ASgJUgZvcGVuSWQSHQoKa3ljX3N0YXR1cxgWIAEoCVIJa3ljU3RhdHVzEh0KCnVwZGF0ZWRfYX'
-    'QYEyABKARSCXVwZGF0ZWRBdBIdCgpjcmVhdGVkX2F0GBggASgEUgljcmVhdGVkQXQSFgoGY2Fy'
-    'ZE5vGBkgASgJUgZjYXJkTm8=');
+    'NJZBIZCghhZ2VudF9pZBgDIAEoA1IHYWdlbnRJZBIUCgVlbWFpbBgEIAEoCVIFZW1haWwSNAoM'
+    'Y291bnRyeV9jb2RlGAUgASgOMhEudXNlci5Db3VudHJ5Q29kZVILY291bnRyeUNvZGUSKwoHY2'
+    '91bnRyeRgrIAEoDjIRLnVzZXIuQ291bnRyeUNvZGVSB2NvdW50cnkSLgoIY3VycmVuY3kYFyAB'
+    'KA4yEi51c2VyLkN1cnJlbmN5Q29kZVIIY3VycmVuY3kSEAoDaWQxGAYgASgJUgNpZDESEAoDaW'
+    'QyGAcgASgJUgNpZDISFQoGaWRfbnVtGAggASgJUgVpZE51bRIbCglzb2NpYWxfaWQYCSABKAlS'
+    'CHNvY2lhbElkEhwKCWZpcnN0TmFtZRgKIAEoCVIJZmlyc3ROYW1lEhoKCGxhc3ROYW1lGAsgAS'
+    'gJUghsYXN0TmFtZRIWCgZtb2JpbGUYDCABKAlSBm1vYmlsZRIQCgNkb2IYDSABKAlSA2RvYhIa'
+    'CghhZGRyZXNzMRgOIAEoCVIIYWRkcmVzczESEgoEY2l0eRgQIAEoCVIEY2l0eRIUCgVzdGF0ZR'
+    'gRIAEoCVIFc3RhdGUSGwoJcG9zdF9jb2RlGBIgASgJUghwb3N0Q29kZRIaCghhcmVhQ29kZRgk'
+    'IAEoCVIIYXJlYUNvZGUSGgoIbWFyU3RhdGUYJyABKAlSCG1hclN0YXRlEiAKC2FkZHJlc3NUeX'
+    'BlGCggASgJUgthZGRyZXNzVHlwZRIWCgZnZW5kZXIYKSABKAlSBmdlbmRlchIWCgZpZFR5cGUY'
+    'KiABKAlSBmlkVHlwZRIXCgdvcGVuX2lkGBUgASgJUgZvcGVuSWQSHQoKa3ljX3N0YXR1cxgWIA'
+    'EoCVIJa3ljU3RhdHVzEh0KCnVwZGF0ZWRfYXQYEyABKARSCXVwZGF0ZWRBdBIdCgpjcmVhdGVk'
+    'X2F0GBggASgEUgljcmVhdGVkQXQSFgoGY2FyZE5vGBkgASgJUgZjYXJkTm8=');
 
 @$core.Deprecated('Use signUpRequestDescriptor instead')
 const SignUpRequest$json = {

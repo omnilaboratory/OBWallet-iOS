@@ -51,6 +51,8 @@ class _AgentKycState extends State<AgentKyc> {
   var dateOfBirthTips = "";
   bool _postalFieldEnable = true;
 
+  final FocusNode _focusNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -64,6 +66,27 @@ class _AgentKycState extends State<AgentKyc> {
         }
       }
     });
+
+    _focusNode.addListener(() {
+      if (!_focusNode.hasFocus) {
+        var email = _emailController.text.trim();
+        if (Utils.isEmailValid(email)) {
+          getAgentKycInfo(email).then((value) {
+            if (value) {
+              alert(S.of(context).tips_ExistEmail, context, () {});
+            }
+          });
+        }
+      }
+    });
+  }
+
+  Future<bool> getAgentKycInfo(String email) async {
+    var resp = await UserService.getInstance().getAgentKycInfo(email);
+    if (resp.code == 1) {
+      return true;
+    }
+    return false;
   }
 
   @override
@@ -265,7 +288,9 @@ class _AgentKycState extends State<AgentKyc> {
                                       S.of(context).common_Email;
                                 }
                                 return null;
-                              }, keyboardType: TextInputType.emailAddress),
+                              },
+                                  keyboardType: TextInputType.emailAddress,
+                                  focusNode: _focusNode),
                               const SizedBox(height: 16),
                               Container(
                                 height: 48,
@@ -347,7 +372,7 @@ class _AgentKycState extends State<AgentKyc> {
                                             if (code == CountryCode.HK) {
                                               _postalController.text = "999077";
                                               _postalFieldEnable = false;
-                                            }else{
+                                            } else {
                                               _postalController.text = "";
                                             }
                                             setState(() {});
@@ -437,6 +462,18 @@ class _AgentKycState extends State<AgentKyc> {
     if (dateOfBirthTips == S.of(context).kyc_dateOfBirth) {
       showToast(S.of(context).tips_selectDateOfBirth);
       return;
+    }
+
+    var email = _emailController.value.text.trim();
+    if (!Utils.isEmailValid(email)) {
+      showToast(S.of(context).tips_WrongEmail);
+      return;
+    } else {
+      getAgentKycInfo(email).then((value) {
+        if (value) {
+          alert(S.of(context).tips_ExistEmail, context, () {});
+        }
+      });
     }
 
     // china

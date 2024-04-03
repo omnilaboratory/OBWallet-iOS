@@ -24,6 +24,13 @@ service UserService {
   rpc Kyc(UserInfo) returns (UserInfo) {}
   //代理商提交客户kyc信息,并开卡
   rpc AgentKycForCard(AgentKycInfo) returns (AgentKycForCardResponse) {}
+  //代理商通过用户openid开卡
+  rpc AgentCard(AgentCardRequest) returns (AgentKycForCardResponse) {}
+  //按邮箱获取代理商用户的kyc信息
+  //正常返回AgentKycInfo;如果未找到返回grcp.NotFound err; 其它情况返回Unknow err
+  rpc GetAgentKycInfo(GetAgentKycInfoRequest) returns (AgentKycInfo) {}
+  //获取代理商用户的kyc信息列表
+  rpc ListAgentKycInfo(ListAgentKycInfoRequest) returns (ListAgentKycInfoResponse) {}
   //修改用户信息
   // input parameter UserInfo-Obj must first get from GetUserInfo-rpc,
   // then update the UserInfo-obj,last call UpdateUser with UserInfo-obj
@@ -147,11 +154,26 @@ message UserInfo {
 message AgentKycForCardResponse {
   string card_no  = 1;
 }
+message GetAgentKycInfoRequest {
+  //客户邮箱
+  string email = 1;
+}
+message ListAgentKycInfoRequest {
+}
+message ListAgentKycInfoResponse {
+  repeated AgentKycInfo list = 1;
+}
+message AgentCardRequest {
+  //客户openid
+  string open_id=1;
+}
 message AgentKycInfo {
   //系统id
   int64 id = 1;
-  //代理商用户ID,由服务端设置
+  //代理商邮箱ID,由服务端设置
   string agentCId=2;
+//代理商用户ID,由服务端设置
+  int64 agent_id=3;
 // 客户的邮箱
   string email = 4;
 
