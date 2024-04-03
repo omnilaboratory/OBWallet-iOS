@@ -87,6 +87,7 @@ class _AgentHomeState extends State<AgentHome>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildTabBars(),
+              const SizedBox(height: 10),
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
