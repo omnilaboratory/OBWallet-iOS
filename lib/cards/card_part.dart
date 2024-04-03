@@ -242,8 +242,6 @@ class _CardPartState extends State<CardPart> {
       if (resp.code == 1) {
         var needLoadList = !hasCard;
         hasCard = CommonService.vCardInfo.cardNo.isNotEmpty;
-
-        log("${CommonService.vCardInfo}");
         if (mounted) {
           if (needLoadList) {
             _onListRefresh();
