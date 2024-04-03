@@ -1269,6 +1269,7 @@ class CardListRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'withoutBalance')
     ..aOB(2, _omitFieldNames ? '' : 'isAgentCard')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'agentCardStatus', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1310,6 +1311,15 @@ class CardListRequest extends $pb.GeneratedMessage {
   $core.bool hasIsAgentCard() => $_has(1);
   @$pb.TagNumber(2)
   void clearIsAgentCard() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get agentCardStatus => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set agentCardStatus($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAgentCardStatus() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAgentCardStatus() => clearField(3);
 }
 
 class CardListResponse extends $pb.GeneratedMessage {
@@ -1320,6 +1330,7 @@ class CardListResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardListResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
     ..pc<CardInfo>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: CardInfo.create)
+    ..aOM<AgentCardListStat>(3, _omitFieldNames ? '' : 'agentCardStat', subBuilder: AgentCardListStat.create)
     ..hasRequiredFields = false
   ;
 
@@ -1346,6 +1357,79 @@ class CardListResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<CardInfo> get items => $_getList(0);
+
+  @$pb.TagNumber(3)
+  AgentCardListStat get agentCardStat => $_getN(1);
+  @$pb.TagNumber(3)
+  set agentCardStat(AgentCardListStat v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAgentCardStat() => $_has(1);
+  @$pb.TagNumber(3)
+  void clearAgentCardStat() => clearField(3);
+  @$pb.TagNumber(3)
+  AgentCardListStat ensureAgentCardStat() => $_ensure(1);
+}
+
+class AgentCardListStat extends $pb.GeneratedMessage {
+  factory AgentCardListStat() => create();
+  AgentCardListStat._() : super();
+  factory AgentCardListStat.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AgentCardListStat.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AgentCardListStat', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'agentCardStatus0', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'agentCardStatus1', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'agentCardStatus2', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AgentCardListStat clone() => AgentCardListStat()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AgentCardListStat copyWith(void Function(AgentCardListStat) updates) => super.copyWith((message) => updates(message as AgentCardListStat)) as AgentCardListStat;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AgentCardListStat create() => AgentCardListStat._();
+  AgentCardListStat createEmptyInstance() => create();
+  static $pb.PbList<AgentCardListStat> createRepeated() => $pb.PbList<AgentCardListStat>();
+  @$core.pragma('dart2js:noInline')
+  static AgentCardListStat getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AgentCardListStat>(create);
+  static AgentCardListStat? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get agentCardStatus0 => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set agentCardStatus0($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAgentCardStatus0() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAgentCardStatus0() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get agentCardStatus1 => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set agentCardStatus1($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAgentCardStatus1() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAgentCardStatus1() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get agentCardStatus2 => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set agentCardStatus2($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAgentCardStatus2() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAgentCardStatus2() => clearField(3);
 }
 
 class CardExchangeInfoListRequest extends $pb.GeneratedMessage {

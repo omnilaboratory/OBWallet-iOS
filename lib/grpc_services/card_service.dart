@@ -31,10 +31,15 @@ class CardService {
 
   factory CardService() => _instance;
 
-  Future<GrpcResponse> cardList(BuildContext context,{bool isAgentCard = false, bool withoutBalance = false}) async {
+  // agent_card_status 代理开卡状态: 0 所有 1 已激活  2 未激活
+  Future<GrpcResponse> cardList(BuildContext context,
+      {bool isAgentCard = false,
+      bool withoutBalance = false,
+      int agentCardStatus = 0}) async {
     var req = CardListRequest();
     req.isAgentCard = isAgentCard;
     req.withoutBalance = withoutBalance;
+    req.agentCardStatus = agentCardStatus;
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient?.cardList(req);
@@ -57,9 +62,23 @@ class CardService {
     }
     return ret;
   }
+  Future<GrpcResponse> agentCardList(int agentCardStatus) async {
+    var req = CardListRequest();
+    req.isAgentCard = true;
+    req.withoutBalance = true;
+    req.agentCardStatus = agentCardStatus;
+    var ret = GrpcResponse();
+    try {
+      var resp = await cardServiceClient?.cardList(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+    }
+    return ret;
+  }
 
   Future<GrpcResponse> applyCard(BuildContext context,
-      {bool isShowToast = true,bool isRealCard = false}) async {
+      {bool isShowToast = true, bool isRealCard = false}) async {
     var request = ApplyCardRequest();
     request.currency = CurrencyCode.USD;
     request.isRealCard = isRealCard;
@@ -192,6 +211,7 @@ class CardService {
     }
     return ret;
   }
+
   Future<GrpcResponse> cardBind(
       BuildContext context, CardBindRequest req) async {
     var ret = GrpcResponse();
@@ -201,10 +221,12 @@ class CardService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, "cardBind", e, ret,isShowToast: false);
+      UserService.getInstance()
+          .setError(context, "cardBind", e, ret, isShowToast: false);
     }
     return ret;
   }
+
   Future<GrpcResponse> getCardActivateCode(
       BuildContext context, String cardNo) async {
     GetCardActivateCodeRequest req = GetCardActivateCodeRequest();
@@ -216,10 +238,12 @@ class CardService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, "getCardActivateCode", e, ret,isShowToast: false);
+      UserService.getInstance()
+          .setError(context, "getCardActivateCode", e, ret, isShowToast: false);
     }
     return ret;
   }
+
   Future<GrpcResponse> cardActivate(
       BuildContext context, CardActivateRequest req) async {
     var ret = GrpcResponse();
@@ -229,7 +253,8 @@ class CardService {
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
-      UserService.getInstance().setError(context, "cardBind", e, ret,isShowToast: false);
+      UserService.getInstance()
+          .setError(context, "cardBind", e, ret, isShowToast: false);
     }
     return ret;
   }

@@ -296,10 +296,23 @@ message CardListRequest {
   bool without_balance = 1;
   //是否是代理卡, 默认false,true时只返回代理开的卡
   bool is_agent_card = 2;
+  //代理开卡状态: 0 所有 1 已激活  2 未激活
+  int32 agent_card_status = 3;
 }
 message CardListResponse {
   repeated CardInfo items=1;
+  //代理开卡状态统计
+  AgentCardListStat agent_card_stat=3;
 }
+message AgentCardListStat{
+  //所有
+  int32 agent_card_status0=1;
+  //已激活
+  int32 agent_card_status1=2;
+  //未激活
+  int32 agent_card_status2=3;
+}
+
 message CardExchangeInfoListRequest {
   string cardNo = 1;
   //same as mysql's offsset; default(0)

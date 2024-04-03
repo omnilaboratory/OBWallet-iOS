@@ -2220,6 +2220,36 @@ class S {
     );
   }
 
+  /// `All({count})`
+  String agent_card_list_all(Object count) {
+    return Intl.message(
+      'All($count)',
+      name: 'agent_card_list_all',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Active({count})`
+  String agent_card_list_active(Object count) {
+    return Intl.message(
+      'Active($count)',
+      name: 'agent_card_list_active',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Inactive({count})`
+  String agent_card_list_inactive(Object count) {
+    return Intl.message(
+      'Inactive($count)',
+      name: 'agent_card_list_inactive',
+      desc: '',
+      args: [count],
+    );
+  }
+
   /// `Wrong email`
   String get tips_WrongEmail {
     return Intl.message(

@@ -280,26 +280,46 @@ const CardListRequest$json = {
   '2': [
     {'1': 'without_balance', '3': 1, '4': 1, '5': 8, '10': 'withoutBalance'},
     {'1': 'is_agent_card', '3': 2, '4': 1, '5': 8, '10': 'isAgentCard'},
+    {'1': 'agent_card_status', '3': 3, '4': 1, '5': 5, '10': 'agentCardStatus'},
   ],
 };
 
 /// Descriptor for `CardListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardListRequestDescriptor = $convert.base64Decode(
     'Cg9DYXJkTGlzdFJlcXVlc3QSJwoPd2l0aG91dF9iYWxhbmNlGAEgASgIUg53aXRob3V0QmFsYW'
-    '5jZRIiCg1pc19hZ2VudF9jYXJkGAIgASgIUgtpc0FnZW50Q2FyZA==');
+    '5jZRIiCg1pc19hZ2VudF9jYXJkGAIgASgIUgtpc0FnZW50Q2FyZBIqChFhZ2VudF9jYXJkX3N0'
+    'YXR1cxgDIAEoBVIPYWdlbnRDYXJkU3RhdHVz');
 
 @$core.Deprecated('Use cardListResponseDescriptor instead')
 const CardListResponse$json = {
   '1': 'CardListResponse',
   '2': [
     {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.user.CardInfo', '10': 'items'},
+    {'1': 'agent_card_stat', '3': 3, '4': 1, '5': 11, '6': '.user.AgentCardListStat', '10': 'agentCardStat'},
   ],
 };
 
 /// Descriptor for `CardListResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardListResponseDescriptor = $convert.base64Decode(
     'ChBDYXJkTGlzdFJlc3BvbnNlEiQKBWl0ZW1zGAEgAygLMg4udXNlci5DYXJkSW5mb1IFaXRlbX'
-    'M=');
+    'MSPwoPYWdlbnRfY2FyZF9zdGF0GAMgASgLMhcudXNlci5BZ2VudENhcmRMaXN0U3RhdFINYWdl'
+    'bnRDYXJkU3RhdA==');
+
+@$core.Deprecated('Use agentCardListStatDescriptor instead')
+const AgentCardListStat$json = {
+  '1': 'AgentCardListStat',
+  '2': [
+    {'1': 'agent_card_status0', '3': 1, '4': 1, '5': 5, '10': 'agentCardStatus0'},
+    {'1': 'agent_card_status1', '3': 2, '4': 1, '5': 5, '10': 'agentCardStatus1'},
+    {'1': 'agent_card_status2', '3': 3, '4': 1, '5': 5, '10': 'agentCardStatus2'},
+  ],
+};
+
+/// Descriptor for `AgentCardListStat`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List agentCardListStatDescriptor = $convert.base64Decode(
+    'ChFBZ2VudENhcmRMaXN0U3RhdBIsChJhZ2VudF9jYXJkX3N0YXR1czAYASABKAVSEGFnZW50Q2'
+    'FyZFN0YXR1czASLAoSYWdlbnRfY2FyZF9zdGF0dXMxGAIgASgFUhBhZ2VudENhcmRTdGF0dXMx'
+    'EiwKEmFnZW50X2NhcmRfc3RhdHVzMhgDIAEoBVIQYWdlbnRDYXJkU3RhdHVzMg==');
 
 @$core.Deprecated('Use cardExchangeInfoListRequestDescriptor instead')
 const CardExchangeInfoListRequest$json = {

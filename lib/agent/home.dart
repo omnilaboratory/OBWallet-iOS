@@ -1,16 +1,13 @@
 import 'dart:developer';
 
 import 'package:awallet/agent/agent_kyc.dart';
-import 'package:awallet/component/agent_card_item.dart';
 import 'package:awallet/component/bottom_button.dart';
-import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
 import 'package:awallet/generated/l10n.dart';
-import 'package:awallet/grpc_services/card_service.dart';
-import 'package:awallet/protos/gen-dart/user/card.pb.dart';
 import 'package:awallet/tools/global_params.dart';
 import 'package:flutter/material.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import 'agent_card_list.dart';
 
 class AgentHome extends StatefulWidget {
   const AgentHome({super.key});
@@ -19,55 +16,85 @@ class AgentHome extends StatefulWidget {
   State<AgentHome> createState() => _AgentHomeState();
 }
 
-class _AgentHomeState extends State<AgentHome> {
-  List<CardInfo> cardInfoList = [];
-  final RefreshController _refreshListController =
-      RefreshController(initialRefresh: false);
+class _AgentHomeState extends State<AgentHome>
+    with SingleTickerProviderStateMixin {
+  var tabNames = [
+    S.current.agent_card_list_all(0),
+    S.current.agent_card_list_active(1),
+    S.current.agent_card_list_inactive(0)
+  ];
+  List<Widget> tabList = [];
+  List<Widget> tabViewList = [];
+  late TabController _tabController;
 
   @override
   void initState() {
-    GlobalParams.eventBus.on().listen((event) {
-      if (event == "agent_kyc_finish") {
-        _onListRefresh();
-      }
-    });
-    _onListRefresh();
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    int type = 0;
+    for (var e in tabNames) {
+      tabList.add(Tab(
+        child: Text(
+          e,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ));
+
+      tabViewList.add(AgentCardList(
+        type: type++,
+        onDataReceived: updateCountInfo,
+      ));
+    }
     super.initState();
+  }
+
+  updateCountInfo(List<int> counts) {
+    log("updateCountInfo $counts");
+    if(mounted){
+      tabNames[0] = S.of(context).agent_card_list_all(counts[0]);
+      tabNames[1] = S.of(context).agent_card_list_active(counts[1]);
+      tabNames[2] = S.of(context).agent_card_list_inactive(counts[2]);
+      tabList = [];
+      for (var e in tabNames) {
+        tabList.add(Tab(
+          child: Text(
+            e,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ));
+      }
+      setState(() {});
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: HeadLogo(title: S.of(context).main_home_agent),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-                flex: 9,
-                child: buildNewSmartRefresher(
-                  _refreshListController,
-                  cardInfoList.isEmpty
-                      ? Center(child: Text(S.of(context).common_NoData))
-                      : ListView.builder(
-                          itemCount: cardInfoList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            if (index < cardInfoList.length) {
-                              return AgentCardItem(
-                                  cardInfo: cardInfoList[index]);
-                            }
-                            return null;
-                          }),
-                  onRefresh: _onListRefresh,
-                )),
-            const SizedBox(height: 20),
-            Expanded(
-              flex: 1,
-              child: BottomButton(
+    return DefaultTabController(
+      length: tabNames.length,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: HeadLogo(title: S.of(context).main_home_agent),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              buildTabBars(),
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: tabViewList,
+                ),
+              ),
+              const SizedBox(height: 20),
+              BottomButton(
                 icon: 'asset/images/icon_arrow_right_green.png',
                 text: S.of(context).agent_kyc.toUpperCase(),
                 onPressed: () {
@@ -77,28 +104,33 @@ class _AgentHomeState extends State<AgentHome> {
                           builder: (context) => const AgentKyc()));
                 },
               ),
-            ),
-            const SizedBox(height: 20),
-          ],
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void _onListRefresh() async {
-    var resp =
-        await CardService.getInstance().cardList(context, isAgentCard: true);
-    if (resp.code == 1) {
-      if (resp.data != null) {
-        cardInfoList = resp.data;
-        setState(() {});
-      }
-    }
-    if (_refreshListController.isRefresh) {
-      _refreshListController.refreshCompleted();
-    }
-    if (_refreshListController.isLoading) {
-      _refreshListController.loadComplete();
-    }
+  Widget buildTabBars() {
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+        color: const Color(0xFFF6F6F6),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: TabBar(
+        controller: _tabController,
+        padding: const EdgeInsets.only(left: 4, right: 4),
+        indicator: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(4.0)),
+        indicatorPadding: const EdgeInsets.only(top: 4, bottom: 4),
+        labelColor: const Color(0xFF4A92FF),
+        unselectedLabelColor: const Color(0xFF999999),
+        dividerColor: Colors.transparent,
+        indicatorSize: TabBarIndicatorSize.tab,
+        tabs: tabList,
+      ),
+    );
   }
 }
