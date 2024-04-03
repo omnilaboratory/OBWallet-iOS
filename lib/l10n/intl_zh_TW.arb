@@ -245,7 +245,7 @@
   "alert_cancel": "取消",
 
   "agent_kyc": "KYC幷申請卡",
-  "agent_kyc_history": "Kyc記錄",
+  "agent_kyc_history": "KYC記錄",
   "agent_card_active": "已激活",
   "agent_card_inactive": "點擊去激活",
   "agent_card_list_all": "所有({count})",

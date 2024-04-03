@@ -69,7 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "agent_card_list_all": m1,
         "agent_card_list_inactive": m2,
         "agent_kyc": MessageLookupByLibrary.simpleMessage("KYC幷申請卡"),
-        "agent_kyc_history": MessageLookupByLibrary.simpleMessage("Kyc記錄"),
+        "agent_kyc_history": MessageLookupByLibrary.simpleMessage("KYC記錄"),
         "alert_cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "alert_ok": MessageLookupByLibrary.simpleMessage("確定"),
         "alert_title": MessageLookupByLibrary.simpleMessage("消息"),
