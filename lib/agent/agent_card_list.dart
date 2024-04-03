@@ -37,19 +37,19 @@ class _AgentCardListState extends State<AgentCardList> {
   @override
   Widget build(BuildContext context) {
     return buildNewSmartRefresher(
-      _refreshListController,
-      cardInfoList.isEmpty
-          ? Center(child: Text(S.of(context).common_NoData))
-          : ListView.builder(
-              itemCount: cardInfoList.length,
-              itemBuilder: (BuildContext context, int index) {
-                if (index < cardInfoList.length) {
-                  return AgentCardItem(cardInfo: cardInfoList[index]);
-                }
-                return null;
-              }),
-      onRefresh: _onListRefresh,
-    );
+        _refreshListController,
+        cardInfoList.isEmpty
+            ? Center(child: Text(S.of(context).common_NoData))
+            : ListView.builder(
+                itemCount: cardInfoList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  if (index < cardInfoList.length) {
+                    return AgentCardItem(cardInfo: cardInfoList[index]);
+                  }
+                  return null;
+                }),
+        onRefresh: _onListRefresh,
+        enablePullUp: false);
   }
 
   void _onListRefresh() async {
