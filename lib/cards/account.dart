@@ -331,7 +331,7 @@ class _AccountState extends State<Account> {
           for (var element in items) {
             txs.add(CryptoTxInfo(
                 title:
-                    "${S.of(context).exchange_tile} (${element.fromSymbol.name}-${element.targetSymbol.name})",
+                    "${S.current.exchange_tile} (${element.fromSymbol.name}-${element.targetSymbol.name})",
                 txTime: DateTime.fromMillisecondsSinceEpoch(
                     (element.createdAt * 1000).toInt()),
                 fromSymbol: element.fromSymbol.name,

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:awallet/bean/card_item_info.dart';
 import 'package:awallet/bean/crypto_tx_info.dart';
@@ -293,8 +294,9 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                       child: Text(S.of(context).card_card_Payment,
                           style: TextStyle(
                               fontSize: 16,
-                              color:
-                                  currTypeIndex == 0 ? Colors.blue : Colors.grey)),
+                              color: currTypeIndex == 0
+                                  ? Colors.blue
+                                  : Colors.grey)),
                     ),
                   )),
               InkWell(
@@ -308,8 +310,9 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                       child: Text(S.of(context).card_card_Account,
                           style: TextStyle(
                               fontSize: 16,
-                              color:
-                                  currTypeIndex == 1 ? Colors.blue : Colors.grey)),
+                              color: currTypeIndex == 1
+                                  ? Colors.blue
+                                  : Colors.grey)),
                     ),
                   )),
             ],
@@ -554,8 +557,8 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                 fromSymbol: element.authCurrency,
                 targetSymbol: "",
                 amount: double.parse(element.authAmt),
-                amountOfDollar: double.parse(element.authAmt),
-                status: 3));
+                amountOfDollar: null,
+                status: element.state == "12" ? 2 : 3));
           }
           if (mounted) {
             setState(() {});
