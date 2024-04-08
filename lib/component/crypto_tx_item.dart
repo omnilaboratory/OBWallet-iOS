@@ -32,8 +32,7 @@ class CryptoTxItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AutoSizeText(
-                    txInfo.title,
+                AutoSizeText(txInfo.title,
                     maxLines: 1,
                     maxFontSize: 12,
                     minFontSize: 8,
@@ -62,7 +61,12 @@ class CryptoTxItem extends StatelessWidget {
             children: [
               buildAmount(txInfo.fromSymbol, txInfo.amount),
               const SizedBox(height: 4),
-              txInfo.amountOfDollar!=null?buildAmount(txInfo.targetSymbol, txInfo.amountOfDollar!):const SizedBox(width: 0,height: 0,),
+              txInfo.amountOfDollar != null
+                  ? buildAmount(txInfo.targetSymbol, txInfo.amountOfDollar!)
+                  : const SizedBox(
+                      width: 0,
+                      height: 0,
+                    ),
             ],
           ),
         ),
@@ -71,6 +75,7 @@ class CryptoTxItem extends StatelessWidget {
   }
 
   Row buildAmount(String symbol, double amount) {
+    symbol = symbol.trim().toUpperCase();
     String imageName = "icon_dollar.png";
     String amountStr = StringTools.formatCurrencyNum(amount);
     if (symbol != "USD") {
