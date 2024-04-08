@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ffi';
 
 import 'package:awallet/bean/card_item_info.dart';
 import 'package:awallet/bean/crypto_tx_info.dart';
@@ -13,6 +12,7 @@ import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/card_item.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_tx_item.dart';
+import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
@@ -39,6 +39,8 @@ class CardPhysicalPart extends StatefulWidget {
 }
 
 class _CardPhysicalPartState extends State<CardPhysicalPart> {
+  bool isLoadingData = false;
+  bool isBeforeUpdateBalance = true;
   var txs = [];
   int currTypeIndex = 0;
   int dataStartIndex = 0;
@@ -56,6 +58,10 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
   @override
   void initState() {
     super.initState();
+    if (!hasCard) {
+      isLoadingData = true;
+    }
+
     if (hasCard) {
       currCardInfo = CommonService.realCardList[currCardIndex];
     }
@@ -72,6 +78,10 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoadingData) {
+      return const LoadingDialog();
+    }
+
     List<Widget> list = [];
     list.add(const SizedBox(height: 10));
     if (hasCard) {
@@ -93,7 +103,9 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
             return CardItem(
               cardItemInfo: CardItemInfo(
                   cardNo: currCardInfo.cardNo,
-                  balance: currCardInfo.balance,
+                  balance: isBeforeUpdateBalance && currCardInfo.balance == 0
+                      ? "--"
+                      : currCardInfo.balance.toString(),
                   exp: currCardInfo.expiryDate,
                   cvv: currCardInfo.cvv),
               type: 1,
@@ -124,7 +136,7 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
       list.add(CardItem(
         cardItemInfo: CardItemInfo(
             cardNo: currCardInfo.cardNo,
-            balance: currCardInfo.balance,
+            balance: currCardInfo.balance.toString(),
             exp: currCardInfo.expiryDate,
             cvv: currCardInfo.cvv),
         type: 1,
@@ -352,6 +364,8 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
             _onListRefresh();
           }
         }
+        isLoadingData = false;
+        isBeforeUpdateBalance = false;
         if (mounted) {
           setState(() {});
         }

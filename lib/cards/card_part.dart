@@ -9,6 +9,7 @@ import 'package:awallet/component/bottom_button.dart';
 import 'package:awallet/component/card_item.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_tx_item.dart';
+import 'package:awallet/component/loading_dialog.dart';
 import 'package:awallet/component/square_button.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
@@ -35,11 +36,14 @@ class CardPart extends StatefulWidget {
 }
 
 class _CardPartState extends State<CardPart> {
+  bool isLoadingData = false;
+  bool isBeforeUpdateBalance = true;
+
   var txs = [];
   int currTypeIndex = 0;
   int dataStartIndex = 0;
   double createCardFee = 5.0;
-  bool hasCard = CommonService.vCardInfo.cardNo.isNotEmpty;
+  bool hasCard = CommonService.userInfo!.cardCount > 0;
 
   final RefreshController _refreshListController =
       RefreshController(initialRefresh: false);
@@ -50,6 +54,9 @@ class _CardPartState extends State<CardPart> {
   @override
   void initState() {
     super.initState();
+    if (!hasCard) {
+      isLoadingData = true;
+    }
     _onBalanceRefresh();
     _onListRefresh();
 
@@ -74,12 +81,18 @@ class _CardPartState extends State<CardPart> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoadingData) {
+      return const LoadingDialog();
+    }
     List<Widget> list = [];
     list.add(const SizedBox(height: 10));
     list.add(CardItem(
         cardItemInfo: CardItemInfo(
             cardNo: CommonService.vCardInfo.cardNo,
-            balance: CommonService.vCardInfo.balance,
+            balance:
+                isBeforeUpdateBalance && CommonService.vCardInfo.balance == 0
+                    ? "--"
+                    : CommonService.vCardInfo.balance.toString(),
             exp: CommonService.vCardInfo.expiryDate,
             cvv: CommonService.vCardInfo.cvv)));
     list.add(const SizedBox(height: 15));
@@ -238,7 +251,7 @@ class _CardPartState extends State<CardPart> {
 
   void _onBalanceRefresh() async {
     log("_onBalanceRefresh");
-    CardService.getInstance().cardList(context).then((resp) {
+    CardService.getInstance().vcardInfo().then((resp) {
       if (resp.code == 1) {
         var needLoadList = !hasCard;
         hasCard = CommonService.vCardInfo.cardNo.isNotEmpty;
@@ -246,6 +259,8 @@ class _CardPartState extends State<CardPart> {
           if (needLoadList) {
             _onListRefresh();
           }
+          isLoadingData = false;
+          isBeforeUpdateBalance = false;
           setState(() {});
         }
       }

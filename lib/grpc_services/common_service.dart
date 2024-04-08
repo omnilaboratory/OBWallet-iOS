@@ -4,6 +4,7 @@ import 'package:awallet/bean/dollar_face_info.dart';
 import 'package:awallet/bean/token_info.dart';
 import 'package:awallet/grpc_services/user_service.dart';
 import 'package:awallet/grpc_services/user_wallet_service.dart';
+import 'package:awallet/protos/gen-dart/user/account.pb.dart';
 import 'package:awallet/protos/gen-dart/user/card.pbgrpc.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/services/token_service.dart';
@@ -21,6 +22,8 @@ mixin CommonService {
   static List<DollarFaceInfo> nftInfoList = [];
   static List<TokenInfo> tokenList = [];
   static List<TokenInfo> tokenListPolygon = [];
+  static AccountInfo? accountInfo;
+
   static CardInfo vCardInfo = CardInfo();
   static List<CardInfo> realCardList = [];
   static String userId = "1";
@@ -52,6 +55,7 @@ resetServices() {
   TokenService.walletInfo = null;
   resetServicesFromChangeLanguage();
 }
+
 resetServicesFromChangeLanguage() {
   UserWalletService.walletClient = null;
   UserService.userServiceClient = null;

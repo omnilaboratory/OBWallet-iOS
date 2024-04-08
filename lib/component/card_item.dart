@@ -1,6 +1,4 @@
-
 import 'package:awallet/bean/card_item_info.dart';
-import 'package:awallet/cards/physical_card_active.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,10 +11,7 @@ class CardItem extends StatelessWidget {
   // 0: 'Virtual Card', 1 'Physical Card'
   final int type;
 
-  const CardItem(
-      {super.key,
-      required this.cardItemInfo,
-      this.type = 0});
+  const CardItem({super.key, required this.cardItemInfo, this.type = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -94,8 +89,7 @@ class CardItem extends StatelessWidget {
                 ),
                 const SizedBox(width: 3),
                 Text(
-                  // StringTools.formatCurrencyNum(cardItemInfo.balance),
-                  '${cardItemInfo.balance}',
+                  cardItemInfo.balance,
                   style: const TextStyle(
                     color: Color(0xFF333333),
                     fontSize: 30,

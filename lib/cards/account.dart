@@ -31,6 +31,8 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
+  bool isBeforeUpdateBalance = true;
+
   var txs = [];
   var currTypeIndex = 0;
   int dataStartIndex = 0;
@@ -40,17 +42,15 @@ class _AccountState extends State<Account> {
   final RefreshController _refreshBalanceController =
       RefreshController(initialRefresh: false);
 
-  double totalBalanceUsd = 0;
   bool hasCard = CommonService.userInfo!.cardCount > 0;
+  double? totalBalanceUsd = CommonService.accountInfo == null
+      ? 0
+      : CommonService.accountInfo?.balance;
 
   @override
   void initState() {
-    if (!hasCard) {
-      hasCard = CommonService.realCardList.isNotEmpty;
-    }
     _onBalanceRefresh();
     _onListRefresh();
-    getCardBalanceFromServer();
     checkHasCard();
 
     GlobalParams.eventBus.on().listen((event) {
@@ -65,7 +65,24 @@ class _AccountState extends State<Account> {
   }
 
   void checkHasCard() {
-    CardService.getInstance().cardList(context).then((info) {
+    if (hasCard) {
+      return;
+    }
+    hasCard = CommonService.userInfo!.cardCount > 0;
+    if (hasCard && mounted) {
+      setState(() {});
+      return;
+    }
+
+    hasCard = CommonService.realCardList.isNotEmpty;
+    if (hasCard && mounted) {
+      setState(() {});
+      return;
+    }
+
+    CardService.getInstance()
+        .cardList(context, withoutBalance: true)
+        .then((info) {
       if (info.code == 1) {
         var items = info.data;
         for (int i = 0; i < items.length; i++) {
@@ -254,7 +271,9 @@ class _AccountState extends State<Account> {
                   ),
                 ),
                 TextSpan(
-                  text: StringTools.formatCurrencyNum(totalBalanceUsd),
+                  text: isBeforeUpdateBalance && totalBalanceUsd! == 0
+                      ? "--"
+                      : StringTools.formatCurrencyNum(totalBalanceUsd!),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 32,
@@ -269,14 +288,6 @@ class _AccountState extends State<Account> {
 
   onJump() {
     GlobalParams.eventBus.fire("changeTab");
-  }
-
-  getCardBalanceFromServer() {
-    CardService.getInstance().cardList(context).then((resp) {
-      if (resp.code == 1) {
-        hasCard = CommonService.vCardInfo.cardNo.isNotEmpty;
-      }
-    });
   }
 
   void _onListRefresh() async {
@@ -395,6 +406,7 @@ class _AccountState extends State<Account> {
       if (info.code == 1) {
         var accountInfo = info.data as AccountInfo;
         totalBalanceUsd = accountInfo.balance;
+        isBeforeUpdateBalance = false;
         if (mounted) {
           setState(() {});
         }

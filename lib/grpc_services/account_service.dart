@@ -38,6 +38,7 @@ class AccountService {
     try {
       var resp = await accountServiceClient?.getAccountInfo(request);
       ret.code = 1;
+      CommonService.accountInfo = resp;
       ret.data = resp;
     } catch (e) {
       UserService.getInstance().setError(context, "getAccountInfo", e, ret);

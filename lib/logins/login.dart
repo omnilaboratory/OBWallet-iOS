@@ -9,7 +9,6 @@ import 'package:awallet/logins/sign_up_step1.dart';
 import 'package:awallet/protos/gen-dart/user/user.pbgrpc.dart';
 import 'package:awallet/tools/local_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../grpc_services/card_service.dart';
 import 'forget_psw.dart';
@@ -271,7 +270,10 @@ class _LoginState extends State<Login> {
 
   void getUserInfoAndGoHome() {
     log("getUserInfoAndGoHome");
-    CardService.getInstance().cardList(context);
+    Future.delayed(const Duration(milliseconds: 30)).then((value) {
+      CardService.getInstance().cardList(context);
+    });
+    CardService.getInstance().cardList(context,withoutBalance: true);
     UserService.getInstance().getUserInfo(context).then((userInfoResp) {
       if (userInfoResp.code == 1) {
         Navigator.pushReplacement(

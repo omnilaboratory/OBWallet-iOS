@@ -32,6 +32,32 @@ class CardService {
   factory CardService() => _instance;
 
   // agent_card_status 代理开卡状态: 0 所有 1 已激活  2 未激活
+  Future<GrpcResponse> vcardInfo(
+      {bool isAgentCard = false,
+      bool withoutBalance = false,
+      int agentCardStatus = 0}) async {
+    var req = CardListRequest();
+    req.isAgentCard = isAgentCard;
+    req.withoutBalance = withoutBalance;
+    req.agentCardStatus = agentCardStatus;
+    var ret = GrpcResponse();
+    try {
+      var resp = await cardServiceClient?.cardList(req);
+      ret.code = 1;
+      if (resp!.items.isNotEmpty) {
+        var items = resp.items;
+        for (int i = 0; i < items.length; i++) {
+          var item = items[i];
+          if (item.isVcard) {
+            CommonService.vCardInfo = item;
+            break;
+          }
+        }
+      }
+    } catch (e) {}
+    return ret;
+  }
+
   Future<GrpcResponse> cardList(BuildContext context,
       {bool isAgentCard = false,
       bool withoutBalance = false,
@@ -46,13 +72,12 @@ class CardService {
       ret.code = 1;
       if (resp!.items.isNotEmpty) {
         var items = resp.items;
-        CommonService.realCardList = [];
         for (int i = 0; i < items.length; i++) {
           var item = items[i];
           if (item.isVcard) {
             CommonService.vCardInfo = item;
           } else {
-            CommonService.realCardList.add(item);
+            updateCardBalance(item, withoutBalance);
           }
         }
         ret.data = resp.items;
@@ -62,6 +87,24 @@ class CardService {
     }
     return ret;
   }
+
+  updateCardBalance(CardInfo item, bool withoutBalance) {
+    bool exist = false;
+    for (int i = 0; i < CommonService.realCardList.length; i++) {
+      var cardInfo = CommonService.realCardList[i];
+      if (item.cardNo.toLowerCase() == cardInfo.cardNo.toLowerCase()) {
+        if (!withoutBalance) {
+          CommonService.realCardList[i] = item;
+        }
+        exist = true;
+        break;
+      }
+    }
+    if (!exist) {
+      CommonService.realCardList.add(item);
+    }
+  }
+
   Future<GrpcResponse> agentCardList(int agentCardStatus) async {
     var req = CardListRequest();
     req.isAgentCard = true;
@@ -72,8 +115,7 @@ class CardService {
       var resp = await cardServiceClient?.cardList(req);
       ret.code = 1;
       ret.data = resp;
-    } catch (e) {
-    }
+    } catch (e) {}
     return ret;
   }
 
@@ -109,7 +151,7 @@ class CardService {
     var ret = GrpcResponse();
     try {
       var resp = await cardServiceClient?.cardHistory(request);
-      log("cardHistory resp $resp");
+      // log("cardHistory resp $resp");
       ret.code = 1;
       ret.data = resp;
     } catch (e) {
