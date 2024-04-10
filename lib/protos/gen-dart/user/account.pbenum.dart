@@ -40,6 +40,7 @@ class TrackedTx_ContractSymbol extends $pb.ProtobufEnum {
   static const TrackedTx_ContractSymbol USDT = TrackedTx_ContractSymbol._(2, _omitEnumNames ? '' : 'USDT');
   static const TrackedTx_ContractSymbol USDC = TrackedTx_ContractSymbol._(3, _omitEnumNames ? '' : 'USDC');
   static const TrackedTx_ContractSymbol NFT = TrackedTx_ContractSymbol._(4, _omitEnumNames ? '' : 'NFT');
+  static const TrackedTx_ContractSymbol ALLE_ENC_TOKEN = TrackedTx_ContractSymbol._(100, _omitEnumNames ? '' : 'ALLE_ENC_TOKEN');
 
   static const $core.List<TrackedTx_ContractSymbol> values = <TrackedTx_ContractSymbol> [
     USD,
@@ -47,6 +48,7 @@ class TrackedTx_ContractSymbol extends $pb.ProtobufEnum {
     USDT,
     USDC,
     NFT,
+    ALLE_ENC_TOKEN,
   ];
 
   static final $core.Map<$core.int, TrackedTx_ContractSymbol> _byValue = $pb.ProtobufEnum.initByValue(values);

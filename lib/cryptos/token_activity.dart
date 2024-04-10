@@ -216,9 +216,9 @@ class _TokenActivityState extends State<TokenActivity> {
                 title: element.sourceType.name,
                 txTime: DateTime.fromMillisecondsSinceEpoch(
                     (element.createdAt * 1000).toInt()),
-                fromSymbol: element.sourceId,
+                fromSymbol: element.symbol.name,
                 targetSymbol: "",
-                amount: element.amt.abs(),
+                amount: element.amt,
                 amountOfDollar: null,
                 status: 3));
           }

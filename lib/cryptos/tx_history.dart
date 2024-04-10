@@ -130,19 +130,20 @@ class _TxHistoryState extends State<TxHistory> {
 
   void getSwapTxList() {
     AccountService.getInstance()
-        .getAccountHistory(context, dataStartIndex, localPageSize)
+        .getAccountHistory(context, dataStartIndex, localPageSize,token: TrackedTx_ContractSymbol.ALLE_ENC_TOKEN)
         .then((result) {
       if (result.code == 1) {
         var items = (result.data as GetAccountHistoryResponse).items;
         if (items.isNotEmpty) {
           for (var element in items) {
+            log("${element.symbol} ${element.symbol.name}");
             txHistoryList.add(CryptoTxInfo(
                 title: element.sourceType.name,
                 txTime: DateTime.fromMillisecondsSinceEpoch(
                     (element.createdAt * 1000).toInt()),
-                fromSymbol: element.sourceId,
+                fromSymbol: element.symbol.name,
                 targetSymbol: "",
-                amount: element.amt.abs(),
+                amount: element.amt,
                 amountOfDollar: null,
                 status: 3));
           }

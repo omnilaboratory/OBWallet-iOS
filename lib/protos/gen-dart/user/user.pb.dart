@@ -248,6 +248,7 @@ class UserInfo extends $pb.GeneratedMessage {
     ..aOS(41, _omitFieldNames ? '' : 'gender')
     ..aOS(42, _omitFieldNames ? '' : 'idType', protoName: 'idType')
     ..e<$5.CountryCode>(43, _omitFieldNames ? '' : 'country', $pb.PbFieldType.OE, defaultOrMaker: $5.CountryCode.UNKNOWNISO, valueOf: $5.CountryCode.valueOf, enumValues: $5.CountryCode.values)
+    ..a<$fixnum.Int64>(44, _omitFieldNames ? '' : 'pcardCount', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -658,6 +659,15 @@ class UserInfo extends $pb.GeneratedMessage {
   $core.bool hasCountry() => $_has(42);
   @$pb.TagNumber(43)
   void clearCountry() => clearField(43);
+
+  @$pb.TagNumber(44)
+  $fixnum.Int64 get pcardCount => $_getI64(43);
+  @$pb.TagNumber(44)
+  set pcardCount($fixnum.Int64 v) { $_setInt64(43, v); }
+  @$pb.TagNumber(44)
+  $core.bool hasPcardCount() => $_has(43);
+  @$pb.TagNumber(44)
+  void clearPcardCount() => clearField(44);
 }
 
 class AgentKycForCardResponse extends $pb.GeneratedMessage {

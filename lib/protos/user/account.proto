@@ -192,6 +192,8 @@ message TrackedTx{
     USDT = 2;
     USDC = 3;
     NFT = 4;
+    //所有加密货币
+    ALLE_ENC_TOKEN = 100;
   }
   enum Status {
     StatusUnknown = 0;

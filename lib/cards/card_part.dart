@@ -471,7 +471,7 @@ class _CardPartState extends State<CardPart> {
                     (element.createdAt * 1000).toInt()),
                 fromSymbol: "USD",
                 targetSymbol: "",
-                amount: element.amt.abs(),
+                amount: element.amt,
                 amountOfDollar: null,
                 status: status));
           }

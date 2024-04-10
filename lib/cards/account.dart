@@ -369,7 +369,7 @@ class _AccountState extends State<Account> {
 
   getAccountHistory() {
     AccountService.getInstance()
-        .getAccountHistory(context, dataStartIndex, pageSize)
+        .getAccountHistory(context, dataStartIndex, pageSize,token: TrackedTx_ContractSymbol.USD)
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as GetAccountHistoryResponse).items;
@@ -379,9 +379,9 @@ class _AccountState extends State<Account> {
                 title: element.sourceType.name,
                 txTime: DateTime.fromMillisecondsSinceEpoch(
                     (element.createdAt * 1000).toInt()),
-                fromSymbol: element.sourceId,
+                fromSymbol: element.symbol.name,
                 targetSymbol: "",
-                amount: element.amt.abs(),
+                amount: element.amt,
                 amountOfDollar: null,
                 status: 3));
           }

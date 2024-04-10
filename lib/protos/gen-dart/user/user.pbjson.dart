@@ -99,6 +99,7 @@ const UserInfo$json = {
     {'1': 'updated_at', '3': 19, '4': 1, '5': 4, '10': 'updatedAt'},
     {'1': 'created_at', '3': 24, '4': 1, '5': 4, '10': 'createdAt'},
     {'1': 'card_count', '3': 27, '4': 1, '5': 4, '10': 'cardCount'},
+    {'1': 'pcard_count', '3': 44, '4': 1, '5': 4, '10': 'pcardCount'},
     {'1': 'user_type', '3': 28, '4': 1, '5': 3, '10': 'userType'},
     {'1': 'is_agent_channel', '3': 33, '4': 1, '5': 8, '10': 'isAgentChannel'},
     {'1': 'muser_id', '3': 29, '4': 1, '5': 3, '10': 'muserId'},
@@ -130,12 +131,13 @@ final $typed_data.Uint8List userInfoDescriptor = $convert.base64Decode(
     'oGaWRUeXBlGCogASgJUgZpZFR5cGUSHQoKa3ljaW5mb19vaxgUIAEoCFIJa3ljaW5mb09rEhcK'
     'B29wZW5faWQYFSABKAlSBm9wZW5JZBIdCgpreWNfc3RhdHVzGBYgASgJUglreWNTdGF0dXMSHQ'
     'oKdXBkYXRlZF9hdBgTIAEoBFIJdXBkYXRlZEF0Eh0KCmNyZWF0ZWRfYXQYGCABKARSCWNyZWF0'
-    'ZWRBdBIdCgpjYXJkX2NvdW50GBsgASgEUgljYXJkQ291bnQSGwoJdXNlcl90eXBlGBwgASgDUg'
-    'h1c2VyVHlwZRIoChBpc19hZ2VudF9jaGFubmVsGCEgASgIUg5pc0FnZW50Q2hhbm5lbBIZCght'
-    'dXNlcl9pZBgdIAEoA1IHbXVzZXJJZBInCg9pbnZpdGF0aW9uX2NvZGUYHiABKAlSDmludml0YX'
-    'Rpb25Db2RlEh8KC3JlZ2lzdF9jb2RlGB8gASgJUgpyZWdpc3RDb2RlEisKEWludml0YXRpb25f'
-    'dXNlcmlkGCAgASgDUhBpbnZpdGF0aW9uVXNlcmlkEh0KCnJlZl91c2VyaWQYIiABKANSCXJlZl'
-    'VzZXJpZBIaCghsYW5ndWFnZRgjIAEoCVIIbGFuZ3VhZ2U=');
+    'ZWRBdBIdCgpjYXJkX2NvdW50GBsgASgEUgljYXJkQ291bnQSHwoLcGNhcmRfY291bnQYLCABKA'
+    'RSCnBjYXJkQ291bnQSGwoJdXNlcl90eXBlGBwgASgDUgh1c2VyVHlwZRIoChBpc19hZ2VudF9j'
+    'aGFubmVsGCEgASgIUg5pc0FnZW50Q2hhbm5lbBIZCghtdXNlcl9pZBgdIAEoA1IHbXVzZXJJZB'
+    'InCg9pbnZpdGF0aW9uX2NvZGUYHiABKAlSDmludml0YXRpb25Db2RlEh8KC3JlZ2lzdF9jb2Rl'
+    'GB8gASgJUgpyZWdpc3RDb2RlEisKEWludml0YXRpb25fdXNlcmlkGCAgASgDUhBpbnZpdGF0aW'
+    '9uVXNlcmlkEh0KCnJlZl91c2VyaWQYIiABKANSCXJlZlVzZXJpZBIaCghsYW5ndWFnZRgjIAEo'
+    'CVIIbGFuZ3VhZ2U=');
 
 @$core.Deprecated('Use agentKycForCardResponseDescriptor instead')
 const AgentKycForCardResponse$json = {

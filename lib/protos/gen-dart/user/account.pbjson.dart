@@ -320,6 +320,7 @@ const TrackedTx_ContractSymbol$json = {
     {'1': 'USDT', '2': 2},
     {'1': 'USDC', '2': 3},
     {'1': 'NFT', '2': 4},
+    {'1': 'ALLE_ENC_TOKEN', '2': 100},
   ],
 };
 
@@ -346,10 +347,11 @@ final $typed_data.Uint8List trackedTxDescriptor = $convert.base64Decode(
     'VyLlRyYWNrZWRUeC5Db250cmFjdFN5bWJvbFIGU3ltYm9sEhoKCGNvbmZpcm1zGAggASgDUghj'
     'b25maXJtcxIuCgZzdGF0dXMYCSABKA4yFi51c2VyLlRyYWNrZWRUeC5TdGF0dXNSBnN0YXR1cx'
     'IcCgp0eF9lcnJfbXNnGAogASgJUgh0eEVyck1zZxIdCgpjcmVhdGVkX2F0GAsgASgDUgljcmVh'
-    'dGVkQXQSHQoKdXBkYXRlZF9hdBgMIAEoA1IJdXBkYXRlZEF0Ij8KDkNvbnRyYWN0U3ltYm9sEg'
-    'cKA1VTRBAAEgcKA0VUSBABEggKBFVTRFQQAhIICgRVU0RDEAMSBwoDTkZUEAQiaQoGU3RhdHVz'
-    'EhEKDVN0YXR1c1Vua25vd24QABIKCgZUeEluaXQQARIOCgpUeENvbW1pdGVkEAISEAoMVHhDb2'
-    '5maXJtaW5nEAMSEAoMVHhDb21taXRGYWlsEAQSDAoIVHhGaW5pc2gQBQ==');
+    'dGVkQXQSHQoKdXBkYXRlZF9hdBgMIAEoA1IJdXBkYXRlZEF0IlMKDkNvbnRyYWN0U3ltYm9sEg'
+    'cKA1VTRBAAEgcKA0VUSBABEggKBFVTRFQQAhIICgRVU0RDEAMSBwoDTkZUEAQSEgoOQUxMRV9F'
+    'TkNfVE9LRU4QZCJpCgZTdGF0dXMSEQoNU3RhdHVzVW5rbm93bhAAEgoKBlR4SW5pdBABEg4KCl'
+    'R4Q29tbWl0ZWQQAhIQCgxUeENvbmZpcm1pbmcQAxIQCgxUeENvbW1pdEZhaWwQBBIMCghUeEZp'
+    'bmlzaBAF');
 
 @$core.Deprecated('Use swapTxDescriptor instead')
 const SwapTx$json = {

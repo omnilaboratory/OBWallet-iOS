@@ -57,10 +57,10 @@ class CryptoTxItem extends StatelessWidget {
         Expanded(
           flex: 2,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               buildAmount(txInfo.fromSymbol, txInfo.amount),
-              const SizedBox(height: 4),
+              SizedBox(height: txInfo.amountOfDollar != null ? 4 : 0),
               txInfo.amountOfDollar != null
                   ? buildAmount(txInfo.targetSymbol, txInfo.amountOfDollar!)
                   : const SizedBox(
