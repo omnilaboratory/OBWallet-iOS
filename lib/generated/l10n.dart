@@ -2280,10 +2280,10 @@ class S {
     );
   }
 
-  /// `Existed email`
+  /// `The email address has already opened a card. If you want to continue to use the same identity to open a card, please go to the Kyc record to operate.`
   String get tips_ExistEmail {
     return Intl.message(
-      'Existed email',
+      'The email address has already opened a card. If you want to continue to use the same identity to open a card, please go to the Kyc record to operate.',
       name: 'tips_ExistEmail',
       desc: '',
       args: [],

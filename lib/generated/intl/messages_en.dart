@@ -386,8 +386,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invitation Code"),
         "signUp_Nickname": MessageLookupByLibrary.simpleMessage("Nickname"),
         "signUp_Title": MessageLookupByLibrary.simpleMessage("Sign Up"),
-        "tips_ExistEmail":
-            MessageLookupByLibrary.simpleMessage("Existed email"),
+        "tips_ExistEmail": MessageLookupByLibrary.simpleMessage(
+            "The email address has already opened a card. If you want to continue to use the same identity to open a card, please go to the Kyc record to operate."),
         "tips_WithdrawResult": m17,
         "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("Wrong email"),
         "tips_WrongTopUp":

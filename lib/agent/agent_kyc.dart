@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:awallet/agent/agent_kyc_history.dart';
 import 'package:awallet/component/bottom_white_button.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/head_logo.dart';
@@ -73,7 +74,13 @@ class _AgentKycState extends State<AgentKyc> {
         if (Utils.isEmailValid(email)) {
           getAgentKycInfo(email).then((value) {
             if (value) {
-              alert(S.of(context).tips_ExistEmail, context, () {});
+              alert(S.of(context).tips_ExistEmail, context, () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AgentKycHistory()));
+              }, showCancel: true);
             }
           });
         }
@@ -117,7 +124,25 @@ class _AgentKycState extends State<AgentKyc> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              const SizedBox(height: 6),
+                              createTextFormField(
+                                  _emailController, S.of(context).common_Email,
+                                  icon: const Icon(Icons.email),
+                                  maxLength: 50, validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return S.of(context).common_Wrong +
+                                      S.of(context).common_Email;
+                                }
+                                bool emailValid =
+                                    RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                        .hasMatch(value);
+                                if (!emailValid) {
+                                  return S.of(context).common_Wrong +
+                                      S.of(context).common_Email;
+                                }
+                                return null;
+                              },
+                                  keyboardType: TextInputType.emailAddress,
+                                  focusNode: _focusNode),
                               buildCardType(),
                               const SizedBox(height: 6),
                               Padding(
@@ -271,26 +296,6 @@ class _AgentKycState extends State<AgentKyc> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 16),
-                              createTextFormField(
-                                  _emailController, S.of(context).common_Email,
-                                  icon: const Icon(Icons.email),
-                                  maxLength: 50, validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return S.of(context).common_Wrong +
-                                      S.of(context).common_Email;
-                                }
-                                bool emailValid =
-                                    RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                        .hasMatch(value);
-                                if (!emailValid) {
-                                  return S.of(context).common_Wrong +
-                                      S.of(context).common_Email;
-                                }
-                                return null;
-                              },
-                                  keyboardType: TextInputType.emailAddress,
-                                  focusNode: _focusNode),
                               const SizedBox(height: 16),
                               Container(
                                 height: 48,
@@ -562,6 +567,7 @@ class _AgentKycState extends State<AgentKyc> {
               ),
               groupValue: selectedCardType,
               onChanged: (value) {
+                _focusNode.unfocus();
                 setState(() {
                   selectedCardType = value!;
                 });
@@ -579,6 +585,7 @@ class _AgentKycState extends State<AgentKyc> {
               ),
               groupValue: selectedCardType,
               onChanged: (value) {
+                _focusNode.unfocus();
                 setState(() {
                   selectedCardType = value!;
                 });
@@ -747,6 +754,7 @@ class _AgentKycState extends State<AgentKyc> {
   late String idImage2;
 
   getImage(int type) {
+    _focusNode.unfocus();
     picker.pickImage(source: ImageSource.gallery).then((image) async {
       if (image != null) {
         UserUploadRequest req = UserUploadRequest();

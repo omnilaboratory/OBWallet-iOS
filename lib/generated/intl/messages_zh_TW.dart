@@ -315,7 +315,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp_InvitationCode": MessageLookupByLibrary.simpleMessage("邀請碼"),
         "signUp_Nickname": MessageLookupByLibrary.simpleMessage("暱稱"),
         "signUp_Title": MessageLookupByLibrary.simpleMessage("註冊"),
-        "tips_ExistEmail": MessageLookupByLibrary.simpleMessage("已被使用的郵件"),
+        "tips_ExistEmail": MessageLookupByLibrary.simpleMessage(
+            "該郵箱已經開過卡了，要繼續用同一个身份開卡，請轉到Kyc記錄中去操作"),
         "tips_WithdrawResult": m17,
         "tips_WrongEmail": MessageLookupByLibrary.simpleMessage("錯誤的郵件"),
         "tips_WrongTopUp": MessageLookupByLibrary.simpleMessage("充值到錢包地址"),

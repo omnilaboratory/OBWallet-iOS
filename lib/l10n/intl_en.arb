@@ -254,7 +254,7 @@
   "agent_card_list_inactive": "To Active({count})",
 
   "tips_WrongEmail": "Wrong email",
-  "tips_ExistEmail": "Existed email",
+  "tips_ExistEmail": "The email address has already opened a card. If you want to continue to use the same identity to open a card, please go to the Kyc record to operate.",
   "tips_WrongTxid": "Wrong txid",
   "tips_WrongTopUp": "Top up to wallet address",
   "tips_comeSoon": "Coming Soon...",

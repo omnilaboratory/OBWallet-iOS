@@ -222,7 +222,7 @@
   "agent_card_list_active": "已激活({count})",
   "agent_card_list_inactive": "未激活({count})",
   "tips_WrongEmail": "錯誤的郵件",
-  "tips_ExistEmail": "已被使用的郵件",
+  "tips_ExistEmail": "該郵箱已經開過卡了，要繼續用同一个身份開卡，請轉到Kyc記錄中去操作",
   "tips_WrongTxid": "錯誤的交易 ID",
   "tips_WrongTopUp": "充值到錢包地址",
   "tips_comeSoon": "即將推出......",
