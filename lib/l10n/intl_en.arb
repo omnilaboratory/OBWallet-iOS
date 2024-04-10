@@ -81,6 +81,7 @@
   "kyc_FirstName": "First Name",
   "kyc_LastName": "Last Name",
   "kyc_MobileNumber": "Mobile Number",
+  "kyc_email_address_desc": "Shipping Address Information",
   "kyc_AddressLine": "Address Line",
   "kyc_AddressLine2": "Address Line 2(Optional)",
   "kyc_StateRegion": "State/Region",

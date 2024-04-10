@@ -73,6 +73,7 @@
   "kyc_FirstName": "名字",
   "kyc_LastName": "姓氏",
   "kyc_MobileNumber": "手機號碼",
+  "kyc_email_address_desc": "郵寄地址信息",
   "kyc_AddressLine": "地址",
   "kyc_AddressLine2": "地址第二行(可選)",
   "kyc_StateRegion": "州/地區",

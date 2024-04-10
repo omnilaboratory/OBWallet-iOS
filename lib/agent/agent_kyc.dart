@@ -331,6 +331,18 @@ class _AgentKycState extends State<AgentKyc> {
                                   ],
                                 ),
                               ),
+                              const SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  Text(S.of(context).kyc_email_address_desc,
+                                      style: const TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      )),
+                                ],
+                              ),
+                              const SizedBox(height: 6),
                               buildAddressType(),
                               createTextFormField(_address1Controller,
                                   S.of(context).kyc_AddressLine),
@@ -476,7 +488,13 @@ class _AgentKycState extends State<AgentKyc> {
     } else {
       getAgentKycInfo(email).then((value) {
         if (value) {
-          alert(S.of(context).tips_ExistEmail, context, () {});
+          alert(S.of(context).tips_ExistEmail, context, () {
+            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AgentKycHistory()));
+          }, showCancel: true);
         }
       });
     }

@@ -218,6 +218,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "kyc_country": MessageLookupByLibrary.simpleMessage("Country/Zone"),
         "kyc_dateOfBirth":
             MessageLookupByLibrary.simpleMessage("Date of birth"),
+        "kyc_email_address_desc": MessageLookupByLibrary.simpleMessage(
+            "Shipping Address Information"),
         "kyc_id_tips_china": MessageLookupByLibrary.simpleMessage(
             "Currently only supports Mainland China"),
         "kyc_id_tips_otherArea": MessageLookupByLibrary.simpleMessage(

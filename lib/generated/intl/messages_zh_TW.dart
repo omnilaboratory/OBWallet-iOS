@@ -183,6 +183,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "kyc_StateRegion": MessageLookupByLibrary.simpleMessage("州/地區"),
         "kyc_country": MessageLookupByLibrary.simpleMessage("國家/地區"),
         "kyc_dateOfBirth": MessageLookupByLibrary.simpleMessage("出生日期"),
+        "kyc_email_address_desc":
+            MessageLookupByLibrary.simpleMessage("郵寄地址信息"),
         "kyc_id_tips_china": MessageLookupByLibrary.simpleMessage("目前僅支持中國大陸"),
         "kyc_id_tips_otherArea":
             MessageLookupByLibrary.simpleMessage("支持全球128个國家"),

@@ -790,6 +790,16 @@ class S {
     );
   }
 
+  /// `Shipping Address Information`
+  String get kyc_email_address_desc {
+    return Intl.message(
+      'Shipping Address Information',
+      name: 'kyc_email_address_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Address Line`
   String get kyc_AddressLine {
     return Intl.message(
