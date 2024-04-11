@@ -55,7 +55,7 @@ class CryptoTxItem extends StatelessWidget {
             ),
             const SizedBox(width: 4),
             Expanded(
-              flex: 3,
+              flex: 2,
               child: Column(
                 children: [
                   buildAmount(txInfo.fromSymbol, txInfo.amount),
