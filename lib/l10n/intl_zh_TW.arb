@@ -21,6 +21,7 @@
   "common_Withdraw": "提款",
   "common_Exchange": "兌換",
   "common_recharge2card": "充值到卡",
+  "activity_balance": "余額: ",
   "login_Welcome": "歡迎",
   "login_Desc": "",
   "login_SignIn": "登錄",

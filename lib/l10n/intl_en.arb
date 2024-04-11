@@ -21,6 +21,7 @@
   "common_Withdraw": "Withdraw",
   "common_Exchange": "Exchange",
   "common_recharge2card": "Recharge to Card",
+  "activity_balance": "Balance: ",
 
   "login_Welcome": "Welcome",
   "login_Desc": "",

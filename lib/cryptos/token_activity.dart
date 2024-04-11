@@ -211,6 +211,7 @@ class _TokenActivityState extends State<TokenActivity> {
       if (result.code == 1) {
         var items = (result.data as GetAccountHistoryResponse).items;
         if (items.isNotEmpty) {
+          log("$items");
           for (var element in items) {
             txHistoryList.add(CryptoTxInfo(
                 title: element.sourceType.name,
@@ -219,7 +220,7 @@ class _TokenActivityState extends State<TokenActivity> {
                 fromSymbol: element.symbol.name,
                 targetSymbol: "",
                 amount: element.amt,
-                amountOfDollar: null,
+                amountOfDollar: element.balance,
                 status: 3));
           }
           if (mounted) {

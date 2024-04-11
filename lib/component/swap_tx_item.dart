@@ -13,8 +13,8 @@ class SwapTxItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 20),
-      height: 40,
+      margin: const EdgeInsets.only(bottom: 8),
+      height: 50,
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Container(
           width: 12,
@@ -38,7 +38,7 @@ class SwapTxItem extends StatelessWidget {
                       color: Color(0xFF333333),
                       fontWeight: FontWeight.w400,
                     )),
-                const SizedBox(height: 4),
+                const SizedBox(height:4),
                 Text(
                   DateFormat("yyyy-MM-dd").format(txInfo.txTime),
                   style: const TextStyle(

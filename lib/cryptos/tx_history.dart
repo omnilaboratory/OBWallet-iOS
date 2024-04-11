@@ -144,7 +144,7 @@ class _TxHistoryState extends State<TxHistory> {
                 fromSymbol: element.symbol.name,
                 targetSymbol: "",
                 amount: element.amt,
-                amountOfDollar: null,
+                amountOfDollar: element.balance,
                 status: 3));
           }
         }

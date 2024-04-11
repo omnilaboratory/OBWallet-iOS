@@ -270,6 +270,16 @@ class S {
     );
   }
 
+  /// `Balance: `
+  String get activity_balance {
+    return Intl.message(
+      'Balance: ',
+      name: 'activity_balance',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Welcome`
   String get login_Welcome {
     return Intl.message(

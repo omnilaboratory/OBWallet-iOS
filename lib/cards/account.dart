@@ -388,7 +388,7 @@ class _AccountState extends State<Account> {
                 fromSymbol: element.symbol.name,
                 targetSymbol: "",
                 amount: element.amt,
-                amountOfDollar: null,
+                amountOfDollar: element.balance,
                 status: 3));
           }
           if (mounted) {

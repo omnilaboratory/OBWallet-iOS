@@ -2950,6 +2950,7 @@ class AccountHistory extends $pb.GeneratedMessage {
     ..aInt64(8, _omitFieldNames ? '' : 'accountId')
     ..aInt64(9, _omitFieldNames ? '' : 'confirms')
     ..e<NetWork>(10, _omitFieldNames ? '' : 'network', $pb.PbFieldType.OE, defaultOrMaker: NetWork.UnKownNetWork, valueOf: NetWork.valueOf, enumValues: NetWork.values)
+    ..a<$core.double>(11, _omitFieldNames ? '' : 'balance', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -3063,6 +3064,15 @@ class AccountHistory extends $pb.GeneratedMessage {
   $core.bool hasNetwork() => $_has(9);
   @$pb.TagNumber(10)
   void clearNetwork() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.double get balance => $_getN(10);
+  @$pb.TagNumber(11)
+  set balance($core.double v) { $_setDouble(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasBalance() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearBalance() => clearField(11);
 }
 
 

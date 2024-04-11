@@ -503,6 +503,7 @@ message AccountHistory{
 
   //imcome positive, outcome negative
   double amt=2;
+  double balance=11;
  //for Recharge and Withdraw source_id is orderNo. for swap source_id is tx_id
   string source_id =3;
   //only for source_id is tx_id and Symbol is coin

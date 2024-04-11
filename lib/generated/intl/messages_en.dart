@@ -71,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "activity_balance": MessageLookupByLibrary.simpleMessage("Balance: "),
         "agent_card_active": MessageLookupByLibrary.simpleMessage("Active"),
         "agent_card_inactive":
             MessageLookupByLibrary.simpleMessage("Click to Active"),

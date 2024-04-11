@@ -748,6 +748,7 @@ const AccountHistory$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
     {'1': 'account_id', '3': 8, '4': 1, '5': 3, '10': 'accountId'},
     {'1': 'amt', '3': 2, '4': 1, '5': 1, '10': 'amt'},
+    {'1': 'balance', '3': 11, '4': 1, '5': 1, '10': 'balance'},
     {'1': 'source_id', '3': 3, '4': 1, '5': 9, '10': 'sourceId'},
     {'1': 'confirms', '3': 9, '4': 1, '5': 3, '10': 'confirms'},
     {'1': 'source_type', '3': 4, '4': 1, '5': 14, '6': '.user.AccountHistory.SourceType', '10': 'sourceType'},
@@ -779,13 +780,13 @@ const AccountHistory_SourceType$json = {
 /// Descriptor for `AccountHistory`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List accountHistoryDescriptor = $convert.base64Decode(
     'Cg5BY2NvdW50SGlzdG9yeRIOCgJpZBgBIAEoA1ICaWQSHQoKYWNjb3VudF9pZBgIIAEoA1IJYW'
-    'Njb3VudElkEhAKA2FtdBgCIAEoAVIDYW10EhsKCXNvdXJjZV9pZBgDIAEoCVIIc291cmNlSWQS'
-    'GgoIY29uZmlybXMYCSABKANSCGNvbmZpcm1zEkAKC3NvdXJjZV90eXBlGAQgASgOMh8udXNlci'
-    '5BY2NvdW50SGlzdG9yeS5Tb3VyY2VUeXBlUgpzb3VyY2VUeXBlEh0KCmNyZWF0ZWRfYXQYBSAB'
-    'KARSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAYgASgEUgl1cGRhdGVkQXQSNgoGU3ltYm9sGA'
-    'cgASgOMh4udXNlci5UcmFja2VkVHguQ29udHJhY3RTeW1ib2xSBlN5bWJvbBInCgduZXR3b3Jr'
-    'GAogASgOMg0udXNlci5OZXRXb3JrUgduZXR3b3JrIpwBCgpTb3VyY2VUeXBlEgoKBlVuS25vdx'
-    'AAEgwKCFJlY2hhcmdlEAESDAoIV2l0aGRyYXcQAhIICgRTd2FwEAMSDgoKQ3JlYXRlQ2FyZBAE'
-    'Eg8KC0NyZWF0ZVBDYXJkEAgSEQoNVG9rZW5UcmFuc2ZlchAFEgoKBlJld2FyZBAGEhAKDFRlbG'
-    'FSZWNoYXJnZRAHEgoKBkJvcnJvdxAJ');
+    'Njb3VudElkEhAKA2FtdBgCIAEoAVIDYW10EhgKB2JhbGFuY2UYCyABKAFSB2JhbGFuY2USGwoJ'
+    'c291cmNlX2lkGAMgASgJUghzb3VyY2VJZBIaCghjb25maXJtcxgJIAEoA1IIY29uZmlybXMSQA'
+    'oLc291cmNlX3R5cGUYBCABKA4yHy51c2VyLkFjY291bnRIaXN0b3J5LlNvdXJjZVR5cGVSCnNv'
+    'dXJjZVR5cGUSHQoKY3JlYXRlZF9hdBgFIAEoBFIJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYBi'
+    'ABKARSCXVwZGF0ZWRBdBI2CgZTeW1ib2wYByABKA4yHi51c2VyLlRyYWNrZWRUeC5Db250cmFj'
+    'dFN5bWJvbFIGU3ltYm9sEicKB25ldHdvcmsYCiABKA4yDS51c2VyLk5ldFdvcmtSB25ldHdvcm'
+    'sinAEKClNvdXJjZVR5cGUSCgoGVW5Lbm93EAASDAoIUmVjaGFyZ2UQARIMCghXaXRoZHJhdxAC'
+    'EggKBFN3YXAQAxIOCgpDcmVhdGVDYXJkEAQSDwoLQ3JlYXRlUENhcmQQCBIRCg1Ub2tlblRyYW'
+    '5zZmVyEAUSCgoGUmV3YXJkEAYSEAoMVGVsYVJlY2hhcmdlEAcSCgoGQm9ycm93EAk=');
 
