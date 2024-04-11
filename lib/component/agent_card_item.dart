@@ -31,7 +31,7 @@ class _AgentCardItemState extends State<AgentCardItem> {
         decoration: BoxDecoration(
           color: widget.cardInfo.pcardStatus == 0
               ? const Color.fromARGB(255, 61, 149, 236)
-              : Colors.purpleAccent,
+              : Colors.green,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Column(
