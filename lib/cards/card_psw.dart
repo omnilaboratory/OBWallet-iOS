@@ -102,6 +102,7 @@ class _CardPswState extends State<CardPsw> {
                               icon: 'asset/images/icon_confirm_green.png',
                               text: S.of(context).common_Ok.toUpperCase(),
                               onPressed: () {
+                                FocusScope.of(context).requestFocus(FocusNode());
                                 if ((_formKey.currentState as FormState)
                                     .validate()) {
                                   onClickOK();
@@ -127,7 +128,6 @@ class _CardPswState extends State<CardPsw> {
   }
 
   void onClickOK() {
-    FocusScope.of(context).requestFocus(FocusNode());
     if (_cardNumberController.value.text.toString().isEmpty) {
       showToast(S.of(context).tips_emptyCardNumber);
       return;
