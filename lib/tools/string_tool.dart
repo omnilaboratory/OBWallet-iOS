@@ -32,7 +32,7 @@ class StringTools {
   }
 
   static String formatCurrencyNum(double? num) {
-    // num ??= 0;
+    num ??= 0;
     // final formatter = NumberFormat("#,###.00");
     // final result    = formatter.format(num);
     // return num == 0 ? '0' : result;
