@@ -307,5 +307,6 @@
   "tips_logout": "Are you sure you want to logout？",
   "tips_WithdrawResult": "Will get ${amount} and fee is ${fee}.",
   "tips_successSet": "Set successful!",
+  "tips_invalidCode": "Invalid verification code, please try again.",
   "tips_successApply": "Apply successful!"
 }

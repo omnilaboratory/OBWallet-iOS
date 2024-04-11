@@ -2800,6 +2800,16 @@ class S {
     );
   }
 
+  /// `Invalid verification code, please try again.`
+  String get tips_invalidCode {
+    return Intl.message(
+      'Invalid verification code, please try again.',
+      name: 'tips_invalidCode',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Apply successful!`
   String get tips_successApply {
     return Intl.message(

@@ -437,6 +437,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please get verification code first."),
         "tips_invalidAddress":
             MessageLookupByLibrary.simpleMessage("Invalid address."),
+        "tips_invalidCode": MessageLookupByLibrary.simpleMessage(
+            "Invalid verification code, please try again."),
         "tips_kycNeed":
             MessageLookupByLibrary.simpleMessage("You need KYC first."),
         "tips_kycPassed": MessageLookupByLibrary.simpleMessage(

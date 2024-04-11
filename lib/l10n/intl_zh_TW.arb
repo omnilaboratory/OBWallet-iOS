@@ -274,5 +274,6 @@
   "tips_logout": "確定要登出嗎？",
   "tips_WithdrawResult": "將獲得 {amount},手續費為 {fee}",
   "tips_successSet": "修改成功!",
+  "tips_invalidCode": "無效驗證碼，請重新獲取",
   "tips_successApply": "申請成功。"
 }

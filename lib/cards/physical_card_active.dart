@@ -108,6 +108,7 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
 
   onConfirm() {
     FocusScope.of(context).requestFocus(FocusNode());
+
     if ((_formKey.currentState as FormState).validate() == false) {
       return;
     }
@@ -116,6 +117,12 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
     if (cardNo.isEmpty || !Utils.checkCreditCardOfMasterCard(cardNo)) {
       showToast(
           "${S.of(context).common_Wrong}${S.of(context).bindCard_cardNo}");
+      return;
+    }
+
+    if (verifyCodeResponse.isEmpty) {
+      showToast(S.of(context).tips_invalidCode);
+      resetCode();
       return;
     }
 

@@ -354,6 +354,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提款失敗,請稍後重試。"),
         "tips_getVerifyCode": MessageLookupByLibrary.simpleMessage("請先獲取驗證碼。"),
         "tips_invalidAddress": MessageLookupByLibrary.simpleMessage("無效地址。"),
+        "tips_invalidCode": MessageLookupByLibrary.simpleMessage("無效驗證碼，請重新獲取"),
         "tips_kycNeed": MessageLookupByLibrary.simpleMessage("您需要先通過認證。"),
         "tips_kycPassed":
             MessageLookupByLibrary.simpleMessage("認證已通過,請稍後在卡片頁面查看。"),
