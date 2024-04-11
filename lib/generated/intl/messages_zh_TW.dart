@@ -105,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "card_home_Account": MessageLookupByLibrary.simpleMessage("賬戶"),
         "card_home_Card": MessageLookupByLibrary.simpleMessage("虛擬卡"),
         "card_home_title": MessageLookupByLibrary.simpleMessage("首頁"),
+        "card_newPsw": MessageLookupByLibrary.simpleMessage("設置卡密碼"),
         "common_Back": MessageLookupByLibrary.simpleMessage("返回"),
         "common_Cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "common_CodeLeve1": MessageLookupByLibrary.simpleMessage("弱"),

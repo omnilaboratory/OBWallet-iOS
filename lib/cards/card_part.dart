@@ -458,7 +458,6 @@ class _CardPartState extends State<CardPart> {
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as CardExchangeInfoListResponse).items;
-        log("$items");
         if (items.isNotEmpty) {
           for (var element in items) {
             int status = element.status.value;
@@ -510,7 +509,6 @@ class _CardPartState extends State<CardPart> {
         .then((resp) {
       if (resp.code == 1) {
         var items = (resp.data as CardHistoryResponse).items;
-        log("$items");
         if (items.isNotEmpty) {
           for (var element in items) {
             txs.add(CryptoTxInfo(

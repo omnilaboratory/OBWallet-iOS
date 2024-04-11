@@ -4,6 +4,7 @@ import 'package:awallet/bean/card_item_info.dart';
 import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/bean/enum_charge_type.dart';
 import 'package:awallet/bean/enum_kyc_status.dart';
+import 'package:awallet/cards/card_psw.dart';
 import 'package:awallet/cards/physical_card_active.dart';
 import 'package:awallet/cards/physical_card_bind.dart';
 import 'package:awallet/cards/real_card_step1.dart';
@@ -416,6 +417,18 @@ class _CardPhysicalPartState extends State<CardPhysicalPart> {
                 _onBalanceRefresh();
               }
             }),
+        SquareButton(
+            icon: 'asset/images/icon_psw.png',
+            iconWidth: iconWidth,
+            text: S.of(context).card_newPsw,
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return CardPsw(
+                        cardNo: currCardInfo.cardNo);
+                  });
+            })
       ],
     );
   }

@@ -301,6 +301,20 @@ class CardService {
     }
     return ret;
   }
+  Future<GrpcResponse> setCardPwd(
+      BuildContext context, SetCardPwdRequest req) async {
+    var ret = GrpcResponse();
+    log("$req");
+    try {
+      var resp = await cardServiceClient?.setCardPwd(req);
+      ret.code = 1;
+      ret.data = resp;
+    } catch (e) {
+      UserService.getInstance()
+          .setError(context, "setCardPwd", e, ret, isShowToast: true);
+    }
+    return ret;
+  }
 
   Future<GrpcResponse> getRealCardStatus() async {
     var ret = GrpcResponse();

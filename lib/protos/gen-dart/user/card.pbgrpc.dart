@@ -61,6 +61,10 @@ class CardServiceClient extends $grpc.Client {
       '/user.CardService/CardActivate',
       ($1.CardActivateRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.CardActivateResponse.fromBuffer(value));
+  static final _$setCardPwd = $grpc.ClientMethod<$1.SetCardPwdRequest, $1.SetCardPwdResponse>(
+      '/user.CardService/SetCardPwd',
+      ($1.SetCardPwdRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.SetCardPwdResponse.fromBuffer(value));
   static final _$getWithdrawResAmt = $grpc.ClientMethod<$1.GetWithdrawResAmtRequest, $1.GetWithdrawResAmtResponse>(
       '/user.CardService/GetWithdrawResAmt',
       ($1.GetWithdrawResAmtRequest value) => value.writeToBuffer(),
@@ -122,6 +126,10 @@ class CardServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$1.CardActivateResponse> cardActivate($1.CardActivateRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$cardActivate, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.SetCardPwdResponse> setCardPwd($1.SetCardPwdRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$setCardPwd, request, options: options);
   }
 
   $grpc.ResponseFuture<$1.GetWithdrawResAmtResponse> getWithdrawResAmt($1.GetWithdrawResAmtRequest request, {$grpc.CallOptions? options}) {
@@ -216,6 +224,13 @@ abstract class CardServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.CardActivateRequest.fromBuffer(value),
         ($1.CardActivateResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.SetCardPwdRequest, $1.SetCardPwdResponse>(
+        'SetCardPwd',
+        setCardPwd_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.SetCardPwdRequest.fromBuffer(value),
+        ($1.SetCardPwdResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.GetWithdrawResAmtRequest, $1.GetWithdrawResAmtResponse>(
         'GetWithdrawResAmt',
         getWithdrawResAmt_Pre,
@@ -286,6 +301,10 @@ abstract class CardServiceBase extends $grpc.Service {
     return cardActivate(call, await request);
   }
 
+  $async.Future<$1.SetCardPwdResponse> setCardPwd_Pre($grpc.ServiceCall call, $async.Future<$1.SetCardPwdRequest> request) async {
+    return setCardPwd(call, await request);
+  }
+
   $async.Future<$1.GetWithdrawResAmtResponse> getWithdrawResAmt_Pre($grpc.ServiceCall call, $async.Future<$1.GetWithdrawResAmtRequest> request) async {
     return getWithdrawResAmt(call, await request);
   }
@@ -312,6 +331,7 @@ abstract class CardServiceBase extends $grpc.Service {
   $async.Future<$1.CardBindResponse> cardBind($grpc.ServiceCall call, $1.CardBindRequest request);
   $async.Future<$1.GetCardActivateCodeResponse> getCardActivateCode($grpc.ServiceCall call, $1.GetCardActivateCodeRequest request);
   $async.Future<$1.CardActivateResponse> cardActivate($grpc.ServiceCall call, $1.CardActivateRequest request);
+  $async.Future<$1.SetCardPwdResponse> setCardPwd($grpc.ServiceCall call, $1.SetCardPwdRequest request);
   $async.Future<$1.GetWithdrawResAmtResponse> getWithdrawResAmt($grpc.ServiceCall call, $1.GetWithdrawResAmtRequest request);
   $async.Future<$1.CardRechargeResponse> cardRecharge($grpc.ServiceCall call, $1.CardRechargeRequest request);
   $async.Future<$1.BuyNftForPayResponse> buyNftForPay($grpc.ServiceCall call, $1.BuyNftForPayRequest request);

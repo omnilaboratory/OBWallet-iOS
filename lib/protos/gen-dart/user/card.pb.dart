@@ -2318,6 +2318,90 @@ class CardActivateResponse extends $pb.GeneratedMessage {
   static CardActivateResponse? _defaultInstance;
 }
 
+class SetCardPwdRequest extends $pb.GeneratedMessage {
+  factory SetCardPwdRequest() => create();
+  SetCardPwdRequest._() : super();
+  factory SetCardPwdRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetCardPwdRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetCardPwdRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'cardNo', protoName: 'cardNo')
+    ..aOS(2, _omitFieldNames ? '' : 'pwd')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SetCardPwdRequest clone() => SetCardPwdRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SetCardPwdRequest copyWith(void Function(SetCardPwdRequest) updates) => super.copyWith((message) => updates(message as SetCardPwdRequest)) as SetCardPwdRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetCardPwdRequest create() => SetCardPwdRequest._();
+  SetCardPwdRequest createEmptyInstance() => create();
+  static $pb.PbList<SetCardPwdRequest> createRepeated() => $pb.PbList<SetCardPwdRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SetCardPwdRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetCardPwdRequest>(create);
+  static SetCardPwdRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get cardNo => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set cardNo($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCardNo() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCardNo() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get pwd => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set pwd($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPwd() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPwd() => clearField(2);
+}
+
+class SetCardPwdResponse extends $pb.GeneratedMessage {
+  factory SetCardPwdResponse() => create();
+  SetCardPwdResponse._() : super();
+  factory SetCardPwdResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetCardPwdResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetCardPwdResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'user'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SetCardPwdResponse clone() => SetCardPwdResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SetCardPwdResponse copyWith(void Function(SetCardPwdResponse) updates) => super.copyWith((message) => updates(message as SetCardPwdResponse)) as SetCardPwdResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetCardPwdResponse create() => SetCardPwdResponse._();
+  SetCardPwdResponse createEmptyInstance() => create();
+  static $pb.PbList<SetCardPwdResponse> createRepeated() => $pb.PbList<SetCardPwdResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SetCardPwdResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetCardPwdResponse>(create);
+  static SetCardPwdResponse? _defaultInstance;
+}
+
 class CardBindRequest extends $pb.GeneratedMessage {
   factory CardBindRequest() => create();
   CardBindRequest._() : super();

@@ -546,6 +546,29 @@ const CardActivateResponse$json = {
 final $typed_data.Uint8List cardActivateResponseDescriptor = $convert.base64Decode(
     'ChRDYXJkQWN0aXZhdGVSZXNwb25zZQ==');
 
+@$core.Deprecated('Use setCardPwdRequestDescriptor instead')
+const SetCardPwdRequest$json = {
+  '1': 'SetCardPwdRequest',
+  '2': [
+    {'1': 'cardNo', '3': 1, '4': 1, '5': 9, '10': 'cardNo'},
+    {'1': 'pwd', '3': 2, '4': 1, '5': 9, '10': 'pwd'},
+  ],
+};
+
+/// Descriptor for `SetCardPwdRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setCardPwdRequestDescriptor = $convert.base64Decode(
+    'ChFTZXRDYXJkUHdkUmVxdWVzdBIWCgZjYXJkTm8YASABKAlSBmNhcmRObxIQCgNwd2QYAiABKA'
+    'lSA3B3ZA==');
+
+@$core.Deprecated('Use setCardPwdResponseDescriptor instead')
+const SetCardPwdResponse$json = {
+  '1': 'SetCardPwdResponse',
+};
+
+/// Descriptor for `SetCardPwdResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setCardPwdResponseDescriptor = $convert.base64Decode(
+    'ChJTZXRDYXJkUHdkUmVzcG9uc2U=');
+
 @$core.Deprecated('Use cardBindRequestDescriptor instead')
 const CardBindRequest$json = {
   '1': 'CardBindRequest',

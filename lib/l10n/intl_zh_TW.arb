@@ -28,6 +28,7 @@
   "login_ForgotPsw": "忘記密碼?",
   "login_SignUp": "註冊",
   "forgetPsw_Title": "忘記密碼",
+  "card_newPsw":"設置卡密碼",
   "signUp_Title": "註冊",
   "signUp_Nickname": "暱稱",
   "signUp_InvitationCode": "邀請碼",

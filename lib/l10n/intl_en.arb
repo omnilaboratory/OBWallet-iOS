@@ -30,6 +30,8 @@
   "login_SignUp": "Sign Up",
   "forgetPsw_Title": "Forgot Password",
 
+  "card_newPsw":"Card New Password",
+
   "signUp_Title": "Sign Up",
   "signUp_Nickname": "Nickname",
   "signUp_InvitationCode": "Invitation Code",

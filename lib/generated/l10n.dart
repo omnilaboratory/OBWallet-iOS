@@ -340,6 +340,16 @@ class S {
     );
   }
 
+  /// `Card New Password`
+  String get card_newPsw {
+    return Intl.message(
+      'Card New Password',
+      name: 'card_newPsw',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign Up`
   String get signUp_Title {
     return Intl.message(

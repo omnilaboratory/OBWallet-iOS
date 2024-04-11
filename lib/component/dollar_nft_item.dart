@@ -90,7 +90,6 @@ class _DollarNftItemState extends State<DollarNftItem> {
     }
     return GestureDetector(
       onTap: () {
-        log("aaaa");
         FocusScope.of(context).requestFocus(FocusNode());
         widget.onClick();
       },

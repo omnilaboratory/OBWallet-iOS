@@ -27,6 +27,8 @@ service CardService{
   rpc GetCardActivateCode(GetCardActivateCodeRequest) returns (GetCardActivateCodeResponse) {}
   //激活实体卡
   rpc CardActivate(CardActivateRequest) returns (CardActivateResponse) {}
+  //设置卡密码
+  rpc SetCardPwd(SetCardPwdRequest) returns (SetCardPwdResponse) {}
   //获取卡提现应得金额
   rpc GetWithdrawResAmt(GetWithdrawResAmtRequest) returns (GetWithdrawResAmtResponse) {}
   //账号充值
@@ -410,7 +412,14 @@ message CardActivateRequest {
 }
 message CardActivateResponse {
 }
+//doc: https://apifox.com/apidoc/shared-63556276-242e-4fee-b799-c5a35723dfcb/api-163850930
+message SetCardPwdRequest {
+  string  cardNo = 1;
+  string  pwd=2;
+}
+message SetCardPwdResponse {
 
+}
 
 //doc https://apifox.com/apidoc/shared-63556276-242e-4fee-b799-c5a35723dfcb/api-146093744
 message CardBindRequest {

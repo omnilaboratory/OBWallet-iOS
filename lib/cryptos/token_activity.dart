@@ -211,7 +211,6 @@ class _TokenActivityState extends State<TokenActivity> {
       if (result.code == 1) {
         var items = (result.data as GetAccountHistoryResponse).items;
         if (items.isNotEmpty) {
-          log("$items");
           for (var element in items) {
             txHistoryList.add(CryptoTxInfo(
                 title: element.sourceType.name,
