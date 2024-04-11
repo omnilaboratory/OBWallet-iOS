@@ -9,6 +9,7 @@ import 'package:awallet/cards/exchange.dart';
 import 'package:awallet/component/common.dart';
 import 'package:awallet/component/crypto_tx_item.dart';
 import 'package:awallet/component/square_button.dart';
+import 'package:awallet/component/swap_tx_item.dart';
 import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/account_service.dart';
 import 'package:awallet/grpc_services/card_service.dart';
@@ -180,7 +181,12 @@ class _AccountState extends State<Account> {
                     itemCount: txs.length,
                     itemBuilder: (BuildContext context, int index) {
                       if (index < txs.length) {
-                        return CryptoTxItem(txInfo: txs[index]);
+                        if(currTypeIndex==0){
+                          return SwapTxItem(txInfo: txs[index]);
+                        }else{
+                          return CryptoTxItem(txInfo: txs[index]);
+                        }
+
                       }
                       return null;
                     }),

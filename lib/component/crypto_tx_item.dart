@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:awallet/bean/crypto_tx_info.dart';
 import 'package:awallet/tools/string_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../bean/crypto_tx_info.dart';
 
 var circleClrs = [Colors.grey, Colors.yellow, Colors.red, Colors.green];
 
@@ -56,19 +56,7 @@ class CryptoTxItem extends StatelessWidget {
         const SizedBox(width: 4),
         Expanded(
           flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              buildAmount(txInfo.fromSymbol, txInfo.amount),
-              SizedBox(height: txInfo.amountOfDollar != null ? 4 : 0),
-              txInfo.amountOfDollar != null
-                  ? buildAmount(txInfo.targetSymbol, txInfo.amountOfDollar!)
-                  : const SizedBox(
-                      width: 0,
-                      height: 0,
-                    ),
-            ],
-          ),
+          child: buildAmount(txInfo.fromSymbol, txInfo.amount),
         ),
       ]),
     );
@@ -92,7 +80,9 @@ class CryptoTxItem extends StatelessWidget {
           break;
       }
     }
-
+    if (amount > 0) {
+      amountStr = "+$amountStr";
+    }
     return Row(
       children: [
         Image(
