@@ -340,10 +340,10 @@ class S {
     );
   }
 
-  /// `Card New Password`
+  /// `Password`
   String get card_newPsw {
     return Intl.message(
-      'Card New Password',
+      'Password',
       name: 'card_newPsw',
       desc: '',
       args: [],

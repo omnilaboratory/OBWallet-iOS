@@ -123,8 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "card_home_Account": MessageLookupByLibrary.simpleMessage("Account"),
         "card_home_Card": MessageLookupByLibrary.simpleMessage("Virtual Card"),
         "card_home_title": MessageLookupByLibrary.simpleMessage("Home"),
-        "card_newPsw":
-            MessageLookupByLibrary.simpleMessage("Card New Password"),
+        "card_newPsw": MessageLookupByLibrary.simpleMessage("Password"),
         "common_Back": MessageLookupByLibrary.simpleMessage("Back"),
         "common_Cancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "common_CodeLeve1": MessageLookupByLibrary.simpleMessage("Weak"),
