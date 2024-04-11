@@ -209,6 +209,7 @@
   "realCard_Step3_note": "請填寫非中國大陸地區的英文地址",
   "bindCard_title": "綁定實體卡",
   "bindCard_cardNo": "卡號",
+  "bindCard_wrongCard": "卡號錯誤,請輸入全部卡號",
   "bindCard_mobile": "手机号",
   "bindCard_cid": "CID",
   "alert_title": "消息",

@@ -2170,6 +2170,16 @@ class S {
     );
   }
 
+  /// `Card numbers is error, please enter all card numbers`
+  String get bindCard_wrongCard {
+    return Intl.message(
+      'Card numbers is error, please enter all card numbers',
+      name: 'bindCard_wrongCard',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Message`
   String get alert_title {
     return Intl.message(

@@ -80,8 +80,7 @@ class _PhysicalCardActiveState extends State<PhysicalCardActive> {
     FocusScope.of(context).requestFocus(FocusNode());
     var cardNo = _cardNoController.value.text;
     if (cardNo.isEmpty || !Utils.checkCreditCardOfMasterCard(cardNo)) {
-      showToast(
-          "${S.of(context).common_Wrong}${S.of(context).bindCard_cardNo}");
+      showToast(S.of(context).bindCard_wrongCard);
       return;
     }
 

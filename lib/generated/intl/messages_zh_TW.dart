@@ -89,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bindCard_cid": MessageLookupByLibrary.simpleMessage("CID"),
         "bindCard_mobile": MessageLookupByLibrary.simpleMessage("手机号"),
         "bindCard_title": MessageLookupByLibrary.simpleMessage("綁定實體卡"),
+        "bindCard_wrongCard":
+            MessageLookupByLibrary.simpleMessage("卡號錯誤,請輸入全部卡號"),
         "cardActivity_tile": MessageLookupByLibrary.simpleMessage("卡活動"),
         "cardRecharge_title": MessageLookupByLibrary.simpleMessage("支付NFT"),
         "card_RecentTransactions": MessageLookupByLibrary.simpleMessage("最近交易"),

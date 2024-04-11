@@ -240,6 +240,7 @@
   "bindCard_cardNo": "Card Number",
   "bindCard_mobile": "Phone Number",
   "bindCard_cid": "CID",
+  "bindCard_wrongCard": "Card numbers is error, please enter all card numbers",
 
   "alert_title": "Message",
   "alert_ok": "OK",

@@ -103,6 +103,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bindCard_mobile": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "bindCard_title":
             MessageLookupByLibrary.simpleMessage("Bind Physical Card"),
+        "bindCard_wrongCard": MessageLookupByLibrary.simpleMessage(
+            "Card numbers is error, please enter all card numbers"),
         "cardActivity_tile":
             MessageLookupByLibrary.simpleMessage("Card Activity"),
         "cardRecharge_title":
