@@ -4,6 +4,7 @@ import 'package:awallet/generated/l10n.dart';
 import 'package:awallet/grpc_services/card_service.dart';
 import 'package:awallet/protos/gen-dart/user/card.pb.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../component/bottom_button.dart';
 
@@ -89,7 +90,13 @@ class _CardPswState extends State<CardPsw> {
                             const SizedBox(height: 6),
                             createTextFormField(
                                 _pswController, S.of(context).common_NewPsw,
-                                obscureText: true, maxLength: 12),
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                obscureText: true,
+                                maxLength: 6),
                             const Spacer(),
                             BottomButton(
                               icon: 'asset/images/icon_confirm_green.png',

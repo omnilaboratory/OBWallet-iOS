@@ -31,6 +31,7 @@ TextFormField createTextFormField(
       FocusNode ? focusNode,
     Function? validator,
     int maxLines = 1,
+      List<TextInputFormatter>? inputFormatters,
     int borderType = 0}) {
   return TextFormField(
     focusNode: focusNode,
@@ -39,6 +40,7 @@ TextFormField createTextFormField(
     maxLength: maxLength,
     keyboardType: keyboardType,
     enabled: enabled,
+    inputFormatters: inputFormatters,
     onChanged: (value) {
       if (onChanged != null) {
         onChanged(value);
