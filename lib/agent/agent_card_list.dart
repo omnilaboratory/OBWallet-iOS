@@ -26,7 +26,7 @@ class _AgentCardListState extends State<AgentCardList> {
   @override
   void initState() {
     GlobalParams.eventBus.on().listen((event) {
-      if (event == "agent_kyc_finish") {
+      if (event == "agent_kyc_finish" || event == "cardActive_Finish") {
         _onListRefresh();
       }
     });
