@@ -8,62 +8,66 @@ import 'crypto_tx_item.dart';
 
 class SwapTxItem extends StatelessWidget {
   final CryptoTxInfo txInfo;
+
   const SwapTxItem({super.key, required this.txInfo});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      height: 50,
-      child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Container(
-          width: 12,
-          height: 12,
-          decoration: BoxDecoration(
-              color: circleClrs[txInfo.status],
-              borderRadius: BorderRadius.circular(6)),
-        ),
-        Expanded(
-          flex: 5,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AutoSizeText(txInfo.title,
-                    maxLines: 1,
-                    maxFontSize: 12,
-                    minFontSize: 8,
-                    style: const TextStyle(
-                      color: Color(0xFF333333),
-                      fontWeight: FontWeight.w400,
-                    )),
-                const SizedBox(height:4),
-                Text(
-                  DateFormat("yyyy-MM-dd").format(txInfo.txTime),
-                  style: const TextStyle(
-                    color: Color(0xFF999999),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
+    return Column(
+      children: [
+        SizedBox(
+          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Container(
+              width: 12,
+              height: 12,
+              decoration: BoxDecoration(
+                  color: circleClrs[txInfo.status],
+                  borderRadius: BorderRadius.circular(6)),
             ),
-          ),
+            Expanded(
+              flex: 5,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AutoSizeText(txInfo.title,
+                        maxLines: 1,
+                        maxFontSize: 12,
+                        minFontSize: 8,
+                        style: const TextStyle(
+                          color: Color(0xFF333333),
+                          fontWeight: FontWeight.w400,
+                        )),
+                    const SizedBox(height: 4),
+                    Text(
+                      DateFormat("yyyy-MM-dd").format(txInfo.txTime),
+                      style: const TextStyle(
+                        color: Color(0xFF999999),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(width: 4),
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  buildAmount(txInfo.fromSymbol, txInfo.amount),
+                  const SizedBox(height: 4),
+                  buildAmount(txInfo.targetSymbol, txInfo.amountOfDollar!),
+                ],
+              ),
+            ),
+          ]),
         ),
-        const SizedBox(width: 4),
-        Expanded(
-          flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              buildAmount(txInfo.fromSymbol, txInfo.amount),
-              const SizedBox(height: 4),
-              buildAmount(txInfo.targetSymbol, txInfo.amountOfDollar!),
-            ],
-          ),
-        ),
-      ]),
+        const SizedBox(height: 12),
+      ],
     );
   }
 
