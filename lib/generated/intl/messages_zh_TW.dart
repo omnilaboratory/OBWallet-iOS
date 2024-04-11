@@ -371,6 +371,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("請存入足夠的 ETH 作為手續費。"),
         "tips_successApply": MessageLookupByLibrary.simpleMessage("申請成功。"),
         "tips_successDeposit": MessageLookupByLibrary.simpleMessage("充值成功。"),
+        "tips_successSet": MessageLookupByLibrary.simpleMessage("修改成功!"),
         "tips_successWithdraw": MessageLookupByLibrary.simpleMessage("提款成功。"),
         "tips_updatedPassword": MessageLookupByLibrary.simpleMessage("密碼已更新。"),
         "tips_waitForReview": MessageLookupByLibrary.simpleMessage("請等待人工審核。"),

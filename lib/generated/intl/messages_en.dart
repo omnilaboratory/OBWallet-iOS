@@ -462,6 +462,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Apply successful!"),
         "tips_successDeposit":
             MessageLookupByLibrary.simpleMessage("Deposit successful."),
+        "tips_successSet":
+            MessageLookupByLibrary.simpleMessage("Set successful!"),
         "tips_successWithdraw":
             MessageLookupByLibrary.simpleMessage("Withdraw successful."),
         "tips_updatedPassword":

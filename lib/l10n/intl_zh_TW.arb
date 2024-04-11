@@ -273,5 +273,6 @@
   "tips_sendTokenError": "請存入足夠的 ETH 作為手續費。",
   "tips_logout": "確定要登出嗎？",
   "tips_WithdrawResult": "將獲得 {amount},手續費為 {fee}",
+  "tips_successSet": "修改成功!",
   "tips_successApply": "申請成功。"
 }

@@ -306,5 +306,6 @@
   "tips_sendTokenError": "Please deposit enough ETH as gas fee.",
   "tips_logout": "Are you sure you want to logout？",
   "tips_WithdrawResult": "Will get ${amount} and fee is ${fee}.",
+  "tips_successSet": "Set successful!",
   "tips_successApply": "Apply successful!"
 }

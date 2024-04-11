@@ -2790,6 +2790,16 @@ class S {
     );
   }
 
+  /// `Set successful!`
+  String get tips_successSet {
+    return Intl.message(
+      'Set successful!',
+      name: 'tips_successSet',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Apply successful!`
   String get tips_successApply {
     return Intl.message(

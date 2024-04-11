@@ -139,7 +139,7 @@ class _CardPswState extends State<CardPsw> {
     req.pwd = _pswController.value.text.trim();
     CardService.getInstance().setCardPwd(context, req).then((resp) async {
       if (resp.code == 1) {
-        Navigator.pop(context, true);
+        alert(S.of(context).tips_successSet, context, (){});
       }
       removeLoading(loading);
     });
