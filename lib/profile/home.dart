@@ -197,7 +197,7 @@ class _ProfileHomeState extends State<ProfileHome> {
             children: [
               const Icon(Icons.person, color: Colors.white, size: 30),
               const SizedBox(width: 10),
-              Text(CommonService.userInfo!.userName,
+              Text(CommonService.userInfo!.userName+ ((CommonService.userInfo?.userType.toInt()==3)? "(${S.of(context).profile_home_agent})":""),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,

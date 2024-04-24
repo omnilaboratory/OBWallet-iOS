@@ -1610,6 +1610,16 @@ class S {
     );
   }
 
+  /// `Agent`
+  String get profile_home_agent {
+    return Intl.message(
+      'Agent',
+      name: 'profile_home_agent',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `My Invitation Code`
   String get profile_home_InvitationCode {
     return Intl.message(

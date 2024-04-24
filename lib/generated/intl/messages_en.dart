@@ -276,6 +276,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("My Users"),
         "profile_home_UpdatePassword":
             MessageLookupByLibrary.simpleMessage("Update Password"),
+        "profile_home_agent": MessageLookupByLibrary.simpleMessage("Agent"),
         "profile_language_title":
             MessageLookupByLibrary.simpleMessage("Language"),
         "profile_reward_subTitle1": m9,

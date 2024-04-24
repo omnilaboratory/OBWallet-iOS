@@ -234,6 +234,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile_home_MyUsers": MessageLookupByLibrary.simpleMessage("我的用戶"),
         "profile_home_UpdatePassword":
             MessageLookupByLibrary.simpleMessage("更新密碼"),
+        "profile_home_agent": MessageLookupByLibrary.simpleMessage("代理商"),
         "profile_language_title": MessageLookupByLibrary.simpleMessage("語言"),
         "profile_reward_subTitle1": m9,
         "profile_title_RewardFrom":

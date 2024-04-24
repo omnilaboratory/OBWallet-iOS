@@ -155,6 +155,9 @@
   "shop_nft_TokenStandard": "代幣標準",
   "shop_nft_Chain": "鏈",
   "shop_nft_tx_history_title": "NFT交易歷史",
+
+
+  "profile_home_agent": "代理商",
   "profile_home_InvitationCode": "我的邀請碼",
   "profile_home_MyUsers": "我的用戶",
   "profile_home_MyReward": "我的獎勵",
