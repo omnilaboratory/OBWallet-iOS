@@ -124,6 +124,7 @@ class _AgentKycState extends State<AgentKyc> {
                           key: _formKey,
                           child: Column(
                             children: [
+                              const SizedBox(height: 10),
                               createTextFormField(
                                   _emailController, S.of(context).common_Email,
                                   icon: const Icon(Icons.email),
@@ -143,69 +144,16 @@ class _AgentKycState extends State<AgentKyc> {
                               },
                                   keyboardType: TextInputType.emailAddress,
                                   focusNode: _focusNode),
-                              buildCardType(),
-                              const SizedBox(height: 6),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                        selectedCardType == 1
-                                            ? S.of(context).kyc_id_tips_china
-                                            : S
-                                                .of(context)
-                                                .kyc_id_tips_otherArea,
-                                        style: const TextStyle(
-                                          color: Color(0xFF999999),
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                          height: 1.47,
-                                        )),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 6),
-                              buildImagePicker(),
-                              const SizedBox(height: 6),
-                              createTextFormField(
-                                  _socialIdController,
-                                  selectedCardType == 1
-                                      ? S.of(context).kyc_IdentityId
-                                      : S.of(context).kyc_PassportId,
-                                  maxLength: 30,
-                                  icon: const Icon(Icons.credit_card)),
+                              const SizedBox(height: 12),
                               Row(
-                                children: [
-                                  Expanded(
-                                      child: createTextFormField(
-                                          _firstNameController,
-                                          S.of(context).kyc_FirstName,
-                                          onChanged: (v) {
-                                    _firstNameController.text =
-                                        _firstNameController.text.toUpperCase();
-                                  }, maxLength: 20)),
-                                  const SizedBox(width: 20),
-                                  Expanded(
-                                      child: createTextFormField(
-                                          _lastNameController,
-                                          S.of(context).kyc_LastName,
-                                          onChanged: (v) {
-                                    _lastNameController.text =
-                                        _lastNameController.text.toUpperCase();
-                                  }, maxLength: 20)),
-                                ],
-                              ),
-                              const SizedBox(height: 6),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(S.of(context).kyc_country,
                                       style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                       )),
-                                  // const SizedBox(width: 6),
+                                  const SizedBox(width: 20),
                                   InkWell(
                                       onTap: () {
                                         showCountryPicker(
@@ -243,8 +191,60 @@ class _AgentKycState extends State<AgentKyc> {
                                           ),
                                         ),
                                       )),
+                                  const SizedBox(width: 12),
+                                  selectedCountry?.name == "China"
+                                      ? Text(
+                                          S.of(context)
+                                              .agent_country_not_supported,
+                                          style: const TextStyle(
+                                              color: Colors.red, fontSize: 14))
+                                      : const Text(""),
                                 ],
                               ),
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Text(
+                                      "${S.of(context).realCard_otherIdCard}: ${S.of(context).kyc_id_tips_otherArea}",
+                                      style: const TextStyle(
+                                        color: Color(0xFF999999),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      )),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              buildImagePicker(),
+                              const SizedBox(height: 12),
+                              createTextFormField(
+                                  _socialIdController,
+                                  selectedCardType == 1
+                                      ? S.of(context).kyc_IdentityId
+                                      : S.of(context).kyc_PassportId,
+                                  maxLength: 30,
+                                  icon: const Icon(Icons.credit_card)),
+                              Row(
+                                children: [
+                                  Expanded(
+                                      child: createTextFormField(
+                                          _firstNameController,
+                                          S.of(context).kyc_FirstName,
+                                          onChanged: (v) {
+                                    _firstNameController.text =
+                                        _firstNameController.text.toUpperCase();
+                                  }, maxLength: 20)),
+                                  const SizedBox(width: 20),
+                                  Expanded(
+                                      child: createTextFormField(
+                                          _lastNameController,
+                                          S.of(context).kyc_LastName,
+                                          onChanged: (v) {
+                                    _lastNameController.text =
+                                        _lastNameController.text.toUpperCase();
+                                  }, maxLength: 20)),
+                                ],
+                              ),
+                              const SizedBox(height: 6),
                               buildGender(),
                               buildMarry(),
                               const SizedBox(height: 16),
@@ -505,6 +505,10 @@ class _AgentKycState extends State<AgentKyc> {
         alert(S.of(context).realCard_tips_uploadImage, context, () {});
         return;
       }
+    }
+    if(selectedCountry?.name == "China"){
+      alert(S.of(context).tips_not_support_china, context, () {});
+      return;
     }
     // out china
     if (selectedCardType == 2) {

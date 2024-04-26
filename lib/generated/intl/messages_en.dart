@@ -78,6 +78,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "agent_card_list_active": m0,
         "agent_card_list_all": m1,
         "agent_card_list_inactive": m2,
+        "agent_country_not_supported":
+            MessageLookupByLibrary.simpleMessage("Not Supported"),
         "agent_kyc": MessageLookupByLibrary.simpleMessage("NEW KYC AND APPLY"),
         "agent_kyc_applyCard": m3,
         "agent_kyc_history":
@@ -455,6 +457,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tips_maxAmount1": MessageLookupByLibrary.simpleMessage(
             "The from amount cannot exceed the maximum."),
         "tips_needFiveDollarFee": m18,
+        "tips_not_support_china": MessageLookupByLibrary.simpleMessage(
+            "Identity information from mainland China is temporarily not supported."),
         "tips_selectCountry":
             MessageLookupByLibrary.simpleMessage("Please select the country."),
         "tips_selectDateOfBirth": MessageLookupByLibrary.simpleMessage(

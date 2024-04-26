@@ -250,6 +250,7 @@
   "alert_ok": "OK",
   "alert_cancel": "Cancel",
 
+  "agent_country_not_supported": "Not Supported",
   "agent_kyc": "NEW KYC AND APPLY",
   "agent_kyc_applyCard": "{email}\n apply new Physical Card ?",
   "agent_kyc_history": "KYC history",
@@ -309,5 +310,6 @@
   "tips_WithdrawResult": "Will get ${amount} and fee is ${fee}.",
   "tips_successSet": "Set successful!",
   "tips_invalidCode": "Invalid verification code, please try again.",
+  "tips_not_support_china": "Identity information from mainland China is temporarily not supported.",
   "tips_successApply": "Apply successful!"
 }

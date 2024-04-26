@@ -2240,6 +2240,16 @@ class S {
     );
   }
 
+  /// `Not Supported`
+  String get agent_country_not_supported {
+    return Intl.message(
+      'Not Supported',
+      name: 'agent_country_not_supported',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `NEW KYC AND APPLY`
   String get agent_kyc {
     return Intl.message(
@@ -2815,6 +2825,16 @@ class S {
     return Intl.message(
       'Invalid verification code, please try again.',
       name: 'tips_invalidCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identity information from mainland China is temporarily not supported.`
+  String get tips_not_support_china {
+    return Intl.message(
+      'Identity information from mainland China is temporarily not supported.',
+      name: 'tips_not_support_china',
       desc: '',
       args: [],
     );

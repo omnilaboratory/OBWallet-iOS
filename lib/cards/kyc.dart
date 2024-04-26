@@ -134,26 +134,73 @@ class _KycState extends State<Kyc> {
                             child: Column(
                               children: [
                                 const SizedBox(height: 6),
-                                buildCardType(),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(S.of(context).kyc_country,
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                        )),
+                                    const SizedBox(width: 20),
+                                    InkWell(
+                                        onTap: () {
+                                          showCountryPicker(
+                                            context: context,
+                                            showPhoneCode: false,
+                                            useSafeArea: true,
+                                            onSelect: (Country country) {
+                                              selectedCountry = country;
+                                              setState(() {});
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.only(left: 6),
+                                          width: 135,
+                                          height: 48,
+                                          decoration: ShapeDecoration(
+                                            shape: outlineInputBorder,
+                                          ),
+                                          child: Center(
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 100,
+                                                  child: AutoSizeText(
+                                                    selectedCountry!.name,
+                                                    maxLines: 2,
+                                                    minFontSize: 10,
+                                                    maxFontSize: 16,
+                                                  ),
+                                                ),
+                                                const Icon(Icons
+                                                    .keyboard_arrow_down_sharp)
+                                              ],
+                                            ),
+                                          ),
+                                        )),
+                                    const SizedBox(width: 12),
+                                    selectedCountry?.name == "China"
+                                        ? Text(
+                                        S.of(context)
+                                            .agent_country_not_supported,
+                                        style: const TextStyle(
+                                            color: Colors.red, fontSize: 14))
+                                        : const Text(""),
+                                  ],
+                                ),
                                 const SizedBox(height: 6),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                          selectedCardType == 1
-                                              ? S.of(context).kyc_id_tips_china
-                                              : S
-                                                  .of(context)
-                                                  .kyc_id_tips_otherArea,
-                                          style: const TextStyle(
-                                            color: Color(0xFF999999),
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w500,
-                                            height: 1.47,
-                                          )),
-                                    ],
-                                  ),
+                                Row(
+                                  children: [
+                                    Text(
+                                        "${S.of(context).realCard_otherIdCard}: ${S.of(context).kyc_id_tips_otherArea}",
+                                        style: const TextStyle(
+                                          color: Color(0xFF999999),
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                        )),
+                                  ],
                                 ),
                                 const SizedBox(height: 6),
                                 buildImagePicker(),
@@ -188,56 +235,6 @@ class _KycState extends State<Kyc> {
                                   ],
                                 ),
                                 const SizedBox(height: 6),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(S.of(context).kyc_country,
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                        )),
-                                    // const SizedBox(width: 6),
-                                    InkWell(
-                                        onTap: () {
-                                          showCountryPicker(
-                                            context: context,
-                                            showPhoneCode: false,
-                                            useSafeArea: true,
-                                            onSelect: (Country country) {
-                                              selectedCountry = country;
-                                              setState(() {});
-                                            },
-                                          );
-                                        },
-                                        child: Container(
-                                          padding:
-                                          const EdgeInsets.only(left: 6),
-                                          width: 135,
-                                          height: 48,
-                                          decoration: ShapeDecoration(
-                                            shape: outlineInputBorder,
-                                          ),
-                                          child: Center(
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 100,
-                                                  child: AutoSizeText(
-                                                    selectedCountry!.name,
-                                                    maxLines: 2,
-                                                    minFontSize: 10,
-                                                    maxFontSize: 16,
-                                                  ),
-                                                ),
-                                                const Icon(Icons
-                                                    .keyboard_arrow_down_sharp)
-                                              ],
-                                            ),
-                                          ),
-                                        )),
-                                  ],
-                                ),
-
                                 buildGender(),
                                 buildMarry(),
                                 const SizedBox(height: 16),
@@ -456,6 +453,11 @@ class _KycState extends State<Kyc> {
         alert(S.of(context).realCard_tips_uploadImage, context, () {});
         return;
       }
+    }
+    
+    if(selectedCountry?.name == "China"){
+      alert(S.of(context).tips_not_support_china, context, () {});
+      return;
     }
     // out china
     if (selectedCardType == 2) {

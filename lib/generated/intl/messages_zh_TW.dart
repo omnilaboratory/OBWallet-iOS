@@ -71,6 +71,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "agent_card_list_active": m0,
         "agent_card_list_all": m1,
         "agent_card_list_inactive": m2,
+        "agent_country_not_supported":
+            MessageLookupByLibrary.simpleMessage("不支持"),
         "agent_kyc": MessageLookupByLibrary.simpleMessage("KYC幷申請卡"),
         "agent_kyc_applyCard": m3,
         "agent_kyc_history": MessageLookupByLibrary.simpleMessage("KYC記錄"),
@@ -366,6 +368,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tips_maxAmount": MessageLookupByLibrary.simpleMessage("金額不能超過最大值。"),
         "tips_maxAmount1": MessageLookupByLibrary.simpleMessage("從金額不能超過最大值。"),
         "tips_needFiveDollarFee": m18,
+        "tips_not_support_china":
+            MessageLookupByLibrary.simpleMessage("中國大陸的身份信息暫不支持"),
         "tips_selectCountry": MessageLookupByLibrary.simpleMessage("請選擇國家。"),
         "tips_selectDateOfBirth":
             MessageLookupByLibrary.simpleMessage("請選擇出生日期。"),

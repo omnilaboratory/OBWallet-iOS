@@ -220,6 +220,8 @@
   "alert_title": "消息",
   "alert_ok": "確定",
   "alert_cancel": "取消",
+
+  "agent_country_not_supported": "不支持",
   "agent_kyc": "KYC幷申請卡",
   "agent_kyc_applyCard": "{email}\n申請新的實體卡?",
   "agent_kyc_history": "KYC記錄",
@@ -278,5 +280,6 @@
   "tips_WithdrawResult": "將獲得 {amount},手續費為 {fee}",
   "tips_successSet": "修改成功!",
   "tips_invalidCode": "無效驗證碼，請重新獲取",
+  "tips_not_support_china": "中國大陸的身份信息暫不支持",
   "tips_successApply": "申請成功。"
 }
