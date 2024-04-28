@@ -342,6 +342,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please upload correct image"),
         "realCard_title":
             MessageLookupByLibrary.simpleMessage("Apply Physical Card"),
+        "realCard_upload_passport":
+            MessageLookupByLibrary.simpleMessage("Upload Passport"),
         "receiveWallet_LightningInvoice":
             MessageLookupByLibrary.simpleMessage("Lightning Invoice"),
         "receiveWallet_WalletAddress":

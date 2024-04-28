@@ -113,7 +113,7 @@ class _KycState extends State<Kyc> {
                 children: [
                   Container(
                     padding:
-                        const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                        const EdgeInsets.only(left: 20, right: 20, bottom: 10),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20.0),
@@ -125,7 +125,7 @@ class _KycState extends State<Kyc> {
                           Center(
                             child: Padding(
                               padding:
-                                  const EdgeInsets.only(top: 28, bottom: 10),
+                                  const EdgeInsets.only(top: 28, bottom: 15),
                               child: createDialogTitle(S.of(context).kyc_title),
                             ),
                           ),
@@ -133,7 +133,7 @@ class _KycState extends State<Kyc> {
                             key: _formKey,
                             child: Column(
                               children: [
-                                const SizedBox(height: 6),
+                                const SizedBox(height: 20),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -190,11 +190,12 @@ class _KycState extends State<Kyc> {
                                         : const Text(""),
                                   ],
                                 ),
-                                const SizedBox(height: 6),
+                                const SizedBox(height: 20),
                                 Row(
                                   children: [
                                     Text(
-                                        "${S.of(context).realCard_otherIdCard}: ${S.of(context).kyc_id_tips_otherArea}",
+                                        // "${S.of(context).realCard_otherIdCard}: ${S.of(context).kyc_id_tips_otherArea}",
+                                        S.of(context).realCard_upload_passport,
                                         style: const TextStyle(
                                           color: Color(0xFF999999),
                                           fontSize: 14,
@@ -204,14 +205,15 @@ class _KycState extends State<Kyc> {
                                 ),
                                 const SizedBox(height: 6),
                                 buildImagePicker(),
-                                const SizedBox(height: 6),
+                                const SizedBox(height: 20),
                                 createTextFormField(
                                     _socialIdController,
                                     selectedCardType == 1
                                         ? S.of(context).kyc_IdentityId
                                         : S.of(context).kyc_PassportId,
-                                    maxLength: 30,
                                     icon: const Icon(Icons.credit_card)),
+
+                                const SizedBox(height: 20),
 
                                 Row(
                                   children: [
@@ -221,8 +223,9 @@ class _KycState extends State<Kyc> {
                                             S.of(context).kyc_FirstName,
                                             onChanged: (v){
                                               _firstNameController.text = _firstNameController.text.toUpperCase();
-                                            },
-                                            maxLength: 20)),
+                                            }
+                                          )
+                                        ),
                                     const SizedBox(width: 20),
                                     Expanded(
                                         child: createTextFormField(
@@ -230,14 +233,15 @@ class _KycState extends State<Kyc> {
                                             S.of(context).kyc_LastName,
                                             onChanged: (v){
                                               _lastNameController.text = _lastNameController.text.toUpperCase();
-                                            },
-                                            maxLength: 20)),
+                                            }
+                                          )
+                                        ),
                                   ],
                                 ),
-                                const SizedBox(height: 6),
+                                const SizedBox(height: 20),
                                 buildGender(),
                                 buildMarry(),
-                                const SizedBox(height: 16),
+                                const SizedBox(height: 20),
                                 Row(
                                   children: [
                                     InkWell(
@@ -317,10 +321,27 @@ class _KycState extends State<Kyc> {
                                               setState(() {});
                                             }
                                           },
-                                          child: Text(dateOfBirthTips)),
+                                          child: Text(
+                                            dateOfBirthTips,
+                                            style: const TextStyle(color: Colors.grey)
+                                          )
+                                        ),
                                     ],
                                   ),
                                 ),
+
+                                const SizedBox(height: 30),
+                              Row(
+                                children: [
+                                  Text(S.of(context).kyc_email_address_desc,
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                        // fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      )),
+                                ],
+                              ),
+
                                 buildAddressType(),
                                 createTextFormField(_address1Controller,
                                     S.of(context).kyc_AddressLine),
@@ -346,7 +367,6 @@ class _KycState extends State<Kyc> {
                                         child: createTextFormField(
                                             _postalController,
                                             S.of(context).kyc_PostalZipCode,
-                                            maxLength: 6,
                                             enabled: _postalFieldEnable,
                                             keyboardType:
                                                 TextInputType.number)),
@@ -732,7 +752,7 @@ class _KycState extends State<Kyc> {
       ));
     }
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.center,
       children: children,
     );
   }

@@ -218,6 +218,7 @@
   "realCard_lastName": "Last Name (Pinyin)",
   "realCard_chinaIdCard": "ID Card",
   "realCard_otherIdCard": "Passport",
+  "realCard_upload_passport": "Upload Passport",
   "realCard_gender_male": "Male", 
   "realCard_gender_female": "Female",
   "realCard_marry_no": "Unmarried",

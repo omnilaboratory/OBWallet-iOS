@@ -284,6 +284,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "realCard_tips_uploadImage":
             MessageLookupByLibrary.simpleMessage("請上傳正確的圖片"),
         "realCard_title": MessageLookupByLibrary.simpleMessage("申請實體卡"),
+        "realCard_upload_passport":
+            MessageLookupByLibrary.simpleMessage("上傳護照"),
         "receiveWallet_LightningInvoice":
             MessageLookupByLibrary.simpleMessage("閃電網路發票"),
         "receiveWallet_WalletAddress":

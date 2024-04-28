@@ -20,7 +20,8 @@ const OutlineInputBorder outlineRightInputBorder = OutlineInputBorder(
 );
 
 TextFormField createTextFormField(
-    TextEditingController controller, String hintText,
+    TextEditingController controller, 
+    String hintText,
     {Icon? icon,
     int? maxLength,
     TextInputType? keyboardType = TextInputType.text,
@@ -50,7 +51,7 @@ TextFormField createTextFormField(
       hintText: hintText,
       prefixIcon: icon,
       isCollapsed: maxLines > 1,
-      hintStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
+      hintStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black26),
       border: borderType == 0 ? outlineInputBorder : outlineRightInputBorder,
       focusedBorder:
           borderType == 0 ? outlineInputBorder : outlineRightInputBorder,

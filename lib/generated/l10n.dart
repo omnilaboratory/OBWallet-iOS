@@ -1980,6 +1980,16 @@ class S {
     );
   }
 
+  /// `Upload Passport`
+  String get realCard_upload_passport {
+    return Intl.message(
+      'Upload Passport',
+      name: 'realCard_upload_passport',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Male`
   String get realCard_gender_male {
     return Intl.message(

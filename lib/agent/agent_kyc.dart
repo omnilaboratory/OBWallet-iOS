@@ -124,27 +124,7 @@ class _AgentKycState extends State<AgentKyc> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              const SizedBox(height: 10),
-                              createTextFormField(
-                                  _emailController, S.of(context).common_Email,
-                                  icon: const Icon(Icons.email),
-                                  maxLength: 50, validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return S.of(context).common_Wrong +
-                                      S.of(context).common_Email;
-                                }
-                                bool emailValid =
-                                    RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                        .hasMatch(value);
-                                if (!emailValid) {
-                                  return S.of(context).common_Wrong +
-                                      S.of(context).common_Email;
-                                }
-                                return null;
-                              },
-                                  keyboardType: TextInputType.emailAddress,
-                                  focusNode: _focusNode),
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 20),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -201,11 +181,14 @@ class _AgentKycState extends State<AgentKyc> {
                                       : const Text(""),
                                 ],
                               ),
-                              const SizedBox(height: 10),
+                              
+                              const SizedBox(height: 20),
+
                               Row(
                                 children: [
                                   Text(
-                                      "${S.of(context).realCard_otherIdCard}: ${S.of(context).kyc_id_tips_otherArea}",
+                                      // "${S.of(context).realCard_otherIdCard}: ${S.of(context).kyc_id_tips_otherArea}",
+                                      S.of(context).realCard_upload_passport,
                                       style: const TextStyle(
                                         color: Color(0xFF999999),
                                         fontSize: 14,
@@ -213,16 +196,43 @@ class _AgentKycState extends State<AgentKyc> {
                                       )),
                                 ],
                               ),
-                              const SizedBox(height: 12),
+
+                              const SizedBox(height: 10),
                               buildImagePicker(),
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 20),
                               createTextFormField(
                                   _socialIdController,
                                   selectedCardType == 1
                                       ? S.of(context).kyc_IdentityId
                                       : S.of(context).kyc_PassportId,
-                                  maxLength: 30,
-                                  icon: const Icon(Icons.credit_card)),
+                                  icon: const Icon(Icons.credit_card)
+                                ),
+
+                                const SizedBox(height: 20),
+
+                                createTextFormField(
+                                  _emailController, S.of(context).common_Email,
+                                  icon: const Icon(Icons.email),
+                                  validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return S.of(context).common_Wrong +
+                                      S.of(context).common_Email;
+                                }
+                                bool emailValid =
+                                    RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                        .hasMatch(value);
+                                if (!emailValid) {
+                                  return S.of(context).common_Wrong +
+                                      S.of(context).common_Email;
+                                }
+                                return null;
+                              },
+                                keyboardType: TextInputType.emailAddress,
+                                focusNode: _focusNode
+                              ),
+
+                              const SizedBox(height: 20),
+
                               Row(
                                 children: [
                                   Expanded(
@@ -232,7 +242,7 @@ class _AgentKycState extends State<AgentKyc> {
                                           onChanged: (v) {
                                     _firstNameController.text =
                                         _firstNameController.text.toUpperCase();
-                                  }, maxLength: 20)),
+                                  })),
                                   const SizedBox(width: 20),
                                   Expanded(
                                       child: createTextFormField(
@@ -241,7 +251,7 @@ class _AgentKycState extends State<AgentKyc> {
                                           onChanged: (v) {
                                     _lastNameController.text =
                                         _lastNameController.text.toUpperCase();
-                                  }, maxLength: 20)),
+                                  })),
                                 ],
                               ),
                               const SizedBox(height: 6),
@@ -327,17 +337,21 @@ class _AgentKycState extends State<AgentKyc> {
                                             setState(() {});
                                           }
                                         },
-                                        child: Text(dateOfBirthTips)),
+                                        child: Text(
+                                          dateOfBirthTips, 
+                                          style: const TextStyle(color: Colors.grey)
+                                        )
+                                        ),
                                   ],
                                 ),
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 30),
                               Row(
                                 children: [
                                   Text(S.of(context).kyc_email_address_desc,
                                       style: const TextStyle(
-                                        color: Colors.blue,
-                                        fontSize: 16,
+                                        color: Colors.grey,
+                                        // fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       )),
                                 ],
@@ -368,7 +382,6 @@ class _AgentKycState extends State<AgentKyc> {
                                       child: createTextFormField(
                                           _postalController,
                                           S.of(context).kyc_PostalZipCode,
-                                          maxLength: 6,
                                           enabled: _postalFieldEnable,
                                           keyboardType: TextInputType.number)),
                                   const SizedBox(width: 20),
@@ -764,7 +777,7 @@ class _AgentKycState extends State<AgentKyc> {
       ));
     }
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.center,
       children: children,
     );
   }

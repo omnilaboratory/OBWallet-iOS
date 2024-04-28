@@ -194,6 +194,7 @@
   "realCard_lastName": "名字拼音",
   "realCard_chinaIdCard": "身份證",
   "realCard_otherIdCard": "護照",
+  "realCard_upload_passport": "上傳護照",
   "realCard_gender_male": "男",
   "realCard_gender_female": "女",
   "realCard_marry_no": "未婚",
